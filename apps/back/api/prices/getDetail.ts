@@ -1,0 +1,36 @@
+import type { ProviderType } from '@fishbot/utils/constants/account';
+import { ErrorType } from '@fishbot/utils/constants/error';
+import type { Price } from '@fishbot/utils/types/Price.model';
+import type { User } from '@fishbot/utils/types/User.model';
+
+const priceGetDetail = async ({ data, userInfo }: {
+  data: {
+    providerType: ProviderType,
+    symbol: string,
+  },
+  userInfo: User,
+}) => {
+  const { providerType, symbol } = data;
+  if (!providerType || !symbol) {
+    return { error: ErrorType.badRequest };
+  }
+
+  const { uid } = userInfo;
+  if (!uid) {
+    return { error: ErrorType.accessDenied };
+  }
+
+  const price = await Mongo.collection<Price>('price').findOne({
+    _id: `${providerType}-${symbol}`,
+  }, {
+    projection: {
+      providerData: 1,
+    },
+  });
+
+  return {
+    result: price,
+  };
+};
+
+export default priceGetDetail;
