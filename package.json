@@ -5,7 +5,10 @@
   "workspaces": [
     "packages/utils",
     "packages/ctrader",
+    "packages/metatrader",
     "packages/core",
+    "packages/swap",
+    "packages/coin",
     "apps/back"
   ],
   "type": "module",
@@ -21,6 +24,7 @@
     "@types/express-session": "^1.17.7",
     "@types/jest": "^29.5.1",
     "@types/lodash": "^4.14.194",
+    "@types/long": "^3.0.32",
     "@types/node": "20.3.1",
     "@types/pg": "^8.10.2",
     "@types/protobufjs": "^5.0.31",
@@ -32,8 +36,8 @@
     "eslint": "^8.40.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.0.0",
-    "eslint-import-resolver-typescript": "^3.5.5",
     "eslint-config-next": "^13.4.7",
+    "eslint-import-resolver-typescript": "^3.5.5",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-react": "^7.32.2",
