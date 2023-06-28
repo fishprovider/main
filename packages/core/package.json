@@ -1,6 +1,7 @@
 {
   "name": "@fishbot/core",
   "version": "5.0.0",
+  "type": "module",
   "scripts": {
     "lint": "eslint --cache --fix src",
     "type-check": "tsc --noEmit",
