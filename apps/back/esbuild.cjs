@@ -27,7 +27,7 @@ const buildMain = () => {
     entryPoints: ['src/index.ts'],
     outdir: 'dist',
     loader: { '.js': 'jsx', '.ts': 'tsx' },
-    external: Object.keys(pkg.dependencies),
+    external: Object.keys(pkg.dependencies).filter((item) => !item.startsWith('@fishbot')),
     bundle: true,
     minify: true,
     sourcemap: true,

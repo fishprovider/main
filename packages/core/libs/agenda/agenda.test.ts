@@ -1,4 +1,4 @@
-import delay from '@fishbot/utils/dist/helpers/delay';
+import delay from '@fishbot/utils/helpers/delay';
 import { jest } from '@jest/globals';
 
 import ServerCommands from '~constants/serverCommands';

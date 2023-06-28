@@ -3,7 +3,7 @@
   "version": "5.0.0",
   "type": "module",
   "scripts": {
-    "lint": "eslint --cache --fix src",
+    "lint": "eslint --cache --fix --ignore-pattern dist .",
     "type-check": "tsc --noEmit",
     "test": "npm run test-unit",
     "test-unit": "cross-env NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules npx jest",
