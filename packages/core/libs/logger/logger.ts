@@ -23,14 +23,16 @@ const getString = (message: Message) => {
 };
 
 const warnHandler = async (messages: Message[]) => {
+  console.warn(...messages);
   const parsedMessages = messages.map((item) => getString(item));
-  await send('@here', parsedMessages);
+  await send('[Warning]', parsedMessages);
 };
 
 const errorHandler = async (messages: Message[]) => {
+  console.error(...messages);
   const parsedMessages = messages.map((item) => getString(item));
-  await send('@here', parsedMessages);
-  await send(`[${typeId}] @here`, parsedMessages, env.notifChannelError);
+  await send('[Error]', parsedMessages);
+  await send(`[${typeId}]`, parsedMessages, env.notifChannelError);
 };
 
 const start = () => {
