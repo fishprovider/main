@@ -1,6 +1,7 @@
 {
   "extends": "@tsconfig/node-lts-strictest-esm/tsconfig.json",
   "compilerOptions": {
+    "composite": true,
     "allowSyntheticDefaultImports": true,
     "exactOptionalPropertyTypes": false,
     "noPropertyAccessFromIndexSignature": false,
