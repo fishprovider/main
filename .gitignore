@@ -1,0 +1,22 @@
+# deps
+node_modules
+
+# cache
+.DS_Store
+.eslintcache
+*.tsbuildinfo
+
+# local
+.env.development.local
+
+# build
+dist
+.next
+.swc
+public/sw.js
+public/sw.js.map
+public/workbox-*.js
+public/workbox-*.js.map
+public/worker-*.js
+public/worker-*.js.LICENSE.txt
+public/sitemap*.xml

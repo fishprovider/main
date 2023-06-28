@@ -1,0 +1,8 @@
+# deps
+**/node_modules
+**/package-lock.json
+
+# cache
+.DS_Store
+.eslintcache
+*.tsbuildinfo

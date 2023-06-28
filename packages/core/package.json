@@ -1,0 +1,16 @@
+{
+  "name": "@fishbot/core",
+  "version": "5.0.0",
+  "scripts": {
+    "lint": "eslint --cache --fix src",
+    "type-check": "tsc --noEmit",
+    "test": "npm run test-unit",
+    "test-unit": "cross-env NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules npx jest",
+    "test-int": "cross-env NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules doppler run --print-config -- npx jest --runInBand",
+    "build": "rm -rf dist && mkdir dist && cp package.json dist && npm run build-ts",
+    "build-ts": "tsc && tsc-alias --verbose"
+  },
+  "dependencies": {
+    "@fishbot/utils": "^5.0.0"
+  }
+}
