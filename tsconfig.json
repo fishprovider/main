@@ -1,7 +1,6 @@
 {
   "extends": "@tsconfig/node-lts-strictest-esm/tsconfig.json",
   "compilerOptions": {
-    "composite": true,
     "allowSyntheticDefaultImports": true,
     "exactOptionalPropertyTypes": false,
     "noPropertyAccessFromIndexSignature": false,
@@ -10,8 +9,8 @@
     "allowJs": true,
     "checkJs": false,
     "noEmit": false,
-    "declaration": true,
+    "declaration": false,
 
-    "ignoreDeprecations": "5.0",
+    "ignoreDeprecations": "5.0"
   }
 }
