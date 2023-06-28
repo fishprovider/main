@@ -9,7 +9,7 @@
     "allowJs": true,
     "checkJs": false,
     "noEmit": false,
-    "declaration": false,
+    "declaration": true,
 
     "ignoreDeprecations": "5.0"
   }

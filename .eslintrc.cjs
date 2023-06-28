@@ -1,4 +1,17 @@
 const rules = {
+  '@typescript-eslint/ban-ts-comment': [
+    'error',
+    { 'ts-ignore': 'allow-with-description' },
+  ],
+  '@typescript-eslint/comma-dangle': ['error', 'always-multiline'],
+  '@typescript-eslint/naming-convention': 'off',
+  '@typescript-eslint/no-explicit-any': 'off',
+  '@typescript-eslint/no-unused-vars': [
+    'error',
+    { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
+  ],
+  '@typescript-eslint/quotes': ['error', 'single'],
+  '@typescript-eslint/restrict-template-expressions': 'off',
   camelcase: 'off',
   'comma-dangle': ['error', 'always-multiline'],
   'global-require': 'off',
@@ -17,31 +30,17 @@ const rules = {
   'simple-import-sort/exports': 'error',
 };
 
-const rulesTS = {
-  ...rules,
-  '@typescript-eslint/ban-ts-comment': [
-    'error',
-    { 'ts-ignore': 'allow-with-description' },
-  ],
-  '@typescript-eslint/comma-dangle': ['error', 'always-multiline'],
-  '@typescript-eslint/naming-convention': 'off',
-  '@typescript-eslint/no-explicit-any': 'off',
-  '@typescript-eslint/no-unused-vars': [
-    'error',
-    { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
-  ],
-  '@typescript-eslint/quotes': ['error', 'single'],
-  '@typescript-eslint/restrict-template-expressions': 'off',
-};
-
 module.exports = {
-  parser: '@babel/eslint-parser',
-  // each following rule set will extend or overwrite the previous ones
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    project: 'tsconfig.json',
+  },
   extends: [
     'airbnb',
+    'airbnb-typescript',
     'airbnb/hooks',
-    'eslint:recommended',
-    'plugin:import/recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:import/typescript',
     'plugin:jsx-a11y/recommended',
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
@@ -50,21 +49,6 @@ module.exports = {
     'simple-import-sort',
   ],
   rules,
-  overrides: [
-    {
-      files: ['**/*.ts', '**/*.tsx'],
-      parser: '@typescript-eslint/parser',
-      parserOptions: {
-        project: 'tsconfig.json',
-      },
-      extends: [
-        'airbnb-typescript',
-        'plugin:@typescript-eslint/recommended',
-        'plugin:import/typescript',
-      ],
-      rules: rulesTS,
-    },
-  ],
   env: {
     es2022: true,
     node: true,
