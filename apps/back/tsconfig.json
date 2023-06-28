@@ -14,14 +14,20 @@
       "path": "../../packages/utils"
     },
     {
-      "path": "../../packages/core"
+      "path": "../../packages/ctrader"
+    },
+    {
+      "path": "../../packages/metatrader"
     },
     {
       "path": "../../packages/swap"
     },
     {
       "path": "../../packages/coin"
-    }
+    },
+    {
+      "path": "../../packages/core"
+    },
   ],
   "include": ["./**/*.ts"]
 }

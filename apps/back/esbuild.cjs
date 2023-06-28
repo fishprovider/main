@@ -9,9 +9,11 @@ const devMode = watchMode;
 const dependencies = {
   ...require('./package.json').dependencies,
   ...require('../../packages/utils/package.json').dependencies,
-  ...require('../../packages/core/package.json').dependencies,
+  ...require('../../packages/ctrader/package.json').dependencies,
+  ...require('../../packages/metatrader/package.json').dependencies,
   ...require('../../packages/swap/package.json').dependencies,
   ...require('../../packages/coin/package.json').dependencies,
+  ...require('../../packages/core/package.json').dependencies,
 };
 
 const options = {
