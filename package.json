@@ -8,6 +8,9 @@
     "apps/*"
   ],
   "type": "module",
+  "engines": {
+    "node": ">=16 <19"
+  },
   "devDependencies": {
     "@jest/globals": "^29.5.0",
     "@testing-library/jest-dom": "^5.16.5",
