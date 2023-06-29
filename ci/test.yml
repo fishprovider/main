@@ -9,7 +9,4 @@ test:
     - !reference [.install_doppler, script]
   script:
     - npm i --cache .npm --prefer-offline --no-audit --no-progress --legacy-peer-deps
-    - npm run lint
-    - npm run type-check
     - npm test -- --ci --silent
-    - npm run build

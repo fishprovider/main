@@ -4,10 +4,8 @@ variables:
   GIT_CLEAN_FLAGS: -ffd -e .npm -e .dpl -e .cache
 
 stages:
-  - pre-build
   - test
   - deploy
-  - post-deploy
 
 .rule_default_branch:
   rules:
