@@ -65,3 +65,13 @@ deploy-spot-meta:
   script:
     # - curl $DEPLOY_SPOT_META_EXNESS
     - curl $DEPLOY_SPOT_META_EXNESS_DEMO
+
+deploy-back:
+  only:
+    changes:
+      - apps/back/**/*
+  script:
+    # - curl $DEPLOY_BACK
+    - curl $DEPLOY_BACK_DEMO
+    # - curl $DEPLOY_BACK_CANARY
+    - curl $DEPLOY_BACK_CANARY_DEMO
