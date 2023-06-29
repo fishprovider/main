@@ -24,10 +24,11 @@ const env = {
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 const protoFile1 = env.ctraderProtoTmp
   ? path.join('/tmp', 'protos', 'OpenApiCommonMessages.proto')
-  : path.join(__dirname, '..', 'protos', 'OpenApiCommonMessages.proto');
+  : path.join(__dirname, '..', '..', '..', 'packages', 'ctrader', 'protos', 'OpenApiCommonMessages.proto');
 const protoFile2 = env.ctraderProtoTmp
   ? path.join('/tmp', 'protos', 'OpenApiMessages.proto')
-  : path.join(__dirname, '..', 'protos', 'OpenApiMessages.proto');
+  : path.join(__dirname, '..', '..', '..', 'packages', 'ctrader', 'protos', 'OpenApiMessages.proto');
+console.log('protoFiles', protoFile1, protoFile2);
 
 class Connection implements ConnectionType {
   /* eslint-disable @typescript-eslint/lines-between-class-members */
