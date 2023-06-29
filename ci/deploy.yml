@@ -10,6 +10,12 @@ deploy-cron:
       - workers/cron/**/*
   script: curl $DEPLOY_CRON
 
+deploy-mon:
+  only:
+    changes:
+      - workers/mon/**/*
+  script: curl $DEPLOY_MON
+
 deploy-pay:
   only:
     changes:
@@ -55,7 +61,7 @@ deploy-spot-ctrader:
     changes:
       - workers/spot-ctrader/**/*
   script:
-    # - curl $DEPLOY_SPOT_CTRADER_ICMARKETS
+    - curl $DEPLOY_SPOT_CTRADER_ICMARKETS
     - curl $DEPLOY_SPOT_CTRADER_ICMARKETS_DEMO
 
 deploy-spot-meta:
@@ -63,7 +69,7 @@ deploy-spot-meta:
     changes:
       - workers/spot-meta/**/*
   script:
-    # - curl $DEPLOY_SPOT_META_EXNESS
+    - curl $DEPLOY_SPOT_META_EXNESS
     - curl $DEPLOY_SPOT_META_EXNESS_DEMO
 
 deploy-back:
@@ -73,5 +79,5 @@ deploy-back:
   script:
     # - curl $DEPLOY_BACK
     - curl $DEPLOY_BACK_DEMO
-    # - curl $DEPLOY_BACK_CANARY
+    - curl $DEPLOY_BACK_CANARY
     - curl $DEPLOY_BACK_CANARY_DEMO
