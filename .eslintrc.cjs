@@ -53,7 +53,6 @@ module.exports = {
     'plugin:jsx-a11y/recommended',
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
-    'next/core-web-vitals',
   ],
   plugins: [
     'simple-import-sort',
