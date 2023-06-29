@@ -1,0 +1,21 @@
+{
+  "extends": "../../tsconfig.frontend.json",
+  "compilerOptions": {
+    "composite": true,
+    "baseUrl": ".",
+    "paths": {
+      "~*": ["./*"]
+    },
+    "rootDir": ".",
+    "outDir": "dist"
+  },
+  "include": ["./**/*.ts"],
+  "references": [
+    {
+      "path": "../../packages/utils"
+    },
+    {
+      "path": "../../packages/cross"
+    }
+  ]
+}

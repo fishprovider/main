@@ -9,6 +9,7 @@
     "rootDir": ".",
     "outDir": "dist"
   },
+  "include": ["./**/*.ts"],
   "references": [
     {
       "path": "../../packages/utils"
@@ -28,6 +29,5 @@
     {
       "path": "../../packages/core"
     },
-  ],
-  "include": ["./**/*.ts"]
+  ]
 }
