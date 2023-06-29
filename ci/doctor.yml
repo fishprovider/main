@@ -9,5 +9,4 @@ doctor:
   cache: !reference [.cache_npm, cache]
   script:
     - npm i --cache .npm --prefer-offline --no-audit --no-progress --legacy-peer-deps
-    - npm run lint -ws
-    - npm run type-check -ws
+    - npm run doctor
