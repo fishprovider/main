@@ -11,7 +11,9 @@
     "test-int": "cross-env NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules doppler run --print-config -- npx jest --runInBand",
     "build": "rm -rf dist && mkdir dist && cp package.json dist && node esbuild.cjs",
     "build-watch": "cross-env WATCH_MODE=true npm run build",
-    "start": "doppler run --print-config -- node --experimental-specifier-resolution=node dist/index.js",
+    "start-immortal": "doppler run --print-config -- node --experimental-specifier-resolution=node dist/immortal.js",
+    "start-mon": "doppler run --print-config -- node --experimental-specifier-resolution=node dist/index.js",
+    "start": "concurrently -k 'npm run start-immortal' 'npm run start-mon'",
     "start-watch": "doppler run --print-config -- nodemon --experimental-specifier-resolution=node --delay 1 dist/index.js",
     "dev": "concurrently -k 'npm run build-watch' 'npm run start-watch'"
   },
@@ -24,6 +26,7 @@
   },
   "devDependencies": {
     "@tsconfig/node-lts-strictest-esm": "^18.12.1",
+    "concurrently": "^8.2.0",
     "esbuild": "^0.18.10"
   }
 }
