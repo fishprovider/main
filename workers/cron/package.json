@@ -1,0 +1,28 @@
+{
+  "name": "@fishbot/cron",
+  "version": "5.0.0",
+  "type": "module",
+  "scripts": {
+    "preinstall": "cd ../.. && npm install -w packages/utils -w packages/core -w packages/swap",
+    "lint": "eslint --cache --fix --ignore-pattern dist .",
+    "type-check": "tsc --noEmit",
+    "test": "npm run test-unit",
+    "test-unit": "cross-env NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules npx jest",
+    "test-int": "cross-env NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules doppler run --print-config -- npx jest --runInBand",
+    "build": "rm -rf dist && mkdir dist && cp package.json dist && node esbuild.cjs",
+    "build-watch": "cross-env WATCH_MODE=true npm run build",
+    "start": "doppler run --print-config -- node --experimental-specifier-resolution=node dist/index.js",
+    "start-watch": "doppler run --print-config -- nodemon --experimental-specifier-resolution=node --delay 1 dist/index.js",
+    "dev": "concurrently -k 'npm run build-watch' 'npm run start-watch'"
+  },
+  "dependencies": {
+    "axios": "^1.4.0",
+    "dotenv-flow": "^3.2.0",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.4"
+  },
+  "devDependencies": {
+    "@tsconfig/node-lts-strictest-esm": "^18.12.1",
+    "esbuild": "^0.18.10"
+  }
+}

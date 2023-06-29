@@ -5,6 +5,15 @@ const esbuild = require('esbuild');
 const watchMode = process.env.WATCH_MODE;
 const devMode = watchMode;
 
+const packageDependencies = {
+  ...require('./packages/utils/package.json').dependencies,
+  ...require('./packages/ctrader/package.json').dependencies,
+  ...require('./packages/metatrader/package.json').dependencies,
+  ...require('./packages/swap/package.json').dependencies,
+  ...require('./packages/coin/package.json').dependencies,
+  ...require('./packages/core/package.json').dependencies,
+};
+
 const baseOptions = {
   entryPoints: ['index.ts'],
   outdir: 'dist',
@@ -18,11 +27,16 @@ const baseOptions = {
   format: 'esm',
 };
 
-const build = async (buildOptions) => {
+const build = async (dependencies, buildOptions) => {
   const options = {
     ...baseOptions,
     ...buildOptions,
+    external: Object.keys({
+      ...packageDependencies,
+      ...dependencies,
+    }),
   };
+
   if (watchMode) {
     const ctx = await esbuild.context(options);
     await ctx.watch();

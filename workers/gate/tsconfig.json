@@ -9,16 +9,25 @@
     "rootDir": ".",
     "outDir": "dist"
   },
+  "include": ["./**/*.ts"],
   "references": [
     {
       "path": "../../packages/utils"
     },
     {
+      "path": "../../packages/ctrader"
+    },
+    {
+      "path": "../../packages/metatrader"
+    },
+    {
       "path": "../../packages/swap"
+    },
+    {
+      "path": "../../packages/coin"
     },
     {
       "path": "../../packages/core"
     },
-  ],
-  "include": ["./**/*.ts"]
+  ]
 }
