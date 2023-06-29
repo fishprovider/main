@@ -8,7 +8,6 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { PersistedClient, Persister, PersistQueryClientProvider as QueryClientProvider } from '@tanstack/react-query-persist-client';
 import localforage from 'localforage';
 import type { ReactNode } from 'react';
-import React from 'react';
 
 interface QueryParams<Data, QueryKey> {
   queryFn: () => Data | Promise<Data>,

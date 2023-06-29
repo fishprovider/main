@@ -26,6 +26,15 @@ const rules = {
   'no-underscore-dangle': 'off',
   'no-unused-vars': 'off',
   quotes: ['error', 'single'],
+  "react/jsx-filename-extension": [
+    "error",
+    { extensions: [".js", ".jsx", ".tsx"] },
+  ],
+  "react/jsx-props-no-spreading": "off",
+  "react/no-array-index-key": "off",
+  "react/prop-types": "off",
+  "react/react-in-jsx-scope": "off",
+  "react/require-default-props": "off",
   'simple-import-sort/imports': 'error',
   'simple-import-sort/exports': 'error',
 };
@@ -44,6 +53,7 @@ module.exports = {
     'plugin:jsx-a11y/recommended',
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
+    'next/core-web-vitals',
   ],
   plugins: [
     'simple-import-sort',

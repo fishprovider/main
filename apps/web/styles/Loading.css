@@ -1,0 +1,14 @@
+.fp-loading {
+  position: fixed;
+  top: calc(50% - 50px);
+  left: calc(50% - 50px);
+  z-index: 1000000;
+
+  animation: flash 1s;
+  animation-iteration-count: infinite;
+  border-radius: 50%;
+}
+
+.fp-loading-inline {
+  position: unset;
+}
