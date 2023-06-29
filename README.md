@@ -35,6 +35,8 @@
   ```
 
 # How to run on cloud?
+Note that we don't want to install all dependencies on cloud, only install what we need
+
 E.g. `apps/back`
 ```shell
 npm run install-server
