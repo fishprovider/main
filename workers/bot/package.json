@@ -3,7 +3,7 @@
   "version": "5.0.0",
   "type": "module",
   "scripts": {
-    "preinstall": "cd ../.. && npm install -w packages/utils -w packages/core -w packages/swap",
+    "preinstall": "cd ../.. && npm install -w packages/utils -w packages/core -w packages/swap -w packages/ctrader -w packages/metatrader",
     "lint": "eslint --cache --fix --ignore-pattern dist .",
     "type-check": "tsc --noEmit",
     "test": "npm run test-unit",
