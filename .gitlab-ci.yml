@@ -1,22 +1,3 @@
 include:
   - local: /ci/doctor.yml
-
-deploy-gate:
-  only:
-    changes:
-      - workers/gate/**/*
-  script: curl $DEPLOY_GATE
-
-deploy-cron:
-  only:
-    changes:
-      - workers/cron/**/*
-  script: curl $DEPLOY_CRON
-
-deploy-pay:
-  only:
-    changes:
-      - workers/pay/**/*
-  script:
-    - curl $DEPLOY_PAY
-    - curl $DEPLOY_PAY_DEMO
+  - local: /ci/deploy.yml
