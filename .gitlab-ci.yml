@@ -12,3 +12,11 @@ cron:
     changes:
       - workers/cron/**/*
   script: curl $DEPLOY_CRON
+
+pay:
+  only:
+    changes:
+      - workers/pay/**/*
+  script:
+    - curl $DEPLOY_PAY
+    - curl $DEPLOY_PAY_DEMO

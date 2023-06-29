@@ -11,6 +11,9 @@
   "engines": {
     "node": ">=16 <19"
   },
+  "scripts": {
+    "doctor": "npm run lint -ws && npm run type-check -ws"
+  },
   "devDependencies": {
     "@jest/globals": "^29.5.0",
     "@testing-library/jest-dom": "^5.16.5",
