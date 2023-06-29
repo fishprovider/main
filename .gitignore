@@ -12,6 +12,7 @@ tmp
 
 # build
 dist
+immortal-*.js
 .next
 .swc
 public/sw.js
