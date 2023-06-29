@@ -17,3 +17,51 @@ deploy-pay:
   script:
     - curl $DEPLOY_PAY
     - curl $DEPLOY_PAY_DEMO
+
+deploy-bot:
+  only:
+    changes:
+      - workers/bot/**/*
+  script:
+    # - curl $DEPLOY_BOT
+    - curl $DEPLOY_BOT_DEMO
+
+deploy-copy:
+  only:
+    changes:
+      - workers/copy/**/*
+  script:
+    # - curl $DEPLOY_COPY
+    - curl $DEPLOY_COPY_DEMO
+
+deploy-head-ctrader:
+  only:
+    changes:
+      - workers/head-ctrader/**/*
+  script:
+    # - curl $DEPLOY_HEAD_CTRADER
+    - curl $DEPLOY_HEAD_CTRADER_DEMO
+
+deploy-head-meta:
+  only:
+    changes:
+      - workers/head-meta/**/*
+  script:
+    # - curl $DEPLOY_HEAD_META
+    - curl $DEPLOY_HEAD_META_DEMO
+
+deploy-spot-ctrader:
+  only:
+    changes:
+      - workers/spot-ctrader/**/*
+  script:
+    # - curl $DEPLOY_SPOT_CTRADER_ICMARKETS
+    - curl $DEPLOY_SPOT_CTRADER_ICMARKETS_DEMO
+
+deploy-spot-meta:
+  only:
+    changes:
+      - workers/spot-meta/**/*
+  script:
+    # - curl $DEPLOY_SPOT_META_EXNESS
+    - curl $DEPLOY_SPOT_META_EXNESS_DEMO
