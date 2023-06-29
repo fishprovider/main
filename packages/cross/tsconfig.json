@@ -1,13 +1,7 @@
 {
-  "extends": "../../tsconfig.json",
+  "extends": "../../tsconfig.frontend.json",
   "compilerOptions": {
     "composite": true,
-
-    "target": "ESNext",
-    "module": "ESNext",
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "jsx": "preserve",
-
     "baseUrl": ".",
     "paths": {
       "~*": ["./*"]
