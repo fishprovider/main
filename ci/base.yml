@@ -1,0 +1,69 @@
+image: node:lts
+
+variables:
+  GIT_CLEAN_FLAGS: -ffd -e .npm -e .dpl -e .cache
+
+stages:
+  - pre-build
+  - test
+  - deploy
+  - post-deploy
+
+.rule_default_branch:
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      when: always
+    - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == $CI_DEFAULT_BRANCH
+      when: always
+    - when: never
+
+.rule_tag:
+  rules:
+    - if: $CI_COMMIT_TAG
+      when: always
+    - when: never
+
+.rule_skip_title_tag:
+  rules:
+    - if: $CI_COMMIT_TAG
+      when: always
+    - if: $CI_COMMIT_TITLE =~ /^\d+\.\d+\.\d+/
+      when: never
+    - when: always
+
+.cache_npm:
+  cache:
+    key: npm-$CI_COMMIT_REF_SLUG
+    paths:
+      - .npm
+      - node_modules
+
+.install_doppler:
+  script:
+    - apt update && apt install -y curl gnupg
+    - curl -Ls --tlsv1.2 --proto "=https" --retry 3 https://cli.doppler.com/install.sh | sh
+
+.install_puppeteer:
+  script:
+    - rm -f /etc/apt/apt.conf.d/docker-clean
+    - rm -rf /var/lib/apt/lists/*
+    - apt-get update
+    - apt-get install -y wget gnupg
+    - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+    - sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+    - apt-get update
+    - apt-get install -y google-chrome-stable fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst fonts-freefont-ttf libxss1 --no-install-recommends
+    - apt-get install -y libxshmfence1
+
+.notif:
+  script:
+    - '[ ! -z "$NOTIF_MSG" ] && curl -X POST -d "{\"content\": \"${NOTIF_MSG}\"}" -H "Content-Type: application/json" $DISCORD_URL || echo "No message to send"'
+    - '[ ! -z "$NOTIF_MSG" ] && curl -X POST -d "{\"text\": \"${NOTIF_MSG}\"}" -H "Content-Type: application/json" $SLACK_URL || echo "No message to send"'
+
+.deploy_notif:
+  before_script:
+    - NOTIF_MSG="Deploying... $CI_PROJECT_NAME $CI_COMMIT_REF_NAME"
+    - !reference [.notif, script]
+  after_script:
+    - NOTIF_MSG="Deployed $CI_PROJECT_NAME $CI_COMMIT_REF_NAME"
+    - !reference [.notif, script]

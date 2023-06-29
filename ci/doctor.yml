@@ -1,0 +1,13 @@
+include:
+  - local: /ci/base.yml
+
+test:
+  tags:
+    - local
+  stage: test
+  rules: !reference [.rule_skip_title_tag, rules]
+  cache: !reference [.cache_npm, cache]
+  script:
+    - npm i --cache .npm --prefer-offline --no-audit --no-progress --legacy-peer-deps
+    - npm run lint -ws
+    - npm run type-check -ws

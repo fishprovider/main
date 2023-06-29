@@ -1,0 +1,11 @@
+include:
+  - local: /ci/base.yml
+
+deploy:
+  extends: .deploy_notif
+  image: ruby:latest
+  stage: deploy
+  rules: !reference [.rule_tag, rules]
+  script:
+    - gem install dpl
+    - dpl --provider=heroku --app=fp-cron-pup --api-key=$HEROKU_API_KEY

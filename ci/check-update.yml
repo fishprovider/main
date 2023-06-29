@@ -1,0 +1,13 @@
+include:
+  - local: /ci/base.yml
+
+check-update:
+  stage: test
+  rules: !reference [.rule_default_branch, rules]
+  script:
+    - npm i --cache .npm --prefer-offline --no-audit --no-progress --legacy-peer-deps
+    - out=`npx npm-check-updates --dep prod --jsonUpgraded`
+    - echo $out
+    - NOTIF_MSG=''
+    - echo $out | if ! grep -q '{}'; then NOTIF_MSG="`echo $out | wc -l` packages to update $CI_JOB_URL"; fi
+    - !reference [.notif, script]
