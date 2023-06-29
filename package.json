@@ -9,8 +9,11 @@
   ],
   "type": "module",
   "scripts": {
-    "install-swap": "npm install -w packages/utils -w packages/core -w packages/ctrader -w packages/metatrader -w packages/swap",
-    "install-coin": "npm install -w packages/utils -w packages/core -w packages/coin"
+    "install-client": "npm install -w packages/utils -w packages/cross",
+    "install-server": "npm install -w packages/utils -w packages/core",
+    "install-trade-api": "npm install -w packages/ctrader -w packages/metatrader",
+    "install-trade": "npm install -w packages/swap",
+    "install-pay": "npm install -w packages/coin"
   },
   "devDependencies": {
     "@jest/globals": "^29.5.0",
