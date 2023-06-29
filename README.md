@@ -39,10 +39,6 @@ Note that we don't want to install all dependencies on cloud, only install what 
 
 E.g. `apps/back`
 ```shell
-npm run install-server
-npm run install-trade-api
-npm run install-trade
-npm run install-pay
 npm i -w apps/back
 npm run build -w apps/back
 npm start -w apps/back
@@ -50,8 +46,6 @@ npm start -w apps/back
 
 E.g. `workers/gate`
 ```shell
-npm run install-server
-npm run install-trade
 npm i -w workers/gate
 npm run build -w workers/gate
 npm start -w workers/gate

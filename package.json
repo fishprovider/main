@@ -8,13 +8,6 @@
     "apps/*"
   ],
   "type": "module",
-  "scripts": {
-    "install-client": "npm install -w packages/utils -w packages/cross",
-    "install-server": "npm install -w packages/utils -w packages/core",
-    "install-trade-api": "npm install -w packages/ctrader -w packages/metatrader",
-    "install-trade": "npm install -w packages/swap",
-    "install-pay": "npm install -w packages/coin"
-  },
   "devDependencies": {
     "@jest/globals": "^29.5.0",
     "@testing-library/jest-dom": "^5.16.5",
