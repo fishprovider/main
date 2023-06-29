@@ -6,3 +6,9 @@ gate:
     changes:
       - workers/gate/**/*
   script: curl $DEPLOY_GATE
+
+cron:
+  only:
+    changes:
+      - workers/cron/**/*
+  script: curl $DEPLOY_CRON
