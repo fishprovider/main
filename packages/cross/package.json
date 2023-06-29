@@ -1,0 +1,25 @@
+{
+  "name": "@fishbot/cross",
+  "version": "5.0.0",
+  "type": "module",
+  "scripts": {
+    "lint": "eslint --cache --fix --ignore-pattern dist .",
+    "type-check": "tsc && tsc-alias --verbose",
+    "test": "npm run test-unit",
+    "test-unit": "cross-env NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules npx jest",
+    "test-int": "cross-env NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules doppler run --print-config -- npx jest --runInBand",
+    "build": "npm run lint && npm run type-check"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^4.29.15",
+    "@tanstack/react-query-devtools": "^4.29.15",
+    "@tanstack/react-query-persist-client": "^4.29.15",
+    "axios": "^1.4.0",
+    "localforage": "^1.10.0",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "zustand": "^4.3.8"
+  }
+}

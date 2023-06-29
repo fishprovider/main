@@ -1,0 +1,23 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+
+    "target": "ESNext",
+    "module": "ESNext",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "jsx": "preserve",
+
+    "baseUrl": ".",
+    "paths": {
+      "~*": ["./*"]
+    },
+    "rootDir": ".",
+    "outDir": "dist"
+  },
+  "references": [
+    {
+      "path": "../../packages/utils"
+    }
+  ]
+}
