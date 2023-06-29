@@ -1,2 +1,8 @@
 include:
   - local: /ci/doctor.yml
+
+gate:
+  only:
+    changes:
+      - workers/gate/**/*
+  script: echo "Gate"
