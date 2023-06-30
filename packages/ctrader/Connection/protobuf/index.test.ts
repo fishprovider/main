@@ -1,14 +1,14 @@
+import appRootPath from 'app-root-path';
 import path from 'path';
-import url from 'url';
 
 import ProtobufMessages from '.';
 
-const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
+const rootPath = appRootPath.toString();
 
 test('protobuf', () => {
   const protocol = new ProtobufMessages([
-    path.join(__dirname, '..', '..', 'protos', 'OpenApiCommonMessages.proto'),
-    path.join(__dirname, '..', '..', 'protos', 'OpenApiMessages.proto'),
+    path.join(rootPath, 'packages', 'ctrader', 'protos', 'OpenApiCommonMessages.proto'),
+    path.join(rootPath, 'packages', 'ctrader', 'protos', 'OpenApiMessages.proto'),
   ]);
 
   const clientId = 'clientId';

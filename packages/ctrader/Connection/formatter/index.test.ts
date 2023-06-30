@@ -1,11 +1,11 @@
+import appRootPath from 'app-root-path';
 import fs from 'fs';
 import path from 'path';
-import url from 'url';
 
 import ProtobufMessages from '../protobuf';
 import Formatter from '.';
 
-const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
+const rootPath = appRootPath.toString();
 
 describe('Buffer should work as expected', () => {
   test('should have method: concat', () => {
@@ -52,7 +52,7 @@ describe('EncodeDecode', () => {
 
   beforeAll(() => {
     protoMessages = new ProtobufMessages([
-      path.join(__dirname, 'CommonMessages.test.proto'),
+      path.join(rootPath, 'packages', 'ctrader', 'Connection', 'formatter', 'CommonMessages.test.proto'),
     ]);
 
     checkBuffer = (buff: Buffer) => {
