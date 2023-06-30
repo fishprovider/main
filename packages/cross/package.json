@@ -5,6 +5,9 @@
     "@fishbot:registry": "https://gitlab.com/api/v4/projects/47223058/packages/npm/"
   },
   "type": "module",
+  "engines": {
+    "node": ">=16 <19"
+  },
   "scripts": {
     "lint": "eslint --cache --fix --ignore-pattern dist .",
     "type-check": "tsc",

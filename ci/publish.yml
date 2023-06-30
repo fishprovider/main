@@ -12,11 +12,11 @@ publish-cross:
         - packages/cross/**/*
       when: always
     - when: never
-  cache:
-    key: npm-cross-$CI_COMMIT_REF_SLUG
-    paths:
-      - .npm
-      - node_modules
+  # cache:
+  #   key: npm-cross-$CI_COMMIT_REF_SLUG
+  #   paths:
+  #     - .npm
+  #     - node_modules
   extends: .deploy_notif
   script:
     - npm run install-packages -w packages/cross
