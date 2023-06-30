@@ -1,4 +1,4 @@
-import { initStore } from '@packages/cross/libs/store';
+import { initStore } from '@fishbot/cross/libs/store';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 

@@ -15,10 +15,10 @@ dist
 immortal-*.js
 .next
 .swc
-public/sw.js
-public/sw.js.map
-public/workbox-*.js
-public/workbox-*.js.map
-public/worker-*.js
-public/worker-*.js.LICENSE.txt
-public/sitemap*.xml
+**/public/sw.js
+**/public/sw.js.map
+**/public/workbox-*.js
+**/public/workbox-*.js.map
+**/public/worker-*.js
+**/public/worker-*.js.LICENSE.txt
+**/public/sitemap*.xml

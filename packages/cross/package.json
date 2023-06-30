@@ -1,25 +1,16 @@
 {
   "name": "@fishbot/cross",
   "version": "5.0.0",
-  "publishConfig": {
-    "@fishbot:registry": "https://gitlab.com/api/v4/projects/47223058/packages/npm/"
-  },
   "type": "module",
-  "engines": {
-    "node": ">=16 <19"
-  },
   "scripts": {
     "lint": "eslint --cache --fix --ignore-pattern dist .",
     "type-check": "tsc",
     "test": "npm run test-unit",
     "test-unit": "cross-env NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules npx jest",
     "test-int": "cross-env NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules doppler run --print-config -- npx jest --runInBand",
-    "install-packages": "cd ../.. && npm install -w packages/utils -w packages/cross",
     "prebuild": "rm -rf dist && mkdir dist",
     "build": "tsc && tsc-alias --verbose",
-    "postbuild": "rm -rf dist/tsconfig.tsbuildinfo",
-    "prepublish": "cp package.json dist",
-    "publish": "cd dist && npm publish"
+    "postbuild": "rm -rf dist/tsconfig.tsbuildinfo"
   },
   "dependencies": {
     "@tanstack/react-query": "^4.29.15",
@@ -31,13 +22,5 @@
     "moment": "^2.29.4",
     "react": "^18.2.0",
     "zustand": "^4.3.8"
-  },
-  "devDependencies": {
-    "@tsconfig/node-lts-strictest-esm": "^18.12.1",
-    "@types/lodash": "^4.14.194",
-    "@types/react": "^18.2.14",
-    "socket.io-client": "^4.7.0",
-    "tsc-alias": "^1.8.6",
-    "typescript": "~5.0.4"
   }
 }

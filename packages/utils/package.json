@@ -8,7 +8,9 @@
     "test": "npm run test-unit",
     "test-unit": "cross-env NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules npx jest",
     "test-int": "cross-env NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules doppler run --print-config -- npx jest --runInBand",
-    "build": "tsc && tsc-alias --verbose"
+    "prebuild": "rm -rf dist && mkdir dist",
+    "build": "tsc && tsc-alias --verbose",
+    "postbuild": "rm -rf dist/tsconfig.tsbuildinfo"
   },
   "dependencies": {
     "crypto-random-string": "^5.0.0",

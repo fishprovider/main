@@ -1,4 +1,3 @@
 include:
   - local: /ci/doctor.yml
-  - local: /ci/publish.yml
   - local: /ci/deploy.yml

@@ -5,6 +5,8 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
+      "@fishbot/utils*": ["../../packages/utils/dist*"],
+      "@fishbot/cross*": ["../../packages/cross/dist*"],
       "~*": ["./*"]
     },
     "rootDir": ".",
