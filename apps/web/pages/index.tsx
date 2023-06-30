@@ -1,20 +1,21 @@
-import storeUser from '@fishbot/cross/stores/user';
+import dynamic from 'next/dynamic';
+import Head from 'next/head';
+
+import Loading from '~ui/core/Loading';
+
+const Home = dynamic(() => import('~views/Home'), {
+  loading: () => <Loading />,
+});
 
 function HomePage() {
-  const {
-    providerId = '',
-    name = '',
-  } = storeUser.useStore((state: any) => ({
-    providerId: state.activeProvider?._id,
-    name: state.activeProvider?.name,
-  }));
-
   return (
-    <div>
-      Home
-      {providerId}
-      {name}
-    </div>
+    <>
+      <Head>
+        <title>Home</title>
+        <meta name="description" content="FishProvider Home" />
+      </Head>
+      <Home />
+    </>
   );
 }
 

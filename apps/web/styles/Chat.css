@@ -1,0 +1,5 @@
+.fp-chat-list {
+  min-height: 200px;
+  max-height: calc(90vh - 200px);
+  overflow: auto;
+}
