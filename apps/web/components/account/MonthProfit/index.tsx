@@ -6,6 +6,7 @@ import {
   Brush,
   CartesianGrid,
   ComposedChart,
+  LabelList,
   Legend,
   Line,
   Rectangle,
@@ -15,13 +16,15 @@ import {
   YAxis,
 } from 'recharts';
 
+import useMobile from '~ui/styles/useMobile';
+
 const defaultProfitMonths: Record<number, number[]> = {
   2022: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3.07],
   2023: [3.16, 1.8, 3.15, 2.14, 2.1, 4.18],
 };
 
-const nameProfit = 'Profit (%)';
-const nameProfitAcc = 'Profit Acc. (%)';
+const nameProfit = 'Month Profit (%)';
+const nameProfitAcc = 'All-Time Profit (%)';
 
 function BarProfit(props: { value: number }) {
   const { value } = props;
@@ -44,6 +47,8 @@ function MonthProfit({
   providerId,
   height = 300,
 }: Props) {
+  const isMobile = useMobile();
+
   const {
     profitMonths = defaultProfitMonths,
   } = storeAccounts.useStore((state) => ({
@@ -76,22 +81,34 @@ function MonthProfit({
     });
   });
 
+  const renderLabel = ({
+    x, y, width, value,
+  }: any) => value && (
+    <g>
+      <text x={x + width / 2} y={y - 5} textAnchor="middle">
+        {`${value}%`}
+      </text>
+    </g>
+  );
+
   return (
     <ResponsiveContainer width="100%" height={height}>
       <ComposedChart data={data}>
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="month" />
-        <YAxis yAxisId="left" unit="%" />
-        <YAxis yAxisId="right" unit="%" orientation="right" />
+        <XAxis dataKey="month" fontSize={12} />
+        <YAxis yAxisId="profitMonth" unit="%" hide />
+        <YAxis yAxisId="profitAcc" unit="%" orientation="right" />
         <Tooltip />
         <Legend />
         <Bar
-          yAxisId="left"
+          yAxisId="profitMonth"
           dataKey={nameProfit}
           shape={BarProfit}
-        />
+        >
+          <LabelList dataKey={nameProfit} content={renderLabel} />
+        </Bar>
         <Line
-          yAxisId="right"
+          yAxisId="profitAcc"
           dataKey={nameProfitAcc}
           stroke="orange"
           strokeWidth={3}
@@ -100,7 +117,7 @@ function MonthProfit({
           dataKey="month"
           startIndex={Math.max(0, data.length - 12)}
           endIndex={Math.max(0, data.length - 1)}
-          travellerWidth={12}
+          travellerWidth={isMobile ? 6 : 12}
           stroke="blue"
         />
       </ComposedChart>
