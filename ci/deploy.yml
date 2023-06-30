@@ -81,3 +81,10 @@ deploy-back:
     - curl $DEPLOY_BACK_DEMO
     - curl $DEPLOY_BACK_CANARY
     - curl $DEPLOY_BACK_CANARY_DEMO
+
+deploy-web:
+  only:
+    changes:
+      - apps/web/**/*
+  script:
+    - echo deploy-web
