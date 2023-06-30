@@ -10,17 +10,9 @@
     "outDir": "dist"
   },
   "references": [
-    {
-      "path": "../../packages/utils"
-    },
-    {
-      "path": "../../packages/ctrader"
-    },
-    {
-      "path": "../../packages/metatrader"
-    },
-    {
-      "path": "../../packages/core"
-    }
+    { "path": "../../packages/utils" },
+    { "path": "../../packages/ctrader" },
+    { "path": "../../packages/metatrader" },
+    { "path": "../../packages/core" }
   ]
 }

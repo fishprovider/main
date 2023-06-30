@@ -19,11 +19,7 @@
     "node_modules",
   ],
   "references": [
-    {
-      "path": "../../packages/utils"
-    },
-    {
-      "path": "../../packages/cross"
-    }
+    { "path": "../../packages/utils" },
+    { "path": "../../packages/cross" }
   ]
 }

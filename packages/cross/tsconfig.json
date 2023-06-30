@@ -10,8 +10,6 @@
     "outDir": "dist"
   },
   "references": [
-    {
-      "path": "../../packages/utils"
-    }
+    { "path": "../../packages/utils" }
   ]
 }
