@@ -5,7 +5,7 @@ doctor:
   tags:
     - local
   stage: test
-  rules: !reference [.rule_skip_title_tag, rules]
+  rules: !reference [.rule_default_branch, rules]
   cache: !reference [.cache_npm, cache]
   script:
     - npm i --cache .npm --prefer-offline --no-audit --no-progress --legacy-peer-deps
