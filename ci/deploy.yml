@@ -29,7 +29,7 @@ deploy-bot:
     changes:
       - workers/bot/**/*
   script:
-    # - curl $DEPLOY_BOT
+    - curl $DEPLOY_BOT
     - curl $DEPLOY_BOT_DEMO
 
 deploy-copy:
@@ -37,7 +37,7 @@ deploy-copy:
     changes:
       - workers/copy/**/*
   script:
-    # - curl $DEPLOY_COPY
+    - curl $DEPLOY_COPY
     - curl $DEPLOY_COPY_DEMO
 
 deploy-head-ctrader:
@@ -45,7 +45,7 @@ deploy-head-ctrader:
     changes:
       - workers/head-ctrader/**/*
   script:
-    # - curl $DEPLOY_HEAD_CTRADER
+    - curl $DEPLOY_HEAD_CTRADER
     - curl $DEPLOY_HEAD_CTRADER_DEMO
 
 deploy-head-meta:
@@ -53,7 +53,7 @@ deploy-head-meta:
     changes:
       - workers/head-meta/**/*
   script:
-    # - curl $DEPLOY_HEAD_META
+    - curl $DEPLOY_HEAD_META
     - curl $DEPLOY_HEAD_META_DEMO
 
 deploy-spot-ctrader:
@@ -77,7 +77,7 @@ deploy-back:
     changes:
       - apps/back/**/*
   script:
-    # - curl $DEPLOY_BACK
+    - curl $DEPLOY_BACK
     - curl $DEPLOY_BACK_DEMO
     - curl $DEPLOY_BACK_CANARY
     - curl $DEPLOY_BACK_CANARY_DEMO
