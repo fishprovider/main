@@ -15,7 +15,9 @@
     "test-unit": "cross-env NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules npx jest",
     "test-int": "cross-env NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules doppler run --print-config -- npx jest --runInBand",
     "install-packages": "cd ../.. && npm install -w packages/utils -w packages/cross",
+    "prebuild": "rm -rf dist && mkdir dist",
     "build": "tsc && tsc-alias --verbose",
+    "postbuild": "rm -rf dist/tsconfig.tsbuildinfo",
     "prepublish": "cp package.json dist",
     "publish": "cd dist && npm publish"
   },
