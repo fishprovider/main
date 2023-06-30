@@ -1,6 +1,6 @@
 {
   "name": "@fishbot/cross",
-  "version": "5.0.1",
+  "version": "5.0.0",
   "publishConfig": {
     "@fishbot:registry": "https://gitlab.com/api/v4/projects/47223058/packages/npm/"
   },
@@ -12,7 +12,10 @@
     "test-unit": "cross-env NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules npx jest",
     "test-int": "cross-env NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules doppler run --print-config -- npx jest --runInBand",
     "install-packages": "cd ../.. && npm install -w packages/utils -w packages/cross",
-    "build": "rm -rf dist && mkdir dist && tsc && tsc-alias --verbose && cp package.json dist",
+    "prebuild": "rm -rf dist && mkdir dist",
+    "build": "tsc && tsc-alias --verbose",
+    "postbuild": "rm -rf dist/tsconfig.tsbuildinfo",
+    "prepublish": "cp package.json dist",
     "publish": "cd dist && npm publish"
   },
   "dependencies": {
