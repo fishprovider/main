@@ -1,6 +1,6 @@
+import appRootPath from 'app-root-path';
 import path from 'path';
 import tls from 'tls';
-import url from 'url';
 
 import authorizeApplication from '~commands/authorizeApplication';
 import sendHeartbeat from '~commands/sendHeartbeat';
@@ -21,13 +21,15 @@ const env = {
   ctraderProtoTmp: process.env.CTRADER_PROTO_TMP,
 };
 
-const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
+const rootPath = appRootPath.toString();
+console.log('rootPath', rootPath);
+
 const protoFile1 = env.ctraderProtoTmp
   ? path.join('/tmp', 'protos', 'OpenApiCommonMessages.proto')
-  : path.join(__dirname, '..', '..', '..', 'packages', 'ctrader', 'protos', 'OpenApiCommonMessages.proto');
+  : path.join(rootPath, 'packages', 'ctrader', 'protos', 'OpenApiCommonMessages.proto');
 const protoFile2 = env.ctraderProtoTmp
   ? path.join('/tmp', 'protos', 'OpenApiMessages.proto')
-  : path.join(__dirname, '..', '..', '..', 'packages', 'ctrader', 'protos', 'OpenApiMessages.proto');
+  : path.join(rootPath, 'packages', 'ctrader', 'protos', 'OpenApiMessages.proto');
 console.log('protoFiles', protoFile1, protoFile2);
 
 class Connection implements ConnectionType {

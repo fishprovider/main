@@ -11,6 +11,7 @@
     "build": "tsc && tsc-alias --verbose"
   },
   "dependencies": {
+    "app-root-path": "^3.1.0",
     "crypto-random-string": "^5.0.0",
     "protobufjs": "^5.0.3"
   }
