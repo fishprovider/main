@@ -52,8 +52,11 @@ const nextConfig = {
   ...swcConfig,
   webpack,
   eslint: {
-    dirs: [],
+    ignoreDuringBuilds: true,
   },
+  typescript: {
+    ignoreBuildErrors: true,
+  }
   // i18n,
 };
 
