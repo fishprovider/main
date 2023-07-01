@@ -23,9 +23,10 @@
   npm i
   ```
 
-- Secondly, start dev server, e.g. `apps/back`
+- Secondly, start dev server, e.g. `apps/back` and `apps/web`
   ```shell
   npm run dev -w apps/back
+  npm run dev -w apps/web
   ```
 
 - (Optional) Run dev tools before pushing any code
@@ -39,16 +40,18 @@ Note that we don't want to install all dependencies on prod, only install what w
 
 E.g. `apps/back`
 ```shell
-npm i -w apps/back
-npm run build -w apps/back
-npm start -w apps/back
+cd apps/back
+npm i
+npm run build
+npm start
 ```
 
 E.g. `workers/cron`
 ```shell
-npm i -w workers/cron
-npm run build -w workers/cron
-npm start -w workers/cron
+cd workers/cron
+npm i
+npm run build
+npm start
 ```
 
 # How to deploy?
