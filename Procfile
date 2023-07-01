@@ -1,0 +1,1 @@
+worker: npm i -w workers/pup && npm run build -w workers/pup && npm run heroku -w workers/pup
