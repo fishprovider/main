@@ -56,7 +56,7 @@ const nextConfig = {
   },
   typescript: {
     ignoreBuildErrors: true,
-  }
+  },
   // i18n,
 };
 
@@ -120,6 +120,6 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 
 module.exports = [
   withPWA,
-  // withSentry,
+  withSentry,
   withBundleAnalyzer,
 ].reduce((finalConfig, pluginFn) => pluginFn(finalConfig), nextConfig);
