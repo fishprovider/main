@@ -1,1 +1,1 @@
-worker: npm i -w workers/pup && npm run build -w workers/pup && npm start -w workers/pup
+worker: npm run heroku-start -w workers/pup
