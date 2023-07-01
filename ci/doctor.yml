@@ -10,3 +10,10 @@ doctor:
   script:
     - npm i --cache .npm --prefer-offline --no-audit --no-progress --legacy-peer-deps
     - npm run doctor
+
+doctor-error:
+  stage: clean
+  when: on_failure
+  script:
+    - NOTIF_MSG="[Error] Doctor failed $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
+    - !reference [.notif, script]

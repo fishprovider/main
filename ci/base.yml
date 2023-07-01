@@ -6,6 +6,7 @@ variables:
 stages:
   - test
   - deploy
+  - clean
 
 .rule_default_branch:
   rules:
@@ -14,20 +15,6 @@ stages:
     - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == $CI_DEFAULT_BRANCH
       when: always
     - when: never
-
-.rule_tag:
-  rules:
-    - if: $CI_COMMIT_TAG
-      when: always
-    - when: never
-
-.rule_skip_title_tag:
-  rules:
-    - if: $CI_COMMIT_TAG
-      when: always
-    - if: $CI_COMMIT_TITLE =~ /^\d+\.\d+\.\d+/
-      when: never
-    - when: always
 
 .cache_npm:
   cache:
@@ -40,18 +27,6 @@ stages:
   script:
     - apt update && apt install -y curl gnupg
     - curl -Ls --tlsv1.2 --proto "=https" --retry 3 https://cli.doppler.com/install.sh | sh
-
-.install_puppeteer:
-  script:
-    - rm -f /etc/apt/apt.conf.d/docker-clean
-    - rm -rf /var/lib/apt/lists/*
-    - apt-get update
-    - apt-get install -y wget gnupg
-    - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
-    - sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-    - apt-get update
-    - apt-get install -y google-chrome-stable fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst fonts-freefont-ttf libxss1 --no-install-recommends
-    - apt-get install -y libxshmfence1
 
 .notif:
   script:
