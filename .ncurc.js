@@ -4,5 +4,6 @@ module.exports = {
   reject: [
     '@types/long',
     'protobufjs',
+    'typescript',
   ],
 };
