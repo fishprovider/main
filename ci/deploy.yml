@@ -2,25 +2,36 @@ deploy-gate:
   only:
     changes:
       - workers/gate/**/*
-  script: curl $DEPLOY_GATE
+  script:
+    - NOTIF_MSG="Deploy gate $CI_COMMIT_REF_NAME"
+    - !reference [.notif, script]
+    - curl $DEPLOY_GATE
 
 deploy-cron:
   only:
     changes:
       - workers/cron/**/*
-  script: curl $DEPLOY_CRON
+  script:
+    - NOTIF_MSG="Deploy cron $CI_COMMIT_REF_NAME"
+    - !reference [.notif, script]
+    - curl $DEPLOY_CRON
 
 deploy-mon:
   only:
     changes:
       - workers/mon/**/*
-  script: curl $DEPLOY_MON
+  script:
+    - NOTIF_MSG="Deploy mon $CI_COMMIT_REF_NAME"
+    - !reference [.notif, script]
+    - curl $DEPLOY_MON
 
 deploy-pay:
   only:
     changes:
       - workers/pay/**/*
   script:
+    - NOTIF_MSG="Deploy pay $CI_COMMIT_REF_NAME"
+    - !reference [.notif, script]
     - curl $DEPLOY_PAY
     - curl $DEPLOY_PAY_DEMO
 
@@ -29,6 +40,8 @@ deploy-bot:
     changes:
       - workers/bot/**/*
   script:
+    - NOTIF_MSG="Deploy bot $CI_COMMIT_REF_NAME"
+    - !reference [.notif, script]
     - curl $DEPLOY_BOT
     - curl $DEPLOY_BOT_DEMO
 
@@ -37,6 +50,8 @@ deploy-copy:
     changes:
       - workers/copy/**/*
   script:
+    - NOTIF_MSG="Deploy copy $CI_COMMIT_REF_NAME"
+    - !reference [.notif, script]
     - curl $DEPLOY_COPY
     - curl $DEPLOY_COPY_DEMO
 
@@ -45,6 +60,8 @@ deploy-head-ctrader:
     changes:
       - workers/head-ctrader/**/*
   script:
+    - NOTIF_MSG="Deploy head-ctrader $CI_COMMIT_REF_NAME"
+    - !reference [.notif, script]
     - curl $DEPLOY_HEAD_CTRADER
     - curl $DEPLOY_HEAD_CTRADER_DEMO
 
@@ -53,6 +70,8 @@ deploy-head-meta:
     changes:
       - workers/head-meta/**/*
   script:
+    - NOTIF_MSG="Deploy head-meta $CI_COMMIT_REF_NAME"
+    - !reference [.notif, script]
     - curl $DEPLOY_HEAD_META
     - curl $DEPLOY_HEAD_META_DEMO
 
@@ -61,6 +80,8 @@ deploy-spot-ctrader:
     changes:
       - workers/spot-ctrader/**/*
   script:
+    - NOTIF_MSG="Deploy spot-ctrader $CI_COMMIT_REF_NAME"
+    - !reference [.notif, script]
     - curl $DEPLOY_SPOT_CTRADER_ICMARKETS
     - curl $DEPLOY_SPOT_CTRADER_ICMARKETS_DEMO
 
@@ -69,6 +90,8 @@ deploy-spot-meta:
     changes:
       - workers/spot-meta/**/*
   script:
+    - NOTIF_MSG="Deploy spot-meta $CI_COMMIT_REF_NAME"
+    - !reference [.notif, script]
     - curl $DEPLOY_SPOT_META_EXNESS
     - curl $DEPLOY_SPOT_META_EXNESS_DEMO
 
@@ -77,6 +100,8 @@ deploy-back:
     changes:
       - apps/back/**/*
   script:
+    - NOTIF_MSG="Deploy back $CI_COMMIT_REF_NAME"
+    - !reference [.notif, script]
     - curl $DEPLOY_BACK
     - curl $DEPLOY_BACK_DEMO
     - curl $DEPLOY_BACK_CANARY
