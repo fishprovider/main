@@ -1,0 +1,1 @@
+web: npm install -w workers/pup && npm run build -w workers/pup && npm start -w workers/pup

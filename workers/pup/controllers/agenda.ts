@@ -1,9 +1,7 @@
 import { clean, getJobType } from '@fishbot/core/libs/agenda';
-import type { Job } from 'agenda';
 
 import getNextWeekNews from '~services/getNextWeekNews';
 import getStrategyInfos from '~services/getStrategyInfos';
-import renewTokens from '~services/renewTokens';
 
 const env = {
   typeId: process.env.TYPE_ID,
@@ -46,25 +44,10 @@ const startGetStrategyInfo = async () => {
   }
 };
 
-const startRenewTokens = async () => {
-  const jobName = `${prefix}-renew-tokens`;
-  Agenda.define(jobName, async (job: Job) => {
-    const { data } = job.attrs;
-    if (data) {
-      const { providerId } = data;
-      Logger.warn(`📥 [${jobName}] Receive providerId ${providerId}`);
-      await renewTokens(providerId);
-    } else {
-      Logger.error(`🔥 [${jobName}] Missing data ${job.attrs}`);
-    }
-  });
-};
-
 const start = async () => {
   await clean();
   await startGetNextWeekNews();
   await startGetStrategyInfo();
-  await startRenewTokens();
 };
 
 export {
