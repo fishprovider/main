@@ -59,4 +59,5 @@ npm start
 ```
 
 # How to deploy?
-- Git push will trigger CI to deploy
+- Git push will trigger CI to deploy, see `ci/deploy.yml`
+- For `apps/web`, use script `deploy-dev.sh`, `deploy-canary.sh`, `deploy-prod.sh`
