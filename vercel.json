@@ -1,6 +1,0 @@
-{
-  "ignoreCommand": "git diff --quiet HEAD^ HEAD ./apps/web",
-  "installCommand": "npm i -w apps/web",
-  "buildCommand": "npm run build -w apps/web",
-  "devCommand": "npm run dev -w apps/web"
-}
