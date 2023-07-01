@@ -25,8 +25,13 @@
 
 - Secondly, start dev server, e.g. `apps/back` and `apps/web`
   ```shell
+  # Option 1
   npm run dev -w apps/back
   npm run dev -w apps/web
+
+  # Option 2
+  cd apps/back
+  npm run dev
   ```
 
 - (Optional) Run dev tools before pushing any code
@@ -40,10 +45,9 @@ Note that we don't want to install all dependencies on prod, only install what w
 
 E.g. `apps/back`
 ```shell
-cd apps/back
-npm i
-npm run build
-npm start
+npm i -w apps/back
+npm run build -w apps/back
+npm start -w apps/back
 ```
 
 E.g. `workers/cron`
