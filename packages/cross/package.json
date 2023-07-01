@@ -9,8 +9,7 @@
     "test-unit": "cross-env NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules npx jest",
     "test-int": "cross-env NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules doppler run --print-config -- npx jest --runInBand",
     "prebuild": "rm -rf dist && mkdir dist",
-    "build": "tsc && tsc-alias --verbose",
-    "postbuild": "rm -rf dist/tsconfig.tsbuildinfo"
+    "build": "tsc && tsc-alias --verbose"
   },
   "dependencies": {
     "@tanstack/react-query": "^4.29.19",

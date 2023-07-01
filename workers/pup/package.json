@@ -2,6 +2,9 @@
   "name": "@fishbot/pup",
   "version": "5.0.0",
   "type": "module",
+  "engines": {
+    "node": ">=16 <19"
+  },
   "scripts": {
     "preinstall": "cd ../.. && npm install -w packages/utils -w packages/core",
     "lint": "eslint --cache --fix --ignore-pattern dist .",
@@ -9,14 +12,13 @@
     "test": "npm run test-unit",
     "test-unit": "cross-env NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules npx jest",
     "test-int": "cross-env NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules doppler run --print-config -- npx jest --runInBand",
-    "build": "rm -rf dist && mkdir dist && node esbuild.cjs",
+    "prebuild": "rm -rf dist && mkdir dist",
+    "build": "node esbuild.cjs",
     "build-watch": "cross-env WATCH_MODE=true npm run build",
     "start": "doppler run --print-config -- node --experimental-specifier-resolution=node dist/index.js",
     "start-watch": "doppler run --print-config -- nodemon --experimental-specifier-resolution=node --delay 1 dist/index.js",
     "dev": "concurrently -k 'npm run build-watch' 'npm run start-watch'",
-    "heroku-prebuild": "echo Before heroku build",
-    "heroku-postbuild": "echo After heroku build",
-    "heroku-start": "node --experimental-specifier-resolution=node dist/index.js"
+    "heroku": "node --experimental-specifier-resolution=node dist/index.js"
   },
   "dependencies": {
     "dotenv-flow": "^3.2.0",
