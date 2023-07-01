@@ -18,12 +18,18 @@
 
 # How to dev?
 
-- First of all, install dependencies
+- Install Doppler for env secrets https://docs.doppler.com/docs/install-cli
+  ```shell
+  doppler login
+  doppler setup -p backend -c prd_demo_local
+  ```
+
+- Install dependencies
   ```shell
   npm i
   ```
 
-- Secondly, start dev server, e.g. `apps/back` and `apps/web`
+- Start dev server, e.g. `apps/back` and `apps/web`
   ```shell
   # Option 1
   npm run dev -w apps/back
