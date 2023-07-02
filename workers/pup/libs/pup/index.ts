@@ -1,6 +1,6 @@
 import fs from 'fs';
 import type { Browser, Page, Product } from 'puppeteer';
-import puppeteerOri from 'puppeteer';
+import puppeteerCore from 'puppeteer-core';
 import puppeteer from 'puppeteer-extra';
 import AdblockerPlugin from 'puppeteer-extra-plugin-adblocker';
 import AnonymizeUAPlugin from 'puppeteer-extra-plugin-anonymize-ua';
@@ -53,7 +53,8 @@ const newBrowser = async (
   product: string,
 ) => {
   const browser = await puppeteer.launch({
-    executablePath: puppeteerOri.executablePath(),
+    // executablePath: puppeteerCore.executablePath(),
+    executablePath: process.env.CHROME_BIN || 'usr/bin/google-chrome',
     headless: headless ? 'new' : false,
     args: [
       '--mute-audio',
