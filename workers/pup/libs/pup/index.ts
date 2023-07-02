@@ -54,7 +54,8 @@ const newBrowser = async (
 ) => {
   const browser = await puppeteer.launch({
     // in Heroku, jontewks/puppeteer will auto set PUPPETEER_EXECUTABLE_PATH
-    executablePath: process.env.PUPPETEER_EXECUTABLE_PATH,
+    executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || '/usr/bin/google-chrome-stable',
+    channel: 'chrome',
     headless: headless ? 'new' : false,
     args: [
       '--mute-audio',
