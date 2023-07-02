@@ -3,8 +3,7 @@
   ```
   https://gitlab.com/fishprovider/heroku-doppler
   heroku/nodejs
-  jontewks/puppeteer
-  heroku/google-chrome
+  https://github.com/puppeteer/puppeteer.git
   ```
 
 - Add env
