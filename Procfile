@@ -1,1 +1,1 @@
-pup: npm run heroku-install -w workers/pup && npm run build -w workers/pup && npm run heroku -w workers/pup
+pup: npm run heroku-install -w workers/pup && npm run build -w workers/pup && npm run heroku-start -w workers/pup
