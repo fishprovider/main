@@ -17,9 +17,7 @@
     "build-watch": "cross-env WATCH_MODE=true npm run build",
     "start": "doppler run --print-config -- node --experimental-specifier-resolution=node dist/index.js",
     "start-watch": "doppler run --print-config -- nodemon --experimental-specifier-resolution=node --delay 1 dist/index.js",
-    "dev": "concurrently -k 'npm run build-watch' 'npm run start-watch'",
-    "heroku-install": "npm i @tsconfig/node-lts-strictest-esm esbuild",
-    "heroku-start": "node --experimental-specifier-resolution=node dist/index.js"
+    "dev": "concurrently -k 'npm run build-watch' 'npm run start-watch'"
   },
   "dependencies": {
     "@tsconfig/node-lts-strictest-esm": "^18.12.1",
