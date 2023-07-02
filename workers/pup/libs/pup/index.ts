@@ -41,7 +41,7 @@ const gotoAttempt = async (
   }
 };
 
-const newPage = async (browser: Browser, defaultTimeout = 60000) => {
+const newPage = async (browser: Browser, defaultTimeout = 600000) => {
   const page = await browser.newPage();
   page.setDefaultTimeout(defaultTimeout);
   return page;
