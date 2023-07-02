@@ -1,4 +1,4 @@
-import { send } from '@fishbot/core/libs/notif';
+// import { send } from '@fishbot/core/libs/notif';
 import { isLastRunExpired } from '@fishbot/utils/helpers/lastRunChecks';
 import type { Account } from '@fishbot/utils/types/Account.model';
 import _ from 'lodash';
@@ -49,7 +49,7 @@ const setBalanceStartDay = async (account: Account) => {
 
     const msg = `[bot] Set balanceStartDay from ${balanceStartDay} to ${newBalanceStartDay}`;
     Logger.debug(`[${providerId}] ${msg}`);
-    send(msg, [], `p-${providerId}`);
+    // send(msg, [], `p-${providerId}`);
 
     if (env.dryRun) return;
 
