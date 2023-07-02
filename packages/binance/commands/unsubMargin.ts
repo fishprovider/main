@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
+import promiseCreator from '@fishbot/utils/helpers/promiseCreator';
+
 import type { ConnectionType } from '~types/Connection.model';
-import promiseCreator from '~utils/promiseCreator';
 import { sendRequest } from '~utils/url';
 
 async function unsubMargin(connection: ConnectionType) {

@@ -10,7 +10,7 @@ import type { Command, ConnectionType, SendCommand } from '~types/Connection.mod
 import type { CallbackPayload } from '~types/Event.model';
 import type { PromiseCreator } from '~types/PromiseCreator.model';
 import type { DecodedMessage } from '~types/ProtobufMessages.model';
-import promiseCreator from '~utils/promiseCreator';
+import promiseCreator from '@fishbot/utils/helpers/promiseCreator';
 import random from '~utils/random';
 
 import handleEvents from './events';

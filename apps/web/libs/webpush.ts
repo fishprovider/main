@@ -1,7 +1,6 @@
 import { apiPost } from '@fishbot/cross/libs/api';
+import promiseCreator from '@fishbot/utils/helpers/promiseCreator';
 import { getMessaging, getToken, onMessage } from 'firebase/messaging';
-
-import promiseCreator from '~utils/promiseCreator';
 
 const env = {
   fcmVapidKey: process.env.NEXT_PUBLIC_FIREBASE_CLOUD_MESSAGING_VAPID_KEY,

@@ -1,3 +1,5 @@
+import delay from '@fishbot/utils/helpers/delay';
+import promiseCreator from '@fishbot/utils/helpers/promiseCreator';
 import { jest } from '@jest/globals';
 import _ from 'lodash';
 
@@ -9,8 +11,6 @@ import {
 } from '~constants/openApi';
 import { createConnection, destroyConnection } from '~dev/utils';
 import type { ConnectionType } from '~types/Connection.model';
-import delay from '~utils/delay';
-import promiseCreator from '~utils/promiseCreator';
 import { isMarketClosed } from '~utils/validate';
 
 import * as handleEventOrder from './order';

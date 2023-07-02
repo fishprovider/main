@@ -1,3 +1,4 @@
+import delay from '@fishbot/utils/helpers/delay';
 import type { Browser, Page } from 'puppeteer';
 
 import { newBrowser, newPage } from '~libs/pup';
@@ -9,10 +10,6 @@ const env = {
 };
 
 const MAX_ATTEMPTS = 5;
-
-const delay = (timeMS: number) => new Promise((resolve) => {
-  setTimeout(resolve, timeMS);
-});
 
 const attemptHandler = async (
   handler: () => Promise<Token>,

@@ -1,6 +1,7 @@
 import userLogin from '@fishbot/cross/api/users/login';
 import userUpdateInfo from '@fishbot/cross/api/users/updateInfo';
 import storeUser from '@fishbot/cross/stores/user';
+import promiseCreator from '@fishbot/utils/helpers/promiseCreator';
 import type { User } from '@fishbot/utils/types/User.model';
 import moment from 'moment';
 import { useRouter } from 'next/router';
@@ -8,7 +9,6 @@ import { useEffect } from 'react';
 
 import { authOnChange, cacheReadUserToken, refreshUserToken } from '~libs/auth';
 import { cacheRead, cacheWrite } from '~libs/cache';
-import promiseCreator from '~utils/promiseCreator';
 import { redirectPreLoginPage } from '~utils/user';
 
 const cacheKeyUser = 'fp-user';

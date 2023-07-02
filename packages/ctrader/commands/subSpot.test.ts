@@ -1,9 +1,9 @@
+import delay from '@fishbot/utils/helpers/delay';
 import { jest } from '@jest/globals';
 
 import * as handleEventPrice from '~Connection/events/price';
 import { createConnection, destroyConnection } from '~dev/utils';
 import type { ConnectionType } from '~types/Connection.model';
-import delay from '~utils/delay';
 
 import getSymbolList from './getSymbolList';
 import subSpot from './subSpot';

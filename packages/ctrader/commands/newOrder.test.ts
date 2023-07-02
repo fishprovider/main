@@ -1,8 +1,9 @@
+import delay from '@fishbot/utils/helpers/delay';
+
 import newOrder from '~commands/newOrder';
 import { OrderType, TradeSide } from '~constants/openApi';
 import { createConnection, destroyConnection } from '~dev/utils';
 import type { ConnectionType } from '~types/Connection.model';
-import delay from '~utils/delay';
 import { isMarketClosed } from '~utils/validate';
 
 import cancelOrder from './cancelOrder';
