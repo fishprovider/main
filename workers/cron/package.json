@@ -1,6 +1,6 @@
 {
   "name": "@fishbot/cron",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "type": "module",
   "scripts": {
     "preinstall": "cd ../.. && npm install -w packages/utils -w packages/core -w packages/swap -w packages/ctrader -w packages/metatrader",
