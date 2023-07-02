@@ -8,5 +8,6 @@
 
 - Add env
   ```
+  NPM_CONFIG_PRODUCTION=false
   DOPPLER_TOKEN=...
   ```
