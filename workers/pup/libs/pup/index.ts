@@ -53,7 +53,7 @@ const newBrowser = async (
   product: string,
 ) => {
   const browser = await puppeteer.launch({
-    executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || '/usr/bin/google-chrome',
+    executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
     channel: 'chrome',
     headless: headless ? 'new' : false,
     args: [
