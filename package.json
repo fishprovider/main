@@ -13,9 +13,8 @@
   },
   "scripts": {
     "doctor": "npm run lint -ws && npm run type-check -ws",
-    "heroku-prebuild": "npm config set NPM_CONFIG_PRODUCTION=false",
     "heroku-build": "npm run build -w workers/pup",
-    "heroku-cleanup": "npm config set NPM_CONFIG_PRODUCTION=true && npm prune --production",
+    "heroku-cleanup": "NPM_CONFIG_PRODUCTION=true npm prune --production",
     "heroku-postbuild": "npm run heroku-build && npm run heroku-cleanup"
   },
   "devDependencies": {
