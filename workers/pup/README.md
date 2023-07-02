@@ -10,6 +10,5 @@
 - Add env
   ```
   NPM_CONFIG_PRODUCTION=false
-  PUPPETEER_EXECUTABLE_PATH=/app/.apt/usr/bin/google-chrome
   DOPPLER_TOKEN=...
   ```
