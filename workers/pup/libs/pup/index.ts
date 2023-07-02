@@ -53,7 +53,8 @@ const newBrowser = async (
   product: string,
 ) => {
   const browser = await puppeteer.launch({
-    executablePath: process.env.CHROME_BIN || process.env.PUPPETEER_EXEC_PATH,
+    // in Heroku, jontewks/puppeteer will auto set PUPPETEER_EXECUTABLE_PATH
+    executablePath: process.env.PUPPETEER_EXECUTABLE_PATH,
     headless: headless ? 'new' : false,
     args: [
       '--mute-audio',
