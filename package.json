@@ -12,9 +12,7 @@
     "node": ">=16 <19"
   },
   "scripts": {
-    "doctor": "npm run lint -ws && npm run type-check -ws",
-    "heroku-prebuild": "npm i -w workers/pup",
-    "heroku-postbuild": "npm run build -w workers/pup"
+    "doctor": "npm run lint -ws && npm run type-check -ws"
   },
   "devDependencies": {
     "@jest/globals": "^29.5.0",
