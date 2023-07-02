@@ -1,7 +1,10 @@
 deploy-gate:
-  only:
-    changes:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+      when: never
+    - changes:
       - workers/gate/**/*
+      when: always
   script:
     - curl $DEPLOY_GATE
   after_script:
@@ -9,9 +12,12 @@ deploy-gate:
     - !reference [.notif, script]
 
 deploy-cron:
-  only:
-    changes:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+      when: never
+    - changes:
       - workers/cron/**/*
+      when: always
   script:
     - curl $DEPLOY_CRON
   after_script:
@@ -19,9 +25,12 @@ deploy-cron:
     - !reference [.notif, script]
 
 deploy-mon:
-  only:
-    changes:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+      when: never
+    - changes:
       - workers/mon/**/*
+      when: always
   script:
     - curl $DEPLOY_MON
   after_script:
@@ -29,9 +38,12 @@ deploy-mon:
     - !reference [.notif, script]
 
 deploy-pay:
-  only:
-    changes:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+      when: never
+    - changes:
       - workers/pay/**/*
+      when: always
   script:
     - curl $DEPLOY_PAY
     - curl $DEPLOY_PAY_DEMO
@@ -40,9 +52,12 @@ deploy-pay:
     - !reference [.notif, script]
 
 deploy-bot:
-  only:
-    changes:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+      when: never
+    - changes:
       - workers/bot/**/*
+      when: always
   script:
     - curl $DEPLOY_BOT
     - curl $DEPLOY_BOT_DEMO
@@ -51,9 +66,12 @@ deploy-bot:
     - !reference [.notif, script]
 
 deploy-copy:
-  only:
-    changes:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+      when: never
+    - changes:
       - workers/copy/**/*
+      when: always
   script:
     - curl $DEPLOY_COPY
     - curl $DEPLOY_COPY_DEMO
@@ -62,9 +80,12 @@ deploy-copy:
     - !reference [.notif, script]
 
 deploy-head-ctrader:
-  only:
-    changes:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+      when: never
+    - changes:
       - workers/head-ctrader/**/*
+      when: always
   script:
     - curl $DEPLOY_HEAD_CTRADER
     - curl $DEPLOY_HEAD_CTRADER_DEMO
@@ -73,9 +94,12 @@ deploy-head-ctrader:
     - !reference [.notif, script]
 
 deploy-head-meta:
-  only:
-    changes:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+      when: never
+    - changes:
       - workers/head-meta/**/*
+      when: always
   script:
     - curl $DEPLOY_HEAD_META
     - curl $DEPLOY_HEAD_META_DEMO
@@ -84,9 +108,12 @@ deploy-head-meta:
     - !reference [.notif, script]
 
 deploy-spot-ctrader:
-  only:
-    changes:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+      when: never
+    - changes:
       - workers/spot-ctrader/**/*
+      when: always
   script:
     - curl $DEPLOY_SPOT_CTRADER_ICMARKETS
     - curl $DEPLOY_SPOT_CTRADER_ICMARKETS_DEMO
@@ -95,9 +122,12 @@ deploy-spot-ctrader:
     - !reference [.notif, script]
 
 deploy-spot-meta:
-  only:
-    changes:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+      when: never
+    - changes:
       - workers/spot-meta/**/*
+      when: always
   script:
     - curl $DEPLOY_SPOT_META_EXNESS
     - curl $DEPLOY_SPOT_META_EXNESS_DEMO
@@ -106,9 +136,12 @@ deploy-spot-meta:
     - !reference [.notif, script]
 
 deploy-back:
-  only:
-    changes:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+      when: never
+    - changes:
       - apps/back/**/*
+      when: always
   script:
     - curl $DEPLOY_BACK
     - curl $DEPLOY_BACK_DEMO
