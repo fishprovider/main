@@ -22,7 +22,9 @@
     "heroku-start": "node --experimental-specifier-resolution=node dist/index.js"
   },
   "dependencies": {
+    "@tsconfig/node-lts-strictest-esm": "^18.12.1",
     "dotenv-flow": "^3.2.0",
+    "esbuild": "^0.18.11",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "puppeteer": "^20.7.4",
@@ -30,9 +32,5 @@
     "puppeteer-extra-plugin-adblocker": "^2.13.6",
     "puppeteer-extra-plugin-anonymize-ua": "^2.4.6",
     "puppeteer-extra-plugin-stealth": "^2.11.2"
-  },
-  "devDependencies": {
-    "@tsconfig/node-lts-strictest-esm": "^18.12.1",
-    "esbuild": "^0.18.11"
   }
 }
