@@ -12,7 +12,11 @@
     "node": ">=16 <19"
   },
   "scripts": {
-    "doctor": "npm run lint -ws && npm run type-check -ws",
+    "lint": "npm run lint -ws",
+    "type-check-pre": "npm run type-check -w packages/utils",
+    "type-check-all": "npm run type-check -ws",
+    "type-check": "npm run type-check-pre && npm run type-check-all",
+    "doctor": "npm run lint && npm run type-check",
     "heroku-build": "npm run build -w workers/pup",
     "heroku-cleanup": "NPM_CONFIG_PRODUCTION=true npm prune --production",
     "heroku-postbuild": "npm run heroku-build && npm run heroku-cleanup"

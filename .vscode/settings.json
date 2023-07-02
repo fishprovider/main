@@ -13,6 +13,12 @@
   "[typescript]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
+  "githubPullRequests.remotes": [
+    "origin",
+    "upstream",
+    "github"
+  ],
+  "github-actions.remote-name": "github",
   "workbench.colorCustomizations": {
     "activityBar.activeBackground": "#93e6fc",
     "activityBar.background": "#93e6fc",
