@@ -1,6 +1,6 @@
 import delay from '@fishbot/utils/helpers/delay';
 import moment from 'moment';
-import type { Page } from 'puppeteer';
+import type { Page } from 'puppeteer-core';
 
 import { gotoAttempt, newBrowser, newPage } from '~libs/pup';
 

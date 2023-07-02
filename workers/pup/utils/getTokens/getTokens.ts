@@ -1,5 +1,5 @@
 import delay from '@fishbot/utils/helpers/delay';
-import type { Browser, Page } from 'puppeteer';
+import type { Browser, Page } from 'puppeteer-core';
 
 import { newBrowser, newPage } from '~libs/pup';
 import type { LoginConfig, Token } from '~types/CTrader.model';

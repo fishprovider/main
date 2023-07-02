@@ -1,6 +1,6 @@
 import { ProviderType } from '@fishbot/utils/constants/account';
 import type { Account } from '@fishbot/utils/types/Account.model';
-import type { Page } from 'puppeteer';
+import type { Page } from 'puppeteer-core';
 
 import getStrategyInfo from '~utils/getStrategyInfo';
 import gotoProviderPage from '~utils/gotoProviderPage';

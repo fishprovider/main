@@ -1,6 +1,5 @@
 import fs from 'fs';
-import type { Browser, Page, Product } from 'puppeteer';
-import puppeteerCore from 'puppeteer-core';
+import type { Browser, Page, Product } from 'puppeteer-core';
 import puppeteer from 'puppeteer-extra';
 import AdblockerPlugin from 'puppeteer-extra-plugin-adblocker';
 import AnonymizeUAPlugin from 'puppeteer-extra-plugin-anonymize-ua';

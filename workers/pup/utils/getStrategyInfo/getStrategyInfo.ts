@@ -1,4 +1,4 @@
-import type { Page } from 'puppeteer';
+import type { Page } from 'puppeteer-core';
 
 const scrollToEl = async (page:Page, field: string) => {
   await page.waitForXPath(`(//*[contains(text(),"${field}")])[1]`);
