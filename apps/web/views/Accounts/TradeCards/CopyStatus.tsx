@@ -1,6 +1,7 @@
 import storeAccounts from '@fishbot/cross/stores/accounts';
 import storeOrders from '@fishbot/cross/stores/orders';
 import { OrderStatus } from '@fishbot/utils/constants/order';
+import { parseCopyId } from '@fishbot/utils/helpers/order';
 import _ from 'lodash';
 
 import Icon from '~ui/core/Icon';
@@ -26,14 +27,16 @@ function CopyStatus({
     state,
     (item) => !!parentIds[item.providerId] && item.status === OrderStatus.live,
   ));
-  const orders = storeOrders.useStore((state) => _.filter(
+  const copyOrders = storeOrders.useStore((state) => _.filter(
     state,
-    (item) => item.providerId === providerId && item.status === OrderStatus.live,
+    (item) => item.providerId === providerId && item.status === OrderStatus.live && !!item.copyId,
   ));
 
-  const diffOrders = _.differenceBy(parentOrders, orders, (item) => item._id);
-  const isSynced = !diffOrders.length;
-  const tooltip = isSynced ? '(Synced)' : `(Missing ${diffOrders.length} orders))`;
+  const missingOrders = parentOrders.filter((parentItem) => !copyOrders.some(
+    (item) => parentItem._id === parseCopyId(item.copyId || '').parentOrderId,
+  ));
+  const isSynced = !missingOrders.length;
+  const tooltip = isSynced ? '(Synced)' : `(Missing ${missingOrders.length} orders))`;
 
   return (
     <Icon
