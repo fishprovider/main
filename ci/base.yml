@@ -1,7 +1,7 @@
 image: node:lts
 
 variables:
-  GIT_CLEAN_FLAGS: -ffd -e .npm -e .dpl -e .cache
+  GIT_CLEAN_FLAGS: -ffd -e .npm -e .cache
 
 stages:
   - test
