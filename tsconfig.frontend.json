@@ -15,7 +15,5 @@
     "module": "ESNext",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "jsx": "preserve",
-
-    "ignoreDeprecations": "5.0"
   },
 }

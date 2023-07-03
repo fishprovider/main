@@ -26,6 +26,7 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "@tsconfig/node-lts-strictest-esm": "^18.12.1",
+    "@tsconfig/react-native": "^3.0.2",
     "@types/amqplib": "^0.10.1",
     "@types/compression": "^1.7.2",
     "@types/cors": "^2.8.13",
