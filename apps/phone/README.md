@@ -1,15 +1,7 @@
-# How to initialize?
-- Run `npx create-expo-app phone --template tabs`
-- Setup `tsconfig.json`
-- Run `npx expo install @expo/metro-config`
-- Setup `metro.config.js`
-- Update scripts in `package.json`
-- (Optional) remove tests
-
-# Useful commands
+# How to dev?
 - To run in Expo Go
   ```shell
-  npm start
+  npm start # or npm run start-clean
   # Press i to start ios simulator
   # Press a to start android simulator
   ```
@@ -23,24 +15,95 @@
 - To update packages
   ```shell
   ncu -u
-  npx expo-doctor
-  npx expo install --check
+  npm run doctor
   ```
 
-# Setup `expo-router`
-- Run `npx expo install expo-router react-native-safe-area-context react-native-screens expo-linking expo-constants expo-status-bar react-native-gesture-handler react-native-reanimated`
-- Add `overrides` to `package.json`
+# How to initialize?
+- Run `npx create-expo-app phone --template tabs`
+
+- Setup path aliases by updating `tsconfig.json`, `babel.config.js`, `metro.config.js` as belows
+
+  + Update `tsconfig.json`
+    ```json
+    {
+      "extends": "@tsconfig/react-native/tsconfig.json",
+      "compilerOptions": {
+        "composite": true,
+        "exactOptionalPropertyTypes": false,
+        "noPropertyAccessFromIndexSignature": false,
+        "baseUrl": ".",
+        "paths": {
+          "@fishbot/utils*": ["../../packages/utils/dist*"],
+          "@fishbot/cross*": ["../../packages/cross/dist*"],
+          "~*": ["./*"]
+        },
+        "rootDir": ".",
+        "outDir": "dist"
+      },
+      "include": ["**/*.ts", "**/*.tsx"],
+      "exclude": ["node_modules"],
+      "references": [
+        { "path": "../../packages/utils" },
+        { "path": "../../packages/cross" }
+      ]
+    }
+    ```
+
+  + Update `babel.config.js`
+    ```js
+    module.exports = function (api) {
+      api.cache(true);
+      return {
+        presets: ['babel-preset-expo'],
+        plugins: [
+          ['module-resolver', {
+            root: '.',
+            alias: {
+              '@fishbot/utils': '../../packages/utils/dist',
+              '@fishbot/cross': '../../packages/cross/dist',
+              // Note that '~': '.' does not work
+              '~constants': './constants',
+              '~components': './components',
+            },
+          }],
+          require.resolve('expo-router/babel'),
+        ],
+      };
+    };
+    ```
+
+  + Update `metro.config.js`
+    ```js
+    module.exports = {
+      watchFolders: [
+        '../../node_modules',
+        '../../packages/utils',
+        '../../packages/cross',
+      ],
+    };
+    ```
+
+- Update scripts in `package.json`
   ```json
-  "overrides": {
-    "metro": "0.76.0",
-    "metro-resolver": "0.76.0"
+  "scripts": {
+    "doctor": "npx expo-doctor && expo install --check",
+    "preinstall": "cd ../.. && npm install -w packages/utils -w packages/cross",
+    "lint": "eslint --cache --fix --ignore-pattern babel.config.js --ignore-pattern metro.config.js .",
+    "type-check": "tsc --noEmit",
+    "start": "doppler run --print-config -- expo start",
+    "start-clean": "npm run start -- --clear",
+    "native-android": "expo run:android",
+    "native-ios": "expo run:ios"
   }
   ```
-- Add babel plugins
-  ```js
-  plugins: [
-    '@babel/plugin-proposal-export-namespace-from',
-    'react-native-reanimated/plugin',
-    require.resolve('expo-router/babel'),
-  ]
-  ```
+
+- (Optional) remove tests
+
+# How to setup app icons?
+TODO
+
+# How to deploy?
+TODO: use EAS
+
+# How to setup UI components?
+TODO: use Tamagui

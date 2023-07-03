@@ -3,7 +3,7 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { Link, Tabs } from 'expo-router';
 import { Pressable, useColorScheme } from 'react-native';
 
-import Colors from '../../constants/Colors';
+import Colors from '~constants/Colors';
 
 interface IconProps {
   color: string;

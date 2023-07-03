@@ -3,8 +3,15 @@ module.exports = function (api) {
   return {
     presets: ['babel-preset-expo'],
     plugins: [
-      '@babel/plugin-proposal-export-namespace-from',
-      'react-native-reanimated/plugin',
+      ['module-resolver', {
+        root: '.',
+        alias: {
+          '@fishbot/utils': '../../packages/utils/dist',
+          '@fishbot/cross': '../../packages/cross/dist',
+          '~constants': './constants',
+          '~components': './components',
+        },
+      }],
       require.resolve('expo-router/babel'),
     ],
   };
