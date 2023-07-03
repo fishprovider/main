@@ -9,7 +9,8 @@
     "rootDir": ".",
     "outDir": "dist"
   },
-  "include": ["**/*.ts"],
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules", "dist"],
   "references": [
     { "path": "../../packages/utils" }
   ]

@@ -12,14 +12,8 @@
     "rootDir": ".",
     "outDir": "dist"
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts", "**/*.tsx",
-    "**/*.js", "**/*.jsx",
-  ],
-  "exclude": [
-    "node_modules",
-  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"],
+  "exclude": ["node_modules", ".next"],
   "references": [
     { "path": "../../packages/utils" },
     { "path": "../../packages/cross" }
