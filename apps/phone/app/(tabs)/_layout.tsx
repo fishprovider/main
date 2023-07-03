@@ -1,23 +1,42 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { Link, Tabs } from 'expo-router';
 import { Pressable, useColorScheme } from 'react-native';
 
 import Colors from '../../constants/Colors';
 
-/**
- * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
- */
-function Icon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
+interface IconProps {
   color: string;
-}) {
-  return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
 }
 
-function TabBarIcon({ color }: {
-  color: string;
-}) {
-  return <Icon name="code" color={color} />;
+function TradeTabIcon({ color }: IconProps) {
+  return (
+    <FontAwesome
+      name="bar-chart"
+      size={20}
+      color={color}
+    />
+  );
+}
+
+function InvestTabIcon({ color }: IconProps) {
+  return (
+    <MaterialIcons
+      name="account-balance-wallet"
+      size={20}
+      color={color}
+    />
+  );
+}
+
+function UserTabIcon({ color }: IconProps) {
+  return (
+    <FontAwesome
+      name="user"
+      size={20}
+      color={color}
+    />
+  );
 }
 
 function HeaderRight() {
@@ -49,16 +68,25 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Tab One',
-          tabBarIcon: TabBarIcon,
+          title: 'Trade',
+          tabBarIcon: TradeTabIcon,
           headerRight: HeaderRight,
         }}
       />
       <Tabs.Screen
-        name="two"
+        name="invest"
         options={{
-          title: 'Tab Two',
-          tabBarIcon: TabBarIcon,
+          title: 'Invest',
+          tabBarIcon: InvestTabIcon,
+          headerRight: HeaderRight,
+        }}
+      />
+      <Tabs.Screen
+        name="user"
+        options={{
+          title: 'User',
+          tabBarIcon: UserTabIcon,
+          headerRight: HeaderRight,
         }}
       />
     </Tabs>
