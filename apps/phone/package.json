@@ -2,8 +2,8 @@
   "name": "phone",
   "version": "5.0.0",
   "scripts": {
-    "lint": "echo TODO",
-    "type-check": "echo TODO",
+    "lint": "eslint --cache --fix --ignore-pattern metro.config.js --ignore-pattern babel.config.js .",
+    "type-check": "tsc --noEmit",
     "start": "doppler run --print-config -- expo start",
     "start-clean": "npm run start -- --clear",
     "native-android": "expo run:android",
