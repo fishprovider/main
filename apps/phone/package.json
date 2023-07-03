@@ -12,7 +12,6 @@
   "dependencies": {
     "@expo/metro-config": "^0.7.1",
     "@expo/vector-icons": "^13.0.0",
-    "@react-navigation/drawer": "^6.6.3",
     "@react-navigation/native": "^6.1.7",
     "expo": "~48.0.19",
     "expo-constants": "~14.2.1",

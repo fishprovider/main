@@ -28,7 +28,7 @@
   ```
 
 # Setup `expo-router`
-- Run `npx expo install @react-navigation/drawer expo-router react-native-safe-area-context react-native-screens expo-linking expo-constants expo-status-bar react-native-gesture-handler react-native-reanimated`
+- Run `npx expo install expo-router react-native-safe-area-context react-native-screens expo-linking expo-constants expo-status-bar react-native-gesture-handler react-native-reanimated`
 - Add `overrides` to `package.json`
   ```json
   "overrides": {
