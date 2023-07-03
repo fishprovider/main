@@ -1,6 +1,22 @@
 {
-  "extends": "expo/tsconfig.base",
+  "extends": "@tsconfig/react-native/tsconfig.json",
   "compilerOptions": {
-    "strict": true
-  }
+    "composite": true,
+    "exactOptionalPropertyTypes": false,
+    "noPropertyAccessFromIndexSignature": false,
+    "baseUrl": ".",
+    "paths": {
+      "@fishbot/utils*": ["../../packages/utils/dist*"],
+      "@fishbot/cross*": ["../../packages/cross/dist*"],
+      "~*": ["./*"]
+    },
+    "rootDir": ".",
+    "outDir": "dist"
+  },
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"],
+  "references": [
+    { "path": "../../packages/utils" },
+    { "path": "../../packages/cross" }
+  ]
 }
