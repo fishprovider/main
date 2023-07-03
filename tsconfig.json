@@ -10,6 +10,8 @@
     "checkJs": false,
     "noEmit": false,
     "declaration": true,
+
+    "ignoreDeprecations": "5.0",
   },
   "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"],
   "exclude": ["**/node_modules", "**/dist"],

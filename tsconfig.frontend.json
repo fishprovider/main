@@ -8,10 +8,14 @@
     "resolveJsonModule": true,
     "allowJs": true,
     "checkJs": false,
-    "noEmit": true,
+    "noEmit": false,
+    "declaration": true,
+
     "target": "ESNext",
     "module": "ESNext",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "jsx": "preserve",
+
+    "ignoreDeprecations": "5.0",
   },
 }
