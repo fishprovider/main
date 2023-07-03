@@ -7,11 +7,11 @@
 - (Optional) remove tests
 
 # Useful commands
-- Check `npx expo-doctor`
 - To run in Expo Go
   ```shell
   npm start
-  # then Press a or Press i
+  # Press i to start ios simulator
+  # Press a to start android simulator
   ```
 
 - To run in native mode
@@ -20,8 +20,15 @@
   npm run native-android
   ```
 
+- To update packages
+  ```shell
+  ncu -u
+  npx expo-doctor
+  npx expo install --check
+  ```
+
 # Setup `expo-router`
-- Run `npx expo install expo-router react-native-safe-area-context react-native-screens expo-linking expo-constants expo-status-bar react-native-gesture-handler`
+- Run `npx expo install @react-navigation/drawer expo-router react-native-safe-area-context react-native-screens expo-linking expo-constants expo-status-bar react-native-gesture-handler react-native-reanimated`
 - Add `overrides` to `package.json`
   ```json
   "overrides": {
