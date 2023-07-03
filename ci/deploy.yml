@@ -2,10 +2,10 @@ deploy-gate:
   rules:
     - if: '$CI_PIPELINE_SOURCE == "schedule"'
       when: never
-    - changes:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == $CI_DEFAULT_BRANCH
+      changes:
       - workers/gate/**/*
       when: always
-    - when: never
   script:
     - curl $DEPLOY_GATE
   after_script:
@@ -16,10 +16,10 @@ deploy-cron:
   rules:
     - if: '$CI_PIPELINE_SOURCE == "schedule"'
       when: never
-    - changes:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == $CI_DEFAULT_BRANCH
+      changes:
       - workers/cron/**/*
       when: always
-    - when: never
   script:
     - curl $DEPLOY_CRON
   after_script:
@@ -30,10 +30,10 @@ deploy-mon:
   rules:
     - if: '$CI_PIPELINE_SOURCE == "schedule"'
       when: never
-    - changes:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == $CI_DEFAULT_BRANCH
+      changes:
       - workers/mon/**/*
       when: always
-    - when: never
   script:
     - curl $DEPLOY_MON
   after_script:
@@ -44,10 +44,10 @@ deploy-pay:
   rules:
     - if: '$CI_PIPELINE_SOURCE == "schedule"'
       when: never
-    - changes:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == $CI_DEFAULT_BRANCH
+      changes:
       - workers/pay/**/*
       when: always
-    - when: never
   script:
     - curl $DEPLOY_PAY
     - curl $DEPLOY_PAY_DEMO
@@ -59,10 +59,10 @@ deploy-bot:
   rules:
     - if: '$CI_PIPELINE_SOURCE == "schedule"'
       when: never
-    - changes:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == $CI_DEFAULT_BRANCH
+      changes:
       - workers/bot/**/*
       when: always
-    - when: never
   script:
     - curl $DEPLOY_BOT
     - curl $DEPLOY_BOT_DEMO
@@ -74,10 +74,10 @@ deploy-copy:
   rules:
     - if: '$CI_PIPELINE_SOURCE == "schedule"'
       when: never
-    - changes:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == $CI_DEFAULT_BRANCH
+      changes:
       - workers/copy/**/*
       when: always
-    - when: never
   script:
     - curl $DEPLOY_COPY
     - curl $DEPLOY_COPY_DEMO
@@ -89,10 +89,10 @@ deploy-head-ctrader:
   rules:
     - if: '$CI_PIPELINE_SOURCE == "schedule"'
       when: never
-    - changes:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == $CI_DEFAULT_BRANCH
+      changes:
       - workers/head-ctrader/**/*
       when: always
-    - when: never
   script:
     - curl $DEPLOY_HEAD_CTRADER
     - curl $DEPLOY_HEAD_CTRADER_DEMO
@@ -104,10 +104,10 @@ deploy-head-meta:
   rules:
     - if: '$CI_PIPELINE_SOURCE == "schedule"'
       when: never
-    - changes:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == $CI_DEFAULT_BRANCH
+      changes:
       - workers/head-meta/**/*
       when: always
-    - when: never
   script:
     - curl $DEPLOY_HEAD_META
     - curl $DEPLOY_HEAD_META_DEMO
@@ -119,10 +119,10 @@ deploy-spot-ctrader:
   rules:
     - if: '$CI_PIPELINE_SOURCE == "schedule"'
       when: never
-    - changes:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == $CI_DEFAULT_BRANCH
+      changes:
       - workers/spot-ctrader/**/*
       when: always
-    - when: never
   script:
     - curl $DEPLOY_SPOT_CTRADER_ICMARKETS
     - curl $DEPLOY_SPOT_CTRADER_ICMARKETS_DEMO
@@ -134,10 +134,10 @@ deploy-spot-meta:
   rules:
     - if: '$CI_PIPELINE_SOURCE == "schedule"'
       when: never
-    - changes:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == $CI_DEFAULT_BRANCH
+      changes:
       - workers/spot-meta/**/*
       when: always
-    - when: never
   script:
     - curl $DEPLOY_SPOT_META_EXNESS
     - curl $DEPLOY_SPOT_META_EXNESS_DEMO
@@ -149,10 +149,10 @@ deploy-back:
   rules:
     - if: '$CI_PIPELINE_SOURCE == "schedule"'
       when: never
-    - changes:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == $CI_DEFAULT_BRANCH
+      changes:
       - apps/back/**/*
       when: always
-    - when: never
   script:
     - curl $DEPLOY_BACK
     - curl $DEPLOY_BACK_DEMO
