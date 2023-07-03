@@ -4,7 +4,7 @@
   "scripts": {
     "preinstall": "cd ../.. && npm install -w packages/utils -w packages/cross",
     "lint": "eslint --cache --fix --ignore-pattern public --ignore-pattern .eslintrc.js --ignore-pattern next.config.js --ignore-pattern next-i18next.config.js --ignore-pattern next-sitemap.config.js .",
-    "type-check": "tsc --noEmit",
+    "type-check": "tsc",
     "test": "cross-env NODE_ENV=test doppler run --print-config -- jest",
     "prebuild": "cd ../.. && npm run build -w packages/utils -w packages/cross",
     "build": "cross-env NODE_ENV=production next build",
