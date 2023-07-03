@@ -17,6 +17,7 @@ import Text from '~ui/core/Text';
 import Tooltip from '~ui/core/Tooltip';
 
 import AccInfo from './AccInfo';
+import CopyStatus from './CopyStatus';
 import TradeInfo from './TradeInfo';
 
 interface Props {
@@ -64,7 +65,7 @@ function TradeCard({
       </Group>
       <Group spacing="xs">
         <Badge variant="filled">{ProviderTypeText[providerType] || providerType}</Badge>
-        {hasCopy && <Icon name="Cyclone" button tooltip="Copying" color="orange" onClick={skipClick} />}
+        {hasCopy && <CopyStatus providerId={providerId} />}
         {hasLock && <Icon name="Lock" button tooltip="Locked" color="red" onClick={skipClick} />}
         {hasTarget && <Tooltip label="Target Passed">🎉</Tooltip>}
         {hasEquityLock && <Icon name="Security" button tooltip="Equity Lock" color="green" onClick={skipClick} />}
