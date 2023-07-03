@@ -36,7 +36,7 @@ const srGet = async ({ secret, symbolName, timeFr: timeFrRaw }: {
     },
   );
   if (!stat) {
-    return { error: 'No data' };
+    return { result: '' };
   }
 
   return { result: stat.keyLevels.join(',') };
