@@ -198,9 +198,11 @@
 
   Then run `npm run dev`
 
-- Create a build for device
-
-  TODO:
+- Submit
+  ```shell
+  eas build --profile preview --platform platform
+  eas submit -p android
+  ```
 
 
 # How to setup UI components?
