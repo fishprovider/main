@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "130013915084",
+    "project_id": "fishprovider-official",
+    "storage_bucket": "fishprovider-official.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:130013915084:android:d1b34af70e61208ddbdf69",
+        "android_client_info": {
+          "package_name": "com.fishprovider.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "130013915084-2qtkr5q2f6pfjp68cb5tmc3qke1p2m24.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-0AKbCMW-S6gcQEaipl8Z1u3lSioZvGo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "130013915084-2qtkr5q2f6pfjp68cb5tmc3qke1p2m24.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "130013915084-4clmt3revash1a9n6kv2vsc3bpnnr0o9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.fishprovider"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

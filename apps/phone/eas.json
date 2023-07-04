@@ -32,6 +32,15 @@
     }
   },
   "submit": {
-    "production": {}
+    "production": {
+      "android": {
+        "track": "internal"
+      },
+      "ios": {
+        "appleId": "maidh91@gmail.com",
+        "ascAppId": "1619961288",
+        "appleTeamId": "52DUXY3FWY"
+      }
+    }
   }
 }
