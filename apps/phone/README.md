@@ -180,11 +180,18 @@ TODO
 
 - Create a build for simulator
   ```shell
-  eas build --profile development --platform android
   eas build --profile development-simulator --platform ios
+  eas build --profile development --platform android
   ```
 
+  Then download the build, extract, and drag to simulator to install the app
+
+  Then run `npm run dev`
+
 - Create a build for device
+
+  TODO:
+
 
 # How to setup UI components?
 TODO: use Tamagui

@@ -8,6 +8,7 @@
     "type-check": "tsc --noEmit",
     "start": "doppler run --print-config -- expo start",
     "start-clean": "npm run start -- --clear",
+    "dev": "expo start --dev-client",
     "native-android": "expo run:android",
     "native-ios": "expo run:ios"
   },
