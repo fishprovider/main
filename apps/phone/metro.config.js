@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable max-len */
 
-const path = require('path');
 const { getDefaultConfig } = require('@expo/metro-config');
 
 const defaultConfig = getDefaultConfig(__dirname);
@@ -9,15 +8,6 @@ const defaultConfig = getDefaultConfig(__dirname);
 
 module.exports = {
   ...defaultConfig,
-  resolver: {
-    ...defaultConfig.resolver,
-    extraNodeModules: {
-      '@fishbot/utils': path.resolve(__dirname, '../../packages/utils'),
-      '@fishbot/cross': path.resolve(__dirname, '../../packages/cross'),
-      '~constants': path.resolve(__dirname, 'constants'),
-      '~components': path.resolve(__dirname, 'components'),
-    },
-  },
   watchFolders: [
     '../../node_modules',
     '../../packages/utils',
