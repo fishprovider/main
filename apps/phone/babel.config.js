@@ -1,8 +1,16 @@
+process.env.TAMAGUI_TARGET = 'native';
+
 module.exports = (api) => {
   api.cache(true);
   return {
     presets: ['babel-preset-expo'],
     plugins: [
+      [
+        'transform-inline-environment-variables',
+        {
+          include: 'TAMAGUI_TARGET',
+        },
+      ],
       ['module-resolver', {
         root: '.',
         alias: {
@@ -12,6 +20,14 @@ module.exports = (api) => {
           '~components': './components',
         },
       }],
+      [
+        '@tamagui/babel-plugin',
+        {
+          components: ['tamagui'],
+          config: './tamagui.config.ts',
+          logTimings: true,
+        },
+      ],
       require.resolve('expo-router/babel'),
     ],
   };

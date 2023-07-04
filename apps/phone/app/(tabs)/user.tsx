@@ -1,5 +1,6 @@
 import { ErrorType } from '@fishbot/utils/constants/error';
 import { StyleSheet } from 'react-native';
+import { Button } from 'tamagui';
 
 import EditScreenInfo from '~components/EditScreenInfo';
 import { Text, View } from '~components/Themed';
@@ -29,6 +30,7 @@ export default function UserScreen() {
       </Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
       <EditScreenInfo path="app/(tabs)/user.tsx" />
+      <Button themeInverse>Hello</Button>
     </View>
   );
 }
