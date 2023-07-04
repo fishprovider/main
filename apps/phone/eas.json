@@ -4,6 +4,7 @@
   },
   "build": {
     "development": {
+      "channel": "staging",
       "developmentClient": true,
       "distribution": "internal"
     },
@@ -14,9 +15,18 @@
       }
     },
     "preview": {
+      "channel": "staging",
       "distribution": "internal"
     },
-    "production": {}
+    "preview-simulator": {
+      "extends": "preview",
+      "ios": {
+        "simulator": true
+      }
+    },
+    "production": {
+      "channel": "production"
+    }
   },
   "submit": {
     "production": {}
