@@ -1,4 +1,3 @@
-import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { SplashScreen, Stack } from 'expo-router';
@@ -31,7 +30,6 @@ function RootLayoutNav() {
 export default function RootLayout() {
   const [loaded, error] = useFonts({
     FontAwesome: require('../assets/fonts/FontAwesome.ttf'),
-    MaterialIcons: require('../assets/fonts/MaterialIcons.ttf'),
   });
 
   // Expo Router uses Error Boundaries to catch errors in the navigation tree.

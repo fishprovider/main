@@ -1,4 +1,4 @@
-import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
 import { Link, Tabs } from 'expo-router';
 import { Pressable, useColorScheme } from 'react-native';
 
@@ -20,8 +20,8 @@ function TradeTabIcon({ color }: IconProps) {
 
 function InvestTabIcon({ color }: IconProps) {
   return (
-    <MaterialIcons
-      name="account-balance-wallet"
+    <FontAwesome
+      name="bank"
       size={20}
       color={color}
     />

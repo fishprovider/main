@@ -109,7 +109,6 @@
   ```js
   const [loaded, error] = useFonts({
     FontAwesome: require('../assets/fonts/FontAwesome.ttf'),
-    MaterialIcons: require('../assets/fonts/MaterialIcons.ttf'),
   });
   ```
 
