@@ -12,7 +12,7 @@
     "rootDir": ".",
     "outDir": "dist"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"],
+  "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "next-env.d.ts", "*.config.js", ".eslintrc.js"],
   "exclude": ["node_modules", ".next"],
   "references": [
     { "path": "../../packages/utils" },
