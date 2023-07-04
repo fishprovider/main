@@ -103,7 +103,16 @@
 - (Optional) remove tests
 
 # How to setup app icons?
-TODO
+- Copy fonts from `node_modules/@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts` to `assets/fonts`
+
+- Load the fonts
+  ```js
+  const [loaded, error] = useFonts({
+    FontAwesome: require('../assets/fonts/FontAwesome.ttf'),
+    MaterialIcons: require('../assets/fonts/MaterialIcons.ttf'),
+  });
+  ```
+
 
 # How to deploy?
 - Update `app.json` for these fields `name`, `slug`, `owner`, `scheme`, `ios.bundleIdentifier`, `android.package`
