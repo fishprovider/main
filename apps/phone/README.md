@@ -103,7 +103,77 @@
 TODO
 
 # How to deploy?
-TODO: use EAS
+- Update `app.json` for these fields `name`, `slug`, `owner`, `scheme`, `ios.bundleIdentifier`, `android.package`
+  ```json
+  {
+    "expo": {
+      "name": "FishProvider",
+      "description": "Never Lose Money - Think Big Do Small",
+      "version": "5.0.0",
+      "slug": "fishprovider",
+      "owner": "fishprovider",
+      "scheme": "fishprovider",
+      "orientation": "portrait",
+      "icon": "./assets/images/icon.png",
+      "userInterfaceStyle": "automatic",
+      "splash": {
+        "image": "./assets/images/splash.png",
+        "resizeMode": "contain",
+        "backgroundColor": "#ffffff"
+      },
+      "assetBundlePatterns": [
+        "**/*"
+      ],
+      "ios": {
+        "bundleIdentifier": "com.fishprovider.app",
+        "supportsTablet": true
+      },
+      "android": {
+        "package": "com.fishprovider.app",
+        "adaptiveIcon": {
+          "foregroundImage": "./assets/images/adaptive-icon.png",
+          "backgroundColor": "#ffffff"
+        }
+      }
+    }
+  }
+  ```
+
+- Create a project in https://expo.dev, e.g. https://expo.dev/accounts/fishprovider/projects/fishprovider
+  ```shell
+  npm i -g eas-cli
+  eas login
+  eas init --id ec0f4220-7564-4608-93a3-ac7aebf2c1ab # ProjectId from expo.dev
+  eas build:configure
+  ```
+
+- Update `eas.json` by adding `development-simulator` profile
+  ```json
+  {
+    "cli": {
+      "version": ">= 3.15.0"
+    },
+    "build": {
+      "development": {
+        "developmentClient": true,
+        "distribution": "internal"
+      },
+      "development-simulator": {
+        "extends": "development",
+        "ios": {
+          "simulator": true
+        }
+      },
+      "preview": {
+        "distribution": "internal"
+      },
+      "production": {}
+    },
+    "submit": {
+      "production": {}
+    }
+  }
+  ```
 
 # How to setup UI components?
 TODO: use Tamagui
