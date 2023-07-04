@@ -21,6 +21,8 @@
 # How to initialize?
 - Run `npx create-expo-app phone --template tabs`
 
+- Rename `index.ts` to `index.js` (otherwise eas build will fail)
+
 - Setup path aliases by updating `tsconfig.json`, `babel.config.js`, `metro.config.js` as belows
 
   + Update `tsconfig.json`
