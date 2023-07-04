@@ -1,10 +1,13 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable max-len */
 
-// const { getDefaultConfig } = require('@expo/metro-config');
-// console.log('Default Metro Config', getDefaultConfig(__dirname));
+const { getDefaultConfig } = require('@expo/metro-config');
+
+const defaultConfig = getDefaultConfig(__dirname);
+// console.log('Default Metro Config', defaultConfig);
 
 module.exports = {
+  ...defaultConfig,
   watchFolders: [
     '../../node_modules',
     '../../packages/utils',

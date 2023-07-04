@@ -74,7 +74,10 @@
 
   + Update `metro.config.js`
     ```js
+    const { getDefaultConfig } = require('@expo/metro-config');
+    const defaultConfig = getDefaultConfig(__dirname);
     module.exports = {
+      ...defaultConfig,
       watchFolders: [
         '../../node_modules',
         '../../packages/utils',
@@ -174,6 +177,14 @@ TODO
     }
   }
   ```
+
+- Create a build for simulator
+  ```shell
+  eas build --profile development --platform android
+  eas build --profile development-simulator --platform ios
+  ```
+
+- Create a build for device
 
 # How to setup UI components?
 TODO: use Tamagui
