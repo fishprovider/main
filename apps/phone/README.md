@@ -90,7 +90,7 @@
   ```json
   "scripts": {
     "doctor": "npx expo-doctor && expo install --check",
-    "preinstall": "cd ../.. && npm install -w packages/utils -w packages/cross",
+    "preinstall": "cd ../.. && npm install -w packages/utils -w packages/cross && npm run build -w packages/utils -w packages/cross",
     "lint": "eslint --cache --fix --ignore-pattern babel.config.js --ignore-pattern metro.config.js .",
     "type-check": "tsc --noEmit",
     "start": "doppler run --print-config -- expo start",
