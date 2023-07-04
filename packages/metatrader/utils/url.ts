@@ -1,6 +1,9 @@
 import axios, { AxiosRequestConfig } from 'axios';
 
+// ref: https://metaapi.cloud/docs/client/restApi/api/readTradingTerminalState/readAccountInformation/
 const clientUrl = 'https://mt-client-api-v1.new-york.agiliumtrade.ai';
+
+// ref: https://metaapi.cloud/docs/provisioning/api/account/createAccount/
 const provisioningUrl = 'https://mt-provisioning-api-v1.agiliumtrade.agiliumtrade.ai';
 
 async function sendRequest<T>({
