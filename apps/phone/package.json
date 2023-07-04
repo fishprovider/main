@@ -1,6 +1,7 @@
 {
   "name": "phone",
   "version": "5.0.0",
+  "main": "index.ts",
   "scripts": {
     "doctor": "npx expo-doctor && expo install --check",
     "preinstall": "cd ../.. && npm install -w packages/utils -w packages/cross && npm run build -w packages/utils -w packages/cross",
