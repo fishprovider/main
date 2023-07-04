@@ -5,11 +5,21 @@
   # Press i to start ios simulator
   # Press a to start android simulator
   ```
+  Note that, this run mode supports only Expo libraries, React Native libraries will not work. To support React Native libraries, use the run mode with Development build as below
 
-- To run in native mode
+- To run with Development builds
   ```shell
-  npm run native-ios
-  npm run native-android
+  # Build the app
+  eas build --profile development-simulator --platform ios
+  eas build --profile development --platform android
+
+  # Download the build and drag to the simulator to install the app
+  # Note that
+  # - need to rebuild for any native code changes
+  # - no need to rebuild for any JS code changes
+
+  # Run dev client
+  npm run dev
   ```
 
 - To update packages
