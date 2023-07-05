@@ -53,6 +53,7 @@ enum CopyVolumeMode {
   auto = 'auto',
   fixedRatio = 'fixedRatio',
   fixedLot = 'fixedLot',
+  autoWithRatio = 'autoWithRatio',
 }
 
 enum LockType {

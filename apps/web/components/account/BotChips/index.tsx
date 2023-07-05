@@ -33,6 +33,7 @@ function CopyChips({
     copyVolumeMode = CopyVolumeMode.auto,
     copyVolumeRatioFixed,
     copyVolumeLotFixed,
+    copyVolumeRatioAuto,
     copyVolumeLotMin,
     copyVolumeLotMax,
   } = copySettings;
@@ -84,7 +85,19 @@ function CopyChips({
               </Badge>
             </Tooltip>
           )}
-          {[CopyVolumeMode.auto, CopyVolumeMode.fixedRatio].includes(copyVolumeMode) && (
+          {copyVolumeMode === CopyVolumeMode.autoWithRatio && copyVolumeRatio && (
+            <Tooltip
+              label={CopyVolumeModeText[CopyVolumeMode.autoWithRatio]?.description as string}
+            >
+              <Badge color="orange">
+                {`CP-Ratio ${copyVolumeRatioAuto}`}
+              </Badge>
+            </Tooltip>
+          )}
+          {[CopyVolumeMode.auto,
+            CopyVolumeMode.autoWithRatio,
+            CopyVolumeMode.fixedRatio,
+          ].includes(copyVolumeMode) && (
             <>
               {copyVolumeLotMin && (
                 <Tooltip label="Min Lot to copy">

@@ -220,6 +220,7 @@ const CopyVolumeModeText: Record<string, { text: string, description: string }> 
   [CopyVolumeMode.auto]: { text: 'Auto', description: 'Scale Volume based on Balance ratio between Parent and Child' },
   [CopyVolumeMode.fixedRatio]: { text: 'Fixed Ratio', description: 'Set Volume Ratio to a fixed number (not auto scale)' },
   [CopyVolumeMode.fixedLot]: { text: 'Fixed Lot', description: 'Set Lot to a fixed number (not auto scale)' },
+  [CopyVolumeMode.autoWithRatio]: { text: 'Auto with Ratio', description: 'Scale Volume based on Balance ratio with additional Ratio' },
 };
 
 const LockTypeText: Record<string, string> = {

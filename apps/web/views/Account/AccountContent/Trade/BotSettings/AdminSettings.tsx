@@ -74,6 +74,9 @@ function ParentCopySettings({
   const [copyVolumeLotFixed, setCopyVolumeLotFixed] = useState<number | string>(
     copySettings.copyVolumeLotFixed || '',
   );
+  const [copyVolumeRatioAuto, setCopyVolumeRatioAuto] = useState<number | string>(
+    copySettings.copyVolumeRatioAuto || '',
+  );
   const [copyVolumeLotMin, setCopyVolumeLotMin] = useState<number | string>(
     copySettings.copyVolumeLotMin || '',
   );
@@ -107,6 +110,7 @@ function ParentCopySettings({
             copyVolumeMode,
             ...(copyVolumeRatioFixed && { copyVolumeRatioFixed: +copyVolumeRatioFixed }),
             ...(copyVolumeLotFixed && { copyVolumeLotFixed: +copyVolumeLotFixed }),
+            ...(copyVolumeRatioAuto && { copyVolumeRatioAuto: +copyVolumeRatioAuto }),
             ...(copyVolumeLotMin && { copyVolumeLotMin: +copyVolumeLotMin }),
             ...(copyVolumeLotMax && { copyVolumeLotMax: +copyVolumeLotMax }),
 
@@ -191,7 +195,7 @@ function ParentCopySettings({
           />
         </Group>
       )}
-      {copyVolumeMode === CopyVolumeMode.fixedLot ? (
+      {copyVolumeMode === CopyVolumeMode.fixedLot && (
         <Group>
           Fixed Lot
           <NumberInput
@@ -200,7 +204,17 @@ function ParentCopySettings({
             rightSection="Lot"
           />
         </Group>
-      ) : (
+      )}
+      {copyVolumeMode === CopyVolumeMode.autoWithRatio && (
+        <Group>
+          Auto with Ratio
+          <NumberInput
+            value={copyVolumeRatioAuto}
+            onChange={(value) => setCopyVolumeRatioAuto(value)}
+          />
+        </Group>
+      )}
+      {copyVolumeMode !== CopyVolumeMode.fixedLot && (
         <>
           <Group>
             Min Lot

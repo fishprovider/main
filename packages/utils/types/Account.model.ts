@@ -82,6 +82,7 @@ interface CopySettings {
   copyVolumeMode?: CopyVolumeMode,
   copyVolumeRatioFixed?: number, // fixedRatio
   copyVolumeLotFixed?: number, // fixedLot
+  copyVolumeRatioAuto?: number, // autoWithRatio
   copyVolumeLotMin?: number,
   copyVolumeLotMax?: number,
 
