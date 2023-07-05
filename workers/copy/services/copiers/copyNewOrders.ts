@@ -4,7 +4,6 @@ import { botUser } from '@fishbot/swap/utils/account';
 import { getPrices } from '@fishbot/swap/utils/price';
 import { CopyVolumeMode, LockType, ProviderType } from '@fishbot/utils/constants/account';
 import { OrderStatus, OrderType } from '@fishbot/utils/constants/order';
-import delay from '@fishbot/utils/helpers/delay';
 import { isLastRunExpired } from '@fishbot/utils/helpers/lastRunChecks';
 import { buildCopyId, parseCopyId } from '@fishbot/utils/helpers/order';
 import { isPausedWeekend } from '@fishbot/utils/helpers/pause';
@@ -19,7 +18,6 @@ import type { OrderCopy } from '~types/Order.model';
 
 const env = {
   dryRun: process.env.DRY_RUN,
-  delayCopySeconds: process.env.DELAY_COPY_SECONDS,
 };
 
 const runs = {};
@@ -207,10 +205,6 @@ const copyNewOrders = async (
   Logger.debug(`[${providerId}] ${msg}`, ordersToNew);
 
   if (env.dryRun) return;
-
-  if (env.delayCopySeconds) {
-    await delay(+env.delayCopySeconds * 1000);
-  }
 
   for (const order of ordersToNew) {
     const count = await Mongo.collection('orders').countDocuments({
