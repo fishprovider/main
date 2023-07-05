@@ -14,8 +14,8 @@ interface Props {
 export default function BaseController({ children }: Props) {
   const [loaded, error] = useFonts({
     FontAwesome: require('../assets/fonts/FontAwesome.ttf'),
-    Inter: require('@tamagui/font-inter/otf/Inter-Medium.otf'),
-    InterBold: require('@tamagui/font-inter/otf/Inter-Bold.otf'),
+    Inter: require('../assets/fonts/Inter-Medium.otf'),
+    InterBold: require('../assets/fonts/Inter-Bold.otf'),
   });
 
   const colorScheme = useColorScheme();
