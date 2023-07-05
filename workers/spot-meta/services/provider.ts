@@ -152,17 +152,16 @@ const start = async () => {
   await startAccount(connection);
   await subAccount(connection);
 
-  const symbols = await getSymbolList(connection);
+  const symbolList = await getSymbolList(connection);
+  const skipPattern = env.skipPattern && new RegExp(env.skipPattern);
+  const watchPattern = new RegExp(env.watchPattern);
+  allSymbols = symbolList.filter((symbol) => {
+    if (!symbol) return false;
+    if (skipPattern && skipPattern.test(symbol)) return false;
+    return watchPattern.test(symbol);
+  });
 
   if (spotTasks.price) {
-    const skipPattern = env.skipPattern && new RegExp(env.skipPattern);
-    const watchPattern = new RegExp(env.watchPattern);
-    allSymbols = symbols.filter((symbol) => {
-      if (!symbol) return false;
-      if (skipPattern && skipPattern.test(symbol)) return false;
-      return watchPattern.test(symbol);
-    });
-
     Logger.info(`Subscribing ${allSymbols.length} symbols`, allSymbols.map((symbol) => symbol).join(','));
     await startSubs(connection, allSymbols);
     Logger.warn(`Subscribed ${allSymbols.length} symbols`);
@@ -171,8 +170,8 @@ const start = async () => {
   }
 
   if (spotTasks.poll) {
-    await startPolls(connection, symbols);
-    await renewSymbolsHandler(symbols);
+    await startPolls(connection, allSymbols);
+    await renewSymbolsHandler(allSymbols);
   }
 
   sendHeartbeat();
