@@ -157,7 +157,6 @@ const accountAdd = async ({ data, userInfo }: {
         return { error: ErrorType.badRequest };
       }
       config.accountId = accountId;
-
       break;
     }
     default:
@@ -174,8 +173,17 @@ const accountAdd = async ({ data, userInfo }: {
   };
   await Mongo.collection<Account>('accounts').insertOne(newAccount);
 
-  // non-blocking
-  updateCache(newAccount);
+  await updateCache(newAccount);
+
+  await Mongo.collection<User>('users').updateOne(
+    { _id: userInfo.uid },
+    {
+      $set: {
+        [`roles.adminProviders.${providerId}`]: true,
+        updatedAt: new Date(),
+      },
+    },
+  );
 
   switch (providerPlatform) {
     case ProviderPlatform.ctrader: {
@@ -188,22 +196,18 @@ const accountAdd = async ({ data, userInfo }: {
       Agenda.now(`${env.typePre}-${providerTradeType}-head-meta-start-provider`, {
         providerId,
       });
+      await Mongo.collection('clientSecrets').updateOne(
+        { clientId: config.clientId },
+        {
+          $inc: {
+            activeAccounts: 1,
+          },
+        },
+      );
       break;
     }
     default:
   }
-
-  await Mongo.collection<User>('users').updateOne(
-    {
-      _id: userInfo.uid,
-    },
-    {
-      $set: {
-        [`roles.adminProviders.${providerId}`]: true,
-        updatedAt: new Date(),
-      },
-    },
-  );
 
   return { result: accountToNew };
 };

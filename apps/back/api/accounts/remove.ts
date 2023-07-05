@@ -70,22 +70,6 @@ const accountRemove = async ({ data, userInfo }: {
     },
   );
 
-  switch (providerPlatform) {
-    case ProviderPlatform.ctrader: {
-      Agenda.now(`${env.typePre}-${providerTradeType}-head-destroy-provider`, {
-        providerId,
-      });
-      break;
-    }
-    case ProviderPlatform.metatrader: {
-      Agenda.now(`${env.typePre}-${providerTradeType}-head-meta-destroy-provider`, {
-        providerId,
-      });
-      break;
-    }
-    default:
-  }
-
   await Mongo.collection('users').updateMany(
     {
       $or: [
@@ -119,6 +103,30 @@ const accountRemove = async ({ data, userInfo }: {
       },
     },
   );
+
+  switch (providerPlatform) {
+    case ProviderPlatform.ctrader: {
+      Agenda.now(`${env.typePre}-${providerTradeType}-head-destroy-provider`, {
+        providerId,
+      });
+      break;
+    }
+    case ProviderPlatform.metatrader: {
+      Agenda.now(`${env.typePre}-${providerTradeType}-head-meta-destroy-provider`, {
+        providerId,
+      });
+      await Mongo.collection('clientSecrets').updateOne(
+        { clientId: config.clientId },
+        {
+          $inc: {
+            activeAccounts: -1,
+          },
+        },
+      );
+      break;
+    }
+    default:
+  }
 
   return {
     result: providerId,
