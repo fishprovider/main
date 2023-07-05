@@ -137,6 +137,9 @@ function TradeCards({
 
       if (search && !account.name.toLowerCase().includes(search.toLowerCase())) return false;
 
+      if (filterBy.some((item) => item === 'locked') && !(account.locks && account.locks.length > 0)) return false;
+      if (filterBy.some((item) => item === 'nolock') && !!account.locks?.length) return false;
+
       return !!account.members?.some((member) => {
         if (member.userId !== userId) return false;
 

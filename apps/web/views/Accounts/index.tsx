@@ -22,6 +22,8 @@ const filterItems = [
   { key: `role-${Roles.trader}`, label: 'Role Trader' },
   { key: `role-${Roles.protector}`, label: 'Role Protector' },
   { key: `role-${Roles.viewer}`, label: 'Role Viewer' },
+  { key: 'locked', label: 'Locked' },
+  { key: 'nolock', label: 'No Lock' },
 ];
 
 const sortItems = [
