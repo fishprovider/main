@@ -165,13 +165,12 @@ const start = async () => {
     Logger.info(`Subscribing ${allSymbols.length} symbols`, allSymbols.map((symbol) => symbol).join(','));
     await startSubs(connection, allSymbols);
     Logger.warn(`Subscribed ${allSymbols.length} symbols`);
-
     renewSymbols();
   }
 
   if (spotTasks.poll) {
     await startPolls(connection, allSymbols);
-    await renewSymbolsHandler(allSymbols);
+    renewSymbolsHandler(allSymbols);
   }
 
   sendHeartbeat();
