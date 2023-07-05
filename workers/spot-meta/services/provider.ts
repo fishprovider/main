@@ -172,6 +172,7 @@ const start = async () => {
 
   if (spotTasks.poll) {
     await startPolls(connection, symbols);
+    await renewSymbolsHandler(symbols);
   }
 
   sendHeartbeat();

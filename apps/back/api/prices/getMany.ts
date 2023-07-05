@@ -4,16 +4,14 @@ import { getProvider } from '@fishbot/swap/utils/account';
 import { getPrices } from '@fishbot/swap/utils/price';
 import { ProviderType } from '@fishbot/utils/constants/account';
 import { ErrorType } from '@fishbot/utils/constants/error';
+import { cryptoSymbols, forexMajorPairs } from '@fishbot/utils/constants/price';
 import { isLastRunExpired } from '@fishbot/utils/helpers/lastRunChecks/lastRunChecks';
 import type { User } from '@fishbot/utils/types/User.model';
 import _ from 'lodash';
 
-const forexSymbols = ['AUDUSD', 'EURUSD', 'GBPUSD', 'NZDUSD', 'USDCAD', 'USDCHF', 'USDJPY'];
-const cryptoSymbols = ['BTCUSD', 'ETHUSD'];
-
 const watchingProviderTypeSymbols = {
-  [ProviderType.icmarkets]: forexSymbols,
-  [ProviderType.exness]: [...forexSymbols, ...cryptoSymbols],
+  [ProviderType.icmarkets]: forexMajorPairs,
+  [ProviderType.exness]: [...forexMajorPairs, ...cryptoSymbols],
 };
 
 const adminProviderIds = {
