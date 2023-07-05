@@ -1,3 +1,3 @@
-import BaseLayout from '~layouts/BaseLayout';
+import MainTabLayout from '~layouts/MainTabLayout';
 
-export default BaseLayout;
+export default MainTabLayout;

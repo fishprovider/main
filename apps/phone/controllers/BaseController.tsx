@@ -1,27 +1,25 @@
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
-import { SplashScreen, Stack } from 'expo-router';
+import { SplashScreen } from 'expo-router';
 import { useEffect } from 'react';
 import { useColorScheme } from 'react-native';
 import { TamaguiProvider, Theme } from 'tamagui';
 
 import config from '../tamagui.config';
 
-// Catch any errors thrown by the Layout component.
-export { ErrorBoundary } from 'expo-router';
+interface Props {
+  children: React.ReactNode;
+}
 
-export const unstable_settings = {
-  initialRouteName: '(tabs)',
-};
-
-export default function BaseController() {
-  const colorScheme = useColorScheme();
-
+export default function BaseController({ children }: Props) {
   const [loaded, error] = useFonts({
     FontAwesome: require('../assets/fonts/FontAwesome.ttf'),
     Inter: require('@tamagui/font-inter/otf/Inter-Medium.otf'),
     InterBold: require('@tamagui/font-inter/otf/Inter-Bold.otf'),
   });
+
+  const colorScheme = useColorScheme();
+  const isDark = colorScheme === 'dark';
 
   // Expo Router uses Error Boundaries to catch errors in the navigation tree.
   useEffect(() => {
@@ -33,15 +31,14 @@ export default function BaseController() {
   if (!loaded) return <SplashScreen />;
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+    <ThemeProvider value={isDark ? DarkTheme : DefaultTheme}>
       <TamaguiProvider config={config}>
-        <Theme name={colorScheme === 'dark' ? 'dark' : 'light'}>
-          <Stack>
-            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-            <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
-          </Stack>
+        <Theme name={isDark ? 'dark' : 'light'}>
+          {children}
         </Theme>
       </TamaguiProvider>
     </ThemeProvider>
   );
 }
+
+export { ErrorBoundary } from 'expo-router';
