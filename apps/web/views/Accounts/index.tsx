@@ -63,9 +63,15 @@ function Accounts() {
       content: <Text color={filterBy.includes(key) ? 'green' : undefined}>{label}</Text>,
       onClick: () => {
         setFilterBy((prev) => {
-          const newKeys = prev.includes(key)
+          let newKeys = prev.includes(key)
             ? prev.filter((item) => item !== key)
             : [...prev, key];
+          if (newKeys.some((item) => item === 'locked')) {
+            newKeys = newKeys.filter((item) => item !== 'nolock');
+          }
+          if (newKeys.some((item) => item === 'nolock')) {
+            newKeys = newKeys.filter((item) => item !== 'locked');
+          }
           sessionWrite('option-filterBy-list', newKeys);
           return newKeys;
         });
