@@ -1,3 +1,4 @@
+import { QueryProvider } from '@fishbot/cross/libs/query';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { SplashScreen } from 'expo-router';
@@ -6,6 +7,9 @@ import { useColorScheme } from 'react-native';
 import { TamaguiProvider, Theme } from 'tamagui';
 
 import config from '../tamagui.config';
+import { initialize as initServices } from './baseServices';
+
+initServices();
 
 interface Props {
   children: React.ReactNode;
@@ -31,13 +35,15 @@ export default function BaseController({ children }: Props) {
   if (!loaded) return <SplashScreen />;
 
   return (
-    <ThemeProvider value={isDark ? DarkTheme : DefaultTheme}>
-      <TamaguiProvider config={config}>
-        <Theme name={isDark ? 'dark' : 'light'}>
-          {children}
-        </Theme>
-      </TamaguiProvider>
-    </ThemeProvider>
+    <QueryProvider withDevTools={false}>
+      <ThemeProvider value={isDark ? DarkTheme : DefaultTheme}>
+        <TamaguiProvider config={config}>
+          <Theme name={isDark ? 'dark' : 'light'}>
+            {children}
+          </Theme>
+        </TamaguiProvider>
+      </ThemeProvider>
+    </QueryProvider>
   );
 }
 
