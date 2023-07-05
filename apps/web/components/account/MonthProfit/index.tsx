@@ -20,7 +20,7 @@ import useTablet from '~ui/styles/useTablet';
 
 const defaultProfitMonths: Record<number, number[]> = {
   2022: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3.07],
-  2023: [3.16, 1.8, 3.15, 2.14, 2.1, 4.18],
+  2023: [3.16, 1.8, 3.15, 2.14, 2.1, 4.18, 2.22],
 };
 
 const nameProfit = 'Month Profit (%)';
@@ -68,7 +68,7 @@ function MonthProfit({
     _.range(0, 12).forEach((idx) => {
       if (+year === currentYear && idx > currentMonth) return;
 
-      const profit = profitMonths[+year]?.[idx] || 0;
+      const profit = +(profitMonths[+year]?.[idx] || 0);
       if (+year === currentYear && idx === currentMonth && !profit) return;
 
       const month = `${year}/${idx + 1}`;
