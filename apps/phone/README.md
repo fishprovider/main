@@ -75,7 +75,12 @@
               '@fishbot/cross': '../../packages/cross/dist',
               // Note that '~': '.' does not work
               '~constants': './constants',
+              '~utils': './utils',
+              '~libs': './libs',
               '~components': './components',
+              '~controllers': './controllers',
+              '~layouts': './layouts',
+              '~views': './views',
             },
           }],
           require.resolve('expo-router/babel'),

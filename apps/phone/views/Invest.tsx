@@ -20,12 +20,12 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function InvestScreen() {
+export default function Invest() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Invest</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/invest.tsx" />
+      <EditScreenInfo path="app/(tabs)/index.tsx" />
     </View>
   );
 }

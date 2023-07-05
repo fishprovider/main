@@ -1,6 +1,4 @@
-import { ErrorType } from '@fishbot/utils/constants/error';
 import { StyleSheet } from 'react-native';
-import { Button } from 'tamagui';
 
 import EditScreenInfo from '~components/EditScreenInfo';
 import { Text, View } from '~components/Themed';
@@ -22,15 +20,12 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function UserScreen() {
+export default function Wallet() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>
-        {ErrorType.userNotFound}
-      </Text>
+      <Text style={styles.title}>Wallet</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/user.tsx" />
-      <Button themeInverse>Hello</Button>
+      <EditScreenInfo path="app/(tabs)/wallet.tsx" />
     </View>
   );
 }
