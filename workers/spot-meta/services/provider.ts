@@ -56,9 +56,9 @@ const sendHeartbeat = async () => {
       orderType: OrderType.limit,
       status: OrderStatus.idea,
 
-      symbol: 'ETHUSD',
+      symbol: 'AUDUSD',
       direction: Direction.buy,
-      volume: 0.1,
+      volume: 1000,
 
       limitPrice: 0.1,
 
