@@ -1,13 +1,5 @@
 import type { QueryKey as ReactQueryKey } from '@tanstack/react-query';
-import {
-  QueryClient,
-  useMutation,
-  useQuery as useReactQuery,
-} from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { PersistedClient, Persister, PersistQueryClientProvider as QueryClientProvider } from '@tanstack/react-query-persist-client';
-import localforage from 'localforage';
-import type { ReactNode } from 'react';
+import { useMutation, useQuery as useReactQuery } from '@tanstack/react-query';
 
 interface QueryParams<Data, QueryKey> {
   queryFn: () => Data | Promise<Data>,
@@ -42,46 +34,6 @@ interface MutateResult<Data, Variables, Error> {
   isLoading: boolean,
   mutate: (vars?: Variables, callbacks?: MutateCallbacks<Data, Variables, Error>) => void,
   // TODO: add more if needed one by one
-}
-
-const reactQueryCacheKey = 'reactQueryFp';
-
-const persister: Persister = {
-  persistClient: async (client: PersistedClient) => {
-    await localforage.setItem(reactQueryCacheKey, client);
-  },
-  restoreClient: async () => {
-    const client = await localforage.getItem<PersistedClient>(reactQueryCacheKey);
-    return client || undefined;
-  },
-  removeClient: () => localforage.removeItem(reactQueryCacheKey),
-};
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      networkMode: 'offlineFirst',
-      cacheTime: 1000 * 60 * 60 * 24 * 7, // 7d
-      refetchInterval: 1000 * 60, // 1m
-      refetchOnWindowFocus: false,
-    },
-  },
-});
-
-function QueryProvider({
-  children,
-}: {
-  children: ReactNode,
-}) {
-  return (
-    <QueryClientProvider
-      client={queryClient}
-      persistOptions={{ persister }}
-    >
-      {children}
-      <ReactQueryDevtools />
-    </QueryClientProvider>
-  );
 }
 
 function useQuery<
@@ -135,5 +87,3 @@ function useMutate<
 }
 
 export { useMutate, useQuery };
-
-export default QueryProvider;
