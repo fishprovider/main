@@ -68,8 +68,7 @@ function Accounts() {
             : [...prev, key];
           if (newKeys.some((item) => item === 'locked')) {
             newKeys = newKeys.filter((item) => item !== 'nolock');
-          }
-          if (newKeys.some((item) => item === 'nolock')) {
+          } else if (newKeys.some((item) => item === 'nolock')) {
             newKeys = newKeys.filter((item) => item !== 'locked');
           }
           sessionWrite('option-filterBy-list', newKeys);
