@@ -17,6 +17,7 @@ import { startSubs, stopSubs } from '~services/handleSubs';
 import { spotTasks } from '~utils/tasks';
 
 import onEvent, { destroy as destroyEventHandler, start as startEventHandler } from './events';
+import { startPolls, stopPolls } from './handlePolls';
 import renewSymbolsHandler from './renewSymbols';
 
 const env = {
@@ -55,9 +56,9 @@ const sendHeartbeat = async () => {
       orderType: OrderType.limit,
       status: OrderStatus.idea,
 
-      symbol: 'AUDUSD',
+      symbol: 'ETHUSD',
       direction: Direction.buy,
-      volume: 1000,
+      volume: 0.1,
 
       limitPrice: 0.1,
 
@@ -75,7 +76,12 @@ const destroy = async () => {
     const connectionToClose = connection;
     connection = undefined;
 
-    await stopSubs(connectionToClose, allSymbols);
+    if (spotTasks.price) {
+      await stopSubs(connectionToClose, allSymbols);
+    }
+    if (spotTasks.poll) {
+      await stopPolls(connectionToClose);
+    }
     await destroyEventHandler();
     await connectionToClose.destroy();
   }
@@ -148,21 +154,26 @@ const start = async () => {
 
   const symbols = await getSymbolList(connection);
 
-  const skipPattern = env.skipPattern && new RegExp(env.skipPattern);
-  const watchPattern = new RegExp(env.watchPattern);
-  allSymbols = symbols.filter((symbol) => {
-    if (!symbol) return false;
-    if (skipPattern && skipPattern.test(symbol)) return false;
-    return watchPattern.test(symbol);
-  });
-
-  Logger.info(`Subscribing ${allSymbols.length} symbols`, allSymbols.map((symbol) => symbol).join(','));
-  await startSubs(connection, allSymbols);
-  Logger.warn(`Subscribed ${allSymbols.length} symbols`);
-
   if (spotTasks.price) {
+    const skipPattern = env.skipPattern && new RegExp(env.skipPattern);
+    const watchPattern = new RegExp(env.watchPattern);
+    allSymbols = symbols.filter((symbol) => {
+      if (!symbol) return false;
+      if (skipPattern && skipPattern.test(symbol)) return false;
+      return watchPattern.test(symbol);
+    });
+
+    Logger.info(`Subscribing ${allSymbols.length} symbols`, allSymbols.map((symbol) => symbol).join(','));
+    await startSubs(connection, allSymbols);
+    Logger.warn(`Subscribed ${allSymbols.length} symbols`);
+
     renewSymbols();
   }
+
+  if (spotTasks.poll) {
+    await startPolls(connection, symbols);
+  }
+
   sendHeartbeat();
 };
 
