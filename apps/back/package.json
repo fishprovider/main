@@ -1,6 +1,6 @@
 {
   "name": "@fishbot/back",
-  "version": "5.0.1",
+  "version": "5.0.2",
   "type": "module",
   "scripts": {
     "preinstall": "cd ../.. && npm install -w packages/utils -w packages/core -w packages/swap -w packages/ctrader -w packages/metatrader -w packages/coin",
