@@ -2,8 +2,10 @@
   "name": "phone",
   "version": "5.0.0",
   "scripts": {
+    "install-packages": "cd ../.. && npm install -w packages/utils -w packages/cross",
+    "build-packages": "cd ../.. && npm run build -w packages/utils -w packages/cross",
+    "preinstall": "npm run install-packages && npm run build-packages",
     "doctor": "npx expo-doctor && expo install --check",
-    "preinstall": "cd ../.. && npm install -w packages/utils -w packages/cross && npm run build -w packages/utils -w packages/cross",
     "lint": "eslint --cache --fix .",
     "type-check": "tsc --noEmit",
     "start": "doppler run --print-config -- expo start",
