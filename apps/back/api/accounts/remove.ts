@@ -47,11 +47,15 @@ const accountRemove = async ({ data, userInfo }: {
     providerPlatform, config, providerTradeType,
   } = account;
 
-  if (providerPlatform === ProviderPlatform.metatrader) {
-    await removeAccount({
-      providerId,
-      config,
-    });
+  switch (providerPlatform) {
+    case ProviderPlatform.metatrader: {
+      await removeAccount({
+        providerId,
+        config,
+      });
+      break;
+    }
+    default:
   }
 
   await Mongo.collection<Account>('accounts').updateOne(
@@ -66,14 +70,20 @@ const accountRemove = async ({ data, userInfo }: {
     },
   );
 
-  if (providerPlatform === ProviderPlatform.ctrader) {
-    Agenda.now(`${env.typePre}-${providerTradeType}-head-destroy-provider`, {
-      providerId,
-    });
-  } else if (providerPlatform === ProviderPlatform.metatrader) {
-    Agenda.now(`${env.typePre}-${providerTradeType}-head-meta-destroy-provider`, {
-      providerId,
-    });
+  switch (providerPlatform) {
+    case ProviderPlatform.ctrader: {
+      Agenda.now(`${env.typePre}-${providerTradeType}-head-destroy-provider`, {
+        providerId,
+      });
+      break;
+    }
+    case ProviderPlatform.metatrader: {
+      Agenda.now(`${env.typePre}-${providerTradeType}-head-meta-destroy-provider`, {
+        providerId,
+      });
+      break;
+    }
+    default:
   }
 
   await Mongo.collection('users').updateMany(

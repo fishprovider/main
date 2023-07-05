@@ -108,41 +108,59 @@ const accountAdd = async ({ data, userInfo }: {
     ...baseConfig,
   };
 
-  if (providerPlatform === ProviderPlatform.metatrader) {
-    // TODO: remove hard code
-    config.clientId = 'marco.dinh91@gmail.com';
-  }
-
-  const client = await Mongo.collection<{ clientSecret: string }>('clientSecrets').findOne({
-    providerType,
-    providerPlatform,
-    clientId: config.clientId,
-  }, {
-    projection: {
-      clientSecret: 1,
-    },
-  });
-  if (!client) {
-    return { error: ErrorType.accountNotFound };
-  }
-  config.clientSecret = client.clientSecret;
-
-  if (providerPlatform === ProviderPlatform.metatrader) {
-    const { accountId } = await newAccountMetaTrader({
-      providerId,
-      options: {
-        name,
-        login: config.user,
-        password: config.pass,
-        platform: config.platform,
-        server: config.server,
-      },
-      config,
-    });
-    if (!accountId) {
-      return { error: ErrorType.badRequest };
+  switch (providerPlatform) {
+    case ProviderPlatform.ctrader: {
+      const client = await Mongo.collection<{ clientSecret: string }>('clientSecrets').findOne({
+        providerType,
+        providerPlatform,
+        clientId: config.clientId,
+      }, {
+        projection: {
+          clientSecret: 1,
+        },
+      });
+      if (!client) {
+        return { error: ErrorType.accountNotFound };
+      }
+      config.clientSecret = client.clientSecret;
+      break;
     }
-    config.accountId = accountId;
+    case ProviderPlatform.metatrader: {
+      const client = await Mongo.collection<{ clientId: string, clientSecret: string }>('clientSecrets').findOne({
+        providerType,
+        providerPlatform,
+        activeAccounts: { $lt: 2 },
+      }, {
+        projection: {
+          clientId: 1,
+          clientSecret: 1,
+        },
+      });
+      if (!client) {
+        return { error: ErrorType.accountNotFound };
+      }
+      config.clientId = client.clientId;
+      config.clientSecret = client.clientSecret;
+
+      const { accountId } = await newAccountMetaTrader({
+        providerId,
+        options: {
+          name,
+          login: config.user,
+          password: config.pass,
+          platform: config.platform,
+          server: config.server,
+        },
+        config,
+      });
+      if (!accountId) {
+        return { error: ErrorType.badRequest };
+      }
+      config.accountId = accountId;
+
+      break;
+    }
+    default:
   }
 
   const newAccount = {
@@ -159,14 +177,20 @@ const accountAdd = async ({ data, userInfo }: {
   // non-blocking
   updateCache(newAccount);
 
-  if (providerPlatform === ProviderPlatform.ctrader) {
-    Agenda.now(`${env.typePre}-${providerTradeType}-head-start-provider`, {
-      providerId,
-    });
-  } else if (providerPlatform === ProviderPlatform.metatrader) {
-    Agenda.now(`${env.typePre}-${providerTradeType}-head-meta-start-provider`, {
-      providerId,
-    });
+  switch (providerPlatform) {
+    case ProviderPlatform.ctrader: {
+      Agenda.now(`${env.typePre}-${providerTradeType}-head-start-provider`, {
+        providerId,
+      });
+      break;
+    }
+    case ProviderPlatform.metatrader: {
+      Agenda.now(`${env.typePre}-${providerTradeType}-head-meta-start-provider`, {
+        providerId,
+      });
+      break;
+    }
+    default:
   }
 
   await Mongo.collection<User>('users').updateOne(
