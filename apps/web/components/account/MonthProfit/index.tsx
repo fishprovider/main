@@ -16,7 +16,7 @@ import {
   YAxis,
 } from 'recharts';
 
-import useMobile from '~ui/styles/useMobile';
+import useTablet from '~ui/styles/useTablet';
 
 const defaultProfitMonths: Record<number, number[]> = {
   2022: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3.07],
@@ -47,7 +47,7 @@ function MonthProfit({
   providerId,
   height = 300,
 }: Props) {
-  const isMobile = useMobile();
+  const isTablet = useTablet();
 
   const {
     profitMonths = defaultProfitMonths,
@@ -85,11 +85,13 @@ function MonthProfit({
     x, y, width, value,
   }: any) => value && (
     <g>
-      <text x={x + width / 2} y={y - 5} textAnchor="middle">
+      <text x={x + width / 2} y={y - 5} textAnchor="middle" fontSize={isTablet ? 10 : 14}>
         {`${value}%`}
       </text>
     </g>
   );
+
+  const travellerWidth = isTablet ? 6 : 12;
 
   return (
     <ResponsiveContainer width="100%" height={height}>
@@ -115,9 +117,9 @@ function MonthProfit({
         />
         <Brush
           dataKey="month"
-          startIndex={Math.max(0, data.length - 12)}
+          startIndex={Math.max(0, data.length - travellerWidth)}
           endIndex={Math.max(0, data.length - 1)}
-          travellerWidth={isMobile ? 6 : 12}
+          travellerWidth={travellerWidth}
           stroke="blue"
         />
       </ComposedChart>
