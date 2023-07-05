@@ -1,4 +1,5 @@
-import newAccount from '@fishbot/swap/libs/metatrader/newAccount';
+import newAccountMetaTrader from '@fishbot/swap/libs/metatrader/newAccount';
+import { updateCache } from '@fishbot/swap/utils/account';
 import {
   ProviderPlatform, ProviderViewType, SourceType,
 } from '@fishbot/utils/constants/account';
@@ -127,7 +128,7 @@ const accountAdd = async ({ data, userInfo }: {
   config.clientSecret = client.clientSecret;
 
   if (providerPlatform === ProviderPlatform.metatrader) {
-    const { accountId } = await newAccount({
+    const { accountId } = await newAccountMetaTrader({
       providerId,
       options: {
         name,
@@ -144,7 +145,7 @@ const accountAdd = async ({ data, userInfo }: {
     config.accountId = accountId;
   }
 
-  await Mongo.collection<Account>('accounts').insertOne({
+  const newAccount = {
     ...accountToNew,
     config: {
       ...config,
@@ -152,7 +153,11 @@ const accountAdd = async ({ data, userInfo }: {
         pass: md5(config.pass),
       }),
     },
-  });
+  };
+  await Mongo.collection<Account>('accounts').insertOne(newAccount);
+
+  // non-blocking
+  updateCache(newAccount);
 
   if (providerPlatform === ProviderPlatform.ctrader) {
     Agenda.now(`${env.typePre}-${providerTradeType}-head-start-provider`, {

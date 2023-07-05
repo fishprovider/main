@@ -1,10 +1,10 @@
 import { ProviderPlatform, ProviderType } from '@fishbot/utils/constants/account';
-import { redisKeys } from '@fishbot/utils/constants/redis';
 import type { Account, Config } from '@fishbot/utils/types/Account.model';
 import _ from 'lodash';
 
 import getAccountInfoCTrader from '~libs/ctrader/commands/getAccountInfo';
 import getAccountInfoMetaTrader from '~libs/metatrader/commands/getAccountInfo';
+import { updateCache } from '~utils/account';
 import { getAssets } from '~utils/price';
 
 interface AccountInfoReqOptions {
@@ -67,43 +67,8 @@ const saveAccountInfo = async (
     ...res,
     ...assetInfo,
   };
-
-  const updateRedis = async () => {
-    const slimAccount = _.omit(accountInfo, ['providerData']);
-    const accountInfoStr = JSON.stringify(slimAccount);
-    await Promise.all([
-      Redis.publish(redisKeys.account(providerId), accountInfoStr),
-      Redis.set(redisKeys.account(providerId), accountInfoStr, {
-        EX: 60 * 60 * 24 * 30,
-      }),
-    ]);
-  };
-
-  const updateFirebase = async () => {
-    const slimAccountPublic = _.omit(accountInfo, ['config', 'providerData']);
-    const membersSlim: Record<string, boolean> = {};
-    account.members?.forEach((member) => {
-      membersSlim[member.userId] = true;
-    });
-    await Firebase.firestore().collection('account').doc(providerId).set({
-      ...slimAccountPublic,
-      ...account.members && membersSlim,
-    });
-  };
-
-  const updateMongo = async () => {
-    await Mongo.collection<Account>('accounts').updateOne(
-      { _id: providerId },
-      { $set: accountInfo },
-    );
-  };
-
   // non-blocking
-  Promise.all([
-    updateRedis(),
-    updateFirebase(),
-    updateMongo(),
-  ]);
+  updateCache(accountInfo);
 
   return accountInfo;
 };

@@ -29,10 +29,10 @@ const accountGet = async ({ data, userInfo }: {
     userId, members, memberInvites, deleted,
   } = account;
 
-  const { isAdminWeb } = getRoleProvider(userInfo.roles);
+  const { isManagerWeb } = getRoleProvider(userInfo.roles);
 
   const checkAccess = () => {
-    if (isAdminWeb) return true;
+    if (isManagerWeb) return true;
     if (deleted) return false;
     if (providerViewType === ProviderViewType.public) return true;
     if (userInfo.uid) {

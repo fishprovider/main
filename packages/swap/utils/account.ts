@@ -31,8 +31,50 @@ const getProviderIds = async (filter: Record<string, any> = {}) => {
   return providerIds;
 };
 
+const updateRedis = async (account: Account) => {
+  const slimAccount = _.omit(account, ['providerData']);
+  const accountStr = JSON.stringify(slimAccount);
+  await Promise.all([
+    Redis.publish(redisKeys.account(account._id), accountStr),
+    Redis.set(redisKeys.account(account._id), accountStr, {
+      EX: 60 * 60 * 24 * 30,
+    }),
+  ]);
+};
+
+const updateFirebase = async (account: Account) => {
+  const slimAccountPublic = _.omit(account, ['config', 'providerData']);
+  const membersSlim: Record<string, boolean> = {};
+  account.members?.forEach((member) => {
+    membersSlim[member.userId] = true;
+  });
+  await Firebase.firestore().collection('account').doc(account._id).set({
+    ...slimAccountPublic,
+    ...account.members && membersSlim,
+  });
+};
+
+const updateMongo = async (account: Account) => {
+  await Mongo.collection<Account>('accounts').updateOne(
+    { _id: account._id },
+    { $set: account },
+  );
+};
+
+const updateCache = async (account: Account) => {
+  Promise.all([
+    updateRedis(account),
+    updateFirebase(account),
+    updateMongo(account),
+  ]);
+};
+
 export {
   botUser,
   getProvider,
   getProviderIds,
+  updateCache,
+  updateFirebase,
+  updateMongo,
+  updateRedis,
 };
