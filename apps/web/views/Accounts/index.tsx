@@ -66,11 +66,19 @@ function Accounts() {
           let newKeys = prev.includes(key)
             ? prev.filter((item) => item !== key)
             : [...prev, key];
-          if (newKeys.some((item) => item === 'locked')) {
-            newKeys = newKeys.filter((item) => item !== 'nolock');
-          } else if (newKeys.some((item) => item === 'nolock')) {
-            newKeys = newKeys.filter((item) => item !== 'locked');
+
+          switch (key) {
+            case 'locked': {
+              newKeys = newKeys.filter((item) => item !== 'nolock');
+              break;
+            }
+            case 'nolock': {
+              newKeys = newKeys.filter((item) => item !== 'locked');
+              break;
+            }
+            default:
           }
+
           sessionWrite('option-filterBy-list', newKeys);
           return newKeys;
         });
