@@ -36,7 +36,7 @@ function CopyStatus({
     (item) => parentItem._id === parseCopyId(item.copyId || '').parentOrderId,
   ));
   const isSynced = !missingOrders.length;
-  const tooltip = isSynced ? '(Synced)' : `(Missing ${missingOrders.length} orders))`;
+  const tooltip = isSynced ? '(Synced)' : `(Missing ${missingOrders.length} orders)`;
 
   return (
     <Icon
