@@ -2,11 +2,10 @@
   "name": "@fishbot/web",
   "version": "5.0.3",
   "scripts": {
-    "preinstall": "cd ../.. && npm install -w packages/utils -w packages/cross",
+    "preinstall": "cd ../.. && npm install -w packages/utils -w packages/cross && npm run build -w packages/utils -w packages/cross",
     "lint": "eslint --cache --fix --ignore-pattern public .",
     "type-check": "tsc --noEmit",
     "test": "cross-env NODE_ENV=test doppler run --print-config -- jest",
-    "prebuild": "cd ../.. && npm run build -w packages/utils -w packages/cross",
     "build": "cross-env NODE_ENV=production next build",
     "postbuild": "cross-env NODE_ENV=production next-sitemap",
     "start": "cross-env NODE_ENV=production next start",
