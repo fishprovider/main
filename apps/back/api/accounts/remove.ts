@@ -31,7 +31,6 @@ const accountRemove = async ({ data, userInfo }: {
     },
     {
       projection: {
-        _id: 1,
         providerType: 1,
         providerPlatform: 1,
         providerTradeType: 1,
@@ -44,7 +43,7 @@ const accountRemove = async ({ data, userInfo }: {
   }
 
   const {
-    providerPlatform, config, providerTradeType,
+    providerType, providerPlatform, providerTradeType, config,
   } = account;
 
   switch (providerPlatform) {
@@ -69,6 +68,22 @@ const accountRemove = async ({ data, userInfo }: {
       },
     },
   );
+
+  switch (providerPlatform) {
+    case ProviderPlatform.ctrader: {
+      Agenda.now(`${env.typePre}-${providerTradeType}-head-destroy-provider`, {
+        providerId,
+      });
+      break;
+    }
+    case ProviderPlatform.metatrader: {
+      Agenda.now(`${env.typePre}-${providerTradeType}-head-meta-destroy-provider`, {
+        providerId,
+      });
+      break;
+    }
+    default:
+  }
 
   await Mongo.collection('users').updateMany(
     {
@@ -104,29 +119,18 @@ const accountRemove = async ({ data, userInfo }: {
     },
   );
 
-  switch (providerPlatform) {
-    case ProviderPlatform.ctrader: {
-      Agenda.now(`${env.typePre}-${providerTradeType}-head-destroy-provider`, {
-        providerId,
-      });
-      break;
-    }
-    case ProviderPlatform.metatrader: {
-      Agenda.now(`${env.typePre}-${providerTradeType}-head-meta-destroy-provider`, {
-        providerId,
-      });
-      await Mongo.collection('clientSecrets').updateOne(
-        { clientId: config.clientId },
-        {
-          $inc: {
-            activeAccounts: -1,
-          },
-        },
-      );
-      break;
-    }
-    default:
-  }
+  await Mongo.collection('clientSecrets').updateOne(
+    {
+      providerType,
+      providerPlatform,
+      clientId: config.clientId,
+    },
+    {
+      $inc: {
+        activeAccounts: -1,
+      },
+    },
+  );
 
   return {
     result: providerId,
