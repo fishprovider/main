@@ -167,7 +167,6 @@ const start = async () => {
     Logger.warn(`Subscribed ${allSymbols.length} symbols`);
     renewSymbols();
   }
-
   if (spotTasks.poll) {
     await startPolls(connection, allSymbols);
     renewSymbolsHandler(allSymbols);

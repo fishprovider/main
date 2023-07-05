@@ -12,6 +12,7 @@ import { startSubs, stopSubs } from '~services/handleSubs';
 import { spotTasks } from '~utils/tasks';
 
 import onEvent, { destroy as destroyEventHandler, start as startEventHandler } from './events';
+import { startPolls, stopPolls } from './handlePolls';
 import renewSymbolsHandler from './renewSymbols';
 import updateAssets from './updateAssets';
 import updateLastBars from './updateLastBars';
@@ -67,7 +68,12 @@ const destroy = async () => {
     const connectionToClose = connection;
     connection = undefined;
 
-    await stopSubs(connectionToClose, allSymbols);
+    if (spotTasks.price) {
+      await stopSubs(connectionToClose, allSymbols);
+    }
+    if (spotTasks.poll) {
+      await stopPolls(connectionToClose);
+    }
     await destroyEventHandler();
     await connectionToClose.destroy();
   }
@@ -174,23 +180,26 @@ const start = async () => {
     },
   });
 
-  const { symbols } = await getSymbolList(connection);
+  const { symbols: symbolList } = await getSymbolList(connection);
 
   const skipPattern = env.skipPattern && new RegExp(env.skipPattern);
   const watchPattern = new RegExp(env.watchPattern);
-  allSymbols = symbols.filter(({ symbolName }) => {
+  allSymbols = symbolList.filter(({ symbolName }) => {
     if (!symbolName) return false;
     if (skipPattern && skipPattern.test(symbolName)) return false;
     return watchPattern.test(symbolName);
   }) as SymbolCTrader[];
 
-  Logger.info(`Subscribing ${allSymbols.length} symbols`, allSymbols.map(({ symbol }) => symbol).join(','));
-  await startSubs(connection, allSymbols);
-  Logger.warn(`Subscribed ${allSymbols.length} symbols`);
-
   if (spotTasks.price) {
+    Logger.info(`Subscribing ${allSymbols.length} symbols`, allSymbols.map(({ symbol }) => symbol).join(','));
+    await startSubs(connection, allSymbols);
+    Logger.warn(`Subscribed ${allSymbols.length} symbols`);
     await updateAssets(connection, providerType);
     renewSymbols();
+  }
+  if (spotTasks.poll) {
+    await startPolls(connection, allSymbols);
+    renewSymbolsHandler(allSymbols);
   }
   if (spotTasks.bar) {
     await updateLastBars(connection, allSymbols, providerType);

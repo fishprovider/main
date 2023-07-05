@@ -1,5 +1,5 @@
 const env = {
-  spotTasks: process.env.SPOT_TASKS || 'price', // price,bar,depth
+  spotTasks: process.env.SPOT_TASKS || 'price', // price,poll,bar,depth
   barPeriods: process.env.BAR_PERIODS || 'M5,M15,H1,H4,D1,W1,MN1',
 };
 
