@@ -13,6 +13,9 @@ interface Props {
   children: React.ReactNode;
 }
 
+// Keep the splash screen visible while we fetch resources
+SplashScreen.preventAutoHideAsync();
+
 export default function BaseController({ children }: Props) {
   const [loaded, error] = useFonts({
     FontAwesome: require('../assets/fonts/FontAwesome.ttf'),
@@ -20,14 +23,15 @@ export default function BaseController({ children }: Props) {
     InterBold: require('../assets/fonts/Inter-Bold.otf'),
   });
 
-  // Expo Router uses Error Boundaries to catch errors in the navigation tree.
   useEffect(() => {
     if (error) throw error;
   }, [error]);
 
-  // Keep the splash screen open until the assets have loaded. In the future,
-  // we should just support async font loading with a native version of font-display.
-  if (!loaded) return <SplashScreen />;
+  useEffect(() => {
+    if (loaded) {
+      SplashScreen.hideAsync();
+    }
+  }, [loaded]);
 
   return (
     <QueryProvider withDevTools={false}>
