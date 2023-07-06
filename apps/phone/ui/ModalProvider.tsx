@@ -13,7 +13,9 @@ const useModalSimple = ({
 }: Props) => useModal(() => (
   <Dialog open>
     <Dialog.Portal>
-      <Dialog.Content>
+      <Dialog.Content
+        key="simple" // need this otherwise the dialog will raise an warn of AnimatePresence
+      >
         <Dialog.Title>{title}</Dialog.Title>
         <Dialog.Description>{description}</Dialog.Description>
       </Dialog.Content>
