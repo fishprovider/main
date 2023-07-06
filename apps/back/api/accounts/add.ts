@@ -164,12 +164,7 @@ const accountAdd = async ({ data, userInfo }: {
 
   const newAccount = {
     ...accountToNew,
-    config: {
-      ...config,
-      ...(config.pass && {
-        pass: md5(config.pass),
-      }),
-    },
+    config,
   };
   await Mongo.collection<Account>('accounts').insertOne(newAccount);
 
