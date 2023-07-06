@@ -34,7 +34,7 @@ function ProviderCards({
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(pageSizeDefault);
 
-  const accounts = storeAccounts.useStore((state) => _.orderBy(
+  const providerIds = storeAccounts.useStore((state) => _.orderBy(
     _.filter(state, (account) => {
       if (!account.strategyId) return false;
       if (account.providerGroupId && account.providerGroupId !== account._id) return false;
@@ -42,17 +42,14 @@ function ProviderCards({
       if (search && !account.name.toLowerCase().includes(search.toLowerCase())) return false;
       return true;
     }),
-  ).slice((page - 1) * pageSize, page * pageSize));
-
-  const sortedAccounts = _.orderBy(
-    accounts,
     [
       (account) => account.order || 0,
-      (account) => account.name],
+      (account) => account.name,
+    ],
     ['desc', 'asc'],
-  );
-
-  const providerIds = sortedAccounts.map((account) => account._id);
+  )
+    .slice((page - 1) * pageSize, page * pageSize)
+    .map((account) => account._id));
 
   return (
     <>
@@ -67,7 +64,7 @@ function ProviderCards({
       </Flex>
       <Group position="center">
         <Pagination
-          total={page + (accounts.length < pageSize ? 0 : 1)}
+          total={page + (providerIds.length < pageSize ? 0 : 1)}
           value={page}
           onChange={(value) => setPage(value)}
           size="lg"

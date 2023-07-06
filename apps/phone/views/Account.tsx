@@ -1,9 +1,4 @@
-import accountGetManySlim from '@fishbot/cross/api/accounts/getManySlim';
-import { queryKeys } from '@fishbot/cross/constants/query';
-import { useQuery } from '@fishbot/cross/libs/query';
-import storeAccounts from '@fishbot/cross/stores/accounts';
 import { ErrorType } from '@fishbot/utils/constants/error';
-import _ from 'lodash';
 import { StyleSheet } from 'react-native';
 import { Button, Label } from 'tamagui';
 
@@ -28,22 +23,6 @@ const styles = StyleSheet.create({
 });
 
 export default function Account() {
-  const accounts = storeAccounts.useStore((state) => _.orderBy(
-    state,
-    [
-      (account) => account.order || 0,
-      (account) => account.name,
-    ],
-    ['desc', 'asc'],
-  ));
-
-  useQuery({
-    queryFn: accountGetManySlim,
-    queryKey: queryKeys.slimAccounts(),
-  });
-
-  console.log(accounts);
-
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Account</Text>

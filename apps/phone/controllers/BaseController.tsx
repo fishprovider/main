@@ -1,12 +1,10 @@
 import { QueryProvider } from '@fishbot/cross/libs/query';
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { SplashScreen } from 'expo-router';
 import { useEffect } from 'react';
-import { useColorScheme } from 'react-native';
-import { TamaguiProvider, Theme } from 'tamagui';
 
-import config from '../tamagui.config';
+import ThemeProvider from '~ui/ThemeProvider';
+
 import { initialize as initServices } from './baseServices';
 
 initServices();
@@ -22,9 +20,6 @@ export default function BaseController({ children }: Props) {
     InterBold: require('../assets/fonts/Inter-Bold.otf'),
   });
 
-  const colorScheme = useColorScheme();
-  const isDark = colorScheme === 'dark';
-
   // Expo Router uses Error Boundaries to catch errors in the navigation tree.
   useEffect(() => {
     if (error) throw error;
@@ -36,12 +31,8 @@ export default function BaseController({ children }: Props) {
 
   return (
     <QueryProvider withDevTools={false}>
-      <ThemeProvider value={isDark ? DarkTheme : DefaultTheme}>
-        <TamaguiProvider config={config}>
-          <Theme name={isDark ? 'dark' : 'light'}>
-            {children}
-          </Theme>
-        </TamaguiProvider>
+      <ThemeProvider>
+        {children}
       </ThemeProvider>
     </QueryProvider>
   );
