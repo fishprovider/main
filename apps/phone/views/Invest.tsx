@@ -50,12 +50,12 @@ function ProviderCard({ providerId }: Props) {
   const activeMonths = moment().diff(moment(createdAt), 'months') + 1;
 
   const [showModal, hideModal] = useModalSimple({
-    title: 'Hello',
-    description: 'This is a modal',
+    title: `Invest in ${name}`,
+    description: 'Coming soon',
   });
 
   const onInvest = () => {
-    toast.show(`Coming soon ${Math.random()}`);
+    toast.show('Coming soon');
     showModal();
     setTimeout(() => hideModal(), 2000);
   };
