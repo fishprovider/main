@@ -13,7 +13,7 @@ import H6 from '~ui/H6';
 import ScrollView from '~ui/ScrollView';
 import Stack from '~ui/Stack';
 import Text from '~ui/Text';
-// import { useToast } from '~ui/ToastProvider';
+import { useToast } from '~ui/ToastProvider';
 
 // const pageSizeOptions = ['5', '10', '20', '50', '100'];
 const pageSizeDefault = 10;
@@ -23,7 +23,7 @@ interface Props {
 }
 
 function ProviderCard({ providerId }: Props) {
-  // const toast = useToast();
+  const toast = useToast();
 
   const {
     name = '-',
@@ -49,7 +49,7 @@ function ProviderCard({ providerId }: Props) {
   const activeMonths = moment().diff(moment(createdAt), 'months') + 1;
 
   const onInvest = () => {
-    // toast.show('Coming soon!');
+    toast.show(`Coming soon ${Math.random()}`);
   };
 
   return (

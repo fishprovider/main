@@ -2,9 +2,8 @@ import { DarkTheme, DefaultTheme, ThemeProvider as NavThemeProvider } from '@rea
 import { useColorScheme } from 'react-native';
 import { TamaguiProvider, Theme } from 'tamagui';
 
-import ToastProvider from '~ui/ToastProvider';
-
 import config from '../tamagui.config';
+import ToastProvider from './ToastProvider';
 
 interface Props {
   children: React.ReactNode;
