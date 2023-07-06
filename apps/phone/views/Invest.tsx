@@ -49,15 +49,21 @@ function ProviderCard({ providerId }: Props) {
   const profit = summary?.roi || roi || 0;
   const activeMonths = moment().diff(moment(createdAt), 'months') + 1;
 
-  const [showModal, hideModal] = useModalSimple({
+  const [showModal] = useModalSimple({
     title: `Invest in ${name}`,
-    description: 'Coming soon',
+    description: (
+      <Button
+        onPress={() => {
+          toast.show('Coming soon');
+        }}
+      >
+        Coming soon
+      </Button>
+    ),
   });
 
   const onInvest = () => {
-    toast.show('Coming soon');
     showModal();
-    setTimeout(() => hideModal(), 2000);
   };
 
   return (
