@@ -64,7 +64,6 @@ export default function BaseLayout() {
         options={{
           title: 'Invest',
           tabBarIcon: InvestTabIcon,
-          headerRight: HeaderRight,
         }}
       />
       <Tabs.Screen
