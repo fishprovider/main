@@ -13,6 +13,7 @@ import H6 from '~ui/H6';
 import ScrollView from '~ui/ScrollView';
 import Stack from '~ui/Stack';
 import Text from '~ui/Text';
+import { useToast } from '~ui/ToastProvider';
 
 // const pageSizeOptions = ['5', '10', '20', '50', '100'];
 const pageSizeDefault = 10;
@@ -22,6 +23,8 @@ interface Props {
 }
 
 function ProviderCard({ providerId }: Props) {
+  const toast = useToast();
+
   const {
     name = '-',
     icon = '-',
@@ -45,6 +48,10 @@ function ProviderCard({ providerId }: Props) {
   const profit = summary?.roi || roi || 0;
   const activeMonths = moment().diff(moment(createdAt), 'months') + 1;
 
+  const onInvest = () => {
+    toast.show('Coming soon!');
+  };
+
   return (
     <Card elevate bordered>
       <Card.Header padded>
@@ -52,7 +59,7 @@ function ProviderCard({ providerId }: Props) {
           <Stack space="$2" width={150}>
             <H6>{name}</H6>
             <Text>{icon}</Text>
-            <Button color="white" backgroundColor="green" size="$3" width={110}>
+            <Button color="white" backgroundColor="green" size="$3" width={110} onPress={onInvest}>
               Invest ➜ 🏦
             </Button>
           </Stack>

@@ -4,6 +4,7 @@ import { SplashScreen } from 'expo-router';
 import { useEffect } from 'react';
 
 import ThemeProvider from '~ui/ThemeProvider';
+import ToastProvider from '~ui/ToastProvider';
 
 import { initialize as initServices } from './baseServices';
 
@@ -32,7 +33,9 @@ export default function BaseController({ children }: Props) {
   return (
     <QueryProvider withDevTools={false}>
       <ThemeProvider>
-        {children}
+        <ToastProvider>
+          {children}
+        </ToastProvider>
       </ThemeProvider>
     </QueryProvider>
   );
