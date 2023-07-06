@@ -14,7 +14,7 @@
     "outDir": "dist"
   },
   "include": ["**/*.ts", "**/*.tsx", "index.js", "*.config.js"],
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", ".expo"],
   "references": [
     { "path": "../../packages/utils" },
     { "path": "../../packages/cross" }
