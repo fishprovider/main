@@ -1,7 +1,7 @@
 # How to dev?
 - To run in Expo Go
   ```shell
-  npm start # or npm run start-clean
+  npm start # or npm start -- --clear
   # Press i to start ios simulator
   # Press a to start android simulator
   ```
@@ -19,7 +19,7 @@
   # - no need to rebuild for any JS code changes
 
   # Run dev client
-  npm run dev
+  npm run dev # or npm run dev -- --clear
   ```
 
 - To update packages
