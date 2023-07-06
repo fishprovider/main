@@ -35,7 +35,11 @@ function CurrentToast() {
 function SafeToastViewport() {
   const { left, top, right } = useSafeAreaInsets();
   return (
-    <ToastViewport top={top} left={left} right={right} />
+    <ToastViewport
+      top={top}
+      left={left}
+      right={right}
+    />
   );
 }
 
