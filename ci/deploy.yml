@@ -161,3 +161,14 @@ deploy-back:
   after_script:
     - NOTIF_MSG="Deploy back $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
     - !reference [.notif, script]
+
+deploy-phone:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+      when: always
+  script:
+    - eas build --profile development-simulator --non-interactive --no-wait -p all
+    - eas build --profile production --non-interactive --no-wait -p android --auto-submit
+  after_script:
+    - NOTIF_MSG="Deploy phone $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
+    - !reference [.notif, script]
