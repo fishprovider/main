@@ -2,6 +2,8 @@ import { DarkTheme, DefaultTheme, ThemeProvider as NavThemeProvider } from '@rea
 import { useColorScheme } from 'react-native';
 import { TamaguiProvider, Theme } from 'tamagui';
 
+import ToastProvider from '~ui/ToastProvider';
+
 import config from '../tamagui.config';
 
 interface Props {
@@ -16,7 +18,9 @@ export default function ThemeProvider({ children }: Props) {
     <NavThemeProvider value={isDark ? DarkTheme : DefaultTheme}>
       <TamaguiProvider config={config}>
         <Theme name={isDark ? 'dark' : 'light'}>
-          {children}
+          <ToastProvider>
+            {children}
+          </ToastProvider>
         </Theme>
       </TamaguiProvider>
     </NavThemeProvider>
