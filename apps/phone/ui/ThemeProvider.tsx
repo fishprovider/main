@@ -3,6 +3,7 @@ import { useColorScheme } from 'react-native';
 import { TamaguiProvider, Theme } from 'tamagui';
 
 import config from '../tamagui.config';
+import { ModalProvider } from './ModalProvider';
 import ToastProvider from './ToastProvider';
 
 interface Props {
@@ -18,7 +19,9 @@ export default function ThemeProvider({ children }: Props) {
       <TamaguiProvider config={config}>
         <Theme name={isDark ? 'dark' : 'light'}>
           <ToastProvider>
-            {children}
+            <ModalProvider>
+              {children}
+            </ModalProvider>
           </ToastProvider>
         </Theme>
       </TamaguiProvider>

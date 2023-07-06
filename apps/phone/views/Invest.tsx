@@ -10,6 +10,7 @@ import Button from '~ui/Button';
 import Card from '~ui/Card';
 import Group from '~ui/Group';
 import H6 from '~ui/H6';
+import { useModalSimple } from '~ui/ModalProvider';
 import ScrollView from '~ui/ScrollView';
 import Stack from '~ui/Stack';
 import Text from '~ui/Text';
@@ -48,8 +49,15 @@ function ProviderCard({ providerId }: Props) {
   const profit = summary?.roi || roi || 0;
   const activeMonths = moment().diff(moment(createdAt), 'months') + 1;
 
+  const [showModal, hideModal] = useModalSimple({
+    title: 'Hello',
+    description: 'This is a modal',
+  });
+
   const onInvest = () => {
     toast.show(`Coming soon ${Math.random()}`);
+    showModal();
+    setTimeout(() => hideModal(), 2000);
   };
 
   return (
