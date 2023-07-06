@@ -19,7 +19,9 @@ function CurrentToast() {
   if (!currentToast || currentToast.isHandledNatively) return null;
 
   return (
-    <Toast>
+    <Toast
+      key={currentToast.id} // need this otherwise the toast will show only once
+    >
       <Stack>
         <Toast.Title>{currentToast.title}</Toast.Title>
         {!!currentToast.message && (
