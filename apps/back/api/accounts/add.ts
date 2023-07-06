@@ -9,7 +9,6 @@ import { getRoleProvider } from '@fishbot/utils/helpers/user';
 import type { Account } from '@fishbot/utils/types/Account.model';
 import type { User } from '@fishbot/utils/types/User.model';
 import _ from 'lodash';
-import md5 from 'md5';
 
 import isDemo from '~utils/isDemo';
 
