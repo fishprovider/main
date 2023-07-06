@@ -167,8 +167,8 @@ deploy-phone:
     - if: $CI_PIPELINE_SOURCE == "schedule" || $CI_COMMIT_TAG
       when: always
   script:
-    - eas build --profile development-simulator --non-interactive --no-wait -p all
-    - eas build --profile production --non-interactive --no-wait -p android --auto-submit
+    - npx eas build --profile development-simulator --non-interactive --no-wait -p all
+    - npx eas build --profile production --non-interactive --no-wait -p android --auto-submit
   after_script:
     - NOTIF_MSG="Deploy phone $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
     - !reference [.notif, script]
