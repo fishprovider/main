@@ -10,12 +10,13 @@
     },
     "development-simulator": {
       "extends": "development",
+      "channel": "development-simulator",
       "ios": {
         "simulator": true
       }
     },
     "preview": {
-      "channel": "staging",
+      "channel": "preview",
       "distribution": "internal",
       "android": {
         "buildType": "app-bundle"
@@ -23,6 +24,7 @@
     },
     "preview-simulator": {
       "extends": "preview",
+      "channel": "preview-simulator",
       "ios": {
         "simulator": true
       },
