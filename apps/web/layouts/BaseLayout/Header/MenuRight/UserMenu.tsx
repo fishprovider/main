@@ -1,4 +1,3 @@
-import userLogout from '@fishbot/cross/api/users/logout';
 import storeUser from '@fishbot/cross/stores/user';
 import { getRoleProvider } from '@fishbot/utils/helpers/user';
 import { useRouter } from 'next/router';
@@ -68,7 +67,7 @@ function UserMenu() {
       {
         key: 'logout',
         content: <Text size="lg">Logout</Text>,
-        onClick: () => userLogout().then(logout),
+        onClick: logout,
       },
     ] : [
       {

@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import { isSignInWithMagicLink, loginWithMagicLink, sendMagicLink } from '~libs/auth';
@@ -10,6 +11,8 @@ import Title from '~ui/core/Title';
 import { toastError } from '~ui/toast';
 
 function LoginWithMagicLink() {
+  const router = useRouter();
+
   const [email, setEmail] = useState('');
 
   useEffect(() => {
@@ -20,7 +23,7 @@ function LoginWithMagicLink() {
           // eslint-disable-next-line no-alert
           magicLinkEmail = window.prompt('Please provide your email for confirmation') || '';
         }
-        loginWithMagicLink(magicLinkEmail);
+        loginWithMagicLink(magicLinkEmail, router.push);
       });
     }
   }, []);

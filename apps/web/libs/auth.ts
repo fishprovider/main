@@ -1,5 +1,6 @@
 import type { User } from '@fishbot/utils/types/User.model';
 import type { FirebaseError } from 'firebase/app';
+import { initializeApp } from 'firebase/app';
 import {
   Auth,
   createUserWithEmailAndPassword,
@@ -28,6 +29,56 @@ import moment from 'moment';
 import { LoginMethods } from '~constants/user';
 import { cacheRead, cacheWrite } from '~libs/cache';
 import { toastError, toastInfo, toastWarn } from '~ui/toast';
+import { cacheKeyUser, onClientLoggedIn, onClientLoggedOut } from '~utils/user';
+
+const env = {
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_CLIENT_API_KEY,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_CLIENT_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_CLIENT_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_CLIENT_MEASUREMENT_ID,
+};
+
+const initFirebase = () => {
+  const config = {
+    apiKey: env.apiKey,
+    authDomain: `${env.projectId}.firebaseapp.com`,
+    databaseURL: `https://${env.projectId}.firebaseio.com`,
+    projectId: env.projectId,
+    storageBucket: `${env.projectId}.appspot.com`,
+    messagingSenderId: env.messagingSenderId,
+    appId: env.appId,
+    measurementId: env.measurementId,
+  };
+
+  initializeApp(config);
+
+  // TODO: add server: analytics, perf monitor
+  // https://firebase.google.com/docs/web/setup#available-services
+};
+
+const getUserAuthInfo = (
+  userAuth: UserAuth,
+  field: keyof UserInfo,
+) => userAuth[field]
+  || userAuth.providerData.find((item) => item[field])?.[field]
+  || '';
+
+const parseUser = (user: UserAuth) => {
+  const { uid } = user;
+  const email = getUserAuthInfo(user, 'email');
+  const name = getUserAuthInfo(user, 'displayName') || email.split('@')[0] || email;
+  const picture = getUserAuthInfo(user, 'photoURL');
+
+  const userInfo = {
+    _id: uid,
+    uid,
+    email,
+    name,
+    picture,
+  };
+  return userInfo;
+};
 
 interface UserToken {
   token: string,
@@ -35,9 +86,60 @@ interface UserToken {
 }
 const cacheKeyUserToken = 'fp-userToken';
 
+const cacheWriteUserToken = (userToken?: UserToken) => cacheWrite(cacheKeyUserToken, userToken);
+
+const cacheReadUserToken = () => cacheRead<UserToken>(cacheKeyUserToken);
+
+const getUserToken = async (user: UserAuth, forceRefresh?: boolean) => {
+  try {
+    const cacheToken = await cacheReadUserToken();
+    const isRefresh = forceRefresh
+      || !cacheToken?.createdAt
+      || moment().diff(cacheToken.createdAt, 'minutes') > 30;
+
+    const token = await user.getIdToken(isRefresh);
+    cacheWriteUserToken({
+      token,
+      createdAt: isRefresh ? new Date() : cacheToken.createdAt,
+    });
+    return token;
+  } catch (error) {
+    Logger.error('Failed to fetch token', error);
+    toastError(`Failed to fetch token ${error}`);
+    return undefined;
+  }
+};
+
+const onLoggedIn = async (
+  user: UserAuth,
+  redirect: (redirectUrl: string) => void,
+) => {
+  const token = await getUserToken(user);
+  if (!token) {
+    onClientLoggedOut();
+    return;
+  }
+  const userInfo = parseUser(user);
+  onClientLoggedIn(userInfo, token, redirect);
+};
+
 //
-// login/out
+// actions
 //
+
+const logout = async () => {
+  cacheWriteUserToken();
+  await getAuth().signOut().then(() => {
+    toastInfo('Logged out successfully');
+    window.location.reload();
+  });
+};
+
+const refreshUserToken = async () => {
+  const user = getAuth()?.currentUser;
+  if (!user) return undefined;
+  return getUserToken(user, true);
+};
 
 const getAuthMethod = (method: LoginMethods) => {
   let authMethod;
@@ -143,27 +245,60 @@ const errorHandler = (
   }
 };
 
-const loginOAuth = (method: LoginMethods) => {
-  const { authMethod, credentialFromError } = getAuthMethod(method);
-  if (authMethod && credentialFromError) {
-    const auth = getAuth();
-    signInWithPopup(auth, authMethod)
-      .catch((error) => errorHandler(error, auth, credentialFromError));
+const loginFromCache = async (
+  redirect: (redirectUrl: string) => void,
+) => {
+  try {
+    const cacheUserToken = await cacheReadUserToken();
+    Logger.debug('[user] cacheUserToken', cacheUserToken);
+    if (!cacheUserToken?.createdAt
+    || moment().diff(cacheUserToken.createdAt, 'minutes') > 60
+    ) return;
+
+    const cacheUser = await cacheRead<User>(cacheKeyUser);
+    Logger.debug('[user] cacheUser', cacheUser);
+    if (!cacheUser) return;
+
+    await onClientLoggedIn(cacheUser, cacheUserToken.token, redirect);
+  } catch (err) {
+    console.error('Failed to login', err);
   }
 };
 
-const loginWithPassword = (email: string, password: string, isLogin: boolean) => {
-  const auth = getAuth();
-  if (isLogin) {
-    signInWithEmailAndPassword(auth, email, password).catch((err) => {
-      Logger.error(err);
-      toastError(`Failed to login: ${err.message}`);
-    });
-  } else {
-    createUserWithEmailAndPassword(auth, email, password).catch((err) => {
-      Logger.error(err);
-      toastError(`Failed to signup: ${err.message}`);
-    });
+const loginOAuth = async (
+  method: LoginMethods,
+  redirect: (redirectUrl: string) => void,
+) => {
+  const { authMethod, credentialFromError } = getAuthMethod(method);
+  if (authMethod && credentialFromError) {
+    const auth = getAuth();
+    try {
+      const { user } = await signInWithPopup(auth, authMethod);
+      await onLoggedIn(user, redirect);
+    } catch (err) {
+      console.error('Failed to login', err);
+      errorHandler(err, auth, credentialFromError);
+    }
+  }
+};
+
+const loginWithPassword = async (
+  email: string,
+  password: string,
+  isLogin: boolean,
+  redirect: (redirectUrl: string) => void,
+) => {
+  try {
+    const auth = getAuth();
+    if (isLogin) {
+      const { user } = await signInWithEmailAndPassword(auth, email, password);
+      await onLoggedIn(user, redirect);
+    } else {
+      const { user } = await createUserWithEmailAndPassword(auth, email, password);
+      await onLoggedIn(user, redirect);
+    }
+  } catch (err) {
+    console.error('Failed to login', err);
   }
 };
 
@@ -187,95 +322,31 @@ const sendMagicLink = (email: string) => {
 
 const isSignInWithMagicLink = () => isSignInWithEmailLink(getAuth(), window.location.href);
 
-const loginWithMagicLink = (email: string) => {
-  signInWithEmailLink(getAuth(), email, window.location.href)
-    .then(() => {
-      toastInfo('Logged in with magic link successfully');
-    })
-    .catch((error) => {
-      Logger.error('Failed to login with magic link', error);
-      toastError(`Failed to login with magic link ${error}`);
-    });
-};
-
-const cacheWriteUserToken = (userToken?: UserToken) => cacheWrite(cacheKeyUserToken, userToken);
-
-const cacheReadUserToken = () => cacheRead<UserToken>(cacheKeyUserToken);
-
-const logout = async () => {
-  cacheWriteUserToken();
-
-  await getAuth().signOut().then(() => {
-    toastInfo('Logged out successfully');
-    window.location.reload();
-  });
-};
-
-const getUserToken = async (user: UserAuth, forceRefresh?: boolean) => {
+const loginWithMagicLink = async (
+  email: string,
+  redirect: (redirectUrl: string) => void,
+) => {
   try {
-    const cacheToken = await cacheReadUserToken();
-    const isRefresh = forceRefresh
-      || !cacheToken?.createdAt
-      || moment().diff(cacheToken.createdAt, 'minutes') > 30;
-
-    const token = await user.getIdToken(isRefresh);
-    cacheWriteUserToken({
-      token,
-      createdAt: isRefresh ? new Date() : cacheToken.createdAt,
-    });
-    return token;
-  } catch (error) {
-    Logger.error('Failed to fetch token', error);
-    toastError(`Failed to fetch token ${error}`);
-    return undefined;
+    const { user } = await signInWithEmailLink(getAuth(), email, window.location.href);
+    await onLoggedIn(user, redirect);
+  } catch (err) {
+    console.error('Failed to login', err);
   }
 };
 
-const refreshUserToken = async () => {
-  const user = getAuth()?.currentUser;
-  if (!user) return undefined;
-  return getUserToken(user, true);
-};
-
-const getUserAuthInfo = (userAuth: UserAuth, field: keyof UserInfo) => userAuth[field]
-  || userAuth.providerData.find((item) => item[field])?.[field] || '';
-
 const authOnChange = (
-  onClientLoggedIn: (user: User, token: string) => void,
-  onClientLoggedOut: () => void,
-) => {
-  const unsub = getAuth().onAuthStateChanged(async (user) => {
-    // user is null (not undefined)
-    if (!user) {
-      onClientLoggedOut();
-      return;
-    }
-
-    const token = await getUserToken(user);
-    if (!token) {
-      onClientLoggedOut();
-      return;
-    }
-
-    const { uid } = user;
-    const email = getUserAuthInfo(user, 'email');
-    const name = getUserAuthInfo(user, 'displayName') || email.split('@')[0] || email;
-    const picture = getUserAuthInfo(user, 'photoURL');
-
-    const userInfo = {
-      _id: uid,
-      uid,
-      email,
-      name,
-      picture,
-    };
-    onClientLoggedIn(userInfo, token);
-  });
-  return unsub;
-};
+  redirect: (redirectUrl: string) => void,
+) => getAuth().onAuthStateChanged(async (user) => {
+  // user is null (not undefined)
+  if (!user) {
+    onClientLoggedOut();
+    return;
+  }
+  await onLoggedIn(user, redirect);
+});
 
 //
-// account updates
+// updates
 //
 
 const changePassword = (password: string) => {
@@ -330,7 +401,9 @@ export {
   cacheReadUserToken,
   changePassword,
   changeProfile,
+  initFirebase,
   isSignInWithMagicLink,
+  loginFromCache,
   loginOAuth,
   loginWithMagicLink,
   loginWithPassword,

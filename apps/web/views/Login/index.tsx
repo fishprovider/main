@@ -1,4 +1,3 @@
-import userLogout from '@fishbot/cross/api/users/logout';
 import storeUser from '@fishbot/cross/stores/user';
 import { useRouter } from 'next/router';
 
@@ -63,9 +62,7 @@ function Login() {
           <Button
             size="lg"
             color="red"
-            onClick={() => {
-              userLogout().then(logout);
-            }}
+            onClick={logout}
           >
             Logout
           </Button>

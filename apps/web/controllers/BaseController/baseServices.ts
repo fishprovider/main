@@ -3,8 +3,8 @@ import { initStore } from '@fishbot/cross/libs/store';
 import moment from 'moment-timezone';
 
 import { initAnalytics } from '~libs/analytics';
+import { initFirebase } from '~libs/auth';
 import { cacheRead } from '~libs/cache';
-import { initFirebase } from '~libs/firebase';
 // import { initLiveChat } from '~libs/liveChat';
 import { initSW } from '~libs/sw';
 import {
