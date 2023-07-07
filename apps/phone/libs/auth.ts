@@ -4,6 +4,10 @@ import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
 // import { LoginMethods } from '~constants/user';
 
+const initFirebase = () => {
+  GoogleSignin.configure();
+};
+
 const logout = async () => {
   try {
     await auth().signOut();
@@ -96,6 +100,7 @@ function authOnChange(
 
 export {
   authOnChange,
+  initFirebase,
   loginOAuth,
   loginWithPassword,
   logout,
