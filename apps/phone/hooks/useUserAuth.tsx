@@ -17,8 +17,8 @@ const useUserAuth = () => {
     userUpdateInfo({});
   };
 
-  const loginFromFirebase = () => {
-    const unsub = authOnChange(
+  useEffect(() => {
+    authOnChange(
       (userInfo, token) => {
         console.debug('[user] authOnChange loggedIn', userInfo, token);
         storeUser.mergeState({ isClientLoggedIn: true });
@@ -30,12 +30,6 @@ const useUserAuth = () => {
         onClientLoggedOut();
       },
     );
-    return unsub;
-  };
-
-  useEffect(() => {
-    const unsub = loginFromFirebase();
-    return unsub;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 };

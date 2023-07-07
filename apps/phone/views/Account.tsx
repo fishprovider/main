@@ -1,9 +1,11 @@
+import storeUser from '@fishbot/cross/stores/user';
 import { ErrorType } from '@fishbot/utils/constants/error';
 import { StyleSheet } from 'react-native';
 import { Button, Label } from 'tamagui';
 
 import EditScreenInfo from '~components/EditScreenInfo';
 import { Text, View } from '~components/Themed';
+import { login, logout } from '~libs/auth';
 
 const styles = StyleSheet.create({
   container: {
@@ -23,13 +25,22 @@ const styles = StyleSheet.create({
 });
 
 export default function Account() {
+  const {
+    email,
+  } = storeUser.useStore((state) => ({
+    email: state.info?.email,
+  }));
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Account</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
       <EditScreenInfo path="app/(tabs)/account.tsx" />
-      <Button themeInverse>Hello</Button>
-      <Label>{ErrorType.accountNotFound}</Label>
+
+      <Label>{email || ErrorType.accountNotFound}</Label>
+
+      <Button themeInverse onPress={login}>Login</Button>
+      <Button themeInverse onPress={logout}>Logout</Button>
     </View>
   );
 }

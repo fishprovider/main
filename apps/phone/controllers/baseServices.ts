@@ -1,6 +1,7 @@
 import { initApi } from '@fishbot/cross/libs/api';
 import { initStore } from '@fishbot/cross/libs/store';
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
+
+import { initFirebase } from '~libs/auth';
 
 const env = {
   backendUrl: process.env.EXPO_PUBLIC_BACKEND_URL,
@@ -19,7 +20,7 @@ const initialize = () => {
     logError: console.info,
   });
 
-  GoogleSignin.configure();
+  initFirebase();
 };
 
 export {
