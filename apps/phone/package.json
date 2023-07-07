@@ -16,6 +16,8 @@
   "dependencies": {
     "@expo/vector-icons": "^13.0.0",
     "@react-native-firebase/app": "^18.1.0",
+    "@react-native-firebase/auth": "^18.1.0",
+    "@react-native-google-signin/google-signin": "^10.0.1",
     "@react-navigation/native": "^6.1.7",
     "@tamagui/animations-react-native": "^1.39.1",
     "@tamagui/babel-plugin": "^1.39.1",

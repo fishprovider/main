@@ -4,7 +4,7 @@ import storeUser from '@fishbot/cross/stores/user';
 import type { User } from '@fishbot/utils/types/User.model';
 import { useEffect } from 'react';
 
-import { authOnChange } from '~libs/auth';
+import { authOnChange, refreshUserToken } from '~libs/auth';
 
 const useUserAuth = () => {
   const onClientLoggedOut = () => {
@@ -17,8 +17,8 @@ const useUserAuth = () => {
     userUpdateInfo({});
   };
 
-  useEffect(() => {
-    authOnChange(
+  const loginFromFirebase = () => {
+    const unsub = authOnChange(
       (userInfo, token) => {
         console.debug('[user] authOnChange loggedIn', userInfo, token);
         storeUser.mergeState({ isClientLoggedIn: true });
@@ -30,7 +30,22 @@ const useUserAuth = () => {
         onClientLoggedOut();
       },
     );
+    return unsub;
+  };
+
+  useEffect(() => {
+    const unsub = loginFromFirebase();
+    return unsub;
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      refreshUserToken();
+    }, 1000 * 60 * 15); // 15 mins
+    return () => {
+      clearInterval(intervalId);
+    };
   }, []);
 };
 
