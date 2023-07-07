@@ -13,12 +13,12 @@ const setPreLoginPage = (redirectUrl: string) => {
   sessionStorage.setItem(preLoginPageKey, decodeURIComponent(redirectUrl));
 };
 
-const redirectPreLoginPage = (redirect: (redirectUrl: string) => void) => {
+const redirectPreLoginPage = () => {
   const preLoginPage = sessionStorage.getItem(preLoginPageKey);
   if (preLoginPage) {
     Logger.info(`Redirect to preLoginPage: ${preLoginPage}`);
     sessionStorage.removeItem(preLoginPageKey);
-    redirect(preLoginPage);
+    window.location.pathname = preLoginPage;
   }
 };
 
@@ -32,20 +32,18 @@ const onClientLoggedOut = async () => {
 const onClientLoggedIn = async (
   userInfo: User,
   token: string,
-  redirect: (redirectUrl: string) => void,
 ) => {
   Logger.info('[user] onClientLoggedIn', userInfo);
   storeUser.mergeState({ isClientLoggedIn: true });
   await userLogin({ token });
   cacheWrite(cacheKeyUser, userInfo);
   userUpdateInfo({});
-  redirectPreLoginPage(redirect);
+  redirectPreLoginPage();
 };
 
 export {
   cacheKeyUser,
   onClientLoggedIn,
   onClientLoggedOut,
-  redirectPreLoginPage,
   setPreLoginPage,
 };

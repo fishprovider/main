@@ -1,18 +1,15 @@
-import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 import { authOnChange, loginFromCache, refreshUserToken } from '~libs/auth';
 
 const useUserAuth = () => {
-  const router = useRouter();
-
   useEffect(() => {
-    loginFromCache(router.push);
+    loginFromCache();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    const unsub = authOnChange(router.push);
+    const unsub = authOnChange();
     return unsub;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

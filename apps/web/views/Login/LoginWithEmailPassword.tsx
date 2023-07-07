@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 import useToggle from '~hooks/useToggle';
@@ -14,8 +13,6 @@ import Title from '~ui/core/Title';
 import { toastError } from '~ui/toast';
 
 function LoginWithEmail() {
-  const router = useRouter();
-
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
   const [passConfirm, setPassConfirm] = useState('');
@@ -58,7 +55,7 @@ function LoginWithEmail() {
               toastError('Password does not match');
               return;
             }
-            loginWithPassword(email, pass, isLogin, router.push);
+            loginWithPassword(email, pass, isLogin);
           }}
         >
           {isLogin ? 'Login' : 'Signup'}

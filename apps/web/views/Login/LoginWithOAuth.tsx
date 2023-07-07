@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import {
   AppleLoginButton,
   FacebookLoginButton,
@@ -15,46 +14,42 @@ import Box from '~ui/core/Box';
 import Stack from '~ui/core/Stack';
 
 function LoginWithOAuth() {
-  const router = useRouter();
-
-  const login = (method: LoginMethods) => loginOAuth(method, router.push);
-
   return (
     <Stack>
       <Box>
         <GoogleLoginButton
           align="center"
-          onClick={() => login(LoginMethods.google)}
+          onClick={() => loginOAuth(LoginMethods.google)}
           text="Login with Google"
         />
         <FacebookLoginButton
           align="center"
-          onClick={() => login(LoginMethods.facebook)}
+          onClick={() => loginOAuth(LoginMethods.facebook)}
           text="Login with Facebook"
         />
         <TwitterLoginButton
           align="center"
-          onClick={() => login(LoginMethods.twitter)}
+          onClick={() => loginOAuth(LoginMethods.twitter)}
           text="Login with Twitter"
         />
         <AppleLoginButton
           align="center"
-          onClick={() => login(LoginMethods.apple)}
+          onClick={() => loginOAuth(LoginMethods.apple)}
           text="Login with Apple"
         />
         <MicrosoftLoginButton
           align="center"
-          onClick={() => login(LoginMethods.microsoft)}
+          onClick={() => loginOAuth(LoginMethods.microsoft)}
           text="Login with Microsoft"
         />
         <YahooLoginButton
           align="center"
-          onClick={() => login(LoginMethods.yahoo)}
+          onClick={() => loginOAuth(LoginMethods.yahoo)}
           text="Login with Yahoo"
         />
         <GithubLoginButton
           align="center"
-          onClick={() => login(LoginMethods.github)}
+          onClick={() => loginOAuth(LoginMethods.github)}
           text="Login with Github"
         />
       </Box>

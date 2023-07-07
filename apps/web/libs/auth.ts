@@ -110,17 +110,14 @@ const getUserToken = async (user: UserAuth, forceRefresh?: boolean) => {
   }
 };
 
-const onLoggedIn = async (
-  user: UserAuth,
-  redirect: (redirectUrl: string) => void,
-) => {
+const onLoggedIn = async (user: UserAuth) => {
   const token = await getUserToken(user);
   if (!token) {
     onClientLoggedOut();
     return;
   }
   const userInfo = parseUser(user);
-  onClientLoggedIn(userInfo, token, redirect);
+  onClientLoggedIn(userInfo, token);
 };
 
 //
@@ -245,9 +242,7 @@ const errorHandler = (
   }
 };
 
-const loginFromCache = async (
-  redirect: (redirectUrl: string) => void,
-) => {
+const loginFromCache = async () => {
   try {
     const cacheUserToken = await cacheReadUserToken();
     Logger.debug('[user] cacheUserToken', cacheUserToken);
@@ -259,22 +254,19 @@ const loginFromCache = async (
     Logger.debug('[user] cacheUser', cacheUser);
     if (!cacheUser) return;
 
-    await onClientLoggedIn(cacheUser, cacheUserToken.token, redirect);
+    await onClientLoggedIn(cacheUser, cacheUserToken.token);
   } catch (err) {
     console.error('Failed to login', err);
   }
 };
 
-const loginOAuth = async (
-  method: LoginMethods,
-  redirect: (redirectUrl: string) => void,
-) => {
+const loginOAuth = async (method: LoginMethods) => {
   const { authMethod, credentialFromError } = getAuthMethod(method);
   if (authMethod && credentialFromError) {
     const auth = getAuth();
     try {
       const { user } = await signInWithPopup(auth, authMethod);
-      await onLoggedIn(user, redirect);
+      await onLoggedIn(user);
     } catch (err) {
       console.error('Failed to login', err);
       errorHandler(err, auth, credentialFromError);
@@ -282,20 +274,15 @@ const loginOAuth = async (
   }
 };
 
-const loginWithPassword = async (
-  email: string,
-  password: string,
-  isLogin: boolean,
-  redirect: (redirectUrl: string) => void,
-) => {
+const loginWithPassword = async (email: string, password: string, isLogin: boolean) => {
   try {
     const auth = getAuth();
     if (isLogin) {
       const { user } = await signInWithEmailAndPassword(auth, email, password);
-      await onLoggedIn(user, redirect);
+      await onLoggedIn(user);
     } else {
       const { user } = await createUserWithEmailAndPassword(auth, email, password);
-      await onLoggedIn(user, redirect);
+      await onLoggedIn(user);
     }
   } catch (err) {
     console.error('Failed to login', err);
@@ -322,27 +309,22 @@ const sendMagicLink = (email: string) => {
 
 const isSignInWithMagicLink = () => isSignInWithEmailLink(getAuth(), window.location.href);
 
-const loginWithMagicLink = async (
-  email: string,
-  redirect: (redirectUrl: string) => void,
-) => {
+const loginWithMagicLink = async (email: string) => {
   try {
     const { user } = await signInWithEmailLink(getAuth(), email, window.location.href);
-    await onLoggedIn(user, redirect);
+    await onLoggedIn(user);
   } catch (err) {
     console.error('Failed to login', err);
   }
 };
 
-const authOnChange = (
-  redirect: (redirectUrl: string) => void,
-) => getAuth().onAuthStateChanged(async (user) => {
+const authOnChange = () => getAuth().onAuthStateChanged(async (user) => {
   // user is null (not undefined)
   if (!user) {
     onClientLoggedOut();
     return;
   }
-  await onLoggedIn(user, redirect);
+  await onLoggedIn(user);
 });
 
 //
