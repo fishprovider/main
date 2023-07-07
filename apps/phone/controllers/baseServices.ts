@@ -1,7 +1,7 @@
 import { initApi } from '@fishbot/cross/libs/api';
 import { initStore } from '@fishbot/cross/libs/store';
 
-import { initAuth } from '~libs/auth';
+// import { initAuth } from '~libs/auth';
 
 const env = {
   backendUrl: process.env.EXPO_PUBLIC_BACKEND_URL,
@@ -20,7 +20,7 @@ const initialize = () => {
     logError: console.info,
   });
 
-  initAuth();
+  // initAuth();
 };
 
 export {
