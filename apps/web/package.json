@@ -1,6 +1,6 @@
 {
   "name": "@fishbot/web",
-  "version": "5.0.3",
+  "version": "5.0.4",
   "scripts": {
     "install-packages": "cd ../.. && npm install -w packages/utils -w packages/cross",
     "build-packages": "cd ../.. && npm run build -w packages/utils -w packages/cross",
