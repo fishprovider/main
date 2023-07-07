@@ -5,7 +5,7 @@ import { Button, Label } from 'tamagui';
 
 import EditScreenInfo from '~components/EditScreenInfo';
 import { Text, View } from '~components/Themed';
-import { login, logout } from '~libs/auth';
+import { loginOAuth, logout } from '~libs/auth';
 
 const styles = StyleSheet.create({
   container: {
@@ -39,7 +39,7 @@ export default function Account() {
 
       <Label>{email || ErrorType.accountNotFound}</Label>
 
-      <Button themeInverse onPress={login}>Login</Button>
+      <Button themeInverse onPress={loginOAuth}>Login</Button>
       <Button themeInverse onPress={logout}>Logout</Button>
     </View>
   );

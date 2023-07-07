@@ -1,13 +1,47 @@
 import type { User } from '@fishbot/utils/types/User.model';
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
+
+// import { LoginMethods } from '~constants/user';
+
+const logout = async () => {
+  try {
+    await auth().signOut();
+  } catch (error) {
+    console.error('Failed to logout', error);
+  }
+};
+
+const loginOAuth = async () => {
+  try {
+    await GoogleSignin.hasPlayServices();
+    const { idToken } = await GoogleSignin.signIn();
+    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+    await auth().signInWithCredential(googleCredential);
+  } catch (err) {
+    console.error('Failed to login', err);
+  }
+};
+
+const loginWithPassword = (email: string, password: string, isLogin: boolean) => {
+  if (isLogin) {
+    auth().createUserWithEmailAndPassword(email, password).catch((err) => {
+      console.error('Failed to login', err);
+    });
+  } else {
+    auth().createUserWithEmailAndPassword(email, password).catch((err) => {
+      console.error('Failed to signup', err);
+    });
+  }
+};
 
 const getUserToken = async (user: FirebaseAuthTypes.User, forceRefresh?: boolean) => {
   try {
     const isRefresh = forceRefresh;
     const token = await user.getIdToken(isRefresh);
     return token;
-  } catch (error) {
-    console.error('Failed to fetch token', error);
+  } catch (err) {
+    console.error('Failed to fetch token', err);
     return undefined;
   }
 };
@@ -62,5 +96,8 @@ function authOnChange(
 
 export {
   authOnChange,
+  loginOAuth,
+  loginWithPassword,
+  logout,
   refreshUserToken,
 };
