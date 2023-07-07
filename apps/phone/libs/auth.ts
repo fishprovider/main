@@ -51,7 +51,7 @@ const onLoggedIn = async (user: FirebaseAuthTypes.User) => {
 
 // actions
 
-const initFirebase = () => {
+const initAuth = () => {
   GoogleSignin.configure();
 };
 
@@ -111,7 +111,7 @@ function authOnChange() {
 
 export {
   authOnChange,
-  initFirebase,
+  initAuth,
   loginOAuth,
   loginWithPassword,
   logout,

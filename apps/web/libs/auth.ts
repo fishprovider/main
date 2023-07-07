@@ -39,7 +39,7 @@ const env = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_CLIENT_MEASUREMENT_ID,
 };
 
-const initFirebase = () => {
+const initAuth = () => {
   const config = {
     apiKey: env.apiKey,
     authDomain: `${env.projectId}.firebaseapp.com`,
@@ -383,7 +383,7 @@ export {
   cacheReadUserToken,
   changePassword,
   changeProfile,
-  initFirebase,
+  initAuth,
   isSignInWithMagicLink,
   loginFromCache,
   loginOAuth,
