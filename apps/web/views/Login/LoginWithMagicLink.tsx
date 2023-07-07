@@ -26,7 +26,7 @@ function LoginWithMagicLink() {
         loginWithMagicLink(magicLinkEmail, router.push);
       });
     }
-  }, []);
+  }, [router]);
 
   return (
     <Card withBorder radius="lg" shadow="xl">
