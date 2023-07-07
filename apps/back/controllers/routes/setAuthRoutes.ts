@@ -84,6 +84,7 @@ const loginHandler = async (req: Request, res: Response, next: NextFunction) => 
 
     res.status(200).json(userInfo);
   } catch (err) {
+    Logger.warn('[auth] login failed', err);
     next(err);
   }
 };
