@@ -11,6 +11,7 @@ const initFirebase = () => {
 const logout = async () => {
   try {
     await auth().signOut();
+    await GoogleSignin.signOut();
   } catch (error) {
     console.error('Failed to logout', error);
   }
