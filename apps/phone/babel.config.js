@@ -20,6 +20,7 @@ module.exports = (api) => {
           '~constants': './constants',
           '~utils': './utils',
           '~libs': './libs',
+          '~hooks': './hooks',
           '~ui': './ui',
           '~components': './components',
           '~controllers': './controllers',

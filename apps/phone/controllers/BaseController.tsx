@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import ThemeProvider from '~ui/ThemeProvider';
 
 import { initialize as initServices } from './baseServices';
+import UserSetup from './UserSetup';
 
 initServices();
 
@@ -35,6 +36,7 @@ export default function BaseController({ children }: Props) {
 
   return (
     <QueryProvider withDevTools={false}>
+      <UserSetup />
       <ThemeProvider>
         {children}
       </ThemeProvider>

@@ -1,5 +1,6 @@
 import { initApi } from '@fishbot/cross/libs/api';
 import { initStore } from '@fishbot/cross/libs/store';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
 const env = {
   backendUrl: process.env.EXPO_PUBLIC_BACKEND_URL,
@@ -17,6 +18,8 @@ const initialize = () => {
     logDebug: console.debug,
     logError: console.info,
   });
+
+  GoogleSignin.configure();
 };
 
 export {
