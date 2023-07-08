@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@fishprovider/utils": "*",
+    "@fishprovider/core": "*",
     "@fishprovider/coin": "*",
     "axios": "^1.4.0",
     "dotenv-flow": "^3.2.0",
