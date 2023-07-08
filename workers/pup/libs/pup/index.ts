@@ -1,10 +1,9 @@
 import fs from 'fs';
-import type { Page } from 'puppeteer-core';
+import type { Browser, Page } from 'puppeteer-core';
 import puppeteer from 'puppeteer-extra';
 import AdblockerPlugin from 'puppeteer-extra-plugin-adblocker';
 import AnonymizeUAPlugin from 'puppeteer-extra-plugin-anonymize-ua';
 import StealthPlugin from 'puppeteer-extra-plugin-stealth';
-import type { AsyncReturnType } from 'type-fest';
 
 const env = {
   nodeEnv: process.env.NODE_ENV,
@@ -15,8 +14,6 @@ const MAX_ATTEMPTS = 10;
 puppeteer.use(AnonymizeUAPlugin());
 puppeteer.use(StealthPlugin());
 puppeteer.use(AdblockerPlugin());
-
-type Browser = AsyncReturnType<typeof puppeteer.launch>;
 
 const debugPage = async (page: Page) => {
   await page.screenshot({ path: 'tmp.page.png' });
@@ -76,7 +73,7 @@ const newBrowser = async (
       isLandscape: true,
     },
   });
-  return browser;
+  return browser as any as Browser;
 };
 
 export {
