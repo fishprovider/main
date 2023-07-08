@@ -1,7 +1,7 @@
-// import useUserAuth from '~hooks/useUserAuth';
+import useUserAuth from '~hooks/useUserAuth';
 
 function UserAuth() {
-  // useUserAuth();
+  useUserAuth();
   return null;
 }
 

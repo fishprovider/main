@@ -52,7 +52,9 @@ const onLoggedIn = async (user: FirebaseAuthTypes.User) => {
 // actions
 
 const initAuth = () => {
-  GoogleSignin.configure();
+  GoogleSignin.configure({
+    webClientId: '130013915084-2qtkr5q2f6pfjp68cb5tmc3qke1p2m24.apps.googleusercontent.com',
+  });
 };
 
 const logout = async () => {

@@ -52,7 +52,7 @@
         "rootDir": ".",
         "outDir": "dist"
       },
-      "include": ["**/*.ts", "**/*.tsx"],
+      "include": ["**/*.ts", "**/*.tsx", "index.js", "*.config.js"],
       "exclude": ["node_modules"],
       "references": [
         { "path": "../../packages/utils" },
@@ -77,6 +77,7 @@
               '~constants': './constants',
               '~utils': './utils',
               '~libs': './libs',
+              '~hooks': './hooks',
               '~ui': './ui',
               '~components': './components',
               '~controllers': './controllers',
@@ -107,11 +108,10 @@
 - Update scripts in `package.json`
   ```json
   "scripts": {
-    "doctor": "npx expo-doctor && expo install --check",
+    "doctor": "npx expo-doctor",
     "lint": "eslint --cache --fix .",
     "type-check": "tsc --noEmit",
     "start": "doppler run --print-config -- expo start",
-    "start-clean": "npm run start -- --clear",
     "native-android": "expo run:android",
     "native-ios": "expo run:ios"
   }
@@ -154,10 +154,12 @@
       ],
       "ios": {
         "bundleIdentifier": "com.fishprovider.app",
+        "googleServicesFile": "./GoogleService-Info.plist",
         "supportsTablet": true
       },
       "android": {
         "package": "com.fishprovider.app",
+        "googleServicesFile": "./google-services.json",
         "adaptiveIcon": {
           "foregroundImage": "./assets/images/adaptive-icon.png",
           "backgroundColor": "#ffffff"
@@ -173,13 +175,14 @@
   eas login
   eas init --id ec0f4220-7564-4608-93a3-ac7aebf2c1ab # ProjectId from expo.dev
   eas build:configure
+  eas update:configure
   ```
 
 - Update `eas.json` by adding `development-simulator` profile
   ```json
   {
     "cli": {
-      "version": ">= 3.15.0"
+      "appVersionSource": "remote"
     },
     "build": {
       "development": {
@@ -219,6 +222,21 @@
   eas submit -p android
   ```
 
+# Install RN Firebase
 
-# How to setup UI components?
-TODO: use Tamagui
+- Update `app.json`
+  ```json
+  "plugins": [
+    "@react-native-firebase/app",
+    "@react-native-firebase/auth",
+    "@react-native-google-signin/google-signin",
+    [
+      "expo-build-properties",
+      {
+        "ios": {
+          "useFrameworks": "static"
+        }
+      }
+    ]
+  ]
+  ```
