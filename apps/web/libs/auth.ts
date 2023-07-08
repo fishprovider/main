@@ -1,4 +1,4 @@
-import type { User } from '@fishbot/utils/types/User.model';
+import type { User } from '@fishprovider/utils/types/User.model';
 import type { FirebaseError } from 'firebase/app';
 import { initializeApp } from 'firebase/app';
 import {

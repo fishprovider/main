@@ -1,11 +1,11 @@
-import { send } from '@fishbot/core/libs/notif';
-import removePosition from '@fishbot/swap/commands/removePosition';
-import { botUser } from '@fishbot/swap/utils/account';
-import { getPrices } from '@fishbot/swap/utils/price';
-import { isLastRunExpired } from '@fishbot/utils/helpers/lastRunChecks';
-import { getProfit } from '@fishbot/utils/helpers/order';
-import { getMajorPairs } from '@fishbot/utils/helpers/price';
-import type { Account, CopySettings } from '@fishbot/utils/types/Account.model';
+import { send } from '@fishprovider/core/libs/notif';
+import removePosition from '@fishprovider/swap/commands/removePosition';
+import { botUser } from '@fishprovider/swap/utils/account';
+import { getPrices } from '@fishprovider/swap/utils/price';
+import { isLastRunExpired } from '@fishprovider/utils/helpers/lastRunChecks';
+import { getProfit } from '@fishprovider/utils/helpers/order';
+import { getMajorPairs } from '@fishprovider/utils/helpers/price';
+import type { Account, CopySettings } from '@fishprovider/utils/types/Account.model';
 import _ from 'lodash';
 
 import type { OrderCopy } from '~types/Order.model';

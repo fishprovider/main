@@ -1,4 +1,4 @@
-import delay from '@fishbot/utils/helpers/delay';
+import delay from '@fishprovider/utils/helpers/delay';
 import moment from 'moment';
 import type { Page } from 'puppeteer-core';
 

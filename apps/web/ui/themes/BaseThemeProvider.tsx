@@ -1,4 +1,4 @@
-import storeUser from '@fishbot/cross/stores/user';
+import storeUser from '@fishprovider/cross/stores/user';
 import { MantineProvider } from '@mantine/core';
 
 interface Props {

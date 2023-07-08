@@ -1,5 +1,5 @@
-import { send } from '@fishbot/core/libs/notif';
-import type { News } from '@fishbot/utils/types/News.model';
+import { send } from '@fishprovider/core/libs/notif';
+import type { News } from '@fishprovider/utils/types/News.model';
 import axios from 'axios';
 import moment from 'moment';
 

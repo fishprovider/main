@@ -1,7 +1,7 @@
-import { apiPost } from '@fishbot/cross/libs/api';
-import { useMutate } from '@fishbot/cross/libs/query';
-import storeWallets from '@fishbot/cross/stores/wallets';
-import { InvestStatus } from '@fishbot/utils/constants/pay';
+import { apiPost } from '@fishprovider/cross/libs/api';
+import { useMutate } from '@fishprovider/cross/libs/query';
+import storeWallets from '@fishprovider/cross/stores/wallets';
+import { InvestStatus } from '@fishprovider/utils/constants/pay';
 import { useState } from 'react';
 
 import Button from '~ui/core/Button';

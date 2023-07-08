@@ -1,7 +1,7 @@
-import storeOrders from '@fishbot/cross/stores/orders';
-import storeUser from '@fishbot/cross/stores/user';
-import { OrderStatus } from '@fishbot/utils/constants/order';
-import { getRoleProvider } from '@fishbot/utils/helpers/user';
+import storeOrders from '@fishprovider/cross/stores/orders';
+import storeUser from '@fishprovider/cross/stores/user';
+import { OrderStatus } from '@fishprovider/utils/constants/order';
+import { getRoleProvider } from '@fishprovider/utils/helpers/user';
 import _ from 'lodash';
 import dynamic from 'next/dynamic';
 

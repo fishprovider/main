@@ -1,12 +1,12 @@
-import { cancelPayment as cancelPaymentCoinbaseCommerce } from '@fishbot/coin/libs/coinbaseCommerce';
-import { getTransactionUpdates as getTransactionUpdatesFromCoinbaseCommerce } from '@fishbot/coin/libs/coinbaseCommerce/utils';
-import { cancelPayment as cancelPaymentRequestFinance } from '@fishbot/coin/libs/requestFinance';
-import { getTransactionUpdates as getTransactionUpdatesFromRequestFinance } from '@fishbot/coin/libs/requestFinance/utils';
-import updateTransaction from '@fishbot/coin/utils/transaction/updateTransaction';
-import { ErrorType } from '@fishbot/utils/constants/error';
-import { SourceType, TransactionStatus } from '@fishbot/utils/constants/pay';
-import type { Transaction } from '@fishbot/utils/types/Pay.model';
-import type { User } from '@fishbot/utils/types/User.model';
+import { cancelPayment as cancelPaymentCoinbaseCommerce } from '@fishprovider/coin/libs/coinbaseCommerce';
+import { getTransactionUpdates as getTransactionUpdatesFromCoinbaseCommerce } from '@fishprovider/coin/libs/coinbaseCommerce/utils';
+import { cancelPayment as cancelPaymentRequestFinance } from '@fishprovider/coin/libs/requestFinance';
+import { getTransactionUpdates as getTransactionUpdatesFromRequestFinance } from '@fishprovider/coin/libs/requestFinance/utils';
+import updateTransaction from '@fishprovider/coin/utils/transaction/updateTransaction';
+import { ErrorType } from '@fishprovider/utils/constants/error';
+import { SourceType, TransactionStatus } from '@fishprovider/utils/constants/pay';
+import type { Transaction } from '@fishprovider/utils/types/Pay.model';
+import type { User } from '@fishprovider/utils/types/User.model';
 
 import isDemo from '~utils/isDemo';
 

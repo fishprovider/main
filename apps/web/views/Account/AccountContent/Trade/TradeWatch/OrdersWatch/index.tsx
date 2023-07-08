@@ -1,8 +1,8 @@
-import orderGetIdea from '@fishbot/cross/api/orders/getIdea';
-import orderGetMany from '@fishbot/cross/api/orders/getMany';
-import orderGetManyInfo from '@fishbot/cross/api/orders/getManyInfo';
-import { useQuery } from '@fishbot/cross/libs/query';
-import { OrderStatus } from '@fishbot/utils/constants/order';
+import orderGetIdea from '@fishprovider/cross/api/orders/getIdea';
+import orderGetMany from '@fishprovider/cross/api/orders/getMany';
+import orderGetManyInfo from '@fishprovider/cross/api/orders/getManyInfo';
+import { useQuery } from '@fishprovider/cross/libs/query';
+import { OrderStatus } from '@fishprovider/utils/constants/order';
 import { useEffect } from 'react';
 
 import { activityFields } from '~constants/account';

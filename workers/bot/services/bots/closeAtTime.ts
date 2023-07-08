@@ -1,9 +1,9 @@
-import { send } from '@fishbot/core/libs/notif';
-import removePosition from '@fishbot/swap/commands/removePosition';
-import { botUser } from '@fishbot/swap/utils/account';
-import { isLastRunExpired } from '@fishbot/utils/helpers/lastRunChecks';
-import type { Account } from '@fishbot/utils/types/Account.model';
-import type { Order } from '@fishbot/utils/types/Order.model';
+import { send } from '@fishprovider/core/libs/notif';
+import removePosition from '@fishprovider/swap/commands/removePosition';
+import { botUser } from '@fishprovider/swap/utils/account';
+import { isLastRunExpired } from '@fishprovider/utils/helpers/lastRunChecks';
+import type { Account } from '@fishprovider/utils/types/Account.model';
+import type { Order } from '@fishprovider/utils/types/Order.model';
 import moment from 'moment';
 
 const env = {

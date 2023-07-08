@@ -1,5 +1,5 @@
-import { redisKeys } from '@fishbot/utils/constants/redis';
-import type { Order } from '@fishbot/utils/types/Order.model';
+import { redisKeys } from '@fishprovider/utils/constants/redis';
+import type { Order } from '@fishprovider/utils/types/Order.model';
 
 const getPendingOrders = async (providerId: string) => {
   const str = await Redis.get(redisKeys.pendingOrders(providerId));

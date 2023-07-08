@@ -1,7 +1,7 @@
-import { ErrorType } from '@fishbot/utils/constants/error';
-import { getRoleProvider } from '@fishbot/utils/helpers/user';
-import type { Account } from '@fishbot/utils/types/Account.model';
-import type { User } from '@fishbot/utils/types/User.model';
+import { ErrorType } from '@fishprovider/utils/constants/error';
+import { getRoleProvider } from '@fishprovider/utils/helpers/user';
+import type { Account } from '@fishprovider/utils/types/Account.model';
+import type { User } from '@fishprovider/utils/types/User.model';
 import _ from 'lodash';
 import { ReturnDocument } from 'mongodb';
 

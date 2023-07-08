@@ -1,12 +1,12 @@
-import { send } from '@fishbot/core/libs/notif';
-import updatePositionCTrader from '@fishbot/ctrader/commands/updatePosition';
-import { OrderStatus as OrderStatusCTrader, PositionStatus } from '@fishbot/ctrader/constants/openApi';
-import type { Config as ConfigCTrader } from '@fishbot/ctrader/types/Config.model';
-import type { ProviderType } from '@fishbot/utils/constants/account';
-import type { Config } from '@fishbot/utils/types/Account.model';
-import type { Order } from '@fishbot/utils/types/Order.model';
-import type { Price } from '@fishbot/utils/types/Price.model';
-import type { RedisSymbol } from '@fishbot/utils/types/Redis.model';
+import { send } from '@fishprovider/core/libs/notif';
+import updatePositionCTrader from '@fishprovider/ctrader/commands/updatePosition';
+import { OrderStatus as OrderStatusCTrader, PositionStatus } from '@fishprovider/ctrader/constants/openApi';
+import type { Config as ConfigCTrader } from '@fishprovider/ctrader/types/Config.model';
+import type { ProviderType } from '@fishprovider/utils/constants/account';
+import type { Config } from '@fishprovider/utils/types/Account.model';
+import type { Order } from '@fishprovider/utils/types/Order.model';
+import type { Price } from '@fishprovider/utils/types/Price.model';
+import type { RedisSymbol } from '@fishprovider/utils/types/Redis.model';
 import _ from 'lodash';
 import type { AsyncReturnType } from 'type-fest';
 

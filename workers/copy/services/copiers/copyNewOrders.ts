@@ -1,18 +1,18 @@
-import { send } from '@fishbot/core/libs/notif';
-import newOrder from '@fishbot/swap/commands/newOrder';
-import { botUser } from '@fishbot/swap/utils/account';
-import { getPrices } from '@fishbot/swap/utils/price';
-import { CopyVolumeMode, LockType, ProviderType } from '@fishbot/utils/constants/account';
-import { OrderStatus, OrderType } from '@fishbot/utils/constants/order';
-import { isLastRunExpired } from '@fishbot/utils/helpers/lastRunChecks';
-import { buildCopyId, parseCopyId } from '@fishbot/utils/helpers/order';
-import { isPausedWeekend } from '@fishbot/utils/helpers/pause';
+import { send } from '@fishprovider/core/libs/notif';
+import newOrder from '@fishprovider/swap/commands/newOrder';
+import { botUser } from '@fishprovider/swap/utils/account';
+import { getPrices } from '@fishprovider/swap/utils/price';
+import { CopyVolumeMode, LockType, ProviderType } from '@fishprovider/utils/constants/account';
+import { OrderStatus, OrderType } from '@fishprovider/utils/constants/order';
+import { isLastRunExpired } from '@fishprovider/utils/helpers/lastRunChecks';
+import { buildCopyId, parseCopyId } from '@fishprovider/utils/helpers/order';
+import { isPausedWeekend } from '@fishprovider/utils/helpers/pause';
 import {
   getLotFromVolume, getVolumeFromLot, getVolumeRound,
-} from '@fishbot/utils/helpers/price';
-import type { Account, CopySettings } from '@fishbot/utils/types/Account.model';
-import type { Order, OrderWithoutId } from '@fishbot/utils/types/Order.model';
-import type { Price } from '@fishbot/utils/types/Price.model';
+} from '@fishprovider/utils/helpers/price';
+import type { Account, CopySettings } from '@fishprovider/utils/types/Account.model';
+import type { Order, OrderWithoutId } from '@fishprovider/utils/types/Order.model';
+import type { Price } from '@fishprovider/utils/types/Price.model';
 
 import type { OrderCopy } from '~types/Order.model';
 

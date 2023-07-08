@@ -1,8 +1,8 @@
 // ref: https://developers.google.com/instance-id/reference/server#get_information_about_app_instances
 
-import { getInfo } from '@fishbot/core/libs/firebase';
-import { ErrorType } from '@fishbot/utils/constants/error';
-import type { User } from '@fishbot/utils/types/User.model';
+import { getInfo } from '@fishprovider/core/libs/firebase';
+import { ErrorType } from '@fishprovider/utils/constants/error';
+import type { User } from '@fishprovider/utils/types/User.model';
 import md5 from 'md5';
 
 const unsubNotif = async ({ data, userInfo }: {

@@ -1,11 +1,11 @@
-import subBar from '@fishbot/ctrader/commands/subBar';
-import subSpot from '@fishbot/ctrader/commands/subSpot';
-import unsubBar from '@fishbot/ctrader/commands/unsubBar';
-import unsubSpot from '@fishbot/ctrader/commands/unsubSpot';
-import { TrendbarPeriod } from '@fishbot/ctrader/constants/openApi';
-import type { ConnectionType } from '@fishbot/ctrader/types/Connection.model';
-import type { SymbolCTrader } from '@fishbot/swap/types/Symbol.model';
-import delay from '@fishbot/utils/helpers/delay';
+import subBar from '@fishprovider/ctrader/commands/subBar';
+import subSpot from '@fishprovider/ctrader/commands/subSpot';
+import unsubBar from '@fishprovider/ctrader/commands/unsubBar';
+import unsubSpot from '@fishprovider/ctrader/commands/unsubSpot';
+import { TrendbarPeriod } from '@fishprovider/ctrader/constants/openApi';
+import type { ConnectionType } from '@fishprovider/ctrader/types/Connection.model';
+import type { SymbolCTrader } from '@fishprovider/swap/types/Symbol.model';
+import delay from '@fishprovider/utils/helpers/delay';
 
 import { periods, spotTasks } from '~utils/tasks';
 

@@ -1,6 +1,6 @@
-import { afterAllSetup, beforeAllSetup, getUser } from '@fishbot/swap/tests/utils';
-import { ErrorType } from '@fishbot/utils/constants/error';
-import type { User } from '@fishbot/utils/types/User.model';
+import { afterAllSetup, beforeAllSetup, getUser } from '@fishprovider/swap/tests/utils';
+import { ErrorType } from '@fishprovider/utils/constants/error';
+import type { User } from '@fishprovider/utils/types/User.model';
 import { jest } from '@jest/globals';
 
 import orderGetMany from './getMany';

@@ -1,8 +1,8 @@
-import { ProviderPlatform, ProviderType } from '@fishbot/utils/constants/account';
-import { OrderStatus } from '@fishbot/utils/constants/order';
-import { redisKeys } from '@fishbot/utils/constants/redis';
-import type { Config } from '@fishbot/utils/types/Account.model';
-import type { Order, OrderWithoutId } from '@fishbot/utils/types/Order.model';
+import { ProviderPlatform, ProviderType } from '@fishprovider/utils/constants/account';
+import { OrderStatus } from '@fishprovider/utils/constants/order';
+import { redisKeys } from '@fishprovider/utils/constants/redis';
+import type { Config } from '@fishprovider/utils/types/Account.model';
+import type { Order, OrderWithoutId } from '@fishprovider/utils/types/Order.model';
 import _ from 'lodash';
 import moment from 'moment';
 

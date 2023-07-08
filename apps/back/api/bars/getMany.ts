@@ -1,6 +1,6 @@
-import type { ProviderType } from '@fishbot/utils/constants/account';
-import { ErrorType } from '@fishbot/utils/constants/error';
-import type { User } from '@fishbot/utils/types/User.model';
+import type { ProviderType } from '@fishprovider/utils/constants/account';
+import { ErrorType } from '@fishprovider/utils/constants/error';
+import type { User } from '@fishprovider/utils/types/User.model';
 import moment from 'moment';
 
 const barGetMany = async ({ data, userInfo }: {

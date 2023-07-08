@@ -1,7 +1,7 @@
-import { ErrorType } from '@fishbot/utils/constants/error';
-import { TransactionType } from '@fishbot/utils/constants/pay';
-import type { Transaction } from '@fishbot/utils/types/Pay.model';
-import type { User } from '@fishbot/utils/types/User.model';
+import { ErrorType } from '@fishprovider/utils/constants/error';
+import { TransactionType } from '@fishprovider/utils/constants/pay';
+import type { Transaction } from '@fishprovider/utils/types/Pay.model';
+import type { User } from '@fishprovider/utils/types/User.model';
 
 const transferGetMany = async ({ userInfo }: {
   data: {

@@ -1,4 +1,4 @@
-import storeUser from '@fishbot/cross/stores/user';
+import storeUser from '@fishprovider/cross/stores/user';
 import { useEffect } from 'react';
 
 import { connectSocket, disconnectSocket } from '~libs/socket';

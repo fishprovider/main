@@ -1,7 +1,7 @@
-import transferGet from '@fishbot/cross/api/transfer/get';
-import { useMutate } from '@fishbot/cross/libs/query';
-import { TransactionStatus } from '@fishbot/utils/constants/pay';
-import type { Transaction } from '@fishbot/utils/types/Pay.model';
+import transferGet from '@fishprovider/cross/api/transfer/get';
+import { useMutate } from '@fishprovider/cross/libs/query';
+import { TransactionStatus } from '@fishprovider/utils/constants/pay';
+import type { Transaction } from '@fishprovider/utils/types/Pay.model';
 import _ from 'lodash';
 
 import Group from '~ui/core/Group';

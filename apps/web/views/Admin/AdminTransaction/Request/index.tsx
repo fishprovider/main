@@ -1,8 +1,8 @@
-import { apiPost } from '@fishbot/cross/libs/api';
-import { useQuery } from '@fishbot/cross/libs/query';
-import storeTransactions from '@fishbot/cross/stores/transactions';
-import { TransactionStatus, TransactionType } from '@fishbot/utils/constants/pay';
-import type { Transaction } from '@fishbot/utils/types/Pay.model';
+import { apiPost } from '@fishprovider/cross/libs/api';
+import { useQuery } from '@fishprovider/cross/libs/query';
+import storeTransactions from '@fishprovider/cross/stores/transactions';
+import { TransactionStatus, TransactionType } from '@fishprovider/utils/constants/pay';
+import type { Transaction } from '@fishprovider/utils/types/Pay.model';
 import _ from 'lodash';
 import React from 'react';
 

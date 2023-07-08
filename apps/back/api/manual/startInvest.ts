@@ -1,9 +1,9 @@
-import { ErrorType } from '@fishbot/utils/constants/error';
-import { InvestStatus } from '@fishbot/utils/constants/pay';
-import { getRoleProvider } from '@fishbot/utils/helpers/user';
-import type { AccountPublic } from '@fishbot/utils/types/Account.model';
-import type { Wallet } from '@fishbot/utils/types/Pay.model';
-import type { User } from '@fishbot/utils/types/User.model';
+import { ErrorType } from '@fishprovider/utils/constants/error';
+import { InvestStatus } from '@fishprovider/utils/constants/pay';
+import { getRoleProvider } from '@fishprovider/utils/helpers/user';
+import type { AccountPublic } from '@fishprovider/utils/types/Account.model';
+import type { Wallet } from '@fishprovider/utils/types/Pay.model';
+import type { User } from '@fishprovider/utils/types/User.model';
 
 const startInvest = async ({ data, userInfo }: {
   data: {

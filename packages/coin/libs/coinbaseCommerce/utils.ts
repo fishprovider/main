@@ -1,4 +1,4 @@
-import { TransactionStatus } from '@fishbot/utils/constants/pay';
+import { TransactionStatus } from '@fishprovider/utils/constants/pay';
 import _ from 'lodash';
 
 import { ChargeStatus } from '~constants/coinbaseCommerce';

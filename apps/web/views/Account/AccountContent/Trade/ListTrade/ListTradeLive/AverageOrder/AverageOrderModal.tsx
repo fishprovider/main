@@ -1,10 +1,10 @@
-import orderAdd from '@fishbot/cross/api/orders/add';
-import { useMutate } from '@fishbot/cross/libs/query';
-import storePrices from '@fishbot/cross/stores/prices';
-import storeUser from '@fishbot/cross/stores/user';
-import { Direction, OrderStatus, OrderType } from '@fishbot/utils/constants/order';
-import { getPriceFromAmount } from '@fishbot/utils/helpers/price';
-import type { Order } from '@fishbot/utils/types/Order.model';
+import orderAdd from '@fishprovider/cross/api/orders/add';
+import { useMutate } from '@fishprovider/cross/libs/query';
+import storePrices from '@fishprovider/cross/stores/prices';
+import storeUser from '@fishprovider/cross/stores/user';
+import { Direction, OrderStatus, OrderType } from '@fishprovider/utils/constants/order';
+import { getPriceFromAmount } from '@fishprovider/utils/helpers/price';
+import type { Order } from '@fishprovider/utils/types/Order.model';
 import _ from 'lodash';
 import { useState } from 'react';
 

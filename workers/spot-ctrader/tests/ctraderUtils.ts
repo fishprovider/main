@@ -1,9 +1,9 @@
-import type { Config } from '@fishbot/ctrader/types/Config.model';
-import type { ConnectionType } from '@fishbot/ctrader/types/Connection.model';
-import type { CallbackPayload } from '@fishbot/ctrader/types/Event.model';
-import connect from '@fishbot/swap/libs/ctrader/connect';
-import { ProviderType } from '@fishbot/utils/constants/account';
-import delay from '@fishbot/utils/helpers/delay';
+import type { Config } from '@fishprovider/ctrader/types/Config.model';
+import type { ConnectionType } from '@fishprovider/ctrader/types/Connection.model';
+import type { CallbackPayload } from '@fishprovider/ctrader/types/Event.model';
+import connect from '@fishprovider/swap/libs/ctrader/connect';
+import { ProviderType } from '@fishprovider/utils/constants/account';
+import delay from '@fishprovider/utils/helpers/delay';
 import { jest } from '@jest/globals';
 
 import onEvent, { destroy as destroyEventHandler, start as startEventHandler } from '~services/events';

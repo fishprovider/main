@@ -1,4 +1,4 @@
-import storeUser from '@fishbot/cross/stores/user';
+import storeUser from '@fishprovider/cross/stores/user';
 import { useRouter } from 'next/router';
 
 import Stack from '~ui/core/Stack';

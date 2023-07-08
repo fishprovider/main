@@ -1,4 +1,4 @@
-import { destroyAsync, start as startCore } from '@fishbot/core/controllers/main';
+import { destroyAsync, start as startCore } from '@fishprovider/core/controllers/main';
 
 import * as adapter from './adapter';
 

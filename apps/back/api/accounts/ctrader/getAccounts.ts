@@ -1,7 +1,7 @@
-import getAccounts from '@fishbot/swap/libs/ctrader/getAccounts';
-import { ProviderPlatform } from '@fishbot/utils/constants/account';
-import { ErrorType } from '@fishbot/utils/constants/error';
-import type { User } from '@fishbot/utils/types/User.model';
+import getAccounts from '@fishprovider/swap/libs/ctrader/getAccounts';
+import { ProviderPlatform } from '@fishprovider/utils/constants/account';
+import { ErrorType } from '@fishprovider/utils/constants/error';
+import type { User } from '@fishprovider/utils/types/User.model';
 import axios from 'axios';
 
 interface Client {

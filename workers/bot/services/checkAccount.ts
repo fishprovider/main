@@ -1,7 +1,7 @@
-import { getDeals, getLiveOrders } from '@fishbot/swap/utils/order';
-import { getPrices } from '@fishbot/swap/utils/price';
-import { getProfit } from '@fishbot/utils/helpers/order';
-import { getMajorPairs } from '@fishbot/utils/helpers/price';
+import { getDeals, getLiveOrders } from '@fishprovider/swap/utils/order';
+import { getPrices } from '@fishprovider/swap/utils/price';
+import { getProfit } from '@fishprovider/utils/helpers/order';
+import { getMajorPairs } from '@fishprovider/utils/helpers/price';
 import _ from 'lodash';
 import moment from 'moment';
 

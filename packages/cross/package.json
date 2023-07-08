@@ -1,5 +1,5 @@
 {
-  "name": "@fishbot/cross",
+  "name": "@fishprovider/cross",
   "version": "5.0.0",
   "type": "module",
   "scripts": {

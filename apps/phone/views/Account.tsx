@@ -1,5 +1,5 @@
-import storeUser from '@fishbot/cross/stores/user';
-import { ErrorType } from '@fishbot/utils/constants/error';
+import storeUser from '@fishprovider/cross/stores/user';
+import { ErrorType } from '@fishprovider/utils/constants/error';
 import { StyleSheet } from 'react-native';
 import { Button, Label } from 'tamagui';
 

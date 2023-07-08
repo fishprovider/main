@@ -1,13 +1,13 @@
-import orderGetIdea from '@fishbot/cross/api/orders/getIdea';
-import { useMutate } from '@fishbot/cross/libs/query';
-import storeOrders from '@fishbot/cross/stores/orders';
-import storePrices from '@fishbot/cross/stores/prices';
-import storeUser from '@fishbot/cross/stores/user';
-import { ProviderType } from '@fishbot/utils/constants/account';
-import { OrderStatus } from '@fishbot/utils/constants/order';
-import { getProfit } from '@fishbot/utils/helpers/order';
-import { getMajorPairs } from '@fishbot/utils/helpers/price';
-import { getRoleProvider } from '@fishbot/utils/helpers/user';
+import orderGetIdea from '@fishprovider/cross/api/orders/getIdea';
+import { useMutate } from '@fishprovider/cross/libs/query';
+import storeOrders from '@fishprovider/cross/stores/orders';
+import storePrices from '@fishprovider/cross/stores/prices';
+import storeUser from '@fishprovider/cross/stores/user';
+import { ProviderType } from '@fishprovider/utils/constants/account';
+import { OrderStatus } from '@fishprovider/utils/constants/order';
+import { getProfit } from '@fishprovider/utils/helpers/order';
+import { getMajorPairs } from '@fishprovider/utils/helpers/price';
+import { getRoleProvider } from '@fishprovider/utils/helpers/user';
 import _ from 'lodash';
 
 import Group from '~ui/core/Group';

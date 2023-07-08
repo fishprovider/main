@@ -1,6 +1,6 @@
-import { afterAllSetup, beforeAllSetup } from '@fishbot/swap/tests/utils';
-import { ErrorType } from '@fishbot/utils/constants/error';
-import type { User } from '@fishbot/utils/types/User.model';
+import { afterAllSetup, beforeAllSetup } from '@fishprovider/swap/tests/utils';
+import { ErrorType } from '@fishprovider/utils/constants/error';
+import type { User } from '@fishprovider/utils/types/User.model';
 import { jest } from '@jest/globals';
 
 import type { } from '~types/Session.model';

@@ -1,4 +1,4 @@
-import type { ConnectionType } from '@fishbot/metatrader/types/Connection.model';
+import type { ConnectionType } from '@fishprovider/metatrader/types/Connection.model';
 
 const stopPolls = async (connection: ConnectionType) => {
   console.log('stopPolls', connection);

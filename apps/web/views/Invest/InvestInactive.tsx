@@ -1,9 +1,9 @@
-import walletGetMany from '@fishbot/cross/api/wallet/getMany';
-import walletRemove from '@fishbot/cross/api/wallet/remove';
-import { useMutate, useQuery } from '@fishbot/cross/libs/query';
-import storeWallets from '@fishbot/cross/stores/wallets';
-import { InvestStatus, WalletType } from '@fishbot/utils/constants/pay';
-import type { Wallet as WalletModel } from '@fishbot/utils/types/Pay.model';
+import walletGetMany from '@fishprovider/cross/api/wallet/getMany';
+import walletRemove from '@fishprovider/cross/api/wallet/remove';
+import { useMutate, useQuery } from '@fishprovider/cross/libs/query';
+import storeWallets from '@fishprovider/cross/stores/wallets';
+import { InvestStatus, WalletType } from '@fishprovider/utils/constants/pay';
+import type { Wallet as WalletModel } from '@fishprovider/utils/types/Pay.model';
 import _ from 'lodash';
 import moment from 'moment';
 

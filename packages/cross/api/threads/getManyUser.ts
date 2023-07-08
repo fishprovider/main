@@ -1,4 +1,4 @@
-import type { Thread } from '@fishbot/utils/types/Thread.model';
+import type { Thread } from '@fishprovider/utils/types/Thread.model';
 import _ from 'lodash';
 
 import { ApiConfig, apiPost } from '~libs/api';

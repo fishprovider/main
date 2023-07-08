@@ -1,8 +1,8 @@
-import { ErrorType } from '@fishbot/utils/constants/error';
-import { TransactionStatus, TransactionType } from '@fishbot/utils/constants/pay';
-import { getRoleProvider } from '@fishbot/utils/helpers/user';
-import type { Transaction } from '@fishbot/utils/types/Pay.model';
-import type { User } from '@fishbot/utils/types/User.model';
+import { ErrorType } from '@fishprovider/utils/constants/error';
+import { TransactionStatus, TransactionType } from '@fishprovider/utils/constants/pay';
+import { getRoleProvider } from '@fishprovider/utils/helpers/user';
+import type { Transaction } from '@fishprovider/utils/types/Pay.model';
+import type { User } from '@fishprovider/utils/types/User.model';
 
 const doneStatuses = [
   TransactionStatus.cancelled,

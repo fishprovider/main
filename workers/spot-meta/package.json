@@ -1,9 +1,8 @@
 {
-  "name": "@fishbot/spot-meta",
+  "name": "@fishprovider/spot-meta",
   "version": "5.0.0",
   "type": "module",
   "scripts": {
-    "preinstall": "cd ../.. && npm install -w packages/utils -w packages/core -w packages/swap -w packages/ctrader -w packages/metatrader",
     "lint": "eslint --cache --fix --ignore-pattern dist .",
     "type-check": "tsc --noEmit",
     "test": "npm run test-unit",
@@ -17,6 +16,11 @@
     "dev": "cross-env NODE_ENV=development concurrently -k 'npm run build-watch' 'npm run start-watch'"
   },
   "dependencies": {
+    "@fishprovider/utils": "*",
+    "@fishprovider/core": "*",
+    "@fishprovider/swap": "*",
+    "@fishprovider/ctrader": "*",
+    "@fishprovider/metatrader": "*",
     "dotenv-flow": "^3.2.0",
     "lodash": "^4.17.21",
     "moment": "^2.29.4"

@@ -1,4 +1,4 @@
-import walletAdd from '@fishbot/cross/api/wallet/add';
+import walletAdd from '@fishprovider/cross/api/wallet/add';
 import { useState } from 'react';
 
 import Button from '~ui/core/Button';

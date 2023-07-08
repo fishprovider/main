@@ -1,6 +1,6 @@
-import { getProvider } from '@fishbot/swap/utils/account';
-import { LockType, PlanType } from '@fishbot/utils/constants/account';
-import type { Account } from '@fishbot/utils/types/Account.model';
+import { getProvider } from '@fishprovider/swap/utils/account';
+import { LockType, PlanType } from '@fishprovider/utils/constants/account';
+import type { Account } from '@fishprovider/utils/types/Account.model';
 import moment from 'moment';
 
 const env = {

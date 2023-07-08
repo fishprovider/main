@@ -1,7 +1,7 @@
-import storeAccounts from '@fishbot/cross/stores/accounts';
-import storeUser from '@fishbot/cross/stores/user';
-import { redisKeys } from '@fishbot/utils/constants/redis';
-import type { Account } from '@fishbot/utils/types/Account.model';
+import storeAccounts from '@fishprovider/cross/stores/accounts';
+import storeUser from '@fishprovider/cross/stores/user';
+import { redisKeys } from '@fishprovider/utils/constants/redis';
+import type { Account } from '@fishprovider/utils/types/Account.model';
 import { useEffect, useRef } from 'react';
 
 import { subDoc } from '~libs/sdb';

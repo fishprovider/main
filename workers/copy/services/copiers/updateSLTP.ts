@@ -1,10 +1,10 @@
-import { send } from '@fishbot/core/libs/notif';
-import updatePosition from '@fishbot/swap/commands/updatePosition';
-import { botUser } from '@fishbot/swap/utils/account';
-import { isLastRunExpired } from '@fishbot/utils/helpers/lastRunChecks';
-import { parseCopyId } from '@fishbot/utils/helpers/order';
-import type { Account, CopySettings } from '@fishbot/utils/types/Account.model';
-import type { Order } from '@fishbot/utils/types/Order.model';
+import { send } from '@fishprovider/core/libs/notif';
+import updatePosition from '@fishprovider/swap/commands/updatePosition';
+import { botUser } from '@fishprovider/swap/utils/account';
+import { isLastRunExpired } from '@fishprovider/utils/helpers/lastRunChecks';
+import { parseCopyId } from '@fishprovider/utils/helpers/order';
+import type { Account, CopySettings } from '@fishprovider/utils/types/Account.model';
+import type { Order } from '@fishprovider/utils/types/Order.model';
 
 import type { OrderCopy } from '~types/Order.model';
 

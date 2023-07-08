@@ -1,7 +1,7 @@
-import { ErrorType } from '@fishbot/utils/constants/error';
-import type { WalletType } from '@fishbot/utils/constants/pay';
-import type { Wallet } from '@fishbot/utils/types/Pay.model';
-import type { User } from '@fishbot/utils/types/User.model';
+import { ErrorType } from '@fishprovider/utils/constants/error';
+import type { WalletType } from '@fishprovider/utils/constants/pay';
+import type { Wallet } from '@fishprovider/utils/types/Pay.model';
+import type { User } from '@fishprovider/utils/types/User.model';
 
 const walletGetMany = async ({ data, userInfo }: {
   data: {

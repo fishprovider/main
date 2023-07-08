@@ -1,6 +1,6 @@
-import storeOrders from '@fishbot/cross/stores/orders';
-import storeUser from '@fishbot/cross/stores/user';
-import { OrderStatus } from '@fishbot/utils/constants/order';
+import storeOrders from '@fishprovider/cross/stores/orders';
+import storeUser from '@fishprovider/cross/stores/user';
+import { OrderStatus } from '@fishprovider/utils/constants/order';
 import _ from 'lodash';
 
 import Stack from '~ui/core/Stack';

@@ -1,5 +1,5 @@
-import userUpdateInfo from '@fishbot/cross/api/users/updateInfo';
-import storeUser from '@fishbot/cross/stores/user';
+import userUpdateInfo from '@fishprovider/cross/api/users/updateInfo';
+import storeUser from '@fishprovider/cross/stores/user';
 
 import Icon from '~ui/core/Icon';
 

@@ -1,6 +1,6 @@
-import accountGet from '@fishbot/cross/api/accounts/get';
-import storeAccounts from '@fishbot/cross/stores/accounts';
-import storeUser from '@fishbot/cross/stores/user';
+import accountGet from '@fishprovider/cross/api/accounts/get';
+import storeAccounts from '@fishprovider/cross/stores/accounts';
+import storeUser from '@fishprovider/cross/stores/user';
 import { useEffect } from 'react';
 
 import { toastError } from '~ui/toast';

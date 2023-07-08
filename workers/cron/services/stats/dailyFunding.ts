@@ -6,7 +6,7 @@ import {
   getMessage,
   getMessages,
   removeLabels,
-} from '@fishbot/core/libs/gmail';
+} from '@fishprovider/core/libs/gmail';
 import type { gmail_v1 } from 'googleapis';
 import _ from 'lodash';
 import moment from 'moment';

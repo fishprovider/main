@@ -1,4 +1,4 @@
-import type { TrendbarPeriod } from '@fishbot/ctrader/constants/openApi';
+import type { TrendbarPeriod } from '@fishprovider/ctrader/constants/openApi';
 
 interface BarCTrader {
   period: TrendbarPeriod;

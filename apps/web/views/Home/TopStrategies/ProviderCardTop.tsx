@@ -1,5 +1,5 @@
-import storeAccounts from '@fishbot/cross/stores/accounts';
-import type { Account } from '@fishbot/utils/types/Account.model';
+import storeAccounts from '@fishprovider/cross/stores/accounts';
+import type { Account } from '@fishprovider/utils/types/Account.model';
 import _ from 'lodash';
 import moment from 'moment';
 

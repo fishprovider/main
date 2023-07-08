@@ -1,14 +1,14 @@
-import newOrder from '@fishbot/swap/commands/newOrder';
-import { getProvider } from '@fishbot/swap/utils/account';
-import { getLiveOrders, getPendingOrders } from '@fishbot/swap/utils/order';
-import { getPrices } from '@fishbot/swap/utils/price';
-import { ErrorType } from '@fishbot/utils/constants/error';
-import { OrderStatus } from '@fishbot/utils/constants/order';
-import { getMajorPairs } from '@fishbot/utils/helpers/price';
-import { getRoleProvider } from '@fishbot/utils/helpers/user';
-import { validateOrderAdd } from '@fishbot/utils/helpers/validateOrder';
-import type { OrderWithoutId } from '@fishbot/utils/types/Order.model';
-import type { User } from '@fishbot/utils/types/User.model';
+import newOrder from '@fishprovider/swap/commands/newOrder';
+import { getProvider } from '@fishprovider/swap/utils/account';
+import { getLiveOrders, getPendingOrders } from '@fishprovider/swap/utils/order';
+import { getPrices } from '@fishprovider/swap/utils/price';
+import { ErrorType } from '@fishprovider/utils/constants/error';
+import { OrderStatus } from '@fishprovider/utils/constants/order';
+import { getMajorPairs } from '@fishprovider/utils/helpers/price';
+import { getRoleProvider } from '@fishprovider/utils/helpers/user';
+import { validateOrderAdd } from '@fishprovider/utils/helpers/validateOrder';
+import type { OrderWithoutId } from '@fishprovider/utils/types/Order.model';
+import type { User } from '@fishprovider/utils/types/User.model';
 import _ from 'lodash';
 
 const orderAdd = async ({ data, userInfo }: {

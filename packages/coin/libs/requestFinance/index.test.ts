@@ -1,5 +1,5 @@
-import delay from '@fishbot/utils/helpers/delay';
-import random from '@fishbot/utils/helpers/random';
+import delay from '@fishprovider/utils/helpers/delay';
+import random from '@fishprovider/utils/helpers/random';
 import moment from 'moment';
 
 import {

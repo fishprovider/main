@@ -1,9 +1,9 @@
-import fetchOrders from '@fishbot/swap/commands/fetchOrders';
-import { getProvider } from '@fishbot/swap/utils/account';
-import { getOrders } from '@fishbot/swap/utils/order';
-import { ErrorType } from '@fishbot/utils/constants/error';
-import { getRoleProvider } from '@fishbot/utils/helpers/user';
-import type { User } from '@fishbot/utils/types/User.model';
+import fetchOrders from '@fishprovider/swap/commands/fetchOrders';
+import { getProvider } from '@fishprovider/swap/utils/account';
+import { getOrders } from '@fishprovider/swap/utils/order';
+import { ErrorType } from '@fishprovider/utils/constants/error';
+import { getRoleProvider } from '@fishprovider/utils/helpers/user';
+import type { User } from '@fishprovider/utils/types/User.model';
 
 const orderGetMany = async ({ data, userInfo }: {
   data: {

@@ -1,4 +1,4 @@
-import storeUser from '@fishbot/cross/stores/user';
+import storeUser from '@fishprovider/cross/stores/user';
 import { useEffect, useState } from 'react';
 
 import { requestNotif } from '~libs/webpush';

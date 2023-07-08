@@ -1,6 +1,6 @@
-import newsGetMany from '@fishbot/cross/api/news/getMany';
-import storeNews from '@fishbot/cross/stores/news';
-import type { News } from '@fishbot/utils/types/News.model';
+import newsGetMany from '@fishprovider/cross/api/news/getMany';
+import storeNews from '@fishprovider/cross/stores/news';
+import type { News } from '@fishprovider/utils/types/News.model';
 import _ from 'lodash';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';

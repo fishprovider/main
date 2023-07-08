@@ -1,5 +1,5 @@
-import { ProviderPlatform, ProviderType } from '@fishbot/utils/constants/account';
-import type { Account, Config } from '@fishbot/utils/types/Account.model';
+import { ProviderPlatform, ProviderType } from '@fishprovider/utils/constants/account';
+import type { Account, Config } from '@fishprovider/utils/types/Account.model';
 import _ from 'lodash';
 
 import getAccountInfoCTrader from '~libs/ctrader/commands/getAccountInfo';

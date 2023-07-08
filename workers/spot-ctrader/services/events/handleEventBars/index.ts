@@ -1,9 +1,9 @@
-import type { QueuePromise } from '@fishbot/core/libs/queuePromise';
-import { destroy as destroyQueue, start as startQueue } from '@fishbot/core/libs/queuePromise';
-import { TrendbarPeriod } from '@fishbot/ctrader/constants/openApi';
-import type { CallbackPayload } from '@fishbot/ctrader/types/Event.model';
-import { getSymbols } from '@fishbot/swap/utils/price';
-import type { ProviderType } from '@fishbot/utils/constants/account';
+import type { QueuePromise } from '@fishprovider/core/libs/queuePromise';
+import { destroy as destroyQueue, start as startQueue } from '@fishprovider/core/libs/queuePromise';
+import { TrendbarPeriod } from '@fishprovider/ctrader/constants/openApi';
+import type { CallbackPayload } from '@fishprovider/ctrader/types/Event.model';
+import { getSymbols } from '@fishprovider/swap/utils/price';
+import type { ProviderType } from '@fishprovider/utils/constants/account';
 import _ from 'lodash';
 import moment from 'moment';
 

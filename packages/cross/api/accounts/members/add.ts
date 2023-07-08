@@ -1,5 +1,5 @@
-import type { Roles } from '@fishbot/utils/constants/user';
-import type { Account } from '@fishbot/utils/types/Account.model';
+import type { Roles } from '@fishprovider/utils/constants/user';
+import type { Account } from '@fishprovider/utils/types/Account.model';
 
 import { ApiConfig, apiPost } from '~libs/api';
 import storeAccounts from '~stores/accounts';

@@ -1,10 +1,10 @@
-import getDealsCTrader from '@fishbot/ctrader/commands/getDeals';
-import type { Config as ConfigCTrader } from '@fishbot/ctrader/types/Config.model';
-import type { ConnectionType } from '@fishbot/ctrader/types/Connection.model';
-import type { ProviderType } from '@fishbot/utils/constants/account';
-import { OrderStatus } from '@fishbot/utils/constants/order';
-import type { Config } from '@fishbot/utils/types/Account.model';
-import type { RedisSymbol } from '@fishbot/utils/types/Redis.model';
+import getDealsCTrader from '@fishprovider/ctrader/commands/getDeals';
+import type { Config as ConfigCTrader } from '@fishprovider/ctrader/types/Config.model';
+import type { ConnectionType } from '@fishprovider/ctrader/types/Connection.model';
+import type { ProviderType } from '@fishprovider/utils/constants/account';
+import { OrderStatus } from '@fishprovider/utils/constants/order';
+import type { Config } from '@fishprovider/utils/types/Account.model';
+import type { RedisSymbol } from '@fishprovider/utils/types/Redis.model';
 import moment from 'moment';
 import type { AsyncReturnType } from 'type-fest';
 

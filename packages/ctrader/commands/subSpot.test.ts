@@ -1,4 +1,4 @@
-import delay from '@fishbot/utils/helpers/delay';
+import delay from '@fishprovider/utils/helpers/delay';
 import { jest } from '@jest/globals';
 
 import * as handleEventPrice from '~Connection/events/price';

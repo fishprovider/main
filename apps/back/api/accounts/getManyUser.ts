@@ -1,6 +1,6 @@
-import { ErrorType } from '@fishbot/utils/constants/error';
-import type { AccountPublic } from '@fishbot/utils/types/Account.model';
-import type { User } from '@fishbot/utils/types/User.model';
+import { ErrorType } from '@fishprovider/utils/constants/error';
+import type { AccountPublic } from '@fishprovider/utils/types/Account.model';
+import type { User } from '@fishprovider/utils/types/User.model';
 
 const accountGetManyUser = async ({ userInfo }: {
   userInfo: User,

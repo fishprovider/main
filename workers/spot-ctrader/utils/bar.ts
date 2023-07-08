@@ -1,6 +1,6 @@
-import { TrendbarPeriod } from '@fishbot/ctrader/constants/openApi';
-import type { ProviderType } from '@fishbot/utils/constants/account';
-import type { Bar } from '@fishbot/utils/types/Bar.model';
+import { TrendbarPeriod } from '@fishprovider/ctrader/constants/openApi';
+import type { ProviderType } from '@fishprovider/utils/constants/account';
+import type { Bar } from '@fishprovider/utils/types/Bar.model';
 import _ from 'lodash';
 
 import type { BarCTrader } from '~types/Bar.model';

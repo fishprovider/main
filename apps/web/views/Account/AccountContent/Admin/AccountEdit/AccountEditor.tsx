@@ -1,6 +1,6 @@
-import accountUpdate from '@fishbot/cross/api/accounts/update';
-import storeUser from '@fishbot/cross/stores/user';
-import { ProviderViewType } from '@fishbot/utils/constants/account';
+import accountUpdate from '@fishprovider/cross/api/accounts/update';
+import storeUser from '@fishprovider/cross/stores/user';
+import { ProviderViewType } from '@fishprovider/utils/constants/account';
 import { useState } from 'react';
 
 import Link from '~components/base/Link';

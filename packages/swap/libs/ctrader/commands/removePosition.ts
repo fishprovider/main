@@ -1,17 +1,17 @@
-import { send } from '@fishbot/core/libs/notif';
-import closePosition from '@fishbot/ctrader/commands/closePosition';
+import { send } from '@fishprovider/core/libs/notif';
+import closePosition from '@fishprovider/ctrader/commands/closePosition';
 import {
   CallbackType, ExecutionType, OrderStatus as OrderStatusCTrader, PositionStatus,
-} from '@fishbot/ctrader/constants/openApi';
-import type { Config as ConfigCTrader } from '@fishbot/ctrader/types/Config.model';
-import type { CallbackPayload } from '@fishbot/ctrader/types/Event.model';
-import type { transformDeal as transformDealCTrader, transformOrder as transformOrderCTrader, transformPosition as transformPositionCTrader } from '@fishbot/ctrader/utils/transform';
-import type { ProviderType } from '@fishbot/utils/constants/account';
-import promiseCreator from '@fishbot/utils/helpers/promiseCreator';
-import type { Config } from '@fishbot/utils/types/Account.model';
-import type { Order } from '@fishbot/utils/types/Order.model';
-import type { Price } from '@fishbot/utils/types/Price.model';
-import type { RedisSymbol } from '@fishbot/utils/types/Redis.model';
+} from '@fishprovider/ctrader/constants/openApi';
+import type { Config as ConfigCTrader } from '@fishprovider/ctrader/types/Config.model';
+import type { CallbackPayload } from '@fishprovider/ctrader/types/Event.model';
+import type { transformDeal as transformDealCTrader, transformOrder as transformOrderCTrader, transformPosition as transformPositionCTrader } from '@fishprovider/ctrader/utils/transform';
+import type { ProviderType } from '@fishprovider/utils/constants/account';
+import promiseCreator from '@fishprovider/utils/helpers/promiseCreator';
+import type { Config } from '@fishprovider/utils/types/Account.model';
+import type { Order } from '@fishprovider/utils/types/Order.model';
+import type { Price } from '@fishprovider/utils/types/Price.model';
+import type { RedisSymbol } from '@fishprovider/utils/types/Redis.model';
 import _ from 'lodash';
 import type { AsyncReturnType } from 'type-fest';
 

@@ -1,5 +1,5 @@
-import statsGetManyTrends from '@fishbot/cross/api/stats/getManyTrends';
-import storeStats from '@fishbot/cross/stores/stats';
+import statsGetManyTrends from '@fishprovider/cross/api/stats/getManyTrends';
+import storeStats from '@fishprovider/cross/stores/stats';
 import _ from 'lodash';
 import { useEffect } from 'react';
 

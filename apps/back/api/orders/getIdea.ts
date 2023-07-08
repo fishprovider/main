@@ -1,11 +1,11 @@
-import { getProvider } from '@fishbot/swap/utils/account';
-import { getLiveOrders } from '@fishbot/swap/utils/order';
-import { ErrorType } from '@fishbot/utils/constants/error';
-import { OrderStatus } from '@fishbot/utils/constants/order';
-import { buildCopyId } from '@fishbot/utils/helpers/order';
-import { getRoleProvider } from '@fishbot/utils/helpers/user';
-import type { Order } from '@fishbot/utils/types/Order.model';
-import type { User } from '@fishbot/utils/types/User.model';
+import { getProvider } from '@fishprovider/swap/utils/account';
+import { getLiveOrders } from '@fishprovider/swap/utils/order';
+import { ErrorType } from '@fishprovider/utils/constants/error';
+import { OrderStatus } from '@fishprovider/utils/constants/order';
+import { buildCopyId } from '@fishprovider/utils/helpers/order';
+import { getRoleProvider } from '@fishprovider/utils/helpers/user';
+import type { Order } from '@fishprovider/utils/types/Order.model';
+import type { User } from '@fishprovider/utils/types/User.model';
 import _ from 'lodash';
 
 const orderGetIdea = async ({ data, userInfo }: {

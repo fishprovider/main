@@ -1,8 +1,8 @@
-import { CallbackType } from '@fishbot/ctrader/constants/openApi';
-import type { Config } from '@fishbot/ctrader/types/Config.model';
-import type { ConnectionType } from '@fishbot/ctrader/types/Connection.model';
-import { getSymbols } from '@fishbot/swap/utils/price';
-import { ProviderType } from '@fishbot/utils/constants/account';
+import { CallbackType } from '@fishprovider/ctrader/constants/openApi';
+import type { Config } from '@fishprovider/ctrader/types/Config.model';
+import type { ConnectionType } from '@fishprovider/ctrader/types/Connection.model';
+import { getSymbols } from '@fishprovider/swap/utils/price';
+import { ProviderType } from '@fishprovider/utils/constants/account';
 import { jest } from '@jest/globals';
 
 import { testConnection } from '~tests/ctraderUtils';

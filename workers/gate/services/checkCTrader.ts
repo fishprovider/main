@@ -1,4 +1,4 @@
-import { isPausedWeekend } from '@fishbot/utils/helpers/pause';
+import { isPausedWeekend } from '@fishprovider/utils/helpers/pause';
 import type { Moment } from 'moment';
 import moment from 'moment-timezone';
 

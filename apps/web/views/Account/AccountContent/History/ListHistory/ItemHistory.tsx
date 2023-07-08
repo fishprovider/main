@@ -1,5 +1,5 @@
-import { getProfitIcon } from '@fishbot/utils/helpers/order';
-import type { Order } from '@fishbot/utils/types/Order.model';
+import { getProfitIcon } from '@fishprovider/utils/helpers/order';
+import type { Order } from '@fishprovider/utils/types/Order.model';
 import _ from 'lodash';
 
 import OrderActivities from '~components/order/OrderActivities';

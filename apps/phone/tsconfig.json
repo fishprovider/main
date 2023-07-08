@@ -6,8 +6,8 @@
     "noPropertyAccessFromIndexSignature": false,
     "baseUrl": ".",
     "paths": {
-      "@fishbot/utils*": ["../../packages/utils/dist*"],
-      "@fishbot/cross*": ["../../packages/cross/dist*"],
+      "@fishprovider/utils*": ["../../packages/utils/dist*"],
+      "@fishprovider/cross*": ["../../packages/cross/dist*"],
       "~*": ["./*"]
     },
     "rootDir": ".",

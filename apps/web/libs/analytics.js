@@ -1,4 +1,4 @@
-import { apiPost } from '@fishbot/cross/libs/api';
+import { apiPost } from '@fishprovider/cross/libs/api';
 import ReactGA from 'react-ga4';
 
 const gaKey = 'G-9GK5LHZ2VN';

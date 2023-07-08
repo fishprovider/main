@@ -1,8 +1,8 @@
-import accountGetManyInfo from '@fishbot/cross/api/accounts/getManyInfo';
-import accountGetManySlim from '@fishbot/cross/api/accounts/getManySlim';
-import accountGetManyUser from '@fishbot/cross/api/accounts/getManyUser';
-import { useQuery } from '@fishbot/cross/libs/query';
-import storeUser from '@fishbot/cross/stores/user';
+import accountGetManyInfo from '@fishprovider/cross/api/accounts/getManyInfo';
+import accountGetManySlim from '@fishprovider/cross/api/accounts/getManySlim';
+import accountGetManyUser from '@fishprovider/cross/api/accounts/getManyUser';
+import { useQuery } from '@fishprovider/cross/libs/query';
+import storeUser from '@fishprovider/cross/stores/user';
 
 import { queryKeys } from '~constants/query';
 

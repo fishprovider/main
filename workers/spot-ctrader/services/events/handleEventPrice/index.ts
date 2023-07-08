@@ -1,7 +1,7 @@
-import type { CallbackPayload } from '@fishbot/ctrader/types/Event.model';
-import { getSymbols, savePrice } from '@fishbot/swap/utils/price';
-import type { ProviderType } from '@fishbot/utils/constants/account';
-import { isLastRunExpired } from '@fishbot/utils/helpers/lastRunChecks';
+import type { CallbackPayload } from '@fishprovider/ctrader/types/Event.model';
+import { getSymbols, savePrice } from '@fishprovider/swap/utils/price';
+import type { ProviderType } from '@fishprovider/utils/constants/account';
+import { isLastRunExpired } from '@fishprovider/utils/helpers/lastRunChecks';
 
 import { setLastUpdated } from '~services/checkCTrader';
 

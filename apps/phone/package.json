@@ -1,19 +1,20 @@
 {
-  "name": "phone",
+  "name": "@fishprovider/phone",
   "version": "5.0.0",
   "scripts": {
-    "install-packages": "cd ../.. && npm install -w packages/utils -w packages/cross",
     "build-packages": "cd ../.. && npm run build -w packages/utils -w packages/cross",
-    "preinstall": "npm run install-packages && npm run build-packages",
     "doctor": "npx expo-doctor",
     "lint": "eslint --cache --fix .",
     "type-check": "tsc --noEmit",
+    "prebuild": "npm run build-packages",
     "start": "NODE_ENV=development doppler run --print-config -- expo start",
     "dev": "NODE_ENV=development expo start --dev-client",
     "native-android": "expo run:android",
     "native-ios": "expo run:ios"
   },
   "dependencies": {
+    "@fishprovider/utils": "*",
+    "@fishprovider/cross": "*",
     "@expo/vector-icons": "^13.0.0",
     "@react-native-firebase/app": "^18.1.0",
     "@react-native-firebase/auth": "^18.1.0",
@@ -26,7 +27,7 @@
     "@tamagui/theme-base": "^1.39.1",
     "@tamagui/toast": "^1.39.1",
     "babel-plugin-transform-inline-environment-variables": "^0.4.4",
-    "burnt": "^0.11.7",
+    "burnt": "^0.10.0",
     "expo": "~49.0.0",
     "expo-build-properties": "~0.8.3",
     "expo-dev-client": "~2.4.4",

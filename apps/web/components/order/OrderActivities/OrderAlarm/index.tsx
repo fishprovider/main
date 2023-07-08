@@ -1,7 +1,7 @@
-import orderUpdateSettings from '@fishbot/cross/api/orders/updateSettings';
-import { useMutate } from '@fishbot/cross/libs/query';
-import { OrderStatus } from '@fishbot/utils/constants/order';
-import type { Order } from '@fishbot/utils/types/Order.model';
+import orderUpdateSettings from '@fishprovider/cross/api/orders/updateSettings';
+import { useMutate } from '@fishprovider/cross/libs/query';
+import { OrderStatus } from '@fishprovider/utils/constants/order';
+import type { Order } from '@fishprovider/utils/types/Order.model';
 
 import Icon from '~ui/core/Icon';
 import openConfirmModal from '~ui/modals/openConfirmModal';

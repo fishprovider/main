@@ -1,9 +1,9 @@
-import * as firebase from '@fishbot/core/libs/firebase';
-import * as mongo from '@fishbot/core/libs/mongo';
-import * as redis from '@fishbot/core/libs/redis';
-import { ErrorType } from '@fishbot/utils/constants/error';
-import type { Account } from '@fishbot/utils/types/Account.model';
-import type { User } from '@fishbot/utils/types/User.model';
+import * as firebase from '@fishprovider/core/libs/firebase';
+import * as mongo from '@fishprovider/core/libs/mongo';
+import * as redis from '@fishprovider/core/libs/redis';
+import { ErrorType } from '@fishprovider/utils/constants/error';
+import type { Account } from '@fishprovider/utils/types/Account.model';
+import type { User } from '@fishprovider/utils/types/User.model';
 
 const env = {
   typeId: process.env.TYPE_ID || '',

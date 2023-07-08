@@ -1,13 +1,13 @@
-import orderGetHistory from '@fishbot/cross/api/orders/getHistory';
-import orderGetManyInfo from '@fishbot/cross/api/orders/getManyInfo';
-import priceGetMany from '@fishbot/cross/api/prices/getMany';
-import { useMutate, useQuery } from '@fishbot/cross/libs/query';
-import storeOrders from '@fishbot/cross/stores/orders';
-import storeUser from '@fishbot/cross/stores/user';
-import { ProviderType } from '@fishbot/utils/constants/account';
-import { OrderStatus } from '@fishbot/utils/constants/order';
-import { getProfitIcon } from '@fishbot/utils/helpers/order';
-import { getMajorPairs } from '@fishbot/utils/helpers/price';
+import orderGetHistory from '@fishprovider/cross/api/orders/getHistory';
+import orderGetManyInfo from '@fishprovider/cross/api/orders/getManyInfo';
+import priceGetMany from '@fishprovider/cross/api/prices/getMany';
+import { useMutate, useQuery } from '@fishprovider/cross/libs/query';
+import storeOrders from '@fishprovider/cross/stores/orders';
+import storeUser from '@fishprovider/cross/stores/user';
+import { ProviderType } from '@fishprovider/utils/constants/account';
+import { OrderStatus } from '@fishprovider/utils/constants/order';
+import { getProfitIcon } from '@fishprovider/utils/helpers/order';
+import { getMajorPairs } from '@fishprovider/utils/helpers/price';
 import _ from 'lodash';
 import { useEffect, useState } from 'react';
 

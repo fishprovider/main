@@ -1,8 +1,8 @@
-import transferAdd from '@fishbot/cross/api/transfer/add';
-import transferGetMany from '@fishbot/cross/api/transfer/getMany';
-import { useMutate, useQuery } from '@fishbot/cross/libs/query';
-import storeTransactions from '@fishbot/cross/stores/transactions';
-import { TransactionType } from '@fishbot/utils/constants/pay';
+import transferAdd from '@fishprovider/cross/api/transfer/add';
+import transferGetMany from '@fishprovider/cross/api/transfer/getMany';
+import { useMutate, useQuery } from '@fishprovider/cross/libs/query';
+import storeTransactions from '@fishprovider/cross/stores/transactions';
+import { TransactionType } from '@fishprovider/utils/constants/pay';
 import _ from 'lodash';
 import { useState } from 'react';
 

@@ -1,5 +1,5 @@
-import storeUser from '@fishbot/cross/stores/user';
-import { getRoleProvider } from '@fishbot/utils/helpers/user';
+import storeUser from '@fishprovider/cross/stores/user';
+import { getRoleProvider } from '@fishprovider/utils/helpers/user';
 import { useEffect } from 'react';
 
 interface Props {

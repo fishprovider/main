@@ -16,8 +16,8 @@ const swcConfig = {
     },
   },
   transpilePackages: [
-    '@fishbot/utils',
-    '@fishbot/cross',
+    '@fishprovider/utils',
+    '@fishprovider/cross',
     '@mui/material',
     '@mui/icons-material',
   ],

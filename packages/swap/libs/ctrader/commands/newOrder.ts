@@ -1,23 +1,23 @@
-import { push } from '@fishbot/core/libs/firebase';
-import { send } from '@fishbot/core/libs/notif';
-import newOrderCTrader from '@fishbot/ctrader/commands/newOrder';
-import updatePosition from '@fishbot/ctrader/commands/updatePosition';
+import { push } from '@fishprovider/core/libs/firebase';
+import { send } from '@fishprovider/core/libs/notif';
+import newOrderCTrader from '@fishprovider/ctrader/commands/newOrder';
+import updatePosition from '@fishprovider/ctrader/commands/updatePosition';
 import {
   CallbackType, ExecutionType, OrderStatus as OrderStatusCTrader, OrderType as OrderTypeCTrader,
   PositionStatus, TradeSide,
-} from '@fishbot/ctrader/constants/openApi';
-import type { Config as ConfigCTrader } from '@fishbot/ctrader/types/Config.model';
-import type { ConnectionType } from '@fishbot/ctrader/types/Connection.model';
-import type { CallbackPayload } from '@fishbot/ctrader/types/Event.model';
-import type { transformOrder as transformOrderCTrader, transformPosition as transformPositionCTrader } from '@fishbot/ctrader/utils/transform';
-import type { ProviderType } from '@fishbot/utils/constants/account';
-import { Direction, OrderType } from '@fishbot/utils/constants/order';
-import promiseCreator from '@fishbot/utils/helpers/promiseCreator';
-import random from '@fishbot/utils/helpers/random';
-import type { Config } from '@fishbot/utils/types/Account.model';
-import type { Order } from '@fishbot/utils/types/Order.model';
-import type { Price } from '@fishbot/utils/types/Price.model';
-import type { RedisSymbol } from '@fishbot/utils/types/Redis.model';
+} from '@fishprovider/ctrader/constants/openApi';
+import type { Config as ConfigCTrader } from '@fishprovider/ctrader/types/Config.model';
+import type { ConnectionType } from '@fishprovider/ctrader/types/Connection.model';
+import type { CallbackPayload } from '@fishprovider/ctrader/types/Event.model';
+import type { transformOrder as transformOrderCTrader, transformPosition as transformPositionCTrader } from '@fishprovider/ctrader/utils/transform';
+import type { ProviderType } from '@fishprovider/utils/constants/account';
+import { Direction, OrderType } from '@fishprovider/utils/constants/order';
+import promiseCreator from '@fishprovider/utils/helpers/promiseCreator';
+import random from '@fishprovider/utils/helpers/random';
+import type { Config } from '@fishprovider/utils/types/Account.model';
+import type { Order } from '@fishprovider/utils/types/Order.model';
+import type { Price } from '@fishprovider/utils/types/Price.model';
+import type { RedisSymbol } from '@fishprovider/utils/types/Redis.model';
 import _ from 'lodash';
 import type { AsyncReturnType } from 'type-fest';
 

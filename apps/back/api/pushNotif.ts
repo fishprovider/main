@@ -1,7 +1,7 @@
-import { push } from '@fishbot/core/libs/firebase';
-import { ErrorType } from '@fishbot/utils/constants/error';
-import { getRoleProvider } from '@fishbot/utils/helpers/user';
-import type { User } from '@fishbot/utils/types/User.model';
+import { push } from '@fishprovider/core/libs/firebase';
+import { ErrorType } from '@fishprovider/utils/constants/error';
+import { getRoleProvider } from '@fishprovider/utils/helpers/user';
+import type { User } from '@fishprovider/utils/types/User.model';
 
 const pushNotif = async ({ data, userInfo }: {
   data: {

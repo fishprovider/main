@@ -1,6 +1,6 @@
-import storeUser from '@fishbot/cross/stores/user';
-import { ProviderType } from '@fishbot/utils/constants/account';
-import { OrderStatus } from '@fishbot/utils/constants/order';
+import storeUser from '@fishprovider/cross/stores/user';
+import { ProviderType } from '@fishprovider/utils/constants/account';
+import { OrderStatus } from '@fishprovider/utils/constants/order';
 
 import PriceWatch from '~components/price/PriceWatch';
 import HistoryWatch from '~views/Account/AccountContent/History/HistoryWatch';

@@ -1,5 +1,5 @@
-import { ProviderViewType } from '@fishbot/utils/constants/account';
-import type { AccountPublic } from '@fishbot/utils/types/Account.model';
+import { ProviderViewType } from '@fishprovider/utils/constants/account';
+import type { AccountPublic } from '@fishprovider/utils/types/Account.model';
 import moment from 'moment';
 
 const key = 'accounts-slim-v2';

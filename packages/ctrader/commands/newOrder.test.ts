@@ -1,4 +1,4 @@
-import delay from '@fishbot/utils/helpers/delay';
+import delay from '@fishprovider/utils/helpers/delay';
 
 import newOrder from '~commands/newOrder';
 import { OrderType, TradeSide } from '~constants/openApi';

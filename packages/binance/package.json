@@ -1,5 +1,5 @@
 {
-  "name": "@fishbot/binance",
+  "name": "@fishprovider/binance",
   "version": "5.0.0",
   "type": "module",
   "scripts": {

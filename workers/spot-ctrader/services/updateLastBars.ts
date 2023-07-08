@@ -1,9 +1,9 @@
-import getBarData from '@fishbot/ctrader/commands/getBarData';
-import { TrendbarPeriod } from '@fishbot/ctrader/constants/openApi';
-import type { ConnectionType } from '@fishbot/ctrader/types/Connection.model';
-import type { SymbolCTrader } from '@fishbot/swap/types/Symbol.model';
-import type { ProviderType } from '@fishbot/utils/constants/account';
-import delay from '@fishbot/utils/helpers/delay';
+import getBarData from '@fishprovider/ctrader/commands/getBarData';
+import { TrendbarPeriod } from '@fishprovider/ctrader/constants/openApi';
+import type { ConnectionType } from '@fishprovider/ctrader/types/Connection.model';
+import type { SymbolCTrader } from '@fishprovider/swap/types/Symbol.model';
+import type { ProviderType } from '@fishprovider/utils/constants/account';
+import delay from '@fishprovider/utils/helpers/delay';
 import _ from 'lodash';
 import type { Moment } from 'moment';
 import moment from 'moment';

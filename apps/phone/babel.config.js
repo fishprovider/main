@@ -14,8 +14,8 @@ module.exports = (api) => {
       ['module-resolver', {
         root: '.',
         alias: {
-          '@fishbot/utils': '../../packages/utils/dist',
-          '@fishbot/cross': '../../packages/cross/dist',
+          '@fishprovider/utils': '../../packages/utils/dist',
+          '@fishprovider/cross': '../../packages/cross/dist',
           // Note that '~': '.' does not work
           '~constants': './constants',
           '~utils': './utils',

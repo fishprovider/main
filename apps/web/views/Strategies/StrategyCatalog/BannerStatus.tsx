@@ -1,4 +1,4 @@
-import storeStats from '@fishbot/cross/stores/stats';
+import storeStats from '@fishprovider/cross/stores/stats';
 import { useState } from 'react';
 
 import Group from '~ui/core/Group';

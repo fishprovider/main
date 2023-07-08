@@ -1,11 +1,11 @@
-import createDeposit from '@fishbot/coin/utils/transaction/createDeposit';
-import createSpot from '@fishbot/coin/utils/wallet/createSpot';
-import { ErrorType } from '@fishbot/utils/constants/error';
-import { SourceType, TransactionType } from '@fishbot/utils/constants/pay';
-import random from '@fishbot/utils/helpers/random';
-import { getRoleProvider } from '@fishbot/utils/helpers/user';
-import type { Wallet } from '@fishbot/utils/types/Pay.model';
-import type { User } from '@fishbot/utils/types/User.model';
+import createDeposit from '@fishprovider/coin/utils/transaction/createDeposit';
+import createSpot from '@fishprovider/coin/utils/wallet/createSpot';
+import { ErrorType } from '@fishprovider/utils/constants/error';
+import { SourceType, TransactionType } from '@fishprovider/utils/constants/pay';
+import random from '@fishprovider/utils/helpers/random';
+import { getRoleProvider } from '@fishprovider/utils/helpers/user';
+import type { Wallet } from '@fishprovider/utils/types/Pay.model';
+import type { User } from '@fishprovider/utils/types/User.model';
 
 const rewardAdd = async ({ data, userInfo }: {
   data: {

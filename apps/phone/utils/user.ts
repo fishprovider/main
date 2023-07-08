@@ -1,8 +1,8 @@
-import userLogin from '@fishbot/cross/api/users/login';
-import userLogout from '@fishbot/cross/api/users/logout';
-import userUpdateInfo from '@fishbot/cross/api/users/updateInfo';
-import storeUser from '@fishbot/cross/stores/user';
-import type { User } from '@fishbot/utils/types/User.model';
+import userLogin from '@fishprovider/cross/api/users/login';
+import userLogout from '@fishprovider/cross/api/users/logout';
+import userUpdateInfo from '@fishprovider/cross/api/users/updateInfo';
+import storeUser from '@fishprovider/cross/stores/user';
+import type { User } from '@fishprovider/utils/types/User.model';
 
 const onClientLoggedOut = async () => {
   console.info('[user] onClientLoggedOut');

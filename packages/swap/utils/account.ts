@@ -1,5 +1,5 @@
-import { redisKeys } from '@fishbot/utils/constants/redis';
-import type { Account } from '@fishbot/utils/types/Account.model';
+import { redisKeys } from '@fishprovider/utils/constants/redis';
+import type { Account } from '@fishprovider/utils/types/Account.model';
 import _ from 'lodash';
 
 const botUser = {

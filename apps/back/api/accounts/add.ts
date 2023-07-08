@@ -1,13 +1,13 @@
-import newAccountMetaTrader from '@fishbot/swap/libs/metatrader/newAccount';
-import { updateCache } from '@fishbot/swap/utils/account';
+import newAccountMetaTrader from '@fishprovider/swap/libs/metatrader/newAccount';
+import { updateCache } from '@fishprovider/swap/utils/account';
 import {
   ProviderPlatform, ProviderViewType, SourceType,
-} from '@fishbot/utils/constants/account';
-import { ErrorType } from '@fishbot/utils/constants/error';
-import { Roles } from '@fishbot/utils/constants/user';
-import { getRoleProvider } from '@fishbot/utils/helpers/user';
-import type { Account } from '@fishbot/utils/types/Account.model';
-import type { User } from '@fishbot/utils/types/User.model';
+} from '@fishprovider/utils/constants/account';
+import { ErrorType } from '@fishprovider/utils/constants/error';
+import { Roles } from '@fishprovider/utils/constants/user';
+import { getRoleProvider } from '@fishprovider/utils/helpers/user';
+import type { Account } from '@fishprovider/utils/types/Account.model';
+import type { User } from '@fishprovider/utils/types/User.model';
 import _ from 'lodash';
 
 import isDemo from '~utils/isDemo';

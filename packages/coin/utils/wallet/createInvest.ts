@@ -1,5 +1,5 @@
-import { InvestStatus, WalletType } from '@fishbot/utils/constants/pay';
-import type { InvestData, Wallet } from '@fishbot/utils/types/Pay.model';
+import { InvestStatus, WalletType } from '@fishprovider/utils/constants/pay';
+import type { InvestData, Wallet } from '@fishprovider/utils/types/Pay.model';
 
 const createInvest = async (params: {
   userId: string,

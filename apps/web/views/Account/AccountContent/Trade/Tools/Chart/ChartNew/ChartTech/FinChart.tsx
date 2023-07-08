@@ -1,9 +1,9 @@
-import type { ProviderType } from '@fishbot/utils/constants/account';
-import { Direction, OrderStatus, OrderType } from '@fishbot/utils/constants/order';
-import { getEntry, getProfit } from '@fishbot/utils/helpers/order';
-import { getDiffPips, getLotFromVolume } from '@fishbot/utils/helpers/price';
-import type { Order } from '@fishbot/utils/types/Order.model';
-import type { Price } from '@fishbot/utils/types/Price.model';
+import type { ProviderType } from '@fishprovider/utils/constants/account';
+import { Direction, OrderStatus, OrderType } from '@fishprovider/utils/constants/order';
+import { getEntry, getProfit } from '@fishprovider/utils/helpers/order';
+import { getDiffPips, getLotFromVolume } from '@fishprovider/utils/helpers/price';
+import type { Order } from '@fishprovider/utils/types/Order.model';
+import type { Price } from '@fishprovider/utils/types/Price.model';
 import { format } from 'd3-format';
 import { timeFormat } from 'd3-time-format';
 import _ from 'lodash';

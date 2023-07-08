@@ -1,8 +1,8 @@
-import { send } from '@fishbot/core/libs/notif';
-import { getProvider } from '@fishbot/swap/utils/account';
-import { isLastRunExpired } from '@fishbot/utils/helpers/lastRunChecks';
-import type { Account, CopySettings } from '@fishbot/utils/types/Account.model';
-import type { Order } from '@fishbot/utils/types/Order.model';
+import { send } from '@fishprovider/core/libs/notif';
+import { getProvider } from '@fishprovider/swap/utils/account';
+import { isLastRunExpired } from '@fishprovider/utils/helpers/lastRunChecks';
+import type { Account, CopySettings } from '@fishprovider/utils/types/Account.model';
+import type { Order } from '@fishprovider/utils/types/Order.model';
 import _ from 'lodash';
 
 const runs = {};

@@ -1,6 +1,6 @@
-import { sendDiscord } from '@fishbot/core/libs/notif';
-import { start as startQueue } from '@fishbot/core/libs/queuePromise';
-import delay from '@fishbot/utils/helpers/delay';
+import { sendDiscord } from '@fishprovider/core/libs/notif';
+import { start as startQueue } from '@fishprovider/core/libs/queuePromise';
+import delay from '@fishprovider/utils/helpers/delay';
 import _ from 'lodash';
 import moment from 'moment-timezone';
 

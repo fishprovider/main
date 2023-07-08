@@ -1,4 +1,4 @@
-import { clean, getJobType } from '@fishbot/core/libs/agenda';
+import { clean, getJobType } from '@fishprovider/core/libs/agenda';
 
 import getNextWeekNews from '~services/getNextWeekNews';
 import getStrategyInfos from '~services/getStrategyInfos';

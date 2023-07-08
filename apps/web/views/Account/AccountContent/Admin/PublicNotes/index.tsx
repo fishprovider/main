@@ -1,5 +1,5 @@
-import accountUpdate from '@fishbot/cross/api/accounts/update';
-import storeUser from '@fishbot/cross/stores/user';
+import accountUpdate from '@fishprovider/cross/api/accounts/update';
+import storeUser from '@fishprovider/cross/stores/user';
 
 import AccountHtmlEditor from '~components/account/AccountHtmlEditor';
 

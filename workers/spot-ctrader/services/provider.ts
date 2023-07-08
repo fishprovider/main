@@ -1,12 +1,12 @@
-import getSymbolList from '@fishbot/ctrader/commands/getSymbolList';
-import type { Config } from '@fishbot/ctrader/types/Config.model';
-import type { ConnectionType } from '@fishbot/ctrader/types/Connection.model';
-import type { CallbackPayload } from '@fishbot/ctrader/types/Event.model';
-import connect from '@fishbot/swap/libs/ctrader/connect';
-import renewTokensCTrader from '@fishbot/swap/libs/ctrader/renewTokens';
-import type { SymbolCTrader } from '@fishbot/swap/types/Symbol.model';
-import type { ProviderType } from '@fishbot/utils/constants/account';
-import type { Account } from '@fishbot/utils/types/Account.model';
+import getSymbolList from '@fishprovider/ctrader/commands/getSymbolList';
+import type { Config } from '@fishprovider/ctrader/types/Config.model';
+import type { ConnectionType } from '@fishprovider/ctrader/types/Connection.model';
+import type { CallbackPayload } from '@fishprovider/ctrader/types/Event.model';
+import connect from '@fishprovider/swap/libs/ctrader/connect';
+import renewTokensCTrader from '@fishprovider/swap/libs/ctrader/renewTokens';
+import type { SymbolCTrader } from '@fishprovider/swap/types/Symbol.model';
+import type { ProviderType } from '@fishprovider/utils/constants/account';
+import type { Account } from '@fishprovider/utils/types/Account.model';
 
 import { startSubs, stopSubs } from '~services/handleSubs';
 import { spotTasks } from '~utils/tasks';

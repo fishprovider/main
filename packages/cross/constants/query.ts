@@ -1,5 +1,5 @@
-import type { ProviderType } from '@fishbot/utils/constants/account';
-import type { WalletType } from '@fishbot/utils/constants/pay';
+import type { ProviderType } from '@fishprovider/utils/constants/account';
+import type { WalletType } from '@fishprovider/utils/constants/pay';
 
 const queryKeys = {
   slimAccounts: () => ['slimAccounts'],

@@ -1,5 +1,5 @@
-import { ErrorType } from '@fishbot/utils/constants/error';
-import type { User } from '@fishbot/utils/types/User.model';
+import { ErrorType } from '@fishprovider/utils/constants/error';
+import type { User } from '@fishprovider/utils/types/User.model';
 import { ChatCompletionRequestMessage, Configuration, OpenAIApi } from 'openai';
 
 import type { AskParams, AskResult, ChatMessage } from '~types/OpenAI.model';

@@ -1,9 +1,9 @@
-import { getTransactionUpdates as getTransactionUpdatesFromCoinbaseCommerce } from '@fishbot/coin/libs/coinbaseCommerce/utils';
-import { getTransactionUpdates as getTransactionUpdatesFromRequestFinance } from '@fishbot/coin/libs/requestFinance/utils';
-import { ErrorType } from '@fishbot/utils/constants/error';
-import { SourceType } from '@fishbot/utils/constants/pay';
-import type { Transaction } from '@fishbot/utils/types/Pay.model';
-import type { User } from '@fishbot/utils/types/User.model';
+import { getTransactionUpdates as getTransactionUpdatesFromCoinbaseCommerce } from '@fishprovider/coin/libs/coinbaseCommerce/utils';
+import { getTransactionUpdates as getTransactionUpdatesFromRequestFinance } from '@fishprovider/coin/libs/requestFinance/utils';
+import { ErrorType } from '@fishprovider/utils/constants/error';
+import { SourceType } from '@fishprovider/utils/constants/pay';
+import type { Transaction } from '@fishprovider/utils/types/Pay.model';
+import type { User } from '@fishprovider/utils/types/User.model';
 
 import isDemo from '~utils/isDemo';
 

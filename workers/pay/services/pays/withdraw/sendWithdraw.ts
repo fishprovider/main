@@ -1,7 +1,7 @@
-import { getAccount, sendTransaction } from '@fishbot/coin/libs/coinbaseApi';
-import updateTransaction from '@fishbot/coin/utils/transaction/updateTransaction';
-import { DestinationPayType, TransactionStatus, TransactionStatusRequest } from '@fishbot/utils/constants/pay';
-import type { Transaction, Wallet } from '@fishbot/utils/types/Pay.model';
+import { getAccount, sendTransaction } from '@fishprovider/coin/libs/coinbaseApi';
+import updateTransaction from '@fishprovider/coin/utils/transaction/updateTransaction';
+import { DestinationPayType, TransactionStatus, TransactionStatusRequest } from '@fishprovider/utils/constants/pay';
+import type { Transaction, Wallet } from '@fishprovider/utils/types/Pay.model';
 import _ from 'lodash';
 import moment from 'moment';
 

@@ -1,4 +1,4 @@
-import promiseCreator from '@fishbot/utils/helpers/promiseCreator';
+import promiseCreator from '@fishprovider/utils/helpers/promiseCreator';
 import appRootPath from 'app-root-path';
 import path from 'path';
 import tls from 'tls';

@@ -1,5 +1,5 @@
-import storeAccounts from '@fishbot/cross/stores/accounts';
-import { ProviderType } from '@fishbot/utils/constants/account';
+import storeAccounts from '@fishprovider/cross/stores/accounts';
+import { ProviderType } from '@fishprovider/utils/constants/account';
 import _ from 'lodash';
 
 import Link from '~components/base/Link';

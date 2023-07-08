@@ -1,4 +1,4 @@
-import type { Bar } from '@fishbot/utils/types/Bar.model';
+import type { Bar } from '@fishprovider/utils/types/Bar.model';
 import _ from 'lodash';
 import moment from 'moment-timezone';
 

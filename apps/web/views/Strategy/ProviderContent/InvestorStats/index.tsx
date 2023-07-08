@@ -1,5 +1,5 @@
-import storeUser from '@fishbot/cross/stores/user';
-import { ProviderPlatform } from '@fishbot/utils/constants/account';
+import storeUser from '@fishprovider/cross/stores/user';
+import { ProviderPlatform } from '@fishprovider/utils/constants/account';
 import _ from 'lodash';
 import moment from 'moment';
 

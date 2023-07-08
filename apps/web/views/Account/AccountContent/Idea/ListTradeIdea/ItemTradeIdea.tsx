@@ -1,9 +1,9 @@
-import orderRemoveIdea from '@fishbot/cross/api/orders/removeIdea';
-import { useMutate } from '@fishbot/cross/libs/query';
-import storeUser from '@fishbot/cross/stores/user';
-import { getRoleProvider } from '@fishbot/utils/helpers/user';
-import type { Order } from '@fishbot/utils/types/Order.model';
-import type { Price } from '@fishbot/utils/types/Price.model';
+import orderRemoveIdea from '@fishprovider/cross/api/orders/removeIdea';
+import { useMutate } from '@fishprovider/cross/libs/query';
+import storeUser from '@fishprovider/cross/stores/user';
+import { getRoleProvider } from '@fishprovider/utils/helpers/user';
+import type { Order } from '@fishprovider/utils/types/Order.model';
+import type { Price } from '@fishprovider/utils/types/Price.model';
 import _ from 'lodash';
 
 import OrderInfo from '~components/order/OrderInfo';

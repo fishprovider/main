@@ -1,6 +1,6 @@
-import storePrices from '@fishbot/cross/stores/prices';
-import type { ProviderType } from '@fishbot/utils/constants/account';
-import { getLotFromVolume, getVolumeFromLot } from '@fishbot/utils/helpers/price';
+import storePrices from '@fishprovider/cross/stores/prices';
+import type { ProviderType } from '@fishprovider/utils/constants/account';
+import { getLotFromVolume, getVolumeFromLot } from '@fishprovider/utils/helpers/price';
 import { useEffect, useState } from 'react';
 
 import Group from '~ui/core/Group';

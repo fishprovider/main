@@ -1,5 +1,5 @@
-import statsUpdate from '@fishbot/cross/api/stats/update';
-import storeStats from '@fishbot/cross/stores/stats';
+import statsUpdate from '@fishprovider/cross/api/stats/update';
+import storeStats from '@fishprovider/cross/stores/stats';
 import _ from 'lodash';
 import moment from 'moment';
 import { useState } from 'react';

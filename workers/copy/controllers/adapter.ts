@@ -1,4 +1,4 @@
-import { start as startSysInfo } from '@fishbot/core/libs/sysinfo';
+import { start as startSysInfo } from '@fishprovider/core/libs/sysinfo';
 
 import {
   destroy as destroyProvider, resume as resumeProvider,

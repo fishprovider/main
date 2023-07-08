@@ -1,4 +1,4 @@
-import type { Order } from '@fishbot/utils/types/Order.model';
+import type { Order } from '@fishprovider/utils/types/Order.model';
 
 import Icon from '~ui/core/Icon';
 import Title from '~ui/core/Title';

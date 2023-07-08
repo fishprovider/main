@@ -1,7 +1,7 @@
-import orderGetIdea from '@fishbot/cross/api/orders/getIdea';
-import { useQuery } from '@fishbot/cross/libs/query';
-import storeUser from '@fishbot/cross/stores/user';
-import { OrderStatus } from '@fishbot/utils/constants/order';
+import orderGetIdea from '@fishprovider/cross/api/orders/getIdea';
+import { useQuery } from '@fishprovider/cross/libs/query';
+import storeUser from '@fishprovider/cross/stores/user';
+import { OrderStatus } from '@fishprovider/utils/constants/order';
 
 import { queryKeys } from '~constants/query';
 import { refreshMS } from '~utils';

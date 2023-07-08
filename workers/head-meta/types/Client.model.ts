@@ -1,6 +1,6 @@
-import type { Config } from '@fishbot/metatrader/types/Config.model';
-import type { ConnectionType } from '@fishbot/metatrader/types/Connection.model';
-import type { ProviderPlatform, ProviderType } from '@fishbot/utils/constants/account';
+import type { Config } from '@fishprovider/metatrader/types/Config.model';
+import type { ConnectionType } from '@fishprovider/metatrader/types/Connection.model';
+import type { ProviderPlatform, ProviderType } from '@fishprovider/utils/constants/account';
 
 interface ClientAccount {
   _id: string;

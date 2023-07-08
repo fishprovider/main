@@ -1,5 +1,5 @@
-import { ProviderType } from '@fishbot/utils/constants/account';
-import { OrderStatus } from '@fishbot/utils/constants/order';
+import { ProviderType } from '@fishprovider/utils/constants/account';
+import { OrderStatus } from '@fishprovider/utils/constants/order';
 
 import updateOrder from '~commands/updateOrder';
 import updatePosition from '~commands/updatePosition';

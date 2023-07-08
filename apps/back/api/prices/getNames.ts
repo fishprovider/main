@@ -1,7 +1,7 @@
-import { getSymbols } from '@fishbot/swap/utils/price';
-import type { ProviderType } from '@fishbot/utils/constants/account';
-import { ErrorType } from '@fishbot/utils/constants/error';
-import type { User } from '@fishbot/utils/types/User.model';
+import { getSymbols } from '@fishprovider/swap/utils/price';
+import type { ProviderType } from '@fishprovider/utils/constants/account';
+import { ErrorType } from '@fishprovider/utils/constants/error';
+import type { User } from '@fishprovider/utils/types/User.model';
 import _ from 'lodash';
 
 const priceGetNames = async ({ data, userInfo }: {

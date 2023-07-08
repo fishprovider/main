@@ -1,5 +1,5 @@
-import { WalletType } from '@fishbot/utils/constants/pay';
-import type { Wallet } from '@fishbot/utils/types/Pay.model';
+import { WalletType } from '@fishprovider/utils/constants/pay';
+import type { Wallet } from '@fishprovider/utils/types/Pay.model';
 
 const createSpot = async (params: {
   userId: string,

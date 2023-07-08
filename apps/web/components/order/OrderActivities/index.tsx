@@ -1,6 +1,6 @@
-import storePrices from '@fishbot/cross/stores/prices';
-import { OrderStatus } from '@fishbot/utils/constants/order';
-import type { Order } from '@fishbot/utils/types/Order.model';
+import storePrices from '@fishprovider/cross/stores/prices';
+import { OrderStatus } from '@fishprovider/utils/constants/order';
+import type { Order } from '@fishprovider/utils/types/Order.model';
 import _ from 'lodash';
 import moment from 'moment';
 

@@ -1,6 +1,6 @@
-import userGetInfo from '@fishbot/cross/api/users/getInfo';
-import { useMutate } from '@fishbot/cross/libs/query';
-import storeUser from '@fishbot/cross/stores/user';
+import userGetInfo from '@fishprovider/cross/api/users/getInfo';
+import { useMutate } from '@fishprovider/cross/libs/query';
+import storeUser from '@fishprovider/cross/stores/user';
 
 import Link from '~components/base/Link';
 // import TelegramLogin from '~components/view/TeleLogin';

@@ -1,7 +1,7 @@
-import { CallbackType } from '@fishbot/metatrader/constants/metaApi';
-import type { ConnectionType } from '@fishbot/metatrader/types/Connection.model';
-import type { CallbackPayload } from '@fishbot/metatrader/types/Event.model';
-import type { ProviderType } from '@fishbot/utils/constants/account';
+import { CallbackType } from '@fishprovider/metatrader/constants/metaApi';
+import type { ConnectionType } from '@fishprovider/metatrader/types/Connection.model';
+import type { CallbackPayload } from '@fishprovider/metatrader/types/Event.model';
+import type { ProviderType } from '@fishprovider/utils/constants/account';
 
 import { spotTasks } from '~utils/tasks';
 

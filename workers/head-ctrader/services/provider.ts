@@ -1,11 +1,11 @@
-import type { Config } from '@fishbot/ctrader/types/Config.model';
-import type { CallbackPayload } from '@fishbot/ctrader/types/Event.model';
-import fetchAccountInfo from '@fishbot/swap/commands/fetchAccountInfo';
-import fetchOrders from '@fishbot/swap/commands/fetchOrders';
-import authorizeAccount from '@fishbot/swap/libs/ctrader/authorizeAccount';
-import connect from '@fishbot/swap/libs/ctrader/connect';
-import renewTokensCTrader from '@fishbot/swap/libs/ctrader/renewTokens';
-import delay from '@fishbot/utils/helpers/delay';
+import type { Config } from '@fishprovider/ctrader/types/Config.model';
+import type { CallbackPayload } from '@fishprovider/ctrader/types/Event.model';
+import fetchAccountInfo from '@fishprovider/swap/commands/fetchAccountInfo';
+import fetchOrders from '@fishprovider/swap/commands/fetchOrders';
+import authorizeAccount from '@fishprovider/swap/libs/ctrader/authorizeAccount';
+import connect from '@fishprovider/swap/libs/ctrader/connect';
+import renewTokensCTrader from '@fishprovider/swap/libs/ctrader/renewTokens';
+import delay from '@fishprovider/utils/helpers/delay';
 import _ from 'lodash';
 
 import type { Client, ClientAccount } from '~types/Client.model';

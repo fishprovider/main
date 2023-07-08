@@ -1,4 +1,4 @@
-import type { ProviderTradeType } from '@fishbot/utils/constants/account';
+import type { ProviderTradeType } from '@fishprovider/utils/constants/account';
 
 const env = {
   typePre: process.env.TYPE_PRE,

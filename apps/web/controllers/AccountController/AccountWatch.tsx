@@ -1,6 +1,6 @@
-import accountGet from '@fishbot/cross/api/accounts/get';
-import { useQuery } from '@fishbot/cross/libs/query';
-import storeUser from '@fishbot/cross/stores/user';
+import accountGet from '@fishprovider/cross/api/accounts/get';
+import { useQuery } from '@fishprovider/cross/libs/query';
+import storeUser from '@fishprovider/cross/stores/user';
 import { useEffect } from 'react';
 
 import { queryKeys } from '~constants/query';

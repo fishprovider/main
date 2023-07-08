@@ -1,12 +1,11 @@
 {
-  "name": "@fishbot/pup",
+  "name": "@fishprovider/pup",
   "version": "5.0.0",
   "type": "module",
   "engines": {
     "node": ">=16 <19"
   },
   "scripts": {
-    "preinstall": "cd ../.. && npm install -w packages/utils -w packages/core",
     "lint": "eslint --cache --fix --ignore-pattern dist .",
     "type-check": "tsc --noEmit",
     "test": "npm run test-unit",
@@ -20,6 +19,8 @@
     "dev": "cross-env NODE_ENV=development concurrently -k 'npm run build-watch' 'npm run start-watch'"
   },
   "dependencies": {
+    "@fishprovider/utils": "*",
+    "@fishprovider/core": "*",
     "dotenv-flow": "^3.2.0",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",

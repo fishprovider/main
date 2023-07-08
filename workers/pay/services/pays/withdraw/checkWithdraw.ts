@@ -1,8 +1,8 @@
-import { getTransactionUpdates } from '@fishbot/coin/libs/coinbaseApi/utils';
-import updateTransaction from '@fishbot/coin/utils/transaction/updateTransaction';
-import { runDBTransaction } from '@fishbot/core/libs/mongo';
-import { DestinationPayType, TransactionStatus, TransactionStatusRequest } from '@fishbot/utils/constants/pay';
-import type { Transaction } from '@fishbot/utils/types/Pay.model';
+import { getTransactionUpdates } from '@fishprovider/coin/libs/coinbaseApi/utils';
+import updateTransaction from '@fishprovider/coin/utils/transaction/updateTransaction';
+import { runDBTransaction } from '@fishprovider/core/libs/mongo';
+import { DestinationPayType, TransactionStatus, TransactionStatusRequest } from '@fishprovider/utils/constants/pay';
+import type { Transaction } from '@fishprovider/utils/types/Pay.model';
 import _ from 'lodash';
 
 import isDemo from '~utils/isDemo';

@@ -1,4 +1,4 @@
-import type { Stat } from '@fishbot/utils/types/Stat.model';
+import type { Stat } from '@fishprovider/utils/types/Stat.model';
 
 import { buildStoreSet } from '~libs/store';
 

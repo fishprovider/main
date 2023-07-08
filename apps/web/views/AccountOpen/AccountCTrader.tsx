@@ -1,4 +1,4 @@
-import { apiPost } from '@fishbot/cross/libs/api';
+import { apiPost } from '@fishprovider/cross/libs/api';
 import { useState } from 'react';
 
 import Button from '~ui/core/Button';

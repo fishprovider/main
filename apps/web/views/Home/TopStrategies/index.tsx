@@ -1,7 +1,7 @@
-import accountGetManySlim from '@fishbot/cross/api/accounts/getManySlim';
-import { useQuery } from '@fishbot/cross/libs/query';
-import storeAccounts from '@fishbot/cross/stores/accounts';
-import type { Account } from '@fishbot/utils/types/Account.model';
+import accountGetManySlim from '@fishprovider/cross/api/accounts/getManySlim';
+import { useQuery } from '@fishprovider/cross/libs/query';
+import storeAccounts from '@fishprovider/cross/stores/accounts';
+import type { Account } from '@fishprovider/utils/types/Account.model';
 import _ from 'lodash';
 import { useRef } from 'react';
 

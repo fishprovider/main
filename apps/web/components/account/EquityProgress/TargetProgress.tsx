@@ -1,5 +1,5 @@
-import storeAccounts from '@fishbot/cross/stores/accounts';
-import { PlanType } from '@fishbot/utils/constants/account';
+import storeAccounts from '@fishprovider/cross/stores/accounts';
+import { PlanType } from '@fishprovider/utils/constants/account';
 import _ from 'lodash';
 
 import Box from '~ui/core/Box';

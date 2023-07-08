@@ -1,4 +1,4 @@
-import { handleEvent, verifyEvent } from '@fishbot/coin/libs/coinbaseCommerce';
+import { handleEvent, verifyEvent } from '@fishprovider/coin/libs/coinbaseCommerce';
 
 const paymentEventHandler = (
   paymentEventType: any, // TODO: define type

@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 import { initialize as initServices } from './baseServices';
 
 const ErrorBoundary = dynamic(() => import('./ErrorBoundary'));
-const QueryProvider = dynamic(() => import('@fishbot/cross/libs/query'));
+const QueryProvider = dynamic(() => import('@fishprovider/cross/libs/query'));
 const UserSetup = dynamic(() => import('./UserSetup'));
 const BaseThemeProvider = dynamic(() => import('~ui/themes/BaseThemeProvider'));
 const NotifProvider = dynamic(() => import('~ui/notif/NotifProvider'));

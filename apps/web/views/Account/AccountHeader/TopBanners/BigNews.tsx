@@ -1,4 +1,4 @@
-import storeNews from '@fishbot/cross/stores/news';
+import storeNews from '@fishprovider/cross/stores/news';
 import _ from 'lodash';
 import moment from 'moment';
 import React from 'react';

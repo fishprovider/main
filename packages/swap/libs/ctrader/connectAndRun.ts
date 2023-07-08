@@ -1,6 +1,6 @@
-import type { Config } from '@fishbot/ctrader/types/Config.model';
-import type { ConnectionType } from '@fishbot/ctrader/types/Connection.model';
-import type { CallbackPayload } from '@fishbot/ctrader/types/Event.model';
+import type { Config } from '@fishprovider/ctrader/types/Config.model';
+import type { ConnectionType } from '@fishprovider/ctrader/types/Connection.model';
+import type { CallbackPayload } from '@fishprovider/ctrader/types/Event.model';
 
 import connect from './connect';
 

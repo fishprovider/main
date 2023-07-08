@@ -45,8 +45,8 @@
         "noPropertyAccessFromIndexSignature": false,
         "baseUrl": ".",
         "paths": {
-          "@fishbot/utils*": ["../../packages/utils/dist*"],
-          "@fishbot/cross*": ["../../packages/cross/dist*"],
+          "@fishprovider/utils*": ["../../packages/utils/dist*"],
+          "@fishprovider/cross*": ["../../packages/cross/dist*"],
           "~*": ["./*"]
         },
         "rootDir": ".",
@@ -71,8 +71,8 @@
           ['module-resolver', {
             root: '.',
             alias: {
-              '@fishbot/utils': '../../packages/utils/dist',
-              '@fishbot/cross': '../../packages/cross/dist',
+              '@fishprovider/utils': '../../packages/utils/dist',
+              '@fishprovider/cross': '../../packages/cross/dist',
               // Note that '~': '.' does not work
               '~constants': './constants',
               '~utils': './utils',
@@ -108,7 +108,6 @@
   ```json
   "scripts": {
     "doctor": "npx expo-doctor && expo install --check",
-    "preinstall": "cd ../.. && npm install -w packages/utils -w packages/cross && npm run build -w packages/utils -w packages/cross",
     "lint": "eslint --cache --fix .",
     "type-check": "tsc --noEmit",
     "start": "doppler run --print-config -- expo start",

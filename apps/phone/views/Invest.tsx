@@ -1,7 +1,7 @@
-import accountGetManySlim from '@fishbot/cross/api/accounts/getManySlim';
-import { queryKeys } from '@fishbot/cross/constants/query';
-import { useQuery } from '@fishbot/cross/libs/query';
-import storeAccounts from '@fishbot/cross/stores/accounts';
+import accountGetManySlim from '@fishprovider/cross/api/accounts/getManySlim';
+import { queryKeys } from '@fishprovider/cross/constants/query';
+import { useQuery } from '@fishprovider/cross/libs/query';
+import storeAccounts from '@fishprovider/cross/stores/accounts';
 import _ from 'lodash';
 import moment from 'moment';
 import { useState } from 'react';

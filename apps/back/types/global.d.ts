@@ -1,4 +1,4 @@
-import type { Session } from '@fishbot/swap/types/Session.model';
+import type { Session } from '@fishprovider/swap/types/Session.model';
 import type { RedisClientType } from '@redis/client';
 import type { Agenda } from 'agenda';
 import type { app as FirebaseApp } from 'firebase-admin';

@@ -1,6 +1,6 @@
-import type { Config } from '@fishbot/metatrader/types/Config.model';
-import type { ConnectionType } from '@fishbot/metatrader/types/Connection.model';
-import type { CallbackPayload } from '@fishbot/metatrader/types/Event.model';
+import type { Config } from '@fishprovider/metatrader/types/Config.model';
+import type { ConnectionType } from '@fishprovider/metatrader/types/Connection.model';
+import type { CallbackPayload } from '@fishprovider/metatrader/types/Event.model';
 
 import connect from './connect';
 

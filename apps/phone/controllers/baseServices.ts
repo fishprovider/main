@@ -1,5 +1,5 @@
-import { initApi } from '@fishbot/cross/libs/api';
-import { initStore } from '@fishbot/cross/libs/store';
+import { initApi } from '@fishprovider/cross/libs/api';
+import { initStore } from '@fishprovider/cross/libs/store';
 
 // import { initAuth } from '~libs/auth';
 

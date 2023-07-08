@@ -1,5 +1,5 @@
-import type { ConnectionType } from '@fishbot/metatrader/types/Connection.model';
-import type { SymbolCTrader } from '@fishbot/swap/types/Symbol.model';
+import type { ConnectionType } from '@fishprovider/metatrader/types/Connection.model';
+import type { SymbolCTrader } from '@fishprovider/swap/types/Symbol.model';
 
 const stopPolls = async (connection: ConnectionType) => {
   console.log('stopPolls', connection);

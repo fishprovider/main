@@ -1,6 +1,6 @@
-import userGetInfo from '@fishbot/cross/api/users/getInfo';
-import { useQuery } from '@fishbot/cross/libs/query';
-import storeUser from '@fishbot/cross/stores/user';
+import userGetInfo from '@fishprovider/cross/api/users/getInfo';
+import { useQuery } from '@fishprovider/cross/libs/query';
+import storeUser from '@fishprovider/cross/stores/user';
 
 import VerifyPhone from '~components/user/VerifyPhone';
 import { queryKeys } from '~constants/query';

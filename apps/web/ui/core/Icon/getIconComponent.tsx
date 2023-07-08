@@ -1,6 +1,6 @@
 // eslint-disable-next-line max-len
-// import { faWallet as Wallet } from '@fishbot/icons/assets/fontawesome/pro-duotone-svg-icons/faWallet';
-// import { FontAwesomeIcon } from '@fishbot/icons/fontawesome';
+// import { faWallet as Wallet } from '@fishprovider/icons/assets/fontawesome/pro-duotone-svg-icons/faWallet';
+// import { FontAwesomeIcon } from '@fishprovider/icons/fontawesome';
 import type { SvgIconProps } from '@mui/material/SvgIcon';
 import _ from 'lodash';
 import { lazy, Suspense } from 'react';

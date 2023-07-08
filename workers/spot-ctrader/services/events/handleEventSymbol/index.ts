@@ -1,10 +1,10 @@
-import getSymbolDetail from '@fishbot/ctrader/commands/getSymbolDetail';
-import type { ConnectionType } from '@fishbot/ctrader/types/Connection.model';
-import type { CallbackPayload } from '@fishbot/ctrader/types/Event.model';
-import { getSymbols, reloadSymbols } from '@fishbot/swap/utils/price';
-import type { ProviderType } from '@fishbot/utils/constants/account';
-import delay from '@fishbot/utils/helpers/delay';
-import type { Price } from '@fishbot/utils/types/Price.model';
+import getSymbolDetail from '@fishprovider/ctrader/commands/getSymbolDetail';
+import type { ConnectionType } from '@fishprovider/ctrader/types/Connection.model';
+import type { CallbackPayload } from '@fishprovider/ctrader/types/Event.model';
+import { getSymbols, reloadSymbols } from '@fishprovider/swap/utils/price';
+import type { ProviderType } from '@fishprovider/utils/constants/account';
+import delay from '@fishprovider/utils/helpers/delay';
+import type { Price } from '@fishprovider/utils/types/Price.model';
 import _ from 'lodash';
 
 const handleEventSymbol = async (

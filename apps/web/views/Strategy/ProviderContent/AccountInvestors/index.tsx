@@ -1,5 +1,5 @@
-import storeUser from '@fishbot/cross/stores/user';
-import type { Investor } from '@fishbot/utils/types/Account.model';
+import storeUser from '@fishprovider/cross/stores/user';
+import type { Investor } from '@fishprovider/utils/types/Account.model';
 import _ from 'lodash';
 
 import Avatar from '~ui/core/Avatar';

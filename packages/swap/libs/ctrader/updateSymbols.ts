@@ -1,9 +1,9 @@
-import getSymbolDetail from '@fishbot/ctrader/commands/getSymbolDetail';
-import type { Config as ConfigCTrader } from '@fishbot/ctrader/types/Config.model';
-import type { ProviderType } from '@fishbot/utils/constants/account';
-import delay from '@fishbot/utils/helpers/delay';
-import type { Config } from '@fishbot/utils/types/Account.model';
-import type { Price } from '@fishbot/utils/types/Price.model';
+import getSymbolDetail from '@fishprovider/ctrader/commands/getSymbolDetail';
+import type { Config as ConfigCTrader } from '@fishprovider/ctrader/types/Config.model';
+import type { ProviderType } from '@fishprovider/utils/constants/account';
+import delay from '@fishprovider/utils/helpers/delay';
+import type { Config } from '@fishprovider/utils/types/Account.model';
+import type { Price } from '@fishprovider/utils/types/Price.model';
 import _ from 'lodash';
 
 import type { SymbolCTrader } from '~types/Symbol.model';

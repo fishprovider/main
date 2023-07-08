@@ -1,13 +1,13 @@
-import { ChargePricingType } from '@fishbot/coin/constants/coinbaseCommerce';
-import { createPayment as createPaymentCoinbaseCommerce } from '@fishbot/coin/libs/coinbaseCommerce';
-import { createPayment as createPaymentRequestFinance } from '@fishbot/coin/libs/requestFinance';
-import createDeposit from '@fishbot/coin/utils/transaction/createDeposit';
-import createSpot from '@fishbot/coin/utils/wallet/createSpot';
-import { ErrorType } from '@fishbot/utils/constants/error';
-import { SourceType, TransactionType } from '@fishbot/utils/constants/pay';
-import random from '@fishbot/utils/helpers/random';
-import type { Wallet } from '@fishbot/utils/types/Pay.model';
-import type { User } from '@fishbot/utils/types/User.model';
+import { ChargePricingType } from '@fishprovider/coin/constants/coinbaseCommerce';
+import { createPayment as createPaymentCoinbaseCommerce } from '@fishprovider/coin/libs/coinbaseCommerce';
+import { createPayment as createPaymentRequestFinance } from '@fishprovider/coin/libs/requestFinance';
+import createDeposit from '@fishprovider/coin/utils/transaction/createDeposit';
+import createSpot from '@fishprovider/coin/utils/wallet/createSpot';
+import { ErrorType } from '@fishprovider/utils/constants/error';
+import { SourceType, TransactionType } from '@fishprovider/utils/constants/pay';
+import random from '@fishprovider/utils/helpers/random';
+import type { Wallet } from '@fishprovider/utils/types/Pay.model';
+import type { User } from '@fishprovider/utils/types/User.model';
 import moment from 'moment';
 
 import isDemo from '~utils/isDemo';

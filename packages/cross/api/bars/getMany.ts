@@ -1,5 +1,5 @@
-import type { ProviderType } from '@fishbot/utils/constants/account';
-import type { Bar } from '@fishbot/utils/types/Bar.model';
+import type { ProviderType } from '@fishprovider/utils/constants/account';
+import type { Bar } from '@fishprovider/utils/types/Bar.model';
 
 import { ApiConfig, apiGet } from '~libs/api';
 import storeBars from '~stores/bars';

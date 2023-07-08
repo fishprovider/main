@@ -1,11 +1,11 @@
-import fetchAccountInfo from '@fishbot/swap/commands/fetchAccountInfo';
-import { getProvider } from '@fishbot/swap/utils/account';
-import { ProviderViewType } from '@fishbot/utils/constants/account';
-import { ErrorType } from '@fishbot/utils/constants/error';
-import { Roles } from '@fishbot/utils/constants/user';
-import { getRoleProvider } from '@fishbot/utils/helpers/user';
-import type { Account, Member } from '@fishbot/utils/types/Account.model';
-import type { User } from '@fishbot/utils/types/User.model';
+import fetchAccountInfo from '@fishprovider/swap/commands/fetchAccountInfo';
+import { getProvider } from '@fishprovider/swap/utils/account';
+import { ProviderViewType } from '@fishprovider/utils/constants/account';
+import { ErrorType } from '@fishprovider/utils/constants/error';
+import { Roles } from '@fishprovider/utils/constants/user';
+import { getRoleProvider } from '@fishprovider/utils/helpers/user';
+import type { Account, Member } from '@fishprovider/utils/types/Account.model';
+import type { User } from '@fishprovider/utils/types/User.model';
 import { ReturnDocument } from 'mongodb';
 
 const accountGet = async ({ data, userInfo }: {

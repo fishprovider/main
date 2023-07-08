@@ -1,9 +1,9 @@
-import storePrices from '@fishbot/cross/stores/prices';
-import storeUser from '@fishbot/cross/stores/user';
-import { PlanType, ProviderPlatform, ProviderType } from '@fishbot/utils/constants/account';
-import { Direction, OrderStatus, OrderType } from '@fishbot/utils/constants/order';
-import { getPriceFromAmount, getVolumeFromLot } from '@fishbot/utils/helpers/price';
-import type { OrderWithoutId } from '@fishbot/utils/types/Order.model';
+import storePrices from '@fishprovider/cross/stores/prices';
+import storeUser from '@fishprovider/cross/stores/user';
+import { PlanType, ProviderPlatform, ProviderType } from '@fishprovider/utils/constants/account';
+import { Direction, OrderStatus, OrderType } from '@fishprovider/utils/constants/order';
+import { getPriceFromAmount, getVolumeFromLot } from '@fishprovider/utils/helpers/price';
+import type { OrderWithoutId } from '@fishprovider/utils/types/Order.model';
 import _ from 'lodash';
 import { useEffect, useState } from 'react';
 

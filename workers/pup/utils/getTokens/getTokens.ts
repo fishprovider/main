@@ -1,4 +1,4 @@
-import delay from '@fishbot/utils/helpers/delay';
+import delay from '@fishprovider/utils/helpers/delay';
 import type { Browser, Page } from 'puppeteer-core';
 
 import { newBrowser, newPage } from '~libs/pup';

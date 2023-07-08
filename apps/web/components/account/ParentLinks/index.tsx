@@ -1,4 +1,4 @@
-import storeAccounts from '@fishbot/cross/stores/accounts';
+import storeAccounts from '@fishprovider/cross/stores/accounts';
 import _ from 'lodash';
 
 import Link from '~components/base/Link';

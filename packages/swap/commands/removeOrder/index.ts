@@ -1,8 +1,8 @@
-import { ProviderPlatform } from '@fishbot/utils/constants/account';
-import { OrderStatus } from '@fishbot/utils/constants/order';
-import type { Config } from '@fishbot/utils/types/Account.model';
-import type { Order, OrderWithoutId } from '@fishbot/utils/types/Order.model';
-import type { Price } from '@fishbot/utils/types/Price.model';
+import { ProviderPlatform } from '@fishprovider/utils/constants/account';
+import { OrderStatus } from '@fishprovider/utils/constants/order';
+import type { Config } from '@fishprovider/utils/types/Account.model';
+import type { Order, OrderWithoutId } from '@fishprovider/utils/types/Order.model';
+import type { Price } from '@fishprovider/utils/types/Price.model';
 import _ from 'lodash';
 
 import removeOrderCTrader from '~libs/ctrader/commands/removeOrder';

@@ -1,8 +1,8 @@
-import storeAccounts from '@fishbot/cross/stores/accounts';
-import storeOrders from '@fishbot/cross/stores/orders';
-import { PlanType } from '@fishbot/utils/constants/account';
-import { OrderStatus } from '@fishbot/utils/constants/order';
-import { getProfit } from '@fishbot/utils/helpers/order';
+import storeAccounts from '@fishprovider/cross/stores/accounts';
+import storeOrders from '@fishprovider/cross/stores/orders';
+import { PlanType } from '@fishprovider/utils/constants/account';
+import { OrderStatus } from '@fishprovider/utils/constants/order';
+import { getProfit } from '@fishprovider/utils/helpers/order';
 import _ from 'lodash';
 import moment from 'moment';
 

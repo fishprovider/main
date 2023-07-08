@@ -1,9 +1,9 @@
-import priceGetMany from '@fishbot/cross/api/prices/getMany';
-import { useQuery } from '@fishbot/cross/libs/query';
-import storePrices from '@fishbot/cross/stores/prices';
-import storeUser from '@fishbot/cross/stores/user';
-import { PlanType, ProviderType } from '@fishbot/utils/constants/account';
-import type { Plan } from '@fishbot/utils/types/Account.model';
+import priceGetMany from '@fishprovider/cross/api/prices/getMany';
+import { useQuery } from '@fishprovider/cross/libs/query';
+import storePrices from '@fishprovider/cross/stores/prices';
+import storeUser from '@fishprovider/cross/stores/user';
+import { PlanType, ProviderType } from '@fishprovider/utils/constants/account';
+import type { Plan } from '@fishprovider/utils/types/Account.model';
 import _ from 'lodash';
 
 import { queryKeys } from '~constants/query';

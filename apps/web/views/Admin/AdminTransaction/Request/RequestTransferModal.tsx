@@ -1,4 +1,4 @@
-import storeTransactions from '@fishbot/cross/stores/transactions';
+import storeTransactions from '@fishprovider/cross/stores/transactions';
 import _ from 'lodash';
 
 import Stack from '~ui/core/Stack';

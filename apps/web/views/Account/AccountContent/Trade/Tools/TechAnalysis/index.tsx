@@ -1,4 +1,4 @@
-import storeUser from '@fishbot/cross/stores/user';
+import storeUser from '@fishprovider/cross/stores/user';
 
 import SymbolsSelect from '~components/price/SymbolsSelect';
 import Group from '~ui/core/Group';

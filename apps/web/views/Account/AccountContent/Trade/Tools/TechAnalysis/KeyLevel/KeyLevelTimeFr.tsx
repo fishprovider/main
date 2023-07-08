@@ -1,9 +1,9 @@
-import statsGetManyKeyLevels from '@fishbot/cross/api/stats/getManyKeyLevels';
-import storePrices from '@fishbot/cross/stores/prices';
-import storeStats from '@fishbot/cross/stores/stats';
-import storeUser from '@fishbot/cross/stores/user';
-import { ProviderType } from '@fishbot/utils/constants/account';
-import { getDiffPips } from '@fishbot/utils/helpers/price';
+import statsGetManyKeyLevels from '@fishprovider/cross/api/stats/getManyKeyLevels';
+import storePrices from '@fishprovider/cross/stores/prices';
+import storeStats from '@fishprovider/cross/stores/stats';
+import storeUser from '@fishprovider/cross/stores/user';
+import { ProviderType } from '@fishprovider/utils/constants/account';
+import { getDiffPips } from '@fishprovider/utils/helpers/price';
 import _ from 'lodash';
 import moment from 'moment';
 import { useEffect } from 'react';

@@ -1,4 +1,4 @@
-import type { Order } from '@fishbot/utils/types/Order.model';
+import type { Order } from '@fishprovider/utils/types/Order.model';
 import _ from 'lodash';
 
 import { ApiConfig, apiPost } from '~libs/api';

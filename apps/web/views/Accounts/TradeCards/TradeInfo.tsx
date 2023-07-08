@@ -1,13 +1,13 @@
-import orderGetMany from '@fishbot/cross/api/orders/getMany';
-import { useQuery } from '@fishbot/cross/libs/query';
-import storeAccounts from '@fishbot/cross/stores/accounts';
-import storeOrders from '@fishbot/cross/stores/orders';
-import storePrices from '@fishbot/cross/stores/prices';
-import { ProviderType } from '@fishbot/utils/constants/account';
-import { OrderStatus } from '@fishbot/utils/constants/order';
-import { getEntry, getProfit, getProfitIcon } from '@fishbot/utils/helpers/order';
-import { getDiffPips, getLotFromVolume, getMajorPairs } from '@fishbot/utils/helpers/price';
-import type { Order } from '@fishbot/utils/types/Order.model';
+import orderGetMany from '@fishprovider/cross/api/orders/getMany';
+import { useQuery } from '@fishprovider/cross/libs/query';
+import storeAccounts from '@fishprovider/cross/stores/accounts';
+import storeOrders from '@fishprovider/cross/stores/orders';
+import storePrices from '@fishprovider/cross/stores/prices';
+import { ProviderType } from '@fishprovider/utils/constants/account';
+import { OrderStatus } from '@fishprovider/utils/constants/order';
+import { getEntry, getProfit, getProfitIcon } from '@fishprovider/utils/helpers/order';
+import { getDiffPips, getLotFromVolume, getMajorPairs } from '@fishprovider/utils/helpers/price';
+import type { Order } from '@fishprovider/utils/types/Order.model';
 import _ from 'lodash';
 
 import EquityProgress from '~components/account/EquityProgress';

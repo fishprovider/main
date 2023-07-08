@@ -1,9 +1,8 @@
 {
-  "name": "@fishbot/back",
+  "name": "@fishprovider/back",
   "version": "5.0.2",
   "type": "module",
   "scripts": {
-    "preinstall": "cd ../.. && npm install -w packages/utils -w packages/core -w packages/swap -w packages/ctrader -w packages/metatrader -w packages/coin",
     "lint": "eslint --cache --fix --ignore-pattern dist .",
     "type-check": "tsc --noEmit",
     "test": "npm run test-unit",
@@ -17,6 +16,12 @@
     "dev": "cross-env NODE_ENV=development concurrently -k 'npm run build-watch' 'npm run start-watch'"
   },
   "dependencies": {
+    "@fishprovider/utils": "*",
+    "@fishprovider/core": "*",
+    "@fishprovider/swap": "*",
+    "@fishprovider/ctrader": "*",
+    "@fishprovider/metatrader": "*",
+    "@fishprovider/coin": "*",
     "axios": "^1.4.0",
     "dotenv-flow": "^3.2.0",
     "express": "^4.18.2",

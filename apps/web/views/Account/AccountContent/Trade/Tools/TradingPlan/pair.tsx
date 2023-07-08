@@ -1,4 +1,4 @@
-import type { Price } from '@fishbot/utils/types/Price.model';
+import type { Price } from '@fishprovider/utils/types/Price.model';
 
 import Mark from '~ui/core/Mark';
 import Text from '~ui/core/Text';

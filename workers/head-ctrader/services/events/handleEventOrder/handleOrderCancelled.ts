@@ -1,9 +1,9 @@
-import type { CallbackPayload } from '@fishbot/ctrader/types/Event.model';
-import { transformOrder, transformPosition } from '@fishbot/swap/libs/ctrader/transform';
-import { newRequestOrder } from '@fishbot/swap/utils/command';
-import { OrderStatus } from '@fishbot/utils/constants/order';
-import type { OrderWithoutId } from '@fishbot/utils/types/Order.model';
-import type { RedisSymbol } from '@fishbot/utils/types/Redis.model';
+import type { CallbackPayload } from '@fishprovider/ctrader/types/Event.model';
+import { transformOrder, transformPosition } from '@fishprovider/swap/libs/ctrader/transform';
+import { newRequestOrder } from '@fishprovider/swap/utils/command';
+import { OrderStatus } from '@fishprovider/utils/constants/order';
+import type { OrderWithoutId } from '@fishprovider/utils/types/Order.model';
+import type { RedisSymbol } from '@fishprovider/utils/types/Redis.model';
 
 import type { ClientAccount } from '~types/Client.model';
 import { checkRequestOrder, updateRequestOrder } from '~utils/order';

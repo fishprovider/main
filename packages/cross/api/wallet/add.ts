@@ -1,4 +1,4 @@
-import type { Wallet } from '@fishbot/utils/types/Pay.model';
+import type { Wallet } from '@fishprovider/utils/types/Pay.model';
 
 import { ApiConfig, apiPost } from '~libs/api';
 import storeWallets from '~stores/wallets';

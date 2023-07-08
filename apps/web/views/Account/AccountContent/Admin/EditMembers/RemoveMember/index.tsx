@@ -1,6 +1,6 @@
-import memberRemove from '@fishbot/cross/api/accounts/members/remove';
-import { useMutate } from '@fishbot/cross/libs/query';
-import storeUser from '@fishbot/cross/stores/user';
+import memberRemove from '@fishprovider/cross/api/accounts/members/remove';
+import { useMutate } from '@fishprovider/cross/libs/query';
+import storeUser from '@fishprovider/cross/stores/user';
 
 import Icon from '~ui/core/Icon';
 import openConfirmModal from '~ui/modals/openConfirmModal';

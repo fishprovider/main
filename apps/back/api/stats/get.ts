@@ -1,6 +1,6 @@
-import { ErrorType } from '@fishbot/utils/constants/error';
-import type { Stat } from '@fishbot/utils/types/Stat.model';
-import type { User } from '@fishbot/utils/types/User.model';
+import { ErrorType } from '@fishprovider/utils/constants/error';
+import type { Stat } from '@fishprovider/utils/types/Stat.model';
+import type { User } from '@fishprovider/utils/types/User.model';
 
 const statGet = async ({ data, userInfo }: {
   data: {

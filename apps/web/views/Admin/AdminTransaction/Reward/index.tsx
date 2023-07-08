@@ -1,6 +1,6 @@
-import { apiPost } from '@fishbot/cross/libs/api';
-import storeUser from '@fishbot/cross/stores/user';
-import { getRoleProvider } from '@fishbot/utils/helpers/user';
+import { apiPost } from '@fishprovider/cross/libs/api';
+import storeUser from '@fishprovider/cross/stores/user';
+import { getRoleProvider } from '@fishprovider/utils/helpers/user';
 import React, { useState } from 'react';
 
 import Button from '~ui/core/Button';

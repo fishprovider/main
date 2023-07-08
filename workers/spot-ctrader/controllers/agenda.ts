@@ -1,4 +1,4 @@
-import { clean, getJobType } from '@fishbot/core/libs/agenda';
+import { clean, getJobType } from '@fishprovider/core/libs/agenda';
 
 import { checkLastUpdated } from '~services/checkCTrader';
 import { renewSymbols, renewTokens } from '~services/provider';

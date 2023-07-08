@@ -1,8 +1,8 @@
-import { start as startQueue } from '@fishbot/core/libs/queuePromise';
-import { ExecutionType } from '@fishbot/ctrader/constants/openApi';
-import type { ConnectionType } from '@fishbot/ctrader/types/Connection.model';
-import type { CallbackPayload } from '@fishbot/ctrader/types/Event.model';
-import { getSymbols } from '@fishbot/swap/utils/price';
+import { start as startQueue } from '@fishprovider/core/libs/queuePromise';
+import { ExecutionType } from '@fishprovider/ctrader/constants/openApi';
+import type { ConnectionType } from '@fishprovider/ctrader/types/Connection.model';
+import type { CallbackPayload } from '@fishprovider/ctrader/types/Event.model';
+import { getSymbols } from '@fishprovider/swap/utils/price';
 
 import type { ClientAccount } from '~types/Client.model';
 import { reloadOrdersAndAccount } from '~utils/order';

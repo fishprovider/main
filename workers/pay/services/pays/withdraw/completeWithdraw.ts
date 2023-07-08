@@ -1,6 +1,6 @@
-import updateTransaction from '@fishbot/coin/utils/transaction/updateTransaction';
-import { TransactionStatus } from '@fishbot/utils/constants/pay';
-import type { Transaction, Wallet } from '@fishbot/utils/types/Pay.model';
+import updateTransaction from '@fishprovider/coin/utils/transaction/updateTransaction';
+import { TransactionStatus } from '@fishprovider/utils/constants/pay';
+import type { Transaction, Wallet } from '@fishprovider/utils/types/Pay.model';
 import type { ClientSession } from 'mongodb';
 
 const completeWithdraw = async (params: {

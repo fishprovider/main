@@ -1,7 +1,7 @@
-import Connection from '@fishbot/ctrader/Connection';
-import type { Config } from '@fishbot/ctrader/types/Config.model';
-import type { CallbackPayload } from '@fishbot/ctrader/types/Event.model';
-import delay from '@fishbot/utils/helpers/delay';
+import Connection from '@fishprovider/ctrader/Connection';
+import type { Config } from '@fishprovider/ctrader/types/Config.model';
+import type { CallbackPayload } from '@fishprovider/ctrader/types/Event.model';
+import delay from '@fishprovider/utils/helpers/delay';
 
 import authorizeAccount from './authorizeAccount';
 

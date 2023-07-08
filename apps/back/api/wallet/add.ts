@@ -1,8 +1,8 @@
-import { ErrorType } from '@fishbot/utils/constants/error';
-import { WalletType } from '@fishbot/utils/constants/pay';
-import randomId from '@fishbot/utils/helpers/random';
-import type { Wallet } from '@fishbot/utils/types/Pay.model';
-import type { User } from '@fishbot/utils/types/User.model';
+import { ErrorType } from '@fishprovider/utils/constants/error';
+import { WalletType } from '@fishprovider/utils/constants/pay';
+import randomId from '@fishprovider/utils/helpers/random';
+import type { Wallet } from '@fishprovider/utils/types/Pay.model';
+import type { User } from '@fishprovider/utils/types/User.model';
 
 const walletAdd = async ({ data, userInfo }: {
   data: {

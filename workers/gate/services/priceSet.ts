@@ -1,6 +1,6 @@
-import { savePrice } from '@fishbot/swap/utils/price';
-import { ProviderType } from '@fishbot/utils/constants/account';
-import { isLastRunExpired } from '@fishbot/utils/helpers/lastRunChecks/lastRunChecks';
+import { savePrice } from '@fishprovider/swap/utils/price';
+import { ProviderType } from '@fishprovider/utils/constants/account';
+import { isLastRunExpired } from '@fishprovider/utils/helpers/lastRunChecks/lastRunChecks';
 import _ from 'lodash';
 
 import { setLastUpdated } from './checkCTrader';

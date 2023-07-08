@@ -1,5 +1,5 @@
-import { apiPost } from '@fishbot/cross/libs/api';
-import storeUser from '@fishbot/cross/stores/user';
+import { apiPost } from '@fishprovider/cross/libs/api';
+import storeUser from '@fishprovider/cross/stores/user';
 import _ from 'lodash';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';

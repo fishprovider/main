@@ -1,15 +1,15 @@
-import orderGetMany from '@fishbot/cross/api/orders/getMany';
-import orderGetManyInfo from '@fishbot/cross/api/orders/getManyInfo';
-import orderRemove from '@fishbot/cross/api/orders/remove';
-import { useMutate } from '@fishbot/cross/libs/query';
-import storePrices from '@fishbot/cross/stores/prices';
-import storeUser from '@fishbot/cross/stores/user';
-import { ProviderType } from '@fishbot/utils/constants/account';
-import { OrderStatus } from '@fishbot/utils/constants/order';
-import { getEntry } from '@fishbot/utils/helpers/order';
-import { getDiffPips, getMajorPairs } from '@fishbot/utils/helpers/price';
-import { getRoleProvider } from '@fishbot/utils/helpers/user';
-import type { Order } from '@fishbot/utils/types/Order.model';
+import orderGetMany from '@fishprovider/cross/api/orders/getMany';
+import orderGetManyInfo from '@fishprovider/cross/api/orders/getManyInfo';
+import orderRemove from '@fishprovider/cross/api/orders/remove';
+import { useMutate } from '@fishprovider/cross/libs/query';
+import storePrices from '@fishprovider/cross/stores/prices';
+import storeUser from '@fishprovider/cross/stores/user';
+import { ProviderType } from '@fishprovider/utils/constants/account';
+import { OrderStatus } from '@fishprovider/utils/constants/order';
+import { getEntry } from '@fishprovider/utils/helpers/order';
+import { getDiffPips, getMajorPairs } from '@fishprovider/utils/helpers/price';
+import { getRoleProvider } from '@fishprovider/utils/helpers/user';
+import type { Order } from '@fishprovider/utils/types/Order.model';
 import _ from 'lodash';
 import { useState } from 'react';
 

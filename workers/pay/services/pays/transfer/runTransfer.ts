@@ -1,7 +1,7 @@
-import updateTransaction from '@fishbot/coin/utils/transaction/updateTransaction';
-import { runDBTransaction } from '@fishbot/core/libs/mongo';
-import { TransactionStatus, TransactionStatusRequest } from '@fishbot/utils/constants/pay';
-import type { Transaction, Wallet } from '@fishbot/utils/types/Pay.model';
+import updateTransaction from '@fishprovider/coin/utils/transaction/updateTransaction';
+import { runDBTransaction } from '@fishprovider/core/libs/mongo';
+import { TransactionStatus, TransactionStatusRequest } from '@fishprovider/utils/constants/pay';
+import type { Transaction, Wallet } from '@fishprovider/utils/types/Pay.model';
 import _ from 'lodash';
 
 import completeTransfer from './completeTransfer';

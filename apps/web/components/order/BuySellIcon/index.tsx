@@ -1,4 +1,4 @@
-import { Direction } from '@fishbot/utils/constants/order';
+import { Direction } from '@fishprovider/utils/constants/order';
 
 import Icon from '~ui/core/Icon';
 

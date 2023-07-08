@@ -1,6 +1,6 @@
-import getAccountList from '@fishbot/ctrader/commands/getAccountList';
-import type { Config as ConfigCTrader } from '@fishbot/ctrader/types/Config.model';
-import type { Config } from '@fishbot/utils/types/Account.model';
+import getAccountList from '@fishprovider/ctrader/commands/getAccountList';
+import type { Config as ConfigCTrader } from '@fishprovider/ctrader/types/Config.model';
+import type { Config } from '@fishprovider/utils/types/Account.model';
 
 import connectAndRun from './connectAndRun';
 

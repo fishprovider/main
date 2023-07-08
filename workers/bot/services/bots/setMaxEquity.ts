@@ -1,6 +1,6 @@
-import { send } from '@fishbot/core/libs/notif';
-import { isLastRunExpired } from '@fishbot/utils/helpers/lastRunChecks';
-import type { Account } from '@fishbot/utils/types/Account.model';
+import { send } from '@fishprovider/core/libs/notif';
+import { isLastRunExpired } from '@fishprovider/utils/helpers/lastRunChecks';
+import type { Account } from '@fishprovider/utils/types/Account.model';
 import _ from 'lodash';
 import moment from 'moment';
 

@@ -1,8 +1,8 @@
-import chatAdd from '@fishbot/cross/api/chats/add';
-import storeChats from '@fishbot/cross/stores/chats';
-import storeUser from '@fishbot/cross/stores/user';
-import type { Chat, ChatType } from '@fishbot/utils/types/Chat.model';
-import type { User } from '@fishbot/utils/types/User.model';
+import chatAdd from '@fishprovider/cross/api/chats/add';
+import storeChats from '@fishprovider/cross/stores/chats';
+import storeUser from '@fishprovider/cross/stores/user';
+import type { Chat, ChatType } from '@fishprovider/utils/types/Chat.model';
+import type { User } from '@fishprovider/utils/types/User.model';
 import _ from 'lodash';
 
 import { toastError } from '~ui/toast';

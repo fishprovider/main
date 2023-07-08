@@ -1,5 +1,5 @@
-import { apiPost } from '@fishbot/cross/libs/api';
-import storeUser from '@fishbot/cross/stores/user';
+import { apiPost } from '@fishprovider/cross/libs/api';
+import storeUser from '@fishprovider/cross/stores/user';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { useRouter } from 'next/router';

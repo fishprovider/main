@@ -1,12 +1,12 @@
-import runPromises from '@fishbot/core/libs/queuePromise/runPromises';
-import getSymbolTick from '@fishbot/swap/libs/metatrader/getSymbolTick';
-import { getProvider } from '@fishbot/swap/utils/account';
-import { getPrices } from '@fishbot/swap/utils/price';
-import { ProviderType } from '@fishbot/utils/constants/account';
-import { ErrorType } from '@fishbot/utils/constants/error';
-import { cryptoSymbols, forexMajorPairs } from '@fishbot/utils/constants/price';
-import { isLastRunExpired } from '@fishbot/utils/helpers/lastRunChecks/lastRunChecks';
-import type { User } from '@fishbot/utils/types/User.model';
+import runPromises from '@fishprovider/core/libs/queuePromise/runPromises';
+import getSymbolTick from '@fishprovider/swap/libs/metatrader/getSymbolTick';
+import { getProvider } from '@fishprovider/swap/utils/account';
+import { getPrices } from '@fishprovider/swap/utils/price';
+import { ProviderType } from '@fishprovider/utils/constants/account';
+import { ErrorType } from '@fishprovider/utils/constants/error';
+import { cryptoSymbols, forexMajorPairs } from '@fishprovider/utils/constants/price';
+import { isLastRunExpired } from '@fishprovider/utils/helpers/lastRunChecks/lastRunChecks';
+import type { User } from '@fishprovider/utils/types/User.model';
 import _ from 'lodash';
 
 const watchingProviderTypeSymbols = {

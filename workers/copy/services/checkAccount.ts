@@ -1,5 +1,5 @@
-import { getLiveOrders } from '@fishbot/swap/utils/order';
-import type { Account, CopySettings } from '@fishbot/utils/types/Account.model';
+import { getLiveOrders } from '@fishprovider/swap/utils/order';
+import type { Account, CopySettings } from '@fishprovider/utils/types/Account.model';
 import _ from 'lodash';
 
 import type { OrderCopy } from '~types/Order.model';

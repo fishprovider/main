@@ -1,5 +1,5 @@
-import { ProviderType } from '@fishbot/utils/constants/account';
-import { ErrorType } from '@fishbot/utils/constants/error';
+import { ProviderType } from '@fishprovider/utils/constants/account';
+import { ErrorType } from '@fishprovider/utils/constants/error';
 
 import newAccount from '~commands/newAccount';
 import removeAccount from '~commands/removeAccount';

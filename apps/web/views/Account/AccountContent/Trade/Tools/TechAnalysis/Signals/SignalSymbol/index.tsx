@@ -1,6 +1,6 @@
-import storeSignals from '@fishbot/cross/stores/signals';
-import { Direction } from '@fishbot/utils/constants/order';
-import type { Signal } from '@fishbot/utils/types/Signal.model';
+import storeSignals from '@fishprovider/cross/stores/signals';
+import { Direction } from '@fishprovider/utils/constants/order';
+import type { Signal } from '@fishprovider/utils/types/Signal.model';
 import _ from 'lodash';
 import moment from 'moment';
 import React from 'react';

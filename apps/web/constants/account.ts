@@ -1,7 +1,7 @@
 import {
   CopyVolumeMode, LockType, ProviderTradeType, ProviderType, ProviderViewType,
-} from '@fishbot/utils/constants/account';
-import { Roles } from '@fishbot/utils/constants/user';
+} from '@fishprovider/utils/constants/account';
+import { Roles } from '@fishprovider/utils/constants/user';
 import _ from 'lodash';
 
 import { isLive, isProd } from '~utils';

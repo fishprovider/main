@@ -1,7 +1,7 @@
-import { apiPost } from '@fishbot/cross/libs/api';
-import { useMutate } from '@fishbot/cross/libs/query';
-import storeTransactions from '@fishbot/cross/stores/transactions';
-import { TransactionStatus } from '@fishbot/utils/constants/pay';
+import { apiPost } from '@fishprovider/cross/libs/api';
+import { useMutate } from '@fishprovider/cross/libs/query';
+import storeTransactions from '@fishprovider/cross/stores/transactions';
+import { TransactionStatus } from '@fishprovider/utils/constants/pay';
 import _ from 'lodash';
 import { useState } from 'react';
 

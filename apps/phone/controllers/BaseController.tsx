@@ -1,4 +1,4 @@
-import { QueryProvider } from '@fishbot/cross/libs/query';
+import { QueryProvider } from '@fishprovider/cross/libs/query';
 import { useFonts } from 'expo-font';
 import { SplashScreen } from 'expo-router';
 import { useEffect } from 'react';

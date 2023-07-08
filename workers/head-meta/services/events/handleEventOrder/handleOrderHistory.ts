@@ -1,9 +1,9 @@
-import { ActionType, OrderState } from '@fishbot/metatrader/constants/metaApi';
-import type { CallbackPayload } from '@fishbot/metatrader/types/Event.model';
-import { transformOrder } from '@fishbot/swap/libs/metatrader/transform';
-import { newRequestOrder } from '@fishbot/swap/utils/command';
-import type { OrderWithoutId } from '@fishbot/utils/types/Order.model';
-import type { RedisSymbol } from '@fishbot/utils/types/Redis.model';
+import { ActionType, OrderState } from '@fishprovider/metatrader/constants/metaApi';
+import type { CallbackPayload } from '@fishprovider/metatrader/types/Event.model';
+import { transformOrder } from '@fishprovider/swap/libs/metatrader/transform';
+import { newRequestOrder } from '@fishprovider/swap/utils/command';
+import type { OrderWithoutId } from '@fishprovider/utils/types/Order.model';
+import type { RedisSymbol } from '@fishprovider/utils/types/Redis.model';
 import moment from 'moment';
 
 import type { ClientAccount } from '~types/Client.model';
