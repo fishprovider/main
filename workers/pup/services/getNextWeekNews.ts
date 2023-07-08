@@ -4,11 +4,6 @@ import type { Page } from 'puppeteer-core';
 
 import { gotoAttempt, newBrowser, newPage } from '~libs/pup';
 
-const env = {
-  typePre: process.env.TYPE_PRE,
-  nodeEnv: process.env.NODE_ENV,
-};
-
 const parseTime = (rows: any[], week: string, type: string) => rows.map((row, index: number) => {
   const datetime = moment.utc(`${row.date} ${row.time}`.trim(), ['ddd MMM D', 'ddd MMM D h:mma']);
   return {
