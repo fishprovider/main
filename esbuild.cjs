@@ -28,13 +28,15 @@ const baseOptions = {
 };
 
 const build = async (dependencies, buildOptions) => {
+  const externalDependencies = Object.keys({
+    ...packageDependencies,
+    ...dependencies,
+  }).filter(item => !item.startsWith('@fishprovider/'));
+
   const options = {
     ...baseOptions,
     ...buildOptions,
-    external: Object.keys({
-      ...packageDependencies,
-      ...dependencies,
-    }),
+    external: externalDependencies,
   };
 
   if (watchMode) {
