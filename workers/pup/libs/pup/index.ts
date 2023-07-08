@@ -73,6 +73,7 @@ const newBrowser = async (
       isLandscape: true,
     },
   });
+  // TODO: fix this type
   return browser as any as Browser;
 };
 
