@@ -3,14 +3,14 @@ import getTokens from './getTokens';
 const env = {
   user: process.env.CTRADER_USER || '',
   pass: process.env.CTRADER_PASS || '',
-  showMember: process.env.CTRADER_SHOW_BROWSER,
+  showBrowser: process.env.CTRADER_SHOW_BROWSER,
   clientId: process.env.CTRADER_CLIENT_ID || '',
 };
 
 const config = {
   user: env.user,
   pass: env.pass,
-  headless: !env.showMember,
+  headless: !env.showBrowser,
   clientId: env.clientId,
 };
 

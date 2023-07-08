@@ -1,10 +1,5 @@
 import { gotoAttempt, newBrowser, newPage } from '~libs/pup';
 
-const env = {
-  nodeEnv: process.env.NODE_ENV,
-  pupProduct: process.env.PUPPETEER_PRODUCT || 'chrome',
-};
-
 const login = async (config: {
   user: string,
   pass: string,
@@ -12,10 +7,7 @@ const login = async (config: {
 }) => {
   const { user, pass, headless } = config;
 
-  const browser = await newBrowser(
-    env.nodeEnv === 'development' ? false : headless !== false,
-    env.pupProduct,
-  );
+  const browser = await newBrowser(headless);
   try {
     const page = await newPage(browser);
 

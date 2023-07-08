@@ -4,11 +4,6 @@ import type { Browser, Page } from 'puppeteer-core';
 import { newBrowser, newPage } from '~libs/pup';
 import type { LoginConfig, Token } from '~types/CTrader.model';
 
-const env = {
-  nodeEnv: process.env.NODE_ENV,
-  pupProduct: process.env.PUPPETEER_PRODUCT || 'chrome',
-};
-
 const MAX_ATTEMPTS = 5;
 
 const attemptHandler = async (
@@ -88,10 +83,7 @@ const pageHandler = async (browser: Browser, page: Page, config: LoginConfig) =>
 
 const browserHandler = async (config: LoginConfig) => {
   const { headless } = config;
-  const browser = await newBrowser(
-    env.nodeEnv === 'development' ? false : headless !== false,
-    env.pupProduct,
-  );
+  const browser = await newBrowser(headless);
   try {
     const page = await newPage(browser);
     const result = await pageHandler(browser, page, config);

@@ -1,9 +1,12 @@
 import fs from 'fs';
-import type { Browser, Page, Product } from 'puppeteer-core';
 import puppeteer from 'puppeteer-extra';
 import AdblockerPlugin from 'puppeteer-extra-plugin-adblocker';
 import AnonymizeUAPlugin from 'puppeteer-extra-plugin-anonymize-ua';
 import StealthPlugin from 'puppeteer-extra-plugin-stealth';
+
+const env = {
+  nodeEnv: process.env.NODE_ENV,
+};
 
 const MAX_ATTEMPTS = 10;
 
@@ -48,8 +51,7 @@ const newPage = async (browser: Browser, defaultTimeout = 600000) => {
 };
 
 const newBrowser = async (
-  headless: boolean,
-  product: string,
+  headless = (env.nodeEnv !== 'development'),
 ) => {
   const browser = await puppeteer.launch({
     executablePath: process.env.PUPPETEER_EXECUTABLE_PATH
@@ -69,7 +71,6 @@ const newBrowser = async (
       height: 768,
       isLandscape: true,
     },
-    product: product as Product,
   });
   return browser;
 };

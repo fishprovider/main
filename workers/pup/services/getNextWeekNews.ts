@@ -7,7 +7,6 @@ import { gotoAttempt, newBrowser, newPage } from '~libs/pup';
 const env = {
   typePre: process.env.TYPE_PRE,
   nodeEnv: process.env.NODE_ENV,
-  pupProduct: process.env.PUPPETEER_PRODUCT || 'chrome',
 };
 
 const parseTime = (rows: any[], week: string, type: string) => rows.map((row, index: number) => {
@@ -180,10 +179,7 @@ const getWeekNews = async (week: string, page: Page) => {
 };
 
 const getNextWeekNews = async () => {
-  const browser = await newBrowser(
-    env.nodeEnv !== 'development',
-    env.pupProduct,
-  );
+  const browser = await newBrowser();
   try {
     const page = await newPage(browser);
     const news: Record<string, any> = {};
