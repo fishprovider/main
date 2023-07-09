@@ -15,5 +15,8 @@
     "crypto-random-string": "^5.0.0",
     "lodash": "^4.17.21",
     "moment": "^2.29.4"
+  },
+  "devDependencies": {
+    "@tsconfig/node-lts-strictest-esm": "^18.12.1"
   }
 }

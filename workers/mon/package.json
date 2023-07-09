@@ -27,8 +27,6 @@
     "moment": "^2.29.4"
   },
   "devDependencies": {
-    "@tsconfig/node-lts-strictest-esm": "^18.12.1",
-    "concurrently": "^8.2.0",
-    "esbuild": "^0.18.11"
+    "concurrently": "^8.2.0"
   }
 }
