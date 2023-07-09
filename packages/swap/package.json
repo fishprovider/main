@@ -11,8 +11,14 @@
     "prebuild": "rm -rf dist && mkdir dist",
     "build": "tsc && tsc-alias --verbose"
   },
+  "peerDependencies": {
+    "@fishprovider/utils": "*",
+    "lodash": "*",
+    "moment": "*"
+  },
   "dependencies": {
-    "lodash": "^4.17.21",
-    "moment": "^2.29.4"
+    "@fishprovider/binance": "*",
+    "@fishprovider/ctrader": "*",
+    "@fishprovider/metatrader": "*"
   }
 }

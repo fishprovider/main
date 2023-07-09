@@ -11,18 +11,17 @@
     "prebuild": "rm -rf dist && mkdir dist",
     "build": "tsc && tsc-alias --verbose"
   },
+  "peerDependencies": {
+    "@fishprovider/utils": "*",
+    "axios": "*",
+    "localforage": "*",
+    "lodash": "*",
+    "moment": "*"
+  },
   "dependencies": {
     "@tanstack/react-query": "^4.29.19",
     "@tanstack/react-query-devtools": "^4.29.19",
     "@tanstack/react-query-persist-client": "^4.29.19",
-    "axios": "^1.4.0",
-    "localforage": "^1.10.0",
-    "lodash": "^4.17.21",
-    "moment": "^2.29.4",
-    "react": "^18.2.0",
     "zustand": "^4.3.9"
-  },
-  "devDependencies": {
-    "socket.io-client": "^4.7.1"
   }
 }
