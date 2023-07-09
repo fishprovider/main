@@ -12,13 +12,13 @@
     "build": "tsc && tsc-alias --verbose"
   },
   "peerDependencies": {
-    "@fishprovider/utils": "*",
     "axios": "*",
     "localforage": "*",
     "lodash": "*",
     "moment": "*"
   },
   "dependencies": {
+    "@fishprovider/utils": "*",
     "@tanstack/react-query": "^4.29.19",
     "@tanstack/react-query-devtools": "^4.29.19",
     "@tanstack/react-query-persist-client": "^4.29.19",

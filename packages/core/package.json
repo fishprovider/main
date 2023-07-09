@@ -11,10 +11,8 @@
     "prebuild": "rm -rf dist && mkdir dist",
     "build": "tsc && tsc-alias --verbose"
   },
-  "peerDependencies": {
-    "@fishprovider/utils": "*"
-  },
   "dependencies": {
+    "@fishprovider/utils": "*",
     "@sentry/node": "^7.57.0",
     "agenda": "^5.0.0",
     "amqplib": "^0.10.3",
