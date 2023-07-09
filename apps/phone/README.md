@@ -10,8 +10,7 @@
 - To run with Development builds
   ```shell
   # Build the app
-  eas build --profile development-simulator --platform ios
-  eas build --profile development --platform android
+  eas build --profile development-simulator --platform all
 
   # Download the build and drag to the simulator to install the app
   # Note that
@@ -130,7 +129,7 @@
   ```
 
 
-# How to deploy?
+# How to build?
 - Update `app.json` for these fields `name`, `slug`, `owner`, `scheme`, `ios.bundleIdentifier`, `android.package`
   ```json
   {
@@ -208,19 +207,32 @@
 
 - Create a build for simulator
   ```shell
-  eas build --profile development-simulator --platform ios
-  eas build --profile development --platform android
+  eas build --profile development-simulator --platform all
   ```
 
   Then download the build, extract, and drag to simulator to install the app
-
   Then run `npm run dev`
 
-- Submit
+# How to deploy?
+
+- Update `app.json`
   ```shell
-  eas build --profile preview --platform platform
-  eas submit -p android
+  "ios": {
+    "googleServicesFile": "./GoogleService-Info.plist",
+  },
+  "android": {
+    "googleServicesFile": "./google-services.json",
+  }
   ```
+
+- Create those files above in Firebase console
+
+- Build and submit
+  ```shell
+  eas build --profile production -p all --auto-submit
+  ```
+
+- (Android only) Play Store requires a manual upload on the first deploy
 
 # Install RN Firebase
 
