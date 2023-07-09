@@ -11,22 +11,14 @@
     "prebuild": "rm -rf dist && mkdir dist",
     "build": "node esbuild.cjs",
     "build-watch": "cross-env WATCH_MODE=true npm run build",
-    "start-immortal": "doppler run --print-config -- node --experimental-specifier-resolution=node dist/immortal.js",
     "start-mon": "doppler run --print-config -- node --experimental-specifier-resolution=node dist/index.js",
-    "start": "concurrently -k 'npm run start-immortal' 'npm run start-mon'",
+    "start-immortal": "doppler run --print-config -- node --experimental-specifier-resolution=node dist/immortal.js",
+    "start-all": "concurrently -k 'npm run start-mon' 'npm run start-immortal'",
+    "start": "npm run start-mon",
     "start-watch": "doppler run --print-config -- nodemon --experimental-specifier-resolution=node --delay 1 dist/index.js",
     "dev": "cross-env NODE_ENV=development concurrently -k 'npm run build-watch' 'npm run start-watch'"
   },
   "dependencies": {
-    "@fishprovider/utils": "*",
-    "@fishprovider/core": "*",
-    "axios": "^1.4.0",
-    "dotenv-flow": "^3.2.0",
-    "express": "^4.18.2",
-    "lodash": "^4.17.21",
-    "moment": "^2.29.4"
-  },
-  "devDependencies": {
-    "concurrently": "^8.2.0"
+    "@fishprovider/core": "*"
   }
 }

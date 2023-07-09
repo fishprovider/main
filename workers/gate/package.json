@@ -16,7 +16,6 @@
     "dev": "cross-env NODE_ENV=development concurrently -k 'npm run build-watch' 'npm run start-watch'"
   },
   "dependencies": {
-    "@fishprovider/utils": "*",
     "@fishprovider/core": "*",
     "@fishprovider/swap": "*",
     "node-telegram-bot-api": "^0.61.0",

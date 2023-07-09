@@ -16,14 +16,7 @@
     "dev": "cross-env NODE_ENV=development concurrently -k 'npm run build-watch' 'npm run start-watch'"
   },
   "dependencies": {
-    "@fishprovider/utils": "*",
     "@fishprovider/core": "*",
-    "@fishprovider/swap": "*",
-    "@fishprovider/ctrader": "*",
-    "@fishprovider/metatrader": "*",
-    "axios": "^1.4.0",
-    "dotenv-flow": "^3.2.0",
-    "lodash": "^4.17.21",
-    "moment": "^2.29.4"
+    "@fishprovider/swap": "*"
   }
 }
