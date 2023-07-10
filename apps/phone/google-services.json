@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "130013915084-m4q2o4gt12llr772tnvtp7s5tibd7ddg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fishprovider.app",
+            "certificate_hash": "9f0bf415a9cb2ad17943894b31daf77e772c67a6"
+          }
+        },
+        {
           "client_id": "130013915084-2qtkr5q2f6pfjp68cb5tmc3qke1p2m24.apps.googleusercontent.com",
           "client_type": 3
         }
