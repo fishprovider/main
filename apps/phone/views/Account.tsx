@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   separator: {
-    marginVertical: 30,
+    marginVertical: 10,
     height: 1,
     width: '80%',
   },
