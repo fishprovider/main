@@ -167,9 +167,9 @@ const start = async () => {
     },
   );
 
-  Logger.warn(`Starting ${clients.length} clients...`);
+  Logger.warn(`Starting ${_.size(clients)} clients...`);
   await Promise.all(_.map(clients, startClient));
-  Logger.warn(`Started ${clients.length} clients...`);
+  Logger.warn(`Started ${_.size(clients)} clients...`);
 };
 
 const startOne = async (providerId: string) => {
