@@ -16,6 +16,13 @@
   ]
   ```
 
+# Rules for the best performance
+
+- In each local `package.json` of sub-projects, only include `dependencies` and `devDependencies` that required
+for `build` and `start`, not for `dev`. If `dev` needs some `devDependencies`, put it in the root `package.json`
+
+- With the rule above, the `build` and `start` on the cloud will have the optional speed to run
+
 # How to dev?
 
 - Install Doppler for env secrets https://docs.doppler.com/docs/install-cli
@@ -26,14 +33,17 @@
 
 - Install dependencies
   ```shell
+  # All
   npm i
+
+  # Single project
+  npm i -w apps/back
   ```
 
 - Start dev server, e.g. `apps/back` and `apps/web`
   ```shell
   # Option 1
   npm run dev -w apps/back
-  npm run dev -w apps/web
 
   # Option 2
   cd apps/back
