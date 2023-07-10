@@ -166,16 +166,27 @@ deploy-back:
 
 deploy-phone:
   rules:
-    - if: $CI_PIPELINE_SOURCE == "schedule" || $CI_COMMIT_TAG
+    - if: $CI_COMMIT_TAG
+      when: always
+  cache: !reference [.cache_npm, cache]
+  script:
+    - npm ci --cache .npm --prefer-offline --no-audit --no-progress --legacy-peer-deps
+    - cd apps/phone
+    - npx eas-cli build --profile production --non-interactive --no-wait -p all --auto-submit
+  timeout: "15 minutes"
+  after_script:
+    - NOTIF_MSG="Deploy phone $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
+    - !reference [.notif, script]
+
+deploy-phone-schedule:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
       when: always
   cache: !reference [.cache_npm, cache]
   script:
     - npm ci --cache .npm --prefer-offline --no-audit --no-progress --legacy-peer-deps
     - cd apps/phone
     - npx eas-cli build --profile development-simulator --non-interactive --no-wait -p all
-    - npx eas-cli build --profile development --non-interactive --no-wait -p all
-    - npx eas-cli build --profile preview-simulator --non-interactive --no-wait -p all
-    - npx eas-cli build --profile preview --non-interactive --no-wait -p all
     - npx eas-cli build --profile production --non-interactive --no-wait -p all --auto-submit
   timeout: "15 minutes"
   after_script:
