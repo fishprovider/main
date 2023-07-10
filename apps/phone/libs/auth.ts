@@ -1,5 +1,5 @@
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
 
 import { onClientLoggedIn, onClientLoggedOut } from '~utils/user';
 
@@ -73,11 +73,27 @@ function refreshUserToken() {
   return getUserToken(user, true);
 }
 
-const loginOAuth = async () => {
+const loginWithGoogle = async () => {
   try {
     await GoogleSignin.hasPlayServices();
-    const { idToken } = await GoogleSignin.signIn();
+    const userInfo = await GoogleSignin.signIn();
+    return userInfo;
+  } catch (err: any) {
+    console.error('Failed to loginWithGoogle', err, err?.code);
+    if (err.code === statusCodes.SIGN_IN_CANCELLED) {
+      console.warn('SIGN_IN_CANCELLED');
+    } else if (err.code === statusCodes.IN_PROGRESS) {
+      console.warn('IN_PROGRESS');
+    } else if (err.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+      console.warn('PLAY_SERVICES_NOT_AVAILABLE');
+    }
+    throw err;
+  }
+};
 
+const loginOAuth = async () => {
+  try {
+    const { idToken } = await loginWithGoogle();
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
     const { user } = await auth().signInWithCredential(googleCredential);
     await onLoggedIn(user);

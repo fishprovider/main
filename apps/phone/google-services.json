@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "130013915084-i0dkslh6ql4ga2bvfj08p8im81shs170.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fishprovider.app",
+            "certificate_hash": "35c31b3308ef57220641f34662cc25ec9420aedd"
+          }
+        },
+        {
           "client_id": "130013915084-2qtkr5q2f6pfjp68cb5tmc3qke1p2m24.apps.googleusercontent.com",
           "client_type": 3
         }
