@@ -1,11 +1,11 @@
 import storeUser from '@fishprovider/cross/stores/user';
 import { ErrorType } from '@fishprovider/utils/constants/error';
 import { StyleSheet } from 'react-native';
-import { Button, Label } from 'tamagui';
 
-import EditScreenInfo from '~components/EditScreenInfo';
-import { Text, View } from '~components/Themed';
 import { loginOAuth, logout } from '~libs/auth';
+import Button from '~ui/Button';
+import Text from '~ui/Text';
+import View from '~ui/View';
 
 const styles = StyleSheet.create({
   container: {
@@ -16,11 +16,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
   },
 });
 
@@ -34,13 +29,12 @@ export default function Account() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Account</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/account.tsx" />
-
-      <Label>{email || ErrorType.accountNotFound}</Label>
-
-      <Button themeInverse onPress={loginOAuth}>Login</Button>
-      <Button themeInverse onPress={logout}>Logout</Button>
+      <Text>{email || ErrorType.accountNotFound}</Text>
+      {email ? (
+        <Button themeInverse onPress={logout}>Logout</Button>
+      ) : (
+        <Button themeInverse onPress={loginOAuth}>Login</Button>
+      )}
     </View>
   );
 }

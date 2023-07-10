@@ -1,7 +1,8 @@
 import { QueryProvider } from '@fishprovider/cross/libs/query';
+import { NavigationContainer } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
-import { SplashScreen } from 'expo-router';
 import { useEffect } from 'react';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import ThemeProvider from '~ui/ThemeProvider';
 
@@ -14,9 +15,6 @@ interface Props {
   children: React.ReactNode;
 }
 
-// Keep the splash screen visible while we fetch resources
-SplashScreen.preventAutoHideAsync();
-
 export default function BaseController({ children }: Props) {
   const [loaded, error] = useFonts({
     FontAwesome: require('../assets/fonts/FontAwesome.ttf'),
@@ -28,20 +26,18 @@ export default function BaseController({ children }: Props) {
     if (error) throw error;
   }, [error]);
 
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
+  if (!loaded) return null;
 
   return (
     <QueryProvider withDevTools={false}>
-      <UserSetup />
-      <ThemeProvider>
-        {children}
-      </ThemeProvider>
+      <SafeAreaProvider>
+        <ThemeProvider>
+          <NavigationContainer>
+            <UserSetup />
+            {children}
+          </NavigationContainer>
+        </ThemeProvider>
+      </SafeAreaProvider>
     </QueryProvider>
   );
 }
-
-export { ErrorBoundary } from 'expo-router';
