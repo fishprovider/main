@@ -16,7 +16,13 @@ const startRunCopiers = async () => {
     { lockLifetime: 1000 * 30 },
     () => runCopiers(),
   );
-  Agenda.define(`${jobName}-manual`, () => runCopiers());
+  Agenda.define(
+    `${jobName}-manual`,
+    {
+      priority: 20,
+    },
+    () => runCopiers(),
+  );
 
   const jobs = await Agenda.jobs({
     name: jobName,

@@ -16,7 +16,13 @@ const startRunBots = async () => {
     { lockLifetime: 1000 * 30 },
     () => runBots(),
   );
-  Agenda.define(`${jobName}-manual`, () => runBots());
+  Agenda.define(
+    `${jobName}-manual`,
+    {
+      priority: 20,
+    },
+    () => runBots(),
+  );
 
   const jobs = await Agenda.jobs({
     name: jobName,
