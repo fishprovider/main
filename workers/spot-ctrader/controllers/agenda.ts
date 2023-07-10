@@ -1,7 +1,8 @@
 import { clean, getJobType } from '@fishprovider/core/libs/agenda';
 
 import { checkLastUpdated } from '~services/checkCTrader';
-import { renewSymbols, renewTokens } from '~services/provider';
+import { pollSymbols, renewSymbols, renewTokens } from '~services/provider';
+import { spotTasks } from '~utils/tasks';
 
 const env = {
   typeId: process.env.TYPE_ID,
@@ -23,6 +24,42 @@ const startCheckCTrader = async () => {
   });
   if (!jobs.length) {
     await Agenda.every('5 minutes', jobName, getJobType('check-ctrader'), {
+      skipImmediate: true,
+    });
+  }
+};
+
+const startPollSymbols = async () => {
+  const jobName = `${prefix}-poll-symbols`;
+  Agenda.define(
+    jobName,
+    { lockLifetime: 1000 * 30 },
+    () => pollSymbols(),
+  );
+
+  const jobs = await Agenda.jobs({
+    name: jobName,
+  });
+  if (!jobs.length) {
+    await Agenda.every('30 seconds', jobName, getJobType('poll-symbols'), {
+      skipImmediate: true,
+    });
+  }
+};
+
+const startPollAllSymbols = async () => {
+  const jobName = `${prefix}-poll-all-symbols`;
+  Agenda.define(
+    jobName,
+    { lockLifetime: 1000 * 60 * 2 },
+    () => pollSymbols(true),
+  );
+
+  const jobs = await Agenda.jobs({
+    name: jobName,
+  });
+  if (!jobs.length) {
+    await Agenda.every('2 minutes', jobName, getJobType('poll-all-symbols'), {
       skipImmediate: true,
     });
   }
@@ -71,6 +108,10 @@ const start = async () => {
   await startCheckCTrader();
   await startRenewTokens();
   await startRenewSymbols();
+  if (spotTasks.poll) {
+    await startPollSymbols();
+    await startPollAllSymbols();
+  }
 };
 
 export {

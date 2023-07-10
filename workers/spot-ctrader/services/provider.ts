@@ -5,6 +5,7 @@ import type { CallbackPayload } from '@fishprovider/ctrader/types/Event.model';
 import connect from '@fishprovider/swap/libs/ctrader/connect';
 import renewTokensCTrader from '@fishprovider/swap/libs/ctrader/renewTokens';
 import type { SymbolCTrader } from '@fishprovider/swap/types/Symbol.model';
+// import { savePrice } from '@fishprovider/swap/utils/price';
 import type { ProviderType } from '@fishprovider/utils/constants/account';
 import type { Account } from '@fishprovider/utils/types/Account.model';
 
@@ -12,7 +13,6 @@ import { startSubs, stopSubs } from '~services/handleSubs';
 import { spotTasks } from '~utils/tasks';
 
 import onEvent, { destroy as destroyEventHandler, start as startEventHandler } from './events';
-import { startPolls, stopPolls } from './handlePolls';
 import renewSymbolsHandler from './renewSymbols';
 import updateAssets from './updateAssets';
 import updateLastBars from './updateLastBars';
@@ -27,6 +27,7 @@ const env = {
 let account: Account | null;
 let connection: ConnectionType | undefined;
 let allSymbols: SymbolCTrader[] = [];
+let symbols: SymbolCTrader[] = [];
 let isRenewing = false;
 let isRestarting = false;
 let isWaitingRestart = false;
@@ -37,7 +38,20 @@ const setIsRestarting = (value: boolean) => {
 
 const getIsRestarting = () => isRestarting;
 
-const renewSymbols = () => renewSymbolsHandler(allSymbols);
+const renewSymbols = () => renewSymbolsHandler(symbols);
+
+const pollSymbols = async (all = false) => {
+  if (!account) {
+    throw new Error(`Account not found ${env.typeId}`);
+  }
+
+  const { config, providerType } = account;
+
+  for (const symbol of (all ? allSymbols : symbols)) {
+    console.log('symbol', symbol, config, providerType);
+    // TODO:
+  }
+};
 
 const renewTokens = async () => {
   if (!connection) {
@@ -69,10 +83,7 @@ const destroy = async () => {
     connection = undefined;
 
     if (spotTasks.price) {
-      await stopSubs(connectionToClose, allSymbols);
-    }
-    if (spotTasks.poll) {
-      await stopPolls(connectionToClose);
+      await stopSubs(connectionToClose, symbols);
     }
     await destroyEventHandler();
     await connectionToClose.destroy();
@@ -181,34 +192,34 @@ const start = async () => {
   });
 
   const { symbols: symbolList } = await getSymbolList(connection);
+  allSymbols = symbolList.filter(({ symbolName }) => !!symbolName) as SymbolCTrader[];
 
   const skipPattern = env.skipPattern && new RegExp(env.skipPattern);
   const watchPattern = new RegExp(env.watchPattern);
-  allSymbols = symbolList.filter(({ symbolName }) => {
-    if (!symbolName) return false;
-    if (skipPattern && skipPattern.test(symbolName)) return false;
-    return watchPattern.test(symbolName);
-  }) as SymbolCTrader[];
+  symbols = allSymbols.filter(({ symbol }) => {
+    if (skipPattern && skipPattern.test(symbol)) return false;
+    return watchPattern.test(symbol);
+  });
 
   if (spotTasks.price) {
-    Logger.info(`Subscribing ${allSymbols.length} symbols`, allSymbols.map(({ symbol }) => symbol).join(','));
-    await startSubs(connection, allSymbols);
-    Logger.warn(`Subscribed ${allSymbols.length} symbols`);
+    Logger.info(`Subscribing ${symbols.length} symbols`, symbols.map(({ symbol }) => symbol).join(','));
+    await startSubs(connection, symbols);
+    Logger.warn(`Subscribed ${symbols.length} symbols`);
     await updateAssets(connection, providerType);
     renewSymbols();
   }
   if (spotTasks.poll) {
-    await startPolls(connection, allSymbols);
-    renewSymbolsHandler(allSymbols);
+    renewSymbolsHandler(symbols);
   }
   if (spotTasks.bar) {
-    await updateLastBars(connection, allSymbols, providerType);
+    await updateLastBars(connection, symbols, providerType);
   }
 };
 
 export {
   destroy,
   getIsRestarting,
+  pollSymbols,
   renewSymbols,
   renewTokens,
   setIsRestarting,
