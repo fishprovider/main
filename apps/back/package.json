@@ -16,9 +16,9 @@
     "dev": "cross-env NODE_ENV=development concurrently -k 'npm run build-watch' 'npm run start-watch'"
   },
   "dependencies": {
+    "@fishprovider/coin": "*",
     "@fishprovider/core": "*",
     "@fishprovider/swap": "*",
-    "@fishprovider/coin": "*",
     "glob": "^9.3.5",
     "md5": "^2.3.0",
     "notion-client": "^6.16.0",
