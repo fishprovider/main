@@ -175,7 +175,7 @@ deploy-phone:
     - npx eas-cli build --profile preview-simulator --non-interactive --no-wait -p all
     - npx eas-cli build --profile preview --non-interactive --no-wait -p all
     - npx eas-cli build --profile production --non-interactive --no-wait -p all --auto-submit
-  timeout: 15
+  timeout: "15 minutes"
   after_script:
     - NOTIF_MSG="Deploy phone $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
     - !reference [.notif, script]
