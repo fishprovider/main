@@ -11,10 +11,8 @@
     "prebuild": "rm -rf dist && mkdir dist",
     "build": "tsc && tsc-alias --verbose"
   },
-  "peerDependencies": {
-    "@fishprovider/utils": "*"
-  },
   "dependencies": {
+    "@fishprovider/utils": "*",
     "app-root-path": "^3.1.0",
     "protobufjs": "^5.0.3"
   }
