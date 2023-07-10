@@ -12,10 +12,10 @@
     "build": "tsc && tsc-alias --verbose"
   },
   "peerDependencies": {
-    "@fishprovider/utils": "*",
-    "protobufjs": "^5.0.3"
+    "@fishprovider/utils": "*"
   },
   "dependencies": {
-    "app-root-path": "^3.1.0"
+    "app-root-path": "^3.1.0",
+    "protobufjs": "^5.0.3"
   }
 }
