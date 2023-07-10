@@ -40,7 +40,7 @@ const getUserToken = async (user: FirebaseAuthTypes.User, forceRefresh?: boolean
 };
 
 const onLoggedIn = async (user: FirebaseAuthTypes.User) => {
-  const token = await getUserToken(user);
+  const token = await getUserToken(user, true);
   if (!token) {
     onClientLoggedOut();
     return;

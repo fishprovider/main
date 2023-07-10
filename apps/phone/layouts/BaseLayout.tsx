@@ -1,19 +1,26 @@
-import { Stack } from 'expo-router';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import BaseController from '~controllers/BaseController';
+import Account from '~views/Account';
+import Invest from '~views/Invest';
+import Wallet from '~views/Wallet';
 
-export const unstable_settings = {
-  // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: '(tabs)',
-};
+const Tab = createBottomTabNavigator();
 
 export default function BaseLayout() {
   return (
-    <BaseController>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
-      </Stack>
-    </BaseController>
+    <Tab.Navigator>
+      <Tab.Screen
+        name="Invest"
+        component={Invest}
+      />
+      <Tab.Screen
+        name="Wallet"
+        component={Wallet}
+      />
+      <Tab.Screen
+        name="Account"
+        component={Account}
+      />
+    </Tab.Navigator>
   );
 }

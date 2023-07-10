@@ -28,9 +28,14 @@
   ```
 
 # How to initialize?
-- Run `npx create-expo-app phone --template tabs`
+- Run `npx create-expo-app@latest phone --template typescript`
 
-- Rename `index.ts` to `index.js` (otherwise eas build will fail)
+- Create `index.js` and remove `main` in `package.json`
+  ```js
+  import registerRootComponent from 'expo/build/launch/registerRootComponent';
+  import App from './App';
+  registerRootComponent(App);
+  ```
 
 - Setup path aliases by updating `tsconfig.json`, `babel.config.js`, `metro.config.js` as belows
 
@@ -84,7 +89,6 @@
               '~views': './views',
             },
           }],
-          require.resolve('expo-router/babel'),
         ],
       };
     };
@@ -107,10 +111,13 @@
 - Update scripts in `package.json`
   ```json
   "scripts": {
+    "build-packages": "cd ../.. && npm run build -w packages/utils -w packages/cross",
     "doctor": "npx expo-doctor",
     "lint": "eslint --cache --fix .",
     "type-check": "tsc --noEmit",
+    "eas-build-post-install": "npm run build-packages",
     "start": "doppler run --print-config -- expo start",
+    "dev": "NODE_ENV=development expo start --dev-client",
     "native-android": "expo run:android",
     "native-ios": "expo run:ios"
   }
@@ -118,7 +125,7 @@
 
 - (Optional) remove tests
 
-# How to setup app icons?
+# How to setup assets?
 - Copy fonts from `node_modules/@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts` to `assets/fonts`
 
 - Load the fonts
@@ -174,7 +181,6 @@
   eas login
   eas init --id ec0f4220-7564-4608-93a3-ac7aebf2c1ab # ProjectId from expo.dev
   eas build:configure
-  eas update:configure
   ```
 
 - Update `eas.json` by adding `development-simulator` profile
