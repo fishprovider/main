@@ -1,3 +1,6 @@
+/* eslint-disable react/no-unstable-nested-components */
+
+import { FontAwesome } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import Account from '~views/Account';
@@ -12,14 +15,23 @@ export default function BaseLayout() {
       <Tab.Screen
         name="Invest"
         component={Invest}
+        options={{
+          tabBarIcon: (props) => <FontAwesome {...props} name="rocket" />,
+        }}
       />
       <Tab.Screen
         name="Wallet"
         component={Wallet}
+        options={{
+          tabBarIcon: (props) => <FontAwesome {...props} name="bank" />,
+        }}
       />
       <Tab.Screen
         name="Account"
         component={Account}
+        options={{
+          tabBarIcon: (props) => <FontAwesome {...props} name="bar-chart" />,
+        }}
       />
     </Tab.Navigator>
   );

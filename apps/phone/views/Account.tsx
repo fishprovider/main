@@ -17,6 +17,11 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
   },
+  separator: {
+    marginVertical: 30,
+    height: 1,
+    width: '80%',
+  },
 });
 
 export default function Account() {
@@ -29,7 +34,9 @@ export default function Account() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Account</Text>
+      <View style={styles.separator} />
       <Text>{email || ErrorType.accountNotFound}</Text>
+      <View style={styles.separator} />
       {email ? (
         <Button themeInverse onPress={logout}>Logout</Button>
       ) : (
