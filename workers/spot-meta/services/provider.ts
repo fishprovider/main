@@ -6,8 +6,10 @@ import type { CallbackPayload } from '@fishprovider/metatrader/types/Event.model
 import newOrder from '@fishprovider/swap/commands/newOrder';
 import removeOrder from '@fishprovider/swap/commands/removeOrder';
 import connect from '@fishprovider/swap/libs/metatrader/connect';
+import getSymbolTick from '@fishprovider/swap/libs/metatrader/getSymbolTick';
 import type { SymbolMetaTrader } from '@fishprovider/swap/types/Symbol.model';
 import { botUser } from '@fishprovider/swap/utils/account';
+import { savePrice } from '@fishprovider/swap/utils/price';
 import type { ProviderType } from '@fishprovider/utils/constants/account';
 import { ProviderPlatform } from '@fishprovider/utils/constants/account';
 import { Direction, OrderStatus, OrderType } from '@fishprovider/utils/constants/order';
@@ -17,7 +19,6 @@ import { startSubs, stopSubs } from '~services/handleSubs';
 import { spotTasks } from '~utils/tasks';
 
 import onEvent, { destroy as destroyEventHandler, start as startEventHandler } from './events';
-import { startPolls, stopPolls } from './handlePolls';
 import renewSymbolsHandler from './renewSymbols';
 
 const env = {
@@ -30,6 +31,7 @@ const env = {
 let account: Account | null;
 let connection: ConnectionType | undefined;
 let allSymbols: SymbolMetaTrader[] = [];
+let symbols: SymbolMetaTrader[] = [];
 let isRestarting = false;
 
 const setIsRestarting = (value: boolean) => {
@@ -38,7 +40,24 @@ const setIsRestarting = (value: boolean) => {
 
 const getIsRestarting = () => isRestarting;
 
-const renewSymbols = () => renewSymbolsHandler(allSymbols);
+const renewSymbols = () => renewSymbolsHandler(symbols);
+
+const pollSymbols = async (all = false) => {
+  if (!account) {
+    throw new Error(`Account not found ${env.typeId}`);
+  }
+
+  const { config, providerType } = account;
+
+  for (const symbol of (all ? allSymbols : symbols)) {
+    const price = await getSymbolTick({
+      providerType,
+      symbol,
+      config,
+    });
+    await savePrice(providerType, symbol, price);
+  }
+};
 
 const sendHeartbeat = async () => {
   if (!account) {
@@ -77,10 +96,7 @@ const destroy = async () => {
     connection = undefined;
 
     if (spotTasks.price) {
-      await stopSubs(connectionToClose, allSymbols);
-    }
-    if (spotTasks.poll) {
-      await stopPolls(connectionToClose);
+      await stopSubs(connectionToClose, symbols);
     }
     await destroyEventHandler();
     await connectionToClose.destroy();
@@ -152,24 +168,23 @@ const start = async () => {
   await startAccount(connection);
   await subAccount(connection);
 
-  const symbolList = await getSymbolList(connection);
+  allSymbols = await getSymbolList(connection);
+
   const skipPattern = env.skipPattern && new RegExp(env.skipPattern);
   const watchPattern = new RegExp(env.watchPattern);
-  allSymbols = symbolList.filter((symbol) => {
-    if (!symbol) return false;
+  symbols = allSymbols.filter((symbol) => {
     if (skipPattern && skipPattern.test(symbol)) return false;
     return watchPattern.test(symbol);
   });
 
   if (spotTasks.price) {
-    Logger.info(`Subscribing ${allSymbols.length} symbols`, allSymbols.map((symbol) => symbol).join(','));
-    await startSubs(connection, allSymbols);
-    Logger.warn(`Subscribed ${allSymbols.length} symbols`);
+    Logger.info(`Subscribing ${symbols.length} symbols`, symbols.map((symbol) => symbol).join(','));
+    await startSubs(connection, symbols);
+    Logger.warn(`Subscribed ${symbols.length} symbols`);
     renewSymbols();
   }
   if (spotTasks.poll) {
-    await startPolls(connection, allSymbols);
-    renewSymbolsHandler(allSymbols);
+    renewSymbolsHandler(symbols);
   }
 
   sendHeartbeat();
@@ -178,6 +193,7 @@ const start = async () => {
 export {
   destroy,
   getIsRestarting,
+  pollSymbols,
   renewSymbols,
   setIsRestarting,
   start,
