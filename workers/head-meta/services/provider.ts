@@ -137,7 +137,7 @@ const startClient = async (client: Client) => {
       });
     await delay(1000 / +maxRequestPerSec);
   }
-  Logger.warn(`Started ${accounts.length} accounts ${clientId.substring(0, 4)}...`);
+  Logger.warn(`Started ${accounts.length} accounts ${clientId.substring(0, 10)}...`);
 
   for (const account of accounts) {
     await reloadData(client, account)
@@ -146,7 +146,7 @@ const startClient = async (client: Client) => {
       });
     await delay(1000 / +maxRequestPerSec);
   }
-  Logger.warn(`Reloaded ${accounts.length} accounts ${clientId.substring(0, 4)}...`);
+  Logger.warn(`Reloaded ${accounts.length} accounts ${clientId.substring(0, 10)}...`);
 };
 
 const start = async () => {
@@ -167,7 +167,9 @@ const start = async () => {
     },
   );
 
+  Logger.warn(`Starting ${clients.length} clients...`);
   await Promise.all(_.map(clients, startClient));
+  Logger.warn(`Started ${clients.length} clients...`);
 };
 
 const startOne = async (providerId: string) => {
