@@ -125,6 +125,7 @@ deploy-spot-ctrader:
       when: always
   script:
     - curl $DEPLOY_SPOT_CTRADER_ICMARKETS
+    - curl $DEPLOY_SPOT_CTRADER_ICMARKETS_POLL
     - curl $DEPLOY_SPOT_CTRADER_ICMARKETS_DEMO
   after_script:
     - NOTIF_MSG="Deploy spot-ctrader $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
@@ -140,6 +141,7 @@ deploy-spot-meta:
       when: always
   script:
     - curl $DEPLOY_SPOT_META_EXNESS
+    - curl $DEPLOY_SPOT_META_EXNESS_POLL
     - curl $DEPLOY_SPOT_META_EXNESS_DEMO
   after_script:
     - NOTIF_MSG="Deploy spot-meta $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
