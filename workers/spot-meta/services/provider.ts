@@ -44,7 +44,8 @@ const renewSymbols = () => renewSymbolsHandler(symbols);
 
 const pollSymbols = async (all = false) => {
   if (!account) {
-    throw new Error(`Account not found ${env.typeId}`);
+    Logger.error(`account not found ${env.typeId}`);
+    return;
   }
 
   const { config, providerType } = account;
