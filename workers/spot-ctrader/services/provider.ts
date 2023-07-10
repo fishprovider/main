@@ -1,13 +1,17 @@
 import getSymbolList from '@fishprovider/ctrader/commands/getSymbolList';
+import { QuoteType } from '@fishprovider/ctrader/constants/openApi';
 import type { Config } from '@fishprovider/ctrader/types/Config.model';
 import type { ConnectionType } from '@fishprovider/ctrader/types/Connection.model';
 import type { CallbackPayload } from '@fishprovider/ctrader/types/Event.model';
 import connect from '@fishprovider/swap/libs/ctrader/connect';
+import getSymbolTick from '@fishprovider/swap/libs/ctrader/getSymbolTick';
 import renewTokensCTrader from '@fishprovider/swap/libs/ctrader/renewTokens';
 import type { SymbolCTrader } from '@fishprovider/swap/types/Symbol.model';
-// import { savePrice } from '@fishprovider/swap/utils/price';
+import { savePrice } from '@fishprovider/swap/utils/price';
 import type { ProviderType } from '@fishprovider/utils/constants/account';
 import type { Account } from '@fishprovider/utils/types/Account.model';
+import _ from 'lodash';
+import moment from 'moment';
 
 import { startSubs, stopSubs } from '~services/handleSubs';
 import { spotTasks } from '~utils/tasks';
@@ -41,15 +45,44 @@ const getIsRestarting = () => isRestarting;
 const renewSymbols = () => renewSymbolsHandler(symbols);
 
 const pollSymbols = async (all = false) => {
+  if (!connection) {
+    Logger.error('connection not found');
+    return;
+  }
   if (!account) {
-    throw new Error(`Account not found ${env.typeId}`);
+    Logger.error(`account not found ${env.typeId}`);
+    return;
   }
 
-  const { config, providerType } = account;
+  const { providerType } = account;
 
-  for (const symbol of (all ? allSymbols : symbols)) {
-    console.log('symbol', symbol, config, providerType);
-    // TODO:
+  const now = moment();
+  const to = now.unix() * 1000;
+  const from = now.subtract(30, 'seconds').unix() * 1000;
+
+  for (const symbolItem of (all ? allSymbols : symbols)) {
+    const { symbol } = symbolItem;
+
+    const { ticks } = await getSymbolTick({
+      providerType,
+      connection,
+      symbol: symbolItem,
+      quoteType: QuoteType.BID,
+      fromTimestamp: from,
+      toTimestamp: to,
+    });
+    const { tick: last, timestamp } = _.last(ticks) || {};
+
+    if (last) {
+      const price = {
+        _id: `${providerType}-${symbol}`,
+        last,
+        time: timestamp,
+        bid: last,
+        ask: last,
+      };
+      await savePrice(providerType, symbol, price);
+    }
   }
 };
 

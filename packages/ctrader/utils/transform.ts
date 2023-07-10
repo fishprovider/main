@@ -2,6 +2,7 @@ import type { AccountInfo } from '~types/Account.model';
 import type { Bar } from '~types/Bar.model';
 import type { Deal } from '~types/Deal.model';
 import type { Order, Position } from '~types/Order.model';
+import type { Tick } from '~types/Tick.model';
 
 const transformLong = (value: Long, moneyDigits = 0) => {
   const divide = 10 ** moneyDigits;
@@ -121,6 +122,19 @@ const transformBar = (bar: Bar) => {
   };
 };
 
+const transformTick = (tickData: Tick) => {
+  const {
+    timestamp, tick,
+  } = tickData;
+  const startAt = new Date(transformLong(timestamp));
+  return {
+    ...tickData,
+    tick: tick && transformLong(tick, 5),
+    startAt,
+    timestamp: startAt && startAt.getTime(),
+  };
+};
+
 export {
   transformAccountInfo,
   transformBar,
@@ -128,4 +142,5 @@ export {
   transformLong,
   transformOrder,
   transformPosition,
+  transformTick,
 };

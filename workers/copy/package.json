@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@fishprovider/core": "*",
-    "@fishprovider/swap": "*"
+    "@fishprovider/swap": "*",
+    "protobufjs": "^5.0.3"
   }
 }
