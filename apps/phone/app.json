@@ -20,6 +20,9 @@
     "ios": {
       "bundleIdentifier": "com.fishprovider.app",
       "googleServicesFile": "./GoogleService-Info.plist",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      },
       "supportsTablet": true
     },
     "android": {
