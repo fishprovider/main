@@ -4,7 +4,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import Account from '~views/Account';
-import Invest from '~views/Invest';
+import Strategies from '~views/Strategies';
 import Wallet from '~views/Wallet';
 
 const Tab = createBottomTabNavigator();
@@ -13,8 +13,8 @@ export default function BaseLayout() {
   return (
     <Tab.Navigator>
       <Tab.Screen
-        name="Invest"
-        component={Invest}
+        name="Strategies"
+        component={Strategies}
         options={{
           tabBarIcon: (props) => <FontAwesome {...props} name="rocket" />,
         }}

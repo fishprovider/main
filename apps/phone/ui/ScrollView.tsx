@@ -1,3 +1,3 @@
-import { ScrollView } from 'react-native';
+import { ScrollView } from 'tamagui';
 
 export default ScrollView;
