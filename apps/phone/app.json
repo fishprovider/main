@@ -23,6 +23,10 @@
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       },
+      "entitlements": {
+        "aps-environment": "development",
+        "com.apple.developer.applesignin": ["Default"]
+      },
       "supportsTablet": true
     },
     "android": {
@@ -37,6 +41,7 @@
       "@react-native-firebase/app",
       "@react-native-firebase/auth",
       "@react-native-google-signin/google-signin",
+      "expo-apple-authentication",
       [
         "expo-build-properties",
         {

@@ -1,9 +1,9 @@
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
-import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import AppleAuthentication from 'expo-apple-authentication';
 
+import { LoginMethods } from '~constants/user';
 import { onClientLoggedIn, onClientLoggedOut } from '~utils/user';
-
-// import { LoginMethods } from '~constants/user';
 
 const getUserAuthInfo = (
   userAuth: FirebaseAuthTypes.User,
@@ -77,25 +77,41 @@ const loginWithGoogle = async () => {
   try {
     await GoogleSignin.hasPlayServices();
     const userInfo = await GoogleSignin.signIn();
-    return userInfo;
+    const credentials = auth.GoogleAuthProvider.credential(userInfo.idToken);
+    return { userInfo, credentials };
   } catch (err: any) {
-    console.error('Failed to loginWithGoogle', err, err?.code);
-    if (err.code === statusCodes.SIGN_IN_CANCELLED) {
-      console.warn('SIGN_IN_CANCELLED');
-    } else if (err.code === statusCodes.IN_PROGRESS) {
-      console.warn('IN_PROGRESS');
-    } else if (err.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-      console.warn('PLAY_SERVICES_NOT_AVAILABLE');
-    }
+    console.error('Failed to loginWithGoogle', err);
     throw err;
   }
 };
 
-const loginOAuth = async () => {
+const loginWithApple = async () => {
   try {
-    const { idToken } = await loginWithGoogle();
-    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-    const { user } = await auth().signInWithCredential(googleCredential);
+    const userInfo = await AppleAuthentication.signInAsync({
+      requestedScopes: [
+        AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
+        AppleAuthentication.AppleAuthenticationScope.EMAIL,
+      ],
+    });
+    const credentials = auth.AppleAuthProvider.credential(userInfo.identityToken);
+    return { userInfo, credentials };
+  } catch (err: any) {
+    console.error('Failed to loginWithApple', err);
+    throw err;
+  }
+};
+
+const loginOAuth = async (loginMethod: LoginMethods) => {
+  try {
+    const getCredentials = async () => {
+      if (loginMethod === LoginMethods.apple) {
+        return loginWithApple();
+      }
+      return loginWithGoogle();
+    };
+    const { credentials } = await getCredentials();
+
+    const { user } = await auth().signInWithCredential(credentials);
     await onLoggedIn(user);
   } catch (err) {
     console.error('Failed to login', err);

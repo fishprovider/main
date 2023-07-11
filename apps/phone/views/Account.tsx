@@ -2,6 +2,7 @@ import storeUser from '@fishprovider/cross/stores/user';
 import { ErrorType } from '@fishprovider/utils/constants/error';
 import { StyleSheet } from 'react-native';
 
+import { LoginMethods } from '~constants/user';
 import { loginOAuth, logout } from '~libs/auth';
 import Button from '~ui/Button';
 import Text from '~ui/Text';
@@ -35,13 +36,27 @@ export default function Account() {
     <View style={styles.container}>
       <Text style={styles.title}>Account</Text>
       <View style={styles.separator} />
+
       <Text>{email || ErrorType.accountNotFound}</Text>
       <View style={styles.separator} />
-      {email ? (
-        <Button themeInverse onPress={logout}>Logout</Button>
-      ) : (
-        <Button themeInverse onPress={loginOAuth}>Login</Button>
-      )}
+
+      <Button
+        themeInverse
+        onPress={() => loginOAuth(LoginMethods.google)}
+      >
+        Login with Google
+      </Button>
+      <View style={styles.separator} />
+
+      <Button
+        themeInverse
+        onPress={() => loginOAuth(LoginMethods.apple)}
+      >
+        Login with Apple
+      </Button>
+      <View style={styles.separator} />
+
+      <Button themeInverse onPress={logout}>Logout</Button>
     </View>
   );
 }
