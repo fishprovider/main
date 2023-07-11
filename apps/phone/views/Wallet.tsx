@@ -1,7 +1,7 @@
 /* eslint-disable no-alert */
 
-import Device from 'expo-device';
-import Notifications, { Notification } from 'expo-notifications';
+import * as Device from 'expo-device';
+import * as Notifications from 'expo-notifications';
 import { useEffect, useRef, useState } from 'react';
 import { Platform } from 'react-native';
 
@@ -73,7 +73,7 @@ async function registerForPushNotificationsAsync() {
 
 export default function Wallet() {
   const [expoPushToken, setExpoPushToken] = useState<string>();
-  const [notification, setNotification] = useState<Notification>();
+  const [notification, setNotification] = useState<Notifications.Notification>();
   const notificationListener = useRef();
   const responseListener = useRef();
 
