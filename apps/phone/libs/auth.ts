@@ -103,11 +103,12 @@ const loginWithApple = async () => {
 
 const loginOAuth = async (loginMethod: LoginMethods) => {
   try {
-    const getCredentials = async () => {
-      if (loginMethod === LoginMethods.apple) {
-        return loginWithApple();
+    const getCredentials = () => {
+      switch (loginMethod) {
+        case LoginMethods.apple: return loginWithApple();
+        case LoginMethods.google: return loginWithGoogle();
+        default: throw new Error(`Unhandled login method ${loginMethod}`);
       }
-      return loginWithGoogle();
     };
     const { credentials } = await getCredentials();
 
