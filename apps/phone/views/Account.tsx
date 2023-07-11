@@ -1,6 +1,6 @@
 import storeUser from '@fishprovider/cross/stores/user';
 import { ErrorType } from '@fishprovider/utils/constants/error';
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 
 import { LoginMethods } from '~constants/user';
 import { loginOAuth, logout } from '~libs/auth';
@@ -48,12 +48,14 @@ export default function Account() {
       </Button>
       <View style={styles.separator} />
 
-      <Button
-        themeInverse
-        onPress={() => loginOAuth(LoginMethods.apple)}
-      >
-        Login with Apple
-      </Button>
+      {Platform.OS === 'ios' && (
+        <Button
+          themeInverse
+          onPress={() => loginOAuth(LoginMethods.apple)}
+        >
+          Login with Apple
+        </Button>
+      )}
       <View style={styles.separator} />
 
       <Button themeInverse onPress={logout}>Logout</Button>
