@@ -173,7 +173,7 @@ deploy-phone:
     - npm ci --cache .npm --prefer-offline --no-audit --no-progress --legacy-peer-deps
     - cd apps/phone
     - npx eas-cli build --profile production --non-interactive --no-wait -p all --auto-submit
-  timeout: "15 minutes"
+  timeout: "10 minutes"
   after_script:
     - NOTIF_MSG="Deploy phone $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
     - !reference [.notif, script]
@@ -188,7 +188,7 @@ deploy-phone-schedule:
     - cd apps/phone
     - npx eas-cli build --profile development-simulator --non-interactive --no-wait -p all
     - npx eas-cli build --profile production --non-interactive --no-wait -p all --auto-submit
-  timeout: "15 minutes"
+  timeout: "20 minutes"
   after_script:
     - NOTIF_MSG="Deploy phone $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
     - !reference [.notif, script]
