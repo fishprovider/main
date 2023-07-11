@@ -1,6 +1,6 @@
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
-import AppleAuthentication from 'expo-apple-authentication';
+import * as AppleAuthentication from 'expo-apple-authentication';
 
 import { LoginMethods } from '~constants/user';
 import { onClientLoggedIn, onClientLoggedOut } from '~utils/user';
