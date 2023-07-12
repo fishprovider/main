@@ -32,14 +32,10 @@ export default function Account() {
     email: state.info?.email,
   }));
 
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Account</Text>
+  const renderLoggedOut = () => (
+    <>
+      <Text>{ErrorType.accountNotFound}</Text>
       <View style={styles.separator} />
-
-      <Text>{email || ErrorType.accountNotFound}</Text>
-      <View style={styles.separator} />
-
       <Button
         themeInverse
         onPress={() => loginOAuth(LoginMethods.google)}
@@ -47,18 +43,34 @@ export default function Account() {
         Login with Google
       </Button>
       <View style={styles.separator} />
-
       {Platform.OS === 'ios' && (
-        <Button
-          themeInverse
-          onPress={() => loginOAuth(LoginMethods.apple)}
-        >
-          Login with Apple
-        </Button>
+        <>
+          <Button
+            themeInverse
+            onPress={() => loginOAuth(LoginMethods.apple)}
+          >
+            Login with Apple
+          </Button>
+          <View style={styles.separator} />
+        </>
       )}
-      <View style={styles.separator} />
+    </>
+  );
 
+  const renderLoggedIn = () => (
+    <>
+      <Text>{email}</Text>
+      <View style={styles.separator} />
       <Button themeInverse onPress={logout}>Logout</Button>
+      <Button themeInverse onPress={logout}>Remove Account</Button>
+    </>
+  );
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Account</Text>
+      <View style={styles.separator} />
+      {email ? renderLoggedOut() : renderLoggedIn()}
     </View>
   );
 }
