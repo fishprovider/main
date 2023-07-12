@@ -1,4 +1,5 @@
 import storeAccounts from '@fishprovider/cross/stores/accounts';
+import * as WebBrowser from 'expo-web-browser';
 import _ from 'lodash';
 import moment from 'moment';
 
@@ -9,7 +10,6 @@ import H6 from '~ui/H6';
 import { useModalSimple } from '~ui/ModalProvider';
 import Stack from '~ui/Stack';
 import Text from '~ui/Text';
-import { useToast } from '~ui/ToastProvider';
 
 import InvestModal from './InvestModal';
 
@@ -41,11 +41,19 @@ export default function ProviderCard({ providerId }: Props) {
   const profit = summary?.roi || roi || 0;
   const activeMonths = moment().diff(moment(createdAt), 'months') + 1;
 
-  const toast = useToast();
   const [showModal] = useModalSimple({
     title: <H6>How to Invest</H6>,
-    description: <InvestModal toast={toast} providerId={providerId} />,
+    content: <InvestModal providerId={providerId} />,
   });
+
+  const onInvest = () => {
+    const isDev = false;
+    if (isDev) {
+      showModal();
+      return;
+    }
+    WebBrowser.openBrowserAsync(`https://www.fishprovider.com/strategies/${providerId}`);
+  };
 
   return (
     <Card elevate bordered>
@@ -54,7 +62,7 @@ export default function ProviderCard({ providerId }: Props) {
           <Stack space="$2" width={150}>
             <H6>{name}</H6>
             <Text>{icon}</Text>
-            <Button color="white" backgroundColor="green" size="$3" width={110} onPress={showModal}>
+            <Button color="white" backgroundColor="green" size="$3" width={110} onPress={onInvest}>
               Invest ➜ 🏦
             </Button>
           </Stack>
