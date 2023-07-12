@@ -62,6 +62,7 @@ export default function Account() {
       <Text>{email}</Text>
       <View style={styles.separator} />
       <Button themeInverse onPress={logout}>Logout</Button>
+      <View style={styles.separator} />
       <Button themeInverse onPress={logout}>Remove Account</Button>
     </>
   );
@@ -70,7 +71,7 @@ export default function Account() {
     <View style={styles.container}>
       <Text style={styles.title}>Account</Text>
       <View style={styles.separator} />
-      {email ? renderLoggedOut() : renderLoggedIn()}
+      {email ? renderLoggedIn() : renderLoggedOut()}
     </View>
   );
 }
