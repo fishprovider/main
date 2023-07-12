@@ -1,5 +1,5 @@
 import { DarkTheme, DefaultTheme, ThemeProvider as NavThemeProvider } from '@react-navigation/native';
-import { useColorScheme } from 'react-native';
+// import { useColorScheme } from 'react-native';
 import { TamaguiProvider, Theme } from 'tamagui';
 
 import config from '../tamagui.config';
@@ -11,8 +11,9 @@ interface Props {
 }
 
 export default function ThemeProvider({ children }: Props) {
-  const colorScheme = useColorScheme();
-  const isDark = colorScheme === 'dark';
+  // const colorScheme = useColorScheme();
+  // const isDark = colorScheme === 'dark';
+  const isDark = false;
 
   return (
     <NavThemeProvider value={isDark ? DarkTheme : DefaultTheme}>
