@@ -2,6 +2,7 @@ import { initApi } from '@fishprovider/cross/libs/api';
 import { initStore } from '@fishprovider/cross/libs/store';
 
 import { initAuth } from '~libs/auth';
+import { initPushNotif } from '~libs/pushNotif';
 
 const env = {
   backendUrl: process.env.EXPO_PUBLIC_BACKEND_URL,
@@ -21,6 +22,7 @@ const initialize = () => {
   });
 
   initAuth();
+  initPushNotif();
 };
 
 export {
