@@ -1,5 +1,4 @@
 import storeUser from '@fishprovider/cross/stores/user';
-import { ErrorType } from '@fishprovider/utils/constants/error';
 
 import { logout } from '~libs/auth';
 import Button from '~ui/Button';
