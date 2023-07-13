@@ -8,13 +8,14 @@ import md5 from 'md5';
 
 const subNotif = async ({ data, userInfo }: {
   data: {
-    fcmToken: string,
+    fcmToken?: string,
+    expoPushToken?: string,
     providerId?: string,
   }
   userInfo: User,
 }) => {
-  const { fcmToken, providerId } = data;
-  if (!fcmToken) {
+  const { fcmToken, expoPushToken, providerId } = data;
+  if (!(fcmToken || expoPushToken)) {
     return { error: ErrorType.badRequest };
   }
 
@@ -30,30 +31,45 @@ const subNotif = async ({ data, userInfo }: {
     }
   }
 
-  if (providerId) {
-    const subRes = await Firebase.messaging().subscribeToTopic(fcmToken, `account-${providerId}`);
-    Logger.debug('Subscribed to topic', subRes);
-  } else {
-    const subRes = await Firebase.messaging().subscribeToTopic(fcmToken, 'allDevices');
-    Logger.debug('Subscribed to topic', subRes);
-  }
-
-  const info = await getInfo(fcmToken);
-  const fcmTokenHash = md5(fcmToken);
-  await Mongo.collection<User>('users').updateOne(
-    {
-      _id: uid,
-    },
-    {
-      $set: {
-        updatedAt: new Date(),
-        [`fcmInfo.${fcmTokenHash}`]: {
-          ...info,
-          fcmToken,
+  if (fcmToken) {
+    if (providerId) {
+      const subRes = await Firebase.messaging().subscribeToTopic(fcmToken, `account-${providerId}`);
+      Logger.debug('Subscribed to topic', subRes);
+    } else {
+      const subRes = await Firebase.messaging().subscribeToTopic(fcmToken, 'allDevices');
+      Logger.debug('Subscribed to topic', subRes);
+    }
+    const info = await getInfo(fcmToken);
+    const tokenHash = md5(fcmToken);
+    await Mongo.collection<User>('users').updateOne(
+      { _id: uid },
+      {
+        $set: {
+          updatedAt: new Date(),
+          [`fcmInfo.${tokenHash}`]: {
+            ...info,
+            fcmToken,
+          },
         },
       },
-    },
-  );
+    );
+  }
+
+  if (expoPushToken) {
+    const tokenHash = md5(expoPushToken);
+    await Mongo.collection<User>('users').updateOne(
+      { _id: uid },
+      {
+        $set: {
+          updatedAt: new Date(),
+          [`expoInfo.${tokenHash}`]: {
+            providerId,
+            fcmToken,
+          },
+        },
+      },
+    );
+  }
 
   return {};
 };
