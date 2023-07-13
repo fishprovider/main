@@ -21,7 +21,6 @@ function BaseController({ children }: Props) {
   return (
     <ErrorBoundary>
       <QueryProvider>
-        <UserSetup />
         <BaseThemeProvider>
           <NotifProvider />
           <ModalProvider>
@@ -29,6 +28,7 @@ function BaseController({ children }: Props) {
               {children}
             </BaseLayout>
           </ModalProvider>
+          <UserSetup />
         </BaseThemeProvider>
       </QueryProvider>
     </ErrorBoundary>

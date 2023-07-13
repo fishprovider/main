@@ -1,7 +1,7 @@
 import storeUser from '@fishprovider/cross/stores/user';
 import { useEffect } from 'react';
 
-import { handleNotif, initPushNotif, subNotif } from '~libs/webpush';
+import { handleNotif, initNotif, subNotif } from '~libs/pushNotif';
 import { toastInfo } from '~ui/toast';
 
 function useUserNotif() {
@@ -15,7 +15,7 @@ function useUserNotif() {
 
   useEffect(() => {
     if (isClientLoggedIn) {
-      initPushNotif();
+      initNotif();
       handleNotif((title: string, body: string) => {
         Logger.info('NotifHandler', title, body);
         toastInfo({ title, message: body });

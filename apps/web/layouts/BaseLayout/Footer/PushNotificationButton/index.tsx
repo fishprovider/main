@@ -1,7 +1,7 @@
 import storeUser from '@fishprovider/cross/stores/user';
 import { useEffect, useState } from 'react';
 
-import { requestNotif } from '~libs/webpush';
+import { requestNotif } from '~libs/pushNotif';
 import Box from '~ui/core/Box';
 import Icon from '~ui/core/Icon';
 import openConfirmModal from '~ui/modals/openConfirmModal';

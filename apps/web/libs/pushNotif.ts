@@ -9,24 +9,24 @@ const env = {
 let fcmToken: string;
 const fcmTokenPromise = promiseCreator();
 
-const requestNotif = () => {
-  if (!('Notification' in window)) {
-    Logger.info('Browser does not support Notification');
-    return Promise.resolve('unsupported');
-  }
-  return Notification.requestPermission();
-};
-
-const initPushNotif = async () => {
+const requestNotif = async () => {
   if (!('serviceWorker' in navigator)) {
     Logger.info('Browser does not support ServiceWorker');
-    return;
+    return 'unsupported';
+  }
+  if (!('Notification' in window)) {
+    Logger.info('Browser does not support Notification');
+    return 'unsupported';
   }
 
-  const status = await requestNotif();
-  if (status !== 'granted') {
-    Logger.info(`User does does allow Notification with status ${status}`);
-    return;
+  const existingStatus = Notification.permission;
+  let finalStatus = existingStatus;
+  if (existingStatus !== 'granted') {
+    finalStatus = await Notification.requestPermission();
+  }
+  if (finalStatus !== 'granted') {
+    Logger.info(`User does does allow Notification with status ${finalStatus}`);
+    return finalStatus;
   }
 
   const messaging = getMessaging();
@@ -34,6 +34,12 @@ const initPushNotif = async () => {
     vapidKey: env.fcmVapidKey,
   });
   fcmTokenPromise.resolveExec();
+
+  return finalStatus;
+};
+
+const initNotif = async () => {
+  await requestNotif();
 };
 
 const handleNotif = async (onNotif?: (title: string, body: string) => void) => {
@@ -62,13 +68,16 @@ const unsubNotif = async (providerId?: string) => {
   await apiPost('/unsubNotif', { fcmToken, providerId });
 };
 
-const pushNotif = async (title: string, body: string) => {
+const sendNotif = async (title: string, body: string) => {
   await fcmTokenPromise;
-  await apiPost('/pushNotif', { title, body });
+  await apiPost('/sendNotif', { title, body });
 };
 
 export {
   handleNotif,
-  initPushNotif, pushNotif, requestNotif,
-  subNotif, unsubNotif,
+  initNotif,
+  requestNotif,
+  sendNotif,
+  subNotif,
+  unsubNotif,
 };

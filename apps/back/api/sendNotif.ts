@@ -3,7 +3,7 @@ import { ErrorType } from '@fishprovider/utils/constants/error';
 import { getRoleProvider } from '@fishprovider/utils/helpers/user';
 import type { User } from '@fishprovider/utils/types/User.model';
 
-const pushNotif = async ({ data, userInfo }: {
+const sendNotif = async ({ data, userInfo }: {
   data: {
     title: string,
     body: string,
@@ -28,4 +28,4 @@ const pushNotif = async ({ data, userInfo }: {
   return {};
 };
 
-export default pushNotif;
+export default sendNotif;

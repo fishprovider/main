@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 
 import { queryKeys } from '~constants/query';
 import useWatchAccount from '~hooks/useWatchAccount';
-import { subNotif, unsubNotif } from '~libs/webpush';
+import { subNotif, unsubNotif } from '~libs/pushNotif';
 import { refreshMS } from '~utils';
 
 interface Props {
