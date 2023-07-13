@@ -3,14 +3,12 @@ import { DarkTheme, DefaultTheme, ThemeProvider as NavThemeProvider } from '@rea
 import { TamaguiProvider, Theme } from 'tamagui';
 
 import config from '../tamagui.config';
-import { ModalProvider } from './ModalProvider';
-import ToastProvider from './ToastProvider';
 
 interface Props {
   children: React.ReactNode;
 }
 
-export default function ThemeProvider({ children }: Props) {
+export default function BaseThemeProvider({ children }: Props) {
   // const colorScheme = useColorScheme();
   // const isDark = colorScheme === 'dark';
   const isDark = false;
@@ -19,11 +17,7 @@ export default function ThemeProvider({ children }: Props) {
     <NavThemeProvider value={isDark ? DarkTheme : DefaultTheme}>
       <TamaguiProvider config={config}>
         <Theme name={isDark ? 'dark' : 'light'}>
-          <ToastProvider>
-            <ModalProvider>
-              {children}
-            </ModalProvider>
-          </ToastProvider>
+          {children}
         </Theme>
       </TamaguiProvider>
     </NavThemeProvider>

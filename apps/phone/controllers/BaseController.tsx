@@ -4,7 +4,9 @@ import { useFonts } from 'expo-font';
 import { useEffect } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-import ThemeProvider from '~ui/ThemeProvider';
+import BaseThemeProvider from '~ui/BaseThemeProvider';
+import { ModalProvider } from '~ui/ModalProvider';
+import ToastProvider from '~ui/ToastProvider';
 
 import { initialize as initServices } from './baseServices';
 import UserSetup from './UserSetup';
@@ -31,12 +33,16 @@ export default function BaseController({ children }: Props) {
   return (
     <QueryProvider withDevTools={false}>
       <SafeAreaProvider>
-        <ThemeProvider>
+        <BaseThemeProvider>
           <NavigationContainer>
-            <UserSetup />
-            {children}
+            <ToastProvider>
+              <ModalProvider>
+                <UserSetup />
+                {children}
+              </ModalProvider>
+            </ToastProvider>
           </NavigationContainer>
-        </ThemeProvider>
+        </BaseThemeProvider>
       </SafeAreaProvider>
     </QueryProvider>
   );

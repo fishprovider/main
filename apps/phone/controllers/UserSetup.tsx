@@ -1,6 +1,6 @@
 // import UserAnalytics from './UserAnalytics';
 import UserAuth from './UserAuth';
-import UserPushNotif from './UserPushNotif';
+import UserNotif from './UserNotif';
 // import UserClean from './UserClean';
 // import UserLiveChat from './UserLiveChat';
 // import UserNotif from './UserNotif';
@@ -11,7 +11,7 @@ function UserSetup() {
   return (
     <>
       <UserAuth />
-      <UserPushNotif />
+      <UserNotif />
       {/* <UserSocket /> */}
       {/* <UserTheme /> */}
       {/* <UserLiveChat /> */}

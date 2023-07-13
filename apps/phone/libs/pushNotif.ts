@@ -1,19 +1,13 @@
+import promiseCreator from '@fishprovider/utils/helpers/promiseCreator';
 import * as Notifications from 'expo-notifications';
 import { Platform } from 'react-native';
 
 type Notification = Notifications.Notification;
 
-async function initPushNotif() {
-  Notifications.setNotificationHandler({
-    handleNotification: async () => ({
-      shouldShowAlert: true,
-      shouldPlaySound: false,
-      shouldSetBadge: false,
-    }),
-  });
-}
+let expoPushToken: string;
+const expoPushTokenPromise = promiseCreator();
 
-async function registerPushNotif() {
+async function requestNotif() {
   const { status: existingStatus } = await Notifications.getPermissionsAsync();
   let finalStatus = existingStatus;
   if (existingStatus !== 'granted') {
@@ -22,9 +16,11 @@ async function registerPushNotif() {
   }
   if (finalStatus !== 'granted') {
     console.warn('Failed to get push token for push notification!');
-    return undefined;
+    return finalStatus;
   }
-  const token = (await Notifications.getExpoPushTokenAsync()).data;
+
+  expoPushToken = (await Notifications.getExpoPushTokenAsync()).data;
+  expoPushTokenPromise.resolveExec();
 
   if (Platform.OS === 'android') {
     Notifications.setNotificationChannelAsync('default', {
@@ -35,12 +31,24 @@ async function registerPushNotif() {
     });
   }
 
-  return token;
+  return finalStatus;
 }
 
-function subPushNotif(onNotif: (event: Notification) => void) {
+async function initNotif() {
+  Notifications.setNotificationHandler({
+    handleNotification: async () => ({
+      shouldShowAlert: true,
+      shouldPlaySound: false,
+      shouldSetBadge: false,
+    }),
+  });
+  await requestNotif();
+}
+
+async function handleNotif() {
+  await expoPushTokenPromise;
   const sub = Notifications.addNotificationReceivedListener((event) => {
-    onNotif(event);
+    console.log(event);
   });
   const unsub = () => {
     Notifications.removeNotificationSubscription(sub);
@@ -48,7 +56,8 @@ function subPushNotif(onNotif: (event: Notification) => void) {
   return unsub;
 }
 
-async function sendPushNotif(expoPushToken?: string) {
+async function sendNotif() {
+  await expoPushTokenPromise;
   const message = {
     to: expoPushToken,
     sound: 'default',
@@ -69,10 +78,10 @@ async function sendPushNotif(expoPushToken?: string) {
 }
 
 export {
-  initPushNotif,
-  registerPushNotif,
-  sendPushNotif,
-  subPushNotif,
+  handleNotif,
+  initNotif,
+  requestNotif,
+  sendNotif,
 };
 
 export type {
