@@ -15,6 +15,7 @@ function DemoScreen() {
       <Button themeInverse onPress={() => navigation.toggleDrawer()}>
         Toggle Drawer
       </Button>
+      <PushNotif />
     </View>
   );
 }
@@ -22,7 +23,6 @@ function DemoScreen() {
 export default function Wallet() {
   return (
     <UserController>
-      <PushNotif />
       <Drawer.Navigator>
         <Drawer.Screen name="Wallet" component={DemoScreen} />
         <Drawer.Screen name="Deposit" component={DemoScreen} />
