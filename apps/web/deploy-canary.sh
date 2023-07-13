@@ -1,5 +1,7 @@
 #!/bin/bash
 
+. git-config.sh
+
 git checkout dev; git merge master --no-verify
 git checkout canary; git merge dev --no-verify
 
