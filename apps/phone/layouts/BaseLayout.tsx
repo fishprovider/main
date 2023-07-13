@@ -24,6 +24,7 @@ export default function BaseLayout() {
         component={Wallet}
         options={{
           tabBarIcon: (props) => <FontAwesome {...props} name="bank" />,
+          headerShown: false,
         }}
       />
       <Tab.Screen

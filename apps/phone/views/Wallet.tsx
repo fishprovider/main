@@ -1,32 +1,20 @@
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { useNavigation } from '@react-navigation/native';
-import { Button, View } from 'react-native';
 
 import PushNotif from '~components/PushNotif';
 import UserController from '~controllers/UserController';
+import Button from '~ui/Button';
+import View from '~ui/View';
 
 const Drawer = createDrawerNavigator();
 
-function HomeScreen() {
+function DemoScreen() {
   const navigation = useNavigation<any>();
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button
-        onPress={() => navigation.toggleDrawer()}
-        title="Toggle Drawer"
-      />
-    </View>
-  );
-}
-
-function NotificationsScreen() {
-  const navigation = useNavigation<any>();
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button
-        onPress={() => navigation.toggleDrawer()}
-        title="Toggle Drawer"
-      />
+      <Button themeInverse onPress={() => navigation.toggleDrawer()}>
+        Toggle Drawer
+      </Button>
     </View>
   );
 }
@@ -35,9 +23,12 @@ export default function Wallet() {
   return (
     <UserController>
       <PushNotif />
-      <Drawer.Navigator initialRouteName="Home">
-        <Drawer.Screen name="Home" component={HomeScreen} />
-        <Drawer.Screen name="Notifications" component={NotificationsScreen} />
+      <Drawer.Navigator>
+        <Drawer.Screen name="Wallet" component={DemoScreen} />
+        <Drawer.Screen name="Deposit" component={DemoScreen} />
+        <Drawer.Screen name="Withdraw" component={DemoScreen} />
+        <Drawer.Screen name="Transfer" component={DemoScreen} />
+        <Drawer.Screen name="Invest" component={DemoScreen} />
       </Drawer.Navigator>
     </UserController>
   );
