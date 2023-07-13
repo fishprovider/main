@@ -1,3 +1,4 @@
+import { apiPost } from '@fishprovider/cross/libs/api';
 import promiseCreator from '@fishprovider/utils/helpers/promiseCreator';
 import * as Notifications from 'expo-notifications';
 import { Platform } from 'react-native';
@@ -46,7 +47,6 @@ async function initNotif() {
 }
 
 async function handleNotif() {
-  await expoPushTokenPromise;
   const sub = Notifications.addNotificationReceivedListener((event) => {
     console.log(event);
   });
@@ -55,6 +55,17 @@ async function handleNotif() {
   };
   return unsub;
 }
+
+const subNotif = async (providerId?: string) => {
+  await expoPushTokenPromise;
+  await apiPost('/subNotif', { expoPushToken, providerId });
+  apiPost('/cleanNotif');
+};
+
+const unsubNotif = async (providerId?: string) => {
+  await expoPushTokenPromise;
+  await apiPost('/unsubNotif', { expoPushToken, providerId });
+};
 
 async function sendNotif() {
   await expoPushTokenPromise;
@@ -82,6 +93,8 @@ export {
   initNotif,
   requestNotif,
   sendNotif,
+  subNotif,
+  unsubNotif,
 };
 
 export type {
