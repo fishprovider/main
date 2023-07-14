@@ -1,10 +1,13 @@
 import { send } from '@fishprovider/core/dist/libs/notif';
 import updatePosition from '@fishprovider/swap/dist/commands/updatePosition';
 import { botUser } from '@fishprovider/swap/dist/utils/account';
+import { getPrices } from '@fishprovider/swap/dist/utils/price';
 import { isLastRunExpired } from '@fishprovider/utils/dist/helpers/lastRunChecks';
 import { parseCopyId } from '@fishprovider/utils/dist/helpers/order';
 import type { Account, CopySettings } from '@fishprovider/utils/dist/types/Account.model';
 import type { Order } from '@fishprovider/utils/dist/types/Order.model';
+import type { Price } from '@fishprovider/utils/dist/types/Price.model';
+import _ from 'lodash';
 
 import type { OrderCopy } from '~types/Order.model';
 
@@ -19,6 +22,7 @@ const getOrderToUpdate = (
   parentId: string,
   copySettings: CopySettings,
   parentOrders: Order[],
+  prices: Record<string, Price>,
 ) => {
   if (!copySettings?.enableCopyOrderSLTP) return [];
 
@@ -30,15 +34,20 @@ const getOrderToUpdate = (
     const parentOrder = parentOrders.find((item) => item._id === res.parentOrderId);
     if (!parentOrder) return;
 
-    const { stopLoss, takeProfit } = parentOrder;
+    const digits = prices[`${copyOrder.providerType}-${copyOrder.symbol}`]?.digits;
 
-    if ((stopLoss && stopLoss !== copyOrder.stopLoss)
-      || (takeProfit && takeProfit !== copyOrder.takeProfit)
+    const parentSL = parentOrder.stopLoss && digits
+      ? _.round(parentOrder.stopLoss, digits) : parentOrder.stopLoss;
+    const parentTP = parentOrder.takeProfit && digits
+      ? _.round(parentOrder.takeProfit, digits) : parentOrder.takeProfit;
+
+    if ((parentSL && parentSL !== copyOrder.stopLoss)
+      || (parentTP && parentTP !== copyOrder.takeProfit)
     ) {
       ordersToUpdate.push({
         ...copyOrder,
-        stopLoss,
-        takeProfit,
+        stopLoss: parentSL,
+        takeProfit: parentTP,
       });
     }
   });
@@ -53,9 +62,18 @@ const updateSLTP = async (
   copySettings: CopySettings,
   parentOrders: Order[],
 ) => {
-  const { _id: providerId } = account;
+  const { _id: providerId, providerType } = account;
 
-  const ordersToUpdate = getOrderToUpdate(copyOrders, parentId, copySettings, parentOrders);
+  const symbols = copyOrders.map((item) => item.symbol);
+  const prices = await getPrices(providerType, symbols);
+
+  const ordersToUpdate = getOrderToUpdate(
+    copyOrders,
+    parentId,
+    copySettings,
+    parentOrders,
+    prices,
+  );
   if (!ordersToUpdate.length) return;
 
   const orderIds = ordersToUpdate.map((item) => item._id);
