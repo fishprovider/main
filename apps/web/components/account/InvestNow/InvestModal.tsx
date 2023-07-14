@@ -1,5 +1,5 @@
 import storeAccounts from '@fishprovider/cross/stores/accounts';
-import { ProviderPlatform, SourceType } from '@fishprovider/utils/constants/account';
+import { AccountSourceType, ProviderPlatform } from '@fishprovider/utils/constants/account';
 import _ from 'lodash';
 import { useState } from 'react';
 
@@ -45,7 +45,7 @@ function InvestModal({
   const canInvestMetaTrader = groupAccounts.some(
     (item) => item.providerPlatform === ProviderPlatform.metatrader,
   );
-  const canInvestFishCT = sourceType === SourceType.admin || !isLive;
+  const canInvestFishCT = sourceType === AccountSourceType.admin || !isLive;
 
   const platforms: { label: string, value: ProviderPlatform }[] = [
     ...(canInvestCTrader ? [
