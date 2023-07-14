@@ -2,14 +2,11 @@
   "name": "@fishprovider/phone",
   "version": "5.0.0",
   "scripts": {
-    "build-packages": "cd ../.. && npm run build -w packages/utils -w packages/cross",
     "doctor": "npx expo-doctor",
     "lint": "eslint --cache --fix .",
     "type-check": "tsc --noEmit",
-    "eas-build-post-install": "npm run build-packages",
-    "prestart": "npm run build-packages",
+    "eas-build-post-install": "./build-packages.sh",
     "start": "NODE_ENV=development doppler run --print-config -- expo start",
-    "predev": "npm run build-packages",
     "dev": "NODE_ENV=development expo start --dev-client",
     "native-android": "expo run:android",
     "native-ios": "expo run:ios"

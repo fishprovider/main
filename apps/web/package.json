@@ -2,17 +2,15 @@
   "name": "@fishprovider/web",
   "version": "5.0.4",
   "scripts": {
-    "build-packages": "cd ../.. && npm run build -w packages/utils -w packages/cross",
     "lint": "eslint --cache --fix --ignore-pattern public .",
     "type-check": "tsc --noEmit",
     "test": "cross-env NODE_ENV=test doppler run --print-config -- jest",
-    "prebuild": "npm run build-packages",
+    "prebuild": "./build-packages.sh",
     "build": "cross-env NODE_ENV=production next build",
     "postbuild": "cross-env NODE_ENV=production next-sitemap",
     "start": "cross-env NODE_ENV=production next start",
     "export": "cross-env NODE_ENV=production next export",
     "build-export": "npm run build && npm run export",
-    "predev": "npm run build-packages",
     "dev": "cross-env NODE_ENV=development doppler run -p web -c prd_local --print-config -- next dev",
     "analyze": "cross-env NODE_ENV=production ANALYZE=true doppler run --print-config -- next build"
   },

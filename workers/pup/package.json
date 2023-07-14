@@ -16,7 +16,7 @@
     "postbuild": "./build-check.sh",
     "build-watch": "cross-env WATCH_MODE=true npm run build",
     "start": "doppler run --print-config -- node --experimental-specifier-resolution=node dist/index.js",
-    "start-watch": "doppler run --print-config -- nodemon --experimental-specifier-resolution=node --delay 1 dist/index.js",
+    "start-watch": "doppler run --print-config -- nodemon --experimental-specifier-resolution=node dist/index.js",
     "dev": "cross-env NODE_ENV=development concurrently -k 'npm run build-watch' 'npm run start-watch'"
   },
   "dependencies": {

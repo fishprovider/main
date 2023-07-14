@@ -37,10 +37,12 @@ for `build` and `start`, not for `dev`. If `dev` needs some `devDependencies`, p
 - Start dev server
   ```shell
   # Option 1: run at root level
+  npm run prebuild -w apps/back
   npm run dev -w apps/back
 
   # Option 2: run at project level
   cd apps/back
+  npm run prebuild
   npm run dev
   ```
 
