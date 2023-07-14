@@ -1,8 +1,8 @@
-import type { Config } from '@fishprovider/ctrader/types/Config.model';
-import fetchOrders from '@fishprovider/swap/commands/fetchOrders';
-import * as newOrder from '@fishprovider/swap/commands/newOrder';
-import removePosition from '@fishprovider/swap/commands/removePosition';
-import { ProviderPlatform, ProviderType } from '@fishprovider/utils/constants/account';
+import type { Config } from '@fishprovider/ctrader/dist/types/Config.model';
+import fetchOrders from '@fishprovider/swap/dist/commands/fetchOrders';
+import * as newOrder from '@fishprovider/swap/dist/commands/newOrder';
+import removePosition from '@fishprovider/swap/dist/commands/removePosition';
+import { ProviderPlatform, ProviderType } from '@fishprovider/utils/dist/constants/account';
 
 import * as provider from '~services/provider';
 import {

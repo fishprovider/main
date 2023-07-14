@@ -1,7 +1,7 @@
-import getAssetList from '@fishprovider/ctrader/commands/getAssetList';
-import type { ConnectionType } from '@fishprovider/ctrader/types/Connection.model';
-import { saveAssets } from '@fishprovider/swap/utils/price';
-import type { ProviderType } from '@fishprovider/utils/constants/account';
+import getAssetList from '@fishprovider/ctrader/dist/commands/getAssetList';
+import type { ConnectionType } from '@fishprovider/ctrader/dist/types/Connection.model';
+import { saveAssets } from '@fishprovider/swap/dist/utils/price';
+import type { ProviderType } from '@fishprovider/utils/dist/constants/account';
 
 const updateAssets = async (connection: ConnectionType, providerType: ProviderType) => {
   Logger.info('Updating assets');

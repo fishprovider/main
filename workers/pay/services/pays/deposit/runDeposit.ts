@@ -1,9 +1,9 @@
-import { getTransactionUpdates as getTransactionUpdatesFromCoinbaseCommerce } from '@fishprovider/coin/libs/coinbaseCommerce/utils';
-import { getTransactionUpdates as getTransactionUpdatesFromRequestFinance } from '@fishprovider/coin/libs/requestFinance/utils';
-import updateTransaction from '@fishprovider/coin/utils/transaction/updateTransaction';
-import { runDBTransaction } from '@fishprovider/core/libs/mongo';
-import { SourceType, TransactionStatus, TransactionStatusRequest } from '@fishprovider/utils/constants/pay';
-import type { Transaction } from '@fishprovider/utils/types/Pay.model';
+import { getTransactionUpdates as getTransactionUpdatesFromCoinbaseCommerce } from '@fishprovider/coin/dist/libs/coinbaseCommerce/utils';
+import { getTransactionUpdates as getTransactionUpdatesFromRequestFinance } from '@fishprovider/coin/dist/libs/requestFinance/utils';
+import updateTransaction from '@fishprovider/coin/dist/utils/transaction/updateTransaction';
+import { runDBTransaction } from '@fishprovider/core/dist/libs/mongo';
+import { SourceType, TransactionStatus, TransactionStatusRequest } from '@fishprovider/utils/dist/constants/pay';
+import type { Transaction } from '@fishprovider/utils/dist/types/Pay.model';
 import _ from 'lodash';
 
 import completeDeposit from './completeDeposit';

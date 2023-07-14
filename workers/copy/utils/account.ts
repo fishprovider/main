@@ -1,4 +1,4 @@
-import { getProvider } from '@fishprovider/swap/utils/account';
+import { getProvider } from '@fishprovider/swap/dist/utils/account';
 
 const env = {
   copyTasks: process.env.COPY_TASKS || 'removeClosedOrders,copyNewOrders,updateSLTP,checkEquitySL',

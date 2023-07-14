@@ -1,7 +1,7 @@
-import subSpot from '@fishprovider/metatrader/commands/subSpot';
-import unsubSpot from '@fishprovider/metatrader/commands/unsubSpot';
-import type { ConnectionType } from '@fishprovider/metatrader/types/Connection.model';
-import delay from '@fishprovider/utils/helpers/delay';
+import subSpot from '@fishprovider/metatrader/dist/commands/subSpot';
+import unsubSpot from '@fishprovider/metatrader/dist/commands/unsubSpot';
+import type { ConnectionType } from '@fishprovider/metatrader/dist/types/Connection.model';
+import delay from '@fishprovider/utils/dist/helpers/delay';
 
 import { spotTasks } from '~utils/tasks';
 

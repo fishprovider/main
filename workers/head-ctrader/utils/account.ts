@@ -1,4 +1,4 @@
-import { ProviderPlatform, ProviderTradeType } from '@fishprovider/utils/constants/account';
+import { ProviderPlatform, ProviderTradeType } from '@fishprovider/utils/dist/constants/account';
 
 import type { ClientAccount } from '~types/Client.model';
 

@@ -1,6 +1,6 @@
-import updateTransaction from '@fishprovider/coin/utils/transaction/updateTransaction';
-import { TransactionStatus } from '@fishprovider/utils/constants/pay';
-import type { Transaction, Wallet } from '@fishprovider/utils/types/Pay.model';
+import updateTransaction from '@fishprovider/coin/dist/utils/transaction/updateTransaction';
+import { TransactionStatus } from '@fishprovider/utils/dist/constants/pay';
+import type { Transaction, Wallet } from '@fishprovider/utils/dist/types/Pay.model';
 import type { ClientSession } from 'mongodb';
 
 const completeTransfer = async (params: {

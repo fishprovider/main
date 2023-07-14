@@ -1,8 +1,8 @@
-import type { QueuePromise } from '@fishprovider/core/libs/queuePromise';
-import { destroy as destroyQueue, start as startQueue } from '@fishprovider/core/libs/queuePromise';
-import { getProviderIds } from '@fishprovider/swap/utils/account';
-import { ProviderTradeType } from '@fishprovider/utils/constants/account';
-import { isPausedWeekend } from '@fishprovider/utils/helpers/pause';
+import type { QueuePromise } from '@fishprovider/core/dist/libs/queuePromise';
+import { destroy as destroyQueue, start as startQueue } from '@fishprovider/core/dist/libs/queuePromise';
+import { getProviderIds } from '@fishprovider/swap/dist/utils/account';
+import { ProviderTradeType } from '@fishprovider/utils/dist/constants/account';
+import { isPausedWeekend } from '@fishprovider/utils/dist/helpers/pause';
 import _ from 'lodash';
 import moment, { Moment } from 'moment';
 

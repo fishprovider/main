@@ -1,4 +1,4 @@
-import { clean, getJobType } from '@fishprovider/core/libs/agenda';
+import { clean, getJobType } from '@fishprovider/core/dist/libs/agenda';
 
 import checkNews from '~services/news/checkNews';
 import dailyBalance from '~services/stats/dailyBalance';

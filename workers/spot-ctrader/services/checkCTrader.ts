@@ -1,4 +1,4 @@
-import { isPausedWeekend } from '@fishprovider/utils/helpers/pause';
+import { isPausedWeekend } from '@fishprovider/utils/dist/helpers/pause';
 import moment from 'moment';
 
 const env = {

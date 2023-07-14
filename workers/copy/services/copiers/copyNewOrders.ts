@@ -1,18 +1,18 @@
-import { send } from '@fishprovider/core/libs/notif';
-import newOrder from '@fishprovider/swap/commands/newOrder';
-import { botUser } from '@fishprovider/swap/utils/account';
-import { getPrices } from '@fishprovider/swap/utils/price';
-import { CopyVolumeMode, LockType, ProviderType } from '@fishprovider/utils/constants/account';
-import { OrderStatus, OrderType } from '@fishprovider/utils/constants/order';
-import { isLastRunExpired } from '@fishprovider/utils/helpers/lastRunChecks';
-import { buildCopyId, parseCopyId } from '@fishprovider/utils/helpers/order';
-import { isPausedWeekend } from '@fishprovider/utils/helpers/pause';
+import { send } from '@fishprovider/core/dist/libs/notif';
+import newOrder from '@fishprovider/swap/dist/commands/newOrder';
+import { botUser } from '@fishprovider/swap/dist/utils/account';
+import { getPrices } from '@fishprovider/swap/dist/utils/price';
+import { CopyVolumeMode, LockType, ProviderType } from '@fishprovider/utils/dist/constants/account';
+import { OrderStatus, OrderType } from '@fishprovider/utils/dist/constants/order';
+import { isLastRunExpired } from '@fishprovider/utils/dist/helpers/lastRunChecks';
+import { buildCopyId, parseCopyId } from '@fishprovider/utils/dist/helpers/order';
+import { isPausedWeekend } from '@fishprovider/utils/dist/helpers/pause';
 import {
   getLotFromVolume, getVolumeFromLot, getVolumeRound,
-} from '@fishprovider/utils/helpers/price';
-import type { Account, CopySettings } from '@fishprovider/utils/types/Account.model';
-import type { Order, OrderWithoutId } from '@fishprovider/utils/types/Order.model';
-import type { Price } from '@fishprovider/utils/types/Price.model';
+} from '@fishprovider/utils/dist/helpers/price';
+import type { Account, CopySettings } from '@fishprovider/utils/dist/types/Account.model';
+import type { Order, OrderWithoutId } from '@fishprovider/utils/dist/types/Order.model';
+import type { Price } from '@fishprovider/utils/dist/types/Price.model';
 
 import type { OrderCopy } from '~types/Order.model';
 

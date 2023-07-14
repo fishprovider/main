@@ -1,5 +1,5 @@
-import { send } from '@fishprovider/core/libs/notif';
-import type { CallbackPayload } from '@fishprovider/ctrader/types/Event.model';
+import { send } from '@fishprovider/core/dist/libs/notif';
+import type { CallbackPayload } from '@fishprovider/ctrader/dist/types/Event.model';
 
 import type { ClientAccount } from '~types/Client.model';
 

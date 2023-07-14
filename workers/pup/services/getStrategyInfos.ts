@@ -1,5 +1,5 @@
-import { ProviderType } from '@fishprovider/utils/constants/account';
-import type { Account } from '@fishprovider/utils/types/Account.model';
+import { ProviderType } from '@fishprovider/utils/dist/constants/account';
+import type { Account } from '@fishprovider/utils/dist/types/Account.model';
 import type { Page } from 'puppeteer-core';
 
 import getStrategyInfo from '~utils/getStrategyInfo';

@@ -1,9 +1,9 @@
-import { send } from '@fishprovider/core/libs/notif';
-import removePosition from '@fishprovider/swap/commands/removePosition';
-import { botUser } from '@fishprovider/swap/utils/account';
-import { isLastRunExpired } from '@fishprovider/utils/helpers/lastRunChecks';
-import type { Account } from '@fishprovider/utils/types/Account.model';
-import type { Order } from '@fishprovider/utils/types/Order.model';
+import { send } from '@fishprovider/core/dist/libs/notif';
+import removePosition from '@fishprovider/swap/dist/commands/removePosition';
+import { botUser } from '@fishprovider/swap/dist/utils/account';
+import { isLastRunExpired } from '@fishprovider/utils/dist/helpers/lastRunChecks';
+import type { Account } from '@fishprovider/utils/dist/types/Account.model';
+import type { Order } from '@fishprovider/utils/dist/types/Order.model';
 
 const env = {
   dryRun: process.env.DRY_RUN,

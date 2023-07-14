@@ -1,5 +1,5 @@
-import { clean, getJobType } from '@fishprovider/core/libs/agenda';
-import { ProviderTradeType } from '@fishprovider/utils/constants/account';
+import { clean, getJobType } from '@fishprovider/core/dist/libs/agenda';
+import { ProviderTradeType } from '@fishprovider/utils/dist/constants/account';
 import type { Job, JobAttributesData } from 'agenda';
 
 import { destroyOne, renewTokens, startOne } from '~services/provider';

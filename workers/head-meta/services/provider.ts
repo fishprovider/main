@@ -1,11 +1,11 @@
-import startAccountMetaTrader from '@fishprovider/metatrader/commands/startAccount';
-import subAccount from '@fishprovider/metatrader/commands/subAccount';
-import type { Config } from '@fishprovider/metatrader/types/Config.model';
-import type { CallbackPayload } from '@fishprovider/metatrader/types/Event.model';
-import fetchAccountInfo from '@fishprovider/swap/commands/fetchAccountInfo';
-import fetchOrders from '@fishprovider/swap/commands/fetchOrders';
-import connect from '@fishprovider/swap/libs/metatrader/connect';
-import delay from '@fishprovider/utils/helpers/delay';
+import startAccountMetaTrader from '@fishprovider/metatrader/dist/commands/startAccount';
+import subAccount from '@fishprovider/metatrader/dist/commands/subAccount';
+import type { Config } from '@fishprovider/metatrader/dist/types/Config.model';
+import type { CallbackPayload } from '@fishprovider/metatrader/dist/types/Event.model';
+import fetchAccountInfo from '@fishprovider/swap/dist/commands/fetchAccountInfo';
+import fetchOrders from '@fishprovider/swap/dist/commands/fetchOrders';
+import connect from '@fishprovider/swap/dist/libs/metatrader/connect';
+import delay from '@fishprovider/utils/dist/helpers/delay';
 import _ from 'lodash';
 
 import type { Client, ClientAccount } from '~types/Client.model';

@@ -1,4 +1,4 @@
-import { ProviderTradeType } from '@fishprovider/utils/constants/account';
+import { ProviderTradeType } from '@fishprovider/utils/dist/constants/account';
 
 const env = {
   providerTradeType: process.env.PROVIDER_TRADE_TYPE || ProviderTradeType.demo,

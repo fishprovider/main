@@ -1,4 +1,4 @@
-import { start as startSysInfo } from '@fishprovider/core/libs/sysinfo';
+import { start as startSysInfo } from '@fishprovider/core/dist/libs/sysinfo';
 
 import { startTelegramVerify } from '~libs/telebot';
 

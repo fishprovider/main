@@ -1,10 +1,10 @@
-import type { ConnectionType } from '@fishprovider/metatrader/types/Connection.model';
-import type { CallbackPayload } from '@fishprovider/metatrader/types/Event.model';
-import fetchAccountInfo from '@fishprovider/swap/commands/fetchAccountInfo';
-import fetchDeals from '@fishprovider/swap/commands/fetchDeals';
-import fetchOrders from '@fishprovider/swap/commands/fetchOrders';
-import random from '@fishprovider/utils/helpers/random';
-import type { Order } from '@fishprovider/utils/types/Order.model';
+import type { ConnectionType } from '@fishprovider/metatrader/dist/types/Connection.model';
+import type { CallbackPayload } from '@fishprovider/metatrader/dist/types/Event.model';
+import fetchAccountInfo from '@fishprovider/swap/dist/commands/fetchAccountInfo';
+import fetchDeals from '@fishprovider/swap/dist/commands/fetchDeals';
+import fetchOrders from '@fishprovider/swap/dist/commands/fetchOrders';
+import random from '@fishprovider/utils/dist/helpers/random';
+import type { Order } from '@fishprovider/utils/dist/types/Order.model';
 import _ from 'lodash';
 
 import type { ClientAccount } from '~types/Client.model';

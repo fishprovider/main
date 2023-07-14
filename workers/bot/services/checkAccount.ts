@@ -1,7 +1,7 @@
-import { getDeals, getLiveOrders } from '@fishprovider/swap/utils/order';
-import { getPrices } from '@fishprovider/swap/utils/price';
-import { getProfit } from '@fishprovider/utils/helpers/order';
-import { getMajorPairs } from '@fishprovider/utils/helpers/price';
+import { getDeals, getLiveOrders } from '@fishprovider/swap/dist/utils/order';
+import { getPrices } from '@fishprovider/swap/dist/utils/price';
+import { getProfit } from '@fishprovider/utils/dist/helpers/order';
+import { getMajorPairs } from '@fishprovider/utils/dist/helpers/price';
 import _ from 'lodash';
 import moment from 'moment';
 

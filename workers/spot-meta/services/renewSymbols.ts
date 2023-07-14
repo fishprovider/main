@@ -1,7 +1,7 @@
-import updateSymbols from '@fishprovider/swap/libs/metatrader/updateSymbols';
-import type { SymbolMetaTrader } from '@fishprovider/swap/types/Symbol.model';
-import { ProviderPlatform, ProviderType } from '@fishprovider/utils/constants/account';
-import type { Account } from '@fishprovider/utils/types/Account.model';
+import updateSymbols from '@fishprovider/swap/dist/libs/metatrader/updateSymbols';
+import type { SymbolMetaTrader } from '@fishprovider/swap/dist/types/Symbol.model';
+import { ProviderPlatform, ProviderType } from '@fishprovider/utils/dist/constants/account';
+import type { Account } from '@fishprovider/utils/dist/types/Account.model';
 
 const renewProviderTypeSymbols = async (
   providerType: ProviderType,

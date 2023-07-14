@@ -1,11 +1,11 @@
-import { push } from '@fishprovider/core/libs/firebase';
-import { TradeSide } from '@fishprovider/ctrader/constants/openApi';
-import type { CallbackPayload } from '@fishprovider/ctrader/types/Event.model';
-import { transformDeal, transformPosition } from '@fishprovider/swap/libs/ctrader/transform';
-import { newRequestOrder } from '@fishprovider/swap/utils/command';
-import { Direction, OrderStatus } from '@fishprovider/utils/constants/order';
-import type { OrderWithoutId } from '@fishprovider/utils/types/Order.model';
-import type { RedisSymbol } from '@fishprovider/utils/types/Redis.model';
+import { push } from '@fishprovider/core/dist/libs/firebase';
+import { TradeSide } from '@fishprovider/ctrader/dist/constants/openApi';
+import type { CallbackPayload } from '@fishprovider/ctrader/dist/types/Event.model';
+import { transformDeal, transformPosition } from '@fishprovider/swap/dist/libs/ctrader/transform';
+import { newRequestOrder } from '@fishprovider/swap/dist/utils/command';
+import { Direction, OrderStatus } from '@fishprovider/utils/dist/constants/order';
+import type { OrderWithoutId } from '@fishprovider/utils/dist/types/Order.model';
+import type { RedisSymbol } from '@fishprovider/utils/dist/types/Redis.model';
 
 import type { ClientAccount } from '~types/Client.model';
 import { checkRequestOrder, updateRequestOrder } from '~utils/order';

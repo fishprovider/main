@@ -1,6 +1,6 @@
-import { destroy as destroyQueue, QueuePromise, start as startQueue } from '@fishprovider/core/libs/queuePromise';
-import { SourceType, TransactionStatus, TransactionType } from '@fishprovider/utils/constants/pay';
-import type { Transaction } from '@fishprovider/utils/types/Pay.model';
+import { destroy as destroyQueue, QueuePromise, start as startQueue } from '@fishprovider/core/dist/libs/queuePromise';
+import { SourceType, TransactionStatus, TransactionType } from '@fishprovider/utils/dist/constants/pay';
+import type { Transaction } from '@fishprovider/utils/dist/types/Pay.model';
 import _ from 'lodash';
 
 import runDeposit from './deposit/runDeposit';

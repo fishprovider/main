@@ -1,5 +1,5 @@
-import type { CallbackPayload } from '@fishprovider/metatrader/types/Event.model';
-import { OrderStatus } from '@fishprovider/utils/constants/order';
+import type { CallbackPayload } from '@fishprovider/metatrader/dist/types/Event.model';
+import { OrderStatus } from '@fishprovider/utils/dist/constants/order';
 
 import type { ClientAccount } from '~types/Client.model';
 import { checkRequestOrder, updateRequestOrder } from '~utils/order';

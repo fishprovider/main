@@ -1,4 +1,4 @@
-import { clean, getJobType } from '@fishprovider/core/libs/agenda';
+import { clean, getJobType } from '@fishprovider/core/dist/libs/agenda';
 
 import { checkLastUpdated } from '~services/checkMetaTrader';
 import { pollSymbols, renewSymbols } from '~services/provider';

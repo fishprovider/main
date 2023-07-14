@@ -1,7 +1,7 @@
-import { CallbackType } from '@fishprovider/ctrader/constants/openApi';
-import type { ConnectionType } from '@fishprovider/ctrader/types/Connection.model';
-import type { CallbackPayload } from '@fishprovider/ctrader/types/Event.model';
-import type { ProviderType } from '@fishprovider/utils/constants/account';
+import { CallbackType } from '@fishprovider/ctrader/dist/constants/openApi';
+import type { ConnectionType } from '@fishprovider/ctrader/dist/types/Connection.model';
+import type { CallbackPayload } from '@fishprovider/ctrader/dist/types/Event.model';
+import type { ProviderType } from '@fishprovider/utils/dist/constants/account';
 
 import { spotTasks } from '~utils/tasks';
 

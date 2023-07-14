@@ -1,13 +1,13 @@
-import { send } from '@fishprovider/core/libs/notif';
-import removeOrder from '@fishprovider/swap/commands/removeOrder';
-import removePosition from '@fishprovider/swap/commands/removePosition';
-import { botUser } from '@fishprovider/swap/utils/account';
-import { getPendingOrders } from '@fishprovider/swap/utils/order';
-import { PlanType } from '@fishprovider/utils/constants/account';
-import { isLastRunExpired } from '@fishprovider/utils/helpers/lastRunChecks';
-import { getProfit } from '@fishprovider/utils/helpers/order';
-import type { Account } from '@fishprovider/utils/types/Account.model';
-import type { Order } from '@fishprovider/utils/types/Order.model';
+import { send } from '@fishprovider/core/dist/libs/notif';
+import removeOrder from '@fishprovider/swap/dist/commands/removeOrder';
+import removePosition from '@fishprovider/swap/dist/commands/removePosition';
+import { botUser } from '@fishprovider/swap/dist/utils/account';
+import { getPendingOrders } from '@fishprovider/swap/dist/utils/order';
+import { PlanType } from '@fishprovider/utils/dist/constants/account';
+import { isLastRunExpired } from '@fishprovider/utils/dist/helpers/lastRunChecks';
+import { getProfit } from '@fishprovider/utils/dist/helpers/order';
+import type { Account } from '@fishprovider/utils/dist/types/Account.model';
+import type { Order } from '@fishprovider/utils/dist/types/Order.model';
 import _ from 'lodash';
 
 import { lockTilDayEnd } from '~utils/account';

@@ -1,15 +1,15 @@
-import getSymbolList from '@fishprovider/ctrader/commands/getSymbolList';
-import { QuoteType } from '@fishprovider/ctrader/constants/openApi';
-import type { Config } from '@fishprovider/ctrader/types/Config.model';
-import type { ConnectionType } from '@fishprovider/ctrader/types/Connection.model';
-import type { CallbackPayload } from '@fishprovider/ctrader/types/Event.model';
-import connect from '@fishprovider/swap/libs/ctrader/connect';
-import getSymbolTick from '@fishprovider/swap/libs/ctrader/getSymbolTick';
-import renewTokensCTrader from '@fishprovider/swap/libs/ctrader/renewTokens';
-import type { SymbolCTrader } from '@fishprovider/swap/types/Symbol.model';
-import { savePrice } from '@fishprovider/swap/utils/price';
-import type { ProviderType } from '@fishprovider/utils/constants/account';
-import type { Account } from '@fishprovider/utils/types/Account.model';
+import getSymbolList from '@fishprovider/ctrader/dist/commands/getSymbolList';
+import { QuoteType } from '@fishprovider/ctrader/dist/constants/openApi';
+import type { Config } from '@fishprovider/ctrader/dist/types/Config.model';
+import type { ConnectionType } from '@fishprovider/ctrader/dist/types/Connection.model';
+import type { CallbackPayload } from '@fishprovider/ctrader/dist/types/Event.model';
+import connect from '@fishprovider/swap/dist/libs/ctrader/connect';
+import getSymbolTick from '@fishprovider/swap/dist/libs/ctrader/getSymbolTick';
+import renewTokensCTrader from '@fishprovider/swap/dist/libs/ctrader/renewTokens';
+import type { SymbolCTrader } from '@fishprovider/swap/dist/types/Symbol.model';
+import { savePrice } from '@fishprovider/swap/dist/utils/price';
+import type { ProviderType } from '@fishprovider/utils/dist/constants/account';
+import type { Account } from '@fishprovider/utils/dist/types/Account.model';
 import _ from 'lodash';
 import moment from 'moment';
 

@@ -1,6 +1,6 @@
-import { CallbackType } from '@fishprovider/metatrader/constants/metaApi';
-import type { ConnectionType } from '@fishprovider/metatrader/types/Connection.model';
-import type { CallbackPayload } from '@fishprovider/metatrader/types/Event.model';
+import { CallbackType } from '@fishprovider/metatrader/dist/constants/metaApi';
+import type { ConnectionType } from '@fishprovider/metatrader/dist/types/Connection.model';
+import type { CallbackPayload } from '@fishprovider/metatrader/dist/types/Event.model';
 
 import type { ClientAccount } from '~types/Client.model';
 

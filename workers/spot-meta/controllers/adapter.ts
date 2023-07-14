@@ -1,4 +1,4 @@
-import { start as startSysInfo } from '@fishprovider/core/libs/sysinfo';
+import { start as startSysInfo } from '@fishprovider/core/dist/libs/sysinfo';
 
 import {
   destroy as destroyProvider, getIsRestarting, setIsRestarting, start as startProvider,
