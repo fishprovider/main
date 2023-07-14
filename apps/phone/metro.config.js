@@ -1,14 +1,24 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 
+const path = require('path');
 const { getDefaultConfig } = require('@expo/metro-config');
 
-const defaultConfig = getDefaultConfig(__dirname);
+const projectRoot = __dirname;
+const workspaceRoot = path.resolve(projectRoot, '../..');
 
-module.exports = {
-  ...defaultConfig,
-  watchFolders: [
-    '../../node_modules',
-    '../../packages/utils',
-    '../../packages/cross',
-  ],
-};
+const config = getDefaultConfig(projectRoot);
+
+config.watchFolders = [
+  path.resolve(workspaceRoot, 'node_modules'),
+  path.resolve(workspaceRoot, 'packages', 'utils'),
+  path.resolve(workspaceRoot, 'packages', 'cross'),
+];
+
+config.resolver.nodeModulesPaths = [
+  path.resolve(projectRoot, 'node_modules'),
+  path.resolve(workspaceRoot, 'node_modules'),
+];
+
+// config.resolver.disableHierarchicalLookup = true;
+
+module.exports = config;
