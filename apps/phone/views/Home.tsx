@@ -3,13 +3,13 @@
 import { FontAwesome } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import Account from '~views/Account';
-import Strategies from '~views/Strategies';
-import Wallet from '~views/Wallet';
+import Account from './Account';
+import Strategies from './Strategies';
+import Wallet from './Wallet';
 
 const Tab = createBottomTabNavigator();
 
-export default function BaseLayout() {
+export default function Home() {
   return (
     <Tab.Navigator>
       <Tab.Screen

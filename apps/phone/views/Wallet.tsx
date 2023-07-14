@@ -1,22 +1,22 @@
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { useNavigation } from '@react-navigation/native';
 
-import PushNotif from '~components/PushNotif';
+import PushNotifDemo from '~components/PushNotifDemo';
 import UserController from '~controllers/UserController';
 import Button from '~ui/Button';
-import View from '~ui/View';
+import Stack from '~ui/Stack';
 
 const Drawer = createDrawerNavigator();
 
 function DemoScreen() {
   const navigation = useNavigation<any>();
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <Stack space="$4" paddingTop="$4" alignItems="center">
       <Button themeInverse onPress={() => navigation.toggleDrawer()}>
         Toggle Drawer
       </Button>
-      <PushNotif />
-    </View>
+      <PushNotifDemo />
+    </Stack>
   );
 }
 

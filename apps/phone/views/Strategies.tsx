@@ -12,7 +12,7 @@ import Stack from '~ui/Stack';
 // const pageSizeOptions = ['5', '10', '20', '50', '100'];
 const pageSizeDefault = 10;
 
-export default function Invest() {
+export default function Strategies() {
   const [page, _setPage] = useState(1);
   const [pageSize, _setPageSize] = useState(pageSizeDefault);
 

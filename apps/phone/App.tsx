@@ -1,10 +1,10 @@
 import BaseController from '~controllers/BaseController';
-import BaseLayout from '~layouts/BaseLayout';
+import Home from '~views/Home';
 
 export default function App() {
   return (
     <BaseController>
-      <BaseLayout />
+      <Home />
     </BaseController>
   );
 }
