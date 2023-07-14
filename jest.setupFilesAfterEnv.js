@@ -1,4 +1,4 @@
-// import { start } from '@fishprovider/core/libs/logger';
+// import { start } from '@fishprovider/core/dist/libs/logger';
 import { jest } from '@jest/globals';
 
 // start();
