@@ -1,6 +1,6 @@
-import memberFetch from '@fishprovider/cross/api/accounts/members/fetch';
-import { useMutate } from '@fishprovider/cross/libs/query';
-import storeUser from '@fishprovider/cross/stores/user';
+import memberFetch from '@fishprovider/cross/dist/api/accounts/members/fetch';
+import { useMutate } from '@fishprovider/cross/dist/libs/query';
+import storeUser from '@fishprovider/cross/dist/stores/user';
 
 import Icon from '~ui/core/Icon';
 

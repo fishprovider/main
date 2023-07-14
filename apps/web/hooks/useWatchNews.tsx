@@ -1,6 +1,6 @@
-import newsGetMany from '@fishprovider/cross/api/news/getMany';
-import storeNews from '@fishprovider/cross/stores/news';
-import storeUser from '@fishprovider/cross/stores/user';
+import newsGetMany from '@fishprovider/cross/dist/api/news/getMany';
+import storeNews from '@fishprovider/cross/dist/stores/news';
+import storeUser from '@fishprovider/cross/dist/stores/user';
 import _ from 'lodash';
 import moment from 'moment';
 import { useEffect } from 'react';

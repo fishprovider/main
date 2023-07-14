@@ -1,4 +1,4 @@
-import storeUser from '@fishprovider/cross/stores/user';
+import storeUser from '@fishprovider/cross/dist/stores/user';
 import { useEffect, useState } from 'react';
 
 import { requestNotif } from '~libs/pushNotif';

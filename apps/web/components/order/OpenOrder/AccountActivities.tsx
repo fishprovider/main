@@ -1,6 +1,6 @@
-import storeUser from '@fishprovider/cross/stores/user';
-import { Roles } from '@fishprovider/utils/constants/user';
-import type { Activity, Member } from '@fishprovider/utils/types/Account.model';
+import storeUser from '@fishprovider/cross/dist/stores/user';
+import { Roles } from '@fishprovider/utils/dist/constants/user';
+import type { Activity, Member } from '@fishprovider/utils/dist/types/Account.model';
 import _ from 'lodash';
 import moment from 'moment';
 

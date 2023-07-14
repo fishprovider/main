@@ -1,8 +1,8 @@
-import depositAdd from '@fishprovider/cross/api/deposit/add';
-import depositGetMany from '@fishprovider/cross/api/deposit/getMany';
-import { useMutate, useQuery } from '@fishprovider/cross/libs/query';
-import storeTransactions from '@fishprovider/cross/stores/transactions';
-import { SourceType, TransactionType } from '@fishprovider/utils/constants/pay';
+import depositAdd from '@fishprovider/cross/dist/api/deposit/add';
+import depositGetMany from '@fishprovider/cross/dist/api/deposit/getMany';
+import { useMutate, useQuery } from '@fishprovider/cross/dist/libs/query';
+import storeTransactions from '@fishprovider/cross/dist/stores/transactions';
+import { SourceType, TransactionType } from '@fishprovider/utils/dist/constants/pay';
 import _ from 'lodash';
 import { useState } from 'react';
 

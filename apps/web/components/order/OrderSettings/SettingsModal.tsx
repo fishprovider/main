@@ -1,14 +1,14 @@
-import orderUpdate from '@fishprovider/cross/api/orders/update';
-import { useMutate } from '@fishprovider/cross/libs/query';
-import storeOrders from '@fishprovider/cross/stores/orders';
-import storePrices from '@fishprovider/cross/stores/prices';
-import storeUser from '@fishprovider/cross/stores/user';
-import { Direction, OrderStatus, OrderType } from '@fishprovider/utils/constants/order';
-import { getEntry } from '@fishprovider/utils/helpers/order';
-import { validateOrderUpdate } from '@fishprovider/utils/helpers/validateOrder';
-import type { Account } from '@fishprovider/utils/types/Account.model';
-import type { Order } from '@fishprovider/utils/types/Order.model';
-import type { User } from '@fishprovider/utils/types/User.model';
+import orderUpdate from '@fishprovider/cross/dist/api/orders/update';
+import { useMutate } from '@fishprovider/cross/dist/libs/query';
+import storeOrders from '@fishprovider/cross/dist/stores/orders';
+import storePrices from '@fishprovider/cross/dist/stores/prices';
+import storeUser from '@fishprovider/cross/dist/stores/user';
+import { Direction, OrderStatus, OrderType } from '@fishprovider/utils/dist/constants/order';
+import { getEntry } from '@fishprovider/utils/dist/helpers/order';
+import { validateOrderUpdate } from '@fishprovider/utils/dist/helpers/validateOrder';
+import type { Account } from '@fishprovider/utils/dist/types/Account.model';
+import type { Order } from '@fishprovider/utils/dist/types/Order.model';
+import type { User } from '@fishprovider/utils/dist/types/User.model';
 import _ from 'lodash';
 import { useState } from 'react';
 

@@ -1,10 +1,10 @@
-import storeAccounts from '@fishprovider/cross/stores/accounts';
-import storePrices from '@fishprovider/cross/stores/prices';
-import storeUser from '@fishprovider/cross/stores/user';
-import { OrderStatus } from '@fishprovider/utils/constants/order';
-import { getEntry, parseCopyId } from '@fishprovider/utils/helpers/order';
-import { getDiffPips, getLotFromVolume } from '@fishprovider/utils/helpers/price';
-import type { Order } from '@fishprovider/utils/types/Order.model';
+import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
+import storePrices from '@fishprovider/cross/dist/stores/prices';
+import storeUser from '@fishprovider/cross/dist/stores/user';
+import { OrderStatus } from '@fishprovider/utils/dist/constants/order';
+import { getEntry, parseCopyId } from '@fishprovider/utils/dist/helpers/order';
+import { getDiffPips, getLotFromVolume } from '@fishprovider/utils/dist/helpers/price';
+import type { Order } from '@fishprovider/utils/dist/types/Order.model';
 import _ from 'lodash';
 import moment from 'moment';
 

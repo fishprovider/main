@@ -1,4 +1,4 @@
-import storeUser from '@fishprovider/cross/stores/user';
+import storeUser from '@fishprovider/cross/dist/stores/user';
 
 import RequiredLoginView from '~components/user/RequiredLoginView';
 import Stack from '~ui/core/Stack';

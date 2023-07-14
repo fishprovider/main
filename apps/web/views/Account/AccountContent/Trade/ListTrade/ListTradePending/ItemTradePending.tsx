@@ -1,9 +1,9 @@
-import orderRemove from '@fishprovider/cross/api/orders/remove';
-import { useMutate } from '@fishprovider/cross/libs/query';
-import storeUser from '@fishprovider/cross/stores/user';
-import { getRoleProvider } from '@fishprovider/utils/helpers/user';
-import type { Order } from '@fishprovider/utils/types/Order.model';
-import type { Price } from '@fishprovider/utils/types/Price.model';
+import orderRemove from '@fishprovider/cross/dist/api/orders/remove';
+import { useMutate } from '@fishprovider/cross/dist/libs/query';
+import storeUser from '@fishprovider/cross/dist/stores/user';
+import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
+import type { Order } from '@fishprovider/utils/dist/types/Order.model';
+import type { Price } from '@fishprovider/utils/dist/types/Price.model';
 import _ from 'lodash';
 
 import OrderActivities from '~components/order/OrderActivities';

@@ -1,5 +1,5 @@
-import storeAccounts from '@fishprovider/cross/stores/accounts';
-import { AccountSourceType, ProviderPlatform } from '@fishprovider/utils/constants/account';
+import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
+import { AccountSourceType, ProviderPlatform } from '@fishprovider/utils/dist/constants/account';
 import _ from 'lodash';
 import { useState } from 'react';
 

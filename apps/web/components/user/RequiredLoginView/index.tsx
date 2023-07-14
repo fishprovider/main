@@ -1,4 +1,4 @@
-import storeUser from '@fishprovider/cross/stores/user';
+import storeUser from '@fishprovider/cross/dist/stores/user';
 import { useRouter } from 'next/router';
 
 import Link from '~components/base/Link';

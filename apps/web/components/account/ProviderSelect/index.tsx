@@ -1,8 +1,8 @@
-import accountGetManySlim from '@fishprovider/cross/api/accounts/getManySlim';
-import accountGetManyUser from '@fishprovider/cross/api/accounts/getManyUser';
-import { useQuery } from '@fishprovider/cross/libs/query';
-import storeAccounts from '@fishprovider/cross/stores/accounts';
-import storeUser from '@fishprovider/cross/stores/user';
+import accountGetManySlim from '@fishprovider/cross/dist/api/accounts/getManySlim';
+import accountGetManyUser from '@fishprovider/cross/dist/api/accounts/getManyUser';
+import { useQuery } from '@fishprovider/cross/dist/libs/query';
+import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
+import storeUser from '@fishprovider/cross/dist/stores/user';
 import _ from 'lodash';
 import { useRouter } from 'next/router';
 

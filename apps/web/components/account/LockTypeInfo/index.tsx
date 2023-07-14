@@ -1,5 +1,5 @@
-import { LockType } from '@fishprovider/utils/constants/account';
-import type { Lock } from '@fishprovider/utils/types/Account.model';
+import { LockType } from '@fishprovider/utils/dist/constants/account';
+import type { Lock } from '@fishprovider/utils/dist/types/Account.model';
 
 import Title from '~ui/core/Title';
 

@@ -1,4 +1,4 @@
-import storeAccounts from '@fishprovider/cross/stores/accounts';
+import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
 import _ from 'lodash';
 import moment from 'moment';
 import {

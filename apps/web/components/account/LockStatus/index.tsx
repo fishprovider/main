@@ -1,6 +1,6 @@
-import storeUser from '@fishprovider/cross/stores/user';
-import { getRoleProvider } from '@fishprovider/utils/helpers/user';
-import type { Lock } from '@fishprovider/utils/types/Account.model';
+import storeUser from '@fishprovider/cross/dist/stores/user';
+import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
+import type { Lock } from '@fishprovider/utils/dist/types/Account.model';
 import moment from 'moment';
 
 import LockTypeInfo from '~components/account/LockTypeInfo';

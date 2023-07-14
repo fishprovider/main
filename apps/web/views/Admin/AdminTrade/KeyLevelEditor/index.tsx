@@ -1,5 +1,5 @@
-import statsGetManyKeyLevels from '@fishprovider/cross/api/stats/getManyKeyLevels';
-import storeUser from '@fishprovider/cross/stores/user';
+import statsGetManyKeyLevels from '@fishprovider/cross/dist/api/stats/getManyKeyLevels';
+import storeUser from '@fishprovider/cross/dist/stores/user';
 import { useEffect } from 'react';
 
 import Group from '~ui/core/Group';

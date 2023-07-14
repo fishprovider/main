@@ -1,6 +1,6 @@
-import lockMember from '@fishprovider/cross/api/accounts/lock/member';
-import storeUser from '@fishprovider/cross/stores/user';
-import type { Lock, Member } from '@fishprovider/utils/types/Account.model';
+import lockMember from '@fishprovider/cross/dist/api/accounts/lock/member';
+import storeUser from '@fishprovider/cross/dist/stores/user';
+import type { Lock, Member } from '@fishprovider/utils/dist/types/Account.model';
 
 import LockAction from '~components/account/LockAction';
 import LockStatus from '~components/account/LockStatus';

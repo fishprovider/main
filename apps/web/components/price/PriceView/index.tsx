@@ -1,7 +1,7 @@
-import storePrices from '@fishprovider/cross/stores/prices';
-import storeUser from '@fishprovider/cross/stores/user';
-import { ProviderType } from '@fishprovider/utils/constants/account';
-import { getDiffPips } from '@fishprovider/utils/helpers/price';
+import storePrices from '@fishprovider/cross/dist/stores/prices';
+import storeUser from '@fishprovider/cross/dist/stores/user';
+import { ProviderType } from '@fishprovider/utils/dist/constants/account';
+import { getDiffPips } from '@fishprovider/utils/dist/helpers/price';
 import _ from 'lodash';
 import moment from 'moment';
 

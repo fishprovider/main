@@ -1,7 +1,7 @@
-import statsGetManyTrends from '@fishprovider/cross/api/stats/getManyTrends';
-import statsUpdate from '@fishprovider/cross/api/stats/update';
-import storeStats from '@fishprovider/cross/stores/stats';
-import storeUser from '@fishprovider/cross/stores/user';
+import statsGetManyTrends from '@fishprovider/cross/dist/api/stats/getManyTrends';
+import statsUpdate from '@fishprovider/cross/dist/api/stats/update';
+import storeStats from '@fishprovider/cross/dist/stores/stats';
+import storeUser from '@fishprovider/cross/dist/stores/user';
 import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
 

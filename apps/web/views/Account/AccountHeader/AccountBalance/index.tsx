@@ -1,12 +1,12 @@
-import accountGet from '@fishprovider/cross/api/accounts/get';
-import { useMutate } from '@fishprovider/cross/libs/query';
-import storeOrders from '@fishprovider/cross/stores/orders';
-import storePrices from '@fishprovider/cross/stores/prices';
-import storeUser from '@fishprovider/cross/stores/user';
-import { ProviderType } from '@fishprovider/utils/constants/account';
-import { OrderStatus } from '@fishprovider/utils/constants/order';
-import { getProfit, getProfitIcon } from '@fishprovider/utils/helpers/order';
-import { getMajorPairs } from '@fishprovider/utils/helpers/price';
+import accountGet from '@fishprovider/cross/dist/api/accounts/get';
+import { useMutate } from '@fishprovider/cross/dist/libs/query';
+import storeOrders from '@fishprovider/cross/dist/stores/orders';
+import storePrices from '@fishprovider/cross/dist/stores/prices';
+import storeUser from '@fishprovider/cross/dist/stores/user';
+import { ProviderType } from '@fishprovider/utils/dist/constants/account';
+import { OrderStatus } from '@fishprovider/utils/dist/constants/order';
+import { getProfit, getProfitIcon } from '@fishprovider/utils/dist/helpers/order';
+import { getMajorPairs } from '@fishprovider/utils/dist/helpers/price';
 import _ from 'lodash';
 
 import EquityProgress from '~components/account/EquityProgress';

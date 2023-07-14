@@ -1,15 +1,15 @@
-import orderGetMany from '@fishprovider/cross/api/orders/getMany';
-import orderGetManyInfo from '@fishprovider/cross/api/orders/getManyInfo';
-import orderRemove from '@fishprovider/cross/api/orders/remove';
-import { useMutate } from '@fishprovider/cross/libs/query';
-import storePrices from '@fishprovider/cross/stores/prices';
-import storeUser from '@fishprovider/cross/stores/user';
-import { ProviderType } from '@fishprovider/utils/constants/account';
-import { OrderStatus } from '@fishprovider/utils/constants/order';
-import { getEntry } from '@fishprovider/utils/helpers/order';
-import { getDiffPips, getMajorPairs } from '@fishprovider/utils/helpers/price';
-import { getRoleProvider } from '@fishprovider/utils/helpers/user';
-import type { Order } from '@fishprovider/utils/types/Order.model';
+import orderGetMany from '@fishprovider/cross/dist/api/orders/getMany';
+import orderGetManyInfo from '@fishprovider/cross/dist/api/orders/getManyInfo';
+import orderRemove from '@fishprovider/cross/dist/api/orders/remove';
+import { useMutate } from '@fishprovider/cross/dist/libs/query';
+import storePrices from '@fishprovider/cross/dist/stores/prices';
+import storeUser from '@fishprovider/cross/dist/stores/user';
+import { ProviderType } from '@fishprovider/utils/dist/constants/account';
+import { OrderStatus } from '@fishprovider/utils/dist/constants/order';
+import { getEntry } from '@fishprovider/utils/dist/helpers/order';
+import { getDiffPips, getMajorPairs } from '@fishprovider/utils/dist/helpers/price';
+import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
+import type { Order } from '@fishprovider/utils/dist/types/Order.model';
 import _ from 'lodash';
 import { useState } from 'react';
 

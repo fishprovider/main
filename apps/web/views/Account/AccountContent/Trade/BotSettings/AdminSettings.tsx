@@ -1,9 +1,9 @@
-import accountUpdate from '@fishprovider/cross/api/accounts/update';
-import storeAccounts from '@fishprovider/cross/stores/accounts';
-import storeUser from '@fishprovider/cross/stores/user';
-import { CopyVolumeMode } from '@fishprovider/utils/constants/account';
-import { getRoleProvider } from '@fishprovider/utils/helpers/user';
-import type { CopySettings } from '@fishprovider/utils/types/Account.model';
+import accountUpdate from '@fishprovider/cross/dist/api/accounts/update';
+import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
+import storeUser from '@fishprovider/cross/dist/stores/user';
+import { CopyVolumeMode } from '@fishprovider/utils/dist/constants/account';
+import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
+import type { CopySettings } from '@fishprovider/utils/dist/types/Account.model';
 import _ from 'lodash';
 import { useState } from 'react';
 

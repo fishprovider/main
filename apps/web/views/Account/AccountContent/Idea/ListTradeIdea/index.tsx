@@ -1,13 +1,13 @@
-import orderGetIdea from '@fishprovider/cross/api/orders/getIdea';
-import { useMutate } from '@fishprovider/cross/libs/query';
-import storeOrders from '@fishprovider/cross/stores/orders';
-import storePrices from '@fishprovider/cross/stores/prices';
-import storeUser from '@fishprovider/cross/stores/user';
-import { ProviderType } from '@fishprovider/utils/constants/account';
-import { OrderStatus } from '@fishprovider/utils/constants/order';
-import { getProfit } from '@fishprovider/utils/helpers/order';
-import { getMajorPairs } from '@fishprovider/utils/helpers/price';
-import { getRoleProvider } from '@fishprovider/utils/helpers/user';
+import orderGetIdea from '@fishprovider/cross/dist/api/orders/getIdea';
+import { useMutate } from '@fishprovider/cross/dist/libs/query';
+import storeOrders from '@fishprovider/cross/dist/stores/orders';
+import storePrices from '@fishprovider/cross/dist/stores/prices';
+import storeUser from '@fishprovider/cross/dist/stores/user';
+import { ProviderType } from '@fishprovider/utils/dist/constants/account';
+import { OrderStatus } from '@fishprovider/utils/dist/constants/order';
+import { getProfit } from '@fishprovider/utils/dist/helpers/order';
+import { getMajorPairs } from '@fishprovider/utils/dist/helpers/price';
+import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
 import _ from 'lodash';
 
 import Group from '~ui/core/Group';

@@ -1,8 +1,8 @@
-import storePrices from '@fishprovider/cross/stores/prices';
-import storeUser from '@fishprovider/cross/stores/user';
-import type { ProviderType } from '@fishprovider/utils/constants/account';
-import { redisKeys } from '@fishprovider/utils/constants/redis';
-import type { Price } from '@fishprovider/utils/types/Price.model';
+import storePrices from '@fishprovider/cross/dist/stores/prices';
+import storeUser from '@fishprovider/cross/dist/stores/user';
+import type { ProviderType } from '@fishprovider/utils/dist/constants/account';
+import { redisKeys } from '@fishprovider/utils/dist/constants/redis';
+import type { Price } from '@fishprovider/utils/dist/types/Price.model';
 import { useEffect, useRef } from 'react';
 
 import useSymbols from '~hooks/useSymbols';

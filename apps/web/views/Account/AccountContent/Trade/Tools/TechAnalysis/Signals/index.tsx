@@ -1,7 +1,7 @@
-import signalGetMany from '@fishprovider/cross/api/signals/getMany';
-import { useQuery } from '@fishprovider/cross/libs/query';
-import storeUser from '@fishprovider/cross/stores/user';
-import { ProviderType } from '@fishprovider/utils/constants/account';
+import signalGetMany from '@fishprovider/cross/dist/api/signals/getMany';
+import { useQuery } from '@fishprovider/cross/dist/libs/query';
+import storeUser from '@fishprovider/cross/dist/stores/user';
+import { ProviderType } from '@fishprovider/utils/dist/constants/account';
 import { useState } from 'react';
 
 import { signalVersions } from '~constants/order';

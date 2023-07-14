@@ -1,5 +1,5 @@
-import { apiPost } from '@fishprovider/cross/libs/api';
-import promiseCreator from '@fishprovider/utils/helpers/promiseCreator';
+import { apiPost } from '@fishprovider/cross/dist/libs/api';
+import promiseCreator from '@fishprovider/utils/dist/helpers/promiseCreator';
 import { getMessaging, getToken, onMessage } from 'firebase/messaging';
 
 const env = {

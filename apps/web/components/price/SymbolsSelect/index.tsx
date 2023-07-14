@@ -1,10 +1,10 @@
-import priceGetDetail from '@fishprovider/cross/api/prices/getDetail';
-import priceGetMany from '@fishprovider/cross/api/prices/getMany';
-import priceGetNames from '@fishprovider/cross/api/prices/getNames';
-import { useQuery } from '@fishprovider/cross/libs/query';
-import storePrices from '@fishprovider/cross/stores/prices';
-import storeUser from '@fishprovider/cross/stores/user';
-import { PlanType, ProviderType } from '@fishprovider/utils/constants/account';
+import priceGetDetail from '@fishprovider/cross/dist/api/prices/getDetail';
+import priceGetMany from '@fishprovider/cross/dist/api/prices/getMany';
+import priceGetNames from '@fishprovider/cross/dist/api/prices/getNames';
+import { useQuery } from '@fishprovider/cross/dist/libs/query';
+import storePrices from '@fishprovider/cross/dist/stores/prices';
+import storeUser from '@fishprovider/cross/dist/stores/user';
+import { PlanType, ProviderType } from '@fishprovider/utils/dist/constants/account';
 import _ from 'lodash';
 import { useEffect } from 'react';
 

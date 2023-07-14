@@ -1,8 +1,8 @@
-import { apiPost } from '@fishprovider/cross/libs/api';
-import { useQuery } from '@fishprovider/cross/libs/query';
-import storeWallets from '@fishprovider/cross/stores/wallets';
-import { InvestStatus, WalletType } from '@fishprovider/utils/constants/pay';
-import type { Wallet } from '@fishprovider/utils/types/Pay.model';
+import { apiPost } from '@fishprovider/cross/dist/libs/api';
+import { useQuery } from '@fishprovider/cross/dist/libs/query';
+import storeWallets from '@fishprovider/cross/dist/stores/wallets';
+import { InvestStatus, WalletType } from '@fishprovider/utils/dist/constants/pay';
+import type { Wallet } from '@fishprovider/utils/dist/types/Pay.model';
 import _ from 'lodash';
 import moment from 'moment';
 import React from 'react';

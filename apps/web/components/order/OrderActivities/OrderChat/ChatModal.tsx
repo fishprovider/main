@@ -1,9 +1,9 @@
-import orderGetManyInfo from '@fishprovider/cross/api/orders/getManyInfo';
-import orderUpdateSettings from '@fishprovider/cross/api/orders/updateSettings';
-import { useMutate } from '@fishprovider/cross/libs/query';
-import storeOrders from '@fishprovider/cross/stores/orders';
-import storeUser from '@fishprovider/cross/stores/user';
-import type { Chat } from '@fishprovider/utils/types/Order.model';
+import orderGetManyInfo from '@fishprovider/cross/dist/api/orders/getManyInfo';
+import orderUpdateSettings from '@fishprovider/cross/dist/api/orders/updateSettings';
+import { useMutate } from '@fishprovider/cross/dist/libs/query';
+import storeOrders from '@fishprovider/cross/dist/stores/orders';
+import storeUser from '@fishprovider/cross/dist/stores/user';
+import type { Chat } from '@fishprovider/utils/dist/types/Order.model';
 import _ from 'lodash';
 import moment from 'moment';
 import { useState } from 'react';

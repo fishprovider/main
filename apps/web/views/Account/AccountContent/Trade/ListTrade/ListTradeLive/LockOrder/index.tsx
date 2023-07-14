@@ -1,5 +1,5 @@
-import orderUpdateSettings from '@fishprovider/cross/api/orders/updateSettings';
-import type { Order } from '@fishprovider/utils/types/Order.model';
+import orderUpdateSettings from '@fishprovider/cross/dist/api/orders/updateSettings';
+import type { Order } from '@fishprovider/utils/dist/types/Order.model';
 import _ from 'lodash';
 
 import Group from '~ui/core/Group';

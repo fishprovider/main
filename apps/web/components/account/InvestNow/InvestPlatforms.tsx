@@ -1,6 +1,6 @@
-import storeAccounts from '@fishprovider/cross/stores/accounts';
-import { ProviderPlatform } from '@fishprovider/utils/constants/account';
-import type { Account } from '@fishprovider/utils/types/Account.model';
+import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
+import { ProviderPlatform } from '@fishprovider/utils/dist/constants/account';
+import type { Account } from '@fishprovider/utils/dist/types/Account.model';
 import _ from 'lodash';
 
 import Link from '~components/base/Link';

@@ -1,6 +1,6 @@
-import accountAdd from '@fishprovider/cross/api/accounts/add';
-import { useMutate } from '@fishprovider/cross/libs/query';
-import { ProviderPlatform, ProviderTradeType, ProviderType } from '@fishprovider/utils/constants/account';
+import accountAdd from '@fishprovider/cross/dist/api/accounts/add';
+import { useMutate } from '@fishprovider/cross/dist/libs/query';
+import { ProviderPlatform, ProviderTradeType, ProviderType } from '@fishprovider/utils/dist/constants/account';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 

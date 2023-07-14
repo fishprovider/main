@@ -1,9 +1,9 @@
-import storeUser from '@fishprovider/cross/stores/user';
-import { Direction, OrderStatus } from '@fishprovider/utils/constants/order';
-import { getProfitIcon } from '@fishprovider/utils/helpers/order';
-import { getDiffPips } from '@fishprovider/utils/helpers/price';
-import type { Order } from '@fishprovider/utils/types/Order.model';
-import type { Price } from '@fishprovider/utils/types/Price.model';
+import storeUser from '@fishprovider/cross/dist/stores/user';
+import { Direction, OrderStatus } from '@fishprovider/utils/dist/constants/order';
+import { getProfitIcon } from '@fishprovider/utils/dist/helpers/order';
+import { getDiffPips } from '@fishprovider/utils/dist/helpers/price';
+import type { Order } from '@fishprovider/utils/dist/types/Order.model';
+import type { Price } from '@fishprovider/utils/dist/types/Price.model';
 import _ from 'lodash';
 import moment from 'moment';
 

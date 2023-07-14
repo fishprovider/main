@@ -1,7 +1,7 @@
-import { PlanType, ProviderPlatform } from '@fishprovider/utils/constants/account';
-import { Direction } from '@fishprovider/utils/constants/order';
-import { getPriceFromAmount } from '@fishprovider/utils/helpers/price';
-import type { Plan } from '@fishprovider/utils/types/Account.model';
+import { PlanType, ProviderPlatform } from '@fishprovider/utils/dist/constants/account';
+import { Direction } from '@fishprovider/utils/dist/constants/order';
+import { getPriceFromAmount } from '@fishprovider/utils/dist/helpers/price';
+import type { Plan } from '@fishprovider/utils/dist/types/Account.model';
 import _ from 'lodash';
 import type { Moment } from 'moment';
 import moment from 'moment';

@@ -1,5 +1,5 @@
-import storeAccounts from '@fishprovider/cross/stores/accounts';
-import { ProviderType } from '@fishprovider/utils/constants/account';
+import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
+import { ProviderType } from '@fishprovider/utils/dist/constants/account';
 import _ from 'lodash';
 
 import Link from '~components/base/Link';

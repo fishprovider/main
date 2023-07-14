@@ -1,9 +1,9 @@
-import storePrices from '@fishprovider/cross/stores/prices';
-import storeUser from '@fishprovider/cross/stores/user';
-import { validateOrderRemove } from '@fishprovider/utils/helpers/validateOrder';
-import type { Account } from '@fishprovider/utils/types/Account.model';
-import type { Order } from '@fishprovider/utils/types/Order.model';
-import type { User } from '@fishprovider/utils/types/User.model';
+import storePrices from '@fishprovider/cross/dist/stores/prices';
+import storeUser from '@fishprovider/cross/dist/stores/user';
+import { validateOrderRemove } from '@fishprovider/utils/dist/helpers/validateOrder';
+import type { Account } from '@fishprovider/utils/dist/types/Account.model';
+import type { Order } from '@fishprovider/utils/dist/types/Order.model';
+import type { User } from '@fishprovider/utils/dist/types/User.model';
 
 import Icon from '~ui/core/Icon';
 import Title from '~ui/core/Title';

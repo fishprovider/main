@@ -1,11 +1,11 @@
-import walletGetMany from '@fishprovider/cross/api/wallet/getMany';
-import withdrawAdd from '@fishprovider/cross/api/withdraw/add';
-import drawGetMany from '@fishprovider/cross/api/withdraw/getMany';
-import { useMutate, useQuery } from '@fishprovider/cross/libs/query';
-import storeTransactions from '@fishprovider/cross/stores/transactions';
-import storeUser from '@fishprovider/cross/stores/user';
-import storeWallets from '@fishprovider/cross/stores/wallets';
-import { TransactionType, WalletType } from '@fishprovider/utils/constants/pay';
+import walletGetMany from '@fishprovider/cross/dist/api/wallet/getMany';
+import withdrawAdd from '@fishprovider/cross/dist/api/withdraw/add';
+import drawGetMany from '@fishprovider/cross/dist/api/withdraw/getMany';
+import { useMutate, useQuery } from '@fishprovider/cross/dist/libs/query';
+import storeTransactions from '@fishprovider/cross/dist/stores/transactions';
+import storeUser from '@fishprovider/cross/dist/stores/user';
+import storeWallets from '@fishprovider/cross/dist/stores/wallets';
+import { TransactionType, WalletType } from '@fishprovider/utils/dist/constants/pay';
 import _ from 'lodash';
 import { useState } from 'react';
 

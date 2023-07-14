@@ -1,6 +1,6 @@
-import orderUpdateSettings from '@fishprovider/cross/api/orders/updateSettings';
-import { useMutate } from '@fishprovider/cross/libs/query';
-import type { Order } from '@fishprovider/utils/types/Order.model';
+import orderUpdateSettings from '@fishprovider/cross/dist/api/orders/updateSettings';
+import { useMutate } from '@fishprovider/cross/dist/libs/query';
+import type { Order } from '@fishprovider/utils/dist/types/Order.model';
 
 import Group from '~ui/core/Group';
 import Icon from '~ui/core/Icon';

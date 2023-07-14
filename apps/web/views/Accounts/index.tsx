@@ -1,5 +1,5 @@
-import { ProviderTradeType } from '@fishprovider/utils/constants/account';
-import { Roles } from '@fishprovider/utils/constants/user';
+import { ProviderTradeType } from '@fishprovider/utils/dist/constants/account';
+import { Roles } from '@fishprovider/utils/dist/constants/user';
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
 

@@ -1,5 +1,5 @@
-import accountRemove from '@fishprovider/cross/api/accounts/remove';
-import storeUser from '@fishprovider/cross/stores/user';
+import accountRemove from '@fishprovider/cross/dist/api/accounts/remove';
+import storeUser from '@fishprovider/cross/dist/stores/user';
 import { useRouter } from 'next/router';
 
 import Routes from '~libs/routes';

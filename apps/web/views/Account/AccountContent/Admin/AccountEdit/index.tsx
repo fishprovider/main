@@ -1,5 +1,5 @@
-import storeUser from '@fishprovider/cross/stores/user';
-import { ProviderViewType } from '@fishprovider/utils/constants/account';
+import storeUser from '@fishprovider/cross/dist/stores/user';
+import { ProviderViewType } from '@fishprovider/utils/dist/constants/account';
 import { useState } from 'react';
 
 import { ProviderViewTypeText } from '~constants/account';

@@ -1,7 +1,7 @@
-import accountGetManySlim from '@fishprovider/cross/api/accounts/getManySlim';
-import accountGetManyUser from '@fishprovider/cross/api/accounts/getManyUser';
-import { useQuery } from '@fishprovider/cross/libs/query';
-import storeUser from '@fishprovider/cross/stores/user';
+import accountGetManySlim from '@fishprovider/cross/dist/api/accounts/getManySlim';
+import accountGetManyUser from '@fishprovider/cross/dist/api/accounts/getManyUser';
+import { useQuery } from '@fishprovider/cross/dist/libs/query';
+import storeUser from '@fishprovider/cross/dist/stores/user';
 import { useState } from 'react';
 
 import { CardVariant } from '~constants/account';

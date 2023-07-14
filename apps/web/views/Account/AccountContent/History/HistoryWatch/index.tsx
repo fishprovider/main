@@ -1,8 +1,8 @@
-import orderGetHistory from '@fishprovider/cross/api/orders/getHistory';
-import orderGetManyInfo from '@fishprovider/cross/api/orders/getManyInfo';
-import { useQuery } from '@fishprovider/cross/libs/query';
-import storeUser from '@fishprovider/cross/stores/user';
-import { OrderStatus } from '@fishprovider/utils/constants/order';
+import orderGetHistory from '@fishprovider/cross/dist/api/orders/getHistory';
+import orderGetManyInfo from '@fishprovider/cross/dist/api/orders/getManyInfo';
+import { useQuery } from '@fishprovider/cross/dist/libs/query';
+import storeUser from '@fishprovider/cross/dist/stores/user';
+import { OrderStatus } from '@fishprovider/utils/dist/constants/order';
 import { useEffect } from 'react';
 
 import { activityFields } from '~constants/account';

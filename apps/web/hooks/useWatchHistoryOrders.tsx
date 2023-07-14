@@ -1,7 +1,7 @@
-import storeOrders from '@fishprovider/cross/stores/orders';
-import storeUser from '@fishprovider/cross/stores/user';
-import { redisKeys } from '@fishprovider/utils/constants/redis';
-import type { Order } from '@fishprovider/utils/types/Order.model';
+import storeOrders from '@fishprovider/cross/dist/stores/orders';
+import storeUser from '@fishprovider/cross/dist/stores/user';
+import { redisKeys } from '@fishprovider/utils/dist/constants/redis';
+import type { Order } from '@fishprovider/utils/dist/types/Order.model';
 import { useEffect, useRef } from 'react';
 
 const getChannel = redisKeys.historyOrders;

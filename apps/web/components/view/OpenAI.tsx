@@ -1,5 +1,5 @@
-import { apiPost } from '@fishprovider/cross/libs/api';
-import storeUser from '@fishprovider/cross/stores/user';
+import { apiPost } from '@fishprovider/cross/dist/libs/api';
+import storeUser from '@fishprovider/cross/dist/stores/user';
 import parse from 'html-react-parser';
 import { useState } from 'react';
 

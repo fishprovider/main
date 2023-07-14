@@ -1,7 +1,7 @@
-import { apiPost } from '@fishprovider/cross/libs/api';
-import { useMutate } from '@fishprovider/cross/libs/query';
-import storeTransactions from '@fishprovider/cross/stores/transactions';
-import { TransactionStatus } from '@fishprovider/utils/constants/pay';
+import { apiPost } from '@fishprovider/cross/dist/libs/api';
+import { useMutate } from '@fishprovider/cross/dist/libs/query';
+import storeTransactions from '@fishprovider/cross/dist/stores/transactions';
+import { TransactionStatus } from '@fishprovider/utils/dist/constants/pay';
 import _ from 'lodash';
 import { useState } from 'react';
 

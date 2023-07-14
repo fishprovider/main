@@ -1,6 +1,6 @@
-import membersAdd from '@fishprovider/cross/api/accounts/members/add';
-import storeUser from '@fishprovider/cross/stores/user';
-import { Roles } from '@fishprovider/utils/constants/user';
+import membersAdd from '@fishprovider/cross/dist/api/accounts/members/add';
+import storeUser from '@fishprovider/cross/dist/stores/user';
+import { Roles } from '@fishprovider/utils/dist/constants/user';
 import { useState } from 'react';
 
 import { ProviderRoleText } from '~constants/account';

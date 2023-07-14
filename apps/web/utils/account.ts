@@ -1,6 +1,6 @@
-import { PlanType } from '@fishprovider/utils/constants/account';
-import type { Account, Plan } from '@fishprovider/utils/types/Account.model';
-import type { Order } from '@fishprovider/utils/types/Order.model';
+import { PlanType } from '@fishprovider/utils/dist/constants/account';
+import type { Account, Plan } from '@fishprovider/utils/dist/types/Account.model';
+import type { Order } from '@fishprovider/utils/dist/types/Order.model';
 import _ from 'lodash';
 
 const getAccountStats = (

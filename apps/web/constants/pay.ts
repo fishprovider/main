@@ -1,4 +1,4 @@
-import { SourceType } from '@fishprovider/utils/constants/pay';
+import { SourceType } from '@fishprovider/utils/dist/constants/pay';
 
 const SourceTypeText: Record<string, string> = {
   [SourceType.coinbaseCommerce]: 'Coinbase Commerce',

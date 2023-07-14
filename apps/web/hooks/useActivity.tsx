@@ -1,6 +1,6 @@
-import accountUpdate from '@fishprovider/cross/api/accounts/update';
-import { useQuery } from '@fishprovider/cross/libs/query';
-import storeUser from '@fishprovider/cross/stores/user';
+import accountUpdate from '@fishprovider/cross/dist/api/accounts/update';
+import { useQuery } from '@fishprovider/cross/dist/libs/query';
+import storeUser from '@fishprovider/cross/dist/stores/user';
 
 import { queryKeys } from '~constants/query';
 

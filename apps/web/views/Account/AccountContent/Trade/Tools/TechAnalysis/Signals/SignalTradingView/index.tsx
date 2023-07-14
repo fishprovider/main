@@ -1,4 +1,4 @@
-import storeUser from '@fishprovider/cross/stores/user';
+import storeUser from '@fishprovider/cross/dist/stores/user';
 import dynamic from 'next/dynamic';
 
 import useToggle from '~hooks/useToggle';

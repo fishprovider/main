@@ -1,6 +1,6 @@
-import accountUpdate from '@fishprovider/cross/api/accounts/update';
-import storeUser from '@fishprovider/cross/stores/user';
-import { ProviderViewType } from '@fishprovider/utils/constants/account';
+import accountUpdate from '@fishprovider/cross/dist/api/accounts/update';
+import storeUser from '@fishprovider/cross/dist/stores/user';
+import { ProviderViewType } from '@fishprovider/utils/dist/constants/account';
 import { useState } from 'react';
 
 import Link from '~components/base/Link';

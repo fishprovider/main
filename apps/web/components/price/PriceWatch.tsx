@@ -1,9 +1,9 @@
-import priceGetMany from '@fishprovider/cross/api/prices/getMany';
-import { useQuery } from '@fishprovider/cross/libs/query';
-import storeOrders from '@fishprovider/cross/stores/orders';
-import type { ProviderType } from '@fishprovider/utils/constants/account';
-import type { OrderStatus } from '@fishprovider/utils/constants/order';
-import { getMajorPairs } from '@fishprovider/utils/helpers/price';
+import priceGetMany from '@fishprovider/cross/dist/api/prices/getMany';
+import { useQuery } from '@fishprovider/cross/dist/libs/query';
+import storeOrders from '@fishprovider/cross/dist/stores/orders';
+import type { ProviderType } from '@fishprovider/utils/dist/constants/account';
+import type { OrderStatus } from '@fishprovider/utils/dist/constants/order';
+import { getMajorPairs } from '@fishprovider/utils/dist/helpers/price';
 import _ from 'lodash';
 import { useEffect } from 'react';
 

@@ -1,13 +1,13 @@
-import orderGetHistory from '@fishprovider/cross/api/orders/getHistory';
-import orderGetManyInfo from '@fishprovider/cross/api/orders/getManyInfo';
-import priceGetMany from '@fishprovider/cross/api/prices/getMany';
-import { useMutate, useQuery } from '@fishprovider/cross/libs/query';
-import storeOrders from '@fishprovider/cross/stores/orders';
-import storeUser from '@fishprovider/cross/stores/user';
-import { ProviderType } from '@fishprovider/utils/constants/account';
-import { OrderStatus } from '@fishprovider/utils/constants/order';
-import { getProfitIcon } from '@fishprovider/utils/helpers/order';
-import { getMajorPairs } from '@fishprovider/utils/helpers/price';
+import orderGetHistory from '@fishprovider/cross/dist/api/orders/getHistory';
+import orderGetManyInfo from '@fishprovider/cross/dist/api/orders/getManyInfo';
+import priceGetMany from '@fishprovider/cross/dist/api/prices/getMany';
+import { useMutate, useQuery } from '@fishprovider/cross/dist/libs/query';
+import storeOrders from '@fishprovider/cross/dist/stores/orders';
+import storeUser from '@fishprovider/cross/dist/stores/user';
+import { ProviderType } from '@fishprovider/utils/dist/constants/account';
+import { OrderStatus } from '@fishprovider/utils/dist/constants/order';
+import { getProfitIcon } from '@fishprovider/utils/dist/helpers/order';
+import { getMajorPairs } from '@fishprovider/utils/dist/helpers/price';
 import _ from 'lodash';
 import { useEffect, useState } from 'react';
 

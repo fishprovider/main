@@ -1,8 +1,8 @@
-import depositCancel from '@fishprovider/cross/api/deposit/cancel';
-import depositGet from '@fishprovider/cross/api/deposit/get';
-import { useMutate } from '@fishprovider/cross/libs/query';
-import { SourceType, TransactionStatus } from '@fishprovider/utils/constants/pay';
-import type { Transaction } from '@fishprovider/utils/types/Pay.model';
+import depositCancel from '@fishprovider/cross/dist/api/deposit/cancel';
+import depositGet from '@fishprovider/cross/dist/api/deposit/get';
+import { useMutate } from '@fishprovider/cross/dist/libs/query';
+import { SourceType, TransactionStatus } from '@fishprovider/utils/dist/constants/pay';
+import type { Transaction } from '@fishprovider/utils/dist/types/Pay.model';
 import _ from 'lodash';
 
 import Link from '~components/base/Link';

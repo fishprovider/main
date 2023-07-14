@@ -1,6 +1,6 @@
-import accountUpdate from '@fishprovider/cross/api/accounts/update';
-import storeUser from '@fishprovider/cross/stores/user';
-import { getRoleProvider } from '@fishprovider/utils/helpers/user';
+import accountUpdate from '@fishprovider/cross/dist/api/accounts/update';
+import storeUser from '@fishprovider/cross/dist/stores/user';
+import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
 import { useState } from 'react';
 
 import useToggle from '~hooks/useToggle';

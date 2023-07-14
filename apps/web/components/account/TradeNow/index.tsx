@@ -1,5 +1,5 @@
-import storeUser from '@fishprovider/cross/stores/user';
-import { getRoleProvider } from '@fishprovider/utils/helpers/user';
+import storeUser from '@fishprovider/cross/dist/stores/user';
+import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
 
 import Link from '~components/base/Link';
 import { toAccount } from '~libs/routes';

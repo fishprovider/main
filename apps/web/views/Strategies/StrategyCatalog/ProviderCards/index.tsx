@@ -1,5 +1,5 @@
-import storeAccounts from '@fishprovider/cross/stores/accounts';
-import storeUser from '@fishprovider/cross/stores/user';
+import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
+import storeUser from '@fishprovider/cross/dist/stores/user';
 import _ from 'lodash';
 import { useState } from 'react';
 

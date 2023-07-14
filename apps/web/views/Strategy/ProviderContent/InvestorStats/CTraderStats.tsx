@@ -1,4 +1,4 @@
-import storeUser from '@fishprovider/cross/stores/user';
+import storeUser from '@fishprovider/cross/dist/stores/user';
 
 import Link from '~components/base/Link';
 import { ctraderPlatforms } from '~constants/account';

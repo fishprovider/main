@@ -1,7 +1,7 @@
-import storeAccounts from '@fishprovider/cross/stores/accounts';
-import storeOrders from '@fishprovider/cross/stores/orders';
-import { OrderStatus } from '@fishprovider/utils/constants/order';
-import { parseCopyId } from '@fishprovider/utils/helpers/order';
+import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
+import storeOrders from '@fishprovider/cross/dist/stores/orders';
+import { OrderStatus } from '@fishprovider/utils/dist/constants/order';
+import { parseCopyId } from '@fishprovider/utils/dist/helpers/order';
 import _ from 'lodash';
 
 import Icon from '~ui/core/Icon';

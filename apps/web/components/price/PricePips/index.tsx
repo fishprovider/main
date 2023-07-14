@@ -1,9 +1,9 @@
-import storePrices from '@fishprovider/cross/stores/prices';
-import type { ProviderType } from '@fishprovider/utils/constants/account';
-import type { Direction } from '@fishprovider/utils/constants/order';
+import storePrices from '@fishprovider/cross/dist/stores/prices';
+import type { ProviderType } from '@fishprovider/utils/dist/constants/account';
+import type { Direction } from '@fishprovider/utils/dist/constants/order';
 import {
   getDiffPips, getGrossProfit, getPriceFromAmount,
-} from '@fishprovider/utils/helpers/price';
+} from '@fishprovider/utils/dist/helpers/price';
 import _ from 'lodash';
 import { useEffect, useState } from 'react';
 

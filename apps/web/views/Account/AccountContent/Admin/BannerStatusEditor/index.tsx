@@ -1,5 +1,5 @@
-import accountUpdate from '@fishprovider/cross/api/accounts/update';
-import storeUser from '@fishprovider/cross/stores/user';
+import accountUpdate from '@fishprovider/cross/dist/api/accounts/update';
+import storeUser from '@fishprovider/cross/dist/stores/user';
 import { useCallback, useState } from 'react';
 
 import AccountHtmlEditor from '~components/account/AccountHtmlEditor';

@@ -1,7 +1,7 @@
-import withdrawGet from '@fishprovider/cross/api/withdraw/get';
-import { useMutate } from '@fishprovider/cross/libs/query';
-import { DestinationPayType, TransactionStatus } from '@fishprovider/utils/constants/pay';
-import type { Transaction } from '@fishprovider/utils/types/Pay.model';
+import withdrawGet from '@fishprovider/cross/dist/api/withdraw/get';
+import { useMutate } from '@fishprovider/cross/dist/libs/query';
+import { DestinationPayType, TransactionStatus } from '@fishprovider/utils/dist/constants/pay';
+import type { Transaction } from '@fishprovider/utils/dist/types/Pay.model';
 import _ from 'lodash';
 
 import Link from '~components/base/Link';

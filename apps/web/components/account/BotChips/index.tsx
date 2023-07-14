@@ -1,7 +1,7 @@
-import { CopyVolumeMode } from '@fishprovider/utils/constants/account';
+import { CopyVolumeMode } from '@fishprovider/utils/dist/constants/account';
 import type {
   CopySettings, ProtectSettings, Settings, TradeSettings,
-} from '@fishprovider/utils/types/Account.model';
+} from '@fishprovider/utils/dist/types/Account.model';
 import _ from 'lodash';
 import moment from 'moment';
 

@@ -1,9 +1,9 @@
-import investAdd from '@fishprovider/cross/api/invest/add';
-import walletGetMany from '@fishprovider/cross/api/wallet/getMany';
-import { useMutate, useQuery } from '@fishprovider/cross/libs/query';
-import storeUser from '@fishprovider/cross/stores/user';
-import storeWallets from '@fishprovider/cross/stores/wallets';
-import { WalletType } from '@fishprovider/utils/constants/pay';
+import investAdd from '@fishprovider/cross/dist/api/invest/add';
+import walletGetMany from '@fishprovider/cross/dist/api/wallet/getMany';
+import { useMutate, useQuery } from '@fishprovider/cross/dist/libs/query';
+import storeUser from '@fishprovider/cross/dist/stores/user';
+import storeWallets from '@fishprovider/cross/dist/stores/wallets';
+import { WalletType } from '@fishprovider/utils/dist/constants/pay';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 

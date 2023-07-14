@@ -1,6 +1,6 @@
-import storeUser from '@fishprovider/cross/stores/user';
-import { getRoleProvider } from '@fishprovider/utils/helpers/user';
-import type { OrderWithoutId } from '@fishprovider/utils/types/Order.model';
+import storeUser from '@fishprovider/cross/dist/stores/user';
+import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
+import type { OrderWithoutId } from '@fishprovider/utils/dist/types/Order.model';
 import { useEffect } from 'react';
 
 import SymbolsSelect from '~components/price/SymbolsSelect';

@@ -1,15 +1,15 @@
-import priceGetMany from '@fishprovider/cross/api/prices/getMany';
-import priceGetNames from '@fishprovider/cross/api/prices/getNames';
-import { useQuery } from '@fishprovider/cross/libs/query';
-import storeAccounts from '@fishprovider/cross/stores/accounts';
-import storeOrders from '@fishprovider/cross/stores/orders';
-import storeUser from '@fishprovider/cross/stores/user';
-import type { ProviderTradeType, ProviderType } from '@fishprovider/utils/constants/account';
-import { OrderStatus } from '@fishprovider/utils/constants/order';
-import { Roles } from '@fishprovider/utils/constants/user';
-import { getMajorPairs } from '@fishprovider/utils/helpers/price';
-import type { Account } from '@fishprovider/utils/types/Account.model';
-import type { Order } from '@fishprovider/utils/types/Order.model';
+import priceGetMany from '@fishprovider/cross/dist/api/prices/getMany';
+import priceGetNames from '@fishprovider/cross/dist/api/prices/getNames';
+import { useQuery } from '@fishprovider/cross/dist/libs/query';
+import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
+import storeOrders from '@fishprovider/cross/dist/stores/orders';
+import storeUser from '@fishprovider/cross/dist/stores/user';
+import type { ProviderTradeType, ProviderType } from '@fishprovider/utils/dist/constants/account';
+import { OrderStatus } from '@fishprovider/utils/dist/constants/order';
+import { Roles } from '@fishprovider/utils/dist/constants/user';
+import { getMajorPairs } from '@fishprovider/utils/dist/helpers/price';
+import type { Account } from '@fishprovider/utils/dist/types/Account.model';
+import type { Order } from '@fishprovider/utils/dist/types/Order.model';
 import _ from 'lodash';
 import { useEffect, useState } from 'react';
 

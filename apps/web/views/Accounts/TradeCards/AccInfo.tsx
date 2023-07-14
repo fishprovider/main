@@ -1,6 +1,6 @@
-import storeAccounts from '@fishprovider/cross/stores/accounts';
-import { PlanType } from '@fishprovider/utils/constants/account';
-import type { Lock } from '@fishprovider/utils/types/Account.model';
+import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
+import { PlanType } from '@fishprovider/utils/dist/constants/account';
+import type { Lock } from '@fishprovider/utils/dist/types/Account.model';
 
 import BotChips from '~components/account/BotChips';
 import LockTypeInfo from '~components/account/LockTypeInfo';

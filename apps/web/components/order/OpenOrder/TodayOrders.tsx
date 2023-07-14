@@ -1,8 +1,8 @@
-import storeOrders from '@fishprovider/cross/stores/orders';
-import storeUser from '@fishprovider/cross/stores/user';
-import { OrderStatus } from '@fishprovider/utils/constants/order';
-import { getProfit } from '@fishprovider/utils/helpers/order';
-import type { Order } from '@fishprovider/utils/types/Order.model';
+import storeOrders from '@fishprovider/cross/dist/stores/orders';
+import storeUser from '@fishprovider/cross/dist/stores/user';
+import { OrderStatus } from '@fishprovider/utils/dist/constants/order';
+import { getProfit } from '@fishprovider/utils/dist/helpers/order';
+import type { Order } from '@fishprovider/utils/dist/types/Order.model';
 import _ from 'lodash';
 import moment from 'moment';
 

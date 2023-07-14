@@ -1,6 +1,6 @@
-import lockAccount from '@fishprovider/cross/api/accounts/lock/account';
-import lockMember from '@fishprovider/cross/api/accounts/lock/member';
-import storeUser from '@fishprovider/cross/stores/user';
+import lockAccount from '@fishprovider/cross/dist/api/accounts/lock/account';
+import lockMember from '@fishprovider/cross/dist/api/accounts/lock/member';
+import storeUser from '@fishprovider/cross/dist/stores/user';
 
 import LockStatus from '~components/account/LockStatus';
 import Box from '~ui/core/Box';

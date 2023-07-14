@@ -1,12 +1,12 @@
-import orderUpdate from '@fishprovider/cross/api/orders/update';
-import { useMutate } from '@fishprovider/cross/libs/query';
-import storeUser from '@fishprovider/cross/stores/user';
-import { PlanType } from '@fishprovider/utils/constants/account';
-import { Direction } from '@fishprovider/utils/constants/order';
-import { getProfit } from '@fishprovider/utils/helpers/order';
-import { getPriceFromAmount } from '@fishprovider/utils/helpers/price';
-import type { Order } from '@fishprovider/utils/types/Order.model';
-import type { Price } from '@fishprovider/utils/types/Price.model';
+import orderUpdate from '@fishprovider/cross/dist/api/orders/update';
+import { useMutate } from '@fishprovider/cross/dist/libs/query';
+import storeUser from '@fishprovider/cross/dist/stores/user';
+import { PlanType } from '@fishprovider/utils/dist/constants/account';
+import { Direction } from '@fishprovider/utils/dist/constants/order';
+import { getProfit } from '@fishprovider/utils/dist/helpers/order';
+import { getPriceFromAmount } from '@fishprovider/utils/dist/helpers/price';
+import type { Order } from '@fishprovider/utils/dist/types/Order.model';
+import type { Price } from '@fishprovider/utils/dist/types/Price.model';
 import _ from 'lodash';
 
 import useConversionRate from '~hooks/useConversionRate';

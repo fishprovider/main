@@ -1,4 +1,4 @@
-import type { Transaction } from '@fishprovider/utils/types/Pay.model';
+import type { Transaction } from '@fishprovider/utils/dist/types/Pay.model';
 import _ from 'lodash';
 import moment from 'moment';
 

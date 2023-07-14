@@ -1,4 +1,4 @@
-import type { Order } from '@fishprovider/utils/types/Order.model';
+import type { Order } from '@fishprovider/utils/dist/types/Order.model';
 
 import Group from '~ui/core/Group';
 import Icon from '~ui/core/Icon';
