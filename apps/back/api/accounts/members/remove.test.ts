@@ -1,7 +1,7 @@
-import { afterAllSetup, beforeAllSetup, getUser } from '@fishprovider/swap/tests/utils';
-import { ErrorType } from '@fishprovider/utils/constants/error';
-import { Roles } from '@fishprovider/utils/constants/user';
-import type { User } from '@fishprovider/utils/types/User.model';
+import { afterAllSetup, beforeAllSetup, getUser } from '@fishprovider/swap/dist/tests/utils';
+import { ErrorType } from '@fishprovider/utils/dist/constants/error';
+import { Roles } from '@fishprovider/utils/dist/constants/user';
+import type { User } from '@fishprovider/utils/dist/types/User.model';
 import { jest } from '@jest/globals';
 
 import memberRemove from './remove';

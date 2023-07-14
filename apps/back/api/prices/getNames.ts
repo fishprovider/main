@@ -1,7 +1,7 @@
-import { getSymbols } from '@fishprovider/swap/utils/price';
-import type { ProviderType } from '@fishprovider/utils/constants/account';
-import { ErrorType } from '@fishprovider/utils/constants/error';
-import type { User } from '@fishprovider/utils/types/User.model';
+import { getSymbols } from '@fishprovider/swap/dist/utils/price';
+import type { ProviderType } from '@fishprovider/utils/dist/constants/account';
+import { ErrorType } from '@fishprovider/utils/dist/constants/error';
+import type { User } from '@fishprovider/utils/dist/types/User.model';
 import _ from 'lodash';
 
 const priceGetNames = async ({ data, userInfo }: {

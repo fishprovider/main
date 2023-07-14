@@ -1,9 +1,9 @@
-import { getProvider } from '@fishprovider/swap/utils/account';
-import { ErrorType } from '@fishprovider/utils/constants/error';
-import { OrderStatus } from '@fishprovider/utils/constants/order';
-import { getRoleProvider } from '@fishprovider/utils/helpers/user';
-import type { Order } from '@fishprovider/utils/types/Order.model';
-import type { User } from '@fishprovider/utils/types/User.model';
+import { getProvider } from '@fishprovider/swap/dist/utils/account';
+import { ErrorType } from '@fishprovider/utils/dist/constants/error';
+import { OrderStatus } from '@fishprovider/utils/dist/constants/order';
+import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
+import type { Order } from '@fishprovider/utils/dist/types/Order.model';
+import type { User } from '@fishprovider/utils/dist/types/User.model';
 import _ from 'lodash';
 
 const orderRemoveIdea = async ({ data, userInfo }: {

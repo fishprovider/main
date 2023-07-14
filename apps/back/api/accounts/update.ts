@@ -1,12 +1,12 @@
-import type { ProviderViewType } from '@fishprovider/utils/constants/account';
-import { ErrorType } from '@fishprovider/utils/constants/error';
-import { getRoleProvider } from '@fishprovider/utils/helpers/user';
+import type { ProviderViewType } from '@fishprovider/utils/dist/constants/account';
+import { ErrorType } from '@fishprovider/utils/dist/constants/error';
+import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
 import type {
   Account, Activity, BannerStatus,
   ProtectSettings,
   Settings, TradeSettings,
-} from '@fishprovider/utils/types/Account.model';
-import type { User } from '@fishprovider/utils/types/User.model';
+} from '@fishprovider/utils/dist/types/Account.model';
+import type { User } from '@fishprovider/utils/dist/types/User.model';
 import _ from 'lodash';
 
 const accountUpdate = async ({ data, userInfo }: {

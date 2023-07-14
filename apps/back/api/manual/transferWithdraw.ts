@@ -1,9 +1,9 @@
-import updateTransaction from '@fishprovider/coin/utils/transaction/updateTransaction';
-import { ErrorType } from '@fishprovider/utils/constants/error';
-import { DestinationPayType, TransactionStatus } from '@fishprovider/utils/constants/pay';
-import { getRoleProvider } from '@fishprovider/utils/helpers/user';
-import type { Transaction } from '@fishprovider/utils/types/Pay.model';
-import type { User } from '@fishprovider/utils/types/User.model';
+import updateTransaction from '@fishprovider/coin/dist/utils/transaction/updateTransaction';
+import { ErrorType } from '@fishprovider/utils/dist/constants/error';
+import { DestinationPayType, TransactionStatus } from '@fishprovider/utils/dist/constants/pay';
+import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
+import type { Transaction } from '@fishprovider/utils/dist/types/Pay.model';
+import type { User } from '@fishprovider/utils/dist/types/User.model';
 
 const transferWithdraw = async ({ data, userInfo }: {
   data: {

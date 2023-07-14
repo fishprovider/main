@@ -1,15 +1,15 @@
-import updateOrder from '@fishprovider/swap/commands/updateOrder';
-import updatePosition from '@fishprovider/swap/commands/updatePosition';
-import { getProvider } from '@fishprovider/swap/utils/account';
-import { getLiveOrders, getPendingOrders } from '@fishprovider/swap/utils/order';
-import { getPrices } from '@fishprovider/swap/utils/price';
-import { ErrorType } from '@fishprovider/utils/constants/error';
-import { OrderStatus } from '@fishprovider/utils/constants/order';
-import { getMajorPairs } from '@fishprovider/utils/helpers/price';
-import { getRoleProvider } from '@fishprovider/utils/helpers/user';
-import { validateOrderUpdate } from '@fishprovider/utils/helpers/validateOrder';
-import type { Order } from '@fishprovider/utils/types/Order.model';
-import type { User } from '@fishprovider/utils/types/User.model';
+import updateOrder from '@fishprovider/swap/dist/commands/updateOrder';
+import updatePosition from '@fishprovider/swap/dist/commands/updatePosition';
+import { getProvider } from '@fishprovider/swap/dist/utils/account';
+import { getLiveOrders, getPendingOrders } from '@fishprovider/swap/dist/utils/order';
+import { getPrices } from '@fishprovider/swap/dist/utils/price';
+import { ErrorType } from '@fishprovider/utils/dist/constants/error';
+import { OrderStatus } from '@fishprovider/utils/dist/constants/order';
+import { getMajorPairs } from '@fishprovider/utils/dist/helpers/price';
+import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
+import { validateOrderUpdate } from '@fishprovider/utils/dist/helpers/validateOrder';
+import type { Order } from '@fishprovider/utils/dist/types/Order.model';
+import type { User } from '@fishprovider/utils/dist/types/User.model';
 import _ from 'lodash';
 
 const orderUpdate = async ({ data, userInfo }: {

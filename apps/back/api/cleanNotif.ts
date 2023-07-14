@@ -1,9 +1,9 @@
 // ref: https://developers.google.com/instance-id/reference/server#get_information_about_app_instances
 
-import { getInfo } from '@fishprovider/core/libs/firebase';
-import { ErrorType } from '@fishprovider/utils/constants/error';
-import { getRoleProvider } from '@fishprovider/utils/helpers/user';
-import type { User } from '@fishprovider/utils/types/User.model';
+import { getInfo } from '@fishprovider/core/dist/libs/firebase';
+import { ErrorType } from '@fishprovider/utils/dist/constants/error';
+import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
+import type { User } from '@fishprovider/utils/dist/types/User.model';
 import _ from 'lodash';
 import md5 from 'md5';
 

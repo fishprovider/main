@@ -1,6 +1,6 @@
-import { ErrorType } from '@fishprovider/utils/constants/error';
-import type { Account } from '@fishprovider/utils/types/Account.model';
-import type { User } from '@fishprovider/utils/types/User.model';
+import { ErrorType } from '@fishprovider/utils/dist/constants/error';
+import type { Account } from '@fishprovider/utils/dist/types/Account.model';
+import type { User } from '@fishprovider/utils/dist/types/User.model';
 
 const userGetInfo = async ({ userInfo }: {
   data: {

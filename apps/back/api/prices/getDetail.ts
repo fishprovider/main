@@ -1,7 +1,7 @@
-import type { ProviderType } from '@fishprovider/utils/constants/account';
-import { ErrorType } from '@fishprovider/utils/constants/error';
-import type { Price } from '@fishprovider/utils/types/Price.model';
-import type { User } from '@fishprovider/utils/types/User.model';
+import type { ProviderType } from '@fishprovider/utils/dist/constants/account';
+import { ErrorType } from '@fishprovider/utils/dist/constants/error';
+import type { Price } from '@fishprovider/utils/dist/types/Price.model';
+import type { User } from '@fishprovider/utils/dist/types/User.model';
 
 const priceGetDetail = async ({ data, userInfo }: {
   data: {

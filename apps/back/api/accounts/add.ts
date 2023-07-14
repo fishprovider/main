@@ -1,14 +1,14 @@
-import newAccountMetaTrader from '@fishprovider/swap/libs/metatrader/newAccount';
-import { updateCache } from '@fishprovider/swap/utils/account';
+import newAccountMetaTrader from '@fishprovider/swap/dist/libs/metatrader/newAccount';
+import { updateCache } from '@fishprovider/swap/dist/utils/account';
 import {
   AccountSourceType,
   ProviderPlatform, ProviderViewType,
-} from '@fishprovider/utils/constants/account';
-import { ErrorType } from '@fishprovider/utils/constants/error';
-import { Roles } from '@fishprovider/utils/constants/user';
-import { getRoleProvider } from '@fishprovider/utils/helpers/user';
-import type { Account } from '@fishprovider/utils/types/Account.model';
-import type { User } from '@fishprovider/utils/types/User.model';
+} from '@fishprovider/utils/dist/constants/account';
+import { ErrorType } from '@fishprovider/utils/dist/constants/error';
+import { Roles } from '@fishprovider/utils/dist/constants/user';
+import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
+import type { Account } from '@fishprovider/utils/dist/types/Account.model';
+import type { User } from '@fishprovider/utils/dist/types/User.model';
 import _ from 'lodash';
 
 import isDemo from '~utils/isDemo';

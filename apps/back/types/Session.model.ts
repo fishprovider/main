@@ -1,4 +1,4 @@
-import type { User } from '@fishprovider/utils/types/User.model';
+import type { User } from '@fishprovider/utils/dist/types/User.model';
 import type { Session as ExpressSession } from 'express-session';
 
 interface UserSession {

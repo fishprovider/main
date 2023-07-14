@@ -1,8 +1,8 @@
-import { getTransactionUpdates } from '@fishprovider/coin/libs/coinbaseApi/utils';
-import { ErrorType } from '@fishprovider/utils/constants/error';
-import { DestinationPayType } from '@fishprovider/utils/constants/pay';
-import type { Transaction } from '@fishprovider/utils/types/Pay.model';
-import type { User } from '@fishprovider/utils/types/User.model';
+import { getTransactionUpdates } from '@fishprovider/coin/dist/libs/coinbaseApi/utils';
+import { ErrorType } from '@fishprovider/utils/dist/constants/error';
+import { DestinationPayType } from '@fishprovider/utils/dist/constants/pay';
+import type { Transaction } from '@fishprovider/utils/dist/types/Pay.model';
+import type { User } from '@fishprovider/utils/dist/types/User.model';
 
 import isDemo from '~utils/isDemo';
 

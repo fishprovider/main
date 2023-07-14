@@ -1,7 +1,7 @@
-import { ErrorType } from '@fishprovider/utils/constants/error';
-import type { Chat } from '@fishprovider/utils/types/Chat.model';
-import type { Thread } from '@fishprovider/utils/types/Thread.model';
-import type { User } from '@fishprovider/utils/types/User.model';
+import { ErrorType } from '@fishprovider/utils/dist/constants/error';
+import type { Chat } from '@fishprovider/utils/dist/types/Chat.model';
+import type { Thread } from '@fishprovider/utils/dist/types/Thread.model';
+import type { User } from '@fishprovider/utils/dist/types/User.model';
 
 const chatAdd = async ({ data, userInfo }: {
   data: {

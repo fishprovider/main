@@ -1,11 +1,11 @@
-import createDeposit from '@fishprovider/coin/utils/transaction/createDeposit';
-import createSpot from '@fishprovider/coin/utils/wallet/createSpot';
-import { ErrorType } from '@fishprovider/utils/constants/error';
-import { SourceType, TransactionType } from '@fishprovider/utils/constants/pay';
-import random from '@fishprovider/utils/helpers/random';
-import { getRoleProvider } from '@fishprovider/utils/helpers/user';
-import type { Wallet } from '@fishprovider/utils/types/Pay.model';
-import type { User } from '@fishprovider/utils/types/User.model';
+import createDeposit from '@fishprovider/coin/dist/utils/transaction/createDeposit';
+import createSpot from '@fishprovider/coin/dist/utils/wallet/createSpot';
+import { ErrorType } from '@fishprovider/utils/dist/constants/error';
+import { SourceType, TransactionType } from '@fishprovider/utils/dist/constants/pay';
+import random from '@fishprovider/utils/dist/helpers/random';
+import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
+import type { Wallet } from '@fishprovider/utils/dist/types/Pay.model';
+import type { User } from '@fishprovider/utils/dist/types/User.model';
 
 const rewardAdd = async ({ data, userInfo }: {
   data: {

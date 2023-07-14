@@ -1,6 +1,6 @@
-import { ErrorType } from '@fishprovider/utils/constants/error';
-import type { Thread } from '@fishprovider/utils/types/Thread.model';
-import type { User } from '@fishprovider/utils/types/User.model';
+import { ErrorType } from '@fishprovider/utils/dist/constants/error';
+import type { Thread } from '@fishprovider/utils/dist/types/Thread.model';
+import type { User } from '@fishprovider/utils/dist/types/User.model';
 
 const threadGetManyUser = async ({ userInfo }: {
   userInfo: User,

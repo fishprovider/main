@@ -1,4 +1,4 @@
-import { ErrorType } from '@fishprovider/utils/constants/error';
+import { ErrorType } from '@fishprovider/utils/dist/constants/error';
 import { NotionAPI } from 'notion-client';
 
 const notion = new NotionAPI();

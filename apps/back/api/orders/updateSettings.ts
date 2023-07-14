@@ -1,8 +1,8 @@
-import { push } from '@fishprovider/core/libs/firebase';
-import { ErrorType } from '@fishprovider/utils/constants/error';
-import { getRoleProvider } from '@fishprovider/utils/helpers/user';
-import type { Order } from '@fishprovider/utils/types/Order.model';
-import type { User } from '@fishprovider/utils/types/User.model';
+import { push } from '@fishprovider/core/dist/libs/firebase';
+import { ErrorType } from '@fishprovider/utils/dist/constants/error';
+import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
+import type { Order } from '@fishprovider/utils/dist/types/Order.model';
+import type { User } from '@fishprovider/utils/dist/types/User.model';
 import { ReturnDocument } from 'mongodb';
 
 const orderUpdateSettings = async ({ data, userInfo }: {

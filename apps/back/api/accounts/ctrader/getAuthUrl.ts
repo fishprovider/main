@@ -1,5 +1,5 @@
-import { ProviderPlatform } from '@fishprovider/utils/constants/account';
-import { ErrorType } from '@fishprovider/utils/constants/error';
+import { ProviderPlatform } from '@fishprovider/utils/dist/constants/account';
+import { ErrorType } from '@fishprovider/utils/dist/constants/error';
 
 interface Client {
   clientId: string,

@@ -1,5 +1,5 @@
-import { afterAllSetup, beforeAllSetup } from '@fishprovider/swap/tests/utils';
-import { ProviderTradeType, ProviderType } from '@fishprovider/utils/constants/account';
+import { afterAllSetup, beforeAllSetup } from '@fishprovider/swap/dist/tests/utils';
+import { ProviderTradeType, ProviderType } from '@fishprovider/utils/dist/constants/account';
 import { jest } from '@jest/globals';
 
 import accountAdd from './add';

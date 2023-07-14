@@ -1,8 +1,8 @@
-import { ErrorType } from '@fishprovider/utils/constants/error';
-import { Roles } from '@fishprovider/utils/constants/user';
-import { getRoleProvider } from '@fishprovider/utils/helpers/user';
-import type { Account, Member } from '@fishprovider/utils/types/Account.model';
-import type { User } from '@fishprovider/utils/types/User.model';
+import { ErrorType } from '@fishprovider/utils/dist/constants/error';
+import { Roles } from '@fishprovider/utils/dist/constants/user';
+import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
+import type { Account, Member } from '@fishprovider/utils/dist/types/Account.model';
+import type { User } from '@fishprovider/utils/dist/types/User.model';
 
 const updateUser = async (providerId: string, member: Member) => {
   const { userId, role } = member;

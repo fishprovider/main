@@ -1,5 +1,5 @@
-import { ErrorType } from '@fishprovider/utils/constants/error';
-import type { User } from '@fishprovider/utils/types/User.model';
+import { ErrorType } from '@fishprovider/utils/dist/constants/error';
+import type { User } from '@fishprovider/utils/dist/types/User.model';
 import moment from 'moment';
 
 const newsGetMany = async ({ data, userInfo }: {

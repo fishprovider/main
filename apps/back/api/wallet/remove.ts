@@ -1,6 +1,6 @@
-import { ErrorType } from '@fishprovider/utils/constants/error';
-import type { Wallet } from '@fishprovider/utils/types/Pay.model';
-import type { User } from '@fishprovider/utils/types/User.model';
+import { ErrorType } from '@fishprovider/utils/dist/constants/error';
+import type { Wallet } from '@fishprovider/utils/dist/types/Pay.model';
+import type { User } from '@fishprovider/utils/dist/types/User.model';
 
 const walletRemove = async ({ data, userInfo }: {
   data: {

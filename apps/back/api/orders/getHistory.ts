@@ -1,9 +1,9 @@
-import fetchDeals from '@fishprovider/swap/commands/fetchDeals';
-import { getProvider } from '@fishprovider/swap/utils/account';
-import { getDeals } from '@fishprovider/swap/utils/order';
-import { ErrorType } from '@fishprovider/utils/constants/error';
-import { getRoleProvider } from '@fishprovider/utils/helpers/user';
-import type { User } from '@fishprovider/utils/types/User.model';
+import fetchDeals from '@fishprovider/swap/dist/commands/fetchDeals';
+import { getProvider } from '@fishprovider/swap/dist/utils/account';
+import { getDeals } from '@fishprovider/swap/dist/utils/order';
+import { ErrorType } from '@fishprovider/utils/dist/constants/error';
+import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
+import type { User } from '@fishprovider/utils/dist/types/User.model';
 
 const orderGetHistory = async ({ data, userInfo }: {
   data: {

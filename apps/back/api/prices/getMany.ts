@@ -1,12 +1,12 @@
-import runPromises from '@fishprovider/core/libs/queuePromise/runPromises';
-import getSymbolTick from '@fishprovider/swap/libs/metatrader/getSymbolTick';
-import { getProvider } from '@fishprovider/swap/utils/account';
-import { getPrices } from '@fishprovider/swap/utils/price';
-import { ProviderType } from '@fishprovider/utils/constants/account';
-import { ErrorType } from '@fishprovider/utils/constants/error';
-import { cryptoSymbols, forexMajorPairs } from '@fishprovider/utils/constants/price';
-import { isLastRunExpired } from '@fishprovider/utils/helpers/lastRunChecks/lastRunChecks';
-import type { User } from '@fishprovider/utils/types/User.model';
+import runPromises from '@fishprovider/core/dist/libs/queuePromise/runPromises';
+import getSymbolTick from '@fishprovider/swap/dist/libs/metatrader/getSymbolTick';
+import { getProvider } from '@fishprovider/swap/dist/utils/account';
+import { getPrices } from '@fishprovider/swap/dist/utils/price';
+import { ProviderType } from '@fishprovider/utils/dist/constants/account';
+import { ErrorType } from '@fishprovider/utils/dist/constants/error';
+import { cryptoSymbols, forexMajorPairs } from '@fishprovider/utils/dist/constants/price';
+import { isLastRunExpired } from '@fishprovider/utils/dist/helpers/lastRunChecks/lastRunChecks';
+import type { User } from '@fishprovider/utils/dist/types/User.model';
 import _ from 'lodash';
 
 const watchingProviderTypeSymbols = {

@@ -1,7 +1,7 @@
-import { afterAllSetup, beforeAllSetup, getUser } from '@fishprovider/swap/tests/utils';
-import { ProviderType } from '@fishprovider/utils/constants/account';
-import { ErrorType } from '@fishprovider/utils/constants/error';
-import type { User } from '@fishprovider/utils/types/User.model';
+import { afterAllSetup, beforeAllSetup, getUser } from '@fishprovider/swap/dist/tests/utils';
+import { ProviderType } from '@fishprovider/utils/dist/constants/account';
+import { ErrorType } from '@fishprovider/utils/dist/constants/error';
+import type { User } from '@fishprovider/utils/dist/types/User.model';
 import { jest } from '@jest/globals';
 
 import priceGetMany from './getMany';

@@ -1,7 +1,7 @@
-import getAccounts from '@fishprovider/swap/libs/ctrader/getAccounts';
-import { ProviderPlatform } from '@fishprovider/utils/constants/account';
-import { ErrorType } from '@fishprovider/utils/constants/error';
-import type { User } from '@fishprovider/utils/types/User.model';
+import getAccounts from '@fishprovider/swap/dist/libs/ctrader/getAccounts';
+import { ProviderPlatform } from '@fishprovider/utils/dist/constants/account';
+import { ErrorType } from '@fishprovider/utils/dist/constants/error';
+import type { User } from '@fishprovider/utils/dist/types/User.model';
 import axios from 'axios';
 
 interface Client {

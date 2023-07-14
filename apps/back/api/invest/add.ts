@@ -1,12 +1,12 @@
-import createTransfer from '@fishprovider/coin/utils/transaction/createTransfer';
-import createInvest from '@fishprovider/coin/utils/wallet/createInvest';
-import { ProviderViewType } from '@fishprovider/utils/constants/account';
-import { ErrorType } from '@fishprovider/utils/constants/error';
-import { InvestStatus, SourceType, TransactionType } from '@fishprovider/utils/constants/pay';
-import random from '@fishprovider/utils/helpers/random';
-import type { AccountPublic } from '@fishprovider/utils/types/Account.model';
-import type { Wallet } from '@fishprovider/utils/types/Pay.model';
-import type { User } from '@fishprovider/utils/types/User.model';
+import createTransfer from '@fishprovider/coin/dist/utils/transaction/createTransfer';
+import createInvest from '@fishprovider/coin/dist/utils/wallet/createInvest';
+import { ProviderViewType } from '@fishprovider/utils/dist/constants/account';
+import { ErrorType } from '@fishprovider/utils/dist/constants/error';
+import { InvestStatus, SourceType, TransactionType } from '@fishprovider/utils/dist/constants/pay';
+import random from '@fishprovider/utils/dist/helpers/random';
+import type { AccountPublic } from '@fishprovider/utils/dist/types/Account.model';
+import type { Wallet } from '@fishprovider/utils/dist/types/Pay.model';
+import type { User } from '@fishprovider/utils/dist/types/User.model';
 
 const investAdd = async ({ data, userInfo }: {
   data: {

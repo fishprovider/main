@@ -1,9 +1,9 @@
-import removeAccount from '@fishprovider/swap/libs/metatrader/removeAccount';
-import { ProviderPlatform } from '@fishprovider/utils/constants/account';
-import { ErrorType } from '@fishprovider/utils/constants/error';
-import { getRoleProvider } from '@fishprovider/utils/helpers/user';
-import type { Account } from '@fishprovider/utils/types/Account.model';
-import type { User } from '@fishprovider/utils/types/User.model';
+import removeAccount from '@fishprovider/swap/dist/libs/metatrader/removeAccount';
+import { ProviderPlatform } from '@fishprovider/utils/dist/constants/account';
+import { ErrorType } from '@fishprovider/utils/dist/constants/error';
+import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
+import type { Account } from '@fishprovider/utils/dist/types/Account.model';
+import type { User } from '@fishprovider/utils/dist/types/User.model';
 
 const env = {
   typePre: process.env.TYPE_PRE,

@@ -1,5 +1,5 @@
-import { ProviderViewType } from '@fishprovider/utils/constants/account';
-import type { AccountPublic } from '@fishprovider/utils/types/Account.model';
+import { ProviderViewType } from '@fishprovider/utils/dist/constants/account';
+import type { AccountPublic } from '@fishprovider/utils/dist/types/Account.model';
 // import moment from 'moment';
 
 // const key = 'accounts-info-v2';
