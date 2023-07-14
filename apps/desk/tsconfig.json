@@ -1,0 +1,9 @@
+{
+  "extends": "../../tsconfig.frontend.json",
+  "compilerOptions": {
+    "composite": true,
+    "noEmit": true,
+  },
+  "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"],
+  "exclude": ["node_modules"],
+}

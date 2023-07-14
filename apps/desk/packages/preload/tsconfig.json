@@ -1,0 +1,11 @@
+{
+  "extends": "../../../../tsconfig.frontend.json",
+  "compilerOptions": {
+    "composite": true,
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+    },
+  },
+  "include": ["**/*.ts", "../../types/**/*.d.ts"],
+}
