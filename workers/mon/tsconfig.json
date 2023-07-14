@@ -10,7 +10,7 @@
     "outDir": "dist"
   },
   "include": ["**/*.ts"],
-  "exclude": ["node_modules", "dist", "immortal-*.js"],
+  "exclude": ["node_modules", "dist"],
   "references": [
     { "path": "../../packages/utils" },
     { "path": "../../packages/ctrader" },

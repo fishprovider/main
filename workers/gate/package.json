@@ -3,13 +3,14 @@
   "version": "5.0.0",
   "type": "module",
   "scripts": {
-    "lint": "eslint --cache --fix --ignore-pattern dist .",
+    "lint": "eslint --cache --fix .",
     "type-check": "tsc --noEmit",
     "test": "npm run test-unit",
     "test-unit": "cross-env NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules npx jest",
     "test-int": "cross-env NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules doppler run --print-config -- npx jest --runInBand",
-    "prebuild": "rm -rf dist && mkdir dist",
+    "prebuild": "./build-packages.sh && rm -rf dist && mkdir dist",
     "build": "node esbuild.cjs",
+    "postbuild": "./build-check.sh",
     "build-watch": "cross-env WATCH_MODE=true npm run build",
     "start": "doppler run --print-config -- node --experimental-specifier-resolution=node dist/index.js",
     "start-watch": "doppler run --print-config -- nodemon --experimental-specifier-resolution=node --delay 1 dist/index.js",
@@ -19,7 +20,6 @@
     "@fishprovider/core": "*",
     "@fishprovider/swap": "*",
     "node-telegram-bot-api": "^0.61.0",
-    "node-telegram-keyboard-wrapper": "^3.1.0",
-    "protobufjs": "^5.0.3"
+    "node-telegram-keyboard-wrapper": "^3.1.0"
   }
 }

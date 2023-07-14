@@ -57,6 +57,9 @@ module.exports = {
   plugins: [
     'simple-import-sort',
   ],
+  ignorePatterns: [
+    '**/dist',
+  ],
   rules,
   env: {
     es2022: true,
