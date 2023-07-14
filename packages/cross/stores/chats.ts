@@ -1,4 +1,4 @@
-import type { Chat } from '@fishprovider/utils/types/Chat.model';
+import type { Chat } from '@fishprovider/utils/dist/types/Chat.model';
 
 import { buildStoreSet } from '~libs/store';
 

@@ -1,4 +1,4 @@
-import type { Bar } from '@fishprovider/utils/types/Bar.model';
+import type { Bar } from '@fishprovider/utils/dist/types/Bar.model';
 
 import { buildStoreSet } from '~libs/store';
 

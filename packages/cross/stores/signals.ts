@@ -1,4 +1,4 @@
-import type { Signal } from '@fishprovider/utils/types/Signal.model';
+import type { Signal } from '@fishprovider/utils/dist/types/Signal.model';
 
 import { buildStoreSet } from '~libs/store';
 

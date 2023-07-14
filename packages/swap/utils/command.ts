@@ -1,6 +1,6 @@
-import { push } from '@fishprovider/core/libs/firebase';
-import random from '@fishprovider/utils/helpers/random';
-import type { Order, OrderWithoutId } from '@fishprovider/utils/types/Order.model';
+import { push } from '@fishprovider/core/dist/libs/firebase';
+import random from '@fishprovider/utils/dist/helpers/random';
+import type { Order, OrderWithoutId } from '@fishprovider/utils/dist/types/Order.model';
 import _ from 'lodash';
 
 import { botUser } from './account';

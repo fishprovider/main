@@ -1,5 +1,5 @@
-import type { Account } from '@fishprovider/utils/types/Account.model';
-import type { User } from '@fishprovider/utils/types/User.model';
+import type { Account } from '@fishprovider/utils/dist/types/Account.model';
+import type { User } from '@fishprovider/utils/dist/types/User.model';
 import type { Socket } from 'socket.io-client';
 
 import { buildStore } from '~libs/store';

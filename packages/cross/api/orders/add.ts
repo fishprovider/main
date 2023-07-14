@@ -1,4 +1,4 @@
-import type { Order, OrderWithoutId } from '@fishprovider/utils/types/Order.model';
+import type { Order, OrderWithoutId } from '@fishprovider/utils/dist/types/Order.model';
 import _ from 'lodash';
 
 import { ApiConfig, apiPost } from '~libs/api';

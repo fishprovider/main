@@ -1,4 +1,4 @@
-import promiseCreator from '@fishprovider/utils/helpers/promiseCreator';
+import promiseCreator from '@fishprovider/utils/dist/helpers/promiseCreator';
 import type { Axios, AxiosRequestConfig } from 'axios';
 import axios from 'axios';
 

@@ -1,10 +1,10 @@
-import getSymbolDetail from '@fishprovider/metatrader/commands/getSymbolDetail';
-import type { Config as ConfigMetaTrader } from '@fishprovider/metatrader/types/Config.model';
-import { ProviderType } from '@fishprovider/utils/constants/account';
-import delay from '@fishprovider/utils/helpers/delay';
-import { getVolumeFromLot } from '@fishprovider/utils/helpers/price';
-import type { Config } from '@fishprovider/utils/types/Account.model';
-import type { Price } from '@fishprovider/utils/types/Price.model';
+import getSymbolDetail from '@fishprovider/metatrader/dist/commands/getSymbolDetail';
+import type { Config as ConfigMetaTrader } from '@fishprovider/metatrader/dist/types/Config.model';
+import { ProviderType } from '@fishprovider/utils/dist/constants/account';
+import delay from '@fishprovider/utils/dist/helpers/delay';
+import { getVolumeFromLot } from '@fishprovider/utils/dist/helpers/price';
+import type { Config } from '@fishprovider/utils/dist/types/Account.model';
+import type { Price } from '@fishprovider/utils/dist/types/Price.model';
 import _ from 'lodash';
 
 import type { SymbolMetaTrader } from '~types/Symbol.model';

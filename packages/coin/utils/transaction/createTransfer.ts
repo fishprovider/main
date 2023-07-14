@@ -1,7 +1,7 @@
 import {
   DestinationType, SourceType, TransactionStatus, TransactionType,
-} from '@fishprovider/utils/constants/pay';
-import type { Transaction } from '@fishprovider/utils/types/Pay.model';
+} from '@fishprovider/utils/dist/constants/pay';
+import type { Transaction } from '@fishprovider/utils/dist/types/Pay.model';
 
 const createTransfer = async (params: {
   payId: string,

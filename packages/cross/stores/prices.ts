@@ -1,4 +1,4 @@
-import type { Price } from '@fishprovider/utils/types/Price.model';
+import type { Price } from '@fishprovider/utils/dist/types/Price.model';
 
 import { buildStoreSet } from '~libs/store';
 

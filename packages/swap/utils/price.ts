@@ -1,12 +1,12 @@
-import type { ProviderType } from '@fishprovider/utils/constants/account';
-import { redisKeys } from '@fishprovider/utils/constants/redis';
-import { isLastRunExpired } from '@fishprovider/utils/helpers/lastRunChecks/lastRunChecks';
-import type { Asset, Price } from '@fishprovider/utils/types/Price.model';
+import type { ProviderType } from '@fishprovider/utils/dist/constants/account';
+import { redisKeys } from '@fishprovider/utils/dist/constants/redis';
+import { isLastRunExpired } from '@fishprovider/utils/dist/helpers/lastRunChecks/lastRunChecks';
+import type { Asset, Price } from '@fishprovider/utils/dist/types/Price.model';
 import type {
   RedisAsset,
   RedisPrice,
   RedisSymbol,
-} from '@fishprovider/utils/types/Redis.model';
+} from '@fishprovider/utils/dist/types/Redis.model';
 import _ from 'lodash';
 
 const savePriceRuns = {};

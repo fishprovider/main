@@ -1,8 +1,8 @@
-import { OrderType as OrderTypeCTrader, TradeSide } from '@fishprovider/ctrader/constants/openApi';
-import { ProviderPlatform, type ProviderType } from '@fishprovider/utils/constants/account';
-import { Direction, OrderStatus, OrderType } from '@fishprovider/utils/constants/order';
-import { getLotFromVolume } from '@fishprovider/utils/helpers/price';
-import type { RedisSymbol } from '@fishprovider/utils/types/Redis.model';
+import { OrderType as OrderTypeCTrader, TradeSide } from '@fishprovider/ctrader/dist/constants/openApi';
+import { ProviderPlatform, type ProviderType } from '@fishprovider/utils/dist/constants/account';
+import { Direction, OrderStatus, OrderType } from '@fishprovider/utils/dist/constants/order';
+import { getLotFromVolume } from '@fishprovider/utils/dist/helpers/price';
+import type { RedisSymbol } from '@fishprovider/utils/dist/types/Redis.model';
 
 const transformOrderType = (orderType: OrderTypeCTrader) => {
   switch (orderType) {

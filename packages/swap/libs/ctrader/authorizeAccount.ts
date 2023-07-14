@@ -1,5 +1,5 @@
-import authorizeAccountCTrader from '@fishprovider/ctrader/commands/authorizeAccount';
-import type { ConnectionType } from '@fishprovider/ctrader/types/Connection.model';
+import authorizeAccountCTrader from '@fishprovider/ctrader/dist/commands/authorizeAccount';
+import type { ConnectionType } from '@fishprovider/ctrader/dist/types/Connection.model';
 
 import renewTokens from './renewTokens';
 

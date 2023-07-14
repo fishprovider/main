@@ -1,4 +1,4 @@
-import type { Thread } from '@fishprovider/utils/types/Thread.model';
+import type { Thread } from '@fishprovider/utils/dist/types/Thread.model';
 
 import { buildStoreSet } from '~libs/store';
 

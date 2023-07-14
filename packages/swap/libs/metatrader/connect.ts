@@ -1,6 +1,6 @@
-import Connection from '@fishprovider/metatrader/Connection';
-import type { Config } from '@fishprovider/metatrader/types/Config.model';
-import type { CallbackPayload } from '@fishprovider/metatrader/types/Event.model';
+import Connection from '@fishprovider/metatrader/dist/Connection';
+import type { Config } from '@fishprovider/metatrader/dist/types/Config.model';
+import type { CallbackPayload } from '@fishprovider/metatrader/dist/types/Event.model';
 
 const connect = async ({
   providerId, config: configRaw, onEvent,

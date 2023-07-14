@@ -1,8 +1,8 @@
-import { send } from '@fishprovider/core/libs/notif';
-import cancelOrder from '@fishprovider/metatrader/commands/cancelOrder';
-import type { Config as ConfigMetaTrader } from '@fishprovider/metatrader/types/Config.model';
-import type { Config } from '@fishprovider/utils/types/Account.model';
-import type { Order } from '@fishprovider/utils/types/Order.model';
+import { send } from '@fishprovider/core/dist/libs/notif';
+import cancelOrder from '@fishprovider/metatrader/dist/commands/cancelOrder';
+import type { Config as ConfigMetaTrader } from '@fishprovider/metatrader/dist/types/Config.model';
+import type { Config } from '@fishprovider/utils/dist/types/Account.model';
+import type { Order } from '@fishprovider/utils/dist/types/Order.model';
 import _ from 'lodash';
 
 import connectAndRun from '../connectAndRun';

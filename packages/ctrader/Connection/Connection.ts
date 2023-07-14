@@ -1,5 +1,5 @@
-import promiseCreator from '@fishprovider/utils/helpers/promiseCreator';
-import random from '@fishprovider/utils/helpers/random';
+import promiseCreator from '@fishprovider/utils/dist/helpers/promiseCreator';
+import random from '@fishprovider/utils/dist/helpers/random';
 import appRootPath from 'app-root-path';
 import path from 'path';
 import tls from 'tls';

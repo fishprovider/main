@@ -1,4 +1,4 @@
-import type { Account } from '@fishprovider/utils/types/Account.model';
+import type { Account } from '@fishprovider/utils/dist/types/Account.model';
 
 import { ApiConfig, apiPost } from '~libs/api';
 import storeAccounts from '~stores/accounts';

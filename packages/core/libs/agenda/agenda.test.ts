@@ -1,4 +1,4 @@
-import delay from '@fishprovider/utils/helpers/delay';
+import delay from '@fishprovider/utils/dist/helpers/delay';
 import { jest } from '@jest/globals';
 
 import ServerCommands from '~constants/serverCommands';

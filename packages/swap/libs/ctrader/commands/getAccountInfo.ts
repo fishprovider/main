@@ -1,7 +1,7 @@
-import getAccountInformation from '@fishprovider/ctrader/commands/getAccountInformation';
-import type { Config as ConfigCTrader } from '@fishprovider/ctrader/types/Config.model';
-import type { ConnectionType } from '@fishprovider/ctrader/types/Connection.model';
-import type { Config } from '@fishprovider/utils/types/Account.model';
+import getAccountInformation from '@fishprovider/ctrader/dist/commands/getAccountInformation';
+import type { Config as ConfigCTrader } from '@fishprovider/ctrader/dist/types/Config.model';
+import type { ConnectionType } from '@fishprovider/ctrader/dist/types/Connection.model';
+import type { Config } from '@fishprovider/utils/dist/types/Account.model';
 import type { AsyncReturnType } from 'type-fest';
 
 import connectAndRun from '../connectAndRun';

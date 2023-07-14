@@ -1,5 +1,5 @@
-import { OrderStatus } from '@fishprovider/utils/constants/order';
-import type { Order } from '@fishprovider/utils/types/Order.model';
+import { OrderStatus } from '@fishprovider/utils/dist/constants/order';
+import type { Order } from '@fishprovider/utils/dist/types/Order.model';
 import _ from 'lodash';
 import moment from 'moment';
 

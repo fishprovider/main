@@ -1,9 +1,9 @@
-import getOrders from '@fishprovider/metatrader/commands/getOrders';
-import type { Config as ConfigMetaTrader } from '@fishprovider/metatrader/types/Config.model';
-import type { ConnectionType } from '@fishprovider/metatrader/types/Connection.model';
-import type { ProviderType } from '@fishprovider/utils/constants/account';
-import type { Config } from '@fishprovider/utils/types/Account.model';
-import type { RedisSymbol } from '@fishprovider/utils/types/Redis.model';
+import getOrders from '@fishprovider/metatrader/dist/commands/getOrders';
+import type { Config as ConfigMetaTrader } from '@fishprovider/metatrader/dist/types/Config.model';
+import type { ConnectionType } from '@fishprovider/metatrader/dist/types/Connection.model';
+import type { ProviderType } from '@fishprovider/utils/dist/constants/account';
+import type { Config } from '@fishprovider/utils/dist/types/Account.model';
+import type { RedisSymbol } from '@fishprovider/utils/dist/types/Redis.model';
 import type { AsyncReturnType } from 'type-fest';
 
 import { getSymbols } from '~utils/price';

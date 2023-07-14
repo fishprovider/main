@@ -1,4 +1,4 @@
-import type { News } from '@fishprovider/utils/types/News.model';
+import type { News } from '@fishprovider/utils/dist/types/News.model';
 
 import { ApiConfig, apiGet } from '~libs/api';
 import storeNews from '~stores/news';

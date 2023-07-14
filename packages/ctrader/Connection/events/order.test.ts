@@ -1,5 +1,5 @@
-import delay from '@fishprovider/utils/helpers/delay';
-import promiseCreator from '@fishprovider/utils/helpers/promiseCreator';
+import delay from '@fishprovider/utils/dist/helpers/delay';
+import promiseCreator from '@fishprovider/utils/dist/helpers/promiseCreator';
 import { jest } from '@jest/globals';
 import _ from 'lodash';
 

@@ -1,4 +1,4 @@
-import { ProviderPlatform, ProviderType } from '@fishprovider/utils/constants/account';
+import { ProviderPlatform, ProviderType } from '@fishprovider/utils/dist/constants/account';
 
 import { afterAllSetup, beforeAllSetup, getConfig } from '~tests/utils';
 

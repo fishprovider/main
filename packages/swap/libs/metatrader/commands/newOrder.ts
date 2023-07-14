@@ -1,14 +1,14 @@
-import { send } from '@fishprovider/core/libs/notif';
-import newOrderMetaTrader from '@fishprovider/metatrader/commands/newOrder';
-import { ActionType } from '@fishprovider/metatrader/constants/metaApi';
-import type { Config as ConfigMetaTrader } from '@fishprovider/metatrader/types/Config.model';
-import type { ConnectionType } from '@fishprovider/metatrader/types/Connection.model';
-import { Direction, OrderStatus, OrderType } from '@fishprovider/utils/constants/order';
-import { getLotFromVolume } from '@fishprovider/utils/helpers/price';
-import random from '@fishprovider/utils/helpers/random';
-import type { Config } from '@fishprovider/utils/types/Account.model';
-import type { Order } from '@fishprovider/utils/types/Order.model';
-import type { Price } from '@fishprovider/utils/types/Price.model';
+import { send } from '@fishprovider/core/dist/libs/notif';
+import newOrderMetaTrader from '@fishprovider/metatrader/dist/commands/newOrder';
+import { ActionType } from '@fishprovider/metatrader/dist/constants/metaApi';
+import type { Config as ConfigMetaTrader } from '@fishprovider/metatrader/dist/types/Config.model';
+import type { ConnectionType } from '@fishprovider/metatrader/dist/types/Connection.model';
+import { Direction, OrderStatus, OrderType } from '@fishprovider/utils/dist/constants/order';
+import { getLotFromVolume } from '@fishprovider/utils/dist/helpers/price';
+import random from '@fishprovider/utils/dist/helpers/random';
+import type { Config } from '@fishprovider/utils/dist/types/Account.model';
+import type { Order } from '@fishprovider/utils/dist/types/Order.model';
+import type { Price } from '@fishprovider/utils/dist/types/Price.model';
 import _ from 'lodash';
 
 import { buildSymbol } from '~libs/metatrader/transform';

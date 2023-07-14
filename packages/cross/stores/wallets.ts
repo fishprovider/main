@@ -1,4 +1,4 @@
-import type { Wallet } from '@fishprovider/utils/types/Pay.model';
+import type { Wallet } from '@fishprovider/utils/dist/types/Pay.model';
 
 import { buildStoreSet } from '~libs/store';
 

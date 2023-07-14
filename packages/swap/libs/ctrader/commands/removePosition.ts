@@ -1,17 +1,17 @@
-import { send } from '@fishprovider/core/libs/notif';
-import closePosition from '@fishprovider/ctrader/commands/closePosition';
+import { send } from '@fishprovider/core/dist/libs/notif';
+import closePosition from '@fishprovider/ctrader/dist/commands/closePosition';
 import {
   CallbackType, ExecutionType, OrderStatus as OrderStatusCTrader, PositionStatus,
-} from '@fishprovider/ctrader/constants/openApi';
-import type { Config as ConfigCTrader } from '@fishprovider/ctrader/types/Config.model';
-import type { CallbackPayload } from '@fishprovider/ctrader/types/Event.model';
-import type { transformDeal as transformDealCTrader, transformOrder as transformOrderCTrader, transformPosition as transformPositionCTrader } from '@fishprovider/ctrader/utils/transform';
-import type { ProviderType } from '@fishprovider/utils/constants/account';
-import promiseCreator from '@fishprovider/utils/helpers/promiseCreator';
-import type { Config } from '@fishprovider/utils/types/Account.model';
-import type { Order } from '@fishprovider/utils/types/Order.model';
-import type { Price } from '@fishprovider/utils/types/Price.model';
-import type { RedisSymbol } from '@fishprovider/utils/types/Redis.model';
+} from '@fishprovider/ctrader/dist/constants/openApi';
+import type { Config as ConfigCTrader } from '@fishprovider/ctrader/dist/types/Config.model';
+import type { CallbackPayload } from '@fishprovider/ctrader/dist/types/Event.model';
+import type { transformDeal as transformDealCTrader, transformOrder as transformOrderCTrader, transformPosition as transformPositionCTrader } from '@fishprovider/ctrader/dist/utils/transform';
+import type { ProviderType } from '@fishprovider/utils/dist/constants/account';
+import promiseCreator from '@fishprovider/utils/dist/helpers/promiseCreator';
+import type { Config } from '@fishprovider/utils/dist/types/Account.model';
+import type { Order } from '@fishprovider/utils/dist/types/Order.model';
+import type { Price } from '@fishprovider/utils/dist/types/Price.model';
+import type { RedisSymbol } from '@fishprovider/utils/dist/types/Redis.model';
 import _ from 'lodash';
 import type { AsyncReturnType } from 'type-fest';
 

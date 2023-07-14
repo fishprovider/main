@@ -1,6 +1,6 @@
-import removeAccountMetaTrader from '@fishprovider/metatrader/commands/removeAccount';
-import type { Config as ConfigMetaTrader } from '@fishprovider/metatrader/types/Config.model';
-import type { Config } from '@fishprovider/utils/types/Account.model';
+import removeAccountMetaTrader from '@fishprovider/metatrader/dist/commands/removeAccount';
+import type { Config as ConfigMetaTrader } from '@fishprovider/metatrader/dist/types/Config.model';
+import type { Config } from '@fishprovider/utils/dist/types/Account.model';
 
 import connectAndRun from './connectAndRun';
 

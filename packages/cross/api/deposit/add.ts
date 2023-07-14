@@ -1,5 +1,5 @@
-import type { SourceType } from '@fishprovider/utils/constants/pay';
-import type { Transaction } from '@fishprovider/utils/types/Pay.model';
+import type { SourceType } from '@fishprovider/utils/dist/constants/pay';
+import type { Transaction } from '@fishprovider/utils/dist/types/Pay.model';
 
 import { ApiConfig, apiPost } from '~libs/api';
 import storeTransactions from '~stores/transactions';

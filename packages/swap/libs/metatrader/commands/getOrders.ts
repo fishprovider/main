@@ -1,7 +1,7 @@
-import type { ConnectionType } from '@fishprovider/metatrader/types/Connection.model';
-import type { ProviderType } from '@fishprovider/utils/constants/account';
-import type { Config } from '@fishprovider/utils/types/Account.model';
-import type { OrderWithoutId } from '@fishprovider/utils/types/Order.model';
+import type { ConnectionType } from '@fishprovider/metatrader/dist/types/Connection.model';
+import type { ProviderType } from '@fishprovider/utils/dist/constants/account';
+import type { Config } from '@fishprovider/utils/dist/types/Account.model';
+import type { OrderWithoutId } from '@fishprovider/utils/dist/types/Order.model';
 
 import getLiveOrders from './getLiveOrders';
 import getPendingOrders from './getPendingOrders';

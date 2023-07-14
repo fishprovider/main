@@ -1,6 +1,6 @@
-import { ProviderPlatform, ProviderType } from '@fishprovider/utils/constants/account';
-import type { Config } from '@fishprovider/utils/types/Account.model';
-import type { Order, OrderWithoutId } from '@fishprovider/utils/types/Order.model';
+import { ProviderPlatform, ProviderType } from '@fishprovider/utils/dist/constants/account';
+import type { Config } from '@fishprovider/utils/dist/types/Account.model';
+import type { Order, OrderWithoutId } from '@fishprovider/utils/dist/types/Order.model';
 import _ from 'lodash';
 
 import getDealsCTrader from '~libs/ctrader/commands/getDeals';

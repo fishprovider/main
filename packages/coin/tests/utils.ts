@@ -1,7 +1,7 @@
-// import * as agenda from '@fishprovider/core/libs/agenda';
-import * as firebase from '@fishprovider/core/libs/firebase';
-import * as mongo from '@fishprovider/core/libs/mongo';
-import * as redis from '@fishprovider/core/libs/redis';
+// import * as agenda from '@fishprovider/core/dist/libs/agenda';
+import * as firebase from '@fishprovider/core/dist/libs/firebase';
+import * as mongo from '@fishprovider/core/dist/libs/mongo';
+import * as redis from '@fishprovider/core/dist/libs/redis';
 
 const beforeAllSetup = (
   done: jest.DoneCallback,

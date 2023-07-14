@@ -1,7 +1,7 @@
-import getSymbolTickMetaTrader from '@fishprovider/metatrader/commands/getSymbolTick';
-import type { Config as ConfigMetaTrader } from '@fishprovider/metatrader/types/Config.model';
-import type { ProviderType } from '@fishprovider/utils/constants/account';
-import type { Config } from '@fishprovider/utils/types/Account.model';
+import getSymbolTickMetaTrader from '@fishprovider/metatrader/dist/commands/getSymbolTick';
+import type { Config as ConfigMetaTrader } from '@fishprovider/metatrader/dist/types/Config.model';
+import type { ProviderType } from '@fishprovider/utils/dist/constants/account';
+import type { Config } from '@fishprovider/utils/dist/types/Account.model';
 
 import { savePrice } from '~utils/price';
 

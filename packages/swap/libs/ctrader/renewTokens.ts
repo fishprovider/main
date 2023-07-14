@@ -1,5 +1,5 @@
-import renewTokensCTrader from '@fishprovider/ctrader/commands/renewTokens';
-import type { ConnectionType } from '@fishprovider/ctrader/types/Connection.model';
+import renewTokensCTrader from '@fishprovider/ctrader/dist/commands/renewTokens';
+import type { ConnectionType } from '@fishprovider/ctrader/dist/types/Connection.model';
 
 import saveTokens from './saveTokens';
 

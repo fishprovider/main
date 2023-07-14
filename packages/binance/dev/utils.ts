@@ -1,5 +1,5 @@
-import { destroyAsync, start } from '@fishprovider/core/libs/mongo';
-import type { Account } from '@fishprovider/utils/types/Account.model';
+import { destroyAsync, start } from '@fishprovider/core/dist/libs/mongo';
+import type { Account } from '@fishprovider/utils/dist/types/Account.model';
 
 import Connection from '~Connection';
 import type { ConnectionType } from '~types/Connection.model';

@@ -1,7 +1,7 @@
-import getAccountInformation from '@fishprovider/metatrader/commands/getAccountInformation';
-import type { Config as ConfigMetaTrader } from '@fishprovider/metatrader/types/Config.model';
-import type { ConnectionType } from '@fishprovider/metatrader/types/Connection.model';
-import type { Config } from '@fishprovider/utils/types/Account.model';
+import getAccountInformation from '@fishprovider/metatrader/dist/commands/getAccountInformation';
+import type { Config as ConfigMetaTrader } from '@fishprovider/metatrader/dist/types/Config.model';
+import type { ConnectionType } from '@fishprovider/metatrader/dist/types/Connection.model';
+import type { Config } from '@fishprovider/utils/dist/types/Account.model';
 import type { AsyncReturnType } from 'type-fest';
 
 import connectAndRun from '../connectAndRun';
