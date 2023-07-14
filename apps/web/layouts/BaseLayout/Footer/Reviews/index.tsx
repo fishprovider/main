@@ -8,8 +8,8 @@ function Reviews() {
   return (
     <Group align="flex-start" spacing="xl">
       <ReviewTrustPilot />
-      <ReviewProvenExpert />
       <ReviewProductReview />
+      <ReviewProvenExpert />
     </Group>
   );
 }
