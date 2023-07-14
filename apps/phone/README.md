@@ -49,8 +49,6 @@
         "noPropertyAccessFromIndexSignature": false,
         "baseUrl": ".",
         "paths": {
-          "@fishprovider/utils*": ["../../packages/utils/dist*"],
-          "@fishprovider/cross*": ["../../packages/cross/dist*"],
           "~*": ["./*"]
         },
         "rootDir": ".",

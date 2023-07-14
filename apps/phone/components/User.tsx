@@ -1,4 +1,4 @@
-import storeUser from '@fishprovider/cross/stores/user';
+import storeUser from '@fishprovider/cross/dist/stores/user';
 
 import { logout } from '~libs/auth';
 import Button from '~ui/Button';

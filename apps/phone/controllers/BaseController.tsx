@@ -1,4 +1,4 @@
-import { QueryProvider } from '@fishprovider/cross/libs/query';
+import { QueryProvider } from '@fishprovider/cross/dist/libs/query';
 import { NavigationContainer } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { useEffect } from 'react';
