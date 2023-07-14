@@ -2,10 +2,11 @@ import getTickData from '@fishprovider/ctrader/dist/commands/getTickData';
 import type { QuoteType } from '@fishprovider/ctrader/dist/constants/openApi';
 import type { Config as ConfigCTrader } from '@fishprovider/ctrader/dist/types/Config.model';
 import type { ConnectionType } from '@fishprovider/ctrader/dist/types/Connection.model';
-import type { SymbolCTrader } from '~types/Symbol.model';
 import type { ProviderType } from '@fishprovider/utils/dist/constants/account';
 import type { Config } from '@fishprovider/utils/dist/types/Account.model';
 import _ from 'lodash';
+
+import type { SymbolCTrader } from '~types/Symbol.model';
 
 import connectAndRun from './connectAndRun';
 
