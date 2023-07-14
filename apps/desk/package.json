@@ -7,7 +7,7 @@
   "main": "packages/main/dist/index.cjs",
   "type": "module",
   "scripts": {
-    "lint": "eslint --cache --fix .",
+    "lint": "eslint --cache --fix --ignore-pattern vite.config.js .",
     "type-check:main": "tsc -p packages/main/tsconfig.json",
     "type-check:preload": "tsc -p packages/preload/tsconfig.json",
     "type-check:renderer": "tsc -p packages/renderer/tsconfig.json",
