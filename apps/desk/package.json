@@ -23,11 +23,10 @@
     "dev": "NODE_ENV=development node scripts/watch.js"
   },
   "dependencies": {
+    "@fishprovider/cross": "*",
     "electron-updater": "6.1.1"
   },
   "devDependencies": {
-    "@fishprovider/cross": "*",
-    "@fishprovider/utils": "*",
     "@vitejs/plugin-react": "^4.0.3",
     "electron": "25.3.0",
     "electron-builder": "24.4.0",
