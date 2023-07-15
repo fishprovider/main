@@ -21,8 +21,6 @@ module.exports = function (api) {
         {
           root: '.',
           alias: {
-            // '@fishprovider/utils': '../../packages/utils/dist',
-            // '@fishprovider/cross': '../../packages/cross/dist',
             // Note that '~': '.' does not work
             '~constants': './constants',
             '~utils': './utils',
