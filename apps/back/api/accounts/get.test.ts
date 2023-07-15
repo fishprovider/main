@@ -1,8 +1,8 @@
-import { afterAllSetup, beforeAllSetup } from '@fishprovider/swap/dist/tests/utils';
 import { ErrorType } from '@fishprovider/utils/dist/constants/error';
 import type { User } from '@fishprovider/utils/dist/types/User.model';
 import { jest } from '@jest/globals';
 
+import { afterAllSetup, beforeAllSetup } from '~tests/utils';
 import type { } from '~types/Session.model';
 
 import accountGet from './get';

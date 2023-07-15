@@ -1,10 +1,11 @@
-import { afterAllSetup, beforeAllSetup, getUser } from '@fishprovider/swap/dist/tests/utils';
 import { LockType } from '@fishprovider/utils/dist/constants/account';
 import { ErrorType } from '@fishprovider/utils/dist/constants/error';
 import type { Account, Lock } from '@fishprovider/utils/dist/types/Account.model';
 import type { User } from '@fishprovider/utils/dist/types/User.model';
 import { jest } from '@jest/globals';
 import moment from 'moment';
+
+import { afterAllSetup, beforeAllSetup, getUser } from '~tests/utils';
 
 import lockAccount from './account';
 

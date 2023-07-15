@@ -1,5 +1,6 @@
-import { afterAllSetup, beforeAllSetup } from '@fishprovider/swap/dist/tests/utils';
 import { jest } from '@jest/globals';
+
+import { afterAllSetup, beforeAllSetup } from '~tests/utils';
 
 import accountGetManySlim from './getManySlim';
 

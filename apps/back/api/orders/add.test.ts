@@ -1,4 +1,3 @@
-import { afterAllSetup, beforeAllSetup, getUser } from '@fishprovider/swap/dist/tests/utils';
 import { ProviderPlatform, ProviderType } from '@fishprovider/utils/dist/constants/account';
 import { ErrorType } from '@fishprovider/utils/dist/constants/error';
 import { Direction, OrderStatus, OrderType } from '@fishprovider/utils/dist/constants/order';
@@ -6,6 +5,7 @@ import random from '@fishprovider/utils/dist/helpers/random';
 import type { User } from '@fishprovider/utils/dist/types/User.model';
 import { jest } from '@jest/globals';
 
+import { afterAllSetup, beforeAllSetup, getUser } from '~tests/utils';
 import type { } from '~types/Session.model';
 
 import orderAdd from './add';

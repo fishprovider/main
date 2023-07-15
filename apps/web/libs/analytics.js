@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { apiPost } from '@fishprovider/cross/dist/libs/api';
 import ReactGA from 'react-ga4';
 
@@ -13,7 +15,6 @@ const initGoogleAnalytics = () => {
   ReactGA.initialize(gaKey);
 };
 
-/* eslint-disable */
 const initFullStory = () => {
   window['_fs_debug'] = false;
   window['_fs_host'] = 'fullstory.com';
@@ -120,7 +121,6 @@ const initHeap = () => {
     });
   heap.load(heapKey);
 };
-/* eslint-enable */
 
 const initAnalytics = () => {
   [initGoogleAnalytics, initFullStory, initHeap].forEach((func) => {
