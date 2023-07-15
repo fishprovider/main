@@ -1,6 +1,8 @@
 #!/bin/bash
 
-npm run build -w packages/utils
+npm run build -w packages/utils &
+npm run build -w packages/cross &
+wait
 
 npm run build -w packages/ctrader &
 npm run build -w packages/metatrader &
