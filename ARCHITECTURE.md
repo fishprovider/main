@@ -58,5 +58,6 @@
   // CacheFirstOrderRepository internally creates MongoOrderRepository and RedisOrderRepository, then implement get from Redis first, then get from Mongo if cache misses
   const cacheFirstOrderRepository = CacheFirstOrderRepository();
   const getOrderUseCase = GetOrderUseCase(cacheFirstOrderRepository);
-  const order = GetOrderController(getOrderUseCase);
+  const getOrderController = GetOrderController(getOrderUseCase);
+  const order = getOrderController(orderId);
   ```
