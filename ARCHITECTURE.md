@@ -5,57 +5,58 @@
 
 - A quick glance
   ```js
-  enterprise                              // business
+  // Level 1: business logics, objects, behaviors that are independent of any technology
+  entities
   ├── order
   │   ├── order.models.ts
   │   ├── order-constants.ts
   │   ├── order-errors.ts
   │   ├── order-helpers.ts
 
-  application                             // use cases
+  // Level 2: use cases, interactions between entities, workflow that are independent of any UI, DB, external system
+  use-cases
   ├── order
-  │   ├── order-repositories.models.ts
+  │   ├── order-repository.models.ts  // e.g. getOrderById, createLiveOrder, createPendingOrder, updateLiveOrder, updatePendingOrder
   │   ├── order-use-cases.models.ts
-  │   ├── use-cases
-  │   │   ├── create-order.ts
+  │   ├── actions
   │   │   ├── get-order.ts
+  │   │   ├── create-live-order.ts
+  │   │   ├── create-pending-order.ts
 
-  data                                    // data access
+  // Level 3: controllers, presenters, gateways
+  interfaces
   ├── order
-  │   ├── order-data-sources.models.ts
-  │   ├── repositories
+  │   ├── controllers                   // handle/parse user inputs and call use cases
   │   │   ├── get-order.ts
-  │   ├── data-sources
-  │   │   ├── mongo
-  │   │   │   ├── order.models.ts
-  │   │   │   ├── get-order.ts
-  │   │   ├── redis
-  │   │   │   ├── order.models.ts
-  │   │   │   ├── get-order.ts
+  │   │   ├── create-live-order.ts
+  │   │   ├── create-pending-order.ts
+  │   ├── presenters                    // format/parse use case outputs to user UI
 
-  presentation                            // bridge for external => internal
-  ├── controllers
-  │   ├── get-order.ts
+  // Level 4: implement interfaces, e.g. access DB, cache, external services, persist data
+  infrastructure
+  ├── data-sources
+  │   ├── order
+  |   │   ├── mongo-order-repository.ts
+  |   │   ├── redis-order-repository.ts
+  |   │   ├── cache-first-order-repository.ts
+  ├── web
+  │   ├── order
+  |   │   ├── get-order.ts
+  ├── phone
+  │   ├── order
+  |   │   ├── get-order.ts
   ```
 
-- E.g. `controllers/get-order.ts`
+  => Dependency Rule: Inwards only (level X knows nothing about level X+1)
+
+- A quick example
   ```js
-  import getOrder from 'application/order/use-cases/get-order'
-  import getOrderRepo from 'data/order/repositories/get-order'
-  import getOrderMongo from 'data/order/data-sources/mongo/get-order'
-  import getOrderRedis from 'data/order/data-sources/redis/get-order'
+  import CacheFirstOrderRepository from 'infrastructure/data-sources/order/cache-first-order-repository'
+  import GetOrderUseCase from 'use-cases/order/actions/get-order'
+  import GetOrderController from 'interfaces/order/controllers/get-order'
 
-  const cacheOrder = getOrder(
-    getOrderRepo(
-      getOrderRedis()
-    )
-  )
-  if (cacheOrder) return cacheOrder
-
-  const order = getOrder(
-    getOrderRepo(
-      getOrderMongo()
-    )
-  )
-  return order
+  // CacheFirstOrderRepository internally creates MongoOrderRepository and RedisOrderRepository, then implement get from Redis first, then get from Mongo if cache misses
+  const cacheFirstOrderRepository = CacheFirstOrderRepository();
+  const getOrderUseCase = GetOrderUseCase(cacheFirstOrderRepository);
+  const order = GetOrderController(getOrderUseCase);
   ```
