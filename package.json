@@ -4,6 +4,8 @@
   "private": true,
   "workspaces": [
     "packages/*",
+    "adapters/*",
+    "frameworks/*",
     "workers/*",
     "apps/*"
   ],
