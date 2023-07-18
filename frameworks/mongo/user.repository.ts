@@ -1,6 +1,5 @@
 import type { GetUserRepositoryParams, UpdateUserRepositoryParams, UserRepository } from '@fishprovider/application-rules';
-import type { User } from '@fishprovider/enterprise-rules';
-import { UserError } from '@fishprovider/enterprise-rules';
+import { User, UserError } from '@fishprovider/enterprise-rules';
 
 import { mongo } from './mongo';
 
