@@ -1,47 +1,114 @@
-// interface Lock {
-//   type: LockType;
-//   value?: any;
-//   lockFrom: Date,
-//   lockUntil: Date,
-//   lockMessage: string;
-//   lockByUserId: string;
-//   lockByUserName: string;
-// }
+import type { UserRoles } from '~user';
 
-// interface Investor {
-//   name: string;
-//   picture?: string;
+export enum ProviderType {
+  icmarkets = 'icmarkets',
+  exness = 'exness',
+}
 
-//   percent: number;
+export enum ProviderPlatform {
+  ctrader = 'ctrader',
+  metatrader = 'metatrader',
+  fishct = 'fishct',
+}
 
-//   createdAt: Date;
-// }
+export enum ProviderTradeType {
+  demo = 'demo',
+  live = 'live',
+}
 
-// interface Member {
-//   userId: string;
-//   email: string;
-//   role: Roles;
-//   name: string;
+export enum ProviderViewType {
+  private = 'private',
+  public = 'public',
+}
 
-//   picture?: string;
-//   locks?: Lock[];
+export enum AccountSourceType {
+  admin = 'admin',
+  user = 'user',
+}
 
-//   updatedAt?: Date;
-//   createdAt?: Date;
-// }
+export enum PlanType {
+  pairs = 'pairs',
 
-// interface MemberInvite {
-//   email: string;
-//   role: Roles;
-//   createdAt: Date;
-// }
+  maxLotTotal = 'maxLotTotal',
+  maxLotOrder = 'maxLotOrder', // for each order, e.g. 0.1 lot
+  maxLotPair = 'maxLotPair', // for all orders of a pair, e.g. 0.5 AUDUSD
+  maxLotPairs = 'maxLotPairs',
 
-// interface Plan {
-//   type: PlanType,
-//   value: any;
-// }
+  stopLoss = 'stopLoss',
+  takeProfit = 'takeProfit',
+  minTakeProfit = 'minTakeProfit',
+  stepTakeProfit = 'stepTakeProfit',
+  limitOnly = 'limitOnly',
 
-type Config = {
+  dayMaxBddLock = 'dayMaxBddLock',
+  dayMaxEddLock = 'dayMaxEddLock',
+  lostSeriesPairLock = 'lostSeriesPairLock',
+
+  monthTargetLock = 'monthTargetLock',
+  levelTargetsLock = 'levelTargetsLock', // { level: number, target: number, resetOnPass: bool } => activeLevelTarget
+  parentLevelTargetLock = 'parentLevelTargetLock',
+
+  profitOffset = 'profitOffset',
+}
+
+export enum CopyVolumeMode {
+  auto = 'auto',
+  fixedRatio = 'fixedRatio',
+  fixedLot = 'fixedLot',
+  autoWithRatio = 'autoWithRatio',
+}
+
+export enum LockType {
+  open = 'open',
+  update = 'update',
+  close = 'close',
+  pairs = 'pairs',
+}
+
+export interface Lock {
+  type: LockType;
+  value?: any;
+  lockFrom: Date,
+  lockUntil: Date,
+  lockMessage: string;
+  lockByUserId: string;
+  lockByUserName: string;
+}
+
+export interface Investor {
+  name: string;
+  picture?: string;
+
+  percent: number;
+
+  createdAt: Date;
+}
+
+export interface Member {
+  userId: string;
+  email: string;
+  role: UserRoles;
+  name: string;
+
+  picture?: string;
+  locks?: Lock[];
+
+  updatedAt?: Date;
+  createdAt?: Date;
+}
+
+export interface MemberInvite {
+  email: string;
+  role: UserRoles;
+  createdAt: Date;
+}
+
+export interface Plan {
+  type: PlanType,
+  value: any;
+}
+
+export type Config = {
   // common
   clientId: string;
   clientSecret: string;
@@ -62,143 +129,143 @@ type Config = {
   server?: string;
 };
 
-// interface BannerStatus {
-//   enabled: boolean;
-//   notes?: string;
-//   bgColor?: string;
-// }
+export interface BannerStatus {
+  enabled: boolean;
+  notes?: string;
+  bgColor?: string;
+}
 
-// interface CopySettings {
-//   enableCopy?: boolean,
-//   enableCopyOrderClose?: boolean,
-//   enableCopyOrderSLTP?: boolean,
+export interface CopySettings {
+  enableCopy?: boolean,
+  enableCopyOrderClose?: boolean,
+  enableCopyOrderSLTP?: boolean,
 
-//   copyVolumeMode?: CopyVolumeMode,
-//   copyVolumeRatioFixed?: number, // fixedRatio
-//   copyVolumeLotFixed?: number, // fixedLot
-//   copyVolumeRatioAuto?: number, // autoWithRatio
-//   copyVolumeLotMin?: number,
-//   copyVolumeLotMax?: number,
+  copyVolumeMode?: CopyVolumeMode,
+  copyVolumeRatioFixed?: number, // fixedRatio
+  copyVolumeLotFixed?: number, // fixedLot
+  copyVolumeRatioAuto?: number, // autoWithRatio
+  copyVolumeLotMin?: number,
+  copyVolumeLotMax?: number,
 
-//   enabledEquitySL?: boolean,
-//   equitySLRatio?: number,
-// }
+  enabledEquitySL?: boolean,
+  equitySLRatio?: number,
+}
 
-// interface TradeSettings {
-//   enabledCloseProfit?: boolean,
-//   takeProfit?: number,
-//   stopLoss?: number,
+export interface TradeSettings {
+  enabledCloseProfit?: boolean,
+  takeProfit?: number,
+  stopLoss?: number,
 
-//   enabledCloseEquity?: boolean,
-//   targetEquity?: number,
-//   stopEquity?: number,
+  enabledCloseEquity?: boolean,
+  targetEquity?: number,
+  stopEquity?: number,
 
-//   enabledCloseTime?: boolean,
-//   closeTime?: Date,
-//   closeTimeIfProfit?: boolean,
-// }
+  enabledCloseTime?: boolean,
+  closeTime?: Date,
+  closeTimeIfProfit?: boolean,
+}
 
-// interface ProtectSettings {
-//   enabledEquityLock?: boolean,
-//   equityLock?: number,
-//   equityLockHours?: number,
-// }
+export interface ProtectSettings {
+  enabledEquityLock?: boolean,
+  equityLock?: number,
+  equityLockHours?: number,
+}
 
-// interface Settings {
-//   enableCopyParent?: boolean,
-//   parents?: Record<string, CopySettings>,
-//   copyVolumeRatio?: number, // auto
-// }
+export interface Settings {
+  enableCopyParent?: boolean,
+  parents?: Record<string, CopySettings>,
+  copyVolumeRatio?: number, // auto
+}
 
-// interface Activity {
-//   lastView: Date;
-// }
+export interface Activity {
+  lastView: Date;
+}
 
-// interface AccountStats extends Record<string, any> {
-//   profitMonths: Record<number, number[]>;
-// }
+export interface AccountStats extends Record<string, any> {
+  profitMonths: Record<number, number[]>;
+}
 
 export interface AccountPublic {
   _id: string;
-  // name: string;
+  name: string;
 
-  // providerType: ProviderType;
-  // providerPlatform: ProviderPlatform;
-  // providerPlatformType?: string;
-  // providerPlatformAccountId?: string;
+  providerType: ProviderType;
+  providerPlatform: ProviderPlatform;
+  providerPlatformType?: string;
+  providerPlatformAccountId?: string;
 
-  // providerGroupId?: string;
-  // providerViewType?: ProviderViewType;
-  // providerTradeType?: ProviderTradeType;
+  providerGroupId?: string;
+  providerViewType?: ProviderViewType;
+  providerTradeType?: ProviderTradeType;
 
-  // asset?: string;
-  // assetId?: string;
+  asset?: string;
+  assetId?: string;
 
-  // leverage?: number;
+  leverage?: number;
 
-  // balance?: number;
-  // balanceStart?: number;
-  // balanceStartDay?: number;
-  // balanceStartDayUpdatedAt?: Date;
+  balance?: number;
+  balanceStart?: number;
+  balanceStartDay?: number;
+  balanceStartDayUpdatedAt?: Date;
 
-  // margin?: number; // MetaTrader only
+  margin?: number; // MetaTrader only
 
-  // maxEquity?: number;
-  // maxEquityTime?: Date;
-  // edd?: number;
+  maxEquity?: number;
+  maxEquityTime?: Date;
+  edd?: number;
 
-  // icon?: string;
-  // maxYearProfit?: number;
-  // roi?: number;
-  // riskScore?: number;
-  // winRate?: number;
+  icon?: string;
+  maxYearProfit?: number;
+  roi?: number;
+  riskScore?: number;
+  winRate?: number;
 
-  // strategyId?: string;
-  // strategyLinks?: {
-  //   type: ProviderType;
-  //   url: string;
-  // }[];
-  // strategyCommission?: number;
-  // minInvest?: number;
-  // capital?: number;
-  // copiers?: number;
-  // rank?: string;
-  // order?: number;
+  strategyId?: string;
+  strategyLinks?: {
+    type: ProviderType;
+    url: string;
+  }[];
+  strategyCommission?: number;
+  minInvest?: number;
+  capital?: number;
+  copiers?: number;
+  rank?: string;
+  order?: number;
 
-  // investors?: Investor[];
-  // members?: Member[];
-  // memberInvites?: MemberInvite[];
+  investors?: Investor[];
+  members?: Member[];
+  memberInvites?: MemberInvite[];
 
-  // tradeSettings?: TradeSettings;
-  // protectSettings?: ProtectSettings;
-  // settings?: Settings;
+  tradeSettings?: TradeSettings;
+  protectSettings?: ProtectSettings;
+  settings?: Settings;
 
-  // plan?: Plan[];
-  // planUpdatedAt?: Date;
-  // locks?: Lock[];
-  // activeLevelTarget?: number,
+  plan?: Plan[];
+  planUpdatedAt?: Date;
+  locks?: Lock[];
+  activeLevelTarget?: number,
 
-  // notes?: string;
-  // privateNotes?: string;
-  // bannerStatus?: BannerStatus;
+  notes?: string;
+  privateNotes?: string;
+  bannerStatus?: BannerStatus;
 
-  // activities?: Record<string, Activity>;
-  // stats?: AccountStats;
+  activities?: Record<string, Activity>;
+  stats?: AccountStats;
 
-  // providerData?: Record<string, any>; // external
-  // summary?: Record<string, any>; // cron data
+  providerData?: Record<string, any>; // external
+  summary?: Record<string, any>; // cron data
 
-  // userId?: string;
-  // userEmail?: string;
-  // userName?: string;
-  // userPicture?: string;
+  userId?: string;
+  userEmail?: string;
+  userName?: string;
+  userPicture?: string;
 
-  // sourceType?: AccountSourceType;
-  // createdAt?: Date;
-  // updatedAt?: Date;
+  sourceType?: AccountSourceType;
+  createdAt?: Date;
+  updatedAt?: Date;
 
-  // deleted?: boolean;
-  // deletedAt?: Date;
+  deleted?: boolean;
+  deletedAt?: Date;
 }
 
 export interface Account extends AccountPublic {
