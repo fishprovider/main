@@ -11,9 +11,6 @@ const allowEditFields = [
 
 export interface UpdateUserUseCaseParams {
   payload: Partial<Omit<User, '_id'>>,
-  options?: {
-    returnAfter?: boolean,
-  },
 }
 
 export const updateUserUseCase = async (

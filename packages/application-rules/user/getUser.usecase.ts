@@ -10,6 +10,8 @@ export const getUserUseCase = async (
     throw new Error(UserError.USER_ACCESS_DENIED);
   }
 
-  const user = await userRepository.getUser();
+  const user = await userRepository.getUser({
+    _id: userSession._id,
+  });
   return user;
 };
