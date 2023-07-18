@@ -1,4 +1,4 @@
-import promiseCreator from './promiseCreator';
+import { promiseCreator } from './promiseCreator';
 
 test('promiseCreator', async () => {
   const val = 'test';
