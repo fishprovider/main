@@ -6,9 +6,6 @@ import { MongoUserRepository } from '@fishprovider/framework-mongo';
 const updateUser = async (
   userSession: UserSession,
   params: UpdateUserUseCaseParams,
-) => {
-  const res = await UserController(MongoUserRepository, userSession).updateUser(params);
-  return res;
-};
+) => UserController(MongoUserRepository, userSession).updateUser(params);
 
 export default updateUser;

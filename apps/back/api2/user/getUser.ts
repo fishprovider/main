@@ -4,9 +4,6 @@ import { MongoUserRepository } from '@fishprovider/framework-mongo';
 
 const getUser = async (
   userSession: UserSession,
-) => {
-  const user = await UserController(MongoUserRepository, userSession).getUser();
-  return user;
-};
+) => UserController(MongoUserRepository, userSession).getUser();
 
 export default getUser;

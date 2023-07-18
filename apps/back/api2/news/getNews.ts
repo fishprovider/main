@@ -6,9 +6,6 @@ import { MongoNewsRepository } from '@fishprovider/framework-mongo';
 const getNews = async (
   userSession: UserSession,
   params: GetNewsUseCaseParams,
-) => {
-  const news = await NewsController(MongoNewsRepository, userSession).getNews(params);
-  return news;
-};
+) => NewsController(MongoNewsRepository, userSession).getNews(params);
 
 export default getNews;
