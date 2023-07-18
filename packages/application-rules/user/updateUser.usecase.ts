@@ -3,14 +3,15 @@ import _ from 'lodash';
 
 import type { UserRepository } from './user.repository';
 
-const allowEditFields = [
+const allowEditFields: Array<keyof User> = [
   'name',
   'picture',
   'starProviders',
 ];
+type AllowEditFields = typeof allowEditFields[number];
 
 export interface UpdateUserUseCaseParams {
-  payload: Partial<Omit<User, '_id'>>,
+  payload: Partial<Pick<User, AllowEditFields>>,
 }
 
 export const updateUserUseCase = async (
