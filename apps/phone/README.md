@@ -107,12 +107,11 @@
 - Update scripts in `package.json`
   ```json
   "scripts": {
-    "build-packages": "cd ../.. && npm run build -w packages/utils -w packages/cross",
     "doctor": "npx expo-doctor",
     "lint": "eslint --cache --fix .",
     "type-check": "tsc --noEmit",
-    "eas-build-post-install": "npm run build-packages",
-    "start": "doppler run --print-config -- expo start",
+    "eas-build-post-install": "./build-packages.sh",
+    "start": "NODE_ENV=development doppler run --print-config -- expo start",
     "dev": "NODE_ENV=development expo start --dev-client",
     "native-android": "expo run:android",
     "native-ios": "expo run:ios"
