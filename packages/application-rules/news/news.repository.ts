@@ -1,9 +1,9 @@
 import type { NewsEntity } from '@fishprovider/enterprise-rules';
 
-export interface GetNewsParams {
+export interface GetNewsRepositoryParams {
   impact?: string;
 }
 
 export interface NewsRepository {
-  getNews: (params: GetNewsParams) => Promise<NewsEntity[]>;
+  getNews: (params: GetNewsRepositoryParams) => Promise<NewsEntity[]>;
 }

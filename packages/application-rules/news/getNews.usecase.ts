@@ -1,9 +1,21 @@
-import type { GetNewsParams, NewsRepository } from './news.repository';
+import { type UserEntity, UserError } from '@fishprovider/enterprise-rules';
+
+import type { GetNewsRepositoryParams, NewsRepository } from './news.repository';
+
+export interface GetNewsUseCaseParams {
+  getNewsRepositoryParams: GetNewsRepositoryParams,
+  userEntity: UserEntity,
+}
 
 export const getNewsUseCase = async (
   newsRepository: NewsRepository,
-  params: GetNewsParams,
+  params: GetNewsUseCaseParams,
 ) => {
-  const news = await newsRepository.getNews(params);
-  return news;
+  const { getNewsRepositoryParams, userEntity } = params;
+
+  if (!userEntity) {
+    throw new Error(UserError.USER_ACCESS_DENIED);
+  }
+
+  return newsRepository.getNews(getNewsRepositoryParams);
 };

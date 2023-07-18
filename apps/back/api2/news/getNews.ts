@@ -1,13 +1,10 @@
 import { NewsController } from '@fishprovider/adapter-backend';
-import type { GetNewsParams } from '@fishprovider/application-rules';
+import type { GetNewsUseCaseParams } from '@fishprovider/application-rules';
 import { MongoNewsRepository } from '@fishprovider/framework-mongo';
 
-const newsGetNews = async (
-  params: GetNewsParams,
-) => {
-  const newsController = NewsController(MongoNewsRepository);
-  const news = await newsController.getNews(params);
+const getNews = async (params: GetNewsUseCaseParams) => {
+  const news = await NewsController(MongoNewsRepository).getNews(params);
   return news;
 };
 
-export default newsGetNews;
+export default getNews;
