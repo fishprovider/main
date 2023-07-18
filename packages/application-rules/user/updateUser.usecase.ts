@@ -25,12 +25,7 @@ export const updateUserUseCase = async (
   const res = await userRepository.updateUser({
     ...params,
     _id: userSession._id,
-    payload: {
-      ..._.pick(
-        params.payload,
-        allowEditFields,
-      ),
-    },
+    payload: _.pick(params.payload, allowEditFields),
   });
   return res;
 };
