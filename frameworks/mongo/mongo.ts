@@ -2,15 +2,14 @@ import { promiseCreator } from '@fishprovider/application-rules';
 import assert from 'assert';
 import { MongoClient } from 'mongodb';
 
-const env = {
-  mongoUrl: process.env.MONGO_URL || '',
-};
-
 let client: MongoClient | undefined;
 const clientPromise = promiseCreator();
 
 const start = async () => {
-  client = new MongoClient(env.mongoUrl);
+  if (!process.env.MONGO_URL) {
+    throw new Error('MONGO_URL is not defined');
+  }
+  client = new MongoClient(process.env.MONGO_URL);
   await client.connect();
   clientPromise.resolveExec();
   return client;

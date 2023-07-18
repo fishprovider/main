@@ -1,17 +1,17 @@
 import { promiseCreator } from '@fishprovider/application-rules';
-import type { RedisClientType } from 'redis';
-import { createClient } from 'redis';
-
-const env = {
-  redisUrl: process.env.REDIS_URL,
-  redisPass: process.env.REDIS_PASS,
-};
+import { createClient, RedisClientType } from '@redis/client';
 
 let client: RedisClientType | undefined;
 const clientPromise = promiseCreator();
 
 const start = async () => {
-  client = createClient({ url: env.redisUrl, password: env.redisPass });
+  if (!process.env.REDIS_URL) {
+    throw new Error('REDIS_URL is not defined');
+  }
+  client = createClient({
+    url: process.env.REDIS_URL,
+    password: process.env.REDIS_PASS,
+  });
   await client.connect();
   clientPromise.resolveExec();
   return client;

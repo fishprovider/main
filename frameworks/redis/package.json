@@ -2,6 +2,11 @@
   "name": "@fishprovider/framework-redis",
   "version": "6.0.0",
   "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist/"
+  ],
   "scripts": {
     "lint": "eslint --cache --fix .",
     "type-check": "tsc",
@@ -13,6 +18,6 @@
   },
   "dependencies": {
     "@fishprovider/enterprise-rules": "*",
-    "redis": "^4.6.7"
+    "@redis/client": "^1.5.8"
   }
 }
