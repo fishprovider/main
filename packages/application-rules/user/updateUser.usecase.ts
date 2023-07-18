@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 import type { UserRepository } from './user.repository';
 
-const allowEditFields: Array<keyof User> = [
+export const allowEditFields: Array<keyof User> = [
   'name',
   'picture',
   'starProviders',
