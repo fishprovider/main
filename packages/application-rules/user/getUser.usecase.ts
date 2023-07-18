@@ -12,6 +12,19 @@ export const getUserUseCase = async (
 
   const user = await userRepository.getUser({
     _id: userSession._id,
+    projection: {
+      email: 1,
+      name: 1,
+      picture: 1,
+
+      roles: 1,
+      starProviders: 1,
+
+      telegram: 1,
+
+      updatedAt: 1,
+      createdAt: 1,
+    },
   });
   return user;
 };

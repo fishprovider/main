@@ -1,7 +1,10 @@
 import type { User } from '@fishprovider/enterprise-rules';
 
+import type { Projection } from '~types/Repository';
+
 export interface GetUserRepositoryParams {
   _id: string,
+  projection?: Projection<User>,
 }
 
 export interface UpdateUserRepositoryParams {
@@ -11,5 +14,5 @@ export interface UpdateUserRepositoryParams {
 
 export interface UserRepository {
   getUser: (params: GetUserRepositoryParams) => Promise<User>;
-  updateUser: (params: UpdateUserRepositoryParams) => Promise<boolean | User>;
+  updateUser: (params: UpdateUserRepositoryParams) => Promise<boolean>;
 }
