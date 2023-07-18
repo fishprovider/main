@@ -8,7 +8,7 @@ const allowEditFields: Array<keyof User> = [
   'picture',
   'starProviders',
 ];
-type AllowEditFields = typeof allowEditFields[number];
+export type AllowEditFields = typeof allowEditFields[number];
 
 export interface UpdateUserUseCaseParams {
   payload: Partial<Pick<User, AllowEditFields>>,
