@@ -1,4 +1,4 @@
-export interface UserRolesEntity {
+export interface UserRoles {
   admin?: boolean;
   adminWeb?: boolean;
   managerWeb?: boolean;
@@ -8,13 +8,13 @@ export interface UserRolesEntity {
   viewerProviders?: Record<string, boolean>;
 }
 
-export interface UserEntity {
-  id: string;
+export interface User {
+  _id: string;
   email: string;
   name: string;
   picture?: string;
 
-  roles?: UserRolesEntity;
+  roles?: UserRoles;
   starProviders?: Record<string, boolean>;
 
   fcmInfo?: Record<string, any>;

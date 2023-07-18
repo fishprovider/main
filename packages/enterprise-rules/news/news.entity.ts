@@ -1,4 +1,4 @@
-export interface NewsEntity {
+export interface News {
   _id: string;
   type: string;
   week: string;
