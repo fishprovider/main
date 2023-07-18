@@ -9,15 +9,17 @@ const allowEditFields = [
   'starProviders',
 ];
 
+export interface UpdateUserUseCaseParams {
+  payload: Partial<Omit<User, '_id'>>,
+  options?: {
+    returnAfter?: boolean,
+  },
+}
+
 export const updateUserUseCase = async (
   userRepository: UserRepository,
   userSession: UserSession,
-  params: {
-    payload: Partial<Omit<User, '_id'>>,
-    options?: {
-      returnAfter?: boolean,
-    },
-  },
+  params: UpdateUserUseCaseParams,
 ) => {
   if (!userSession) {
     throw new Error(UserError.USER_ACCESS_DENIED);
