@@ -1,4 +1,4 @@
-import updateUser from '@fishprovider/cross/dist/api/users/updateUser';
+import updateUser from '@fishprovider/cross/dist/api/user/updateUser';
 import storeUser from '@fishprovider/cross/dist/stores/user';
 
 import Icon from '~ui/core/Icon';

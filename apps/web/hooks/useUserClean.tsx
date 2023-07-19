@@ -1,4 +1,4 @@
-import userClean from '@fishprovider/cross/dist/api/users/clean';
+import userClean from '@fishprovider/cross/dist/api/user/clean';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
 import storeUser from '@fishprovider/cross/dist/stores/user';
 

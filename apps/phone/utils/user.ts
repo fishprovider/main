@@ -1,6 +1,6 @@
-import userLogin from '@fishprovider/cross/dist/api/users/login';
-import userLogout from '@fishprovider/cross/dist/api/users/logout';
-import updateUser from '@fishprovider/cross/dist/api/users/updateUser';
+import userLogin from '@fishprovider/cross/dist/api/user/login';
+import userLogout from '@fishprovider/cross/dist/api/user/logout';
+import updateUser from '@fishprovider/cross/dist/api/user/updateUser';
 import storeUser from '@fishprovider/cross/dist/stores/user';
 import type { User } from '@fishprovider/utils/dist/types/User.model';
 

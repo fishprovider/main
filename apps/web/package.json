@@ -5,6 +5,7 @@
     "lint": "eslint --cache --fix --ignore-pattern public .",
     "type-check": "tsc --noEmit",
     "test": "cross-env NODE_ENV=test doppler run --print-config -- jest",
+    "clean-build": "rm -rf .next",
     "prebuild": "./build-packages.sh",
     "build": "cross-env NODE_ENV=production next build",
     "postbuild": "cross-env NODE_ENV=production next-sitemap",

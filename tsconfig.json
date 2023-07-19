@@ -10,6 +10,7 @@
     "checkJs": false,
     "noEmit": false,
     "declaration": true,
+    "incremental": true,
 
     "ignoreDeprecations": "5.0",
   },
