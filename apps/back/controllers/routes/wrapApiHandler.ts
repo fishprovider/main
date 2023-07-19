@@ -1,9 +1,9 @@
-import type { UserSession } from '@fishprovider/enterprise-rules';
+import type { UserSession } from '@fishprovider/adapter-backend';
 import type { Request, Response } from 'express';
 
 type Handler = (params: {
   userSession: UserSession;
-  payload: any;
+  data: any;
 }) => Promise<any>;
 
 const getReqMsg = (req: Request) => [
@@ -16,14 +16,14 @@ const getReqMsg = (req: Request) => [
 
 const wrapApiHandler = (handler: Handler) => async (req: Request, res: Response) => {
   try {
-    let payload;
+    let data;
     switch (req.method) {
       case 'GET': {
-        payload = req.query;
+        data = req.query;
         break;
       }
       case 'POST': {
-        payload = req.body;
+        data = req.body;
         break;
       }
       default: {
@@ -33,7 +33,7 @@ const wrapApiHandler = (handler: Handler) => async (req: Request, res: Response)
 
     const result = await handler({
       userSession: req.session.userInfo,
-      payload,
+      data,
     });
     res.status(200).json(result);
   } catch (err: any) {
