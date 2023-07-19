@@ -29,6 +29,7 @@ function adapters() {
 function frameworks() {
   npm run build -w frameworks/mongo &
   npm run build -w frameworks/redis &
+  npm run build -w frameworks/cache-first &
   wait
 }
 

@@ -7,5 +7,5 @@ export interface GetNewsRepositoryParams {
 }
 
 export interface NewsRepository {
-  getNews: (params: GetNewsRepositoryParams) => Promise<News[]>;
+  getNews: (params: GetNewsRepositoryParams) => Promise<News[] | undefined>;
 }

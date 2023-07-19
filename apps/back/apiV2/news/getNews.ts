@@ -1,5 +1,5 @@
 import { getNewsController } from '@fishprovider/adapter-backend';
 import { getNewsUseCase } from '@fishprovider/application-rules';
-import { MongoNewsRepository } from '@fishprovider/framework-mongo';
+import { CacheFirstNewsRepository } from '@fishprovider/framework-cache-first';
 
-export default getNewsController(getNewsUseCase(MongoNewsRepository));
+export default getNewsController(getNewsUseCase(CacheFirstNewsRepository));

@@ -17,5 +17,5 @@ export const getNewsUseCase = (
 ) => {
   const { payload } = params;
   const news = await newsRepository.getNews(payload);
-  return news;
+  return news || [];
 };
