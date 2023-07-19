@@ -2,17 +2,20 @@ import { UserError, UserSession } from '@fishprovider/enterprise-rules';
 
 import type { GetNewsRepositoryParams, NewsRepository } from './news.repository';
 
-export type GetNewsUseCaseParams = GetNewsRepositoryParams;
+export type GetNewsUseCasePayload = GetNewsRepositoryParams;
 
-export const getNewsUseCase = async (
+export interface GetNewsUseCaseParams {
   newsRepository: NewsRepository,
   userSession: UserSession,
-  params: GetNewsUseCaseParams,
-) => {
+  payload: GetNewsUseCasePayload,
+}
+
+export const getNewsUseCase = async (params: GetNewsUseCaseParams) => {
+  const { newsRepository, userSession, payload } = params;
   if (!userSession) {
     throw new Error(UserError.USER_ACCESS_DENIED);
   }
 
-  const news = await newsRepository.getNews(params);
+  const news = await newsRepository.getNews(payload);
   return news;
 };

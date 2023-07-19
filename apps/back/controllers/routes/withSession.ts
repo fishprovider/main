@@ -46,6 +46,4 @@ const withSession = (handler: Handler) => async (req: Request, res: Response) =>
   }
 };
 
-export {
-  withSession,
-};
+export default withSession;

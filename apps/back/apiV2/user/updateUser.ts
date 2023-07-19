@@ -1,11 +1,11 @@
 import { UserController } from '@fishprovider/adapter-backend';
-import type { UpdateUserUseCaseParams } from '@fishprovider/application-rules';
+import type { UpdateUserUseCasePayload } from '@fishprovider/application-rules';
 import type { UserSession } from '@fishprovider/enterprise-rules';
 import { MongoUserRepository } from '@fishprovider/framework-mongo';
 
-const updateUser = async (
+const updateUser = async ({ userSession, payload } : {
   userSession: UserSession,
-  params: UpdateUserUseCaseParams,
-) => UserController(MongoUserRepository, userSession).updateUser(params);
+  payload: UpdateUserUseCasePayload,
+}) => UserController(MongoUserRepository, userSession).updateUser(payload);
 
 export default updateUser;

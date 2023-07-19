@@ -2,8 +2,8 @@ import { UserController } from '@fishprovider/adapter-backend';
 import type { UserSession } from '@fishprovider/enterprise-rules';
 import { MongoUserRepository } from '@fishprovider/framework-mongo';
 
-const getUser = async (
+const getUser = async ({ userSession } : {
   userSession: UserSession,
-) => UserController(MongoUserRepository, userSession).getUser();
+}) => UserController(MongoUserRepository, userSession).getUser();
 
 export default getUser;

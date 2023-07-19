@@ -10,23 +10,23 @@ export const updateUserAllowEditFields: Array<keyof User> = [
 ];
 export type UpdateUserAllowEditFields = typeof updateUserAllowEditFields[number];
 
-export interface UpdateUserUseCaseParams {
-  payload: Partial<Pick<User, UpdateUserAllowEditFields>>,
-}
+export type UpdateUserUseCasePayload = Partial<Pick<User, UpdateUserAllowEditFields>>;
 
-export const updateUserUseCase = async (
+export interface UpdateUserUseCaseParams {
   userRepository: UserRepository,
   userSession: UserSession,
-  params: UpdateUserUseCaseParams,
-) => {
+  payload: UpdateUserUseCasePayload,
+}
+
+export const updateUserUseCase = async (params: UpdateUserUseCaseParams) => {
+  const { userRepository, userSession, payload } = params;
   if (!userSession) {
     throw new Error(UserError.USER_ACCESS_DENIED);
   }
 
   const res = await userRepository.updateUser({
-    ...params,
     _id: userSession._id,
-    payload: _.pick(params.payload, updateUserAllowEditFields),
+    payload: _.pick(payload, updateUserAllowEditFields),
   });
   return res;
 };

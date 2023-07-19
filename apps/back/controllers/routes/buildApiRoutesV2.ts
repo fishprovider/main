@@ -2,9 +2,9 @@ import type { Router } from 'express';
 import { globSync } from 'glob';
 import path from 'path';
 
-import withSession from './withSession';
+import withSession from './withSessionV2';
 
-const apiDir = `${process.cwd()}/dist/api`;
+const apiDir = `${process.cwd()}/dist/apiV2`;
 
 const getHandler = async (route: string) => {
   const mod = await import(`${apiDir}${route}.js`);
@@ -28,8 +28,9 @@ const buildApiRoutes = (router: Router) => {
   Logger.debug(`[route] Parsed ${routes.length} routes`, routes);
 
   return Promise.all(
-    routes.map(async (route) => {
-      const handler = await getHandler(route);
+    routes.map(async (routeRaw) => {
+      const handler = await getHandler(routeRaw);
+      const route = path.join('/v2', routeRaw);
       if (route.includes('/get')) {
         Logger.debug('GET', route);
         router.get(route, withSession(handler));

@@ -2,10 +2,13 @@ import { UserError, UserSession } from '@fishprovider/enterprise-rules';
 
 import type { UserRepository } from './user.repository';
 
-export const getUserUseCase = async (
+export interface GetUserUseCaseParams {
   userRepository: UserRepository,
   userSession: UserSession,
-) => {
+}
+
+export const getUserUseCase = async (params: GetUserUseCaseParams) => {
+  const { userRepository, userSession } = params;
   if (!userSession) {
     throw new Error(UserError.USER_ACCESS_DENIED);
   }
