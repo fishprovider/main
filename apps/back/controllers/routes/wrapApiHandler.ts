@@ -1,10 +1,6 @@
-import type { UserSession } from '@fishprovider/adapter-backend';
 import type { Request, Response } from 'express';
 
-type Handler = (params: {
-  userSession: UserSession;
-  data: any;
-}) => Promise<any>;
+import type { ApiHandler } from '~types/api';
 
 const getReqMsg = (req: Request) => [
   req.method,
@@ -14,7 +10,7 @@ const getReqMsg = (req: Request) => [
   JSON.stringify(req.session),
 ].join(', ');
 
-const wrapApiHandler = (handler: Handler) => async (req: Request, res: Response) => {
+const wrapApiHandler = <T>(handler: ApiHandler<T>) => async (req: Request, res: Response) => {
   try {
     let data;
     switch (req.method) {

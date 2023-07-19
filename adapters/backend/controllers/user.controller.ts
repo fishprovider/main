@@ -30,8 +30,7 @@ async function updateUser(
     name: z.string().optional(),
     picture: z.string().optional(),
     starProviders: z.record(z.boolean()).optional(),
-  }).refine((item) => item.name || item.picture || item.starProviders)
-    .parse(data);
+  }).parse(data);
 
   const res = await updateUserUseCase({
     userRepository,

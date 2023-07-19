@@ -1,9 +1,10 @@
-import { UserController, UserSession } from '@fishprovider/adapter-backend';
+import { UserController } from '@fishprovider/adapter-backend';
 import { MongoUserRepository } from '@fishprovider/framework-mongo';
 
-const updateUser = async ({ userSession, payload } : {
-  userSession: UserSession,
-  payload: any,
-}) => UserController(MongoUserRepository, userSession).updateUser(payload);
+import type { ApiHandlerParams } from '~types/api';
+
+const updateUser = async (
+  { userSession, data }: ApiHandlerParams,
+) => UserController(MongoUserRepository, userSession).updateUser(data);
 
 export default updateUser;
