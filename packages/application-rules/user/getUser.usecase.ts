@@ -1,4 +1,4 @@
-import { UserError, UserSession } from '@fishprovider/enterprise-rules';
+import type { UserSession } from '@fishprovider/enterprise-rules';
 
 import type { UserRepository } from './user.repository';
 
@@ -9,10 +9,6 @@ export interface GetUserUseCaseParams {
 
 export const getUserUseCase = async (params: GetUserUseCaseParams) => {
   const { userRepository, userSession } = params;
-  if (!userSession) {
-    throw new Error(UserError.USER_ACCESS_DENIED);
-  }
-
   const user = await userRepository.getUser({
     _id: userSession._id,
     projection: {

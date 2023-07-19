@@ -1,5 +1,5 @@
 import type { GetNewsRepositoryParams, NewsRepository } from '@fishprovider/application-rules';
-import { News, NewsError } from '@fishprovider/enterprise-rules';
+import type { News } from '@fishprovider/enterprise-rules';
 import moment from 'moment';
 
 import { mongo } from './mongo.framework';
@@ -36,7 +36,7 @@ async function getNews(params: GetNewsRepositoryParams) {
     return news;
   }
 
-  throw new Error(NewsError.GET_NEWS_BAD_REQUEST);
+  return [];
 }
 
 export const MongoNewsRepository: NewsRepository = {

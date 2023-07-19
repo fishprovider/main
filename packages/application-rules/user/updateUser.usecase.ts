@@ -1,4 +1,4 @@
-import { User, UserError, UserSession } from '@fishprovider/enterprise-rules';
+import type { User, UserSession } from '@fishprovider/enterprise-rules';
 import _ from 'lodash';
 
 import type { UserRepository } from './user.repository';
@@ -20,10 +20,6 @@ export interface UpdateUserUseCaseParams {
 
 export const updateUserUseCase = async (params: UpdateUserUseCaseParams) => {
   const { userRepository, userSession, payload } = params;
-  if (!userSession) {
-    throw new Error(UserError.USER_ACCESS_DENIED);
-  }
-
   const res = await userRepository.updateUser({
     _id: userSession._id,
     payload: _.pick(payload, updateUserAllowEditFields),

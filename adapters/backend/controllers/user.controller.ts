@@ -1,9 +1,13 @@
 import {
   getUserUseCase, updateUserUseCase, UpdateUserUseCasePayload, UserRepository,
 } from '@fishprovider/application-rules';
-import type { UserSession } from '@fishprovider/enterprise-rules';
+import { UserError, UserSession } from '@fishprovider/enterprise-rules';
 
 const getUser = (userRepository: UserRepository, userSession: UserSession) => async () => {
+  if (!userSession) {
+    throw new Error(UserError.USER_ACCESS_DENIED);
+  }
+
   const user = await getUserUseCase({ userRepository, userSession });
   return user;
 };
@@ -11,6 +15,10 @@ const getUser = (userRepository: UserRepository, userSession: UserSession) => as
 const updateUser = (userRepository: UserRepository, userSession: UserSession) => async (
   payload: UpdateUserUseCasePayload,
 ) => {
+  if (!userSession) {
+    throw new Error(UserError.USER_ACCESS_DENIED);
+  }
+
   const res = await updateUserUseCase({ userRepository, userSession, payload });
   return res;
 };
