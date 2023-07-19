@@ -1,4 +1,4 @@
-import newsGetMany from '@fishprovider/cross/dist/api/news/getMany';
+import newsGetMany from '@fishprovider/cross/dist/api/news/getNews';
 import storeNews from '@fishprovider/cross/dist/stores/news';
 import storeUser from '@fishprovider/cross/dist/stores/user';
 import _ from 'lodash';
