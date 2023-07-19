@@ -16,6 +16,12 @@ const start = async () => {
 };
 
 const destroy = async () => {
+  // Clean architecture
+  await Promise.all([
+    redis.stop(),
+    mongo.stop(),
+  ]);
+
   await destroyAsync(adapter);
 };
 
