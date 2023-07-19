@@ -3,12 +3,12 @@ import type { User } from '@fishprovider/enterprise-rules';
 import type { Projection } from '~types/Repository';
 
 export interface GetUserRepositoryParams {
-  _id: string,
+  userId: string,
   projection?: Projection<User>,
 }
 
 export interface UpdateUserRepositoryParams {
-  _id: string,
+  userId: string,
   payload: Partial<Omit<User, '_id'>>,
 }
 

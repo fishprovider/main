@@ -8,7 +8,7 @@ export interface UserRoles {
   viewerProviders?: Record<string, boolean>;
 }
 
-export interface UserSession {
+export interface User {
   _id: string;
   email: string;
   name: string;
@@ -16,9 +16,7 @@ export interface UserSession {
 
   roles?: UserRoles;
   starProviders?: Record<string, boolean>;
-}
 
-export interface User extends UserSession {
   fcmInfo?: Record<string, any>;
   telegram?: {
     userId: string;

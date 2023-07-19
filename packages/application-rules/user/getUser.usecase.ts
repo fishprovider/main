@@ -1,16 +1,14 @@
-import type { UserSession } from '@fishprovider/enterprise-rules';
-
 import type { UserRepository } from './user.repository';
 
 export interface GetUserUseCaseParams {
   userRepository: UserRepository,
-  userSession: UserSession,
+  userId: string,
 }
 
 export const getUserUseCase = async (params: GetUserUseCaseParams) => {
-  const { userRepository, userSession } = params;
+  const { userRepository, userId } = params;
   const user = await userRepository.getUser({
-    _id: userSession._id,
+    userId,
     projection: {
       email: 1,
       name: 1,

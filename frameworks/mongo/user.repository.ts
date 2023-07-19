@@ -6,10 +6,10 @@ import { User, UserError } from '@fishprovider/enterprise-rules';
 import { mongo } from './mongo.framework';
 
 async function getUser(params: GetUserRepositoryParams) {
-  const { _id, projection } = params;
+  const { userId, projection } = params;
   const { db } = await mongo.get();
   const user = await db.collection<User>('users').findOne({
-    _id,
+    _id: userId,
   }, {
     projection,
   });
@@ -20,10 +20,10 @@ async function getUser(params: GetUserRepositoryParams) {
 }
 
 async function updateUser(params: UpdateUserRepositoryParams) {
-  const { _id, payload } = params;
+  const { userId, payload } = params;
   const { db } = await mongo.get();
   await db.collection<User>('news').updateOne({
-    _id,
+    _id: userId,
   }, {
     $set: payload,
   });

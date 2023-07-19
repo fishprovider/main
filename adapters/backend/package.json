@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@fishprovider/application-rules": "*",
-    "@fishprovider/enterprise-rules": "*"
+    "@fishprovider/enterprise-rules": "*",
+    "zod": "^3.21.4"
   }
 }

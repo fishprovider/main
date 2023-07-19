@@ -1,11 +1,9 @@
-import { NewsController } from '@fishprovider/adapter-backend';
-import type { GetNewsUseCasePayload } from '@fishprovider/application-rules';
-import type { UserSession } from '@fishprovider/enterprise-rules';
+import { NewsController, UserSession } from '@fishprovider/adapter-backend';
 import { MongoNewsRepository } from '@fishprovider/framework-mongo';
 
-const getNews = async ({ userSession, payload } : {
+const getNews = async ({ userSession, data } : {
   userSession: UserSession,
-  payload: GetNewsUseCasePayload,
-}) => NewsController(MongoNewsRepository, userSession).getNews(payload);
+  data: any,
+}) => NewsController(MongoNewsRepository, userSession).getNews(data);
 
 export default getNews;

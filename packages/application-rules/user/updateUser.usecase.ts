@@ -1,4 +1,4 @@
-import type { User, UserSession } from '@fishprovider/enterprise-rules';
+import type { User } from '@fishprovider/enterprise-rules';
 import _ from 'lodash';
 
 import type { UserRepository } from './user.repository';
@@ -14,14 +14,14 @@ export type UpdateUserUseCasePayload = Partial<Pick<User, UpdateUserAllowEditFie
 
 export interface UpdateUserUseCaseParams {
   userRepository: UserRepository,
-  userSession: UserSession,
+  userId: string,
   payload: UpdateUserUseCasePayload,
 }
 
 export const updateUserUseCase = async (params: UpdateUserUseCaseParams) => {
-  const { userRepository, userSession, payload } = params;
+  const { userRepository, userId, payload } = params;
   const res = await userRepository.updateUser({
-    _id: userSession._id,
+    userId,
     payload: _.pick(payload, updateUserAllowEditFields),
   });
   return res;

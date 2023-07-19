@@ -1,5 +1,4 @@
-import { UserController } from '@fishprovider/adapter-backend';
-import type { UserSession } from '@fishprovider/enterprise-rules';
+import { UserController, UserSession } from '@fishprovider/adapter-backend';
 import { MongoUserRepository } from '@fishprovider/framework-mongo';
 
 const getUser = async ({ userSession } : {

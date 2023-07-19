@@ -1,32 +1,50 @@
 import {
-  getUserUseCase, updateUserUseCase, UpdateUserUseCasePayload, UserRepository,
+  getUserUseCase, updateUserUseCase, UserRepository,
 } from '@fishprovider/application-rules';
-import { UserError, UserSession } from '@fishprovider/enterprise-rules';
+import { z } from 'zod';
 
-const getUser = (userRepository: UserRepository, userSession: UserSession) => async () => {
-  if (!userSession) {
-    throw new Error(UserError.USER_ACCESS_DENIED);
-  }
+import { requireLogIn } from '~helpers';
+import type { UserSession } from '~types';
 
-  const user = await getUserUseCase({ userRepository, userSession });
+async function getUser(
+  userRepository: UserRepository,
+  userSession: UserSession,
+) {
+  requireLogIn(userSession);
+
+  const user = await getUserUseCase({
+    userRepository,
+    userId: userSession._id,
+  });
   return user;
-};
+}
 
-const updateUser = (userRepository: UserRepository, userSession: UserSession) => async (
-  payload: UpdateUserUseCasePayload,
-) => {
-  if (!userSession) {
-    throw new Error(UserError.USER_ACCESS_DENIED);
-  }
+async function updateUser(
+  userRepository: UserRepository,
+  userSession: UserSession,
+  data: any,
+) {
+  requireLogIn(userSession);
 
-  const res = await updateUserUseCase({ userRepository, userSession, payload });
+  const payload = z.object({
+    name: z.string().optional(),
+    picture: z.string().optional(),
+    starProviders: z.record(z.boolean()).optional(),
+  }).refine((item) => item.name || item.picture || item.starProviders)
+    .parse(data);
+
+  const res = await updateUserUseCase({
+    userRepository,
+    userId: userSession._id,
+    payload,
+  });
   return res;
-};
+}
 
 export const UserController = (
   userRepository: UserRepository,
   userSession: UserSession,
 ) => ({
-  getUser: getUser(userRepository, userSession),
-  updateUser: updateUser(userRepository, userSession),
+  getUser: () => getUser(userRepository, userSession),
+  updateUser: (data: any) => updateUser(userRepository, userSession, data),
 });

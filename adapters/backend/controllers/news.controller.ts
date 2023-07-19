@@ -1,26 +1,30 @@
-import { getNewsUseCase, GetNewsUseCasePayload, NewsRepository } from '@fishprovider/application-rules';
-import { UserError, UserSession } from '@fishprovider/enterprise-rules';
+import { getNewsUseCase, NewsRepository } from '@fishprovider/application-rules';
+import { z } from 'zod';
 
-import { BackendError } from '~types';
+import { requireLogIn } from '~helpers';
+import type { UserSession } from '~types';
 
-const getNews = (newsRepository: NewsRepository, userSession: UserSession) => async (
-  payload: GetNewsUseCasePayload,
-) => {
-  if (!userSession) {
-    throw new Error(UserError.USER_ACCESS_DENIED);
-  }
-  const { today, week, upcoming } = payload;
-  if (!(today || week || upcoming)) {
-    throw new Error(BackendError.BAD_REQUEST);
-  }
+async function getNews(
+  newsRepository: NewsRepository,
+  userSession: UserSession,
+  data: any,
+) {
+  requireLogIn(userSession);
 
-  const news = await getNewsUseCase({ newsRepository, userSession, payload });
+  const payload = z.object({
+    today: z.boolean().optional(),
+    week: z.string().optional(),
+    upcoming: z.boolean().optional(),
+  }).refine((item) => item.today || item.week || item.upcoming)
+    .parse(data);
+
+  const news = await getNewsUseCase({ newsRepository, payload });
   return news;
-};
+}
 
 export const NewsController = (
   newsRepository: NewsRepository,
   userSession: UserSession,
 ) => ({
-  getNews: getNews(newsRepository, userSession),
+  getNews: (data: any) => getNews(newsRepository, userSession, data),
 });

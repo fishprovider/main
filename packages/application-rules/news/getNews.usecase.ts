@@ -1,12 +1,9 @@
-import type { UserSession } from '@fishprovider/enterprise-rules';
-
 import type { GetNewsRepositoryParams, NewsRepository } from './news.repository';
 
 export type GetNewsUseCasePayload = GetNewsRepositoryParams;
 
 export interface GetNewsUseCaseParams {
   newsRepository: NewsRepository,
-  userSession: UserSession,
   payload: GetNewsUseCasePayload,
 }
 

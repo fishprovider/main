@@ -1,11 +1,9 @@
-import { UserController } from '@fishprovider/adapter-backend';
-import type { UpdateUserUseCasePayload } from '@fishprovider/application-rules';
-import type { UserSession } from '@fishprovider/enterprise-rules';
+import { UserController, UserSession } from '@fishprovider/adapter-backend';
 import { MongoUserRepository } from '@fishprovider/framework-mongo';
 
 const updateUser = async ({ userSession, payload } : {
   userSession: UserSession,
-  payload: UpdateUserUseCasePayload,
+  payload: any,
 }) => UserController(MongoUserRepository, userSession).updateUser(payload);
 
 export default updateUser;
