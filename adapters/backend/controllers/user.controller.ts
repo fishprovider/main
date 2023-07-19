@@ -1,27 +1,24 @@
-import {
-  getUserUseCase, updateUserUseCase, UserRepository,
-} from '@fishprovider/application-rules';
+import type { GetUserUseCase, UpdateUserUseCase } from '@fishprovider/application-rules';
 import { z } from 'zod';
 
 import { requireLogIn } from '~helpers';
 import type { ApiHandlerParams } from '~types';
 
-export const getUser = (
-  userRepository: UserRepository,
+export const getUserController = (
+  getUserUseCase: GetUserUseCase,
 ) => async (
   { userSession }: ApiHandlerParams,
 ) => {
   requireLogIn(userSession);
 
   const user = await getUserUseCase({
-    userRepository,
     userId: userSession._id,
   });
   return user;
 };
 
-export const updateUser = (
-  userRepository: UserRepository,
+export const updateUserController = (
+  updateUserUseCase: UpdateUserUseCase,
 ) => async (
   { userSession, data }: ApiHandlerParams,
 ) => {
@@ -34,7 +31,6 @@ export const updateUser = (
   }).parse(data);
 
   const res = await updateUserUseCase({
-    userRepository,
     userId: userSession._id,
     payload,
   });

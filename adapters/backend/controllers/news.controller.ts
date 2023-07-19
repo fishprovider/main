@@ -1,11 +1,11 @@
-import { getNewsUseCase, NewsRepository } from '@fishprovider/application-rules';
+import type { GetNewsUseCase } from '@fishprovider/application-rules';
 import { z } from 'zod';
 
 import { requireLogIn } from '~helpers';
 import type { ApiHandlerParams } from '~types';
 
-export const getNews = (
-  newsRepository: NewsRepository,
+export const getNewsController = (
+  getNewsUseCase: GetNewsUseCase,
 ) => async (
   { userSession, data }: ApiHandlerParams,
 ) => {
@@ -18,6 +18,6 @@ export const getNews = (
   }).refine((item) => item.today || item.week || item.upcoming)
     .parse(data);
 
-  const news = await getNewsUseCase({ newsRepository, payload });
+  const news = await getNewsUseCase({ payload });
   return news;
 };

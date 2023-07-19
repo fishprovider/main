@@ -1,12 +1,19 @@
+import type { User } from '@fishprovider/enterprise-rules';
+
 import type { UserRepository } from './user.repository';
 
 export interface GetUserUseCaseParams {
-  userRepository: UserRepository,
   userId: string,
 }
 
-export const getUserUseCase = async (params: GetUserUseCaseParams) => {
-  const { userRepository, userId } = params;
+export type GetUserUseCase = (params: GetUserUseCaseParams) => Promise<User>;
+
+export const getUserUseCase = (
+  userRepository: UserRepository,
+): GetUserUseCase => async (
+  params: GetUserUseCaseParams,
+) => {
+  const { userId } = params;
   const user = await userRepository.getUser({
     userId,
     projection: {
