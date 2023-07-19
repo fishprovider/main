@@ -1,13 +1,12 @@
 import type { GetUserUseCase, UpdateUserUseCase } from '@fishprovider/application-rules';
-import type { User } from '@fishprovider/enterprise-rules';
 import { z } from 'zod';
 
 import { requireLogIn } from '~helpers';
-import type { ApiHandler, ApiHandlerParams } from '~types';
+import type { ApiHandlerParams } from '~types';
 
 export const getUserController = (
   getUserUseCase: GetUserUseCase,
-): ApiHandler<User> => async (
+) => async (
   { userSession }: ApiHandlerParams,
 ) => {
   requireLogIn(userSession);
@@ -20,7 +19,7 @@ export const getUserController = (
 
 export const updateUserController = (
   updateUserUseCase: UpdateUserUseCase,
-): ApiHandler<boolean> => async (
+) => async (
   { userSession, data }: ApiHandlerParams,
 ) => {
   requireLogIn(userSession);
