@@ -1,7 +1,7 @@
 import type { GetNewsRepositoryParams, NewsRepository } from '@fishprovider/application-rules';
 import type { News } from '@fishprovider/enterprise-rules';
 
-import { mongo } from './mongo';
+import { mongo } from './mongo.framework';
 
 async function getNews(params: GetNewsRepositoryParams) {
   const { db } = await mongo.get();

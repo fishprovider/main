@@ -1,7 +1,7 @@
 import { destroyAsync, start as startCore } from '@fishprovider/core/dist/controllers/main';
 import { mongo } from '@fishprovider/framework-mongo';
+import { redis } from '@fishprovider/framework-redis';
 
-// import { redis } from '@fishprovider/framework-redis';
 import * as adapter from '~controllers/adapter';
 
 const start = async () => {
@@ -10,7 +10,7 @@ const start = async () => {
 
   // Clean architecture
   await Promise.all([
-    // redis.start(),
+    redis.start(),
     mongo.start(),
   ]);
 };

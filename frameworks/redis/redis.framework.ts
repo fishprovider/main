@@ -1,5 +1,6 @@
 import { promiseCreator } from '@fishprovider/application-rules';
-import { createClient, RedisClientType } from '@redis/client';
+import type { RedisClientType } from '@redis/client';
+import { createClient } from 'redis';
 
 let client: RedisClientType | undefined;
 const clientPromise = promiseCreator();

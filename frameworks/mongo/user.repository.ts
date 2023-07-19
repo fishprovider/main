@@ -3,7 +3,7 @@ import type {
 } from '@fishprovider/application-rules';
 import { User, UserError } from '@fishprovider/enterprise-rules';
 
-import { mongo } from './mongo';
+import { mongo } from './mongo.framework';
 
 async function getUser(
   params: GetUserRepositoryParams,
