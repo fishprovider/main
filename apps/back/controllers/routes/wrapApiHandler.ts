@@ -4,14 +4,11 @@ import type { Request, Response } from 'express';
 type Handler = (params: {
   userSession: UserSession;
   payload: any;
-}) => Promise<{
-  result?: any;
-  error?: any;
-}>;
+}) => Promise<any>;
 
 const getReqMsg = (req: Request) => `${req.method} ${req.url}, ${JSON.stringify(req.query)}, ${JSON.stringify(req.body)}`;
 
-const withSession = (handler: Handler) => async (req: Request, res: Response) => {
+const wrapApiHandler = (handler: Handler) => async (req: Request, res: Response) => {
   try {
     let payload;
     switch (req.method) {
@@ -28,22 +25,15 @@ const withSession = (handler: Handler) => async (req: Request, res: Response) =>
       }
     }
 
-    const { result, error } = await handler({
+    const result = await handler({
       userSession: req.session.userInfo,
       payload,
     });
-
-    if (error) {
-      Logger.warn(`Handler Error: ${getReqMsg(req)}`, error);
-      Logger.debug(`Handler Error: ${getReqMsg(req)}`, req.session, req.cookies);
-      res.status(403).send(error);
-    } else {
-      res.status(200).json(result);
-    }
+    res.status(200).json(result);
   } catch (err: any) {
-    Logger.warn(`Server Error: ${getReqMsg(req)}`, err.response?.data, err);
+    Logger.warn('ApiHandler failed', getReqMsg(req), err);
     res.status(403).send(err.message);
   }
 };
 
-export default withSession;
+export default wrapApiHandler;

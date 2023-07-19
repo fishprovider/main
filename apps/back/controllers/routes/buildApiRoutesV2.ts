@@ -2,7 +2,7 @@ import type { Router } from 'express';
 import { globSync } from 'glob';
 import path from 'path';
 
-import withSession from './withSessionV2';
+import wrapApiHandler from './wrapApiHandler';
 
 const apiDir = `${process.cwd()}/dist/apiV2`;
 
@@ -33,10 +33,10 @@ const buildApiRoutes = (router: Router) => {
       const route = path.join('/v2', routeRaw);
       if (route.includes('/get')) {
         Logger.debug('GET', route);
-        router.get(route, withSession(handler));
+        router.get(route, wrapApiHandler(handler));
       }
       Logger.debug('POST', route);
-      router.post(route, withSession(handler));
+      router.post(route, wrapApiHandler(handler));
     }),
   );
 };

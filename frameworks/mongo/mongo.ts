@@ -6,10 +6,10 @@ let client: MongoClient | undefined;
 const clientPromise = promiseCreator();
 
 const start = async () => {
-  if (!process.env.MONGO_URL) {
-    throw new Error('MONGO_URL is not defined');
+  if (!process.env.MONGODB_URI) {
+    throw new Error('MONGODB_URI is not defined');
   }
-  client = new MongoClient(process.env.MONGO_URL);
+  client = new MongoClient(process.env.MONGODB_URI);
   await client.connect();
   clientPromise.resolveExec();
   return client;
