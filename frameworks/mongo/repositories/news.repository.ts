@@ -2,7 +2,7 @@ import type { GetNewsRepositoryParams, NewsRepository } from '@fishprovider/appl
 import type { News } from '@fishprovider/enterprise-rules';
 import moment from 'moment';
 
-import { mongo } from './mongo.framework';
+import { mongo } from '../mongo.framework';
 
 async function getNews(params: GetNewsRepositoryParams) {
   const { today, week, upcoming } = params;

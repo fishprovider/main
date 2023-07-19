@@ -1,4 +1,4 @@
-import type { UserRoles } from '~user';
+import type { UserRoles } from '~entities/user';
 
 export enum ProviderType {
   icmarkets = 'icmarkets',

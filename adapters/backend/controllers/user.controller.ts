@@ -4,12 +4,13 @@ import {
 import { z } from 'zod';
 
 import { requireLogIn } from '~helpers';
-import type { UserSession } from '~types';
+import type { ApiHandlerParams } from '~types';
 
-async function getUser(
+export const getUser = (
   userRepository: UserRepository,
-  userSession: UserSession,
-) {
+) => async (
+  { userSession }: ApiHandlerParams,
+) => {
   requireLogIn(userSession);
 
   const user = await getUserUseCase({
@@ -17,13 +18,13 @@ async function getUser(
     userId: userSession._id,
   });
   return user;
-}
+};
 
-async function updateUser(
+export const updateUser = (
   userRepository: UserRepository,
-  userSession: UserSession,
-  data: any,
-) {
+) => async (
+  { userSession, data }: ApiHandlerParams,
+) => {
   requireLogIn(userSession);
 
   const payload = z.object({
@@ -38,12 +39,4 @@ async function updateUser(
     payload,
   });
   return res;
-}
-
-export const UserController = (
-  userRepository: UserRepository,
-  userSession: UserSession,
-) => ({
-  getUser: () => getUser(userRepository, userSession),
-  updateUser: (data: any) => updateUser(userRepository, userSession, data),
-});
+};

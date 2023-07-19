@@ -4,11 +4,14 @@
     "composite": true,
     "baseUrl": ".",
     "paths": {
-      "~*": ["./*"]
     },
     "rootDir": ".",
     "outDir": "dist"
   },
   "include": ["**/*.ts"],
   "exclude": ["node_modules", "dist"],
+  "references": [
+    { "path": "../../packages/enterprise-rules" },
+    { "path": "../../packages/application-rules" },
+  ],
 }

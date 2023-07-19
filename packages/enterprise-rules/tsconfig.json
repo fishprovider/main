@@ -4,7 +4,8 @@
     "composite": true,
     "baseUrl": ".",
     "paths": {
-      "~*": ["./*"]
+      "~entities/*": ["./entities/*"],
+      "~entities": ["./entities"],
     },
     "rootDir": ".",
     "outDir": "dist"

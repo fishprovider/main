@@ -1,6 +1,6 @@
 import type { User } from '@fishprovider/enterprise-rules';
 
-import type { Projection } from '~types/Repository';
+import type { Projection } from '~types/repository';
 
 export interface GetUserRepositoryParams {
   userId: string,

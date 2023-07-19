@@ -2,13 +2,13 @@ import { getNewsUseCase, NewsRepository } from '@fishprovider/application-rules'
 import { z } from 'zod';
 
 import { requireLogIn } from '~helpers';
-import type { UserSession } from '~types';
+import type { ApiHandlerParams } from '~types';
 
-async function getNews(
+export const getNews = (
   newsRepository: NewsRepository,
-  userSession: UserSession,
-  data: any,
-) {
+) => async (
+  { userSession, data }: ApiHandlerParams,
+) => {
   requireLogIn(userSession);
 
   const payload = z.object({
@@ -20,11 +20,4 @@ async function getNews(
 
   const news = await getNewsUseCase({ newsRepository, payload });
   return news;
-}
-
-export const NewsController = (
-  newsRepository: NewsRepository,
-  userSession: UserSession,
-) => ({
-  getNews: (data: any) => getNews(newsRepository, userSession, data),
-});
+};

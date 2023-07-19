@@ -4,7 +4,12 @@
     "composite": true,
     "baseUrl": ".",
     "paths": {
+      "~helpers/*": ["./helpers/*"],
+      "~helpers": ["./helpers"],
       "~types/*": ["./types/*"],
+      "~types": ["./types"],
+      "~usecases/*": ["./usecases/*"],
+      "~usecases": ["./usecases"],
     },
     "rootDir": ".",
     "outDir": "dist"
@@ -12,6 +17,6 @@
   "include": ["**/*.ts"],
   "exclude": ["node_modules", "dist"],
   "references": [
-    { "path": "../enterprise-rules" },
+    { "path": "../../packages/enterprise-rules" },
   ],
 }
