@@ -1,4 +1,4 @@
-import userUpdateInfo from '@fishprovider/cross/dist/api/users/updateInfo';
+import updateUser from '@fishprovider/cross/dist/api/users/updateUser';
 import storeUser from '@fishprovider/cross/dist/stores/user';
 
 import Icon from '~ui/core/Icon';
@@ -16,7 +16,7 @@ function Favorite({ providerId }: Props) {
       ...user?.starProviders,
       [providerId]: !user?.starProviders?.[providerId],
     };
-    userUpdateInfo({ starProviders });
+    updateUser({ starProviders });
   };
 
   return (

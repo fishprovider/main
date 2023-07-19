@@ -7,7 +7,7 @@ import { buildStore } from '~libs/store';
 interface Store extends Record<string, any> {
   isClientLoggedIn?: boolean;
   isServerLoggedIn?: boolean;
-  info?: User | null;
+  info?: Partial<User> | null;
   socket?: Socket;
 
   theme: string;

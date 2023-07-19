@@ -6,7 +6,13 @@ type Handler = (params: {
   payload: any;
 }) => Promise<any>;
 
-const getReqMsg = (req: Request) => `${req.method} ${req.url}, ${JSON.stringify(req.query)}, ${JSON.stringify(req.body)}`;
+const getReqMsg = (req: Request) => [
+  req.method,
+  req.url,
+  JSON.stringify(req.query),
+  JSON.stringify(req.body),
+  JSON.stringify(req.session),
+].join(', ');
 
 const wrapApiHandler = (handler: Handler) => async (req: Request, res: Response) => {
   try {

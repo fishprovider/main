@@ -1,4 +1,4 @@
-import userGetInfo from '@fishprovider/cross/dist/api/users/getInfo';
+import getUser from '@fishprovider/cross/dist/api/users/getUser';
 import { useMutate } from '@fishprovider/cross/dist/libs/query';
 import storeUser from '@fishprovider/cross/dist/stores/user';
 
@@ -21,7 +21,7 @@ function VerifyPhone() {
   }));
 
   const { mutate: reload, isLoading: isLoadingReload } = useMutate({
-    mutationFn: () => userGetInfo({}),
+    mutationFn: () => getUser({}),
   });
 
   return (

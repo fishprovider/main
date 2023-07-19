@@ -1,4 +1,4 @@
-import userGetInfo from '@fishprovider/cross/dist/api/users/getInfo';
+import getUser from '@fishprovider/cross/dist/api/users/getUser';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
 import storeUser from '@fishprovider/cross/dist/stores/user';
 
@@ -16,7 +16,7 @@ function RequiredVerifyPhone() {
   }));
 
   useQuery({
-    queryFn: () => userGetInfo({}),
+    queryFn: () => getUser({}),
     queryKey: queryKeys.user(userId),
     enabled: !!userId,
     refetchInterval: refreshMS,

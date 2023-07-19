@@ -1,15 +1,14 @@
 import type { User } from '@fishprovider/utils/dist/types/User.model';
 
-import { ApiConfig, apiPost } from '~libs/api';
+import { apiPost } from '~libs/api';
 import storeUser from '~stores/user';
 
-const userGetInfo = async (
+const getUser = async (
   payload: {
     reload?: boolean;
   },
-  options?: ApiConfig,
 ) => {
-  const updatedInfo = await apiPost<User>('/users/getInfo', payload, options);
+  const updatedInfo = await apiPost<User>('/v2/user/getUser', payload);
   const info = {
     ...storeUser.getState().info,
     ...updatedInfo,
@@ -18,4 +17,4 @@ const userGetInfo = async (
   return info;
 };
 
-export default userGetInfo;
+export default getUser;
