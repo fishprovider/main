@@ -1,7 +1,9 @@
 import type { News } from '@fishprovider/enterprise-rules';
 
 export interface GetNewsRepositoryParams {
-  impact?: string;
+  today?: boolean,
+  week?: string,
+  upcoming?: boolean,
 }
 
 export interface NewsRepository {
