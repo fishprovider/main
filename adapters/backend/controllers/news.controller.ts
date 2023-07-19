@@ -1,12 +1,13 @@
 import type { GetNewsUseCase } from '@fishprovider/application-rules';
+import type { News } from '@fishprovider/enterprise-rules';
 import { z } from 'zod';
 
 import { requireLogIn } from '~helpers';
-import type { ApiHandlerParams } from '~types';
+import type { ApiHandler, ApiHandlerParams } from '~types';
 
 export const getNewsController = (
   getNewsUseCase: GetNewsUseCase,
-) => async (
+): ApiHandler<News[]> => async (
   { userSession, data }: ApiHandlerParams,
 ) => {
   requireLogIn(userSession);
