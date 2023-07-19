@@ -6,12 +6,13 @@ let client: RedisClientType | undefined;
 const clientPromise = promiseCreator();
 
 const start = async () => {
-  if (!process.env.REDIS_URL) {
-    throw new Error('REDIS_URL is not defined');
+  if (!process.env.REDIS_HOST) {
+    throw new Error('REDIS_HOST is not defined');
   }
   client = createClient({
-    url: process.env.REDIS_URL,
-    password: process.env.REDIS_PASS,
+    name: `${process.env.TYPE}-${process.env.TYPE_ID}`,
+    url: `redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`,
+    ...(process.env.REDIS_KEY && { password: process.env.REDIS_KEY }),
   });
   await client.connect();
   clientPromise.resolveExec();
