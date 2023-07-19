@@ -12,7 +12,6 @@
     "start": "cross-env NODE_ENV=production next start",
     "export": "cross-env NODE_ENV=production next export",
     "build-export": "npm run build && npm run export",
-    "predev": "./build-packages.sh",
     "dev": "cross-env NODE_ENV=development doppler run -p web -c prd_local --print-config -- next dev",
     "analyze": "cross-env NODE_ENV=production ANALYZE=true doppler run --print-config -- next build"
   },

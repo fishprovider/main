@@ -18,7 +18,6 @@
     "start-all": "concurrently -k 'npm run start-mon' 'npm run start-immortal'",
     "start": "npm run start-mon",
     "start-watch": "doppler run --print-config -- nodemon --experimental-specifier-resolution=node dist/index.js",
-    "predev": "npm run prebuild",
     "dev": "cross-env NODE_ENV=development concurrently -k 'npm run build-watch' 'npm run start-watch'"
   },
   "dependencies": {

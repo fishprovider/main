@@ -20,7 +20,6 @@
     "build:renderer": "cd ./packages/renderer && vite build",
     "build": "npm run build:main && npm run build:preload && npm run build:renderer",
     "package": "electron-builder build --config .electron-builder.config.cjs --dir",
-    "predev": "npm run update-vendors",
     "dev": "cross-env NODE_ENV=development node scripts/watch.js"
   },
   "dependencies": {
