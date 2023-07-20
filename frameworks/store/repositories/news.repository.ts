@@ -8,9 +8,9 @@ async function setNews(params: SetNewsRepositoryParams) {
 }
 
 async function getNews<T>(params: GetNewsRepositoryParams<T>) {
-  const { selector } = params;
-  if (selector) {
-    return storeNews.useStore<T>(selector);
+  const { useSelector } = params;
+  if (useSelector) {
+    return storeNews.useStore<T>(useSelector);
   }
   return Object.values(storeNews.getState());
 }
