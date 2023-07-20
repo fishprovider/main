@@ -11,6 +11,7 @@ const start = async () => {
   }
   client = new MongoClient(process.env.MONGODB_URI);
   await client.connect();
+  console.info('Started mongo.framework');
   clientPromise.resolveExec();
   return client;
 };
@@ -19,6 +20,7 @@ const stop = async () => {
   if (client) {
     await client.close();
   }
+  console.info('Stopped mongo.framework');
 };
 
 const get = async () => {

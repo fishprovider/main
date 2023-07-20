@@ -6,6 +6,7 @@ const start = async () => {
     redis.start(),
     mongo.start(),
   ]);
+  console.info('Started cacheFirst.framework');
 };
 
 const stop = async () => {
@@ -13,6 +14,7 @@ const stop = async () => {
     mongo.stop(),
     redis.stop(),
   ]);
+  console.info('Stopped cacheFirst.framework');
 };
 
 const get = async () => ({

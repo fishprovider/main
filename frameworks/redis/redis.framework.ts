@@ -15,6 +15,7 @@ const start = async () => {
     ...(process.env.REDIS_KEY && { password: process.env.REDIS_KEY }),
   });
   await client.connect();
+  console.info('Started redis.framework');
   clientPromise.resolveExec();
   return client;
 };
@@ -23,6 +24,7 @@ const stop = async () => {
   if (client) {
     await client.quit();
   }
+  console.info('Stopped redis.framework');
 };
 
 const get = async () => {
