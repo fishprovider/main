@@ -21,7 +21,8 @@ export const getNewsController = (
     today: z.boolean().optional(),
     week: z.string().optional(),
     upcoming: z.boolean().optional(),
-  }).refine((item) => item.today || item.week || item.upcoming)
+  }).strict()
+    .refine((item) => item.today || item.week || item.upcoming)
     .parse(finalData);
 
   const news = await getNewsUseCase({ payload });

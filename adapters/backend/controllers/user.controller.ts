@@ -28,7 +28,8 @@ export const updateUserController = (
     name: z.string().optional(),
     picture: z.string().optional(),
     starProviders: z.record(z.boolean()).optional(),
-  }).parse(data);
+  }).strict()
+    .parse(data);
 
   const res = await updateUserUseCase({
     userId: userSession._id,
