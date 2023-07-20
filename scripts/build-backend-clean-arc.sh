@@ -6,7 +6,6 @@ cd ..
 
 function adapters() {
   npm run build -w adapters/backend
-  wait
 }
 
 function frameworks() {

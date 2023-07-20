@@ -5,11 +5,15 @@ bash ./build-clean-arc-share.sh
 cd ..
 
 function adapters() {
-  echo todo
+  npm run build -w adapters/frontend
 }
 
 function frameworks() {
-  echo todo
+  npm run build -w frameworks/fish-api &
+  npm run build -w frameworks/local &
+  wait
+
+  npm run build -w frameworks/offline-first
 }
 
 adapters &

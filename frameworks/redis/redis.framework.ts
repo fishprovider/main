@@ -1,5 +1,6 @@
 import { promiseCreator } from '@fishprovider/application-rules';
 import type { RedisClientType } from '@redis/client';
+import assert from 'assert';
 import { createClient } from 'redis';
 
 let client: RedisClientType | undefined;
@@ -29,6 +30,7 @@ const stop = async () => {
 
 const get = async () => {
   await clientPromise;
+  assert(client);
   return client;
 };
 

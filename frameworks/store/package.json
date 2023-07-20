@@ -1,5 +1,5 @@
 {
-  "name": "@fishprovider/framework-cache-first",
+  "name": "@fishprovider/framework-store",
   "version": "6.0.0",
   "type": "module",
   "main": "./dist/index.js",
@@ -18,8 +18,9 @@
   },
   "dependencies": {
     "@fishprovider/application-rules": "*",
-    "@fishprovider/enterprise-rules": "*",
-    "@fishprovider/framework-mongo": "*",
-    "@fishprovider/framework-redis": "*"
+    "@fishprovider/enterprise-rules": "*"
+  },
+  "devDependencies": {
+    "socket.io-client": "^4.7.1"
   }
 }

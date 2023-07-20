@@ -1,0 +1,23 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "baseUrl": ".",
+    "paths": {
+      "~controllers/*": ["./controllers/*"],
+      "~controllers": ["./controllers"],
+      "~helpers/*": ["./helpers/*"],
+      "~helpers": ["./helpers"],
+      "~types/*": ["./types/*"],
+      "~types": ["./types"],
+    },
+    "rootDir": ".",
+    "outDir": "dist"
+  },
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules", "dist"],
+  "references": [
+    { "path": "../../packages/enterprise-rules" },
+    { "path": "../../packages/application-rules" },
+  ],
+}
