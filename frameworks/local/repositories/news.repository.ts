@@ -15,8 +15,8 @@ async function setNews(params: SetNewsRepositoryParams) {
 
 async function getNews() {
   const { localGet } = await local.get();
-  const docs = await localGet<News[]>('news');
-  return docs;
+  const news = await localGet<News[]>('news');
+  return news;
 }
 
 export const LocalNewsRepository: NewsRepository = {

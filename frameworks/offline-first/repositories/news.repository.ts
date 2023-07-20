@@ -8,8 +8,8 @@ async function getNews(params: GetNewsRepositoryParams) {
     news = await FishApiNewsRepository.getNews(params);
   } else {
     // non-blocking
-    FishApiNewsRepository.getNews(params).then((docs) => {
-      LocalNewsRepository.setNews({ news: docs || [] });
+    FishApiNewsRepository.getNews(params).then((res) => {
+      LocalNewsRepository.setNews({ news: res || [] });
     });
   }
   return news;

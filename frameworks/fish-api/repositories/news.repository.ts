@@ -6,9 +6,9 @@ import { fishApi } from '../fishApi.framework';
 
 async function getNews(params: GetNewsRepositoryParams) {
   const { apiGet } = await fishApi.get();
-  const docs = await apiGet<News[]>('/news/getNews', params);
-  StoreNewsRepository.setNews({ news: docs });
-  return docs;
+  const news = await apiGet<News[]>('/news/getNews', params);
+  StoreNewsRepository.setNews({ news });
+  return news;
 }
 
 export const FishApiNewsRepository: NewsRepository = {
