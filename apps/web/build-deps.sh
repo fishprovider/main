@@ -1,5 +1,11 @@
 #!/bin/bash
 
-cd ../..
-npm run build -w packages/utils
-npm run build -w packages/cross
+cd ../../scripts
+
+function old() {
+  sh ./build-frontend-full.sh build-share
+}
+
+old &
+# sh ./build-frontend-clean-arc.sh &
+wait
