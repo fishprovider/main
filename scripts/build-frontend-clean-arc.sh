@@ -11,6 +11,7 @@ function adapters() {
 function frameworks() {
   npm run build -w frameworks/fish-api &
   npm run build -w frameworks/local &
+  npm run build -w frameworks/store &
   wait
 
   npm run build -w frameworks/offline-first
