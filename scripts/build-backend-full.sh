@@ -3,11 +3,11 @@
 MODE=$1
 
 if [ "$MODE" == "build-share" ]; then
-  sh ./build-share.sh
+  bash ./build-share.sh
 fi
 
-sh ./build-backend-share.sh
+bash ./build-backend-share.sh
 
-sh ./build-backend-trade.sh &
-sh ./build-backend-pay.sh &
+bash ./build-backend-trade.sh &
+bash ./build-backend-pay.sh &
 wait

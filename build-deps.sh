@@ -2,9 +2,9 @@
 
 cd scripts
 
-sh ./build-share.sh
+bash ./build-share.sh
 
-sh ./build-backend-clean-arc.sh &
-sh ./build-backend-full.sh &
-sh ./build-frontend-full.sh &
+bash ./build-backend-clean-arc.sh &
+bash ./build-backend-full.sh &
+bash ./build-frontend-full.sh &
 wait

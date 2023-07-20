@@ -3,9 +3,9 @@
 cd ../../scripts
 
 function old() {
-  sh ./build-frontend-full.sh build-share
+  bash ./build-frontend-full.sh build-share
 }
 
 old &
-sh ./build-frontend-clean-arc.sh &
+bash ./build-frontend-clean-arc.sh &
 wait

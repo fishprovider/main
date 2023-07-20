@@ -3,7 +3,7 @@
 MODE=$1
 
 if [ "$MODE" == "build-share" ]; then
-  sh ./build-share.sh
+  bash ./build-share.sh
 fi
 
-sh ./build-frontend-share.sh
+bash ./build-frontend-share.sh

@@ -2,4 +2,4 @@
 
 cd ../../scripts
 
-sh ./build-backend-pay.sh build-backend-share
+bash ./build-backend-pay.sh build-backend-share

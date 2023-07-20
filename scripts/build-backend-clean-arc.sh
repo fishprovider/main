@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sh ./build-clean-arc-share.sh
+bash ./build-clean-arc-share.sh
 
 cd ..
 
