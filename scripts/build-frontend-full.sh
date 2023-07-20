@@ -2,7 +2,7 @@
 
 MODE=$1
 
-if [ "$MODE" == "build-share" ]; then
+if [ "$MODE" = "build-share" ]; then
   bash ./build-share.sh
 fi
 
