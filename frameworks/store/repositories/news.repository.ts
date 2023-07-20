@@ -1,4 +1,4 @@
-import type { NewsRepository, SetNewsRepositoryParams, UseNewsRepositoryParams } from '@fishprovider/application-rules';
+import type { GetNewsRepositoryParams, NewsRepository, SetNewsRepositoryParams } from '@fishprovider/application-rules';
 
 import { storeNews } from '~stores';
 
@@ -7,16 +7,15 @@ async function setNews(params: SetNewsRepositoryParams) {
   return true;
 }
 
-async function getNews() {
+async function getNews<T>(params: GetNewsRepositoryParams<T>) {
+  const { selector } = params;
+  if (selector) {
+    return storeNews.useStore<T>(selector);
+  }
   return Object.values(storeNews.getState());
-}
-
-function useNews<T>(params: UseNewsRepositoryParams<T>) {
-  return storeNews.useStore((state) => params.query(state));
 }
 
 export const StoreNewsRepository: NewsRepository = {
   setNews,
   getNews,
-  useNews,
 };
