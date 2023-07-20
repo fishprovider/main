@@ -4,7 +4,7 @@ export interface GetNewsRepositoryParams<T = any> {
   today?: boolean,
   week?: string,
   upcoming?: boolean,
-  selector: (input: Record<string, News>) => T,
+  selector?: (input: Record<string, News>) => T,
 }
 
 export interface SetNewsRepositoryParams {
