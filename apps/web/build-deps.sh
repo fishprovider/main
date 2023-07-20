@@ -7,5 +7,5 @@ function old() {
 }
 
 old &
-# sh ./build-frontend-clean-arc.sh &
+sh ./build-frontend-clean-arc.sh &
 wait

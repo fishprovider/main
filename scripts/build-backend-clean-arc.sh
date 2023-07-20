@@ -1,10 +1,11 @@
 #!/bin/bash
 
+sh ./build-clean-arc-share.sh
+
 cd ..
 
 function adapters() {
-  npm run build -w adapters/backend &
-  # npm run build -w adapters/frontend &
+  npm run build -w adapters/backend
   wait
 }
 
@@ -15,9 +16,6 @@ function frameworks() {
 
   npm run build -w frameworks/cache-first
 }
-
-npm run build -w packages/enterprise-rules
-npm run build -w packages/application-rules
 
 adapters &
 frameworks &
