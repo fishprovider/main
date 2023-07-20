@@ -3,8 +3,7 @@
 cd ../../scripts
 
 function old() {
-  sh ./build-share.sh
-  sh ./build-backend-full.sh
+  sh ./build-backend-full.sh build-share
 }
 
 old &

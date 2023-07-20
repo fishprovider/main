@@ -6,5 +6,5 @@ sh ./build-share.sh
 
 sh ./build-backend-full.sh &
 sh ./build-backend-clean-arc.sh &
-sh ./build-frontend.sh &
+sh ./build-frontend-share.sh &
 wait

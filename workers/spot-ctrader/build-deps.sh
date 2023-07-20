@@ -2,5 +2,5 @@
 
 cd ../../scripts
 
-sh ./build-share.sh
-sh ./build-backend-trade.sh
+sh ./build-backend-trade.sh build-backend-share
+

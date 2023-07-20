@@ -1,14 +1,13 @@
 #!/bin/bash
 
-cd ..
+MODE=$1
 
-npm run build -w packages/core
+if [ "$MODE" == "build-share" ]; then
+  sh ./build-share.sh
+fi
 
-npm run build -w packages/ctrader &
-npm run build -w packages/metatrader &
-# npm run build -w packages/binance &
-wait
+sh ./build-backend-share.sh
 
-npm run build -w packages/swap &
-npm run build -w packages/coin &
+sh ./build-backend-trade.sh &
+sh ./build-backend-pay.sh &
 wait
