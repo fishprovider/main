@@ -10,7 +10,7 @@
     "dev": "NODE_ENV=development expo start --dev-client",
     "native-android": "expo run:android",
     "native-ios": "expo run:ios",
-    "eas-build-post-install": "./build-packages.sh"
+    "eas-build-post-install": "./build-deps.sh"
   },
   "dependencies": {
     "@fishprovider/cross": "*",
