@@ -12,6 +12,9 @@ import Switch from '~ui/core/Switch';
 import Table from '~ui/core/Table';
 import Title from '~ui/core/Title';
 
+// fishApiGetNews = getNewsController(getNewsUseCase(OfflineFirstNewsRepository));
+// storeGetNews = getNewsController(getNewsUseCase(StoreNewsRepository));
+
 function NewsList() {
   const [type, setType] = useState('today'); // today, this, next
   const [showAll, setShowAll] = useState(false);
@@ -22,9 +25,11 @@ function NewsList() {
         && moment(item.datetime) <= moment().add(1, 'day'))
       : _.filter(state, (item) => item.week === type)
   ));
+  // store(...)
 
   useEffect(() => {
     newsGetMany(type === 'next' ? { week: 'next' } : { week: 'this' });
+    // fishApi(type === 'next' ? { week: 'next' } : { week: 'this' })
   }, [type]);
 
   const allRows = _.sortBy(

@@ -1,4 +1,4 @@
-import type { NewsRepository } from '@fishprovider/application-rules';
+import { DefaultNewsRepository, type NewsRepository } from '@fishprovider/application-rules';
 import type { News } from '@fishprovider/enterprise-rules';
 
 import { local } from '../local.framework';
@@ -10,5 +10,6 @@ async function getNews() {
 }
 
 export const LocalNewsRepository: NewsRepository = {
+  ...DefaultNewsRepository,
   getNews,
 };

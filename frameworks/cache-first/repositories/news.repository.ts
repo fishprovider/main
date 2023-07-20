@@ -1,4 +1,4 @@
-import type { GetNewsRepositoryParams, NewsRepository } from '@fishprovider/application-rules';
+import { DefaultNewsRepository, type GetNewsRepositoryParams, type NewsRepository } from '@fishprovider/application-rules';
 import { MongoNewsRepository } from '@fishprovider/framework-mongo';
 import { RedisNewsRepository } from '@fishprovider/framework-redis';
 
@@ -11,5 +11,6 @@ async function getNews(params: GetNewsRepositoryParams) {
 }
 
 export const CacheFirstNewsRepository: NewsRepository = {
+  ...DefaultNewsRepository,
   getNews,
 };

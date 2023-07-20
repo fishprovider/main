@@ -1,4 +1,4 @@
-import type { GetNewsRepositoryParams, NewsRepository } from '@fishprovider/application-rules';
+import { DefaultNewsRepository, type GetNewsRepositoryParams, type NewsRepository } from '@fishprovider/application-rules';
 import { FishApiNewsRepository } from '@fishprovider/framework-fish-api';
 import { LocalNewsRepository } from '@fishprovider/framework-local';
 
@@ -16,5 +16,6 @@ async function getNews(params: GetNewsRepositoryParams) {
 }
 
 export const OfflineFirstNewsRepository: NewsRepository = {
+  ...DefaultNewsRepository,
   getNews,
 };

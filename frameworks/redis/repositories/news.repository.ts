@@ -1,4 +1,4 @@
-import type { GetNewsRepositoryParams, NewsRepository } from '@fishprovider/application-rules';
+import { DefaultNewsRepository, type GetNewsRepositoryParams, type NewsRepository } from '@fishprovider/application-rules';
 
 async function getNews(params: GetNewsRepositoryParams) {
   console.log('TODO', params);
@@ -6,5 +6,6 @@ async function getNews(params: GetNewsRepositoryParams) {
 }
 
 export const RedisNewsRepository: NewsRepository = {
+  ...DefaultNewsRepository,
   getNews,
 };
