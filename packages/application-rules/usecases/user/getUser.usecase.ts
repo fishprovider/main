@@ -1,9 +1,33 @@
 import type { User } from '@fishprovider/enterprise-rules';
+import _ from 'lodash';
 
-import type { UserRepository } from './user.repository';
+import type { Projection } from '~types';
 
-export interface GetUserUseCaseParams {
-  userId: string,
+import type { GetUserRepositoryParams, UserRepository } from './_user.repository';
+
+const getUserAllowReadFields: Array<keyof User> = [
+  'email',
+  'name',
+  'picture',
+  'starProviders',
+  'roles',
+
+  'telegram',
+
+  'updatedAt',
+  'createdAt',
+];
+
+const getUserAllowReadFieldsProjection = getUserAllowReadFields.reduce<Projection<User>>(
+  (acc, field) => {
+    acc[field] = 1;
+    return acc;
+  },
+  {},
+);
+
+export interface GetUserUseCaseParams extends GetUserRepositoryParams {
+  isInternal?: boolean;
 }
 
 export type GetUserUseCase = (params: GetUserUseCaseParams) => Promise<User>;
@@ -13,22 +37,15 @@ export const getUserUseCase = (
 ): GetUserUseCase => async (
   params: GetUserUseCaseParams,
 ) => {
-  const { userId } = params;
-  const user = await userRepository.getUser({
-    userId,
+  const { isInternal, projection } = params;
+  const repositoryParams = isInternal ? params : {
+    ...params,
     projection: {
-      email: 1,
-      name: 1,
-      picture: 1,
-
-      roles: 1,
-      starProviders: 1,
-
-      telegram: 1,
-
-      updatedAt: 1,
-      createdAt: 1,
+      ...getUserAllowReadFieldsProjection,
+      ..._.pick(projection, getUserAllowReadFields),
     },
-  });
+  };
+
+  const user = await userRepository.getUser(repositoryParams);
   return user;
 };

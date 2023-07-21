@@ -9,8 +9,8 @@ export interface GetNewsRepositoryParams {
 }
 
 export interface SetNewsRepositoryParams {
-  keys?: string[],
   news: News[],
+  key?: string,
 }
 
 export interface WatchNewsRepositoryParams<T> {
@@ -33,4 +33,9 @@ export const DefaultNewsRepository: NewsRepository = {
   watchNews: () => {
     throw new Error(RepositoryError.NOT_IMPLEMENTED);
   },
+};
+
+export const buildSetNewsKeys = (params: GetNewsRepositoryParams) => {
+  const keys = Object.entries(params).map(([key, value]) => `${key}-${value}`);
+  return `news-${keys?.join('-')}`;
 };

@@ -1,20 +1,16 @@
 import type { User } from '@fishprovider/enterprise-rules';
 import _ from 'lodash';
 
-import type { UserRepository } from './user.repository';
+import type { UpdateUserRepositoryParams, UserRepository } from './_user.repository';
 
-export const updateUserAllowEditFields: Array<keyof User> = [
+const updateUserAllowUpdateFields: Array<keyof User> = [
   'name',
   'picture',
   'starProviders',
 ];
-export type UpdateUserAllowEditFields = typeof updateUserAllowEditFields[number];
 
-export type UpdateUserUseCasePayload = Partial<Pick<User, UpdateUserAllowEditFields>>;
-
-export interface UpdateUserUseCaseParams {
-  userId: string,
-  payload: UpdateUserUseCasePayload,
+export interface UpdateUserUseCaseParams extends UpdateUserRepositoryParams {
+  isInternal?: boolean;
 }
 
 export type UpdateUserUseCase = (params: UpdateUserUseCaseParams) => Promise<boolean>;
@@ -24,10 +20,13 @@ export const updateUserUseCase = (
 ): UpdateUserUseCase => async (
   params: UpdateUserUseCaseParams,
 ) => {
-  const { userId, payload } = params;
-  const res = await userRepository.updateUser({
-    userId,
-    payload: _.pick(payload, updateUserAllowEditFields),
-  });
+  const { isInternal, payload, payloadDelete } = params;
+  const repositoryParams = isInternal ? params : {
+    ...params,
+    payload: _.pick(payload, updateUserAllowUpdateFields),
+    payloadDelete: _.pick(payloadDelete, updateUserAllowUpdateFields),
+  };
+
+  const res = await userRepository.updateUser(repositoryParams);
   return res;
 };

@@ -1,6 +1,6 @@
 import type { News } from '@fishprovider/enterprise-rules';
 
-import type { GetNewsRepositoryParams, NewsRepository } from './news.repository';
+import type { GetNewsRepositoryParams, NewsRepository } from './_news.repository';
 
 export type GetNewsUseCaseParams = GetNewsRepositoryParams;
 

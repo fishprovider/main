@@ -1,4 +1,4 @@
-import type { NewsRepository, WatchNewsRepositoryParams } from './news.repository';
+import type { NewsRepository, WatchNewsRepositoryParams } from './_news.repository';
 
 export type WatchNewsUseCaseParams<T> = WatchNewsRepositoryParams<T>;
 

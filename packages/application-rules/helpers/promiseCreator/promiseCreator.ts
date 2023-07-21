@@ -3,7 +3,7 @@ export interface PromiseCreator<T> extends Promise<T> {
   rejectExec : ((reason?: any) => void);
 }
 
-export function promiseCreator<T>() {
+export const promiseCreator = <T>() => {
   let resolveExec: ((val?: T) => void) = () => undefined;
   let rejectExec : ((reason?: any) => void) = () => undefined;
 
@@ -17,4 +17,4 @@ export function promiseCreator<T>() {
     { resolveExec, rejectExec },
   );
   return newPromise;
-}
+};

@@ -8,8 +8,10 @@ export interface GetUserRepositoryParams {
 }
 
 export interface UpdateUserRepositoryParams {
-  userId: string,
-  payload: Partial<Omit<User, '_id'>>,
+  userId?: string,
+  email?: string,
+  payload?: Record<string, any>,
+  payloadDelete?: Record<string, any>,
 }
 
 export interface UserRepository {
