@@ -15,6 +15,6 @@ export interface UpdateUserRepositoryParams {
 }
 
 export interface UserRepository {
-  getUser: (params: GetUserRepositoryParams) => Promise<User>;
+  getUser: (params: GetUserRepositoryParams) => Promise<User | undefined>;
   updateUser: (params: UpdateUserRepositoryParams) => Promise<boolean>;
 }

@@ -1,4 +1,4 @@
-import type { User } from '@fishprovider/enterprise-rules';
+import { type User, UserError } from '@fishprovider/enterprise-rules';
 import _ from 'lodash';
 
 import type { Projection } from '~types';
@@ -47,5 +47,8 @@ export const getUserUseCase = (
   };
 
   const user = await userRepository.getUser(repositoryParams);
+  if (!user) {
+    throw new Error(UserError.USER_NOT_FOUND);
+  }
   return user;
 };
