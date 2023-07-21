@@ -1,7 +1,6 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "composite": true,
     "baseUrl": ".",
     "paths": {
       "~*": ["./*"]
@@ -11,8 +10,4 @@
   },
   "include": ["**/*.ts"],
   "exclude": ["node_modules", "dist"],
-  "references": [
-    { "path": "../../packages/utils" },
-    { "path": "../../packages/core" }
-  ]
 }

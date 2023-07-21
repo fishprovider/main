@@ -1,7 +1,6 @@
 {
   "extends": "../../tsconfig.frontend.json",
   "compilerOptions": {
-    "composite": true,
     "baseUrl": ".",
     "paths": {
       "~*": ["./*"]
@@ -11,7 +10,4 @@
   },
   "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules", "dist"],
-  "references": [
-    { "path": "../../packages/utils" }
-  ]
 }

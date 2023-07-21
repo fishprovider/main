@@ -44,7 +44,6 @@
     {
       "extends": "@tsconfig/react-native/tsconfig.json",
       "compilerOptions": {
-        "composite": true,
         "exactOptionalPropertyTypes": false,
         "noPropertyAccessFromIndexSignature": false,
         "baseUrl": ".",
@@ -56,10 +55,6 @@
       },
       "include": ["**/*.ts", "**/*.tsx", "index.js", "*.config.js"],
       "exclude": ["node_modules"],
-      "references": [
-        { "path": "../../packages/utils" },
-        { "path": "../../packages/cross" }
-      ]
     }
     ```
 

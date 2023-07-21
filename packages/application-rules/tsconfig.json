@@ -1,7 +1,6 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "composite": true,
     "baseUrl": ".",
     "paths": {
       "~helpers/*": ["./helpers/*"],
@@ -16,7 +15,4 @@
   },
   "include": ["**/*.ts"],
   "exclude": ["node_modules", "dist"],
-  "references": [
-    { "path": "../../packages/enterprise-rules" },
-  ],
 }
