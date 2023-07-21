@@ -1,5 +1,5 @@
-import { getNewsController } from '@fishprovider/adapter-backend';
-import { getNewsUseCase } from '@fishprovider/application-rules';
+import { getNewsController, watchNewsController } from '@fishprovider/adapter-frontend';
+import { getNewsUseCase, watchNewsUseCase } from '@fishprovider/application-rules';
 import newsGetMany from '@fishprovider/cross/dist/api/news/getNews';
 import storeNews from '@fishprovider/cross/dist/stores/news';
 import { OfflineFirstNewsRepository } from '@fishprovider/framework-offline-first';
@@ -16,10 +16,8 @@ import Switch from '~ui/core/Switch';
 import Table from '~ui/core/Table';
 import Title from '~ui/core/Title';
 
-const getNewsV2 = getNewsController(getNewsUseCase(OfflineFirstNewsRepository));
-const storeNewsV2 = getNewsController(getNewsUseCase(StoreNewsRepository));
-console.log('getNewsV2', getNewsV2);
-console.log('storeNewsV2', storeNewsV2);
+const getNews = getNewsController(getNewsUseCase(OfflineFirstNewsRepository));
+const watchNews = watchNewsController(watchNewsUseCase(StoreNewsRepository));
 
 function NewsList() {
   const [type, setType] = useState('today'); // today, this, next
@@ -31,11 +29,24 @@ function NewsList() {
         && moment(item.datetime) <= moment().add(1, 'day'))
       : _.filter(state, (item) => item.week === type)
   ));
-  // store(...)
+  const newsV2 = watchNews({
+    payload: {
+      selector: (state) => (type === 'today'
+        ? _.filter(state, (item) => moment(item.datetime) >= moment()
+          && moment(item.datetime) <= moment().add(1, 'day'))
+        : _.filter(state, (item) => item.week === type)
+      ),
+    },
+  });
+  console.log('newsV2', newsV2);
 
   useEffect(() => {
     newsGetMany(type === 'next' ? { week: 'next' } : { week: 'this' });
-    // fishApi(type === 'next' ? { week: 'next' } : { week: 'this' })
+    getNews({
+      payload: {
+        week: type === 'next' ? 'next' : 'this',
+      },
+    });
   }, [type]);
 
   const allRows = _.sortBy(
