@@ -1,7 +1,8 @@
 import type {
   GetUserRepositoryParams, UpdateUserRepositoryParams, UserRepository,
 } from '@fishprovider/application-rules';
-import { type User, UserError } from '@fishprovider/enterprise-rules';
+import type { User } from '@fishprovider/enterprise-rules';
+import assert from 'assert';
 
 import { mongo } from '../mongo.framework';
 
@@ -13,19 +14,27 @@ async function getUser(params: GetUserRepositoryParams) {
   }, {
     projection,
   });
-  if (!user) {
-    throw new Error(UserError.USER_NOT_FOUND);
-  }
   return user;
 }
 
 async function updateUser(params: UpdateUserRepositoryParams) {
-  const { userId, payload } = params;
+  const {
+    userId, email, payload, payloadDelete,
+  } = params;
+  assert(userId || email);
+  assert(payload || payloadDelete);
+
   const { db } = await mongo.get();
   await db.collection<User>('news').updateOne({
-    _id: userId,
+    ...(userId && { _id: userId }),
+    ...(email && { email }),
   }, {
-    $set: payload,
+    ...(payload && {
+      $set: payload,
+    }),
+    ...(payloadDelete && {
+      $unset: payloadDelete,
+    }),
   });
   return true;
 }

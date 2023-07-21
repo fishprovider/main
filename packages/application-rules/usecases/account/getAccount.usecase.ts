@@ -1,5 +1,5 @@
 import {
-  type Account, AccountError, ProviderViewType, type User,
+  type Account, AccountError, AccountViewType, type User,
 } from '@fishprovider/enterprise-rules';
 
 import { getRoleProvider } from '~helpers/user';
@@ -14,13 +14,13 @@ export interface GetAccountUseCaseParams extends GetAccountRepositoryParams {
 export type GetAccountUseCase = (params: GetAccountUseCaseParams) => Promise<Account>;
 
 export const getAccountUseCase = (
-  AccountRepository: AccountRepository,
+  accountRepository: AccountRepository,
 ): GetAccountUseCase => async (
   params: GetAccountUseCaseParams,
 ) => {
   const { user, isInternal } = params;
 
-  const account = await AccountRepository.getAccount(params);
+  const account = await accountRepository.getAccount(params);
   if (!account) {
     throw new Error(AccountError.ACCOUNT_NOT_FOUND);
   }
@@ -42,7 +42,7 @@ export const getAccountUseCase = (
   const checkAccess = () => {
     if (isManagerWeb) return true;
     if (deleted) return false;
-    if (providerViewType === ProviderViewType.public) return true;
+    if (providerViewType === AccountViewType.public) return true;
     if (user?._id) {
       if (userId === user._id) return true;
       if (members?.some((item) => item.userId === user._id)) return true;
