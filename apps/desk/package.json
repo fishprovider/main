@@ -23,7 +23,14 @@
     "dev": "cross-env NODE_ENV=development node scripts/watch.js"
   },
   "dependencies": {
+    "@fishprovider/adapter-frontend": "*",
+    "@fishprovider/application-rules": "*",
     "@fishprovider/cross": "*",
+    "@fishprovider/enterprise-rules": "*",
+    "@fishprovider/framework-fish-api": "*",
+    "@fishprovider/framework-local": "*",
+    "@fishprovider/framework-offline-first": "*",
+    "@fishprovider/framework-store": "*",
     "electron-updater": "6.1.1"
   },
   "devDependencies": {
