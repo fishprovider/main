@@ -1,10 +1,10 @@
 import { DefaultNewsRepository, type GetNewsRepositoryParams, type NewsRepository } from '@fishprovider/application-rules';
 import { FishApiNewsRepository } from '@fishprovider/framework-fish-api';
-import { LocalNewsRepository } from '@fishprovider/framework-local';
+import { buildSetNewsKeys, LocalNewsRepository } from '@fishprovider/framework-local';
 
 async function getNews(params: GetNewsRepositoryParams) {
   let news = await LocalNewsRepository.getNews(params);
-  const keys = Object.entries(params).map(([key, value]) => `${key}-${value}`);
+  const keys = buildSetNewsKeys(params);
   if (!news) {
     news = await FishApiNewsRepository.getNews(params);
     // non-blocking
