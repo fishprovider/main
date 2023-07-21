@@ -13,7 +13,14 @@
     "eas-build-post-install": "./build-deps.sh"
   },
   "dependencies": {
+    "@fishprovider/adapter-frontend": "*",
+    "@fishprovider/application-rules": "*",
     "@fishprovider/cross": "*",
+    "@fishprovider/enterprise-rules": "*",
+    "@fishprovider/framework-fish-api": "*",
+    "@fishprovider/framework-local": "*",
+    "@fishprovider/framework-offline-first": "*",
+    "@fishprovider/framework-store": "*",
     "@fishprovider/utils": "*",
     "@react-native-firebase/app": "^18.1.0",
     "@react-native-firebase/auth": "^18.1.0",
