@@ -1,4 +1,9 @@
-import type { UserRoles } from '~entities/user';
+export enum AccountRoles {
+  admin = 'admin',
+  protector = 'protector',
+  trader = 'trader',
+  viewer = 'viewer',
+}
 
 export enum ProviderType {
   icmarkets = 'icmarkets',
@@ -87,7 +92,7 @@ export interface Investor {
 export interface Member {
   userId: string;
   email: string;
-  role: UserRoles;
+  role: AccountRoles;
   name: string;
 
   picture?: string;
@@ -99,7 +104,7 @@ export interface Member {
 
 export interface MemberInvite {
   email: string;
-  role: UserRoles;
+  role: AccountRoles;
   createdAt: Date;
 }
 
