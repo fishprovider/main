@@ -33,9 +33,7 @@ function NewsList() {
 
   useEffect(() => {
     getNews({
-      payload: {
-        week: type === 'next' ? 'next' : 'this',
-      },
+      week: type === 'next' ? 'next' : 'this',
     });
   }, [type]);
 

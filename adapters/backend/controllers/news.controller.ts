@@ -25,6 +25,6 @@ export const getNewsController = (
     .refine((item) => item.today || item.week || item.upcoming)
     .parse(finalData);
 
-  const news = await getNewsUseCase({ payload });
+  const news = await getNewsUseCase(payload);
   return news;
 };

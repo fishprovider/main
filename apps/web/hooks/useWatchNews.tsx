@@ -16,9 +16,7 @@ const storeGetNews = getNewsController(getNewsUseCase(StoreNewsRepository));
 export default function useWatchNews() {
   const getBigNews = async () => {
     const news = await getNews({
-      payload: {
-        upcoming: true,
-      },
+      upcoming: true,
     });
     if (news.length) {
       storeUser.mergeState({
@@ -29,9 +27,7 @@ export default function useWatchNews() {
       });
     }
 
-    const allNews = await storeGetNews({
-      payload: {},
-    });
+    const allNews = await storeGetNews({});
     const hasBigNews = _.some(
       allNews,
       ({ impact, datetime }) => ['high', 'medium'].includes(impact)
