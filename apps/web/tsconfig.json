@@ -1,7 +1,6 @@
 {
   "extends": "../../tsconfig.frontend.json",
   "compilerOptions": {
-    "composite": true,
     "baseUrl": ".",
     "paths": {
       "~*": ["./*"]
@@ -10,9 +9,5 @@
     "outDir": "dist"
   },
   "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "next-env.d.ts", ".eslintrc.js"],
-  "exclude": ["node_modules", ".next"],
-  "references": [
-    { "path": "../../packages/utils" },
-    { "path": "../../packages/cross" }
-  ]
+  "exclude": ["node_modules", ".next"]
 }
