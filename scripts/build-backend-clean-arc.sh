@@ -1,6 +1,8 @@
 #!/bin/bash
 
-bash ./build-clean-arc-share.sh
+if [ "$MODE" = "build-share" ]; then
+  bash ./build-clean-arc-share.sh
+fi
 
 cd ..
 
