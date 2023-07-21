@@ -1,3 +1,24 @@
+export enum AccountType {
+  icmarkets = 'icmarkets',
+  exness = 'exness',
+}
+
+export enum AccountPlatform {
+  ctrader = 'ctrader',
+  metatrader = 'metatrader',
+  fishct = 'fishct',
+}
+
+export enum AccountTradeType {
+  demo = 'demo',
+  live = 'live',
+}
+
+export enum AccountViewType {
+  private = 'private',
+  public = 'public',
+}
+
 export enum AccountRoles {
   admin = 'admin',
   protector = 'protector',
@@ -5,33 +26,12 @@ export enum AccountRoles {
   viewer = 'viewer',
 }
 
-export enum ProviderType {
-  icmarkets = 'icmarkets',
-  exness = 'exness',
-}
-
-export enum ProviderPlatform {
-  ctrader = 'ctrader',
-  metatrader = 'metatrader',
-  fishct = 'fishct',
-}
-
-export enum ProviderTradeType {
-  demo = 'demo',
-  live = 'live',
-}
-
-export enum ProviderViewType {
-  private = 'private',
-  public = 'public',
-}
-
 export enum AccountSourceType {
   admin = 'admin',
   user = 'user',
 }
 
-export enum PlanType {
+export enum AccountPlanType {
   pairs = 'pairs',
 
   maxLotTotal = 'maxLotTotal',
@@ -56,22 +56,22 @@ export enum PlanType {
   profitOffset = 'profitOffset',
 }
 
-export enum CopyVolumeMode {
+export enum AccountCopyVolumeMode {
   auto = 'auto',
   fixedRatio = 'fixedRatio',
   fixedLot = 'fixedLot',
   autoWithRatio = 'autoWithRatio',
 }
 
-export enum LockType {
+export enum AccountLockType {
   open = 'open',
   update = 'update',
   close = 'close',
   pairs = 'pairs',
 }
 
-export interface Lock {
-  type: LockType;
+export interface AccountLock {
+  type: AccountLockType;
   value?: any;
   lockFrom: Date,
   lockUntil: Date,
@@ -80,7 +80,7 @@ export interface Lock {
   lockByUserName: string;
 }
 
-export interface Investor {
+export interface AccountInvestor {
   name: string;
   picture?: string;
 
@@ -89,31 +89,31 @@ export interface Investor {
   createdAt: Date;
 }
 
-export interface Member {
+export interface AccountMember {
   userId: string;
   email: string;
   role: AccountRoles;
   name: string;
 
   picture?: string;
-  locks?: Lock[];
+  locks?: AccountLock[];
 
   updatedAt?: Date;
   createdAt?: Date;
 }
 
-export interface MemberInvite {
+export interface AccountMemberInvite {
   email: string;
   role: AccountRoles;
   createdAt: Date;
 }
 
-export interface Plan {
-  type: PlanType,
+export interface AccountPlan {
+  type: AccountPlanType,
   value: any;
 }
 
-export type Config = {
+export type AccountConfig = {
   // common
   clientId: string;
   clientSecret: string;
@@ -134,18 +134,18 @@ export type Config = {
   server?: string;
 };
 
-export interface BannerStatus {
+export interface AccountBannerStatus {
   enabled: boolean;
   notes?: string;
   bgColor?: string;
 }
 
-export interface CopySettings {
+export interface AccountCopySettings {
   enableCopy?: boolean,
   enableCopyOrderClose?: boolean,
   enableCopyOrderSLTP?: boolean,
 
-  copyVolumeMode?: CopyVolumeMode,
+  copyVolumeMode?: AccountCopyVolumeMode,
   copyVolumeRatioFixed?: number, // fixedRatio
   copyVolumeLotFixed?: number, // fixedLot
   copyVolumeRatioAuto?: number, // autoWithRatio
@@ -156,7 +156,7 @@ export interface CopySettings {
   equitySLRatio?: number,
 }
 
-export interface TradeSettings {
+export interface AccountTradeSettings {
   enabledCloseProfit?: boolean,
   takeProfit?: number,
   stopLoss?: number,
@@ -170,19 +170,19 @@ export interface TradeSettings {
   closeTimeIfProfit?: boolean,
 }
 
-export interface ProtectSettings {
+export interface AccountProtectSettings {
   enabledEquityLock?: boolean,
   equityLock?: number,
   equityLockHours?: number,
 }
 
-export interface Settings {
+export interface AccountSettings {
   enableCopyParent?: boolean,
-  parents?: Record<string, CopySettings>,
+  parents?: Record<string, AccountCopySettings>,
   copyVolumeRatio?: number, // auto
 }
 
-export interface Activity {
+export interface AccountActivity {
   lastView: Date;
 }
 
@@ -194,14 +194,14 @@ export interface AccountPublic {
   _id: string;
   name: string;
 
-  providerType: ProviderType;
-  providerPlatform: ProviderPlatform;
+  providerType: AccountType;
+  providerPlatform: AccountPlatform;
   providerPlatformType?: string;
   providerPlatformAccountId?: string;
 
   providerGroupId?: string;
-  providerViewType?: ProviderViewType;
-  providerTradeType?: ProviderTradeType;
+  providerViewType?: AccountViewType;
+  providerTradeType?: AccountTradeType;
 
   asset?: string;
   assetId?: string;
@@ -227,7 +227,7 @@ export interface AccountPublic {
 
   strategyId?: string;
   strategyLinks?: {
-    type: ProviderType;
+    type: AccountType;
     url: string;
   }[];
   strategyCommission?: number;
@@ -237,24 +237,24 @@ export interface AccountPublic {
   rank?: string;
   order?: number;
 
-  investors?: Investor[];
-  members?: Member[];
-  memberInvites?: MemberInvite[];
+  investors?: AccountInvestor[];
+  members?: AccountMember[];
+  memberInvites?: AccountMemberInvite[];
 
-  tradeSettings?: TradeSettings;
-  protectSettings?: ProtectSettings;
-  settings?: Settings;
+  tradeSettings?: AccountTradeSettings;
+  protectSettings?: AccountProtectSettings;
+  settings?: AccountSettings;
 
-  plan?: Plan[];
+  plan?: AccountPlan[];
   planUpdatedAt?: Date;
-  locks?: Lock[];
+  locks?: AccountLock[];
   activeLevelTarget?: number,
 
   notes?: string;
   privateNotes?: string;
-  bannerStatus?: BannerStatus;
+  bannerStatus?: AccountBannerStatus;
 
-  activities?: Record<string, Activity>;
+  activities?: Record<string, AccountActivity>;
   stats?: AccountStats;
 
   providerData?: Record<string, any>; // external
@@ -274,5 +274,5 @@ export interface AccountPublic {
 }
 
 export interface Account extends AccountPublic {
-  config: Config; // private
+  config: AccountConfig; // private
 }
