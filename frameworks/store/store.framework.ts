@@ -194,7 +194,7 @@ const start = async (params: {
   logDebug?: (...args: any[]) => void,
   logError?: (...args: any[]) => void
 }) => {
-  console.info('Started local.framework');
+  console.info('Started store.framework');
 
   if (params.logDebug) {
     logDebug = params.logDebug;
@@ -205,7 +205,7 @@ const start = async (params: {
 };
 
 const stop = async () => {
-  console.info('Stopped local.framework');
+  console.info('Stopped store.framework');
 };
 
 export const store = {
