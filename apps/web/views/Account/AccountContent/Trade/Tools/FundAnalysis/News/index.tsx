@@ -1,7 +1,5 @@
 import { getNewsController, watchNewsController } from '@fishprovider/adapter-frontend';
 import { getNewsUseCase, watchNewsUseCase } from '@fishprovider/application-rules';
-import newsGetMany from '@fishprovider/cross/dist/api/news/getNews';
-import storeNews from '@fishprovider/cross/dist/stores/news';
 import { OfflineFirstNewsRepository } from '@fishprovider/framework-offline-first';
 import { StoreNewsRepository } from '@fishprovider/framework-store';
 import type { News } from '@fishprovider/utils/dist/types/News.model';
@@ -23,13 +21,7 @@ function NewsList() {
   const [type, setType] = useState('today'); // today, this, next
   const [showAll, setShowAll] = useState(false);
 
-  const news = storeNews.useStore((state) => (
-    type === 'today'
-      ? _.filter(state, (item) => moment(item.datetime) >= moment()
-        && moment(item.datetime) <= moment().add(1, 'day'))
-      : _.filter(state, (item) => item.week === type)
-  ));
-  const newsV2 = watchNews({
+  const news = watchNews({
     payload: {
       selector: (state) => (type === 'today'
         ? _.filter(state, (item) => moment(item.datetime) >= moment()
@@ -38,10 +30,8 @@ function NewsList() {
       ),
     },
   });
-  console.log('newsV2', newsV2);
 
   useEffect(() => {
-    newsGetMany(type === 'next' ? { week: 'next' } : { week: 'this' });
     getNews({
       payload: {
         week: type === 'next' ? 'next' : 'this',
