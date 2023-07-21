@@ -8,8 +8,9 @@ import type { News } from '@fishprovider/enterprise-rules';
 import { local } from '../local.framework';
 
 async function setNews(params: SetNewsRepositoryParams) {
+  const { keys, news } = params;
   const { localSet } = await local.get();
-  await localSet('news', params.news);
+  await localSet(`news-${keys?.join('-')}`, news);
   return true;
 }
 

@@ -4,14 +4,15 @@ import { LocalNewsRepository } from '@fishprovider/framework-local';
 
 async function getNews(params: GetNewsRepositoryParams) {
   let news = await LocalNewsRepository.getNews(params);
+  const keys = Object.keys(params);
   if (!news) {
     news = await FishApiNewsRepository.getNews(params);
     // non-blocking
-    LocalNewsRepository.setNews({ news: news || [] });
+    LocalNewsRepository.setNews({ keys, news: news || [] });
   } else {
     // non-blocking
     FishApiNewsRepository.getNews(params).then((res) => {
-      LocalNewsRepository.setNews({ news: res || [] });
+      LocalNewsRepository.setNews({ keys, news: res || [] });
     });
   }
   return news;

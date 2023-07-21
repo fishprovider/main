@@ -9,6 +9,7 @@ export interface GetNewsRepositoryParams {
 }
 
 export interface SetNewsRepositoryParams {
+  keys?: string[],
   news: News[],
 }
 
