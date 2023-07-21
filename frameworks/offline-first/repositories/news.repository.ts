@@ -6,6 +6,8 @@ async function getNews(params: GetNewsRepositoryParams) {
   let news = await LocalNewsRepository.getNews(params);
   if (!news) {
     news = await FishApiNewsRepository.getNews(params);
+    // non-blocking
+    LocalNewsRepository.setNews({ news: news || [] });
   } else {
     // non-blocking
     FishApiNewsRepository.getNews(params).then((res) => {
