@@ -22,13 +22,11 @@ function NewsList() {
   const [showAll, setShowAll] = useState(false);
 
   const news = watchNews({
-    payload: {
-      selector: (state) => (type === 'today'
-        ? _.filter(state, (item) => moment(item.datetime) >= moment()
+    selector: (state) => (type === 'today'
+      ? _.filter(state, (item) => moment(item.datetime) >= moment()
           && moment(item.datetime) <= moment().add(1, 'day'))
-        : _.filter(state, (item) => item.week === type)
-      ),
-    },
+      : _.filter(state, (item) => item.week === type)
+    ),
   });
 
   useEffect(() => {

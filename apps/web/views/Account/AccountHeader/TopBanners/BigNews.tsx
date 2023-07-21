@@ -16,14 +16,12 @@ interface Props {
 
 function BigNews({ onClose }: Props) {
   const news = watchNews({
-    payload: {
-      selector: (state) => _.filter(
-        state,
-        ({ impact, datetime }) => ['high', 'medium'].includes(impact)
-          && moment(datetime) > moment().subtract(1, 'hour')
-          && moment(datetime) < moment().add(1, 'hour'),
-      ),
-    },
+    selector: (state) => _.filter(
+      state,
+      ({ impact, datetime }) => ['high', 'medium'].includes(impact)
+        && moment(datetime) > moment().subtract(1, 'hour')
+        && moment(datetime) < moment().add(1, 'hour'),
+    ),
   });
 
   const messages = news.map(
