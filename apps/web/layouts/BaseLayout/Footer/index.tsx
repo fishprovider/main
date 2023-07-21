@@ -10,6 +10,7 @@ import Contacts from './Contacts';
 import Links from './Links';
 import PushNotificationButton from './PushNotificationButton';
 import Reviews from './Reviews';
+import StoreApps from './StoreApps';
 import TimezoneSelector from './TimezoneSelector';
 
 function Footer() {
@@ -25,7 +26,10 @@ function Footer() {
           </Grid.Col>
         </Grid>
 
-        <Reviews />
+        <Group align="top" position="apart">
+          <StoreApps />
+          <Reviews />
+        </Group>
 
         <Group spacing="xl">
           {/* <LangSelector /> */}
