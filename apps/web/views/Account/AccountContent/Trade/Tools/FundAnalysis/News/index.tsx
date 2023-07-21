@@ -1,5 +1,9 @@
+import { getNewsController } from '@fishprovider/adapter-backend';
+import { getNewsUseCase } from '@fishprovider/application-rules';
 import newsGetMany from '@fishprovider/cross/dist/api/news/getNews';
 import storeNews from '@fishprovider/cross/dist/stores/news';
+import { OfflineFirstNewsRepository } from '@fishprovider/framework-offline-first';
+import { StoreNewsRepository } from '@fishprovider/framework-store';
 import type { News } from '@fishprovider/utils/dist/types/News.model';
 import _ from 'lodash';
 import moment from 'moment';
@@ -12,8 +16,10 @@ import Switch from '~ui/core/Switch';
 import Table from '~ui/core/Table';
 import Title from '~ui/core/Title';
 
-// fishApiGetNews = getNewsController(getNewsUseCase(OfflineFirstNewsRepository));
-// storeGetNews = getNewsController(getNewsUseCase(StoreNewsRepository));
+const getNewsV2 = getNewsController(getNewsUseCase(OfflineFirstNewsRepository));
+const storeNewsV2 = getNewsController(getNewsUseCase(StoreNewsRepository));
+console.log('getNewsV2', getNewsV2);
+console.log('storeNewsV2', storeNewsV2);
 
 function NewsList() {
   const [type, setType] = useState('today'); // today, this, next
