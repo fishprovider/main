@@ -1,5 +1,4 @@
-import type { Account } from '@fishprovider/utils/dist/types/Account.model';
-import type { User } from '@fishprovider/utils/dist/types/User.model';
+import type { Account, User } from '@fishprovider/enterprise-rules';
 import type { Socket } from 'socket.io-client';
 
 import { buildStore } from '../store.framework';

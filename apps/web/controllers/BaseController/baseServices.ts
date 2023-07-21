@@ -1,5 +1,7 @@
 import { initApi } from '@fishprovider/cross/dist/libs/api';
 import { initStore } from '@fishprovider/cross/dist/libs/store';
+import { offlineFirst } from '@fishprovider/framework-offline-first';
+import { store } from '@fishprovider/framework-store';
 import moment from 'moment-timezone';
 
 import { initAnalytics } from '~libs/analytics';
@@ -28,7 +30,18 @@ const initialize = () => {
     logError: Logger.info,
   });
 
+  offlineFirst.start({
+    baseURL: `${isLive ? env.backendUrl : env.demoBackendUrl}${env.api}/v2`,
+    logDebug: Logger.debug,
+    logError: Logger.info,
+  });
+
   initStore({
+    logDebug: Logger.debug,
+    logError: Logger.info,
+  });
+
+  store.start({
     logDebug: Logger.debug,
     logError: Logger.info,
   });

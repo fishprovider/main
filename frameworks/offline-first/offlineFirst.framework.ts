@@ -1,28 +1,32 @@
-import { mongo } from '@fishprovider/framework-mongo';
-import { redis } from '@fishprovider/framework-redis';
+import { fishApi } from '@fishprovider/framework-fish-api';
+import { local } from '@fishprovider/framework-local';
 
-const start = async () => {
+const start = async (params: {
+  baseURL?: string,
+  logDebug?: (...args: any[]) => void
+  logError?: (...args: any[]) => void
+}) => {
   await Promise.all([
-    redis.start(),
-    mongo.start(),
+    local.start(),
+    fishApi.start(params),
   ]);
-  console.info('Started cacheFirst.framework');
+  console.info('Started offlineFirst.framework');
 };
 
 const stop = async () => {
   await Promise.all([
-    mongo.stop(),
-    redis.stop(),
+    fishApi.stop(),
+    local.stop(),
   ]);
-  console.info('Stopped cacheFirst.framework');
+  console.info('Stopped offlineFirst.framework');
 };
 
 const get = async () => ({
-  redis: await redis.get(),
-  mongo: await mongo.get(),
+  local: await local.get(),
+  fishApi: await fishApi.get(),
 });
 
-export const cacheFirst = {
+export const offlineFirst = {
   start,
   stop,
   get,
