@@ -4,7 +4,7 @@ import { LocalNewsRepository } from '@fishprovider/framework-local';
 
 async function getNews(params: GetNewsRepositoryParams) {
   let news = await LocalNewsRepository.getNews(params);
-  const keys = Object.keys(params);
+  const keys = Object.entries(params).map(([key, value]) => `${key}-${value}`);
   if (!news) {
     news = await FishApiNewsRepository.getNews(params);
     // non-blocking
