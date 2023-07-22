@@ -18,9 +18,12 @@ export interface WatchNewsRepositoryParams<T> {
 }
 
 export interface NewsRepository {
-  getNews: (params: GetNewsRepositoryParams) => Promise<News[] | undefined>;
-  setNews: (params: SetNewsRepositoryParams) => Promise<boolean>;
-  watchNews: <T>(params: WatchNewsRepositoryParams<T>) => T;
+  getNews: (
+    params: GetNewsRepositoryParams) => Promise<News[] | null>;
+  setNews: (
+    params: SetNewsRepositoryParams) => Promise<boolean>;
+  watchNews: <T>(
+    params: WatchNewsRepositoryParams<T>) => T;
 }
 
 export const DefaultNewsRepository: NewsRepository = {

@@ -6,7 +6,7 @@ export type GetAccountExternalUseCaseParams = GetAccountExternalRepositoryParams
 
 export type GetAccountExternalUseCase = (
   params: GetAccountExternalUseCaseParams
-) => Promise<Partial<Account>>;
+) => Promise<Partial<Account> | null>;
 
 export const getAccountExternalUseCase = (
   accountRepository: AccountRepository,

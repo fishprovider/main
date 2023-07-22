@@ -15,17 +15,21 @@ export interface UpdateUserUseCaseParams extends UpdateUserRepositoryParams {
 
 export type UpdateUserUseCase = (
   params: UpdateUserUseCaseParams
-) => Promise<boolean>;
+) => Promise<Partial<User> | boolean>;
 
 export const updateUserUseCase = (
   userRepository: UserRepository,
 ): UpdateUserUseCase => async (
   params: UpdateUserUseCaseParams,
 ) => {
-  const { isInternal, payload } = params;
+  const {
+    isInternal, userId, payload, returnDoc,
+  } = params;
 
   const repositoryParams = isInternal ? params : {
+    userId,
     payload: _.pick(payload, updateUserAllowUpdateFields),
+    returnDoc,
   };
 
   const res = await userRepository.updateUser(repositoryParams);

@@ -2,7 +2,7 @@ import type {
   Account, AccountConfig, AccountPlatform, AccountType,
 } from '@fishprovider/enterprise-rules';
 
-import type { Projection } from '~types';
+import { type Projection, RepositoryError } from '~types';
 
 export interface GetAccountRepositoryParams {
   accountId: string,
@@ -22,10 +22,26 @@ export interface UpdateAccountRepositoryParams {
   payloadDelete?: Record<string, any>,
   payloadPush?: Record<string, any>,
   payloadPull?: Record<string, any>,
+  returnDoc?: boolean,
 }
 
 export interface AccountRepository {
-  getAccount: (params: GetAccountRepositoryParams) => Promise<Account | undefined>;
-  getAccountExternal: (params: GetAccountExternalRepositoryParams) => Promise<Partial<Account>>;
-  updateAccount: (params: UpdateAccountRepositoryParams) => Promise<boolean>;
+  getAccount: (
+    params: GetAccountRepositoryParams) => Promise<Partial<Account> | null>;
+  getAccountExternal: (
+    params: GetAccountExternalRepositoryParams) => Promise<Partial<Account> | null>;
+  updateAccount: (
+    params: UpdateAccountRepositoryParams) => Promise<Partial<Account> | boolean>;
 }
+
+export const DefaultAccountRepository: AccountRepository = {
+  getAccount: () => {
+    throw new Error(RepositoryError.NOT_IMPLEMENTED);
+  },
+  getAccountExternal: () => {
+    throw new Error(RepositoryError.NOT_IMPLEMENTED);
+  },
+  updateAccount: () => {
+    throw new Error(RepositoryError.NOT_IMPLEMENTED);
+  },
+};

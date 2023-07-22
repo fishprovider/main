@@ -13,17 +13,21 @@ export interface UpdateAccountUseCaseParams extends UpdateAccountRepositoryParam
 
 export type UpdateAccountUseCase = (
   params: UpdateAccountUseCaseParams
-) => Promise<boolean>;
+) => Promise<Partial<Account> | boolean>;
 
 export const updateAccountUseCase = (
   AccountRepository: AccountRepository,
 ): UpdateAccountUseCase => async (
   params: UpdateAccountUseCaseParams,
 ) => {
-  const { isInternal, payload } = params;
+  const {
+    isInternal, accountId, payload, returnDoc,
+  } = params;
 
   const repositoryParams = isInternal ? params : {
+    accountId,
     payload: _.pick(payload, updateAccountAllowUpdateFields),
+    returnDoc,
   };
 
   const res = await AccountRepository.updateAccount(repositoryParams);

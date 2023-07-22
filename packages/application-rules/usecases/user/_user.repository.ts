@@ -1,6 +1,6 @@
 import type { User } from '@fishprovider/enterprise-rules';
 
-import type { Projection } from '~types';
+import { type Projection, RepositoryError } from '~types';
 
 export interface GetUserRepositoryParams {
   userId: string,
@@ -12,9 +12,21 @@ export interface UpdateUserRepositoryParams {
   email?: string,
   payload?: Record<string, any>,
   payloadDelete?: Record<string, any>,
+  returnDoc?: boolean,
 }
 
 export interface UserRepository {
-  getUser: (params: GetUserRepositoryParams) => Promise<User | undefined>;
-  updateUser: (params: UpdateUserRepositoryParams) => Promise<boolean>;
+  getUser: (
+    params: GetUserRepositoryParams) => Promise<User | null>;
+  updateUser: (
+    params: UpdateUserRepositoryParams) => Promise<Partial<User> | boolean>;
 }
+
+export const DefaultUserRepository: UserRepository = {
+  getUser: () => {
+    throw new Error(RepositoryError.NOT_IMPLEMENTED);
+  },
+  updateUser: () => {
+    throw new Error(RepositoryError.NOT_IMPLEMENTED);
+  },
+};
