@@ -20,11 +20,10 @@ export const updateUserUseCase = (
 ): UpdateUserUseCase => async (
   params: UpdateUserUseCaseParams,
 ) => {
-  const { isInternal, payload, payloadDelete } = params;
+  const { isInternal, payload } = params;
+
   const repositoryParams = isInternal ? params : {
-    ...params,
     payload: _.pick(payload, updateUserAllowUpdateFields),
-    payloadDelete: _.pick(payloadDelete, updateUserAllowUpdateFields),
   };
 
   const res = await userRepository.updateUser(repositoryParams);

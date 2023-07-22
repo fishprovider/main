@@ -1,4 +1,5 @@
 import { type User, UserError } from '@fishprovider/enterprise-rules';
+import assert from 'assert';
 import _ from 'lodash';
 
 import type { Projection } from '~types';
@@ -38,6 +39,8 @@ export const getUserUseCase = (
   params: GetUserUseCaseParams,
 ) => {
   const { isInternal, projection } = params;
+  assert(!isInternal || projection);
+
   const repositoryParams = isInternal ? params : {
     ...params,
     projection: {
