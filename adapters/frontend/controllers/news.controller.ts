@@ -6,16 +6,10 @@ export const getNewsController = (
   getNewsUseCase: GetNewsUseCase,
 ) => async (
   params: GetNewsUseCaseParams,
-) => {
-  const news = await getNewsUseCase(params);
-  return news;
-};
+) => getNewsUseCase(params);
 
 export const watchNewsController = (
   watchNewsUseCase: WatchNewsUseCase,
 ) => <T>(
   params: WatchNewsUseCaseParams<T>,
-) => {
-  const res = watchNewsUseCase(params);
-  return res;
-};
+) => watchNewsUseCase(params);
