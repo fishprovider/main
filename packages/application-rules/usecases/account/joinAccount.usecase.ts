@@ -8,6 +8,7 @@ import type { UserRepository } from '~usecases';
 import type { AccountRepository, GetAccountRepositoryParams } from './_account.repository';
 
 export interface JoinAccountUseCaseParams extends GetAccountRepositoryParams {
+  accountId: string,
   user: Partial<User> & {
     _id: string,
     name: string,

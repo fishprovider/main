@@ -1,4 +1,6 @@
-import type { GetUserUseCase, UpdateUserUseCase } from '@fishprovider/application-rules';
+import type {
+  GetUserUseCase, RefreshUserRolesUseCase, RefreshUserStarProvidersUseCase, UpdateUserUseCase,
+} from '@fishprovider/application-rules';
 import type { User } from '@fishprovider/enterprise-rules';
 import { z } from 'zod';
 
@@ -31,6 +33,28 @@ export const updateUserController = (
   const result = await updateUserUseCase({
     userId: userSession._id,
     payload,
+  });
+  return { result };
+};
+
+export const refreshUserRolesController = (
+  refreshUserRolesUseCase: RefreshUserRolesUseCase,
+): ApiHandler<boolean> => async ({ userSession }) => {
+  requireLogin(userSession);
+
+  const result = await refreshUserRolesUseCase({
+    user: userSession,
+  });
+  return { result };
+};
+
+export const refreshUserStarProvidersController = (
+  refreshUserStarProvidersUseCase: RefreshUserStarProvidersUseCase,
+): ApiHandler<boolean> => async ({ userSession }) => {
+  requireLogin(userSession);
+
+  const result = await refreshUserStarProvidersUseCase({
+    user: userSession,
   });
   return { result };
 };
