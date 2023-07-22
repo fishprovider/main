@@ -22,7 +22,6 @@ export interface UpdateAccountRepositoryParams {
   payloadDelete?: Record<string, any>,
   payloadPush?: Record<string, any>,
   payloadPull?: Record<string, any>,
-  returnDoc?: boolean,
 }
 
 export interface AccountRepository {
@@ -31,7 +30,7 @@ export interface AccountRepository {
   getAccountExternal: (
     params: GetAccountExternalRepositoryParams) => Promise<Partial<Account> | null>;
   updateAccount: (
-    params: UpdateAccountRepositoryParams) => Promise<Partial<Account> | boolean>;
+    params: UpdateAccountRepositoryParams) => Promise<boolean>;
 }
 
 export const DefaultAccountRepository: AccountRepository = {

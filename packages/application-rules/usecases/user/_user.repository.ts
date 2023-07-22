@@ -12,14 +12,13 @@ export interface UpdateUserRepositoryParams {
   email?: string,
   payload?: Record<string, any>,
   payloadDelete?: Record<string, any>,
-  returnDoc?: boolean,
 }
 
 export interface UserRepository {
   getUser: (
     params: GetUserRepositoryParams) => Promise<User | null>;
   updateUser: (
-    params: UpdateUserRepositoryParams) => Promise<Partial<User> | boolean>;
+    params: UpdateUserRepositoryParams) => Promise<boolean>;
 }
 
 export const DefaultUserRepository: UserRepository = {
