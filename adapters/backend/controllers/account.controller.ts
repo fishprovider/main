@@ -24,7 +24,7 @@ export const getAccountController = (
   return { result };
 };
 
-export const updateAccountInviteController = (
+export const joinAccountController = (
   updateAccountUseCase: UpdateAccountUseCase,
   updateUserUseCase: UpdateUserUseCase,
 ): ApiHandler<boolean> => async ({ userSession, data }) => {
