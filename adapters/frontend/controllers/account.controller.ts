@@ -1,16 +1,10 @@
-import type {
-  GetAccountUseCase, GetAccountUseCaseParams, JoinAccountUseCase, JoinAccountUseCaseParams,
-} from '@fishprovider/application-rules';
+import type { GetAccountUseCase, JoinAccountUseCase } from '@fishprovider/application-rules';
 import _ from 'lodash';
 
 export const getAccountController = (
   getAccountUseCase: GetAccountUseCase,
-) => async (
-  params: GetAccountUseCaseParams,
-) => getAccountUseCase(params);
+) => getAccountUseCase;
 
 export const joinAccountController = (
   joinAccountUseCase: JoinAccountUseCase,
-) => async (
-  params: JoinAccountUseCaseParams,
-) => joinAccountUseCase(params);
+) => joinAccountUseCase;
