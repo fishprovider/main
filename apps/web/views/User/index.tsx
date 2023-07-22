@@ -1,6 +1,9 @@
+import { getUserController } from '@fishprovider/adapter-frontend';
+import { getUserUseCase } from '@fishprovider/application-rules';
 import getUser from '@fishprovider/cross/dist/api/user/getUser';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
 import storeUser from '@fishprovider/cross/dist/stores/user';
+import { FishApiUserRepository } from '@fishprovider/framework-fish-api';
 import { useState } from 'react';
 
 import VerifyPhone from '~components/user/VerifyPhone';
@@ -17,6 +20,8 @@ import ContentSection from '~ui/layouts/ContentSection';
 import openConfirmModal from '~ui/modals/openConfirmModal';
 import { toastError } from '~ui/toast';
 import { refreshMS } from '~utils';
+
+const getUserV2 = getUserController(getUserUseCase(FishApiUserRepository));
 
 function User() {
   const {
@@ -37,7 +42,10 @@ function User() {
   const [passConfirm, setPassConfirm] = useState('');
 
   useQuery({
-    queryFn: () => getUser({}),
+    queryFn: () => {
+      if (userId) getUserV2({ userId });
+      return getUser({});
+    },
     queryKey: queryKeys.user(userId),
     enabled: !!userId,
     refetchInterval: refreshMS,
