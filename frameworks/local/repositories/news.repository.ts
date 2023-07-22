@@ -20,7 +20,7 @@ async function getNews(params: GetNewsRepositoryParams) {
   const key = buildSetNewsKeys(params);
   const { localGet } = await local.get();
   const news = await localGet<News[]>(key);
-  return news;
+  return news ?? null;
 }
 
 export const LocalNewsRepository: NewsRepository = {

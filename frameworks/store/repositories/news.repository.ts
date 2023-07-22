@@ -41,7 +41,7 @@ async function getNews(params: GetNewsRepositoryParams) {
     );
   }
 
-  return undefined;
+  return null;
 }
 
 function watchNews<T>(params: WatchNewsRepositoryParams<T>) {
