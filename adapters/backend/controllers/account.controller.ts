@@ -11,14 +11,15 @@ import type { ApiHandler } from '~types';
 export const getAccountController = (
   getAccountUseCase: GetAccountUseCase,
 ): ApiHandler<Partial<Account>> => async ({ userSession, data }) => {
-  requireLogin(userSession);
-
   const payload = z.object({
     accountId: z.string().nonempty(),
   }).strict()
     .parse(data);
 
-  const result = await getAccountUseCase(payload);
+  const result = await getAccountUseCase({
+    ...payload,
+    user: userSession,
+  });
   return { result };
 };
 

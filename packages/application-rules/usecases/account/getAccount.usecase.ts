@@ -50,11 +50,13 @@ export const getAccountUseCase = (
     if (isManagerWeb) return true;
     if (deleted) return false;
     if (providerViewType === AccountViewType.public) return true;
-    if (user?._id) {
-      if (userId === user._id) return true;
-      if (members?.some((item) => item.userId === user._id)) return true;
-      if (memberInvites?.some((item) => item.email === user.email)) return true;
-    }
+
+    // for private accounts
+    if (!user?._id) return false;
+    if (userId === user._id) return true;
+    if (members?.some((item) => item.userId === user._id)) return true;
+    if (memberInvites?.some((item) => item.email === user.email)) return true;
+
     return false;
   };
   if (!checkAccess()) {
