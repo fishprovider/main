@@ -62,5 +62,8 @@ export const getAccountUseCase = (
   if (!checkAccess()) {
     throw new Error(AccountError.ACCOUNT_ACCESS_DENIED);
   }
+
+  delete account.config;
+
   return account;
 };
