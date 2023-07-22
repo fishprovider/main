@@ -1,6 +1,5 @@
+import type { ApiHandler } from '@fishprovider/adapter-backend';
 import type { Request, Response } from 'express';
-
-import type { ApiHandler } from '~types/api';
 
 const getReqMsg = (req: Request) => [
   req.method,
@@ -27,10 +26,18 @@ const wrapApiHandler = <T>(handler: ApiHandler<T>) => async (req: Request, res: 
       }
     }
 
-    const result = await handler({
+    const { result, userSessionNew } = await handler({
       userSession: req.session.userInfo,
       data,
     });
+
+    if (userSessionNew) {
+      req.session.userInfo = {
+        ...req.session.userInfo,
+        ...userSessionNew,
+      };
+    }
+
     res.status(200).json(result);
   } catch (err: any) {
     Logger.warn('ApiHandler failed', getReqMsg(req), err);

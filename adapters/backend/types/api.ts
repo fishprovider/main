@@ -5,4 +5,9 @@ export interface ApiHandlerParams {
   data: any;
 }
 
-export type ApiHandler<T> = (params: ApiHandlerParams) => Promise<T>;
+export interface ApiHandlerResponse<T> {
+  result: T,
+  userSessionNew?: UserSession,
+}
+
+export type ApiHandler<T> = (params: ApiHandlerParams) => Promise<ApiHandlerResponse<T>>;

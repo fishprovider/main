@@ -1,28 +1,25 @@
 import type { GetUserUseCase, UpdateUserUseCase } from '@fishprovider/application-rules';
+import type { User } from '@fishprovider/enterprise-rules';
 import { z } from 'zod';
 
-import { requireLogIn } from '~helpers';
-import type { ApiHandlerParams } from '~types';
+import { requireLogin } from '~helpers';
+import type { ApiHandler } from '~types';
 
 export const getUserController = (
   getUserUseCase: GetUserUseCase,
-) => async (
-  { userSession }: ApiHandlerParams,
-) => {
-  requireLogIn(userSession);
+): ApiHandler<Partial<User>> => async ({ userSession }) => {
+  requireLogin(userSession);
 
-  const user = await getUserUseCase({
+  const result = await getUserUseCase({
     userId: userSession._id,
   });
-  return user;
+  return { result };
 };
 
 export const updateUserController = (
   updateUserUseCase: UpdateUserUseCase,
-) => async (
-  { userSession, data }: ApiHandlerParams,
-) => {
-  requireLogIn(userSession);
+): ApiHandler<boolean> => async ({ userSession, data }) => {
+  requireLogin(userSession);
 
   const payload = z.object({
     name: z.string().optional(),
@@ -31,9 +28,9 @@ export const updateUserController = (
   }).strict()
     .parse(data);
 
-  const res = await updateUserUseCase({
+  const result = await updateUserUseCase({
     userId: userSession._id,
     payload,
   });
-  return res;
+  return { result };
 };
