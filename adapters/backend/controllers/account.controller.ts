@@ -26,8 +26,8 @@ export const getAccountController = (
 
 export const joinAccountController = (
   getAccountUseCase: GetAccountUseCase,
-  systemUpdateAccountUseCase: UpdateAccountUseCase,
-  systemUpdateUserUseCase: UpdateUserUseCase,
+  internalUpdateAccountUseCase: UpdateAccountUseCase,
+  internalUpdateUserUseCase: UpdateUserUseCase,
 ): ApiHandler<boolean> => async ({ userSession, data }) => {
   requireLogin(userSession);
 
@@ -76,7 +76,7 @@ export const joinAccountController = (
     }),
   };
 
-  await systemUpdateUserUseCase({
+  await internalUpdateUserUseCase({
     email,
     payload: setRoles,
     payloadDelete: deleteRoles,
@@ -98,7 +98,7 @@ export const joinAccountController = (
     updatedAt: new Date(),
   };
 
-  const result = await systemUpdateAccountUseCase({
+  const result = await internalUpdateAccountUseCase({
     accountId,
     payloadPull: {
       memberInvites: {
