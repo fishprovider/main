@@ -9,10 +9,11 @@ import assert from 'assert';
 import { mongo } from '../mongo.framework';
 
 const getAccount = async (params: GetAccountRepositoryParams) => {
-  const { accountId, projection } = params;
+  const { accountId, query, projection } = params;
   const { db } = await mongo.get();
   const account = await db.collection<Account>('accounts').findOne({
-    _id: accountId,
+    ...(accountId && { _id: accountId }),
+    ...query,
   }, {
     projection,
   });

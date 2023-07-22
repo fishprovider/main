@@ -31,21 +31,16 @@ export const getAccountUseCase = (
 ): GetAccountUseCase => async (
   params: GetAccountUseCaseParams,
 ) => {
-  const { user } = params;
+  const account = await internalGetAccountUseCase(accountRepository)(params);
 
-  const account = await accountRepository.getAccount(params);
-  if (!account) {
-    throw new Error(AccountError.ACCOUNT_NOT_FOUND);
-  }
+  const { user } = params;
+  const { isManagerWeb } = getRoleProvider(user?.roles);
 
   const {
     providerViewType,
     userId, members, memberInvites,
     deleted,
   } = account;
-
-  const { isManagerWeb } = getRoleProvider(user?.roles);
-
   const checkAccess = () => {
     if (isManagerWeb) return true;
     if (deleted) return false;
@@ -63,6 +58,7 @@ export const getAccountUseCase = (
     throw new Error(AccountError.ACCOUNT_ACCESS_DENIED);
   }
 
+  // never leak the secret to outside
   delete account.config;
 
   return account;

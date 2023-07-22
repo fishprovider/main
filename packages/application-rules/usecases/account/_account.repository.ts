@@ -5,7 +5,8 @@ import type {
 import { type Projection, RepositoryError } from '~types';
 
 export interface GetAccountRepositoryParams {
-  accountId: string,
+  accountId?: string,
+  query?: Record<string, any>,
   projection?: Projection<Account>,
 }
 
