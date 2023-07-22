@@ -6,7 +6,7 @@ export type GetNewsUseCaseParams = GetNewsRepositoryParams;
 
 export type GetNewsUseCase = (
   params: GetNewsUseCaseParams
-) => Promise<News[] | null>;
+) => Promise<News[]>;
 
 export const getNewsUseCase = (
   newsRepository: NewsRepository,
@@ -14,5 +14,5 @@ export const getNewsUseCase = (
   params: GetNewsUseCaseParams,
 ) => {
   const news = await newsRepository.getNews(params);
-  return news;
+  return news || [];
 };

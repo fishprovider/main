@@ -16,7 +16,7 @@ export interface UpdateUserRepositoryParams {
 
 export interface UserRepository {
   getUser: (
-    params: GetUserRepositoryParams) => Promise<User | null>;
+    params: GetUserRepositoryParams) => Promise<Partial<User> | null>;
   updateUser: (
     params: UpdateUserRepositoryParams) => Promise<boolean>;
 }
