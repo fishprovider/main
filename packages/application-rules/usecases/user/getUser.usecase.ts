@@ -31,7 +31,9 @@ export interface GetUserUseCaseParams extends GetUserRepositoryParams {
   isInternal?: boolean;
 }
 
-export type GetUserUseCase = (params: GetUserUseCaseParams) => Promise<User>;
+export type GetUserUseCase = (
+  params: GetUserUseCaseParams
+) => Promise<Partial<User>>;
 
 export const getUserUseCase = (
   userRepository: UserRepository,

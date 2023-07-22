@@ -12,7 +12,9 @@ export interface GetAccountUseCaseParams extends GetAccountRepositoryParams {
   isInternal?: boolean;
 }
 
-export type GetAccountUseCase = (params: GetAccountUseCaseParams) => Promise<Account>;
+export type GetAccountUseCase = (
+  params: GetAccountUseCaseParams
+) => Promise<Partial<Account>>;
 
 export const getAccountUseCase = (
   accountRepository: AccountRepository,

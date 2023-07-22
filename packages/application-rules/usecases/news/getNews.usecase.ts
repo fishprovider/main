@@ -4,7 +4,9 @@ import type { GetNewsRepositoryParams, NewsRepository } from './_news.repository
 
 export type GetNewsUseCaseParams = GetNewsRepositoryParams;
 
-export type GetNewsUseCase = (params: GetNewsUseCaseParams) => Promise<News[]>;
+export type GetNewsUseCase = (
+  params: GetNewsUseCaseParams
+) => Promise<News[]>;
 
 export const getNewsUseCase = (
   newsRepository: NewsRepository,

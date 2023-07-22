@@ -11,7 +11,9 @@ export interface UpdateAccountUseCaseParams extends UpdateAccountRepositoryParam
   isInternal?: boolean;
 }
 
-export type UpdateAccountUseCase = (params: UpdateAccountUseCaseParams) => Promise<boolean>;
+export type UpdateAccountUseCase = (
+  params: UpdateAccountUseCaseParams
+) => Promise<boolean>;
 
 export const updateAccountUseCase = (
   AccountRepository: AccountRepository,
