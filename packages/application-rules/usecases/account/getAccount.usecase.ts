@@ -1,8 +1,9 @@
 import {
   type Account, AccountError, AccountViewType, type User,
 } from '@fishprovider/enterprise-rules';
+import assert from 'assert';
 
-import { getRoleProvider } from '~helpers/user';
+import { getRoleProvider } from '~helpers';
 
 import type { AccountRepository, GetAccountRepositoryParams } from './_account.repository';
 
@@ -18,7 +19,8 @@ export const getAccountUseCase = (
 ): GetAccountUseCase => async (
   params: GetAccountUseCaseParams,
 ) => {
-  const { user, isInternal } = params;
+  const { user, isInternal, projection } = params;
+  assert(!isInternal || projection);
 
   const account = await accountRepository.getAccount(params);
   if (!account) {

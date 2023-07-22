@@ -2,7 +2,7 @@ import type {
   Account, AccountConfig, AccountPlatform, AccountType,
 } from '@fishprovider/enterprise-rules';
 
-import type { Projection } from '~types/repository';
+import type { Projection } from '~types';
 
 export interface GetAccountRepositoryParams {
   accountId: string,
