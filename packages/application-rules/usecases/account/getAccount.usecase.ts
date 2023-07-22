@@ -1,7 +1,6 @@
 import {
   type Account, AccountError, AccountViewType, type User,
 } from '@fishprovider/enterprise-rules';
-import assert from 'assert';
 
 import { getRoleProvider } from '~helpers';
 
@@ -9,30 +8,34 @@ import type { AccountRepository, GetAccountRepositoryParams } from './_account.r
 
 export interface GetAccountUseCaseParams extends GetAccountRepositoryParams {
   user?: Partial<User>;
-  isInternal?: boolean;
 }
 
 export type GetAccountUseCase = (
   params: GetAccountUseCaseParams
 ) => Promise<Partial<Account>>;
 
+export const internalGetAccountUseCase = (
+  accountRepository: AccountRepository,
+): GetAccountUseCase => async (
+  params: GetAccountUseCaseParams,
+) => {
+  const account = await accountRepository.getAccount(params);
+  if (!account) {
+    throw new Error(AccountError.ACCOUNT_NOT_FOUND);
+  }
+  return account;
+};
+
 export const getAccountUseCase = (
   accountRepository: AccountRepository,
 ): GetAccountUseCase => async (
   params: GetAccountUseCaseParams,
 ) => {
-  const { user, isInternal, projection } = params;
-  assert(!isInternal || projection);
+  const { user } = params;
 
   const account = await accountRepository.getAccount(params);
   if (!account) {
     throw new Error(AccountError.ACCOUNT_NOT_FOUND);
-  }
-
-  if (isInternal) return account;
-
-  if (!user) {
-    throw new Error(AccountError.ACCOUNT_ACCESS_DENIED);
   }
 
   const {
@@ -41,7 +44,7 @@ export const getAccountUseCase = (
     deleted,
   } = account;
 
-  const { isManagerWeb } = getRoleProvider(user.roles);
+  const { isManagerWeb } = getRoleProvider(user?.roles);
 
   const checkAccess = () => {
     if (isManagerWeb) return true;
@@ -57,6 +60,5 @@ export const getAccountUseCase = (
   if (!checkAccess()) {
     throw new Error(AccountError.ACCOUNT_ACCESS_DENIED);
   }
-
   return account;
 };

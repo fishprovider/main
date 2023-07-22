@@ -7,28 +7,31 @@ const updateAccountAllowUpdateFields: Array<keyof Account> = [
   'name',
 ];
 
-export interface UpdateAccountUseCaseParams extends UpdateAccountRepositoryParams {
-  isInternal?: boolean;
-}
+export type UpdateAccountUseCaseParams = UpdateAccountRepositoryParams;
 
 export type UpdateAccountUseCase = (
   params: UpdateAccountUseCaseParams
 ) => Promise<boolean>;
+
+export const internalUpdateAccountUseCase = (
+  AccountRepository: AccountRepository,
+): UpdateAccountUseCase => async (
+  params: UpdateAccountUseCaseParams,
+) => {
+  const res = await AccountRepository.updateAccount(params);
+  return res;
+};
 
 export const updateAccountUseCase = (
   AccountRepository: AccountRepository,
 ): UpdateAccountUseCase => async (
   params: UpdateAccountUseCaseParams,
 ) => {
-  const {
-    isInternal, accountId, payload,
-  } = params;
+  const { accountId, payload } = params;
 
-  const repositoryParams = isInternal ? params : {
+  const repositoryParams = {
     accountId,
     payload: _.pick(payload, updateAccountAllowUpdateFields),
   };
-
-  const res = await AccountRepository.updateAccount(repositoryParams);
-  return res;
+  return internalUpdateAccountUseCase(AccountRepository)(repositoryParams);
 };

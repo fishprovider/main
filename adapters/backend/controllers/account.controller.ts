@@ -2,7 +2,7 @@ import type {
   GetAccountUseCase, UpdateAccountUseCase, UpdateUserUseCase,
 } from '@fishprovider/application-rules';
 import {
-  Account, AccountMember, AccountRoles,
+  Account, AccountError, AccountMember, AccountRoles,
 } from '@fishprovider/enterprise-rules';
 import _ from 'lodash';
 import { z } from 'zod';
@@ -25,23 +25,26 @@ export const getAccountController = (
 };
 
 export const joinAccountController = (
-  updateAccountUseCase: UpdateAccountUseCase,
-  updateUserUseCase: UpdateUserUseCase,
+  getAccountUseCase: GetAccountUseCase,
+  systemUpdateAccountUseCase: UpdateAccountUseCase,
+  systemUpdateUserUseCase: UpdateUserUseCase,
 ): ApiHandler<boolean> => async ({ userSession, data }) => {
   requireLogin(userSession);
 
   const payload = z.object({
     accountId: z.string().nonempty(),
-    memberInvite: z.object({
-      email: z.string().email(),
-      role: z.nativeEnum(AccountRoles),
-      createdAt: z.date(),
-    }),
   }).strict()
     .parse(data);
 
-  const { accountId, memberInvite } = payload;
+  const account = await getAccountUseCase(payload);
 
+  const { memberInvites } = account;
+  const memberInvite = memberInvites?.find(({ email }) => email === userSession.email);
+  if (!memberInvite) {
+    throw new Error(AccountError.ACCOUNT_ACCESS_DENIED);
+  }
+
+  const { accountId } = payload;
   const { email, role } = memberInvite;
 
   const setRoles = {
@@ -73,8 +76,7 @@ export const joinAccountController = (
     }),
   };
 
-  await updateUserUseCase({
-    isInternal: true,
+  await systemUpdateUserUseCase({
     email,
     payload: setRoles,
     payloadDelete: deleteRoles,
@@ -96,8 +98,7 @@ export const joinAccountController = (
     updatedAt: new Date(),
   };
 
-  const result = await updateAccountUseCase({
-    isInternal: true,
+  const result = await systemUpdateAccountUseCase({
     accountId,
     payloadPull: {
       memberInvites: {

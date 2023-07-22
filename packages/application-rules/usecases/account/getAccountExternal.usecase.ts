@@ -8,7 +8,7 @@ export type GetAccountExternalUseCase = (
   params: GetAccountExternalUseCaseParams
 ) => Promise<Partial<Account>>;
 
-export const getAccountExternalUseCase = (
+export const internalGetAccountExternalUseCase = (
   accountRepository: AccountRepository,
 ): GetAccountExternalUseCase => async (
   params: GetAccountExternalUseCaseParams,

@@ -1,5 +1,4 @@
 import { type User, UserError } from '@fishprovider/enterprise-rules';
-import assert from 'assert';
 import _ from 'lodash';
 
 import type { Projection } from '~types';
@@ -27,33 +26,37 @@ const getUserAllowReadFieldsProjection = getUserAllowReadFields.reduce<Projectio
   {},
 );
 
-export interface GetUserUseCaseParams extends GetUserRepositoryParams {
-  isInternal?: boolean;
-}
+export type GetUserUseCaseParams = GetUserRepositoryParams;
 
 export type GetUserUseCase = (
   params: GetUserUseCaseParams
 ) => Promise<Partial<User>>;
+
+export const internalGetUserUseCase = (
+  userRepository: UserRepository,
+): GetUserUseCase => async (
+  params: GetUserUseCaseParams,
+) => {
+  const user = await userRepository.getUser(params);
+  if (!user) {
+    throw new Error(UserError.USER_NOT_FOUND);
+  }
+  return user;
+};
 
 export const getUserUseCase = (
   userRepository: UserRepository,
 ): GetUserUseCase => async (
   params: GetUserUseCaseParams,
 ) => {
-  const { isInternal, projection } = params;
-  assert(!isInternal || projection);
+  const { projection } = params;
 
-  const repositoryParams = isInternal ? params : {
+  const repositoryParams = {
     ...params,
     projection: {
       ...getUserAllowReadFieldsProjection,
       ..._.pick(projection, getUserAllowReadFields),
     },
   };
-
-  const user = await userRepository.getUser(repositoryParams);
-  if (!user) {
-    throw new Error(UserError.USER_NOT_FOUND);
-  }
-  return user;
+  return internalGetUserUseCase(userRepository)(repositoryParams);
 };

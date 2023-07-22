@@ -9,28 +9,31 @@ const updateUserAllowUpdateFields: Array<keyof User> = [
   'starProviders',
 ];
 
-export interface UpdateUserUseCaseParams extends UpdateUserRepositoryParams {
-  isInternal?: boolean;
-}
+export type UpdateUserUseCaseParams = UpdateUserRepositoryParams;
 
 export type UpdateUserUseCase = (
   params: UpdateUserUseCaseParams
 ) => Promise<boolean>;
+
+export const internalUpdateUserUseCase = (
+  userRepository: UserRepository,
+): UpdateUserUseCase => async (
+  params: UpdateUserUseCaseParams,
+) => {
+  const res = await userRepository.updateUser(params);
+  return res;
+};
 
 export const updateUserUseCase = (
   userRepository: UserRepository,
 ): UpdateUserUseCase => async (
   params: UpdateUserUseCaseParams,
 ) => {
-  const {
-    isInternal, userId, payload,
-  } = params;
+  const { userId, payload } = params;
 
-  const repositoryParams = isInternal ? params : {
+  const repositoryParams = {
     userId,
     payload: _.pick(payload, updateUserAllowUpdateFields),
   };
-
-  const res = await userRepository.updateUser(repositoryParams);
-  return res;
+  return internalUpdateUserUseCase(userRepository)(repositoryParams);
 };
