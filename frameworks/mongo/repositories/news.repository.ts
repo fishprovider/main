@@ -36,7 +36,7 @@ async function getNews(params: GetNewsRepositoryParams) {
     return news;
   }
 
-  return undefined;
+  return null;
 }
 
 export const MongoNewsRepository: NewsRepository = {

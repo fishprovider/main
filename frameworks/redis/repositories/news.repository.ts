@@ -2,7 +2,7 @@ import { DefaultNewsRepository, type GetNewsRepositoryParams, type NewsRepositor
 
 async function getNews(params: GetNewsRepositoryParams) {
   console.log('TODO', params);
-  return undefined;
+  return null;
 }
 
 export const RedisNewsRepository: NewsRepository = {
