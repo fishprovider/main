@@ -40,12 +40,12 @@ const stop = async () => {
 
 const checkSkipLog = (url: string) => url === '/logger';
 
-async function errHandler<T>(
+const errHandler = async <T>(
   handler: () => Promise<T>,
   url: string,
   payload: Record<string, any> = {},
   options?: ApiConfig,
-) {
+) => {
   try {
     return await handler();
   } catch (err: any) {
@@ -60,34 +60,30 @@ async function errHandler<T>(
     }
     throw new Error(errMsg);
   }
-}
+};
 
-async function apiGet<T>(
+const apiGet = async <T>(
   url: string,
   payload: Record<string, any> = {},
   options?: ApiConfig,
-) {
-  return errHandler<T>(async () => {
-    assert(client);
-    const res = await client.get<T>(url, {
-      ...options,
-      params: payload,
-    });
-    return res.data;
-  }, url, payload, options);
-}
+) => errHandler<T>(async () => {
+  assert(client);
+  const res = await client.get<T>(url, {
+    ...options,
+    params: payload,
+  });
+  return res.data;
+}, url, payload, options);
 
-async function apiPost<T>(
+const apiPost = async<T>(
   url: string,
   payload: Record<string, any> = {},
   options?: ApiConfig,
-) {
-  return errHandler<T>(async () => {
-    assert(client);
-    const res = await client.post<T>(url, payload, options);
-    return res.data;
-  }, url, payload, options);
-}
+) => errHandler<T>(async () => {
+  assert(client);
+  const res = await client.post<T>(url, payload, options);
+  return res.data;
+}, url, payload, options);
 
 const get = async () => {
   await clientPromise;

@@ -5,7 +5,7 @@ import { FishApiNewsRepository } from '@fishprovider/framework-fish-api';
 import { LocalNewsRepository } from '@fishprovider/framework-local';
 import { StoreNewsRepository } from '@fishprovider/framework-store';
 
-async function getNews(params: GetNewsRepositoryParams) {
+const getNews = async (params: GetNewsRepositoryParams) => {
   let news = await LocalNewsRepository.getNews(params);
   const key = buildSetNewsKeys(params);
   if (!news) {
@@ -20,7 +20,7 @@ async function getNews(params: GetNewsRepositoryParams) {
     });
   }
   return news;
-}
+};
 
 export const OfflineFirstNewsRepository: NewsRepository = {
   ...DefaultNewsRepository,

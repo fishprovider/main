@@ -2,13 +2,13 @@ import { DefaultNewsRepository, type GetNewsRepositoryParams, type NewsRepositor
 import { MongoNewsRepository } from '@fishprovider/framework-mongo';
 import { RedisNewsRepository } from '@fishprovider/framework-redis';
 
-async function getNews(params: GetNewsRepositoryParams) {
+const getNews = async (params: GetNewsRepositoryParams) => {
   let news = await RedisNewsRepository.getNews(params);
   if (!news) {
     news = await MongoNewsRepository.getNews(params);
   }
   return news;
-}
+};
 
 export const CacheFirstNewsRepository: NewsRepository = {
   ...DefaultNewsRepository,

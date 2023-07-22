@@ -9,12 +9,12 @@ import moment from 'moment';
 
 import { storeNews } from '~stores';
 
-async function setNews(params: SetNewsRepositoryParams) {
+const setNews = async (params: SetNewsRepositoryParams) => {
   storeNews.mergeDocs(params.news);
   return true;
-}
+};
 
-async function getNews(params: GetNewsRepositoryParams) {
+const getNews = async (params: GetNewsRepositoryParams) => {
   const { today, week, upcoming } = params;
 
   if (today) {
@@ -42,12 +42,12 @@ async function getNews(params: GetNewsRepositoryParams) {
   }
 
   return null;
-}
+};
 
-function watchNews<T>(params: WatchNewsRepositoryParams<T>) {
+const watchNews = <T>(params: WatchNewsRepositoryParams<T>) => {
   const { selector } = params;
   return storeNews.useStore(selector);
-}
+};
 
 export const StoreNewsRepository: NewsRepository = {
   ...DefaultNewsRepository,

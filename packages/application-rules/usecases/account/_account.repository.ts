@@ -17,7 +17,7 @@ export interface GetAccountExternalRepositoryParams {
 }
 
 export interface UpdateAccountRepositoryParams {
-  accountId?: string,
+  accountId: string,
   payload?: Record<string, any>,
   payloadDelete?: Record<string, any>,
   payloadPush?: Record<string, any>,

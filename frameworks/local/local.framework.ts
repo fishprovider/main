@@ -12,14 +12,15 @@ const stop = async () => {
   console.info('Stopped local.framework');
 };
 
-async function localGet<T>(key: string) {
+const localGet = async <T>(key: string) => {
   const val = await client.getItem<T>(key);
   return val ?? undefined;
-}
+};
 
-async function localSet<T>(key: string, value: T) {
-  return client.setItem<T>(key, value);
-}
+const localSet = async <T>(key: string, value: T) => {
+  const res = client.setItem<T>(key, value);
+  return res;
+};
 
 const get = async () => {
   assert(client);

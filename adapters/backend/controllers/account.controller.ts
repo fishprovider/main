@@ -98,6 +98,7 @@ export const updateAccountInviteController = (
 
   const result = await updateAccountUseCase({
     isInternal: true,
+    accountId,
     payloadPull: {
       memberInvites: {
         email,

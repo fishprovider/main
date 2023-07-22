@@ -1,12 +1,13 @@
-import type {
-  GetUserRepositoryParams, UpdateUserRepositoryParams, UserRepository,
+import {
+  DefaultUserRepository,
+  type GetUserRepositoryParams, type UpdateUserRepositoryParams, type UserRepository,
 } from '@fishprovider/application-rules';
 import type { User } from '@fishprovider/enterprise-rules';
 import assert from 'assert';
 
 import { mongo } from '../mongo.framework';
 
-async function getUser(params: GetUserRepositoryParams) {
+const getUser = async (params: GetUserRepositoryParams) => {
   const { userId, projection } = params;
   const { db } = await mongo.get();
   const user = await db.collection<User>('users').findOne({
@@ -15,9 +16,9 @@ async function getUser(params: GetUserRepositoryParams) {
     projection,
   });
   return user;
-}
+};
 
-async function updateUser(params: UpdateUserRepositoryParams) {
+const updateUser = async (params: UpdateUserRepositoryParams) => {
   const {
     userId, email, payload, payloadDelete,
   } = params;
@@ -25,7 +26,7 @@ async function updateUser(params: UpdateUserRepositoryParams) {
   assert(payload || payloadDelete);
 
   const { db } = await mongo.get();
-  await db.collection<User>('news').updateOne({
+  await db.collection<User>('users').updateOne({
     ...(userId && { _id: userId }),
     ...(email && { email }),
   }, {
@@ -37,9 +38,10 @@ async function updateUser(params: UpdateUserRepositoryParams) {
     }),
   });
   return true;
-}
+};
 
 export const MongoUserRepository: UserRepository = {
+  ...DefaultUserRepository,
   getUser,
   updateUser,
 };

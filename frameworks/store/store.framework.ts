@@ -49,7 +49,7 @@ export const Comparator = {
   deepEqual: isEqual,
 };
 
-export function buildStoreSet<Doc extends DocWithId>(initState: StateSet<Doc>, name: string) {
+export const buildStoreSet = <Doc extends DocWithId>(initState: StateSet<Doc>, name: string) => {
   type State = StateSet<Doc>;
   type Transform = TransformState<State>;
 
@@ -130,19 +130,17 @@ export function buildStoreSet<Doc extends DocWithId>(initState: StateSet<Doc>, n
 
   const getState = () => store.getState().state;
 
-  function useStore<Val>(
+  const useStore = <Val>(
     selector: (state: State) => Val,
     comparator: (a: Val, b: Val) => boolean = Comparator.shallowEqual,
-  ) {
-    return store(({ state }) => selector(state), comparator);
-  }
+  ) => store(({ state }) => selector(state), comparator);
 
   return {
     ...store.getState(), getState, useStore,
   };
-}
+};
 
-export function buildStore<State extends Record<string, any>>(initState: State, name: string) {
+export const buildStore = <State extends Record<string, any>>(initState: State, name: string) => {
   type Transform = TransformState<State>;
 
   const store = create<Store<State, Transform>>((set) => ({
@@ -178,17 +176,15 @@ export function buildStore<State extends Record<string, any>>(initState: State, 
 
   const getState = () => store.getState().state;
 
-  function useStore<Val>(
+  const useStore = <Val>(
     selector: (state: State) => Val,
     comparator: (a: Val, b: Val) => boolean = Comparator.shallowEqual,
-  ) {
-    return store(({ state }) => selector(state), comparator);
-  }
+  ) => store(({ state }) => selector(state), comparator);
 
   return {
     ...store.getState(), getState, useStore,
   };
-}
+};
 
 const start = async (params: {
   logDebug?: (...args: any[]) => void,

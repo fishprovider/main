@@ -4,7 +4,7 @@ import moment from 'moment';
 
 import { mongo } from '../mongo.framework';
 
-async function getNews(params: GetNewsRepositoryParams) {
+const getNews = async (params: GetNewsRepositoryParams) => {
   const { today, week, upcoming } = params;
   const { db } = await mongo.get();
 
@@ -37,7 +37,7 @@ async function getNews(params: GetNewsRepositoryParams) {
   }
 
   return null;
-}
+};
 
 export const MongoNewsRepository: NewsRepository = {
   ...DefaultNewsRepository,
