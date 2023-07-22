@@ -25,10 +25,9 @@ export const getAccountController = (
 };
 
 export const updateAccountInviteController = (
-  getAccountUseCase: GetAccountUseCase,
   updateAccountUseCase: UpdateAccountUseCase,
   updateUserUseCase: UpdateUserUseCase,
-): ApiHandler<Partial<Account>> => async ({ userSession, data }) => {
+): ApiHandler<boolean> => async ({ userSession, data }) => {
   requireLogin(userSession);
 
   const payload = z.object({
@@ -96,7 +95,8 @@ export const updateAccountInviteController = (
     picture: userSession.picture,
     updatedAt: new Date(),
   };
-  await updateAccountUseCase({
+
+  const result = await updateAccountUseCase({
     isInternal: true,
     payloadPull: {
       memberInvites: {
@@ -105,15 +105,6 @@ export const updateAccountInviteController = (
     },
     payloadPush: {
       members: member,
-    },
-  });
-
-  const result = await getAccountUseCase({
-    isInternal: true,
-    accountId,
-    projection: {
-      memberInvites: 1,
-      members: 1,
     },
   });
   return { result, userSessionNew };
