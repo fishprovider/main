@@ -200,7 +200,7 @@ deploy-phone:
   script:
     - npm ci --cache .npm --prefer-offline --no-audit --no-progress --legacy-peer-deps
     - cd apps/phone
-    - npx eas-cli build --profile production --non-interactive --no-wait -p all --auto-submit
+    - npx eas-cli@latest build --profile production --non-interactive --no-wait -p all --auto-submit
   timeout: "10 minutes"
   after_script:
     - NOTIF_MSG="Deploy phone $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
@@ -214,8 +214,8 @@ deploy-phone-schedule:
   script:
     - npm ci --cache .npm --prefer-offline --no-audit --no-progress --legacy-peer-deps
     - cd apps/phone
-    - npx eas-cli build --profile development-simulator --non-interactive --no-wait -p all
-    - npx eas-cli build --profile production --non-interactive --no-wait -p all --auto-submit
+    - npx eas-cli@latest build --profile development-simulator --non-interactive --no-wait -p all
+    - npx eas-cli@latest build --profile production --non-interactive --no-wait -p all --auto-submit
   timeout: "20 minutes"
   after_script:
     - NOTIF_MSG="Deploy phone $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
