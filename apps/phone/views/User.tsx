@@ -34,9 +34,7 @@ export default function User() {
         options={options}
         value={mode}
         onChange={setMode}
-      >
-        <Text>{options.find((item) => item.value === mode)?.label}</Text>
-      </Select>
+      />
     </Stack>
   );
 }

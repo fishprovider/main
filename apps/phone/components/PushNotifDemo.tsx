@@ -5,10 +5,12 @@ import Button from '~ui/Button';
 
 export default function PushNotifDemo() {
   return (
-    <Button onPress={() => {
-      if (!Device.isDevice) return;
-      sendNotif();
-    }}
+    <Button
+      borderColor="black"
+      onPress={() => {
+        if (!Device.isDevice) return;
+        sendNotif();
+      }}
     >
       Press to Send Notification
     </Button>

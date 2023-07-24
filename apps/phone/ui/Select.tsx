@@ -1,20 +1,22 @@
 import { FontAwesome } from '@expo/vector-icons';
-import { Adapt, Select as SelectT, Sheet } from 'tamagui';
+import {
+  Adapt, Select as SelectT, Sheet, Text,
+} from 'tamagui';
 
 interface Props {
   options: { value: string, label: string }[];
   value: string;
   onChange: (value: string) => void;
-  children: React.ReactNode;
+  placeholder?: string;
 }
 
 export default function Select({
-  options, value, onChange, children,
+  options, value, onChange, placeholder,
 }: Props) {
   return (
     <SelectT value={value} onValueChange={onChange}>
       <SelectT.Trigger borderColor="black" iconAfter={<FontAwesome name="chevron-down" />}>
-        {children}
+        <Text>{options.find((item) => item.value === value)?.label ?? placeholder}</Text>
       </SelectT.Trigger>
 
       <Adapt>

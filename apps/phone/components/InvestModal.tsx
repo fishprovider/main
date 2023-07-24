@@ -38,9 +38,7 @@ function SelectDemo() {
       options={options}
       value={val}
       onChange={setVal}
-    >
-      <Text>{options.find((item) => item.value === val)?.label}</Text>
-    </Select>
+    />
   );
 }
 
