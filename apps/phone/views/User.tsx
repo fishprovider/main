@@ -25,16 +25,18 @@ export default function User() {
   return (
     <Stack space="$4" paddingTop="$4" alignItems="center">
       <Text>{email}</Text>
-      <Button borderColor="black" onPress={logout}>Logout</Button>
-      <Button borderColor="black" onPress={logout}>Remove Account</Button>
-      <Switch borderColor="black">
+      <Button theme="blue" onPress={logout}>Logout</Button>
+      <Button theme="blue" onPress={logout}>Remove Account</Button>
+      <Switch theme="blue">
         <Switch.Thumb />
       </Switch>
-      <Select
-        options={options}
-        value={mode}
-        onChange={setMode}
-      />
+      <Stack>
+        <Select
+          options={options}
+          value={mode}
+          onChange={setMode}
+        />
+      </Stack>
     </Stack>
   );
 }

@@ -1,7 +1,7 @@
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
-import DemoDrawer from '~components/DemoDrawer';
 import UserController from '~controllers/UserController';
+import DemoDrawer from '~views/DemoDrawer';
 import User from '~views/User';
 
 const Drawer = createDrawerNavigator();
