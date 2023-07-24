@@ -3,13 +3,14 @@
 import { FontAwesome } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import Account from './Account';
-import Strategies from './Strategies';
-import Wallet from './Wallet';
+import Strategies from '~views/Strategies';
+
+import AccountNavigator from './AccountNavigator';
+import WalletNavigator from './WalletNavigator';
 
 const Tab = createBottomTabNavigator();
 
-export default function Home() {
+export default function RootNavigator() {
   return (
     <Tab.Navigator>
       <Tab.Screen
@@ -21,7 +22,7 @@ export default function Home() {
       />
       <Tab.Screen
         name="Wallet"
-        component={Wallet}
+        component={WalletNavigator}
         options={{
           tabBarIcon: (props) => <FontAwesome {...props} name="bank" />,
           headerShown: false,
@@ -29,7 +30,7 @@ export default function Home() {
       />
       <Tab.Screen
         name="Account"
-        component={Account}
+        component={AccountNavigator}
         options={{
           tabBarIcon: (props) => <FontAwesome {...props} name="bar-chart" />,
           headerShown: false,

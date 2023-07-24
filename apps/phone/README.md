@@ -77,6 +77,7 @@
               '~components': './components',
               '~controllers': './controllers',
               '~layouts': './layouts',
+              '~navigators': './navigators',
               '~views': './views',
             },
           }],

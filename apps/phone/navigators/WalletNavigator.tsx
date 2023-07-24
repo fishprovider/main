@@ -5,7 +5,7 @@ import UserController from '~controllers/UserController';
 
 const Drawer = createDrawerNavigator();
 
-export default function Wallet() {
+export default function WalletNavigator() {
   return (
     <UserController>
       <Drawer.Navigator>

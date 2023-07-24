@@ -1,12 +1,12 @@
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import DemoDrawer from '~components/DemoDrawer';
-import User from '~components/User';
 import UserController from '~controllers/UserController';
+import User from '~views/User';
 
 const Drawer = createDrawerNavigator();
 
-export default function Account() {
+export default function AccountNavigator() {
   return (
     <UserController>
       <Drawer.Navigator>

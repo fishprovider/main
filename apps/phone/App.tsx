@@ -1,10 +1,10 @@
 import BaseController from '~controllers/BaseController';
-import Home from '~views/Home';
+import RootNavigator from '~navigators/RootNavigator';
 
 export default function App() {
   return (
     <BaseController>
-      <Home />
+      <RootNavigator />
     </BaseController>
   );
 }
