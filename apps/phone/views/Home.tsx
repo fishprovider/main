@@ -32,6 +32,7 @@ export default function Home() {
         component={Account}
         options={{
           tabBarIcon: (props) => <FontAwesome {...props} name="bar-chart" />,
+          headerShown: false,
         }}
       />
     </Tab.Navigator>
