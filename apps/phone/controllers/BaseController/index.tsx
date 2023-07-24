@@ -19,9 +19,9 @@ interface Props {
 
 export default function BaseController({ children }: Props) {
   const [loaded, error] = useFonts({
-    FontAwesome: require('../assets/fonts/FontAwesome.ttf'),
-    Inter: require('../assets/fonts/Inter-Medium.otf'),
-    InterBold: require('../assets/fonts/Inter-Bold.otf'),
+    FontAwesome: require('../../assets/fonts/FontAwesome.ttf'),
+    Inter: require('../../assets/fonts/Inter-Medium.otf'),
+    InterBold: require('../../assets/fonts/Inter-Bold.otf'),
   });
 
   useEffect(() => {

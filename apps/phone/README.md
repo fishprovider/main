@@ -122,7 +122,7 @@
 - Load the fonts
   ```js
   const [loaded, error] = useFonts({
-    FontAwesome: require('../assets/fonts/FontAwesome.ttf'),
+    FontAwesome: require('../../assets/fonts/FontAwesome.ttf'),
   });
   ```
 
