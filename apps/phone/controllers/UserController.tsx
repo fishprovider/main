@@ -1,6 +1,6 @@
 import storeUser from '@fishprovider/cross/dist/stores/user';
 
-import Login from '~components/Login';
+import Login from '~views/Login';
 
 interface Props {
   children: React.ReactNode;
