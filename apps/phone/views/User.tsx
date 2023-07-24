@@ -23,11 +23,11 @@ export default function User() {
   const [mode, setMode] = useState('live');
 
   return (
-    <Stack space="$4" paddingTop="$4" alignItems="center">
+    <Stack center>
       <Text>{email}</Text>
-      <Button theme="blue" onPress={logout}>Logout</Button>
-      <Button theme="blue" onPress={logout}>Remove Account</Button>
-      <Switch theme="blue">
+      <Button onPress={logout}>Logout</Button>
+      <Button onPress={logout}>Remove Account</Button>
+      <Switch>
         <Switch.Thumb />
       </Switch>
       <Stack>

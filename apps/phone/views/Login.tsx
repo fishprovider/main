@@ -8,19 +8,13 @@ import Stack from '~ui/Stack';
 
 export default function Login() {
   return (
-    <Stack space="$4" paddingTop="$4" alignItems="center">
+    <Stack center>
       <H4>Login</H4>
-      <Button
-        themeInverse
-        onPress={() => loginOAuth(LoginMethods.google)}
-      >
+      <Button onPress={() => loginOAuth(LoginMethods.google)}>
         Login with Google
       </Button>
       {Platform.OS === 'ios' && (
-        <Button
-          themeInverse
-          onPress={() => loginOAuth(LoginMethods.apple)}
-        >
+        <Button onPress={() => loginOAuth(LoginMethods.apple)}>
           Login with Apple
         </Button>
       )}

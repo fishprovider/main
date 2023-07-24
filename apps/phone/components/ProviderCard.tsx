@@ -10,6 +10,7 @@ import H6 from '~ui/H6';
 import { useModalSimple } from '~ui/ModalProvider';
 import Stack from '~ui/Stack';
 import Text from '~ui/Text';
+import ThemeProvider from '~ui/ThemeProvider';
 
 import InvestModal from './InvestModal';
 
@@ -55,43 +56,48 @@ export default function ProviderCard({ providerId }: Props) {
     WebBrowser.openBrowserAsync(`https://www.fishprovider.com/strategies/${providerId}`);
   };
 
+  const target = `${maxYearProfit}%/year`;
+  const allTimeProfit = `${profit}%`;
+  const active = moment.duration(moment().diff(moment(createdAt))).humanize();
+  const avgProfit = `${_.round(profit / activeMonths, 2)}%/month`;
+
   return (
-    <Card elevate bordered>
-      <Card.Header padded>
-        <Group>
-          <Stack space="$2" width={150}>
-            <H6>{name}</H6>
-            <Text>{icon}</Text>
-            <Button color="white" backgroundColor="green" size="$3" width={110} onPress={onInvest}>
-              Invest ➜ 🏦
-            </Button>
-          </Stack>
-          <Stack space="$2" justifyContent="center">
-            <Text>
-              Target:
-              {' '}
-              <Text color="orange">{`${maxYearProfit}%/year`}</Text>
-            </Text>
-            <Text>
-              All-Time Profit:
-              {' '}
-              <Text color="green">{`${profit}%`}</Text>
-            </Text>
-            <Text>
-              Active:
-              {' '}
-              <Text color="blue">
-                {moment.duration(moment().diff(moment(createdAt))).humanize()}
+    <ThemeProvider name="light">
+      <Card elevate bordered>
+        <Card.Header padded>
+          <Group>
+            <Stack width={150}>
+              <H6>{name}</H6>
+              <Text>{icon}</Text>
+              <Button color="white" backgroundColor="green" size="$3" width={110} onPress={onInvest}>
+                Invest ➜ 🏦
+              </Button>
+            </Stack>
+            <Stack justifyContent="center">
+              <Text>
+                Target:
+                {' '}
+                <Text color="orange">{target}</Text>
               </Text>
-            </Text>
-            <Text>
-              Avg. Profit:
-              {' '}
-              <Text color="purple">{`${_.round(profit / activeMonths, 2)}%/month`}</Text>
-            </Text>
-          </Stack>
-        </Group>
-      </Card.Header>
-    </Card>
+              <Text>
+                All-Time Profit:
+                {' '}
+                <Text color="green">{allTimeProfit}</Text>
+              </Text>
+              <Text>
+                Active:
+                {' '}
+                <Text color="blue">{active}</Text>
+              </Text>
+              <Text>
+                Avg. Profit:
+                {' '}
+                <Text color="purple">{avgProfit}</Text>
+              </Text>
+            </Stack>
+          </Group>
+        </Card.Header>
+      </Card>
+    </ThemeProvider>
   );
 }

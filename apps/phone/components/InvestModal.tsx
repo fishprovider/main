@@ -3,7 +3,6 @@ import { useState } from 'react';
 import Button from '~ui/Button';
 import Select from '~ui/Select';
 import Stack from '~ui/Stack';
-import Text from '~ui/Text';
 import { useToast } from '~ui/ToastProvider';
 
 const options = [
@@ -48,16 +47,14 @@ interface Props {
 
 export default function InvestModal({ providerId }: Props) {
   const toast = useToast();
+
+  const onInvest = () => {
+    toast.show('Coming soon');
+  };
+
   return (
-    <Stack space="$2">
-      <Button
-        onPress={() => {
-          toast.show('Coming soon');
-        }}
-        themeInverse
-      >
-        {providerId}
-      </Button>
+    <Stack>
+      <Button onPress={onInvest}>{providerId}</Button>
       <SelectDemo />
     </Stack>
   );

@@ -1,12 +1,16 @@
 import { Button as ButtonT, ButtonProps } from 'tamagui';
 
+type Props = ButtonProps;
+
 export default function Button({
-  themeInverse = false,
   children,
   ...rest
-}: ButtonProps) {
+}: Props) {
   return (
-    <ButtonT themeInverse={themeInverse} {...rest}>
+    <ButtonT
+      theme="blue"
+      {...rest}
+    >
       {children}
     </ButtonT>
   );

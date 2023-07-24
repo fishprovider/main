@@ -15,7 +15,10 @@ export default function Select({
 }: Props) {
   return (
     <SelectT value={value} onValueChange={onChange}>
-      <SelectT.Trigger borderColor="black" iconAfter={<FontAwesome name="chevron-down" />}>
+      <SelectT.Trigger
+        theme="blue"
+        iconAfter={<FontAwesome name="chevron-down" />}
+      >
         <Text>{options.find((item) => item.value === value)?.label ?? placeholder}</Text>
       </SelectT.Trigger>
 

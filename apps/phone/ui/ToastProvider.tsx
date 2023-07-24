@@ -43,7 +43,7 @@ function SafeToastViewport() {
   );
 }
 
-function ToastProvider({ children }: Props) {
+export default function ToastProvider({ children }: Props) {
   return (
     <ToastProviderT>
       <CurrentToast />
@@ -52,8 +52,6 @@ function ToastProvider({ children }: Props) {
     </ToastProviderT>
   );
 }
-
-export default ToastProvider;
 
 export {
   useToast,
