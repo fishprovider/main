@@ -12,7 +12,7 @@ const Gift = dynamic(() => import('./Gift'));
 function Home() {
   return (
     <>
-      <PageSection variant="light" bg="/banner.jpeg">
+      <PageSection variant="light" bg="/banner.png">
         <ContentSection>
           <Intro />
         </ContentSection>
