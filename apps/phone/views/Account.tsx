@@ -1,10 +1,20 @@
+import { createDrawerNavigator } from '@react-navigation/drawer';
+
+import DemoDrawer from '~components/DemoDrawer';
 import User from '~components/User';
 import UserController from '~controllers/UserController';
+
+const Drawer = createDrawerNavigator();
 
 export default function Account() {
   return (
     <UserController>
-      <User />
+      <Drawer.Navigator>
+        <Drawer.Screen name="Trade" component={DemoDrawer} />
+        <Drawer.Screen name="History" component={DemoDrawer} />
+        <Drawer.Screen name="Admin" component={DemoDrawer} />
+        <Drawer.Screen name="User" component={User} />
+      </Drawer.Navigator>
     </UserController>
   );
 }
