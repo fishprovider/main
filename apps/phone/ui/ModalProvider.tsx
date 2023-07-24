@@ -22,7 +22,7 @@ const useModalSimple = ({
           width="98%"
           space
           borderWidth={2}
-          borderColor="orange"
+          borderColor="black"
           style={{
             position: 'absolute',
             top: '20%',

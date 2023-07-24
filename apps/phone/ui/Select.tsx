@@ -13,7 +13,7 @@ export default function Select({
 }: Props) {
   return (
     <SelectT value={value} onValueChange={onChange}>
-      <SelectT.Trigger borderColor="orange" iconAfter={<FontAwesome name="chevron-down" />}>
+      <SelectT.Trigger borderColor="black" iconAfter={<FontAwesome name="chevron-down" />}>
         {children}
       </SelectT.Trigger>
 
