@@ -1,5 +1,4 @@
 process.env.TAMAGUI_TARGET = 'native';
-process.env.EXPO_PUBLIC_BACKEND_URL = 'https://back.fishprovider.com';
 
 // eslint-disable-next-line func-names
 module.exports = function (api) {
@@ -11,7 +10,6 @@ module.exports = function (api) {
         'transform-inline-environment-variables',
         {
           include: [
-            'EXPO_PUBLIC_BACKEND_URL',
             'TAMAGUI_TARGET',
           ],
         },
