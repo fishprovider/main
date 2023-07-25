@@ -4,21 +4,16 @@ import { initStore } from '@fishprovider/cross/dist/libs/store';
 import { initAuth } from '~libs/auth';
 import { initNotif } from '~libs/pushNotif';
 
-const env = {
-  backendUrl: process.env.EXPO_PUBLIC_BACKEND_URL,
-  api: '/api',
-};
-
 const initialize = () => {
   initApi({
-    baseURL: `${env.backendUrl}${env.api}`,
-    logDebug: console.debug,
-    logError: console.info,
+    baseURL: `${process.env.EXPO_PUBLIC_BACKEND_URL}/api`,
+    logDebug: Logger.debug,
+    logError: Logger.error,
   });
 
   initStore({
-    logDebug: console.debug,
-    logError: console.info,
+    logDebug: Logger.debug,
+    logError: Logger.error,
   });
 
   initAuth();

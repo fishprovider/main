@@ -5,13 +5,13 @@ import storeUser from '@fishprovider/cross/dist/stores/user';
 import type { User } from '@fishprovider/utils/dist/types/User.model';
 
 const onClientLoggedOut = async () => {
-  console.info('[user] onClientLoggedOut');
+  Logger.info('[user] onClientLoggedOut');
   storeUser.mergeState({ isClientLoggedIn: false });
   await userLogout();
 };
 
 const onClientLoggedIn = async (userInfo: User, token: string) => {
-  console.info('[user] onClientLoggedIn', userInfo);
+  Logger.info('[user] onClientLoggedIn', userInfo);
   storeUser.mergeState({ isClientLoggedIn: true });
   await userLogin({ token });
   updateUser({});

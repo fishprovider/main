@@ -13,7 +13,7 @@ interface Props {
 
 function ItemTradePending({ order, prices }: Props) {
   const onClose = async () => {
-    console.log('ItemTradePending', _.size(prices));
+    Logger.debug('ItemTradePending', _.size(prices));
   };
 
   return (

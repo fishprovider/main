@@ -16,7 +16,7 @@ async function requestNotif() {
     finalStatus = status;
   }
   if (finalStatus !== 'granted') {
-    console.warn('Failed to get push token for push notification!');
+    Logger.warn('Failed to get push token for push notification!');
     return finalStatus;
   }
 
@@ -48,7 +48,7 @@ async function initNotif() {
 
 async function handleNotif() {
   const sub = Notifications.addNotificationReceivedListener((event) => {
-    console.log(event);
+    Logger.debug(event);
   });
   const unsub = () => {
     Notifications.removeNotificationSubscription(sub);

@@ -34,7 +34,7 @@ const getUserToken = async (user: FirebaseAuthTypes.User, forceRefresh?: boolean
     const token = await user.getIdToken(isRefresh);
     return token;
   } catch (err) {
-    console.error('Failed to fetch token', err);
+    Logger.error('Failed to fetch token', err);
     return undefined;
   }
 };
@@ -63,7 +63,7 @@ const logout = async () => {
     await GoogleSignin.signOut();
     await onClientLoggedOut();
   } catch (error) {
-    console.error('Failed to logout', error);
+    Logger.error('Failed to logout', error);
   }
 };
 
@@ -80,7 +80,7 @@ const loginWithGoogle = async () => {
     const credentials = auth.GoogleAuthProvider.credential(userInfo.idToken);
     return { userInfo, credentials };
   } catch (err: any) {
-    console.error('Failed to loginWithGoogle', err);
+    Logger.error('Failed to loginWithGoogle', err);
     throw err;
   }
 };
@@ -96,7 +96,7 @@ const loginWithApple = async () => {
     const credentials = auth.AppleAuthProvider.credential(userInfo.identityToken);
     return { userInfo, credentials };
   } catch (err: any) {
-    console.error('Failed to loginWithApple', err);
+    Logger.error('Failed to loginWithApple', err);
     throw err;
   }
 };
@@ -115,7 +115,7 @@ const loginOAuth = async (loginMethod: LoginMethods) => {
     const { user } = await auth().signInWithCredential(credentials);
     await onLoggedIn(user);
   } catch (err) {
-    console.error('Failed to login', err);
+    Logger.error('Failed to login', err);
   }
 };
 
@@ -129,7 +129,7 @@ const loginWithPassword = async (email: string, password: string, isLogin: boole
       await onLoggedIn(user);
     }
   } catch (err) {
-    console.error('Failed to login', err);
+    Logger.error('Failed to login', err);
   }
 };
 

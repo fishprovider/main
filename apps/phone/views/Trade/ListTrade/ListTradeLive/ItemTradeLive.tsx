@@ -17,7 +17,7 @@ function ItemTradeLive({
   order, prices, mergedView, unmergeView,
 }: Props) {
   const onClose = async () => {
-    console.log('ItemTradeLive', _.size(prices));
+    Logger.debug('ItemTradeLive', _.size(prices));
   };
 
   return (

@@ -23,24 +23,24 @@ function useLiveOrdersSocket(providerId: string) {
   useEffect(() => {
     if (socket) {
       if (prevChannel.current) {
-        console.log('[socket] unsub from prev', prevChannel.current);
+        Logger.debug('[socket] unsub from prev', prevChannel.current);
         socket.off(prevChannel.current);
         socket.emit('leave', prevChannel.current);
       }
 
       const channel = redisKeys.liveOrders(providerId);
-      console.log('[socket] sub', channel);
+      Logger.debug('[socket] sub', channel);
       socket.emit('join', channel);
       socket.on(channel, (docs: Order[]) => {
         storeOrders.mergeDocs(docs);
       });
     } else {
-      console.log('Skipped useLiveOrdersSocket', providerId);
+      Logger.debug('Skipped useLiveOrdersSocket', providerId);
     }
     return () => {
       if (socket) {
         const channel = redisKeys.liveOrders(providerId);
-        console.log('[socket] unsub', channel);
+        Logger.debug('[socket] unsub', channel);
         socket.off(channel);
         socket.emit('leave', channel);
       }
@@ -59,24 +59,24 @@ function usePendingOrdersSocket(providerId: string) {
   useEffect(() => {
     if (socket) {
       if (prevChannel.current) {
-        console.log('[socket] unsub from prev', prevChannel.current);
+        Logger.debug('[socket] unsub from prev', prevChannel.current);
         socket.off(prevChannel.current);
         socket.emit('leave', prevChannel.current);
       }
 
       const channel = redisKeys.pendingOrders(providerId);
-      console.log('[socket] sub', channel);
+      Logger.debug('[socket] sub', channel);
       socket.emit('join', channel);
       socket.on(channel, (docs: Order[]) => {
         storeOrders.mergeDocs(docs);
       });
     } else {
-      console.log('Skipped usePendingOrdersSocket', providerId);
+      Logger.debug('Skipped usePendingOrdersSocket', providerId);
     }
     return () => {
       if (socket) {
         const channel = redisKeys.pendingOrders(providerId);
-        console.log('[socket] unsub', channel);
+        Logger.debug('[socket] unsub', channel);
         socket.off(channel);
         socket.emit('leave', channel);
       }
