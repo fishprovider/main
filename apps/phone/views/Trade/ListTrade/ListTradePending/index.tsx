@@ -7,6 +7,7 @@ import type { Order } from '@fishprovider/utils/dist/types/Order.model';
 import _ from 'lodash';
 import { useState } from 'react';
 
+import H6 from '~ui/H6';
 import Stack from '~ui/Stack';
 import Text from '~ui/Text';
 
@@ -83,7 +84,7 @@ function ListTradePending({ orders }: Props) {
 
   return (
     <Stack>
-      <Text>Pending Orders</Text>
+      <H6>Pending Orders</H6>
       {renderBody()}
     </Stack>
   );
