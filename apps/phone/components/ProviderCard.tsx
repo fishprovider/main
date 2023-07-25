@@ -1,4 +1,5 @@
 import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
+import storeUser from '@fishprovider/cross/dist/stores/user';
 import * as WebBrowser from 'expo-web-browser';
 import _ from 'lodash';
 import moment from 'moment';
@@ -19,6 +20,12 @@ interface Props {
 }
 
 export default function ProviderCard({ providerId }: Props) {
+  const {
+    mode = 'live',
+  } = storeUser.useStore((state) => ({
+    mode: state.mode,
+  }));
+
   const {
     name = '-',
     icon = '-',
@@ -53,7 +60,9 @@ export default function ProviderCard({ providerId }: Props) {
       showModal();
       return;
     }
-    WebBrowser.openBrowserAsync(`https://www.fishprovider.com/strategies/${providerId}`);
+    WebBrowser.openBrowserAsync(mode === 'live'
+      ? `https://www.fishprovider.com/strategies/${providerId}`
+      : `https://demo.fishprovider.com/strategies/${providerId}`);
   };
 
   const target = `${maxYearProfit}%/year`;
