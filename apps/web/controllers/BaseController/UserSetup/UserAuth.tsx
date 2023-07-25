@@ -1,17 +1,21 @@
 import { useEffect } from 'react';
 
-import { authOnChange, loginFromCache, refreshUserToken } from '~libs/auth';
+import {
+  authOnChange, authOnReady, loginFromCache, refreshUserToken,
+} from '~libs/auth';
 
 function UserAuth() {
   useEffect(() => {
     loginFromCache();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    authOnReady();
   }, []);
 
   useEffect(() => {
     const unsub = authOnChange();
     return unsub;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

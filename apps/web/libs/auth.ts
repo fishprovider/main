@@ -319,13 +319,22 @@ const loginWithMagicLink = async (email: string) => {
 };
 
 const authOnChange = () => getAuth().onAuthStateChanged(async (user) => {
-  // user is null (not undefined)
   if (!user) {
     onClientLoggedOut();
     return;
   }
   await onLoggedIn(user);
 });
+
+const authOnReady = async () => {
+  await getAuth().authStateReady();
+  const user = getAuth().currentUser;
+  if (!user) {
+    onClientLoggedOut();
+    return;
+  }
+  await onLoggedIn(user);
+};
 
 //
 // updates
@@ -380,6 +389,7 @@ const changeProfile = ({ name, picture }: { name?: string, picture?: string }) =
 
 export {
   authOnChange,
+  authOnReady,
   cacheReadUserToken,
   changePassword,
   changeProfile,
