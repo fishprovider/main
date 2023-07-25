@@ -10,7 +10,7 @@ export default function UserAccountNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Account"
+        name="AccountNavigator"
         component={AccountNavigator}
         options={{
           headerShown: false,

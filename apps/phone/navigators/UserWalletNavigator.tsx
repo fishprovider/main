@@ -10,7 +10,7 @@ export default function UserWalletNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Wallet"
+        name="WalletNavigator"
         component={WalletNavigator}
         options={{
           headerShown: false,

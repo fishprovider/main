@@ -33,7 +33,7 @@ export default function RootNavigator() {
           }}
         />
         <Tab.Screen
-          name="Wallet"
+          name="UserWalletNavigator"
           component={UserWalletNavigator}
           options={{
             tabBarIcon: BankIcon,
@@ -41,7 +41,7 @@ export default function RootNavigator() {
           }}
         />
         <Tab.Screen
-          name="Account"
+          name="UserAccountNavigator"
           component={UserAccountNavigator}
           options={{
             tabBarIcon: AccountIcon,
