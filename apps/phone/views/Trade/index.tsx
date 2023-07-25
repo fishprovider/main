@@ -1,9 +1,10 @@
 import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
 import storeUser from '@fishprovider/cross/dist/stores/user';
 import _ from 'lodash';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import StrategyController from '~controllers/StrategyController';
+import { cacheRead, cacheWrite } from '~libs/cache';
 import Select from '~ui/Select';
 import Stack from '~ui/Stack';
 import Text from '~ui/Text';
@@ -45,17 +46,32 @@ export default function Trade() {
     label: `${item.name} ${item.icon || ''}`,
   })));
 
+  const [defaultProviderId, setDefaultProviderId] = useState<string>();
   const [selectedProviderId, setSelectedProviderId] = useState<string>();
+
+  useEffect(() => {
+    cacheRead<string>('fp-providerId').then((cache) => {
+      if (cache) {
+        setDefaultProviderId(cache);
+      }
+    });
+  }, []);
 
   if (!options.length) return null;
 
-  const providerId = selectedProviderId || options[0].value;
+  const providerId = selectedProviderId || defaultProviderId || options[0].value;
+
+  const onSelect = (value: string) => {
+    setSelectedProviderId(value);
+    cacheWrite('fp-providerId', value);
+  };
+
   return (
     <Stack paddingHorizontal="$2">
       <Select
         options={options}
         value={providerId}
-        onChange={setSelectedProviderId}
+        onChange={onSelect}
       />
       <StrategyController providerId={providerId}>
         <Account />
