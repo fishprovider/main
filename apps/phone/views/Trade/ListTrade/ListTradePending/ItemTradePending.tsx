@@ -1,8 +1,9 @@
+import { FontAwesome } from '@expo/vector-icons';
+import { Direction } from '@fishprovider/utils/dist/constants/order';
 import type { Order } from '@fishprovider/utils/dist/types/Order.model';
 import type { Price } from '@fishprovider/utils/dist/types/Price.model';
 import _ from 'lodash';
 
-import Button from '~ui/Button';
 import Group from '~ui/Group';
 import Text from '~ui/Text';
 
@@ -19,19 +20,30 @@ function ItemTradePending({ order, prices }: Props) {
   return (
     <Group justifyContent="space-between" alignItems="center" borderWidth={1} padding={4}>
       <Text>
-        {_.upperFirst(order.direction)}
+        {order.direction === Direction.buy ? (
+          <FontAwesome
+            name="chevron-up"
+            color="green"
+            size={15}
+          />
+        ) : (
+          <FontAwesome
+            name="chevron-down"
+            color="red"
+            size={15}
+          />
+        )}
         {' '}
         {order.volume}
         {' '}
         {order.symbol}
       </Text>
-      <Button
+      <FontAwesome
+        name="window-close-o"
+        color="orange"
+        size={20}
         onPress={onClose}
-        size="$2"
-        theme="red"
-      >
-        x
-      </Button>
+      />
     </Group>
   );
 }
