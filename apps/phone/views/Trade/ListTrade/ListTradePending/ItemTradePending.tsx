@@ -4,7 +4,10 @@ import type { Order } from '@fishprovider/utils/dist/types/Order.model';
 import type { Price } from '@fishprovider/utils/dist/types/Price.model';
 import _ from 'lodash';
 
+import CloseOrderModal from '~components/CloseOrderModal';
 import Group from '~ui/Group';
+import H6 from '~ui/H6';
+import { useModalSimple } from '~ui/ModalProvider';
 import Text from '~ui/Text';
 
 interface Props {
@@ -13,8 +16,14 @@ interface Props {
 }
 
 function ItemTradePending({ order, prices }: Props) {
+  const [showModal] = useModalSimple({
+    title: <H6>Are you sure?</H6>,
+    content: <CloseOrderModal order={order} />,
+  });
+
   const onClose = async () => {
     Logger.debug('ItemTradePending', _.size(prices));
+    showModal();
   };
 
   return (

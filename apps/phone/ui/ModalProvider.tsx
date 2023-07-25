@@ -1,6 +1,6 @@
+import { FontAwesome } from '@expo/vector-icons';
 import { ModalProvider, useModal } from 'react-native-use-modal-hooks';
 
-import Button from './Button';
 import Dialog from './Dialog';
 
 interface Props {
@@ -34,16 +34,16 @@ const useModalSimple = ({
           {description && <Dialog.Description>{description}</Dialog.Description>}
           {content}
           <Dialog.Close asChild>
-            <Button
-              position="absolute"
-              top="$3"
-              right="$3"
-              size="$2"
-              circular
+            <FontAwesome
+              name="window-close"
+              size={20}
+              style={{
+                position: 'absolute',
+                top: '5%',
+                right: '2%',
+              }}
               onPress={() => hide()}
-            >
-              x
-            </Button>
+            />
           </Dialog.Close>
         </Dialog.Content>
       </Dialog.Portal>
