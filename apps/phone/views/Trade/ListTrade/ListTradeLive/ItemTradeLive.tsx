@@ -6,7 +6,6 @@ import _ from 'lodash';
 
 import OrderInfo from '~components/OrderInfo';
 import Profit from '~components/Profit';
-import Button from '~ui/Button';
 import Group from '~ui/Group';
 
 interface Props {

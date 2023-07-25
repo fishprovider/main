@@ -8,6 +8,7 @@ export default function OpenOrder() {
       iconAfter={(
         <FontAwesome name="plus" size={15} style={{ color: 'green' }} />
       )}
+      themeInverse
     >
       New Order
     </Button>

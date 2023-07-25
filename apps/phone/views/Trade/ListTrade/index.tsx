@@ -17,7 +17,7 @@ function ListTrade() {
   ));
 
   return (
-    <Stack>
+    <Stack space="$4">
       <ListTradeLive orders={trades.filter((item) => item.status === OrderStatus.live)} />
       <ListTradePending orders={trades.filter((item) => item.status === OrderStatus.pending)} />
     </Stack>

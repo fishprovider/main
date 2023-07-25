@@ -46,7 +46,7 @@ export default function Trade() {
         onChange={onSelect}
       />
       <StrategyController providerId={providerId}>
-        <Stack>
+        <Stack space="$4">
           <TradeWatch />
           <TradeHeader />
           <OpenOrder />

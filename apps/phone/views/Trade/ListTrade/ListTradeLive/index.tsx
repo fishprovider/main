@@ -1,7 +1,11 @@
 import { FontAwesome } from '@expo/vector-icons';
+import orderGetMany from '@fishprovider/cross/dist/api/orders/getMany';
+import orderGetManyInfo from '@fishprovider/cross/dist/api/orders/getManyInfo';
+import { useMutate } from '@fishprovider/cross/dist/libs/query';
 import storePrices from '@fishprovider/cross/dist/stores/prices';
 import storeUser from '@fishprovider/cross/dist/stores/user';
 import { ProviderType } from '@fishprovider/utils/dist/constants/account';
+import { OrderStatus } from '@fishprovider/utils/dist/constants/order';
 import { getProfit } from '@fishprovider/utils/dist/helpers/order';
 import { getMajorPairs } from '@fishprovider/utils/dist/helpers/price';
 import type { Order } from '@fishprovider/utils/dist/types/Order.model';
@@ -9,7 +13,7 @@ import _ from 'lodash';
 import { useState } from 'react';
 
 import Group from '~ui/Group';
-import H6 from '~ui/H6';
+import H4 from '~ui/H4';
 import Stack from '~ui/Stack';
 import Text from '~ui/Text';
 
@@ -21,9 +25,11 @@ interface Props {
 
 function ListTradeLive({ orders }: Props) {
   const {
+    providerId = '',
     providerType = ProviderType.icmarkets,
     asset = 'USD',
   } = storeUser.useStore((state) => ({
+    providerId: state.activeProvider?._id,
     providerType: state.activeProvider?.providerType,
     asset: state.activeProvider?.asset,
   }));
@@ -40,10 +46,30 @@ function ListTradeLive({ orders }: Props) {
     )
   ));
 
+  const { mutate: reload, isLoading: isLoadingReload } = useMutate({
+    mutationFn: orderGetMany,
+  });
+
   const [mergedViewInput, setMergedViewInput] = useState<boolean>();
   const mergedView = mergedViewInput ?? orders.length > 5;
 
   const [sortProfit] = useState(false);
+
+  const onReload = () => {
+    if (isLoadingReload) return;
+
+    reload({
+      providerId,
+      orderStatus: OrderStatus.live,
+      reload: true,
+    }, {
+      onSuccess: (res) => {
+        const orderIds = res.positions.map((item) => item._id);
+        if (!orderIds.length) return;
+        orderGetManyInfo({ providerId, orderIds, fields: [] });
+      },
+    });
+  };
 
   const renderBody = () => {
     if (!orders.length) {
@@ -111,11 +137,17 @@ function ListTradeLive({ orders }: Props) {
 
   return (
     <Stack>
-      <Group>
-        <H6>Live Orders</H6>
+      <Group space="$3">
+        <H4>Live Orders</H4>
         <FontAwesome
-          name="compress"
-          size={15}
+          name="refresh"
+          size={20}
+          onPress={onReload}
+          color={isLoadingReload ? 'gray' : 'green'}
+        />
+        <FontAwesome
+          name={mergedView ? 'expand' : 'compress'}
+          size={20}
           onPress={() => setMergedViewInput(
             (prev) => (prev === undefined ? !mergedView : !prev),
           )}
