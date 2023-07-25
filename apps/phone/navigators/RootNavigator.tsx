@@ -36,6 +36,7 @@ export default function RootNavigator() {
           name="UserWalletNavigator"
           component={UserWalletNavigator}
           options={{
+            tabBarLabel: 'Wallet',
             tabBarIcon: BankIcon,
             headerShown: false,
           }}
@@ -44,6 +45,7 @@ export default function RootNavigator() {
           name="UserAccountNavigator"
           component={UserAccountNavigator}
           options={{
+            tabBarLabel: 'Account',
             tabBarIcon: AccountIcon,
             headerShown: false,
           }}
