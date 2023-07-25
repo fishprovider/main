@@ -3,7 +3,7 @@ import { useMutate } from '@fishprovider/cross/dist/libs/query';
 import { Order } from '@fishprovider/utils/dist/types/Order.model';
 
 import Button from '~ui/Button';
-import Stack from '~ui/Stack';
+import Group from '~ui/Group';
 import { useToast } from '~ui/ToastProvider';
 
 interface Props {
@@ -29,10 +29,10 @@ export default function CloseOrderModal({ order }: Props) {
   };
 
   return (
-    <Stack>
+    <Group>
       <Button theme={isLoading ? 'gray' : 'red'} onPress={onCloseOrder} disabled={isLoading}>
         Yes, close this order now
       </Button>
-    </Stack>
+    </Group>
   );
 }
