@@ -19,7 +19,10 @@ export default function UserAccountNavigator() {
       <Stack.Screen
         name="User"
         component={User}
-        options={{ presentation: 'modal' }}
+        options={{
+          headerLeftLabelVisible: false,
+          presentation: 'modal'
+         }}
       />
     </Stack.Navigator>
   );
