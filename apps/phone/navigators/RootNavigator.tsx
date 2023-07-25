@@ -1,15 +1,25 @@
-/* eslint-disable react/no-unstable-nested-components */
-
 import { FontAwesome } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import BaseController from '~controllers/BaseController';
 import Strategies from '~views/Strategies';
 
-import AccountNavigator from './AccountNavigator';
-import WalletNavigator from './WalletNavigator';
+import UserAccountNavigator from './UserAccountNavigator';
+import UserWalletNavigator from './UserWalletNavigator';
 
 const Tab = createBottomTabNavigator();
+
+function StrategiesIcon(props: any) {
+  return <FontAwesome {...props} name="rocket" />;
+}
+
+function BankIcon(props: any) {
+  return <FontAwesome {...props} name="bank" />;
+}
+
+function AccountIcon(props: any) {
+  return <FontAwesome {...props} name="bar-chart" />;
+}
 
 export default function RootNavigator() {
   return (
@@ -19,22 +29,22 @@ export default function RootNavigator() {
           name="Strategies"
           component={Strategies}
           options={{
-            tabBarIcon: (props) => <FontAwesome {...props} name="rocket" />,
+            tabBarIcon: StrategiesIcon,
           }}
         />
         <Tab.Screen
           name="Wallet"
-          component={WalletNavigator}
+          component={UserWalletNavigator}
           options={{
-            tabBarIcon: (props) => <FontAwesome {...props} name="bank" />,
+            tabBarIcon: BankIcon,
             headerShown: false,
           }}
         />
         <Tab.Screen
           name="Account"
-          component={AccountNavigator}
+          component={UserAccountNavigator}
           options={{
-            tabBarIcon: (props) => <FontAwesome {...props} name="bar-chart" />,
+            tabBarIcon: AccountIcon,
             headerShown: false,
           }}
         />
