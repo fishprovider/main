@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 
 import StrategyController from '~controllers/StrategyController';
 import { cacheRead, cacheWrite } from '~libs/cache';
+import ScrollView from '~ui/ScrollView';
 import Select from '~ui/Select';
 import Stack from '~ui/Stack';
 
@@ -46,12 +47,14 @@ export default function Trade() {
         onChange={onSelect}
       />
       <StrategyController providerId={providerId}>
-        <Stack space="$4">
-          <TradeWatch />
-          <TradeHeader />
-          <OpenOrder />
-          <ListTrade />
-        </Stack>
+        <ScrollView>
+          <Stack space="$4">
+            <TradeWatch />
+            <TradeHeader />
+            <OpenOrder />
+            <ListTrade />
+          </Stack>
+        </ScrollView>
       </StrategyController>
     </Stack>
   );
