@@ -1,4 +1,5 @@
 import walletGetMany from '@fishprovider/cross/dist/api/wallet/getMany';
+import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
 import storeUser from '@fishprovider/cross/dist/stores/user';
 import storeWallets from '@fishprovider/cross/dist/stores/wallets';
@@ -7,7 +8,6 @@ import type { Wallet as WalletModel } from '@fishprovider/utils/dist/types/Pay.m
 import _ from 'lodash';
 
 import Link from '~components/base/Link';
-import { queryKeys } from '~constants/query';
 import Routes from '~libs/routes';
 import Card from '~ui/core/Card';
 import Group from '~ui/core/Group';

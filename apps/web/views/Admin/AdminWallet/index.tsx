@@ -1,3 +1,4 @@
+import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { apiPost } from '@fishprovider/cross/dist/libs/api';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
 import storeWallets from '@fishprovider/cross/dist/stores/wallets';
@@ -7,7 +8,6 @@ import _ from 'lodash';
 import moment from 'moment';
 import React from 'react';
 
-import { queryKeys } from '~constants/query';
 import Icon from '~ui/core/Icon';
 import Stack from '~ui/core/Stack';
 import Table from '~ui/core/Table';

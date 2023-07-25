@@ -1,5 +1,6 @@
 import depositAdd from '@fishprovider/cross/dist/api/deposit/add';
 import depositGetMany from '@fishprovider/cross/dist/api/deposit/getMany';
+import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useMutate, useQuery } from '@fishprovider/cross/dist/libs/query';
 import storeTransactions from '@fishprovider/cross/dist/stores/transactions';
 import { SourceType, TransactionType } from '@fishprovider/utils/dist/constants/pay';
@@ -7,7 +8,6 @@ import _ from 'lodash';
 import { useState } from 'react';
 
 import { SourceTypeText } from '~constants/pay';
-import { queryKeys } from '~constants/query';
 import Button from '~ui/core/Button';
 import Card from '~ui/core/Card';
 import Chip from '~ui/core/Chip';

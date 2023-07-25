@@ -1,5 +1,6 @@
 import orderGetHistory from '@fishprovider/cross/dist/api/orders/getHistory';
 import orderGetManyInfo from '@fishprovider/cross/dist/api/orders/getManyInfo';
+import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
 import storeOrders from '@fishprovider/cross/dist/stores/orders';
 import storeUser from '@fishprovider/cross/dist/stores/user';
@@ -9,7 +10,6 @@ import type { Order } from '@fishprovider/utils/dist/types/Order.model';
 import { useEffect, useRef } from 'react';
 
 import { activityFields } from '~constants/account';
-import { queryKeys } from '~constants/query';
 import { refreshMS } from '~utils';
 
 const getChannel = redisKeys.historyOrders;

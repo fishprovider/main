@@ -1,12 +1,12 @@
 import accountGetManySlim from '@fishprovider/cross/dist/api/accounts/getManySlim';
 import accountGetManyUser from '@fishprovider/cross/dist/api/accounts/getManyUser';
+import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
 import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
 import storeUser from '@fishprovider/cross/dist/stores/user';
 import _ from 'lodash';
 import { useRouter } from 'next/router';
 
-import { queryKeys } from '~constants/query';
 import Select from '~ui/core/Select';
 
 function ProviderSelect() {

@@ -1,4 +1,5 @@
 import orderGetMany from '@fishprovider/cross/dist/api/orders/getMany';
+import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
 import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
 import storeOrders from '@fishprovider/cross/dist/stores/orders';
@@ -12,7 +13,6 @@ import _ from 'lodash';
 
 import EquityProgress from '~components/account/EquityProgress';
 import BuySellIcon from '~components/order/BuySellIcon';
-import { queryKeys } from '~constants/query';
 import Group from '~ui/core/Group';
 import Icon from '~ui/core/Icon';
 import Indicator from '~ui/core/Indicator';
@@ -134,7 +134,7 @@ function TradeInfo({
         <Text color={profit > 0 ? 'green' : 'red'}>
           {`Profit: ${_.round(profit, 2)} ${asset} (${_.round(profitRatio, 2)}% ${profitIcon})`}
         </Text>
-        <Indicator label={`${orders.length}`} size={orders.length && 16}>
+        <Indicator label={orders.length} size={orders.length && 16}>
           <Icon name="Info" button />
         </Indicator>
       </Group>

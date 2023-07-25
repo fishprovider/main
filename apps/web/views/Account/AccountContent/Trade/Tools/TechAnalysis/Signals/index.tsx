@@ -1,11 +1,11 @@
 import signalGetMany from '@fishprovider/cross/dist/api/signals/getMany';
+import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
 import storeUser from '@fishprovider/cross/dist/stores/user';
 import { ProviderType } from '@fishprovider/utils/dist/constants/account';
 import { useState } from 'react';
 
 import { signalVersions } from '~constants/order';
-import { queryKeys } from '~constants/query';
 import Group from '~ui/core/Group';
 import Select from '~ui/core/Select';
 import Stack from '~ui/core/Stack';

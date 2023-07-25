@@ -1,6 +1,7 @@
 import priceGetDetail from '@fishprovider/cross/dist/api/prices/getDetail';
 import priceGetMany from '@fishprovider/cross/dist/api/prices/getMany';
 import priceGetNames from '@fishprovider/cross/dist/api/prices/getNames';
+import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
 import storePrices from '@fishprovider/cross/dist/stores/prices';
 import storeUser from '@fishprovider/cross/dist/stores/user';
@@ -9,7 +10,6 @@ import _ from 'lodash';
 import { useEffect } from 'react';
 
 import PriceView from '~components/price/PriceView';
-import { queryKeys } from '~constants/query';
 import Group from '~ui/core/Group';
 import Select from '~ui/core/Select';
 

@@ -1,6 +1,7 @@
 import lockAccount from '@fishprovider/cross/dist/api/accounts/lock/account';
 import lockMember from '@fishprovider/cross/dist/api/accounts/lock/member';
 import priceGetNames from '@fishprovider/cross/dist/api/prices/getNames';
+import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
 import storePrices from '@fishprovider/cross/dist/stores/prices';
 import storeUser from '@fishprovider/cross/dist/stores/user';
@@ -11,7 +12,6 @@ import moment from 'moment';
 import { useState } from 'react';
 
 import { LockTypeText } from '~constants/account';
-import { queryKeys } from '~constants/query';
 import Box from '~ui/core/Box';
 import Button from '~ui/core/Button';
 import Group from '~ui/core/Group';

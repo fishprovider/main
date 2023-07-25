@@ -1,5 +1,6 @@
 import investAdd from '@fishprovider/cross/dist/api/invest/add';
 import walletGetMany from '@fishprovider/cross/dist/api/wallet/getMany';
+import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useMutate, useQuery } from '@fishprovider/cross/dist/libs/query';
 import storeUser from '@fishprovider/cross/dist/stores/user';
 import storeWallets from '@fishprovider/cross/dist/stores/wallets';
@@ -9,7 +10,6 @@ import { useState } from 'react';
 
 import Link from '~components/base/Link/Link';
 import RequiredLoginView from '~components/user/RequiredLoginView';
-import { queryKeys } from '~constants/query';
 import Routes from '~libs/routes';
 import Box from '~ui/core/Box';
 import Button from '~ui/core/Button';

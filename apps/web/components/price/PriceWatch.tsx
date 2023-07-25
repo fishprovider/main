@@ -1,4 +1,5 @@
 import priceGetMany from '@fishprovider/cross/dist/api/prices/getMany';
+import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
 import storeOrders from '@fishprovider/cross/dist/stores/orders';
 import storePrices from '@fishprovider/cross/dist/stores/prices';
@@ -11,7 +12,6 @@ import type { Price } from '@fishprovider/utils/dist/types/Price.model';
 import _ from 'lodash';
 import { useEffect, useRef, useState } from 'react';
 
-import { queryKeys } from '~constants/query';
 import { refreshMS } from '~utils';
 
 const usePricesSocket = (providerType: ProviderType, watchSymbols: string[]) => {

@@ -1,6 +1,7 @@
 import orderGetHistory from '@fishprovider/cross/dist/api/orders/getHistory';
 import orderGetManyInfo from '@fishprovider/cross/dist/api/orders/getManyInfo';
 import priceGetMany from '@fishprovider/cross/dist/api/prices/getMany';
+import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useMutate, useQuery } from '@fishprovider/cross/dist/libs/query';
 import storeOrders from '@fishprovider/cross/dist/stores/orders';
 import storeUser from '@fishprovider/cross/dist/stores/user';
@@ -13,7 +14,6 @@ import { useEffect, useState } from 'react';
 
 import ProfitColor from '~components/price/ProfitColor';
 import { activityFields } from '~constants/account';
-import { queryKeys } from '~constants/query';
 import useToggle from '~hooks/useToggle';
 import Group from '~ui/core/Group';
 import Icon from '~ui/core/Icon';

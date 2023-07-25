@@ -1,4 +1,5 @@
 import priceGetMany from '@fishprovider/cross/dist/api/prices/getMany';
+import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
 import storePrices from '@fishprovider/cross/dist/stores/prices';
 import storeUser from '@fishprovider/cross/dist/stores/user';
@@ -6,7 +7,6 @@ import { PlanType, ProviderType } from '@fishprovider/utils/dist/constants/accou
 import type { Plan } from '@fishprovider/utils/dist/types/Account.model';
 import _ from 'lodash';
 
-import { queryKeys } from '~constants/query';
 import Stack from '~ui/core/Stack';
 import Table from '~ui/core/Table';
 import Title from '~ui/core/Title';

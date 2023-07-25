@@ -1,3 +1,4 @@
+import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { apiPost } from '@fishprovider/cross/dist/libs/api';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
 import storeTransactions from '@fishprovider/cross/dist/stores/transactions';
@@ -6,7 +7,6 @@ import type { Transaction } from '@fishprovider/utils/dist/types/Pay.model';
 import _ from 'lodash';
 import React from 'react';
 
-import { queryKeys } from '~constants/query';
 import Stack from '~ui/core/Stack';
 import Table from '~ui/core/Table';
 import Title from '~ui/core/Title';

@@ -1,6 +1,7 @@
 import walletGetMany from '@fishprovider/cross/dist/api/wallet/getMany';
 import withdrawAdd from '@fishprovider/cross/dist/api/withdraw/add';
 import drawGetMany from '@fishprovider/cross/dist/api/withdraw/getMany';
+import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useMutate, useQuery } from '@fishprovider/cross/dist/libs/query';
 import storeTransactions from '@fishprovider/cross/dist/stores/transactions';
 import storeUser from '@fishprovider/cross/dist/stores/user';
@@ -11,7 +12,6 @@ import { useState } from 'react';
 
 import Link from '~components/base/Link';
 import RequiredVerifyPhone from '~components/user/RequiredVerifyPhone';
-import { queryKeys } from '~constants/query';
 import Button from '~ui/core/Button';
 import NumberInput from '~ui/core/NumberInput';
 import Select from '~ui/core/Select';

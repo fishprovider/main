@@ -1,4 +1,5 @@
 import accountGetManySlim from '@fishprovider/cross/dist/api/accounts/getManySlim';
+import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
 import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
 import type { Account } from '@fishprovider/utils/dist/types/Account.model';
@@ -7,7 +8,6 @@ import { useRef } from 'react';
 
 import Link from '~components/base/Link';
 import { TopProviderIds } from '~constants/account';
-import { queryKeys } from '~constants/query';
 import Routes from '~libs/routes';
 import Box from '~ui/core/Box';
 import Button from '~ui/core/Button';

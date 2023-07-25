@@ -1,13 +1,13 @@
 import { getUserController } from '@fishprovider/adapter-frontend';
 import { getUserUseCase } from '@fishprovider/application-rules';
 import getUser from '@fishprovider/cross/dist/api/user/getUser';
+import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
 import storeUser from '@fishprovider/cross/dist/stores/user';
 import { FishApiUserRepository } from '@fishprovider/framework-fish-api';
 import { useState } from 'react';
 
 import VerifyPhone from '~components/user/VerifyPhone';
-import { queryKeys } from '~constants/query';
 import { changePassword, changeProfile, resetPassword } from '~libs/auth';
 import Avatar from '~ui/core/Avatar';
 import Button from '~ui/core/Button';

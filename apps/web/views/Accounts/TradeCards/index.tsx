@@ -1,5 +1,6 @@
 import priceGetMany from '@fishprovider/cross/dist/api/prices/getMany';
 import priceGetNames from '@fishprovider/cross/dist/api/prices/getNames';
+import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
 import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
 import storeOrders from '@fishprovider/cross/dist/stores/orders';
@@ -13,7 +14,6 @@ import type { Order } from '@fishprovider/utils/dist/types/Order.model';
 import _ from 'lodash';
 import { useEffect, useState } from 'react';
 
-import { queryKeys } from '~constants/query';
 import Group from '~ui/core/Group';
 import Pagination from '~ui/core/Pagination';
 import Select from '~ui/core/Select';
@@ -184,7 +184,7 @@ function TradeCards({
         />
         <Select
           data={pageSizeOptions}
-          value={`${pageSize}`}
+          value={pageSize}
           onChange={(value) => {
             if (!value) return;
             setPageSize(+value);

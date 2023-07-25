@@ -1,6 +1,7 @@
 import barGetMany from '@fishprovider/cross/dist/api/bars/getMany';
 import orderRemove from '@fishprovider/cross/dist/api/orders/remove';
 import orderUpdate from '@fishprovider/cross/dist/api/orders/update';
+import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
 import storeBars from '@fishprovider/cross/dist/stores/bars';
 import storeOrders from '@fishprovider/cross/dist/stores/orders';
@@ -19,7 +20,6 @@ import React, { useEffect, useState } from 'react';
 
 import OrderModal from '~components/order/OpenOrder/OrderModal';
 import SymbolsSelect from '~components/price/SymbolsSelect';
-import { queryKeys } from '~constants/query';
 import useConversionRate from '~hooks/useConversionRate';
 import Box from '~ui/core/Box';
 import Button from '~ui/core/Button';

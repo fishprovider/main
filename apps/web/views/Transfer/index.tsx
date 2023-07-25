@@ -1,12 +1,12 @@
 import transferAdd from '@fishprovider/cross/dist/api/transfer/add';
 import transferGetMany from '@fishprovider/cross/dist/api/transfer/getMany';
+import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useMutate, useQuery } from '@fishprovider/cross/dist/libs/query';
 import storeTransactions from '@fishprovider/cross/dist/stores/transactions';
 import { TransactionType } from '@fishprovider/utils/dist/constants/pay';
 import _ from 'lodash';
 import { useState } from 'react';
 
-import { queryKeys } from '~constants/query';
 import Button from '~ui/core/Button';
 import NumberInput from '~ui/core/NumberInput';
 import Stack from '~ui/core/Stack';
