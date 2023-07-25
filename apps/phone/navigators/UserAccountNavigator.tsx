@@ -21,8 +21,8 @@ export default function UserAccountNavigator() {
         component={User}
         options={{
           headerLeftLabelVisible: false,
-          presentation: 'modal'
-         }}
+          presentation: 'modal',
+        }}
       />
     </Stack.Navigator>
   );
