@@ -2,6 +2,7 @@ import { initApi } from '@fishprovider/cross/dist/libs/api';
 import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
 import storeOrders from '@fishprovider/cross/dist/stores/orders';
 import storeUser from '@fishprovider/cross/dist/stores/user';
+import { useNavigation } from '@react-navigation/native';
 
 import { logout } from '~libs/auth';
 import { updateSocketUrl } from '~libs/socket';
@@ -14,6 +15,8 @@ const options = [
 ];
 
 export default function LiveModeSwitch() {
+  const navigation = useNavigation<any>();
+
   const {
     mode = 'live',
   } = storeUser.useStore((state) => ({
@@ -35,6 +38,10 @@ export default function LiveModeSwitch() {
     updateSocketUrl(modeNew === 'live'
       ? process.env.EXPO_PUBLIC_SOCKET_URL
       : process.env.EXPO_PUBLIC_DEMO_SOCKET_URL);
+
+    if (navigation.canGoBack()) {
+      navigation.goBack();
+    }
   };
 
   return (
