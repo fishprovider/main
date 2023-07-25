@@ -24,7 +24,7 @@ function Profit({ order, prices }: Props) {
   if (!priceDoc || !order.price) return null;
 
   return (
-    <Text>
+    <Text color={profit > 0 ? 'green' : 'red'}>
       {`${_.round(profit, 2)} ${asset}`}
     </Text>
   );
