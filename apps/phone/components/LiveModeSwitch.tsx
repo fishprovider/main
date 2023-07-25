@@ -5,6 +5,7 @@ import storeUser from '@fishprovider/cross/dist/stores/user';
 import { useNavigation } from '@react-navigation/native';
 
 import { logout } from '~libs/auth';
+import { cacheWrite } from '~libs/cache';
 import { updateSocketUrl } from '~libs/socket';
 import Select from '~ui/Select';
 import Stack from '~ui/Stack';
@@ -27,6 +28,8 @@ export default function LiveModeSwitch() {
     storeUser.mergeState({ mode: modeNew });
     storeAccounts.mergeDocs([], { replaceAll: true });
     storeOrders.mergeDocs([], { replaceAll: true });
+
+    cacheWrite('fp-providerId', '');
 
     await logout();
 
