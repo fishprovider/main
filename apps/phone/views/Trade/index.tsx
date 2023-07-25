@@ -8,6 +8,7 @@ import Select from '~ui/Select';
 import Stack from '~ui/Stack';
 
 import ListTrade from './ListTrade';
+import OpenOrder from './OpenOrder';
 import TradeHeader from './TradeHeader';
 import TradeWatch from './TradeWatch';
 
@@ -48,6 +49,7 @@ export default function Trade() {
         <Stack>
           <TradeWatch />
           <TradeHeader />
+          <OpenOrder />
           <ListTrade />
         </Stack>
       </StrategyController>
