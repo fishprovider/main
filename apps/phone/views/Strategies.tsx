@@ -8,6 +8,7 @@ import { useState } from 'react';
 import ProviderCards from '~components/ProviderCards';
 import ScrollView from '~ui/ScrollView';
 import Stack from '~ui/Stack';
+import { refreshMS } from '~utils';
 
 // const pageSizeOptions = ['5', '10', '20', '50', '100'];
 const pageSizeDefault = 10;
@@ -36,6 +37,7 @@ export default function Strategies() {
   useQuery({
     queryFn: accountGetManySlim,
     queryKey: queryKeys.slimAccounts(),
+    refetchInterval: refreshMS,
   });
 
   return (

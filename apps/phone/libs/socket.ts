@@ -1,13 +1,19 @@
 import storeUser from '@fishprovider/cross/dist/stores/user';
 import io from 'socket.io-client';
 
+let socketUrl = process.env.EXPO_PUBLIC_SOCKET_URL || '';
+
+const updateSocketUrl = (url = '') => {
+  socketUrl = url;
+};
+
 const connectSocket = async () => {
   const { socket: socketCheck } = storeUser.getState();
   if (socketCheck) {
     return;
   }
 
-  const socket = io(process.env.EXPO_PUBLIC_SOCKET_URL || '', {
+  const socket = io(socketUrl, {
     transports: (process.env.EXPO_PUBLIC_SOCKET_TRANSPORTS || 'websocket,polling,webtransport').split(','),
   });
   storeUser.mergeState({ socket });
@@ -30,4 +36,4 @@ const disconnectSocket = () => {
   socket.disconnect();
 };
 
-export { connectSocket, disconnectSocket };
+export { connectSocket, disconnectSocket, updateSocketUrl };

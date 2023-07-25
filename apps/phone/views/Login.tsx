@@ -1,5 +1,6 @@
 import { Platform } from 'react-native';
 
+import LiveModeSwitch from '~components/LiveModeSwitch';
 import { LoginMethods } from '~constants/user';
 import { loginOAuth } from '~libs/auth';
 import Button from '~ui/Button';
@@ -18,6 +19,7 @@ export default function Login() {
           Login with Apple
         </Button>
       )}
+      <LiveModeSwitch />
     </Stack>
   );
 }
