@@ -18,7 +18,7 @@ function ItemTradePending({ order, prices }: Props) {
   };
 
   return (
-    <Group justifyContent="space-between" alignItems="center" borderWidth={1} padding={4}>
+    <Group justifyContent="space-between" borderWidth={1} padding={4}>
       <Text>
         {order.direction === Direction.buy ? (
           <FontAwesome

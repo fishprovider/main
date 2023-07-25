@@ -4,10 +4,10 @@ import type { Order } from '@fishprovider/utils/dist/types/Order.model';
 import type { Price } from '@fishprovider/utils/dist/types/Price.model';
 import _ from 'lodash';
 
+import OrderInfo from '~components/OrderInfo';
 import Profit from '~components/Profit';
 import Button from '~ui/Button';
 import Group from '~ui/Group';
-import Text from '~ui/Text';
 
 interface Props {
   order: Order;
@@ -24,27 +24,16 @@ function ItemTradeLive({
   };
 
   return (
-    <Group justifyContent="space-between" alignItems="center" borderWidth={1} padding={4}>
-      <Text>
+    <Group justifyContent="space-between" borderWidth={1} padding={4}>
+      <Group>
         {order.direction === Direction.buy ? (
-          <FontAwesome
-            name="chevron-up"
-            color="green"
-            size={15}
-          />
+          <FontAwesome name="chevron-up" color="green" size={15} />
         ) : (
-          <FontAwesome
-            name="chevron-down"
-            color="red"
-            size={15}
-          />
+          <FontAwesome name="chevron-down" color="red" size={15} />
         )}
-        {' '}
-        {order.volume}
-        {' '}
-        {order.symbol}
-      </Text>
-      <Group alignItems="center">
+        <OrderInfo order={order} mergedView={mergedView} />
+      </Group>
+      <Group>
         <Profit order={order} prices={prices} />
         <FontAwesome
           name="window-close"
@@ -53,7 +42,11 @@ function ItemTradeLive({
           onPress={onClose}
         />
         {mergedView && (
-          <Button onPress={unmergeView}>M</Button>
+          <FontAwesome
+            name="expand"
+            size={15}
+            onPress={unmergeView}
+          />
         )}
       </Group>
     </Group>

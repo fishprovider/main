@@ -1,3 +1,4 @@
+import { FontAwesome } from '@expo/vector-icons';
 import storePrices from '@fishprovider/cross/dist/stores/prices';
 import storeUser from '@fishprovider/cross/dist/stores/user';
 import { ProviderType } from '@fishprovider/utils/dist/constants/account';
@@ -7,6 +8,7 @@ import type { Order } from '@fishprovider/utils/dist/types/Order.model';
 import _ from 'lodash';
 import { useState } from 'react';
 
+import Group from '~ui/Group';
 import H6 from '~ui/H6';
 import Stack from '~ui/Stack';
 import Text from '~ui/Text';
@@ -109,7 +111,16 @@ function ListTradeLive({ orders }: Props) {
 
   return (
     <Stack>
-      <H6>Live Orders</H6>
+      <Group>
+        <H6>Live Orders</H6>
+        <FontAwesome
+          name="compress"
+          size={15}
+          onPress={() => setMergedViewInput(
+            (prev) => (prev === undefined ? !mergedView : !prev),
+          )}
+        />
+      </Group>
       {renderBody()}
     </Stack>
   );

@@ -4,6 +4,7 @@ export default function Group(props: XStackProps) {
   return (
     <XStack
       space="$2"
+      alignItems="center"
       {...props}
     />
   );
