@@ -1,56 +1,32 @@
-import { FontAwesome } from '@expo/vector-icons';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 
 import BaseController from '~controllers/BaseController';
-import Strategies from '~views/Strategies';
+import User from '~views/User';
 
-import UserAccountNavigator from './UserAccountNavigator';
-import UserWalletNavigator from './UserWalletNavigator';
+import BottomTabsNavigator from './BottomTabsNavigator';
 
-const Tab = createBottomTabNavigator();
-
-function StrategiesIcon(props: any) {
-  return <FontAwesome {...props} name="rocket" />;
-}
-
-function BankIcon(props: any) {
-  return <FontAwesome {...props} name="bank" />;
-}
-
-function AccountIcon(props: any) {
-  return <FontAwesome {...props} name="bar-chart" />;
-}
+const Stack = createStackNavigator();
 
 export default function RootNavigator() {
   return (
     <BaseController>
-      <Tab.Navigator>
-        <Tab.Screen
-          name="Strategies"
-          component={Strategies}
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Home"
+          component={BottomTabsNavigator}
           options={{
-            tabBarIcon: StrategiesIcon,
-          }}
-        />
-        <Tab.Screen
-          name="UserWalletNavigator"
-          component={UserWalletNavigator}
-          options={{
-            tabBarLabel: 'Wallet',
-            tabBarIcon: BankIcon,
             headerShown: false,
           }}
         />
-        <Tab.Screen
-          name="UserAccountNavigator"
-          component={UserAccountNavigator}
+        <Stack.Screen
+          name="User"
+          component={User}
           options={{
-            tabBarLabel: 'Account',
-            tabBarIcon: AccountIcon,
-            headerShown: false,
+            headerLeftLabelVisible: false,
+            presentation: 'modal',
           }}
         />
-      </Tab.Navigator>
+      </Stack.Navigator>
     </BaseController>
   );
 }

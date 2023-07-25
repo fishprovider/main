@@ -1,10 +1,12 @@
+import userLogin from '@fishprovider/cross/dist/api/user/login';
+import userLogout from '@fishprovider/cross/dist/api/user/logout';
 import { initApi } from '@fishprovider/cross/dist/libs/api';
 import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
 import storeOrders from '@fishprovider/cross/dist/stores/orders';
 import storeUser from '@fishprovider/cross/dist/stores/user';
 import { useNavigation } from '@react-navigation/native';
 
-import { logout } from '~libs/auth';
+import { getUserToken } from '~libs/auth';
 import { cacheWrite } from '~libs/cache';
 import { updateSocketUrl } from '~libs/socket';
 import Select from '~ui/Select';
@@ -25,13 +27,7 @@ export default function LiveModeSwitch() {
   }));
 
   const onChangeMode = async (modeNew: string) => {
-    storeUser.mergeState({ mode: modeNew });
-    storeAccounts.mergeDocs([], { replaceAll: true });
-    storeOrders.mergeDocs([], { replaceAll: true });
-
-    cacheWrite('fp-providerId', '');
-
-    await logout();
+    await userLogout();
 
     initApi({
       baseURL: modeNew === 'live'
@@ -42,9 +38,21 @@ export default function LiveModeSwitch() {
       ? process.env.EXPO_PUBLIC_SOCKET_URL
       : process.env.EXPO_PUBLIC_DEMO_SOCKET_URL);
 
+    storeUser.mergeState({ mode: modeNew });
+    storeAccounts.mergeDocs([], { replaceAll: true });
+    storeOrders.mergeDocs([], { replaceAll: true });
+
+    cacheWrite('fp-providerId', '');
+
+    const token = await getUserToken();
+    if (token) {
+      await userLogin({ token });
+    }
+
     if (navigation.canGoBack()) {
       navigation.goBack();
     }
+    navigation.navigate('Strategies');
   };
 
   return (

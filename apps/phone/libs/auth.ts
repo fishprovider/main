@@ -28,7 +28,7 @@ const parseUser = (user: FirebaseAuthTypes.User) => {
   return userInfo;
 };
 
-const getUserToken = async (user: FirebaseAuthTypes.User, forceRefresh?: boolean) => {
+const getIdToken = async (user: FirebaseAuthTypes.User, forceRefresh?: boolean) => {
   try {
     const isRefresh = forceRefresh;
     const token = await user.getIdToken(isRefresh);
@@ -40,7 +40,7 @@ const getUserToken = async (user: FirebaseAuthTypes.User, forceRefresh?: boolean
 };
 
 const onLoggedIn = async (user: FirebaseAuthTypes.User) => {
-  const token = await getUserToken(user, true);
+  const token = await getIdToken(user, true);
   if (!token) {
     onClientLoggedOut();
     return;
@@ -67,10 +67,16 @@ const logout = async () => {
   }
 };
 
+function getUserToken() {
+  const user = auth().currentUser;
+  if (!user) return undefined;
+  return getIdToken(user);
+}
+
 function refreshUserToken() {
   const user = auth().currentUser;
   if (!user) return undefined;
-  return getUserToken(user, true);
+  return getIdToken(user, true);
 }
 
 const loginWithGoogle = async () => {
@@ -146,6 +152,7 @@ function authOnChange() {
 
 export {
   authOnChange,
+  getUserToken,
   initAuth,
   loginOAuth,
   loginWithPassword,

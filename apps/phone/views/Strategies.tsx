@@ -30,8 +30,7 @@ export default function Strategies() {
       (account) => account.name,
     ],
     ['desc', 'asc'],
-  )
-    .slice((page - 1) * pageSize, page * pageSize)
+  ).slice((page - 1) * pageSize, page * pageSize)
     .map((account) => account._id));
 
   useQuery({

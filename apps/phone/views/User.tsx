@@ -22,6 +22,7 @@ export default function User() {
     if (navigation.canGoBack()) {
       navigation.goBack();
     }
+    navigation.navigate('Strategies');
   };
 
   return (
