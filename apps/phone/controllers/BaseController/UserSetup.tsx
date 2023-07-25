@@ -4,7 +4,7 @@ import UserNotif from './UserNotif';
 // import UserClean from './UserClean';
 // import UserLiveChat from './UserLiveChat';
 // import UserNotif from './UserNotif';
-// import UserSocket from './UserSocket';
+import UserSocket from './UserSocket';
 // import UserTheme from './UserTheme';
 
 function UserSetup() {
@@ -12,7 +12,7 @@ function UserSetup() {
     <>
       <UserAuth />
       <UserNotif />
-      {/* <UserSocket /> */}
+      <UserSocket />
       {/* <UserTheme /> */}
       {/* <UserLiveChat /> */}
       {/* <UserClean /> */}
