@@ -46,13 +46,13 @@ function MyDocument() {
         <meta property="og:description" content="FishProvider: Never Lose Money - Think Big Do Small" />
         <meta property="og:site_name" content="FishProvider" />
         <meta property="og:url" content="https://www.fishprovider.com" />
-        <meta property="og:image" content="https://www.fishprovider.com/banner-with-text.png" />
+        <meta property="og:image" content="/banner-with-text.png" />
 
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:url" content="https://www.fishprovider.com" />
         <meta name="twitter:title" content="FishProvider" />
         <meta name="twitter:description" content="FishProvider: Never Lose Money - Think Big Do Small" />
-        <meta name="twitter:image" content="https://www.fishprovider.com/banner-with-text.png" />
+        <meta name="twitter:image" content="/banner-with-text.png" />
         <meta name="twitter:creator" content="@FishProvider" />
       </Head>
       <body>

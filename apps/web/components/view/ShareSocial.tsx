@@ -69,7 +69,7 @@ function ShareSocial() {
         <RedditShareButton url={url}>
           <RedditIcon round size={size} />
         </RedditShareButton>
-        <PinterestShareButton url={url} media="https://www.fishprovider.com/logo.png">
+        <PinterestShareButton url={url} media="/logo.png">
           <PinterestIcon round size={size} />
         </PinterestShareButton>
         <VKShareButton url={url}>
