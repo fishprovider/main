@@ -2,14 +2,125 @@ import orderGetIdea from '@fishprovider/cross/dist/api/orders/getIdea';
 import orderGetMany from '@fishprovider/cross/dist/api/orders/getMany';
 import orderGetManyInfo from '@fishprovider/cross/dist/api/orders/getManyInfo';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
+import storeOrders from '@fishprovider/cross/dist/stores/orders';
+import storeUser from '@fishprovider/cross/dist/stores/user';
 import { OrderStatus } from '@fishprovider/utils/dist/constants/order';
-import { useEffect } from 'react';
+import { redisKeys } from '@fishprovider/utils/dist/constants/redis';
+import type { Order } from '@fishprovider/utils/dist/types/Order.model';
+import { useEffect, useRef } from 'react';
 
 import { activityFields } from '~constants/account';
 import { queryKeys } from '~constants/query';
-import useWatchLiveOrders from '~hooks/useWatchLiveOrders';
-import useWatchPendingOrders from '~hooks/useWatchPendingOrders';
+import { subDoc } from '~libs/sdb';
 import { refreshMS } from '~utils';
+
+function useLiveOrdersSocket(providerId: string) {
+  const socket = storeUser.useStore((state) => state.socket);
+
+  const prevChannel = useRef<string>();
+  useEffect(() => {
+    prevChannel.current = redisKeys.liveOrders(providerId);
+  });
+
+  useEffect(() => {
+    if (socket) {
+      if (prevChannel.current) {
+        Logger.debug('[socket] unsub from prev', prevChannel.current);
+        socket.off(prevChannel.current);
+        socket.emit('leave', prevChannel.current);
+      }
+
+      const channel = redisKeys.liveOrders(providerId);
+      Logger.debug('[socket] sub', channel);
+      socket.emit('join', channel);
+      socket.on(channel, (docs: Order[]) => {
+        storeOrders.mergeDocs(docs);
+      });
+    } else {
+      Logger.debug('Skipped useLiveOrdersSocket', providerId);
+    }
+    return () => {
+      if (socket) {
+        const channel = redisKeys.liveOrders(providerId);
+        Logger.debug('[socket] unsub', channel);
+        socket.off(channel);
+        socket.emit('leave', channel);
+      }
+    };
+  }, [socket, providerId]);
+}
+
+function useLiveOrdersSdb(providerId: string) {
+  const isClientLoggedIn = storeUser.useStore((state) => state.isClientLoggedIn);
+
+  useEffect(() => {
+    if (isClientLoggedIn) {
+      Logger.debug('[firestore] sub', `liveOrders/${providerId}`);
+      const unsub = subDoc<{ orders: Order[] }>({
+        doc: `liveOrders/${providerId}`,
+        onSnapshot: (doc) => {
+          storeOrders.mergeDocs(doc.orders);
+        },
+      });
+      return unsub;
+    }
+    return () => undefined;
+  }, [isClientLoggedIn, providerId]);
+}
+
+function usePendingOrdersSocket(providerId: string) {
+  const socket = storeUser.useStore((state) => state.socket);
+
+  const prevChannel = useRef<string>();
+  useEffect(() => {
+    prevChannel.current = redisKeys.pendingOrders(providerId);
+  });
+
+  useEffect(() => {
+    if (socket) {
+      if (prevChannel.current) {
+        Logger.debug('[socket] unsub from prev', prevChannel.current);
+        socket.off(prevChannel.current);
+        socket.emit('leave', prevChannel.current);
+      }
+
+      const channel = redisKeys.pendingOrders(providerId);
+      Logger.debug('[socket] sub', channel);
+      socket.emit('join', channel);
+      socket.on(channel, (docs: Order[]) => {
+        storeOrders.mergeDocs(docs);
+      });
+    } else {
+      Logger.debug('Skipped usePendingOrdersSocket', providerId);
+    }
+    return () => {
+      if (socket) {
+        const channel = redisKeys.pendingOrders(providerId);
+        Logger.debug('[socket] unsub', channel);
+        socket.off(channel);
+        socket.emit('leave', channel);
+      }
+    };
+  }, [socket, providerId]);
+}
+
+function usePendingOrdersSdb(providerId: string) {
+  const isClientLoggedIn = storeUser.useStore((state) => state.isClientLoggedIn);
+
+  useEffect(() => {
+    if (isClientLoggedIn) {
+      Logger.debug('[firestore] sub', `pendingOrders/${providerId}`);
+      const unsub = subDoc<{ orders: Order[] }>({
+        doc: `pendingOrders/${providerId}`,
+        onSnapshot: (doc) => {
+          storeOrders.mergeDocs(doc.orders);
+        },
+      });
+      return unsub;
+    }
+    return () => undefined;
+  }, [isClientLoggedIn, providerId]);
+}
 
 interface OrdersWatchProps {
   providerId: string;
@@ -45,8 +156,11 @@ function OrdersWatch({ providerId }: OrdersWatchProps) {
     refetchInterval: refreshMS,
   });
 
-  useWatchLiveOrders(providerId);
-  useWatchPendingOrders(providerId);
+  useLiveOrdersSocket(providerId);
+  useLiveOrdersSdb(providerId);
+
+  usePendingOrdersSocket(providerId);
+  usePendingOrdersSdb(providerId);
 
   return null;
 }

@@ -61,7 +61,7 @@
     "d3-time-format": "^4.1.0",
     "dayjs": "^1.11.9",
     "disqus-react": "^1.1.5",
-    "firebase": "^9.23.0",
+    "firebase": "^10.1.0",
     "html-react-parser": "^4.2.0",
     "i18next": "^23.2.11",
     "i18next-chained-backend": "^4.4.0",
