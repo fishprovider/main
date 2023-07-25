@@ -18,6 +18,7 @@ export default function User() {
 
   const onLogout = () => {
     logout();
+
     if (navigation.canGoBack()) {
       navigation.goBack();
     }
