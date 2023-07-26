@@ -32,7 +32,14 @@ export default function Trade() {
 
   if (!options.length) return null;
 
-  const providerId = selectedProviderId || defaultProviderId || options[0].value;
+  const getProviderId = () => {
+    if (selectedProviderId) return selectedProviderId;
+    if (defaultProviderId && options.some((item) => item.value === defaultProviderId)) {
+      return defaultProviderId;
+    }
+    return options[0].value;
+  };
+  const providerId = getProviderId();
 
   const onSelect = (value: string) => {
     setSelectedProviderId(value);
