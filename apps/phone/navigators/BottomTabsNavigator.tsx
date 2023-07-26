@@ -22,13 +22,18 @@ function AccountIcon(props: any) {
 
 export default function BottomTabsNavigator() {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      screenOptions={{
+        tabBarStyle: {
+          marginBottom: 10,
+        },
+      }}
+    >
       <Tab.Screen
         name="Strategies"
         component={Strategies}
         options={{
           tabBarIcon: StrategiesIcon,
-          tabBarStyle: { padding: 20 },
         }}
       />
       <Tab.Screen
@@ -37,7 +42,6 @@ export default function BottomTabsNavigator() {
         options={{
           tabBarLabel: 'Wallet',
           tabBarIcon: BankIcon,
-          tabBarStyle: { padding: 20 },
           headerShown: false,
         }}
       />
@@ -47,7 +51,6 @@ export default function BottomTabsNavigator() {
         options={{
           tabBarLabel: 'Account',
           tabBarIcon: AccountIcon,
-          tabBarStyle: { padding: 20 },
           headerShown: false,
         }}
       />
