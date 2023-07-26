@@ -28,7 +28,7 @@ export default function BottomTabsNavigator() {
         component={Strategies}
         options={{
           tabBarIcon: StrategiesIcon,
-          tabBarStyle: { padding: 10 },
+          tabBarStyle: { padding: 20 },
         }}
       />
       <Tab.Screen
@@ -37,7 +37,7 @@ export default function BottomTabsNavigator() {
         options={{
           tabBarLabel: 'Wallet',
           tabBarIcon: BankIcon,
-          tabBarStyle: { padding: 10 },
+          tabBarStyle: { padding: 20 },
           headerShown: false,
         }}
       />
@@ -47,7 +47,7 @@ export default function BottomTabsNavigator() {
         options={{
           tabBarLabel: 'Account',
           tabBarIcon: AccountIcon,
-          tabBarStyle: { padding: 10 },
+          tabBarStyle: { padding: 20 },
           headerShown: false,
         }}
       />
