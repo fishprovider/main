@@ -32,7 +32,6 @@
     "@react-navigation/stack": "^6.3.17",
     "@tamagui/babel-plugin": "^1.45.10",
     "@tamagui/config": "^1.45.10",
-    "@tamagui/theme-base": "^1.45.10",
     "@tamagui/toast": "^1.45.10",
     "babel-plugin-transform-inline-environment-variables": "^0.4.4",
     "burnt": "^0.10.0",
