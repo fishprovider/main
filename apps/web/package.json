@@ -63,7 +63,7 @@
     "disqus-react": "^1.1.5",
     "firebase": "^10.1.0",
     "html-react-parser": "^4.2.0",
-    "i18next": "^23.2.11",
+    "i18next": "^23.3.0",
     "i18next-chained-backend": "^4.4.0",
     "i18next-http-backend": "^2.2.1",
     "i18next-localforage-backend": "^2.0.0",
