@@ -3,7 +3,10 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "~*": ["./*"]
+      "~libs/*": ["./libs/*"],
+      "~libs": ["./libs"],
+      "~stores/*": ["./stores/*"],
+      "~stores": ["./stores"],
     },
     "rootDir": ".",
     "outDir": "dist"
