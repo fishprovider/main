@@ -71,7 +71,7 @@ function ProviderCards({
         />
         <Select
           data={pageSizeOptions}
-          value={`${pageSize}`}
+          value={String(pageSize)}
           onChange={(value) => {
             if (!value) return;
             setPageSize(+value);
