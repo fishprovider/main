@@ -1,4 +1,5 @@
 import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
+import storeUser from '@fishprovider/cross/dist/stores/user';
 import _ from 'lodash';
 import { useEffect, useState } from 'react';
 
@@ -7,6 +8,7 @@ import { cacheRead, cacheWrite } from '~libs/cache';
 import ScrollView from '~ui/ScrollView';
 import Select from '~ui/Select';
 import Stack from '~ui/Stack';
+import Text from '~ui/Text';
 
 import ListTrade from './ListTrade';
 import OpenOrder from './OpenOrder';
@@ -14,7 +16,13 @@ import TradeHeader from './TradeHeader';
 import TradeWatch from './TradeWatch';
 
 export default function Trade() {
-  const options = storeAccounts.useStore((state) => _.map(state, (item) => ({
+  const userId = storeUser.useStore((state) => state.info?._id);
+
+  const options = storeAccounts.useStore((state) => _.filter(state, (item) => {
+    if (item.userId && item.userId === userId) return true;
+    if (item.members?.some((itemMember) => itemMember.userId === userId)) return true;
+    return false;
+  }).map((item) => ({
     value: item._id,
     label: `${item.name} ${item.icon || ''}`,
   })));
@@ -30,7 +38,13 @@ export default function Trade() {
     });
   }, []);
 
-  if (!options.length) return null;
+  if (!options.length) {
+    return (
+      <Stack center>
+        <Text>N.A.</Text>
+      </Stack>
+    );
+  }
 
   const getProviderId = () => {
     if (selectedProviderId) return selectedProviderId;
