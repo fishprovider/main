@@ -23,6 +23,24 @@ module.exports = function (api) {
         },
       ],
       [
+        'module-resolver',
+        {
+          root: '.',
+          alias: {
+            // Note that '~': '.' does not work
+            '~components': './components',
+            '~constants': './constants',
+            '~controllers': './controllers',
+            '~hooks': './hooks',
+            '~libs': './libs',
+            '~navigators': './navigators',
+            '~ui': './ui',
+            '~utils': './utils',
+            '~views': './views',
+          },
+        },
+      ],
+      [
         '@tamagui/babel-plugin',
         {
           components: ['tamagui'],
