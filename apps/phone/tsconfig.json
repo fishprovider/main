@@ -3,7 +3,6 @@
   "compilerOptions": {
     "exactOptionalPropertyTypes": false,
     "noPropertyAccessFromIndexSignature": false,
-    "noImplicitAny": false,
     "baseUrl": ".",
     "paths": {
       "~*": ["./*"]
