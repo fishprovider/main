@@ -1,5 +1,10 @@
-import { getUserController } from '@fishprovider/adapter-backend';
-import { getUserUseCase } from '@fishprovider/application-rules';
+import { ApiHandler, GetUserController } from '@fishprovider/adapter-backend';
+import { GetUserUseCase } from '@fishprovider/application-rules';
+import type { User } from '@fishprovider/enterprise-rules';
 import { MongoUserRepository } from '@fishprovider/framework-mongo';
 
-export default getUserController(getUserUseCase(MongoUserRepository));
+const handler: ApiHandler<Partial<User>> = new GetUserController(
+  new GetUserUseCase(MongoUserRepository),
+).run;
+
+export default handler;

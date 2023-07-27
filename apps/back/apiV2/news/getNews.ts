@@ -1,5 +1,10 @@
-import { getNewsController } from '@fishprovider/adapter-backend';
-import { getNewsUseCase } from '@fishprovider/application-rules';
+import { ApiHandler, GetNewsController } from '@fishprovider/adapter-backend';
+import { GetNewsUseCase } from '@fishprovider/application-rules';
+import type { News } from '@fishprovider/enterprise-rules';
 import { CacheFirstNewsRepository } from '@fishprovider/framework-cache-first';
 
-export default getNewsController(getNewsUseCase(CacheFirstNewsRepository));
+const handler: ApiHandler<News[]> = new GetNewsController(
+  new GetNewsUseCase(CacheFirstNewsRepository),
+).run;
+
+export default handler;
