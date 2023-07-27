@@ -1,13 +1,13 @@
 import type { UserSession } from './user';
 
-export interface ApiHandlerParams {
+export interface ApiHandlerRequest {
   userSession: UserSession;
   data: any;
 }
 
-export interface ApiHandlerResponse<T> {
+export type ApiHandlerResponse<T> = Promise<{
   result: T,
   userSessionNew?: UserSession,
-}
+}>;
 
-export type ApiHandler<T> = (params: ApiHandlerParams) => Promise<ApiHandlerResponse<T>>;
+export type ApiHandler<T> = (params: ApiHandlerRequest) => ApiHandlerResponse<T>;

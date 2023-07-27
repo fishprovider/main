@@ -1,3 +1,3 @@
-export * from './account.controller';
-export * from './news.controller';
-export * from './user.controller';
+export * from './account';
+export * from './news';
+export * from './user';
