@@ -7,7 +7,6 @@ import { PlanType } from '@fishprovider/utils/dist/constants/account';
 import { isLastRunExpired } from '@fishprovider/utils/dist/helpers/lastRunChecks';
 import type { Account } from '@fishprovider/utils/dist/types/Account.model';
 import type { Order } from '@fishprovider/utils/dist/types/Order.model';
-import _ from 'lodash';
 
 import { LevelTarget, lockForBreak, lockTilMonthEnd } from '~utils/account';
 

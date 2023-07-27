@@ -24,7 +24,7 @@ function OrderConfidence({ order }: Props) {
   });
 
   return (
-    <Indicator label={`${point}`} size={16}>
+    <Indicator label={point} size={16}>
       <Icon {...getIconProps(point)} size="small" button onClick={onEdit} tooltip="Confidence" />
     </Indicator>
   );

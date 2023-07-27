@@ -1,5 +1,4 @@
 import type { RedisClientType } from '@redis/client';
-import _ from 'lodash';
 
 let redisClient: RedisClientType | undefined;
 const channels = [

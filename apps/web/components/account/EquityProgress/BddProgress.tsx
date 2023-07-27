@@ -72,7 +72,7 @@ function BddProgress({ providerId, profit }: Props) {
         <Text size="sm" color="red">{`${_.round(minBalance, 2)} (${dayMaxBdd})`}</Text>
       </Box>
       <Box pos="absolute" top={40} right={0}>
-        <Text size="sm">{`${_.round(maxBalance, 2)}`}</Text>
+        <Text size="sm">{_.round(maxBalance, 2)}</Text>
       </Box>
     </Box>
   );

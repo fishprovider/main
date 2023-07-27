@@ -2,7 +2,6 @@ import { getAccount, sendTransaction } from '@fishprovider/coin/dist/libs/coinba
 import updateTransaction from '@fishprovider/coin/dist/utils/transaction/updateTransaction';
 import { DestinationPayType, TransactionStatus, TransactionStatusRequest } from '@fishprovider/utils/dist/constants/pay';
 import type { Transaction, Wallet } from '@fishprovider/utils/dist/types/Pay.model';
-import _ from 'lodash';
 import moment from 'moment';
 
 import isDemo from '~utils/isDemo';

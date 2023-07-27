@@ -5,7 +5,6 @@ import delay from '@fishprovider/utils/dist/helpers/delay';
 import { getVolumeFromLot } from '@fishprovider/utils/dist/helpers/price';
 import type { Config } from '@fishprovider/utils/dist/types/Account.model';
 import type { Price } from '@fishprovider/utils/dist/types/Price.model';
-import _ from 'lodash';
 
 import type { SymbolMetaTrader } from '~types/Symbol.model';
 import { saveSymbols } from '~utils/price';

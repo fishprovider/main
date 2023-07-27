@@ -1,5 +1,4 @@
 import { TransactionStatus } from '@fishprovider/utils/dist/constants/pay';
-import _ from 'lodash';
 
 import { getTransaction } from '~libs/coinbaseApi';
 

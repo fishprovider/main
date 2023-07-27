@@ -56,7 +56,7 @@ function TargetProgress({ providerId, profit }: Props) {
         <Text size="sm">{`${_.round(progressAmt, 2)} (${_.round(progress, 2)}%)`}</Text>
       </Box>
       <Box pos="absolute" top={40} right={0}>
-        <Text size="sm" color="green">{`${_.round(target, 2)}`}</Text>
+        <Text size="sm" color="green">{_.round(target, 2)}</Text>
       </Box>
     </Box>
   );

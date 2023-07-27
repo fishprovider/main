@@ -2,7 +2,6 @@ import {
   CopyVolumeMode, LockType, ProviderTradeType, ProviderType, ProviderViewType,
 } from '@fishprovider/utils/dist/constants/account';
 import { Roles } from '@fishprovider/utils/dist/constants/user';
-import _ from 'lodash';
 
 const getTopProviderIds = () => ['earth', 'water', 'air', 'fire', 'whale'];
 

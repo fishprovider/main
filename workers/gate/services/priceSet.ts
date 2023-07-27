@@ -1,7 +1,6 @@
 import { savePrice } from '@fishprovider/swap/dist/utils/price';
 import { ProviderType } from '@fishprovider/utils/dist/constants/account';
 import { isLastRunExpired } from '@fishprovider/utils/dist/helpers/lastRunChecks/lastRunChecks';
-import _ from 'lodash';
 
 import { setLastUpdated } from './checkCTrader';
 

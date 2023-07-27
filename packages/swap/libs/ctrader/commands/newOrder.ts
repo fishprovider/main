@@ -18,7 +18,6 @@ import type { Config } from '@fishprovider/utils/dist/types/Account.model';
 import type { Order } from '@fishprovider/utils/dist/types/Order.model';
 import type { Price } from '@fishprovider/utils/dist/types/Price.model';
 import type { RedisSymbol } from '@fishprovider/utils/dist/types/Redis.model';
-import _ from 'lodash';
 import type { AsyncReturnType } from 'type-fest';
 
 import { getSymbols, parseSymbols } from '~utils/price';

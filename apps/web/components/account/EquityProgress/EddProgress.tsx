@@ -58,7 +58,7 @@ function EddProgress({ providerId, profit }: Props) {
         <Text size="sm" color="red">{`${_.round(minEquity, 2)} (${dayMaxEdd})`}</Text>
       </Box>
       <Box pos="absolute" top={40} right={0}>
-        <Text size="sm">{`${_.round(maxEquity, 2)}`}</Text>
+        <Text size="sm">{_.round(maxEquity, 2)}</Text>
       </Box>
     </Box>
   );

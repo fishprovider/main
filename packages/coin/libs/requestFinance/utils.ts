@@ -1,5 +1,4 @@
 import { TransactionStatus } from '@fishprovider/utils/dist/constants/pay';
-import _ from 'lodash';
 
 import { InvoiceStatus } from '~constants/requestFinance';
 import { getPayment } from '~libs/requestFinance';

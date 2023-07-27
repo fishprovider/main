@@ -1,7 +1,6 @@
 import updateTransaction from '@fishprovider/coin/dist/utils/transaction/updateTransaction';
 import { TransactionStatus } from '@fishprovider/utils/dist/constants/pay';
 import type { Transaction } from '@fishprovider/utils/dist/types/Pay.model';
-import _ from 'lodash';
 
 import checkWithdraw from './checkWithdraw';
 import sendWithdraw from './sendWithdraw';

@@ -1,5 +1,4 @@
 import type { Order } from '@fishprovider/utils/dist/types/Order.model';
-import _ from 'lodash';
 
 import { ApiConfig, apiGet } from '~libs/api';
 import storeOrders from '~stores/orders';

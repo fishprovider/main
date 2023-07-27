@@ -3,7 +3,6 @@ import updateTransaction from '@fishprovider/coin/dist/utils/transaction/updateT
 import { runDBTransaction } from '@fishprovider/core/dist/libs/mongo';
 import { DestinationPayType, TransactionStatus, TransactionStatusRequest } from '@fishprovider/utils/dist/constants/pay';
 import type { Transaction } from '@fishprovider/utils/dist/types/Pay.model';
-import _ from 'lodash';
 
 import isDemo from '~utils/isDemo';
 

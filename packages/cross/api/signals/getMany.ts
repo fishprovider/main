@@ -1,5 +1,4 @@
 import type { Signal } from '@fishprovider/utils/dist/types/Signal.model';
-import _ from 'lodash';
 
 import { ApiConfig, apiGet } from '~libs/api';
 import storeSignals from '~stores/signals';

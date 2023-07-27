@@ -1,5 +1,4 @@
 import type { Chat } from '@fishprovider/utils/dist/types/Chat.model';
-import _ from 'lodash';
 
 import { ApiConfig, apiPost } from '~libs/api';
 

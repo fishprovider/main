@@ -4,7 +4,6 @@ import { OrderStatus } from '@fishprovider/utils/dist/constants/order';
 import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
 import type { Order } from '@fishprovider/utils/dist/types/Order.model';
 import type { User } from '@fishprovider/utils/dist/types/User.model';
-import _ from 'lodash';
 
 const orderRemoveIdea = async ({ data, userInfo }: {
   data: {

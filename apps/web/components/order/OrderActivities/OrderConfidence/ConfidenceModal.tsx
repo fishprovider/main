@@ -113,7 +113,7 @@ function OrderConfidence({ orderId, onClose }: Props) {
       <Group position="apart">
         <Group>
           <Tooltip label={userPoint.name}><Avatar size="sm" src={userPoint.picture} alt={userPoint.userId} /></Tooltip>
-          <Indicator label={`${point}`} size={16}>
+          <Indicator label={point} size={16}>
             <Icon {...getIconProps(point)} />
           </Indicator>
           <Text>{getText(point)}</Text>
@@ -140,7 +140,7 @@ function OrderConfidence({ orderId, onClose }: Props) {
       {_.orderBy(memberPoints, ['point'], ['desc']).map((item) => item.userId !== userId && (
         <Group key={item.userId}>
           <Tooltip label={item.name}><Avatar size="sm" src={item.picture} alt={item.userId} /></Tooltip>
-          <Indicator label={`${item.point}`} size={16}>
+          <Indicator label={item.point} size={16}>
             <Icon {...getIconProps(item.point)} />
           </Indicator>
           <Text>{getText(item.point)}</Text>
@@ -149,7 +149,7 @@ function OrderConfidence({ orderId, onClose }: Props) {
       <Group position="apart">
         <Group spacing="xs">
           Total
-          <Indicator label={`${totalPoints}`} size={16}>
+          <Indicator label={totalPoints} size={16}>
             <Icon {...getIconProps(totalPoints)} />
           </Indicator>
           <Text>{getText(totalPoints)}</Text>
