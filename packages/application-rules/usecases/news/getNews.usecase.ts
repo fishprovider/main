@@ -1,18 +1,22 @@
 import type { News } from '@fishprovider/enterprise-rules';
 
-import type { GetNewsRepositoryParams, NewsRepository } from './_news.repository';
+import type { GetNewsRepositoryParams, NewsRepository } from '~repositories';
 
 export type GetNewsUseCaseParams = GetNewsRepositoryParams;
 
-export type GetNewsUseCase = (
-  params: GetNewsUseCaseParams
-) => Promise<News[]>;
+export class GetNewsUseCase {
+  newsRepository: NewsRepository;
 
-export const getNewsUseCase = (
-  newsRepository: NewsRepository,
-): GetNewsUseCase => async (
-  params: GetNewsUseCaseParams,
-) => {
-  const news = await newsRepository.getNews(params);
-  return news || [];
-};
+  constructor(
+    newsRepository: NewsRepository,
+  ) {
+    this.newsRepository = newsRepository;
+  }
+
+  async run(
+    params: GetNewsUseCaseParams,
+  ): Promise<News[]> {
+    const news = await this.newsRepository.getNews(params);
+    return news || [];
+  }
+}

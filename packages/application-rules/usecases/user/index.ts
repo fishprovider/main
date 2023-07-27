@@ -1,4 +1,3 @@
-export * from './_user.repository';
 export * from './getUser.usecase';
 export * from './refreshUserRoles.usecase';
 export * from './refreshUserStarProviders.usecase';

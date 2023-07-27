@@ -3,11 +3,9 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "~helpers/*": ["./helpers/*"],
       "~helpers": ["./helpers"],
-      "~types/*": ["./types/*"],
+      "~repositories": ["./repositories"],
       "~types": ["./types"],
-      "~usecases/*": ["./usecases/*"],
       "~usecases": ["./usecases"],
     },
     "rootDir": ".",

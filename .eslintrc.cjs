@@ -4,6 +4,7 @@ const rules = {
     { 'ts-ignore': 'allow-with-description' },
   ],
   '@typescript-eslint/comma-dangle': ['error', 'always-multiline'],
+  '@typescript-eslint/lines-between-class-members': 'off',
   '@typescript-eslint/naming-convention': 'off',
   '@typescript-eslint/no-explicit-any': 'off',
   '@typescript-eslint/no-unused-vars': [

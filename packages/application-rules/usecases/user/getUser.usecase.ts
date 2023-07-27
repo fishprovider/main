@@ -1,9 +1,8 @@
 import { type User, UserError } from '@fishprovider/enterprise-rules';
 import _ from 'lodash';
 
+import type { GetUserRepositoryParams, UserRepository } from '~repositories';
 import type { Projection } from '~types';
-
-import type { GetUserRepositoryParams, UserRepository } from './_user.repository';
 
 const getUserAllowReadFields: Array<keyof User> = [
   'email',
@@ -28,35 +27,37 @@ const getUserAllowReadFieldsProjection = getUserAllowReadFields.reduce<Projectio
 
 export type GetUserUseCaseParams = GetUserRepositoryParams;
 
-export type GetUserUseCase = (
-  params: GetUserUseCaseParams
-) => Promise<Partial<User>>;
+export class GetUserUseCase {
+  userRepository: UserRepository;
 
-export const internalGetUserUseCase = (
-  userRepository: UserRepository,
-): GetUserUseCase => async (
-  params: GetUserUseCaseParams,
-) => {
-  const user = await userRepository.getUser(params);
-  if (!user) {
-    throw new Error(UserError.USER_NOT_FOUND);
+  constructor(
+    userRepository: UserRepository,
+  ) {
+    this.userRepository = userRepository;
   }
-  return user;
-};
 
-export const getUserUseCase = (
-  userRepository: UserRepository,
-): GetUserUseCase => async (
-  params: GetUserUseCaseParams,
-) => {
-  const { projection } = params;
+  async runInternal(
+    params: GetUserUseCaseParams,
+  ): Promise<Partial<User>> {
+    const user = await this.userRepository.getUser(params);
+    if (!user) {
+      throw new Error(UserError.USER_NOT_FOUND);
+    }
+    return user;
+  }
 
-  const repositoryParams = {
-    ...params,
-    projection: {
-      ...getUserAllowReadFieldsProjection,
-      ..._.pick(projection, getUserAllowReadFields),
-    },
-  };
-  return internalGetUserUseCase(userRepository)(repositoryParams);
-};
+  async run(
+    params: GetUserUseCaseParams,
+  ): Promise<Partial<User>> {
+    const { projection } = params;
+
+    const repositoryParams = {
+      ...params,
+      projection: {
+        ...getUserAllowReadFieldsProjection,
+        ..._.pick(projection, getUserAllowReadFields),
+      },
+    };
+    return this.runInternal(repositoryParams);
+  }
+}

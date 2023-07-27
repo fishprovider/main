@@ -1,14 +1,20 @@
-import type { NewsRepository, WatchNewsRepositoryParams } from './_news.repository';
+import type { NewsRepository, WatchNewsRepositoryParams } from '~repositories';
 
 export type WatchNewsUseCaseParams<T> = WatchNewsRepositoryParams<T>;
 
-export type WatchNewsUseCase = <T>(params: WatchNewsUseCaseParams<T>) => T;
+export class WatchNewsUseCase {
+  newsRepository: NewsRepository;
 
-export const watchNewsUseCase = (
-  newsRepository: NewsRepository,
-): WatchNewsUseCase => <T>(
-  params: WatchNewsUseCaseParams<T>,
-) => {
-  const res = newsRepository.watchNews(params);
-  return res;
-};
+  constructor(
+    newsRepository: NewsRepository,
+  ) {
+    this.newsRepository = newsRepository;
+  }
+
+  run<T>(
+    params: WatchNewsUseCaseParams<T>,
+  ): T {
+    const res = this.newsRepository.watchNews(params);
+    return res;
+  }
+}

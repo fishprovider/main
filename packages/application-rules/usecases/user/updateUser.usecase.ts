@@ -1,7 +1,7 @@
 import type { User } from '@fishprovider/enterprise-rules';
 import _ from 'lodash';
 
-import type { UpdateUserRepositoryParams, UserRepository } from './_user.repository';
+import type { UpdateUserRepositoryParams, UserRepository } from '~repositories';
 
 const updateUserAllowUpdateFields: Array<keyof User> = [
   'name',
@@ -11,29 +11,31 @@ const updateUserAllowUpdateFields: Array<keyof User> = [
 
 export type UpdateUserUseCaseParams = UpdateUserRepositoryParams;
 
-export type UpdateUserUseCase = (
-  params: UpdateUserUseCaseParams
-) => Promise<boolean>;
+export class UpdateUserUseCase {
+  userRepository: UserRepository;
 
-export const internalUpdateUserUseCase = (
-  userRepository: UserRepository,
-): UpdateUserUseCase => async (
-  params: UpdateUserUseCaseParams,
-) => {
-  const res = await userRepository.updateUser(params);
-  return res;
-};
+  constructor(
+    userRepository: UserRepository,
+  ) {
+    this.userRepository = userRepository;
+  }
 
-export const updateUserUseCase = (
-  userRepository: UserRepository,
-): UpdateUserUseCase => async (
-  params: UpdateUserUseCaseParams,
-) => {
-  const { userId, payload } = params;
+  async runInternal(
+    params: UpdateUserUseCaseParams,
+  ): Promise<boolean> {
+    const res = await this.userRepository.updateUser(params);
+    return res;
+  }
 
-  const repositoryParams = {
-    userId,
-    payload: _.pick(payload, updateUserAllowUpdateFields),
-  };
-  return internalUpdateUserUseCase(userRepository)(repositoryParams);
-};
+  async run(
+    params: UpdateUserUseCaseParams,
+  ): Promise<boolean> {
+    const { userId, payload } = params;
+
+    const repositoryParams = {
+      userId,
+      payload: _.pick(payload, updateUserAllowUpdateFields),
+    };
+    return this.runInternal(repositoryParams);
+  }
+}
