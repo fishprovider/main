@@ -1,5 +1,5 @@
-import { getUserController } from '@fishprovider/adapter-frontend';
-import { getUserUseCase } from '@fishprovider/application-rules';
+import { GetUserController } from '@fishprovider/adapter-frontend';
+import { GetUserUseCase } from '@fishprovider/application-rules';
 import getUser from '@fishprovider/cross/dist/api/user/getUser';
 import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
@@ -21,7 +21,9 @@ import openConfirmModal from '~ui/modals/openConfirmModal';
 import { toastError } from '~ui/toast';
 import { refreshMS } from '~utils';
 
-const getUserV2 = getUserController(getUserUseCase(FishApiUserRepository));
+const getUserController = new GetUserController(
+  new GetUserUseCase(FishApiUserRepository),
+);
 
 function User() {
   const {
@@ -43,7 +45,7 @@ function User() {
 
   useQuery({
     queryFn: () => {
-      if (userId) getUserV2({ userId });
+      if (userId) getUserController.run({ userId });
       return getUser({});
     },
     queryKey: queryKeys.user(userId),

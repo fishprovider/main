@@ -1,5 +1,5 @@
-import { getNewsController } from '@fishprovider/adapter-frontend';
-import { getNewsUseCase } from '@fishprovider/application-rules';
+import { GetNewsController } from '@fishprovider/adapter-frontend';
+import { GetNewsUseCase } from '@fishprovider/application-rules';
 import storeUser from '@fishprovider/cross/dist/stores/user';
 import { OfflineFirstNewsRepository } from '@fishprovider/framework-offline-first';
 import { StoreNewsRepository } from '@fishprovider/framework-store';
@@ -10,12 +10,17 @@ import { useEffect } from 'react';
 const bannerIdBigNews = 'BigNews';
 const bannerIdBigNewsNear = 'BigNewsNear';
 
-const getNews = getNewsController(getNewsUseCase(OfflineFirstNewsRepository));
-const storeGetNews = getNewsController(getNewsUseCase(StoreNewsRepository));
+const getNewsController = new GetNewsController(
+  new GetNewsUseCase(OfflineFirstNewsRepository),
+);
+
+const storeGetNewsController = new GetNewsController(
+  new GetNewsUseCase(StoreNewsRepository),
+);
 
 function NewsWatch() {
   const getBigNews = async () => {
-    const news = await getNews({
+    const news = await getNewsController.run({
       upcoming: true,
     });
     if (news.length) {
@@ -27,7 +32,7 @@ function NewsWatch() {
       });
     }
 
-    const allNews = await storeGetNews({});
+    const allNews = await storeGetNewsController.run({});
     const hasBigNews = _.some(
       allNews,
       ({ impact, datetime }) => ['high', 'medium'].includes(impact)

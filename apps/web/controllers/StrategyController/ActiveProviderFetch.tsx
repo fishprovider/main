@@ -1,5 +1,5 @@
-import { getAccountController } from '@fishprovider/adapter-frontend';
-import { getAccountUseCase } from '@fishprovider/application-rules';
+import { GetAccountController } from '@fishprovider/adapter-frontend';
+import { GetAccountUseCase } from '@fishprovider/application-rules';
 import accountGet from '@fishprovider/cross/dist/api/accounts/get';
 import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
 import storeUser from '@fishprovider/cross/dist/stores/user';
@@ -8,7 +8,9 @@ import { useEffect } from 'react';
 
 import { toastError } from '~ui/toast';
 
-const getAccount = getAccountController(getAccountUseCase(FishApiAccountRepository));
+const getAccountController = new GetAccountController(
+  new GetAccountUseCase(FishApiAccountRepository),
+);
 
 interface Props {
   providerId: string;
@@ -32,7 +34,7 @@ function ActiveProviderFetch({ providerId }: Props) {
       toastError(err.message);
     });
 
-    getAccount({ accountId: providerId });
+    getAccountController.run({ accountId: providerId });
   }, [providerId]);
 
   return null;

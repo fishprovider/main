@@ -1,5 +1,5 @@
-import { getNewsController, watchNewsController } from '@fishprovider/adapter-frontend';
-import { getNewsUseCase, watchNewsUseCase } from '@fishprovider/application-rules';
+import { GetNewsController, WatchNewsController } from '@fishprovider/adapter-frontend';
+import { GetNewsUseCase, WatchNewsUseCase } from '@fishprovider/application-rules';
 import { OfflineFirstNewsRepository } from '@fishprovider/framework-offline-first';
 import { StoreNewsRepository } from '@fishprovider/framework-store';
 import type { News } from '@fishprovider/utils/dist/types/News.model';
@@ -14,14 +14,19 @@ import Switch from '~ui/core/Switch';
 import Table from '~ui/core/Table';
 import Title from '~ui/core/Title';
 
-const getNews = getNewsController(getNewsUseCase(OfflineFirstNewsRepository));
-const watchNews = watchNewsController(watchNewsUseCase(StoreNewsRepository));
+const getNewsController = new GetNewsController(
+  new GetNewsUseCase(OfflineFirstNewsRepository),
+);
+
+const watchNewsController = new WatchNewsController(
+  new WatchNewsUseCase(StoreNewsRepository),
+);
 
 function NewsList() {
   const [type, setType] = useState('today'); // today, this, next
   const [showAll, setShowAll] = useState(false);
 
-  const news = watchNews({
+  const news = watchNewsController.run({
     selector: (state) => (type === 'today'
       ? _.filter(state, (item) => moment(item.datetime) >= moment()
           && moment(item.datetime) <= moment().add(1, 'day'))
@@ -30,7 +35,7 @@ function NewsList() {
   });
 
   useEffect(() => {
-    getNews({
+    getNewsController.run({
       week: type === 'next' ? 'next' : 'this',
     });
   }, [type]);

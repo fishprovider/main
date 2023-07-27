@@ -1,5 +1,5 @@
-import { watchNewsController } from '@fishprovider/adapter-frontend';
-import { watchNewsUseCase } from '@fishprovider/application-rules';
+import { WatchNewsController } from '@fishprovider/adapter-frontend';
+import { WatchNewsUseCase } from '@fishprovider/application-rules';
 import { StoreNewsRepository } from '@fishprovider/framework-store';
 import _ from 'lodash';
 import moment from 'moment';
@@ -8,14 +8,16 @@ import React from 'react';
 import Alert from '~ui/core/Alert';
 import List from '~ui/core/List';
 
-const watchNews = watchNewsController(watchNewsUseCase(StoreNewsRepository));
+const watchNewsController = new WatchNewsController(
+  new WatchNewsUseCase(StoreNewsRepository),
+);
 
 interface Props {
   onClose: () => void,
 }
 
 function BigNews({ onClose }: Props) {
-  const news = watchNews({
+  const news = watchNewsController.run({
     selector: (state) => _.filter(
       state,
       ({ impact, datetime }) => ['high', 'medium'].includes(impact)
