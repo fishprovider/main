@@ -3,7 +3,6 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "~controllers/*": ["./controllers/*"],
       "~controllers": ["./controllers"],
     },
     "rootDir": ".",
