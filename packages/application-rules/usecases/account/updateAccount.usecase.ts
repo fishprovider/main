@@ -18,13 +18,6 @@ export class UpdateAccountUseCase {
     this.accountRepository = accountRepository;
   }
 
-  async runInternal(
-    params: UpdateAccountUseCaseParams,
-  ): Promise<boolean> {
-    const res = await this.accountRepository.updateAccount(params);
-    return res;
-  }
-
   async run(
     params: UpdateAccountUseCaseParams,
   ): Promise<boolean> {
@@ -34,6 +27,7 @@ export class UpdateAccountUseCase {
       accountId,
       payload: _.pick(payload, updateAccountAllowUpdateFields),
     };
-    return this.runInternal(repositoryParams);
+    const res = await this.accountRepository.updateAccount(repositoryParams);
+    return res;
   }
 }

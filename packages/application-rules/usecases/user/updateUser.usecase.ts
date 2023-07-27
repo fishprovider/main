@@ -20,13 +20,6 @@ export class UpdateUserUseCase {
     this.userRepository = userRepository;
   }
 
-  async runInternal(
-    params: UpdateUserUseCaseParams,
-  ): Promise<boolean> {
-    const res = await this.userRepository.updateUser(params);
-    return res;
-  }
-
   async run(
     params: UpdateUserUseCaseParams,
   ): Promise<boolean> {
@@ -36,6 +29,7 @@ export class UpdateUserUseCase {
       userId,
       payload: _.pick(payload, updateUserAllowUpdateFields),
     };
-    return this.runInternal(repositoryParams);
+    const res = await this.userRepository.updateUser(repositoryParams);
+    return res;
   }
 }

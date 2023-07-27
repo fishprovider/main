@@ -18,20 +18,13 @@ export class GetAccountUseCase {
     this.accountRepository = accountRepository;
   }
 
-  async runInternal(
+  async run(
     params: GetAccountUseCaseParams,
   ): Promise<Partial<Account>> {
     const account = await this.accountRepository.getAccount(params);
     if (!account) {
       throw new Error(AccountError.ACCOUNT_NOT_FOUND);
     }
-    return account;
-  }
-
-  async run(
-    params: GetAccountUseCaseParams,
-  ): Promise<Partial<Account>> {
-    const account = await this.runInternal(params);
 
     const { user } = params;
     const { isManagerWeb } = getRoleProvider(user?.roles);

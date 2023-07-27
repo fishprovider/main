@@ -36,16 +36,6 @@ export class GetUserUseCase {
     this.userRepository = userRepository;
   }
 
-  async runInternal(
-    params: GetUserUseCaseParams,
-  ): Promise<Partial<User>> {
-    const user = await this.userRepository.getUser(params);
-    if (!user) {
-      throw new Error(UserError.USER_NOT_FOUND);
-    }
-    return user;
-  }
-
   async run(
     params: GetUserUseCaseParams,
   ): Promise<Partial<User>> {
@@ -58,6 +48,10 @@ export class GetUserUseCase {
         ..._.pick(projection, getUserAllowReadFields),
       },
     };
-    return this.runInternal(repositoryParams);
+    const user = await this.userRepository.getUser(repositoryParams);
+    if (!user) {
+      throw new Error(UserError.USER_NOT_FOUND);
+    }
+    return user;
   }
 }
