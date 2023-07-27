@@ -1,6 +1,5 @@
 import type { GetAccountUseCase } from '@fishprovider/application-rules';
 import type { Account } from '@fishprovider/enterprise-rules';
-import _ from 'lodash';
 import { z } from 'zod';
 
 import type { ApiHandlerRequest, ApiHandlerResponse } from '~types';

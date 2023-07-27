@@ -1,6 +1,5 @@
 import type { GetUserUseCase } from '@fishprovider/application-rules';
 import type { User } from '@fishprovider/enterprise-rules';
-import _ from 'lodash';
 
 import { requireLogin } from '~helpers';
 import type { ApiHandlerRequest, ApiHandlerResponse } from '~types';

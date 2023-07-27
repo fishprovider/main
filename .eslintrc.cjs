@@ -9,7 +9,7 @@ const rules = {
   '@typescript-eslint/no-explicit-any': 'off',
   '@typescript-eslint/no-unused-vars': [
     'error',
-    { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
+    { argsIgnorePattern: '^_.+', varsIgnorePattern: '^_.+' },
   ],
   '@typescript-eslint/quotes': ['error', 'single'],
   '@typescript-eslint/restrict-template-expressions': 'off',

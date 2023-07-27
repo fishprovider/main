@@ -1,6 +1,5 @@
 import type { GetNewsUseCase } from '@fishprovider/application-rules';
 import type { News } from '@fishprovider/enterprise-rules';
-import _ from 'lodash';
 import { z } from 'zod';
 
 import { requireLogin } from '~helpers';

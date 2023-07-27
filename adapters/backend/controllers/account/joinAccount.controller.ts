@@ -1,5 +1,4 @@
 import type { JoinAccountUseCase } from '@fishprovider/application-rules';
-import _ from 'lodash';
 import { z } from 'zod';
 
 import { requireLogin } from '~helpers';
