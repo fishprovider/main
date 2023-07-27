@@ -17,7 +17,7 @@ export class GetNewsController {
 
   async run(
     { userSession, data }: ApiHandlerRequest,
-  ): ApiHandlerResponse<Partial<News[]>> {
+  ): ApiHandlerResponse<News[]> {
     requireLogin(userSession);
 
     const finalData = {
