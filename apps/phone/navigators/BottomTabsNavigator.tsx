@@ -25,7 +25,9 @@ export default function BottomTabsNavigator() {
     <Tab.Navigator
       screenOptions={{
         tabBarStyle: {
-          marginBottom: 10,
+          paddingBottom: 20,
+          paddingTop: 10,
+          height: 80,
         },
       }}
     >

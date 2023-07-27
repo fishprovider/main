@@ -1,3 +1,6 @@
+import accountGetManyUser from '@fishprovider/cross/dist/api/accounts/getManyUser';
+import { queryKeys } from '@fishprovider/cross/dist/constants/query';
+import { useQuery } from '@fishprovider/cross/dist/libs/query';
 import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
 import storeUser from '@fishprovider/cross/dist/stores/user';
 import _ from 'lodash';
@@ -9,6 +12,7 @@ import ScrollView from '~ui/ScrollView';
 import Select from '~ui/Select';
 import Stack from '~ui/Stack';
 import Text from '~ui/Text';
+import { refreshMS } from '~utils';
 
 import ListTrade from './ListTrade';
 import OpenOrder from './OpenOrder';
@@ -26,6 +30,12 @@ export default function Trade() {
     value: item._id,
     label: `${item.name} ${item.icon || ''}`,
   })));
+
+  useQuery({
+    queryFn: accountGetManyUser,
+    queryKey: queryKeys.userAccounts(),
+    refetchInterval: refreshMS,
+  });
 
   const [defaultProviderId, setDefaultProviderId] = useState<string>();
   const [selectedProviderId, setSelectedProviderId] = useState<string>();
