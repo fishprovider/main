@@ -22,11 +22,19 @@ import TradeWatch from './TradeWatch';
 export default function Trade() {
   const userId = storeUser.useStore((state) => state.info?._id);
 
-  const options = storeAccounts.useStore((state) => _.filter(state, (item) => {
-    if (item.userId && item.userId === userId) return true;
-    if (item.members?.some((itemMember) => itemMember.userId === userId)) return true;
-    return false;
-  }).map((item) => ({
+  const options = storeAccounts.useStore((state) => _.orderBy(
+    _.filter(state, (item) => {
+      if (item.userId && item.userId === userId) return true;
+      if (item.members?.some((itemMember) => itemMember.userId === userId)) return true;
+      return false;
+    }),
+    (item) => _.last(
+      _.sortBy(
+        _.map(item.activities, ({ lastView }) => new Date(lastView).getTime()),
+      ),
+    ),
+    ['desc'],
+  ).map((item) => ({
     value: item._id,
     label: `${item.name} ${item.icon || ''}`,
   })));
