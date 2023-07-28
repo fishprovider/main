@@ -225,9 +225,7 @@ deploy-phone:
   script:
     - cd apps/phone
     - npm ci --cache .npm --prefer-offline --no-audit --no-progress --legacy-peer-deps
-    - npx eas-cli@latest build --non-interactive --no-wait -p ios --profile production --auto-submit &
-    - npx eas-cli@latest build --non-interactive --no-wait -p android --profile production --auto-submit &
-    - wait
+    - npx eas-cli@latest build --non-interactive --no-wait -p all --profile production --auto-submit
   after_script:
     - NOTIF_MSG="Deploy phone $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
     - !reference [.notif, script]
@@ -243,15 +241,9 @@ deploy-phone-schedule:
   script:
     - cd apps/phone
     - npm ci --cache .npm --prefer-offline --no-audit --no-progress --legacy-peer-deps
-    - npx eas-cli@latest build --non-interactive --no-wait -p ios --profile production --auto-submit &
-    - npx eas-cli@latest build --non-interactive --no-wait -p android --profile production --auto-submit &
-    - wait
-    - npx eas-cli@latest build --non-interactive --no-wait -p ios --profile development &
-    - npx eas-cli@latest build --non-interactive --no-wait -p android --profile development &
-    - wait
-    - npx eas-cli@latest build --non-interactive --no-wait -p ios --profile development-simulator &
-    - npx eas-cli@latest build --non-interactive --no-wait -p android --profile development-simulator &
-    - wait
+    - npx eas-cli@latest build --non-interactive --no-wait -p all --profile production --auto-submit
+    - npx eas-cli@latest build --non-interactive --no-wait -p all --profile development
+    - npx eas-cli@latest build --non-interactive --no-wait -p all --profile development-simulator
   after_script:
     - NOTIF_MSG="Deploy phone $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
     - !reference [.notif, script]
