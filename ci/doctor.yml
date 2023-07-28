@@ -10,7 +10,6 @@ doctor:
   script:
     - npm ci --cache .npm --prefer-offline --no-audit --no-progress --legacy-peer-deps
     - npm run doctor
-  timeout: "20 minutes"
 
 doctor-error:
   tags:
