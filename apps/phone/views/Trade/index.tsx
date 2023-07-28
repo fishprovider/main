@@ -20,7 +20,11 @@ import TradeHeader from './TradeHeader';
 import TradeWatch from './TradeWatch';
 
 export default function Trade() {
-  const userId = storeUser.useStore((state) => state.info?._id);
+  const {
+    userId = '',
+  } = storeUser.useStore((state) => ({
+    userId: state.info?._id,
+  }));
 
   const options = storeAccounts.useStore((state) => _.orderBy(
     _.filter(state, (item) => {
@@ -28,11 +32,11 @@ export default function Trade() {
       if (item.members?.some((itemMember) => itemMember.userId === userId)) return true;
       return false;
     }),
-    (item) => _.last(
-      _.sortBy(
-        _.map(item.activities, ({ lastView }) => new Date(lastView).getTime()),
-      ),
-    ),
+    (item) => {
+      const activity = item.activities?.[userId];
+      if (!activity) return 0;
+      return new Date(activity.lastView).getTime();
+    },
     ['desc'],
   ).map((item) => ({
     value: item._id,
