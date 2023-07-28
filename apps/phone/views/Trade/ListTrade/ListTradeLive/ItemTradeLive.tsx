@@ -20,14 +20,10 @@ interface Props {
 function ItemTradeLive({
   order, prices, mergedView, unmergeView,
 }: Props) {
-  const [showModal] = useModalSimple({
+  const [onClose] = useModalSimple({
     title: <H6>Are you sure?</H6>,
     content: <CloseOrderModal order={order} />,
   });
-
-  const onClose = async () => {
-    showModal();
-  };
 
   return (
     <Group justifyContent="space-between" borderWidth={1} padding={4}>
