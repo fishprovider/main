@@ -12,6 +12,7 @@ interface Props {
   prices: Record<string, Price>;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function ItemTradePending({ order, prices }: Props) {
   return (
     <Group justifyContent="space-between" borderWidth={1} padding={4}>
