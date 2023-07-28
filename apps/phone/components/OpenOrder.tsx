@@ -1,3 +1,4 @@
+import { FontAwesome } from '@expo/vector-icons';
 import storePrices from '@fishprovider/cross/dist/stores/prices';
 import storeUser from '@fishprovider/cross/dist/stores/user';
 import { PlanType, ProviderType } from '@fishprovider/utils/dist/constants/account';
@@ -7,6 +8,7 @@ import _ from 'lodash';
 import { useState } from 'react';
 
 import PricePips from '~components/PricePips';
+import PriceView from '~components/PriceView';
 import SymbolsSelect from '~components/SymbolsSelect';
 import VolumeLots from '~components/VolumeLots';
 import useConversionRate from '~hooks/useConversionRate';
@@ -36,7 +38,7 @@ export default function OpenOrder() {
 
   const [orderType, setOrderType] = useState<OrderType>(OrderType.market);
   const [direction, setDirection] = useState<Direction>(Direction.buy);
-  const [volumeInput, setVolumeInput] = useState<number | undefined>(0);
+  const [volumeInput, setVolumeInput] = useState<number | undefined>();
   const [limitPriceInput, setLimitPriceInput] = useState<number | string | undefined>();
 
   const getDefaultVolume = () => {
@@ -146,6 +148,7 @@ export default function OpenOrder() {
         flex={1}
         theme={direction === Direction.buy ? 'green' : 'transparent'}
         borderColor={direction === Direction.buy ? 'green' : 'lightgrey'}
+        icon={<FontAwesome name="arrow-up" color="green" size={20} />}
         onPress={() => setDirection(Direction.buy)}
       >
         Buy
@@ -154,6 +157,7 @@ export default function OpenOrder() {
         flex={1}
         theme={direction === Direction.sell ? 'red' : 'transparent'}
         borderColor={direction === Direction.sell ? 'red' : 'lightgrey'}
+        icon={<FontAwesome name="arrow-down" color="red" size={20} />}
         onPress={() => setDirection(Direction.sell)}
       >
         Sell
@@ -164,6 +168,7 @@ export default function OpenOrder() {
   return (
     <Stack space="$5" padding="$2">
       <SymbolsSelect />
+      <PriceView />
       {renderOrderType()}
       <VolumeLots
         providerType={providerType}
@@ -176,6 +181,13 @@ export default function OpenOrder() {
       <Button
         theme={direction === Direction.buy ? 'green' : 'red'}
         borderColor={direction === Direction.buy ? 'green' : 'red'}
+        icon={(
+          <FontAwesome
+            name={direction === Direction.buy ? 'arrow-up' : 'arrow-down'}
+            color={direction === Direction.buy ? 'green' : 'red'}
+            size={20}
+          />
+        )}
         onPress={onOpen}
       >
         {_.upperFirst(direction)}
