@@ -221,10 +221,13 @@ deploy-phone:
     #   - apps/phone/**/*
     #   when: always
   cache: !reference [.cache_npm, cache]
+  timeout: "100 minutes"
   script:
     - cd apps/phone
     - npm ci --cache .npm --prefer-offline --no-audit --no-progress --legacy-peer-deps
-    - npx eas-cli@latest build --non-interactive --no-wait -p all --profile production --auto-submit
+    - npx eas-cli@latest build --non-interactive --no-wait -p ios --profile production --auto-submit &
+    - npx eas-cli@latest build --non-interactive --no-wait -p android --profile production --auto-submit &
+    - wait
   after_script:
     - NOTIF_MSG="Deploy phone $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
     - !reference [.notif, script]
@@ -236,12 +239,19 @@ deploy-phone-schedule:
     - if: $CI_PIPELINE_SOURCE == "schedule"
       when: always
   cache: !reference [.cache_npm, cache]
+  timeout: "300 minutes"
   script:
     - cd apps/phone
     - npm ci --cache .npm --prefer-offline --no-audit --no-progress --legacy-peer-deps
-    - npx eas-cli@latest build --non-interactive --no-wait -p all --profile production --auto-submit
-    - npx eas-cli@latest build --non-interactive --no-wait -p all --profile development
-    - npx eas-cli@latest build --non-interactive --no-wait -p all --profile development-simulator
+    - npx eas-cli@latest build --non-interactive --no-wait -p ios --profile production --auto-submit &
+    - npx eas-cli@latest build --non-interactive --no-wait -p android --profile production --auto-submit &
+    - wait
+    - npx eas-cli@latest build --non-interactive --no-wait -p ios --profile development &
+    - npx eas-cli@latest build --non-interactive --no-wait -p android --profile development &
+    - wait
+    - npx eas-cli@latest build --non-interactive --no-wait -p ios --profile development-simulator &
+    - npx eas-cli@latest build --non-interactive --no-wait -p android --profile development-simulator &
+    - wait
   after_script:
     - NOTIF_MSG="Deploy phone $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
     - !reference [.notif, script]
