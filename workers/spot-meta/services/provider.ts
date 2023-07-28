@@ -15,6 +15,7 @@ import { ProviderPlatform } from '@fishprovider/utils/dist/constants/account';
 import { Direction, OrderStatus, OrderType } from '@fishprovider/utils/dist/constants/order';
 import type { Account } from '@fishprovider/utils/dist/types/Account.model';
 
+import { setLastUpdated } from '~services/checkMetaTrader';
 import { startSubs, stopSubs } from '~services/handleSubs';
 import { spotTasks } from '~utils/tasks';
 
@@ -57,6 +58,8 @@ const pollSymbols = async (all = false) => {
       config,
     });
     await savePrice(providerType, symbol, price);
+
+    setLastUpdated();
   }
 };
 

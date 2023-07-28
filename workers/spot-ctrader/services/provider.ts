@@ -13,6 +13,7 @@ import type { Account } from '@fishprovider/utils/dist/types/Account.model';
 import _ from 'lodash';
 import moment from 'moment';
 
+import { setLastUpdated } from '~services/checkCTrader';
 import { startSubs, stopSubs } from '~services/handleSubs';
 import { spotTasks } from '~utils/tasks';
 
@@ -82,6 +83,8 @@ const pollSymbols = async (all = false) => {
         ask: last,
       };
       await savePrice(providerType, symbol, price);
+
+      setLastUpdated();
     }
   }
 };
