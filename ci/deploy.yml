@@ -1,4 +1,6 @@
 deploy-gate:
+  tags:
+    - local
   rules:
     - if: $CI_PIPELINE_SOURCE == "schedule"
       when: never
@@ -15,6 +17,8 @@ deploy-gate:
     - !reference [.notif, script]
 
 deploy-cron:
+  tags:
+    - local
   rules:
     - if: $CI_PIPELINE_SOURCE == "schedule"
       when: never
@@ -31,6 +35,8 @@ deploy-cron:
     - !reference [.notif, script]
 
 deploy-mon:
+  tags:
+    - local
   rules:
     - if: $CI_PIPELINE_SOURCE == "schedule"
       when: never
@@ -47,6 +53,8 @@ deploy-mon:
     - !reference [.notif, script]
 
 deploy-pay:
+  tags:
+    - local
   rules:
     - if: $CI_PIPELINE_SOURCE == "schedule"
       when: never
@@ -64,6 +72,8 @@ deploy-pay:
     - !reference [.notif, script]
 
 deploy-bot:
+  tags:
+    - local
   rules:
     - if: $CI_PIPELINE_SOURCE == "schedule"
       when: never
@@ -81,6 +91,8 @@ deploy-bot:
     - !reference [.notif, script]
 
 deploy-copy:
+  tags:
+    - local
   rules:
     - if: $CI_PIPELINE_SOURCE == "schedule"
       when: never
@@ -98,6 +110,8 @@ deploy-copy:
     - !reference [.notif, script]
 
 deploy-head-ctrader:
+  tags:
+    - local
   rules:
     - if: $CI_PIPELINE_SOURCE == "schedule"
       when: never
@@ -115,6 +129,8 @@ deploy-head-ctrader:
     - !reference [.notif, script]
 
 deploy-head-meta:
+  tags:
+    - local
   rules:
     - if: $CI_PIPELINE_SOURCE == "schedule"
       when: never
@@ -132,6 +148,8 @@ deploy-head-meta:
     - !reference [.notif, script]
 
 deploy-spot-ctrader:
+  tags:
+    - local
   rules:
     - if: $CI_PIPELINE_SOURCE == "schedule"
       when: never
@@ -150,6 +168,8 @@ deploy-spot-ctrader:
     - !reference [.notif, script]
 
 deploy-spot-meta:
+  tags:
+    - local
   rules:
     - if: $CI_PIPELINE_SOURCE == "schedule"
       when: never
@@ -168,6 +188,8 @@ deploy-spot-meta:
     - !reference [.notif, script]
 
 deploy-back:
+  tags:
+    - local
   rules:
     - if: $CI_PIPELINE_SOURCE == "schedule"
       when: never
@@ -187,6 +209,8 @@ deploy-back:
     - !reference [.notif, script]
 
 deploy-phone:
+  tags:
+    - local
   rules:
     - if: $CI_PIPELINE_SOURCE == "schedule"
       when: never
@@ -207,6 +231,8 @@ deploy-phone:
     - !reference [.notif, script]
 
 deploy-phone-schedule:
+  tags:
+    - local
   rules:
     - if: $CI_PIPELINE_SOURCE == "schedule"
       when: always

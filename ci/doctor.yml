@@ -13,6 +13,8 @@ doctor:
   timeout: "20 minutes"
 
 doctor-error:
+  tags:
+    - local
   stage: clean
   when: on_failure
   script:
