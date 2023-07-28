@@ -8,12 +8,9 @@ import Button from '~ui/Button';
 import Card from '~ui/Card';
 import Group from '~ui/Group';
 import H6 from '~ui/H6';
-import { useModalSimple } from '~ui/ModalProvider';
 import Stack from '~ui/Stack';
 import Text from '~ui/Text';
 import ThemeProvider from '~ui/ThemeProvider';
-
-import InvestModal from './InvestModal';
 
 interface Props {
   providerId: string;
@@ -49,17 +46,7 @@ export default function ProviderCard({ providerId }: Props) {
   const profit = summary?.roi || roi || 0;
   const activeMonths = moment().diff(moment(createdAt), 'months') + 1;
 
-  const [showModal] = useModalSimple({
-    title: <H6>How to Invest</H6>,
-    content: <InvestModal providerId={providerId} />,
-  });
-
   const onInvest = () => {
-    const isDev = false;
-    if (isDev) {
-      showModal();
-      return;
-    }
     WebBrowser.openBrowserAsync(mode === 'live'
       ? `https://www.fishprovider.com/strategies/${providerId}`
       : `https://demo.fishprovider.com/strategies/${providerId}`);

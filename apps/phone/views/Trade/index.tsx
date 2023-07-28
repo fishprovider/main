@@ -71,7 +71,7 @@ export default function Trade() {
   };
 
   return (
-    <Stack paddingHorizontal="$2">
+    <Stack padding="$2">
       <Select
         options={options}
         value={providerId}

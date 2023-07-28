@@ -118,7 +118,7 @@ function ListTradePending({ orders }: Props) {
           name="refresh"
           size={20}
           onPress={onReload}
-          color={isLoadingReload ? 'gray' : 'green'}
+          color={isLoadingReload ? 'gray' : 'deepskyblue'}
         />
       </Group>
       {renderBody()}

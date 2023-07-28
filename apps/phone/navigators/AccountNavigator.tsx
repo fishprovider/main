@@ -14,7 +14,7 @@ function UserIcon() {
     <FontAwesome
       name="user-circle"
       size={20}
-      style={{ marginRight: 15, color: 'green' }}
+      style={{ marginRight: 15, color: 'deepskyblue' }}
       onPress={() => navigation.navigate('User')}
     />
   );

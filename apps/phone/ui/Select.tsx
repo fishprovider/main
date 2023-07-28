@@ -17,6 +17,7 @@ export default function Select({
     <SelectT value={value} onValueChange={onChange}>
       <SelectT.Trigger
         theme="blue"
+        borderColor="deepskyblue"
         iconAfter={<FontAwesome name="chevron-down" />}
       >
         <Text>{options.find((item) => item.value === value)?.label ?? placeholder}</Text>

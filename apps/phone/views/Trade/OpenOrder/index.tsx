@@ -1,25 +1,23 @@
 import { FontAwesome } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 import Button from '~ui/Button';
 import Group from '~ui/Group';
-import H6 from '~ui/H6';
-import { useModalSimple } from '~ui/ModalProvider';
-
-import OpenOrderModal from './OpenOrderModal';
 
 export default function OpenOrder() {
-  const [onOpen] = useModalSimple({
-    title: <H6>New Order</H6>,
-    content: <OpenOrderModal />,
-  });
+  const navigation = useNavigation<any>();
+
+  const onOpen = () => {
+    navigation.navigate('OpenOrder');
+  };
 
   return (
     <Group>
       <Button
         iconAfter={(
-          <FontAwesome name="plus" size={15} style={{ color: 'green' }} />
+          <FontAwesome name="plus" size={15} style={{ color: 'deepskyblue' }} />
         )}
-        themeInverse
+        borderColor="deepskyblue"
         onPress={onOpen}
       >
         New Order

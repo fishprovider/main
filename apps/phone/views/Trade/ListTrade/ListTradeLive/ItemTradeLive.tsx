@@ -3,12 +3,10 @@ import { Direction } from '@fishprovider/utils/dist/constants/order';
 import type { Order } from '@fishprovider/utils/dist/types/Order.model';
 import type { Price } from '@fishprovider/utils/dist/types/Price.model';
 
-import CloseOrderModal from '~components/CloseOrderModal';
+import CloseOrder from '~components/CloseOrder';
 import OrderInfo from '~components/OrderInfo';
 import Profit from '~components/Profit';
 import Group from '~ui/Group';
-import H6 from '~ui/H6';
-import { useModalSimple } from '~ui/ModalProvider';
 
 interface Props {
   order: Order;
@@ -20,11 +18,6 @@ interface Props {
 function ItemTradeLive({
   order, prices, mergedView, unmergeView,
 }: Props) {
-  const [onClose] = useModalSimple({
-    title: <H6>Are you sure?</H6>,
-    content: <CloseOrderModal order={order} />,
-  });
-
   return (
     <Group justifyContent="space-between" borderWidth={1} padding={4}>
       <Group>
@@ -37,12 +30,7 @@ function ItemTradeLive({
       </Group>
       <Group>
         <Profit order={order} prices={prices} />
-        <FontAwesome
-          name="window-close"
-          color="orange"
-          size={20}
-          onPress={onClose}
-        />
+        <CloseOrder order={order} />
         {mergedView && (
           <FontAwesome
             name="expand"

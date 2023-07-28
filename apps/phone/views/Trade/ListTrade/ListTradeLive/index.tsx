@@ -143,7 +143,7 @@ function ListTradeLive({ orders }: Props) {
           name="refresh"
           size={20}
           onPress={onReload}
-          color={isLoadingReload ? 'gray' : 'green'}
+          color={isLoadingReload ? 'gray' : 'deepskyblue'}
         />
         <FontAwesome
           name={mergedView ? 'expand' : 'compress'}
