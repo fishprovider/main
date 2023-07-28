@@ -1,7 +1,7 @@
 const IS_DEV = process.env.NODE_ENV === 'development';
 
 const name = IS_DEV ? 'FishProvider (Dev)' : 'FishProvider';
-const appId = IS_DEV ? 'com.fishprovider.app-dev' : 'com.fishprovider.app';
+const appId = IS_DEV ? 'com.fishprovider.dev' : 'com.fishprovider.app';
 
 export default {
   expo: {
