@@ -15,7 +15,7 @@ import Text from '~ui/Text';
 import { refreshMS } from '~utils';
 
 import ListTrade from './ListTrade';
-import OpenOrder from './OpenOrder';
+import NewOrder from './NewOrder';
 import TradeHeader from './TradeHeader';
 import TradeWatch from './TradeWatch';
 
@@ -82,7 +82,7 @@ export default function Trade() {
           <Stack space="$4">
             <TradeWatch />
             <TradeHeader />
-            <OpenOrder />
+            <NewOrder />
             <ListTrade />
           </Stack>
         </ScrollView>

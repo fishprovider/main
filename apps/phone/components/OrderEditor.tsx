@@ -1,9 +1,10 @@
 import { FontAwesome } from '@expo/vector-icons';
 import storePrices from '@fishprovider/cross/dist/stores/prices';
 import storeUser from '@fishprovider/cross/dist/stores/user';
-import { PlanType, ProviderType } from '@fishprovider/utils/dist/constants/account';
-import { Direction, OrderType } from '@fishprovider/utils/dist/constants/order';
+import { PlanType, ProviderPlatform, ProviderType } from '@fishprovider/utils/dist/constants/account';
+import { Direction, OrderStatus, OrderType } from '@fishprovider/utils/dist/constants/order';
 import { getPriceFromAmount, getVolumeFromLot } from '@fishprovider/utils/dist/helpers/price';
+import { OrderWithoutId } from '@fishprovider/utils/dist/types/Order.model';
 import _ from 'lodash';
 import { useState } from 'react';
 
@@ -13,21 +14,31 @@ import SymbolsSelect from '~components/SymbolsSelect';
 import VolumeLots from '~components/VolumeLots';
 import useConversionRate from '~hooks/useConversionRate';
 import Button from '~ui/Button';
+import Checkbox from '~ui/Checkbox';
 import Group from '~ui/Group';
-import Label from '~ui/Label';
 import RadioGroup from '~ui/RadioGroup';
 import Stack from '~ui/Stack';
+import { getDefaultSLTP } from '~utils/price';
 
-export default function OpenOrder() {
+interface Props {
+  onSubmit: (order: OrderWithoutId) => void,
+  loading?: boolean,
+}
+
+export default function OrderEditor({
+  onSubmit, loading,
+}: Props) {
   const {
     symbol,
     providerType = ProviderType.icmarkets,
+    providerPlatform = ProviderPlatform.ctrader,
     asset = 'USD',
     plan = [],
     balance = 0,
   } = storeUser.useStore((state) => ({
     symbol: state.activeSymbol,
     providerType: state.activeProvider?.providerType,
+    providerPlatform: state.activeProvider?.providerPlatform,
     asset: state.activeProvider?.asset,
     plan: state.activeProvider?.plan,
     balance: state.activeProvider?.balance,
@@ -40,6 +51,11 @@ export default function OpenOrder() {
   const [direction, setDirection] = useState<Direction>(Direction.buy);
   const [volumeInput, setVolumeInput] = useState<number | undefined>();
   const [limitPriceInput, setLimitPriceInput] = useState<number | string | undefined>();
+
+  const [hasStopLoss, setHasStopLoss] = useState(false);
+  const [stopLossInput, setStopLossInput] = useState<number | string>();
+  const [hasTakeProfit, setHasTakeProfit] = useState(false);
+  const [takeProfitInput, setTakeProfitInput] = useState<number | string>();
 
   const getDefaultVolume = () => {
     if (!priceDoc) return 0;
@@ -70,8 +86,45 @@ export default function OpenOrder() {
   };
   const limitPrice = limitPriceInput ?? getDefaultLimitPrice();
 
+  let entry = priceDoc?.last || 0;
+  if ([OrderType.limit, OrderType.stop].includes(orderType) && limitPrice) {
+    entry = +limitPrice;
+  }
+
+  const {
+    defaultSL, defaultTP, planSLAmt, planTPAmt,
+  } = getDefaultSLTP(balance, plan, direction, volume, entry, rate);
+  const stopLoss = stopLossInput ?? defaultSL;
+  const takeProfit = takeProfitInput ?? defaultTP;
+
   const onOpen = () => {
-    Logger.info(symbol, orderType, direction);
+    const providerId = storeUser.getState().activeProvider?._id || '';
+    const digits = priceDoc?.digits || 0;
+
+    const order = {
+      providerId,
+      providerType,
+      providerPlatform,
+
+      orderType,
+      status: OrderStatus.idea,
+
+      symbol,
+      direction,
+      volume,
+      ...(orderType === OrderType.limit && limitPrice
+        && { limitPrice: _.round(+limitPrice, digits) }),
+      ...(orderType === OrderType.stop && limitPrice
+        && { stopPrice: _.round(+limitPrice, digits) }),
+      ...(orderType === OrderType.market
+        && { price: entry }),
+      ...((hasStopLoss || planSLAmt) && stopLoss
+        && { stopLoss: _.round(+stopLoss, digits) }),
+      ...((hasTakeProfit || planTPAmt) && takeProfit
+        && { takeProfit: _.round(+takeProfit, digits) }),
+    };
+
+    onSubmit(order);
   };
 
   const renderOrderType = () => (
@@ -125,6 +178,62 @@ export default function OpenOrder() {
     return null;
   };
 
+  const renderSLTPOption = () => (
+    <Group space="$4">
+      <Checkbox
+        id="StopLoss"
+        checked={hasStopLoss}
+        onChange={() => setHasStopLoss((prev) => !prev)}
+        label="Stop loss (SL)"
+      />
+      <Checkbox
+        id="TakeProfit"
+        checked={hasTakeProfit}
+        onChange={() => setHasTakeProfit((prev) => !prev)}
+        label="Take Profit (TP)"
+      />
+    </Group>
+  );
+
+  const renderSLTP = () => {
+    if (!entry || !(hasStopLoss || hasTakeProfit)) return null;
+
+    return (
+      <Stack>
+        {hasStopLoss && (
+          <PricePips
+            label="SL"
+            providerType={providerType}
+            symbol={symbol}
+            entry={entry}
+            newPrice={+stopLoss}
+            onChange={setStopLossInput}
+            asset={asset}
+            rate={rate}
+            direction={direction}
+            volume={volume}
+            balance={balance}
+          />
+        )}
+        {hasTakeProfit && (
+          <PricePips
+            label="TP"
+            providerType={providerType}
+            symbol={symbol}
+            entry={entry}
+            newPrice={+takeProfit}
+            onChange={setTakeProfitInput}
+            asset={asset}
+            rate={rate}
+            direction={direction}
+            volume={volume}
+            balance={balance}
+          />
+        )}
+      </Stack>
+    );
+  };
+
   const renderBuySell = () => (
     <Group>
       <Button
@@ -148,8 +257,14 @@ export default function OpenOrder() {
     </Group>
   );
 
+  const getButtonColor = () => {
+    if (loading) return 'grey';
+    return direction === Direction.buy ? 'green' : 'red';
+  };
+  const buttonColor = getButtonColor();
+
   return (
-    <Stack space="$5" padding="$2">
+    <Stack space="$5">
       <SymbolsSelect />
       <PriceView />
       {renderOrderType()}
@@ -160,18 +275,21 @@ export default function OpenOrder() {
         onChange={setVolumeInput}
       />
       {renderPendingPrice()}
+      {renderSLTPOption()}
+      {renderSLTP()}
       {renderBuySell()}
       <Button
-        theme={direction === Direction.buy ? 'green' : 'red'}
-        borderColor={direction === Direction.buy ? 'green' : 'red'}
+        theme={buttonColor}
+        borderColor={buttonColor}
         icon={(
           <FontAwesome
             name={direction === Direction.buy ? 'arrow-up' : 'arrow-down'}
-            color={direction === Direction.buy ? 'green' : 'red'}
+            color={buttonColor}
             size={20}
           />
         )}
         onPress={onOpen}
+        disabled={loading}
       >
         {_.upperFirst(direction)}
       </Button>

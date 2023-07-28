@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import Button from '~ui/Button';
 import Group from '~ui/Group';
 
-export default function OpenOrder() {
+export default function NewOrder() {
   const navigation = useNavigation<any>();
 
   const onOpen = () => {

@@ -1,7 +1,7 @@
 import { createStackNavigator } from '@react-navigation/stack';
 
-import OpenOrder from '~components/OpenOrder';
 import BaseController from '~controllers/BaseController';
+import OpenOrder from '~views/OpenOrder';
 import User from '~views/User';
 
 import BottomTabsNavigator from './BottomTabsNavigator';

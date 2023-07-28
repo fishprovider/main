@@ -1,3 +1,4 @@
+import { FontAwesome } from '@expo/vector-icons';
 import { Checkbox as CheckboxT, type CheckboxProps } from 'tamagui';
 
 import Group from './Group';
@@ -22,7 +23,9 @@ export default function Checkbox({
         onCheckedChange={onChange}
         {...rest}
       >
-        <CheckboxT.Indicator />
+        <CheckboxT.Indicator>
+          <FontAwesome name="check" />
+        </CheckboxT.Indicator>
       </CheckboxT>
       {label && <Label htmlFor={id}>{label}</Label>}
     </Group>
