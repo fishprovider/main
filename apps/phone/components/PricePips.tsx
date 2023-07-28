@@ -9,8 +9,6 @@ import { useEffect, useState } from 'react';
 
 import Group from '~ui/Group';
 import Input from '~ui/Input';
-import Label from '~ui/Label';
-import Stack from '~ui/Stack';
 
 interface Props {
   label: string,
@@ -75,64 +73,58 @@ function PricePips({
 
   return (
     <Group>
-      <Stack space="$0" flex={1}>
-        <Label htmlFor="price">{label}</Label>
-        <Input
-          id="price"
-          value={String(price)}
-          onChangeText={(value) => {
-            setPriceInput(value);
-            onChange(value);
+      <Input
+        id="price"
+        label={label}
+        value={String(price)}
+        onChange={(value) => {
+          setPriceInput(value);
+          onChange(value);
 
-            setPipsInput(value && getPips(value));
-            setProfitInput(value && getProfit(value));
+          setPipsInput(value && getPips(value));
+          setProfitInput(value && getProfit(value));
+        }}
+      />
+      {pipSize && (
+        <Input
+          id="pips"
+          label={`${label} (Pips)`}
+          value={String(pips)}
+          onChange={(value) => {
+            setPipsInput(value);
+
+            const newPriceInput = _.round(
+              entry + +value * pipSize,
+              digits,
+            );
+            setPriceInput(newPriceInput);
+            onChange(newPriceInput);
+
+            setProfitInput(newPriceInput && getProfit(newPriceInput));
           }}
         />
-      </Stack>
-      {pipSize && (
-        <Stack space="$0" flex={1}>
-          <Label htmlFor="pips">{`${label} (Pips)`}</Label>
-          <Input
-            id="pips"
-            value={String(pips)}
-            onChangeText={(value) => {
-              setPipsInput(value);
-
-              const newPriceInput = _.round(
-                entry + +value * pipSize,
-                digits,
-              );
-              setPriceInput(newPriceInput);
-              onChange(newPriceInput);
-
-              setProfitInput(newPriceInput && getProfit(newPriceInput));
-            }}
-          />
-        </Stack>
       )}
       {asset && (
-        <Stack space="$0" flex={1}>
-          <Label htmlFor="profit">{`${label} (${asset}) ${profitRatio ? `(${profitRatio}%)` : ''}`}</Label>
-          <Input
-            id="profit"
-            value={String(profit)}
-            onChangeText={(value) => {
-              setProfitInput(value);
+        <Input
+          id="profit"
+          label={`${label} (${asset}) ${profitRatio ? `(${profitRatio}%)` : ''}`}
+          value={String(profit)}
+          onChange={(value) => {
+            setProfitInput(value);
 
-              const newPriceInput = _.round(getPriceFromAmount({
-                direction,
-                volume,
-                entry,
-                assetAmt: +value,
-                rate,
-              }), digits);
-              setPriceInput(newPriceInput);
-              onChange(newPriceInput);
+            const newPriceInput = _.round(getPriceFromAmount({
+              direction,
+              volume,
+              entry,
+              assetAmt: +value,
+              rate,
+            }), digits);
+            setPriceInput(newPriceInput);
+            onChange(newPriceInput);
 
-              setPipsInput(newPriceInput && getPips(newPriceInput));
-            }}
-          />
-        </Stack>
+            setPipsInput(newPriceInput && getPips(newPriceInput));
+          }}
+        />
       )}
     </Group>
   );

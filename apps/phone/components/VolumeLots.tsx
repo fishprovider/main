@@ -5,8 +5,6 @@ import { useEffect, useState } from 'react';
 
 import Group from '~ui/Group';
 import Input from '~ui/Input';
-import Label from '~ui/Label';
-import Stack from '~ui/Stack';
 
 interface Props {
   providerType: ProviderType,
@@ -40,44 +38,40 @@ function VolumeLots({
 
   return (
     <Group>
-      <Stack space="$0" flex={1}>
-        <Label htmlFor="volume">Volume</Label>
-        <Input
-          id="volume"
-          value={String(volume)}
-          onChangeText={(value) => {
-            setVolumeInput(value);
-            onChange(+value);
+      <Input
+        id="volume"
+        label="Volume"
+        value={String(volume)}
+        onChange={(value) => {
+          setVolumeInput(value);
+          onChange(+value);
 
-            const newLot = getLotFromVolume({
-              providerType,
-              symbol,
-              prices: { [priceDoc._id]: priceDoc },
-              volume: +value,
-            }).lot;
-            setLotInput(newLot);
-          }}
-        />
-      </Stack>
-      <Stack space="$0" flex={1}>
-        <Label htmlFor="lot">Lot</Label>
-        <Input
-          id="lot"
-          value={String(lot)}
-          onChangeText={(value) => {
-            setLotInput(value);
+          const newLot = getLotFromVolume({
+            providerType,
+            symbol,
+            prices: { [priceDoc._id]: priceDoc },
+            volume: +value,
+          }).lot;
+          setLotInput(newLot);
+        }}
+      />
+      <Input
+        id="lot"
+        label="Lot"
+        value={String(lot)}
+        onChange={(value) => {
+          setLotInput(value);
 
-            const newVolume = getVolumeFromLot({
-              providerType,
-              symbol,
-              prices: { [priceDoc._id]: priceDoc },
-              lot: +value,
-            }).volume || 0;
-            setVolumeInput(newVolume);
-            onChange(newVolume);
-          }}
-        />
-      </Stack>
+          const newVolume = getVolumeFromLot({
+            providerType,
+            symbol,
+            prices: { [priceDoc._id]: priceDoc },
+            lot: +value,
+          }).volume || 0;
+          setVolumeInput(newVolume);
+          onChange(newVolume);
+        }}
+      />
     </Group>
   );
 }

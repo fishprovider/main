@@ -5,7 +5,6 @@ import { useEffect } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import BaseThemeProvider from '~ui/BaseThemeProvider';
-import { ModalProvider } from '~ui/ModalProvider';
 import ToastProvider from '~ui/ToastProvider';
 
 import { initialize as initServices } from './baseServices';
@@ -36,10 +35,8 @@ export default function BaseController({ children }: Props) {
         <BaseThemeProvider>
           <NavigationContainer>
             <ToastProvider>
-              <ModalProvider>
-                <UserSetup />
-                {children}
-              </ModalProvider>
+              <UserSetup />
+              {children}
             </ToastProvider>
           </NavigationContainer>
         </BaseThemeProvider>

@@ -76,31 +76,14 @@ export default function OpenOrder() {
 
   const renderOrderType = () => (
     <RadioGroup
+      options={[
+        { value: OrderType.market, label: 'Market' },
+        { value: OrderType.limit, label: 'Limit' },
+        { value: OrderType.stop, label: 'Stop' },
+      ]}
       value={orderType}
-      onValueChange={(value) => setOrderType(value as OrderType)}
-      orientation="horizontal"
-      space="$4"
-      theme="blue"
-    >
-      <Group>
-        <RadioGroup.Item value={OrderType.market} size="$6" id={OrderType.market}>
-          <RadioGroup.Indicator />
-        </RadioGroup.Item>
-        <Label htmlFor={OrderType.market}>Market</Label>
-      </Group>
-      <Group>
-        <RadioGroup.Item value={OrderType.limit} size="$6" id={OrderType.limit}>
-          <RadioGroup.Indicator />
-        </RadioGroup.Item>
-        <Label htmlFor={OrderType.limit}>Limit</Label>
-      </Group>
-      <Group>
-        <RadioGroup.Item value={OrderType.stop} size="$6" id={OrderType.stop}>
-          <RadioGroup.Indicator />
-        </RadioGroup.Item>
-        <Label htmlFor={OrderType.stop}>Stop</Label>
-      </Group>
-    </RadioGroup>
+      onChange={(value) => setOrderType(value as OrderType)}
+    />
   );
 
   const renderPendingPrice = () => {

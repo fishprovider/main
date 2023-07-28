@@ -1,4 +1,4 @@
-import { Button as ButtonT, ButtonProps } from 'tamagui';
+import { Button as ButtonT, type ButtonProps } from 'tamagui';
 
 type Props = ButtonProps;
 

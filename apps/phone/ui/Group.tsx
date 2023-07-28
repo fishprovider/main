@@ -1,6 +1,8 @@
-import { XStack, XStackProps } from 'tamagui';
+import { XStack, type XStackProps } from 'tamagui';
 
-export default function Group(props: XStackProps) {
+type Props = XStackProps;
+
+export default function Group(props: Props) {
   return (
     <XStack
       space="$2"
