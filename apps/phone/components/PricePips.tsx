@@ -74,7 +74,7 @@ function PricePips({
   return (
     <Group>
       <Input
-        id="price"
+        id={`${label}-price}`}
         label={label}
         value={String(price)}
         onChange={(value) => {
@@ -87,7 +87,7 @@ function PricePips({
       />
       {pipSize && (
         <Input
-          id="pips"
+          id={`${label}-pips}`}
           label="Pips"
           value={String(pips)}
           onChange={(value) => {
@@ -106,7 +106,7 @@ function PricePips({
       )}
       {asset && (
         <Input
-          id="profit"
+          id={`${label}-profit}`}
           label={`${asset} ${profitRatio ? `(${profitRatio}%)` : ''}`}
           value={String(profit)}
           onChange={(value) => {
