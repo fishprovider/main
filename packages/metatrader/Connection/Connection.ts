@@ -5,7 +5,6 @@ import type { ConnectionType } from '~types/Connection.model';
 import type { CallbackPayload } from '~types/Event.model';
 
 class Connection implements ConnectionType {
-  /* eslint-disable @typescript-eslint/lines-between-class-members */
   clientSecret: string;
   clientId: string;
   name?: string;
@@ -14,7 +13,6 @@ class Connection implements ConnectionType {
   api?: MetaApi;
 
   onEvent?: (_: CallbackPayload) => void;
-  /* eslint-enable @typescript-eslint/lines-between-class-members */
 
   constructor(
     config: Config,

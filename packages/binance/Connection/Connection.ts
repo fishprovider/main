@@ -5,7 +5,6 @@ import type { ConnectionType } from '~types/Connection.model';
 import type { PromiseCreator } from '~types/PromiseCreator.model';
 
 class Connection implements ConnectionType {
-  /* eslint-disable @typescript-eslint/lines-between-class-members */
   name: string;
   clientId: string;
   clientSecret: string;
@@ -18,7 +17,6 @@ class Connection implements ConnectionType {
   listenKey: string | undefined;
   pingInterval: NodeJS.Timer | undefined;
   destroyPromise: PromiseCreator<void> | undefined;
-  /* eslint-enable @typescript-eslint/lines-between-class-members */
 
   constructor(
     config: Config,

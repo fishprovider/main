@@ -33,7 +33,6 @@ const protoFile2 = env.ctraderProtoTmp
 console.log('protoFiles', protoFile1, protoFile2);
 
 class Connection implements ConnectionType {
-  /* eslint-disable @typescript-eslint/lines-between-class-members */
   host: string;
   port: number;
   clientId: string;
@@ -58,7 +57,6 @@ class Connection implements ConnectionType {
   onEvent: (_: CallbackPayload) => void;
   onError: (_: any) => void;
   onClose: () => void;
-  /* eslint-enable @typescript-eslint/lines-between-class-members */
 
   constructor(
     config: Config,
