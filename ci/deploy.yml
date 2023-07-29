@@ -2,8 +2,8 @@ deploy-gate:
   tags:
     - local
   rules:
-    - if: $CI_PIPELINE_SOURCE == "schedule" && $SCHEDULE_GATE == "true"
-      when: always
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+      when: never
     - if: $CI_COMMIT_TITLE =~ /deploy-gate/
       when: always
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
@@ -20,8 +20,8 @@ deploy-cron:
   tags:
     - local
   rules:
-    - if: $CI_PIPELINE_SOURCE == "schedule" && $SCHEDULE_CRON == "true"
-      when: always
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+      when: never
     - if: $CI_COMMIT_TITLE =~ /deploy-cron/
       when: always
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
@@ -38,8 +38,8 @@ deploy-mon:
   tags:
     - local
   rules:
-    - if: $CI_PIPELINE_SOURCE == "schedule" && $SCHEDULE_MON == "true"
-      when: always
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+      when: never
     - if: $CI_COMMIT_TITLE =~ /deploy-mon/
       when: always
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
@@ -56,8 +56,8 @@ deploy-pay:
   tags:
     - local
   rules:
-    - if: $CI_PIPELINE_SOURCE == "schedule" && $SCHEDULE_PAY == "true"
-      when: always
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+      when: never
     - if: $CI_COMMIT_TITLE =~ /deploy-pay/
       when: always
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
@@ -75,8 +75,8 @@ deploy-bot:
   tags:
     - local
   rules:
-    - if: $CI_PIPELINE_SOURCE == "schedule" && $SCHEDULE_BOT == "true"
-      when: always
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+      when: never
     - if: $CI_COMMIT_TITLE =~ /deploy-bot/
       when: always
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
@@ -94,8 +94,8 @@ deploy-copy:
   tags:
     - local
   rules:
-    - if: $CI_PIPELINE_SOURCE == "schedule" && $SCHEDULE_COPY == "true"
-      when: always
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+      when: never
     - if: $CI_COMMIT_TITLE =~ /deploy-copy/
       when: always
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
@@ -113,8 +113,8 @@ deploy-head-ctrader:
   tags:
     - local
   rules:
-    - if: $CI_PIPELINE_SOURCE == "schedule" && $SCHEDULE_HEAD_CTRADER == "true"
-      when: always
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+      when: never
     - if: $CI_COMMIT_TITLE =~ /deploy-head-ctrader/
       when: always
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
@@ -132,8 +132,8 @@ deploy-head-meta:
   tags:
     - local
   rules:
-    - if: $CI_PIPELINE_SOURCE == "schedule" && $SCHEDULE_HEAD_META == "true"
-      when: always
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+      when: never
     - if: $CI_COMMIT_TITLE =~ /deploy-head-meta/
       when: always
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
@@ -151,8 +151,8 @@ deploy-spot-ctrader:
   tags:
     - local
   rules:
-    - if: $CI_PIPELINE_SOURCE == "schedule" && $SCHEDULE_SPOT_CTRADER == "true"
-      when: always
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+      when: never
     - if: $CI_COMMIT_TITLE =~ /deploy-spot-ctrader/
       when: always
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
@@ -171,8 +171,8 @@ deploy-spot-meta:
   tags:
     - local
   rules:
-    - if: $CI_PIPELINE_SOURCE == "schedule" && $SCHEDULE_SPOT_META == "true"
-      when: always
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+      when: never
     - if: $CI_COMMIT_TITLE =~ /deploy-spot-meta/
       when: always
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
@@ -191,8 +191,8 @@ deploy-back:
   tags:
     - local
   rules:
-    - if: $CI_PIPELINE_SOURCE == "schedule" && $SCHEDULE_BACK == "true"
-      when: always
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+      when: never
     - if: $CI_COMMIT_TITLE =~ /deploy-back/
       when: always
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
@@ -212,8 +212,8 @@ deploy-phone:
   tags:
     - local
   rules:
-    - if: $CI_PIPELINE_SOURCE == "schedule" && $SCHEDULE_PHONE == "phone"
-      when: always
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+      when: never
     - if: $CI_COMMIT_TITLE =~ /deploy-phone/
       when: always
   cache: !reference [.cache_npm, cache]

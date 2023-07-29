@@ -1,0 +1,32 @@
+schedule-render:
+  tags:
+    - local
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+      when: always
+  script:
+    - if [ -n $SCHEDULE_GATE ]; then curl $DEPLOY_GATE; fi
+    - if [ -n $SCHEDULE_CRON ]; then curl $DEPLOY_CRON; fi
+    - if [ -n $SCHEDULE_MON ]; then curl $DEPLOY_MON; fi
+    - if [ -n $SCHEDULE_PAY ]; then curl $DEPLOY_PAY && curl $DEPLOY_PAY_DEMO; fi
+    - if [ -n $SCHEDULE_BOT ]; then curl $DEPLOY_BOT && curl $DEPLOY_BOT_DEMO; fi
+    - if [ -n $SCHEDULE_COPY ]; then curl $DEPLOY_COPY && curl $DEPLOY_COPY_DEMO; fi
+    - if [ -n $SCHEDULE_HEAD_CTRADER ]; then curl $DEPLOY_HEAD_CTRADER && curl $DEPLOY_HEAD_CTRADER_DEMO; fi
+    - if [ -n $SCHEDULE_HEAD_META ]; then curl $DEPLOY_HEAD_META && curl $DEPLOY_HEAD_META_DEMO; fi
+    - if [ -n $SCHEDULE_SPOT_CTRADER ]; then curl $DEPLOY_SPOT_CTRADER_ICMARKETS && curl $DEPLOY_SPOT_CTRADER_ICMARKETS_POLL && curl $DEPLOY_SPOT_CTRADER_ICMARKETS_DEMO; fi
+    - if [ -n $SCHEDULE_SPOT_META ]; then curl $DEPLOY_SPOT_META_EXNESS && curl $DEPLOY_SPOT_META_EXNESS_POLL && curl $DEPLOY_SPOT_META_EXNESS_DEMO; fi
+    - if [ -n $SCHEDULE_BACK ]; then curl $DEPLOY_BACK && curl $DEPLOY_BACK_DEMO && curl $DEPLOY_BACK_CANARY && curl $DEPLOY_BACK_CANARY_DEMO; fi
+
+schedule-phone:
+  tags:
+    - local
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+      when: always
+  script:
+    - if [ -z $SCHEDULE_PHONE ]; then exit 0; fi
+    - cd apps/phone
+    - ./clean-deps.sh
+    - npm ci --cache .npm --prefer-offline --no-audit --no-progress --legacy-peer-deps
+    - alias eas="npx eas-cli@latest"
+    - eas build --non-interactive --no-wait -p all --profile production --auto-submit
