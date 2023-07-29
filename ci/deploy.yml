@@ -191,8 +191,8 @@ deploy-back:
   tags:
     - local
   rules:
-    - if: $CI_PIPELINE_SOURCE == "schedule"
-      when: never
+    - if: $CI_PIPELINE_SOURCE == "schedule" && $SCHEDULE_BACK == "true"
+      when: always
     - if: $CI_COMMIT_TITLE =~ /deploy-back/
       when: always
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
