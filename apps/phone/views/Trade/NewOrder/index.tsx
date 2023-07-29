@@ -1,14 +1,13 @@
 import { FontAwesome } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
 
 import Button from '~ui/Button';
 import Group from '~ui/Group';
+import { showModal } from '~ui/ModalProvider';
+import OpenOrder from '~views/OpenOrder';
 
 export default function NewOrder() {
-  const navigation = useNavigation<any>();
-
   const onOpen = () => {
-    navigation.navigate('OpenOrder');
+    showModal(<OpenOrder />);
   };
 
   return (

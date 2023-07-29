@@ -88,7 +88,7 @@ function PricePips({
       {pipSize && (
         <Input
           id="pips"
-          label={`${label} (Pips)`}
+          label="Pips"
           value={String(pips)}
           onChange={(value) => {
             setPipsInput(value);
@@ -107,7 +107,7 @@ function PricePips({
       {asset && (
         <Input
           id="profit"
-          label={`${label} (${asset}) ${profitRatio ? `(${profitRatio}%)` : ''}`}
+          label={`${asset} ${profitRatio ? `(${profitRatio}%)` : ''}`}
           value={String(profit)}
           onChange={(value) => {
             setProfitInput(value);

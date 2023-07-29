@@ -13,6 +13,7 @@ import _ from 'lodash';
 
 import OrderEditor from '~components/OrderEditor';
 import Alert from '~ui/Alert';
+import ScrollView from '~ui/ScrollView';
 import Stack from '~ui/Stack';
 import { useToast } from '~ui/ToastProvider';
 
@@ -82,8 +83,10 @@ export default function OpenOrder() {
   };
 
   return (
-    <Stack padding="$2">
-      <OrderEditor onSubmit={onOpen} loading={isLoading} />
-    </Stack>
+    <ScrollView>
+      <Stack padding="$2">
+        <OrderEditor onSubmit={onOpen} loading={isLoading} />
+      </Stack>
+    </ScrollView>
   );
 }
