@@ -232,6 +232,8 @@ deploy-phone-update:
   tags:
     - local
   rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+      when: never
     - if: $CI_COMMIT_BRANCH =~ /prod-phone/
       when: always
   cache: !reference [.cache_npm, cache]
