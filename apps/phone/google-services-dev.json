@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "130013915084",
+    "project_id": "fishprovider-official",
+    "storage_bucket": "fishprovider-official.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:130013915084:android:d1b34af70e61208ddbdf69",
+        "android_client_info": {
+          "package_name": "com.fishprovider.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "130013915084-i0dkslh6ql4ga2bvfj08p8im81shs170.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fishprovider.app",
+            "certificate_hash": "35c31b3308ef57220641f34662cc25ec9420aedd"
+          }
+        },
+        {
+          "client_id": "130013915084-m4q2o4gt12llr772tnvtp7s5tibd7ddg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fishprovider.app",
+            "certificate_hash": "9f0bf415a9cb2ad17943894b31daf77e772c67a6"
+          }
+        },
+        {
+          "client_id": "130013915084-2qtkr5q2f6pfjp68cb5tmc3qke1p2m24.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-0AKbCMW-S6gcQEaipl8Z1u3lSioZvGo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "130013915084-2qtkr5q2f6pfjp68cb5tmc3qke1p2m24.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "130013915084-eeo2mbt6rj4qmc7to8lv2b403oof7spm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.fishprovider.app"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:130013915084:android:157f76cbf51fb8e0dbdf69",
+        "android_client_info": {
+          "package_name": "com.fishprovider.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "130013915084-2qtkr5q2f6pfjp68cb5tmc3qke1p2m24.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-0AKbCMW-S6gcQEaipl8Z1u3lSioZvGo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "130013915084-2qtkr5q2f6pfjp68cb5tmc3qke1p2m24.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "130013915084-eeo2mbt6rj4qmc7to8lv2b403oof7spm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.fishprovider.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

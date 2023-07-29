@@ -24,7 +24,7 @@ export default {
     ],
     ios: {
       bundleIdentifier: appId,
-      googleServicesFile: './GoogleService-Info.plist',
+      googleServicesFile: IS_DEV ? './GoogleService-Info-dev.plist' : './GoogleService-Info.plist',
       infoPlist: {
         ITSAppUsesNonExemptEncryption: false,
       },
@@ -36,7 +36,7 @@ export default {
     },
     android: {
       package: appId,
-      googleServicesFile: './google-services.json',
+      googleServicesFile: IS_DEV ? './google-services-dev.json' : './google-services.json',
       adaptiveIcon: {
         foregroundImage: './assets/images/adaptive-icon.png',
         backgroundColor: '#ffffff',
