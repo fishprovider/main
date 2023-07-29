@@ -36,10 +36,9 @@ export default function BaseController({ children }: Props) {
         <BaseThemeProvider>
           <NavigationContainer>
             <ToastProvider>
-              <ModalProvider>
-                <UserSetup />
-                {children}
-              </ModalProvider>
+              <ModalProvider />
+              <UserSetup />
+              {children}
             </ToastProvider>
           </NavigationContainer>
         </BaseThemeProvider>

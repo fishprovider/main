@@ -2,7 +2,7 @@ import storeUser from '@fishprovider/cross/dist/stores/user';
 
 import Sheet from './Sheet';
 
-function DefaultModal() {
+export default function ModalProvider() {
   const {
     modalOpen,
     modalContent,
@@ -26,19 +26,6 @@ function DefaultModal() {
       <Sheet.Handle />
       <Sheet.Frame>{modalContent}</Sheet.Frame>
     </Sheet>
-  );
-}
-
-interface Props {
-  children: React.ReactNode;
-}
-
-export default function ModalProvider({ children }: Props) {
-  return (
-    <>
-      {children}
-      <DefaultModal />
-    </>
   );
 }
 
