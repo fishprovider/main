@@ -247,3 +247,18 @@ deploy-phone-schedule:
   after_script:
     - NOTIF_MSG="Deploy phone $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
     - !reference [.notif, script]
+
+deploy-phone-update:
+  tags:
+    - local
+  rules:
+    - if: $CI_COMMIT_BRANCH =~ /prod-phone/
+      when: always
+  cache: !reference [.cache_npm, cache]
+  script:
+    - cd apps/phone
+    - npm ci --cache .npm --prefer-offline --no-audit --no-progress --legacy-peer-deps
+    - npx eas-cli@latest update --auto --channel production
+  after_script:
+    - NOTIF_MSG="Deploy phone $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
+    - !reference [.notif, script]
