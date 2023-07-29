@@ -10,6 +10,7 @@
     "dev": "NODE_ENV=development expo start --dev-client",
     "native-android": "expo run:android",
     "native-ios": "expo run:ios",
+    "eas-build-pre-install": "./clean-deps.sh",
     "eas-build-post-install": "./build-deps.sh"
   },
   "dependencies": {
