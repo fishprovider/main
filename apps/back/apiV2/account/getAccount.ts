@@ -3,8 +3,10 @@ import { GetAccountUseCase } from '@fishprovider/application-rules';
 import type { User } from '@fishprovider/enterprise-rules';
 import { MongoAccountRepository } from '@fishprovider/framework-mongo';
 
-const handler: ApiHandler<Partial<User>> = new GetAccountController(
+const getAccountController = new GetAccountController(
   new GetAccountUseCase(MongoAccountRepository),
-).run;
+);
+
+const handler: ApiHandler<Partial<User>> = getAccountController.run;
 
 export default handler;

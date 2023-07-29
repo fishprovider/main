@@ -3,8 +3,10 @@ import { GetNewsUseCase } from '@fishprovider/application-rules';
 import type { News } from '@fishprovider/enterprise-rules';
 import { CacheFirstNewsRepository } from '@fishprovider/framework-cache-first';
 
-const handler: ApiHandler<News[]> = new GetNewsController(
+const getNewsController = new GetNewsController(
   new GetNewsUseCase(CacheFirstNewsRepository),
-).run;
+);
+
+const handler: ApiHandler<News[]> = getNewsController.run;
 
 export default handler;

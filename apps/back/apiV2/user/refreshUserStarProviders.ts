@@ -2,8 +2,10 @@ import { ApiHandler, RefreshUserStarProvidersController } from '@fishprovider/ad
 import { RefreshUserStarProvidersUseCase } from '@fishprovider/application-rules';
 import { MongoUserRepository } from '@fishprovider/framework-mongo';
 
-const handler: ApiHandler<boolean> = new RefreshUserStarProvidersController(
+const refreshUserStarProvidersController = new RefreshUserStarProvidersController(
   new RefreshUserStarProvidersUseCase(MongoUserRepository),
-).run;
+);
+
+const handler: ApiHandler<boolean> = refreshUserStarProvidersController.run;
 
 export default handler;

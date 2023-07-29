@@ -2,11 +2,13 @@ import { ApiHandler, RefreshUserRolesController } from '@fishprovider/adapter-ba
 import { RefreshUserRolesUseCase } from '@fishprovider/application-rules';
 import { MongoAccountRepository, MongoUserRepository } from '@fishprovider/framework-mongo';
 
-const handler: ApiHandler<boolean> = new RefreshUserRolesController(
+const refreshUserRolesController = new RefreshUserRolesController(
   new RefreshUserRolesUseCase(
     MongoUserRepository,
     MongoAccountRepository,
   ),
-).run;
+);
+
+const handler: ApiHandler<boolean> = refreshUserRolesController.run;
 
 export default handler;

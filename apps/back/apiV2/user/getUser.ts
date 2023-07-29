@@ -3,8 +3,10 @@ import { GetUserUseCase } from '@fishprovider/application-rules';
 import type { User } from '@fishprovider/enterprise-rules';
 import { MongoUserRepository } from '@fishprovider/framework-mongo';
 
-const handler: ApiHandler<Partial<User>> = new GetUserController(
+const getUserController = new GetUserController(
   new GetUserUseCase(MongoUserRepository),
-).run;
+);
+
+const handler: ApiHandler<Partial<User>> = getUserController.run;
 
 export default handler;
