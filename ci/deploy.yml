@@ -224,8 +224,10 @@ deploy-phone:
   timeout: "100 minutes"
   script:
     - cd apps/phone
+    - ./clean-deps.sh
     - npm ci --cache .npm --prefer-offline --no-audit --no-progress --legacy-peer-deps
-    - npx eas-cli@latest build --non-interactive --no-wait -p all --profile production --auto-submit
+    - alias eas="npx eas-cli@latest"
+    - eas build --non-interactive --no-wait -p all --profile production --auto-submit
   after_script:
     - NOTIF_MSG="Deploy phone $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
     - !reference [.notif, script]
@@ -240,10 +242,12 @@ deploy-phone-schedule:
   timeout: "300 minutes"
   script:
     - cd apps/phone
+    - ./clean-deps.sh
     - npm ci --cache .npm --prefer-offline --no-audit --no-progress --legacy-peer-deps
-    - npx eas-cli@latest build --non-interactive --no-wait -p all --profile production --auto-submit
-    - npx eas-cli@latest build --non-interactive --no-wait -p all --profile development
-    - npx eas-cli@latest build --non-interactive --no-wait -p all --profile development-simulator
+    - alias eas="npx eas-cli@latest"
+    - eas build --non-interactive --no-wait -p all --profile production --auto-submit
+    - eas build --non-interactive --no-wait -p all --profile development
+    - eas build --non-interactive --no-wait -p all --profile development-simulator
   after_script:
     - NOTIF_MSG="Deploy phone $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
     - !reference [.notif, script]
@@ -257,8 +261,10 @@ deploy-phone-update:
   cache: !reference [.cache_npm, cache]
   script:
     - cd apps/phone
+    - ./clean-deps.sh
     - npm ci --cache .npm --prefer-offline --no-audit --no-progress --legacy-peer-deps
-    - npx eas-cli@latest update --auto --channel production
+    - alias eas="npx eas-cli@latest"
+    - eas update --auto --channel production
   after_script:
     - NOTIF_MSG="Deploy phone $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
     - !reference [.notif, script]
