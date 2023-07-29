@@ -8,7 +8,6 @@ import { validateOrderAdd } from '@fishprovider/utils/dist/helpers/validateOrder
 import { Account } from '@fishprovider/utils/dist/types/Account.model';
 import { OrderWithoutId } from '@fishprovider/utils/dist/types/Order.model';
 import { User } from '@fishprovider/utils/dist/types/User.model';
-import { useNavigation } from '@react-navigation/native';
 import _ from 'lodash';
 
 import OrderEditor from '~components/OrderEditor';
@@ -18,7 +17,6 @@ import Stack from '~ui/Stack';
 import { useToast } from '~ui/ToastProvider';
 
 export default function OpenOrder() {
-  const navigation = useNavigation<any>();
   const toast = useToast();
 
   const { mutate: open, isLoading } = useMutate({
@@ -70,9 +68,6 @@ export default function OpenOrder() {
         onPress: () => open({ order }, {
           onSuccess: () => {
             toast.show('Done');
-            if (navigation.canGoBack()) {
-              navigation.goBack();
-            }
           },
           onError: (err: any) => {
             toast.show(err);
