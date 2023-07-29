@@ -1,9 +1,6 @@
 #!/bin/bash
 
-cd ../..
+cd ../../scripts
 
-ls adapters | grep -vE "frontend" | xargs rm -rf
-ls apps | grep -vE "web" | xargs rm -rf
-ls frameworks | grep -vE "local|store|fish-api|offline-first" | xargs rm -rf
-ls packages | grep -vE "utils|cross|enterprise-rules|application-rules" | xargs rm -rf
-rm -rf workers
+bash ./clean-frontend-deps.sh web
+bash ./clean-root-dev-deps.sh
