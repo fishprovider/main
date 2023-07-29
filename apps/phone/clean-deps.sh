@@ -3,4 +3,4 @@
 cd ../../scripts
 
 bash ./clean-frontend-deps.sh phone
-bash ./clean-root-dev-deps.sh
+node ./clean-root-dev-deps.js

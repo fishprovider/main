@@ -3,4 +3,4 @@
 cd ../../scripts
 
 bash ./clean-frontend-deps.sh web
-bash ./clean-root-dev-deps.sh
+node ./clean-root-dev-deps.js
