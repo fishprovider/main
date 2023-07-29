@@ -11,7 +11,7 @@ export default function PushNotifDemo() {
 
   return (
     <Button onPress={onSend}>
-      Press to Send Notification
+      Test Push Notification
     </Button>
   );
 }
