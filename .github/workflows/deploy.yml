@@ -23,8 +23,8 @@ jobs:
 
       - name: Build
         run: |
-          npm ci --cache ~/.npm --prefer-offline --no-audit --no-progress --legacy-peer-deps
           cd apps/extension
+          npm ci --cache ~/.npm --prefer-offline --no-audit --no-progress --legacy-peer-deps
           npm run build -- --verbose
           npm run package
 
@@ -32,4 +32,4 @@ jobs:
         uses: PlasmoHQ/bpp@v3
         with:
           keys: ${{ secrets.BBP_KEYS }}
-          artifact: build/chrome-mv3-prod.zip
+          artifact: apps/extension/build/chrome-mv3-prod.zip
