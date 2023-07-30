@@ -1,19 +1,21 @@
 {
-  "extends": "plasmo/templates/tsconfig.base",
-  "exclude": [
-    "node_modules"
-  ],
-  "include": [
-    ".plasmo/index.d.ts",
-    "./**/*.ts",
-    "./**/*.tsx"
-  ],
+  "extends": "../../tsconfig.frontend.json",
   "compilerOptions": {
+    "baseUrl": ".",
     "paths": {
       "~*": [
         "./*"
       ]
     },
-    "baseUrl": "."
-  }
+    "rootDir": ".",
+    "outDir": "dist"
+  },
+  "include": [
+    ".plasmo/index.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
