@@ -20,7 +20,7 @@
   },
   "manifest": {
     "host_permissions": [
-      "https://*/*"
+      "https://www.fishprovider.com/*"
     ]
   }
 }
