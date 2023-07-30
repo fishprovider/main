@@ -83,7 +83,7 @@ const handleOrderFilled = async (
         title: `[${providerId}] ${isClosed ? 'Closed' : 'Filled'} order`,
         body: `[${positionId}] ${orderToUpdate.direction} ${orderToUpdate.volume} ${orderToUpdate.symbol}`,
       },
-      providerId,
+      `account-${providerId}`,
     );
 
     return 1;
@@ -136,7 +136,7 @@ const handleOrderFilled = async (
       title: `[${providerId}] ${isClosed ? 'Closed' : 'Filled'} order`,
       body: `[${positionId}] ${orderToNew.direction} ${orderToNew.volume} ${orderToNew.symbol}`,
     },
-    providerId,
+    `account-${providerId}`,
   );
 
   return -1;

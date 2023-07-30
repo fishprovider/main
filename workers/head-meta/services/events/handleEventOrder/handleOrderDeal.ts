@@ -151,7 +151,7 @@ const handleOrderDeal = async (
         title: `[${providerId}] ${isClosed ? 'Closed' : 'Filled'} order`,
         body: `[${positionId}] ${orderToUpdate.direction} ${orderToUpdate.volume} ${orderToUpdate.symbol}`,
       },
-      providerId,
+      `account-${providerId}`,
     );
 
     return 1;
@@ -182,7 +182,7 @@ const handleOrderDeal = async (
       title: `[${providerId}] ${isClosed ? 'Closed' : 'Filled'} order`,
       body: `[${positionId}] ${orderToUpdate.direction} ${orderToUpdate.volume} ${orderToUpdate.symbol}`,
     },
-    providerId,
+    `account-${providerId}`,
   );
 
   return -1;
