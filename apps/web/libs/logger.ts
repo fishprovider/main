@@ -9,16 +9,16 @@ const env = {
 
 global.Logger = log.noConflict();
 
-const originalFactory = log.methodFactory;
+const originalMethodFactory = log.methodFactory;
 log.methodFactory = (methodName, level, loggerName) => {
-  const rawMethod = originalFactory(methodName, level, loggerName);
+  const loggingMethod = originalMethodFactory(methodName, level, loggerName);
   return async (...messages) => {
     if (['error', 'warn'].includes(methodName)) {
       await apiPost('/logger', { methodName, messages }).catch(() => {
         console.error('Failed to call /logger');
       });
     }
-    rawMethod(`[${env.typeId}]`, ...messages);
+    loggingMethod(`[${env.typeId}]`, ...messages);
   };
 };
 
