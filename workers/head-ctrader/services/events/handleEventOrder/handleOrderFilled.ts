@@ -1,4 +1,4 @@
-import { push } from '@fishprovider/core/dist/libs/firebase';
+import { push } from '@fishprovider/core/dist/libs/notif';
 import { TradeSide } from '@fishprovider/ctrader/dist/constants/openApi';
 import type { CallbackPayload } from '@fishprovider/ctrader/dist/types/Event.model';
 import { transformDeal, transformPosition } from '@fishprovider/swap/dist/libs/ctrader/transform';

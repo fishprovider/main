@@ -1,4 +1,4 @@
-import { push } from '@fishprovider/core/dist/libs/firebase';
+import { push } from '@fishprovider/core/dist/libs/notif';
 import { EntryType } from '@fishprovider/metatrader/dist/constants/metaApi';
 import type { CallbackPayload } from '@fishprovider/metatrader/dist/types/Event.model';
 import { transformDeal } from '@fishprovider/swap/dist/libs/metatrader/transform';

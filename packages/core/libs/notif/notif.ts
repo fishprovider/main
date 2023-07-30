@@ -3,6 +3,8 @@ import {
   Client, Events, ForumChannel, GatewayIntentBits,
 } from 'discord.js';
 
+import { push as pushFirebase } from '~libs/firebase';
+
 const env = {
   nodeEnv: process.env.NODE_ENV,
   typeId: process.env.TYPE_ID,
@@ -187,4 +189,11 @@ const send = (
   }),
 ]);
 
-export { send, sendDiscord };
+const push = async (
+  notification: { title: string, body: string },
+  topic = 'allDevices',
+) => {
+  await pushFirebase(notification, topic);
+};
+
+export { push, send, sendDiscord };

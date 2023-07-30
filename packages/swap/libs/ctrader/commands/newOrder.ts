@@ -1,5 +1,4 @@
-import { push } from '@fishprovider/core/dist/libs/firebase';
-import { send } from '@fishprovider/core/dist/libs/notif';
+import { push, send } from '@fishprovider/core/dist/libs/notif';
 import newOrderCTrader from '@fishprovider/ctrader/dist/commands/newOrder';
 import updatePosition from '@fishprovider/ctrader/dist/commands/updatePosition';
 import {
