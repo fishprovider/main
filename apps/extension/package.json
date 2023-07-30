@@ -1,14 +1,15 @@
 {
   "name": "@fishprovider/extension",
-  "displayName": "FishProvider",
   "version": "0.0.1",
+  "displayName": "FishProvider",
   "description": "Never Lose Money - Think Big Do Small",
-  "author": "FishProvider",
+  "author": "FishProvider <admin@fishprovider.com>",
   "scripts": {
     "lint": "eslint --cache --fix .",
     "type-check": "tsc --noEmit",
     "test": "plasmo test",
     "build": "plasmo build",
+    "package": "plasmo package",
     "dev": "plasmo dev"
   },
   "dependencies": {
