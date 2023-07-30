@@ -52,7 +52,6 @@ export default {
         {
           ios: {
             useFrameworks: 'static',
-            flipper: true,
           },
         },
       ],
