@@ -1,4 +1,4 @@
-name: Deploy
+name: Deploy Extension
 on:
   workflow_dispatch:
 
@@ -23,9 +23,9 @@ jobs:
 
       - name: Build
         run: |
-          cd apps/extension
           npm ci --cache ~/.npm --prefer-offline --no-audit --no-progress --legacy-peer-deps
-          npm run build
+          cd apps/extension
+          npm run build -- --verbose
           npm run package
 
       - name: Publish
