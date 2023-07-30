@@ -1,13 +1,12 @@
 // ref: https://developers.google.com/instance-id/reference/server#get_information_about_app_instances
 
-import { getInfo } from '@fishprovider/core/dist/libs/firebase';
 import { ErrorType } from '@fishprovider/utils/dist/constants/error';
 import type { User } from '@fishprovider/utils/dist/types/User.model';
-import md5 from 'md5';
 
 const unsubNotif = async ({ data, userInfo }: {
   data: {
     fcmToken: string,
+    expoPushToken?: string,
     providerId?: string,
   }
   userInfo: User,
@@ -25,18 +24,17 @@ const unsubNotif = async ({ data, userInfo }: {
   const subRes = await Firebase.messaging().unsubscribeFromTopic(fcmToken, `account-${providerId}`);
   Logger.debug('Unsubscribed to topic', subRes);
 
-  const info = await getInfo(fcmToken);
-  const fcmTokenHash = md5(fcmToken);
   await Mongo.collection<User>('users').updateOne(
-    {
-      _id: uid,
-    },
+    { _id: uid },
     {
       $set: {
         updatedAt: new Date(),
-        [`fcmInfo.${fcmTokenHash}`]: {
-          ...info,
-          fcmToken,
+      },
+      $pull: {
+        pushNotif: {
+          type: 'fcm',
+          token: fcmToken,
+          topic: `account-${providerId}`,
         },
       },
     },

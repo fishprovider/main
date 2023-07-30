@@ -59,7 +59,6 @@ async function handleNotif() {
 const subNotif = async (providerId?: string) => {
   await expoPushTokenPromise;
   await apiPost('/subNotif', { expoPushToken, providerId });
-  apiPost('/cleanNotif');
 };
 
 const unsubNotif = async (providerId?: string) => {

@@ -60,7 +60,6 @@ const handleNotif = async (onNotif?: (title: string, body: string) => void) => {
 const subNotif = async (providerId?: string) => {
   await fcmTokenPromise;
   await apiPost('/subNotif', { fcmToken, providerId });
-  apiPost('/cleanNotif');
 };
 
 const unsubNotif = async (providerId?: string) => {

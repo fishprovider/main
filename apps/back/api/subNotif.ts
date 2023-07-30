@@ -4,7 +4,6 @@ import { getInfo } from '@fishprovider/core/dist/libs/firebase';
 import { ErrorType } from '@fishprovider/utils/dist/constants/error';
 import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
 import type { User } from '@fishprovider/utils/dist/types/User.model';
-import md5 from 'md5';
 
 const subNotif = async ({ data, userInfo }: {
   data: {
@@ -39,16 +38,35 @@ const subNotif = async ({ data, userInfo }: {
       const subRes = await Firebase.messaging().subscribeToTopic(fcmToken, 'allDevices');
       Logger.debug('Subscribed to topic', subRes);
     }
-    const info = await getInfo(fcmToken);
-    const tokenHash = md5(fcmToken);
+    const fcmInfo = await getInfo(fcmToken);
+
     await Mongo.collection<User>('users').updateOne(
       { _id: uid },
       {
         $set: {
           updatedAt: new Date(),
-          [`fcmInfo.${tokenHash}`]: {
-            ...info,
-            fcmToken,
+        },
+        $pull: {
+          pushNotif: {
+            type: 'fcm',
+            token: fcmToken,
+            topic: `account-${providerId}`,
+          },
+        },
+      },
+    );
+    await Mongo.collection<User>('users').updateOne(
+      { _id: uid },
+      {
+        $set: {
+          updatedAt: new Date(),
+        },
+        $push: {
+          pushNotif: {
+            type: 'fcm',
+            token: fcmToken,
+            topic: `account-${providerId}`,
+            data: fcmInfo,
           },
         },
       },
@@ -56,15 +74,32 @@ const subNotif = async ({ data, userInfo }: {
   }
 
   if (expoPushToken) {
-    const tokenHash = md5(expoPushToken);
     await Mongo.collection<User>('users').updateOne(
       { _id: uid },
       {
         $set: {
           updatedAt: new Date(),
-          [`expoInfo.${tokenHash}`]: {
-            providerId,
-            fcmToken,
+        },
+        $pull: {
+          pushNotif: {
+            type: 'expo',
+            token: expoPushToken,
+            topic: `account-${providerId}`,
+          },
+        },
+      },
+    );
+    await Mongo.collection<User>('users').updateOne(
+      { _id: uid },
+      {
+        $set: {
+          updatedAt: new Date(),
+        },
+        $push: {
+          pushNotif: {
+            type: 'fcm',
+            token: expoPushToken,
+            topic: `account-${providerId}`,
           },
         },
       },

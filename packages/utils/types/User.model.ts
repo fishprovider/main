@@ -21,13 +21,19 @@ interface User {
 
   roles?: Roles
   starProviders?: Record<string, boolean>;
-  fcmInfo?: Record<string, any>;
 
   telegram?: {
     userId: string;
     userName?: string;
     phoneNumber?: string;
   };
+
+  pushNotif?: {
+    type: 'fcm' | 'expo',
+    token: string,
+    topic?: string,
+    data?: any,
+  }[];
 }
 
 export type {
