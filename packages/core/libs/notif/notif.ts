@@ -3,6 +3,7 @@ import {
   Client, Events, ForumChannel, GatewayIntentBits,
 } from 'discord.js';
 
+import { push as pushExpoServer } from '~libs/expoServer';
 import { push as pushFirebase } from '~libs/firebase';
 
 const env = {
@@ -193,7 +194,10 @@ const push = async (
   notification: { title: string, body: string },
   topic = 'allDevices',
 ) => {
-  await pushFirebase(notification, topic);
+  await Promise.all([
+    pushFirebase(notification, topic),
+    pushExpoServer(notification, topic),
+  ]);
 };
 
 export { push, send, sendDiscord };
