@@ -1,0 +1,27 @@
+name: Install NPM packages
+
+inputs:
+  app-dir:
+    type: string
+    default: "."
+
+runs:
+  using: composite
+  steps:
+    - name: Cache ~/.npm
+      uses: actions/cache@v3
+      with:
+        path: ~/.npm
+        key: v1-npm-${{ hashFiles('package-lock.json') }}
+
+    - name: Cache node_modules
+      uses: actions/cache@v3
+      with:
+        path: node_modules
+        key: v1-node-modules-${{ hashFiles('package-lock.json') }}
+
+    - name: Install dependencies
+      shell: bash
+      run: |
+        cd ${{ inputs.app-dir }}
+        npm ci --cache ~/.npm --prefer-offline --no-audit --no-progress --legacy-peer-deps

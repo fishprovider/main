@@ -9,22 +9,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Cache ~/.npm
-        uses: actions/cache@v3
+      - name: Install NPM packages
+        uses: ./ci/github/install-npm
         with:
-          path: ~/.npm
-          key: v1-npm-${{ hashFiles('package-lock.json') }}
-
-      - name: Cache node_modules
-        uses: actions/cache@v3
-        with:
-          path: node_modules
-          key: v1-node-modules-${{ hashFiles('package-lock.json') }}
+          app-dir: "apps/extension"
 
       - name: Build
         run: |
           cd apps/extension
-          npm ci --cache ~/.npm --prefer-offline --no-audit --no-progress --legacy-peer-deps
           npm run build -- --verbose
           npm run package
 

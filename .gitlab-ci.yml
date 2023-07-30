@@ -1,4 +1,4 @@
 include:
-  - local: /ci/doctor.yml
-  - local: /ci/deploy.yml
-  - local: /ci/schedule.yml
+  - local: /ci/gitlab/doctor.yml
+  - local: /ci/gitlab/deploy.yml
+  - local: /ci/gitlab/schedule.yml

@@ -1,5 +1,5 @@
 include:
-  - local: /ci/base.yml
+  - local: /ci/gitlab/base.yml
 
 doctor:
   tags:
