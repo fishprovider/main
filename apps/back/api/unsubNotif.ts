@@ -11,8 +11,8 @@ const unsubNotif = async ({ data, userInfo }: {
   }
   userInfo: User,
 }) => {
-  const { fcmToken, providerId } = data;
-  if (!fcmToken || !providerId) {
+  const { fcmToken, expoPushToken, providerId } = data;
+  if (!(fcmToken || expoPushToken) || !providerId) {
     return { error: ErrorType.badRequest };
   }
 
@@ -24,21 +24,41 @@ const unsubNotif = async ({ data, userInfo }: {
   const subRes = await Firebase.messaging().unsubscribeFromTopic(fcmToken, `account-${providerId}`);
   Logger.debug('Unsubscribed to topic', subRes);
 
-  await Mongo.collection<User>('users').updateOne(
-    { _id: uid },
-    {
-      $set: {
-        updatedAt: new Date(),
-      },
-      $pull: {
-        pushNotif: {
-          type: 'fcm',
-          token: fcmToken,
-          topic: `account-${providerId}`,
+  if (fcmToken) {
+    await Mongo.collection<User>('users').updateOne(
+      { _id: uid },
+      {
+        $set: {
+          updatedAt: new Date(),
+        },
+        $pull: {
+          pushNotif: {
+            type: 'fcm',
+            token: fcmToken,
+            topic: `account-${providerId}`,
+          },
         },
       },
-    },
-  );
+    );
+  }
+
+  if (expoPushToken) {
+    await Mongo.collection<User>('users').updateOne(
+      { _id: uid },
+      {
+        $set: {
+          updatedAt: new Date(),
+        },
+        $pull: {
+          pushNotif: {
+            type: 'expo',
+            token: expoPushToken,
+            topic: `account-${providerId}`,
+          },
+        },
+      },
+    );
+  }
 
   return {};
 };

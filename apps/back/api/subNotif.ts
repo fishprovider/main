@@ -50,7 +50,9 @@ const subNotif = async ({ data, userInfo }: {
           pushNotif: {
             type: 'fcm',
             token: fcmToken,
-            topic: `account-${providerId}`,
+            ...(providerId && {
+              topic: `account-${providerId}`,
+            }),
           },
         },
       },
@@ -65,7 +67,9 @@ const subNotif = async ({ data, userInfo }: {
           pushNotif: {
             type: 'fcm',
             token: fcmToken,
-            topic: `account-${providerId}`,
+            ...(providerId && {
+              topic: `account-${providerId}`,
+            }),
             data: fcmInfo,
           },
         },
@@ -84,7 +88,9 @@ const subNotif = async ({ data, userInfo }: {
           pushNotif: {
             type: 'expo',
             token: expoPushToken,
-            topic: `account-${providerId}`,
+            ...(providerId && {
+              topic: `account-${providerId}`,
+            }),
           },
         },
       },
@@ -97,9 +103,11 @@ const subNotif = async ({ data, userInfo }: {
         },
         $push: {
           pushNotif: {
-            type: 'fcm',
+            type: 'expo',
             token: expoPushToken,
-            topic: `account-${providerId}`,
+            ...(providerId && {
+              topic: `account-${providerId}`,
+            }),
           },
         },
       },
