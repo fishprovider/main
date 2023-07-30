@@ -32,4 +32,4 @@ jobs:
         uses: PlasmoHQ/bpp@v3
         with:
           keys: ${{ secrets.BBP_KEYS }}
-          artifact: apps/extension/build/chrome-mv3-prod.zip
+          artifact: build/chrome-mv3-prod.zip
