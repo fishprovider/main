@@ -1,32 +1,125 @@
-schedule-render:
+include:
+  - local: /ci/gitlab/_base.yml
+  - local: /ci/gitlab/_deploy.yml
+
+deploy-gate:
   tags:
     - local
   rules:
     - if: $CI_PIPELINE_SOURCE == "schedule"
       when: always
   script:
-    - if [ -n $SCHEDULE_GATE ]; then curl $DEPLOY_GATE; fi
-    - if [ -n $SCHEDULE_CRON ]; then curl $DEPLOY_CRON; fi
-    - if [ -n $SCHEDULE_MON ]; then curl $DEPLOY_MON; fi
-    - if [ -n $SCHEDULE_PAY ]; then curl $DEPLOY_PAY && curl $DEPLOY_PAY_DEMO; fi
-    - if [ -n $SCHEDULE_BOT ]; then curl $DEPLOY_BOT && curl $DEPLOY_BOT_DEMO; fi
-    - if [ -n $SCHEDULE_COPY ]; then curl $DEPLOY_COPY && curl $DEPLOY_COPY_DEMO; fi
-    - if [ -n $SCHEDULE_HEAD_CTRADER ]; then curl $DEPLOY_HEAD_CTRADER && curl $DEPLOY_HEAD_CTRADER_DEMO; fi
-    - if [ -n $SCHEDULE_HEAD_META ]; then curl $DEPLOY_HEAD_META && curl $DEPLOY_HEAD_META_DEMO; fi
-    - if [ -n $SCHEDULE_SPOT_CTRADER ]; then curl $DEPLOY_SPOT_CTRADER_ICMARKETS && curl $DEPLOY_SPOT_CTRADER_ICMARKETS_POLL && curl $DEPLOY_SPOT_CTRADER_ICMARKETS_DEMO; fi
-    - if [ -n $SCHEDULE_SPOT_META ]; then curl $DEPLOY_SPOT_META_EXNESS && curl $DEPLOY_SPOT_META_EXNESS_POLL && curl $DEPLOY_SPOT_META_EXNESS_DEMO; fi
-    - if [ -n $SCHEDULE_BACK ]; then curl $DEPLOY_BACK && curl $DEPLOY_BACK_DEMO && curl $DEPLOY_BACK_CANARY && curl $DEPLOY_BACK_CANARY_DEMO; fi
+    - if [ -z $SCHEDULE_GATE ]; then exit 0; fi
+    - !reference [.deploy-gate, script]
 
-schedule-phone:
+deploy-cron:
   tags:
     - local
   rules:
     - if: $CI_PIPELINE_SOURCE == "schedule"
       when: always
+  script:
+    - if [ -z $SCHEDULE_CRON ]; then exit 0; fi
+    - !reference [.deploy-cron, script]
+
+deploy-mon:
+  tags:
+    - local
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+      when: always
+  script:
+    - if [ -z $SCHEDULE_MON ]; then exit 0; fi
+    - !reference [.deploy-mon, script]
+
+deploy-pay:
+  tags:
+    - local
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+      when: always
+  script:
+    - if [ -z $SCHEDULE_PAY ]; then exit 0; fi
+    - !reference [.deploy-pay, script]
+
+deploy-bot:
+  tags:
+    - local
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+      when: always
+  script:
+    - if [ -z $SCHEDULE_BOT ]; then exit 0; fi
+    - !reference [.deploy-bot, script]
+
+deploy-copy:
+  tags:
+    - local
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+      when: always
+  script:
+    - if [ -z $SCHEDULE_COPY ]; then exit 0; fi
+    - !reference [.deploy-copy, script]
+
+deploy-head-ctrader:
+  tags:
+    - local
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+      when: always
+  script:
+    - if [ -z $SCHEDULE_HEAD_CTRADER ]; then exit 0; fi
+    - !reference [.deploy-head-ctrader, script]
+
+deploy-head-meta:
+  tags:
+    - local
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+      when: always
+  script:
+    - if [ -z $SCHEDULE_HEAD_META ]; then exit 0; fi
+    - !reference [.deploy-head-meta, script]
+
+deploy-spot-ctrader:
+  tags:
+    - local
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+      when: always
+  script:
+    - if [ -z $SCHEDULE_SPOT_CTRADER ]; then exit 0; fi
+    - !reference [.deploy-spot-ctrader, script]
+
+deploy-spot-meta:
+  tags:
+    - local
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+      when: always
+  script:
+    - if [ -z $SCHEDULE_SPOT_META ]; then exit 0; fi
+    - !reference [.deploy-spot-meta, script]
+
+deploy-back:
+  tags:
+    - local
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+      when: always
+  script:
+    - if [ -z $SCHEDULE_BACK ]; then exit 0; fi
+    - !reference [.deploy-back, script]
+
+deploy-phone:
+  tags:
+    - local
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+      when: always
+  cache: !reference [.cache_npm, cache]
+  timeout: "100 minutes"
   script:
     - if [ -z $SCHEDULE_PHONE ]; then exit 0; fi
-    - cd apps/phone
-    - ./clean-deps.sh
-    - npm ci --cache .npm --prefer-offline --no-audit --no-progress --legacy-peer-deps
-    - alias eas="npx eas-cli@latest"
-    - eas build --non-interactive --no-wait -p all --profile production --auto-submit
+    - !reference [.deploy-phone, script]

@@ -1,3 +1,7 @@
+include:
+  - local: /ci/gitlab/_base.yml
+  - local: /ci/gitlab/_deploy.yml
+
 deploy-gate:
   tags:
     - local
@@ -11,10 +15,7 @@ deploy-gate:
       - workers/gate/**/*
       when: always
   script:
-    - curl $DEPLOY_GATE
-  after_script:
-    - NOTIF_MSG="Deploy gate $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
-    - !reference [.notif, script]
+    - !reference [.deploy-gate, script]
 
 deploy-cron:
   tags:
@@ -29,10 +30,7 @@ deploy-cron:
       - workers/cron/**/*
       when: always
   script:
-    - curl $DEPLOY_CRON
-  after_script:
-    - NOTIF_MSG="Deploy cron $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
-    - !reference [.notif, script]
+    - !reference [.deploy-cron, script]
 
 deploy-mon:
   tags:
@@ -47,10 +45,7 @@ deploy-mon:
       - workers/mon/**/*
       when: always
   script:
-    - curl $DEPLOY_MON
-  after_script:
-    - NOTIF_MSG="Deploy mon $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
-    - !reference [.notif, script]
+    - !reference [.deploy-mon, script]
 
 deploy-pay:
   tags:
@@ -65,11 +60,7 @@ deploy-pay:
       - workers/pay/**/*
       when: always
   script:
-    - curl $DEPLOY_PAY
-    - curl $DEPLOY_PAY_DEMO
-  after_script:
-    - NOTIF_MSG="Deploy pay $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
-    - !reference [.notif, script]
+    - !reference [.deploy-pay, script]
 
 deploy-bot:
   tags:
@@ -84,11 +75,7 @@ deploy-bot:
       - workers/bot/**/*
       when: always
   script:
-    - curl $DEPLOY_BOT
-    - curl $DEPLOY_BOT_DEMO
-  after_script:
-    - NOTIF_MSG="Deploy bot $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
-    - !reference [.notif, script]
+    - !reference [.deploy-bot, script]
 
 deploy-copy:
   tags:
@@ -103,11 +90,7 @@ deploy-copy:
       - workers/copy/**/*
       when: always
   script:
-    - curl $DEPLOY_COPY
-    - curl $DEPLOY_COPY_DEMO
-  after_script:
-    - NOTIF_MSG="Deploy copy $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
-    - !reference [.notif, script]
+    - !reference [.deploy-copy, script]
 
 deploy-head-ctrader:
   tags:
@@ -122,11 +105,7 @@ deploy-head-ctrader:
       - workers/head-ctrader/**/*
       when: always
   script:
-    - curl $DEPLOY_HEAD_CTRADER
-    - curl $DEPLOY_HEAD_CTRADER_DEMO
-  after_script:
-    - NOTIF_MSG="Deploy head-ctrader $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
-    - !reference [.notif, script]
+    - !reference [.deploy-head-ctrader, script]
 
 deploy-head-meta:
   tags:
@@ -141,11 +120,7 @@ deploy-head-meta:
       - workers/head-meta/**/*
       when: always
   script:
-    - curl $DEPLOY_HEAD_META
-    - curl $DEPLOY_HEAD_META_DEMO
-  after_script:
-    - NOTIF_MSG="Deploy head-meta $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
-    - !reference [.notif, script]
+    - !reference [.deploy-head-meta, script]
 
 deploy-spot-ctrader:
   tags:
@@ -160,12 +135,7 @@ deploy-spot-ctrader:
       - workers/spot-ctrader/**/*
       when: always
   script:
-    - curl $DEPLOY_SPOT_CTRADER_ICMARKETS
-    - curl $DEPLOY_SPOT_CTRADER_ICMARKETS_POLL
-    - curl $DEPLOY_SPOT_CTRADER_ICMARKETS_DEMO
-  after_script:
-    - NOTIF_MSG="Deploy spot-ctrader $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
-    - !reference [.notif, script]
+    - !reference [.deploy-spot-ctrader, script]
 
 deploy-spot-meta:
   tags:
@@ -180,12 +150,7 @@ deploy-spot-meta:
       - workers/spot-meta/**/*
       when: always
   script:
-    - curl $DEPLOY_SPOT_META_EXNESS
-    - curl $DEPLOY_SPOT_META_EXNESS_POLL
-    - curl $DEPLOY_SPOT_META_EXNESS_DEMO
-  after_script:
-    - NOTIF_MSG="Deploy spot-meta $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
-    - !reference [.notif, script]
+    - !reference [.deploy-spot-meta, script]
 
 deploy-back:
   tags:
@@ -200,13 +165,7 @@ deploy-back:
       - apps/back/**/*
       when: always
   script:
-    - curl $DEPLOY_BACK
-    - curl $DEPLOY_BACK_DEMO
-    - curl $DEPLOY_BACK_CANARY
-    - curl $DEPLOY_BACK_CANARY_DEMO
-  after_script:
-    - NOTIF_MSG="Deploy back $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
-    - !reference [.notif, script]
+    - !reference [.deploy-back, script]
 
 deploy-phone:
   tags:
@@ -219,14 +178,7 @@ deploy-phone:
   cache: !reference [.cache_npm, cache]
   timeout: "100 minutes"
   script:
-    - cd apps/phone
-    - ./clean-deps.sh
-    - npm ci --cache .npm --prefer-offline --no-audit --no-progress --legacy-peer-deps
-    - alias eas="npx eas-cli@latest"
-    - eas build --non-interactive --no-wait -p all --profile production --auto-submit
-  after_script:
-    - NOTIF_MSG="Deploy phone $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
-    - !reference [.notif, script]
+    - !reference [.deploy-phone, script]
 
 deploy-phone-update:
   tags:
@@ -238,11 +190,4 @@ deploy-phone-update:
       when: always
   cache: !reference [.cache_npm, cache]
   script:
-    - cd apps/phone
-    - ./clean-deps.sh
-    - npm ci --cache .npm --prefer-offline --no-audit --no-progress --legacy-peer-deps
-    - alias eas="npx eas-cli@latest"
-    - eas update --auto --channel production
-  after_script:
-    - NOTIF_MSG="Deploy phone $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
-    - !reference [.notif, script]
+    - !reference [.deploy-phone-update, script]
