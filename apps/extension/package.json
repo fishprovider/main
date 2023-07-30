@@ -9,7 +9,9 @@
     "type-check": "tsc --noEmit",
     "test": "plasmo test",
     "build": "plasmo build",
+    "build-all": "plasmo build && plasmo build --target=firefox-mv2 && plasmo build --target=edge-mv3",
     "package": "plasmo package",
+    "package-all": "plasmo package && plasmo package --target=firefox-mv2 && plasmo package --target=edge-mv3",
     "dev": "plasmo dev"
   },
   "dependencies": {
