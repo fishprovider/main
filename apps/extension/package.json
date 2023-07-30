@@ -5,18 +5,16 @@
   "description": "Never Lose Money - Think Big Do Small",
   "author": "FishProvider",
   "scripts": {
-    "dev": "plasmo dev",
+    "lint": "eslint --cache --fix .",
+    "type-check": "tsc --noEmit",
+    "test": "plasmo test",
     "build": "plasmo build",
-    "test": "plasmo test"
+    "dev": "plasmo dev"
   },
   "dependencies": {
     "plasmo": "0.82.0",
     "react": "18.2.0",
     "react-dom": "18.2.0"
-  },
-  "devDependencies": {
-    "@ianvs/prettier-plugin-sort-imports": "4.1.0",
-    "@types/chrome": "0.0.241"
   },
   "manifest": {
     "host_permissions": [
