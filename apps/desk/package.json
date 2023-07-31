@@ -34,7 +34,7 @@
     "electron-updater": "6.1.4"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^4.0.3",
+    "@vitejs/plugin-react": "^4.0.4",
     "cross-env": "^7.0.3",
     "electron": "25.3.2",
     "electron-builder": "24.6.3",

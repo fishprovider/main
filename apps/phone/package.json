@@ -31,9 +31,9 @@
     "@react-navigation/drawer": "^6.6.3",
     "@react-navigation/native": "^6.1.7",
     "@react-navigation/stack": "^6.3.17",
-    "@tamagui/babel-plugin": "^1.48.2",
-    "@tamagui/config": "^1.48.2",
-    "@tamagui/toast": "^1.48.2",
+    "@tamagui/babel-plugin": "^1.48.3",
+    "@tamagui/config": "^1.48.3",
+    "@tamagui/toast": "^1.48.3",
     "babel-plugin-transform-inline-environment-variables": "^0.4.4",
     "burnt": "^0.10.0",
     "expo": "~48.0.20",
@@ -57,7 +57,7 @@
     "react-native-screens": "~3.20.0",
     "react-native-web": "~0.18.10",
     "socket.io-client": "^4.7.1",
-    "tamagui": "^1.48.2"
+    "tamagui": "^1.48.3"
   },
   "devDependencies": {
     "@tsconfig/react-native": "^3.0.2"
