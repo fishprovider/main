@@ -7,7 +7,7 @@ const Platforms = dynamic(() => import('./Platforms'));
 
 function CopyTrade() {
   return (
-    <Stack id="platforms" py={50} spacing="xl">
+    <Stack id="platforms" py={50} spacing={80}>
       <Connect />
       <Platforms />
     </Stack>
