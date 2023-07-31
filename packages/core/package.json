@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@fishprovider/utils": "*",
-    "@sentry/node": "^7.60.0",
+    "@sentry/node": "^7.60.1",
     "agenda": "^5.0.0",
     "amqplib": "^0.10.3",
     "axios": "^1.4.0",
@@ -26,7 +26,7 @@
     "express": "^4.18.2",
     "express-session": "^1.17.3",
     "firebase-admin": "^11.10.1",
-    "googleapis": "^122.0.0",
+    "googleapis": "^123.0.0",
     "lodash": "^4.17.21",
     "loglevel": "^1.8.1",
     "moment": "^2.29.4",
@@ -36,13 +36,13 @@
     "pg": "^8.11.1",
     "redis": "^4.6.7",
     "socket.io": "^4.7.1",
-    "systeminformation": "^5.18.7"
+    "systeminformation": "^5.18.10"
   },
   "devDependencies": {
     "@types/amqplib": "^0.10.1",
     "@types/compression": "^1.7.2",
     "@types/express-session": "^1.17.7",
     "@types/pg": "^8.10.2",
-    "esbuild": "^0.18.16"
+    "esbuild": "^0.18.17"
   }
 }

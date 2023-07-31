@@ -1,7 +1,7 @@
 /** @type {import('jest').Config} */
 module.exports = {
-  setupFiles: ["<rootDir>/../../jest.setupFiles.js"],
-  setupFilesAfterEnv: ["<rootDir>/../../jest.setupFilesAfterEnv.js"],
+  setupFiles: ['<rootDir>/../../jest.setupFiles.js'],
+  setupFilesAfterEnv: ['<rootDir>/../../jest.setupFilesAfterEnv.js'],
   moduleNameMapper: {
     '~(.*)': '<rootDir>/$1',
   },

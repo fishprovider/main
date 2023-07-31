@@ -1,5 +1,8 @@
 {
-  "extends": "@tsconfig/node-lts-strictest-esm/tsconfig.json",
+  "extends": [
+    "@tsconfig/strictest/tsconfig",
+    "@tsconfig/node-lts/tsconfig"
+  ],
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "exactOptionalPropertyTypes": false,
@@ -12,8 +15,23 @@
     "declaration": true,
     "incremental": true,
 
-    "ignoreDeprecations": "5.0",
+    "lib": ["es2021"],
+    "module": "ESNext",
+    "moduleResolution": "Node",
   },
-  "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"],
-  "exclude": ["**/node_modules", "**/dist"],
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.js",
+    "**/*.jsx",
+    "**/*.cjs",
+    "**/.*.js",
+    "**/.*.cjs",
+  ],
+  "exclude": [
+    "**/node_modules",
+    "**/dist",
+    "**/build",
+    "**/tmp",
+  ]
 }

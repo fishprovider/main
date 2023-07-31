@@ -1,8 +1,9 @@
 {
-  "extends": "@tsconfig/react-native/tsconfig.json",
+  "extends": [
+    "../../tsconfig.json",
+    "@tsconfig/react-native/tsconfig.json",
+  ],
   "compilerOptions": {
-    "exactOptionalPropertyTypes": false,
-    "noPropertyAccessFromIndexSignature": false,
     "baseUrl": ".",
     "paths": {
       "~*": ["./*"]
@@ -10,6 +11,17 @@
     "rootDir": ".",
     "outDir": "dist"
   },
-  "include": ["**/*.ts", "**/*.tsx", "index.js", "*.config.js"],
-  "exclude": ["node_modules", ".expo"],
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.js",
+    "**/*.jsx",
+  ],
+  "exclude": [
+    "**/node_modules",
+    "**/dist",
+    "**/build",
+    "**/tmp",
+    ".expo",
+  ]
 }

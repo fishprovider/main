@@ -20,6 +20,6 @@
     "moment": "^2.29.4"
   },
   "devDependencies": {
-    "type-fest": "^3.13.1"
+    "type-fest": "^4.1.0"
   }
 }

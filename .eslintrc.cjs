@@ -16,8 +16,11 @@ const rules = {
   camelcase: 'off',
   'comma-dangle': ['error', 'always-multiline'],
   'global-require': 'off',
+  'import/no-cycle': 'off',
+  'import/export': 'off',
   'import/extensions': 'off',
   'import/no-extraneous-dependencies': 'off',
+  'import/no-named-as-default': 'off',
   'import/order': 'off',
   'import/prefer-default-export': 'off',
   'no-await-in-loop': 'off',
@@ -27,19 +30,20 @@ const rules = {
   'no-underscore-dangle': 'off',
   'no-unused-vars': 'off',
   quotes: ['error', 'single'],
-  "react/jsx-filename-extension": [
-    "error",
-    { extensions: [".js", ".jsx", ".tsx"] },
+  'react/jsx-filename-extension': [
+    'error',
+    { extensions: ['.js', '.jsx', '.tsx'] },
   ],
-  "react/jsx-props-no-spreading": "off",
-  "react/no-array-index-key": "off",
-  "react/prop-types": "off",
-  "react/react-in-jsx-scope": "off",
-  "react/require-default-props": "off",
+  'react/jsx-props-no-spreading': 'off',
+  'react/no-array-index-key': 'off',
+  'react/prop-types': 'off',
+  'react/react-in-jsx-scope': 'off',
+  'react/require-default-props': 'off',
   'simple-import-sort/imports': 'error',
   'simple-import-sort/exports': 'error',
 };
 
+/** @type {import('eslint').Linter.Config} */
 module.exports = {
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -59,7 +63,10 @@ module.exports = {
     'simple-import-sort',
   ],
   ignorePatterns: [
+    '**/node_modules',
     '**/dist',
+    '**/build',
+    '**/tmp',
   ],
   rules,
   env: {

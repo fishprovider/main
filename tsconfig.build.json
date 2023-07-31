@@ -1,0 +1,11 @@
+{
+  "exclude": [
+    "**/node_modules",
+    "**/dist",
+    "**/build",
+    "**/tmp",
+    "**/dev",
+    "**/tests",
+    "**/*.test.ts",
+  ]
+}

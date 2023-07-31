@@ -73,7 +73,7 @@ export default function Trade() {
     if (defaultProviderId && options.some((item) => item.value === defaultProviderId)) {
       return defaultProviderId;
     }
-    return options[0].value;
+    return options[0]?.value || '';
   };
   const providerId = getProviderId();
 
