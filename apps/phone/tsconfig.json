@@ -1,9 +1,12 @@
 {
-  "extends": [
-    "../../tsconfig.json",
-    "@tsconfig/react-native/tsconfig.json",
-  ],
+  "extends": "@tsconfig/react-native/tsconfig.json",
+  // "extends": [
+  //   "../../tsconfig.json",
+  //   "@tsconfig/react-native/tsconfig.json",
+  // ],
   "compilerOptions": {
+    "exactOptionalPropertyTypes": false,
+    "noPropertyAccessFromIndexSignature": false,
     "baseUrl": ".",
     "paths": {
       "~*": ["./*"]
