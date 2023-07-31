@@ -21,6 +21,7 @@ const rules = {
   'import/extensions': 'off',
   'import/no-extraneous-dependencies': 'off',
   'import/no-named-as-default': 'off',
+  'import/no-named-as-default-member': 'off',
   'import/order': 'off',
   'import/prefer-default-export': 'off',
   'no-await-in-loop': 'off',
