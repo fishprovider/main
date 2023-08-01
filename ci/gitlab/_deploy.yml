@@ -81,8 +81,7 @@
     - cd apps/phone
     - ./clean-deps.sh
     - npm ci --cache .npm --prefer-offline --no-audit --no-progress --legacy-peer-deps
-    - alias eas="npx eas-cli@latest"
-    - eas build --non-interactive --no-wait -p all --profile production --auto-submit
+    - npx eas-cli@latest build --non-interactive --no-wait -p all --profile production --auto-submit
     - NOTIF_MSG="Deploy phone $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
     - !reference [.notif, script]
 
@@ -91,7 +90,6 @@
     - cd apps/phone
     - ./clean-deps.sh
     - npm ci --cache .npm --prefer-offline --no-audit --no-progress --legacy-peer-deps
-    - alias eas="npx eas-cli@latest"
-    - eas update --auto --channel production
+    - npx eas-cli@latest update --auto --channel production
     - NOTIF_MSG="Deploy phone $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
     - !reference [.notif, script]
