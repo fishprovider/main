@@ -2,7 +2,7 @@ import type { Account } from '@fishprovider/utils/dist/types/Account.model';
 import type { User } from '@fishprovider/utils/dist/types/User.model';
 import type { Socket } from 'socket.io-client';
 
-import { buildStore } from '~libs/store';
+import { buildStoreObj } from '~libs/store';
 
 interface Store extends Record<string, any> {
   isClientLoggedIn?: boolean;
@@ -18,7 +18,7 @@ interface Store extends Record<string, any> {
   banners: Record<string, boolean>;
 }
 
-const storeUser = buildStore<Store>({
+const storeUser = buildStoreObj<Store>({
   theme: 'light',
   lang: 'en',
   activeSymbol: 'EURUSD',

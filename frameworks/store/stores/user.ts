@@ -1,7 +1,7 @@
 import type { Account, User } from '@fishprovider/enterprise-rules';
 import type { Socket } from 'socket.io-client';
 
-import { buildStore } from '../store.framework';
+import { buildStoreObj } from '../store.framework';
 
 export interface UserStore extends Record<string, any> {
   isClientLoggedIn?: boolean;
@@ -17,7 +17,7 @@ export interface UserStore extends Record<string, any> {
   banners: Record<string, boolean>;
 }
 
-export const storeUser = buildStore<UserStore>({
+export const storeUser = buildStoreObj<UserStore>({
   theme: 'light',
   lang: 'en',
   activeSymbol: 'EURUSD',

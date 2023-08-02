@@ -1,8 +1,10 @@
-import { keyBy } from 'lodash';
 import isEqual from 'lodash/isEqual';
+import keyBy from 'lodash/keyBy';
 import pickBy from 'lodash/pickBy';
+import { devtools } from 'zustand/middleware';
 import { shallow } from 'zustand/shallow';
 import { createWithEqualityFn } from 'zustand/traditional';
+import { StateCreator } from 'zustand/vanilla';
 
 interface DocWithId extends Record<string, any> {
   _id: string,
@@ -49,12 +51,14 @@ export const Comparator = {
   deepEqual: isEqual,
 };
 
-export const buildStoreSet = <Doc extends DocWithId>(initState: StateSet<Doc>, name: string) => {
+export const buildStoreSet = <Doc extends DocWithId>(
+  initState: StateSet<Doc>, name: string,
+) => {
   type State = StateSet<Doc>;
   type Transform = TransformState<State>;
   type Store = StoreSet<State, Transform, Doc>;
 
-  const store = createWithEqualityFn<Store>((set) => ({
+  const stateCreator: StateCreator<Store> = (set) => ({
     state: initState,
     setState: (transform: Transform, options?: Options) => {
       const { skipLog } = options || {};
@@ -127,7 +131,12 @@ export const buildStoreSet = <Doc extends DocWithId>(initState: StateSet<Doc>, n
         state: pickBy(state, (doc) => !objDocIds[doc._id]),
       }));
     },
-  }), Comparator.shallowEqual);
+  });
+
+  const store = createWithEqualityFn<Store>()(devtools(stateCreator, {
+    enabled: false,
+    store: name,
+  }), shallow);
 
   const getState = () => store.getState().state;
 
@@ -141,11 +150,13 @@ export const buildStoreSet = <Doc extends DocWithId>(initState: StateSet<Doc>, n
   };
 };
 
-export const buildStore = <State extends Record<string, any>>(initState: State, name: string) => {
+export const buildStoreObj = <State extends Record<string, any>>(
+  initState: State, name: string,
+) => {
   type Transform = TransformState<State>;
   type Store = StoreObj<State, Transform>;
 
-  const store = createWithEqualityFn<Store>((set) => ({
+  const stateCreator: StateCreator<Store> = (set) => ({
     state: initState,
     setState: (transform: Transform, options?: Options) => {
       const { skipLog } = options || {};
@@ -174,6 +185,11 @@ export const buildStore = <State extends Record<string, any>>(initState: State, 
         state: pickBy(state, (doc) => doc._id !== key) as State,
       }));
     },
+  });
+
+  const store = createWithEqualityFn<Store>()(devtools(stateCreator, {
+    enabled: false,
+    store: name,
   }), Comparator.shallowEqual);
 
   const getState = () => store.getState().state;
