@@ -36,7 +36,7 @@ export interface StoreSet<State, Transform, Doc> {
   removeDocs: (docIds: string[], options?: Options) => void;
 }
 
-export interface Store<State, Transform> {
+export interface StoreObj<State, Transform> {
   state: State;
   setState: (transform: Transform, options?: Options) => void;
   mergeState: (data: Partial<State>, options?: Options) => void;
@@ -52,8 +52,9 @@ export const Comparator = {
 export const buildStoreSet = <Doc extends DocWithId>(initState: StateSet<Doc>, name: string) => {
   type State = StateSet<Doc>;
   type Transform = TransformState<State>;
+  type Store = StoreSet<State, Transform, Doc>;
 
-  const store = createWithEqualityFn<StoreSet<State, Transform, Doc>>((set) => ({
+  const store = createWithEqualityFn<Store>((set) => ({
     state: initState,
     setState: (transform: Transform, options?: Options) => {
       const { skipLog } = options || {};
@@ -142,8 +143,9 @@ export const buildStoreSet = <Doc extends DocWithId>(initState: StateSet<Doc>, n
 
 export const buildStore = <State extends Record<string, any>>(initState: State, name: string) => {
   type Transform = TransformState<State>;
+  type Store = StoreObj<State, Transform>;
 
-  const store = createWithEqualityFn<Store<State, Transform>>((set) => ({
+  const store = createWithEqualityFn<Store>((set) => ({
     state: initState,
     setState: (transform: Transform, options?: Options) => {
       const { skipLog } = options || {};

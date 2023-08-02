@@ -36,7 +36,7 @@ interface StoreSet<State, Transform, Doc> {
   removeDocs: (docIds: string[], options?: Options) => void;
 }
 
-interface Store<State, Transform> {
+interface StoreObj<State, Transform> {
   state: State;
   setState: (transform: Transform, options?: Options) => void;
   mergeState: (data: Partial<State>, options?: Options) => void;
@@ -64,8 +64,9 @@ function initStore(params: {
 function buildStoreSet<Doc extends DocWithId>(initState: StateSet<Doc>, name: string) {
   type State = StateSet<Doc>;
   type Transform = TransformState<State>;
+  type Store = StoreSet<State, Transform, Doc>;
 
-  const store = createWithEqualityFn<StoreSet<State, Transform, Doc>>((set) => ({
+  const store = createWithEqualityFn<Store>((set) => ({
     state: initState,
     setState: (transform: Transform, options?: Options) => {
       const { skipLog } = options || {};
@@ -156,8 +157,9 @@ function buildStoreSet<Doc extends DocWithId>(initState: StateSet<Doc>, name: st
 
 function buildStore<State extends Record<string, any>>(initState: State, name: string) {
   type Transform = TransformState<State>;
+  type Store = StoreObj<State, Transform>;
 
-  const store = createWithEqualityFn<Store<State, Transform>>((set) => ({
+  const store = createWithEqualityFn<Store>((set) => ({
     state: initState,
     setState: (transform: Transform, options?: Options) => {
       const { skipLog } = options || {};
@@ -213,6 +215,6 @@ export type {
   MergeDocOptions,
   MergeDocsOptions,
   Options,
-  Store,
+  StoreObj as Store,
   StoreSet,
 };
