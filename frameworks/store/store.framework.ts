@@ -1,8 +1,8 @@
 import { keyBy } from 'lodash';
 import isEqual from 'lodash/isEqual';
 import pickBy from 'lodash/pickBy';
-import { create } from 'zustand';
 import { shallow } from 'zustand/shallow';
+import { createWithEqualityFn } from 'zustand/traditional';
 
 interface DocWithId extends Record<string, any> {
   _id: string,
@@ -53,7 +53,7 @@ export const buildStoreSet = <Doc extends DocWithId>(initState: StateSet<Doc>, n
   type State = StateSet<Doc>;
   type Transform = TransformState<State>;
 
-  const store = create<StoreSet<State, Transform, Doc>>((set) => ({
+  const store = createWithEqualityFn<StoreSet<State, Transform, Doc>>((set) => ({
     state: initState,
     setState: (transform: Transform, options?: Options) => {
       const { skipLog } = options || {};
@@ -126,13 +126,13 @@ export const buildStoreSet = <Doc extends DocWithId>(initState: StateSet<Doc>, n
         state: pickBy(state, (doc) => !objDocIds[doc._id]),
       }));
     },
-  }));
+  }), Comparator.shallowEqual);
 
   const getState = () => store.getState().state;
 
   const useStore = <Val>(
     selector: (state: State) => Val,
-    comparator: (a: Val, b: Val) => boolean = Comparator.shallowEqual,
+    comparator?: (a: Val, b: Val) => boolean,
   ) => store(({ state }) => selector(state), comparator);
 
   return {
@@ -143,7 +143,7 @@ export const buildStoreSet = <Doc extends DocWithId>(initState: StateSet<Doc>, n
 export const buildStore = <State extends Record<string, any>>(initState: State, name: string) => {
   type Transform = TransformState<State>;
 
-  const store = create<Store<State, Transform>>((set) => ({
+  const store = createWithEqualityFn<Store<State, Transform>>((set) => ({
     state: initState,
     setState: (transform: Transform, options?: Options) => {
       const { skipLog } = options || {};
@@ -172,13 +172,13 @@ export const buildStore = <State extends Record<string, any>>(initState: State, 
         state: pickBy(state, (doc) => doc._id !== key) as State,
       }));
     },
-  }));
+  }), Comparator.shallowEqual);
 
   const getState = () => store.getState().state;
 
   const useStore = <Val>(
     selector: (state: State) => Val,
-    comparator: (a: Val, b: Val) => boolean = Comparator.shallowEqual,
+    comparator?: (a: Val, b: Val) => boolean,
   ) => store(({ state }) => selector(state), comparator);
 
   return {

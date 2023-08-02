@@ -40,6 +40,6 @@
     "electron-builder": "24.6.3",
     "happy-dom": "10.5.2",
     "unplugin-auto-expose": "0.0.5",
-    "vite": "4.4.7"
+    "vite": "4.4.8"
   }
 }

@@ -19,7 +19,7 @@
   "dependencies": {
     "@fishprovider/application-rules": "*",
     "@fishprovider/enterprise-rules": "*",
-    "zustand": "^4.3.9"
+    "zustand": "^4.4.0"
   },
   "devDependencies": {
     "socket.io-client": "^4.7.1"
