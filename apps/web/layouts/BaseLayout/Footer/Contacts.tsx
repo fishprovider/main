@@ -64,14 +64,14 @@ function Contacts() {
 
       <Group spacing={4}>
         <Text span>Latest Updates via</Text>
-        <DefaultIcon name="Discord" url={`https://discord.gg/${discordKey}`} />
-        <DefaultIcon name="Facebook" url={`https://www.facebook.com/${commonKey}`} />
         <DefaultIcon name="Telegram" url={`https://t.me/${commonKey}`} />
+        <DefaultIcon name="Discord" url={`https://discord.gg/${discordKey}`} />
+        <CustomIcon name="X (Twitter)" url={`https://twitter.com/${commonKey}`} icon="/icons/twitter.png" />
+        <DefaultIcon name="Facebook" url={`https://www.facebook.com/${commonKey}`} />
         <DefaultIcon name="Linkedin" url={`https://www.linkedin.com/company/${commonKey}`} />
-        <DefaultIcon name="Twitter" url={`https://twitter.com/${commonKey}`} />
-        <DefaultIcon name="Instagram" url={`https://www.instagram.com/${commonKey}`} />
         <DefaultIcon name="Tiktok" url={`https://www.tiktok.com/@${commonKey}`} />
         <DefaultIcon name="Youtube" url={`https://www.youtube.com/@${commonKey}`} />
+        <DefaultIcon name="Instagram" url={`https://www.instagram.com/${commonKey}`} />
         <CustomIcon name="Moj" url={`https://mojapp.in/@${commonKey}`} icon="/icons/moj.png" />
         <DefaultIcon name="VK" url={`https://vk.com/${commonKey}.page`} />
         <CustomIcon name="OK" url={`https://ok.ru/group/${okKey}`} icon="/icons/ok.png" />
