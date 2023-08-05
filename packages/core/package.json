@@ -36,13 +36,13 @@
     "pg": "^8.11.2",
     "redis": "^4.6.7",
     "socket.io": "^4.7.2",
-    "systeminformation": "^5.18.11"
+    "systeminformation": "^5.18.12"
   },
   "devDependencies": {
     "@types/amqplib": "^0.10.1",
     "@types/compression": "^1.7.2",
     "@types/express-session": "^1.17.7",
     "@types/pg": "^8.10.2",
-    "esbuild": "^0.18.17"
+    "esbuild": "^0.18.18"
   }
 }
