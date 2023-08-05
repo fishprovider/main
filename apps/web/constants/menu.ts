@@ -22,14 +22,19 @@ const menuItems = [
     href: Routes.strategies,
   },
   {
+    key: 'faq',
+    label: 'FAQs',
+    href: Routes.faq,
+  },
+  {
     key: 'blog',
     label: 'Blog',
     href: Routes.blog,
   },
   {
-    key: 'faq',
-    label: 'FAQ',
-    href: Routes.faq,
+    key: 'news',
+    label: 'News',
+    href: Routes.news,
   },
 ];
 

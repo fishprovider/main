@@ -4,10 +4,10 @@ const Routes = {
   plans: '/plans',
   strategies: '/strategies',
   // strategy: '/strategies/:providerId',
-  blog: '/blog',
   faq: '/faq',
-
+  blog: '/blog',
   news: '/news',
+
   copyTrade: '/copy-trade',
 
   login: '/login',
