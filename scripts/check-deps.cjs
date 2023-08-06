@@ -5,6 +5,11 @@ const fs = require('fs');
 const { globSync } = require('glob');
 const rootPackageJson = require('../package.json');
 
+const result = {
+  deleted: 0,
+  updated: 0,
+};
+
 const packageJsonFiles = rootPackageJson.workspaces
   .map((item) => `../${item}/package.json`)
   .flatMap((item) => globSync(item));
@@ -83,6 +88,7 @@ Object.entries(rootPackageJson.devDependencies)
     if (!dependenciesAll.some((item) => item.name === name && item.version === version)) {
       console.log(`Redundant package: "${name}": "${version}"`);
       delete rootPackageJson.devDependencies[name];
+      result.deleted += 1;
     }
   });
 
@@ -91,8 +97,14 @@ dependenciesAll.forEach(({ name, version }) => {
   if (!devDependenciesRoot[name] || devDependenciesRoot[name] !== version) {
     console.log(`Update package: "${name}": "${version}"`);
     devDependenciesRoot[name] = version;
+    result.updated += 1;
   }
 });
 
 rootPackageJson.devDependencies = devDependenciesRoot;
 fs.writeFileSync('../package.json', JSON.stringify(rootPackageJson, null, 2));
+
+console.log('Done', result);
+if (result.deleted || result.updated) {
+  process.exit(1);
+}

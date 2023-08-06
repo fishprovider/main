@@ -16,7 +16,8 @@
   "scripts": {
     "lint": "npm run lint -ws",
     "type-check": "npm run type-check -ws",
-    "doctor": "./build-deps.sh && npm run lint && npm run type-check",
+    "check-deps": "cd scripts && node check-deps.cjs",
+    "doctor": "./build-deps.sh && npm run lint && npm run type-check && npm run check-deps",
     "heroku-build": "npm run build -w workers/pup",
     "heroku-cleanup": "NPM_CONFIG_PRODUCTION=true npm prune --production",
     "heroku-postbuild": "npm run heroku-build && npm run heroku-cleanup"
