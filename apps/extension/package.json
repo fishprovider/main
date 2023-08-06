@@ -17,8 +17,8 @@
   "dependencies": {
     "@fishprovider/cross": "*",
     "plasmo": "0.82.0",
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "manifest": {
     "host_permissions": [
