@@ -2,6 +2,7 @@ import storeUser from '@fishprovider/cross/dist/stores/user';
 import { useEffect } from 'react';
 
 import { identifyAnalytics } from '~libs/analytics';
+import { isTrack } from '~utils';
 
 function UserAnalytics() {
   const {
@@ -13,7 +14,7 @@ function UserAnalytics() {
   }));
 
   useEffect(() => {
-    if (isClientLoggedIn && user) {
+    if (isClientLoggedIn && user && isTrack) {
       identifyAnalytics(user);
     }
   }, [isClientLoggedIn, user]);

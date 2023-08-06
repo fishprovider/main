@@ -10,7 +10,7 @@ import { cacheRead } from '~libs/cache';
 // import { initLiveChat } from '~libs/liveChat';
 import { initSW } from '~libs/sw';
 import {
-  isBrowser, isLive, isProd, isProdHostnames,
+  isBrowser, isLive, isProd, isTrack,
 } from '~utils';
 
 const env = {
@@ -18,10 +18,6 @@ const env = {
   demoBackendUrl: process.env.NEXT_PUBLIC_DEMO_BACKEND_URL || '',
   api: process.env.NEXT_PUBLIC_API || '/api',
 };
-
-console.log('Services', {
-  isBrowser, isLive, isProd, isProdHostnames,
-});
 
 const initialize = () => {
   initApi({
@@ -49,7 +45,7 @@ const initialize = () => {
   if (isBrowser) {
     initAuth();
 
-    if (isProdHostnames) {
+    if (isTrack) {
       initAnalytics();
     }
 

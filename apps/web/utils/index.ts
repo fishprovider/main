@@ -24,6 +24,10 @@ export const isLive = !isBrowser || liveHostNames.includes(window.location.hostn
 
 export const isProdHostnames = isBrowser && prodHostnames.includes(window.location.hostname);
 
+export const isNoTrack = isBrowser && window.location.search.includes('notrack=true');
+
+export const isTrack = isBrowser && isProdHostnames && !isNoTrack;
+
 export const isProd = env.nodeEnv === 'production';
 
 export const refreshMS = isProd ? 1000 * 5 : 1000 * 60;
