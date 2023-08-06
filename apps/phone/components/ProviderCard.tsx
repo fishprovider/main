@@ -48,8 +48,8 @@ export default function ProviderCard({ providerId }: Props) {
 
   const onInvest = () => {
     WebBrowser.openBrowserAsync(mode === 'live'
-      ? `https://www.fishprovider.com/strategies/${providerId}`
-      : `https://demo.fishprovider.com/strategies/${providerId}`);
+      ? `https://www.fishprovider.com/strategies/${providerId}?notrack=true`
+      : `https://demo.fishprovider.com/strategies/${providerId}?notrack=true`);
   };
 
   const target = `${maxYearProfit}%/year`;
