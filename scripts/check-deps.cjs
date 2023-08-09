@@ -101,10 +101,9 @@ dependenciesAll.forEach(({ name, version }) => {
   }
 });
 
-rootPackageJson.devDependencies = devDependenciesRoot;
-fs.writeFileSync('../package.json', JSON.stringify(rootPackageJson, null, 2));
-
 console.log('Done', result);
 if (result.deleted || result.updated) {
+  rootPackageJson.devDependencies = devDependenciesRoot;
+  fs.writeFileSync('../package.json', JSON.stringify(rootPackageJson, null, 2));
   process.exit(1);
 }
