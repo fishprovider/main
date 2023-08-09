@@ -1,49 +1,33 @@
-import { FontAwesome } from '@expo/vector-icons';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { useNavigation } from '@react-navigation/native';
 
+import UserNav from '~components/UserNav';
 import UserController from '~controllers/UserController';
 import DemoDrawer from '~views/DemoDrawer';
 import Trade from '~views/Trade';
 
 const Drawer = createDrawerNavigator();
 
-function UserIcon() {
-  const navigation = useNavigation<any>();
-  return (
-    <FontAwesome
-      name="user-circle"
-      size={20}
-      style={{ marginRight: 15, color: 'deepskyblue' }}
-      onPress={() => navigation.navigate('User')}
-    />
-  );
-}
-
 export default function AccountNavigator() {
   return (
     <UserController>
-      <Drawer.Navigator>
+      <Drawer.Navigator screenOptions={{
+        headerRight: UserNav,
+        sceneContainerStyle: {
+          paddingBottom: 45,
+        },
+      }}
+      >
         <Drawer.Screen
           name="Trade"
           component={Trade}
-          options={{
-            headerRight: UserIcon,
-          }}
         />
         <Drawer.Screen
           name="History"
           component={DemoDrawer}
-          options={{
-            headerRight: UserIcon,
-          }}
         />
         <Drawer.Screen
           name="Admin"
           component={DemoDrawer}
-          options={{
-            headerRight: UserIcon,
-          }}
         />
       </Drawer.Navigator>
     </UserController>
