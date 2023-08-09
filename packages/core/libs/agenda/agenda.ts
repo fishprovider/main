@@ -27,7 +27,10 @@ const startHeartbeat = async () => {
   const jobName = `${prefix}-heartbeat`;
   Agenda.define(
     jobName,
-    { lockLifetime: 1000 * 10 },
+    {
+      lockLifetime: 1000 * 10,
+      priority: 10,
+    },
     () => undefined,
   );
 
@@ -43,7 +46,9 @@ const startLocalRemote = () => {
   const jobName = `${prefix}-remote`;
   Agenda.define(
     jobName,
-    {},
+    {
+      priority: 10,
+    },
     async (job: Job<ServerCommand>) => {
       const { data } = job.attrs;
       if (data) {
