@@ -79,7 +79,7 @@ export default function OpenOrder() {
 
   return (
     <ScrollView>
-      <Stack padding="$2">
+      <Stack padding="$2" paddingBottom="$6">
         <OrderEditor onSubmit={onOpen} loading={isLoading} />
       </Stack>
     </ScrollView>
