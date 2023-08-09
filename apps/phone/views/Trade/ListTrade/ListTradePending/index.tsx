@@ -105,7 +105,7 @@ function ListTradePending({ orders }: Props) {
       <ItemTradePending
         key={order._id}
         order={order}
-        // prices={prices}
+        prices={prices}
       />
     ));
   };
