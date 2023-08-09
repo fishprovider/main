@@ -53,9 +53,6 @@ export const getDefaultStaticPaths = (
       rootId,
       undefined,
       getPage,
-      {
-        concurrency: 8,
-      },
     );
 
     const mapPageUrl = async (pageId: string) => {
