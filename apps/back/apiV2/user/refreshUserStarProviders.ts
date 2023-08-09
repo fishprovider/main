@@ -1,11 +1,10 @@
-import { ApiHandler, RefreshUserStarProvidersController } from '@fishprovider/adapter-backend';
+import { ApiHandlerRequest, RefreshUserStarProvidersController } from '@fishprovider/adapter-backend';
 import { RefreshUserStarProvidersUseCase } from '@fishprovider/application-rules';
 import { MongoUserRepository } from '@fishprovider/framework-mongo';
 
-const refreshUserStarProvidersController = new RefreshUserStarProvidersController(
-  new RefreshUserStarProvidersUseCase(MongoUserRepository),
-);
-
-const handler: ApiHandler<boolean> = refreshUserStarProvidersController.run;
-
-export default handler;
+export default (params: ApiHandlerRequest) => {
+  const refreshUserStarProvidersController = new RefreshUserStarProvidersController(
+    new RefreshUserStarProvidersUseCase(MongoUserRepository),
+  );
+  return refreshUserStarProvidersController.run(params);
+};
