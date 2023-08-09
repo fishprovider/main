@@ -5,7 +5,6 @@ import { Platform } from 'react-native';
 
 type Notification = Notifications.Notification;
 
-let expoPushToken: string;
 const expoPushTokenPromise = promiseCreator();
 
 async function requestNotif() {
@@ -20,8 +19,8 @@ async function requestNotif() {
     return finalStatus;
   }
 
-  expoPushToken = (await Notifications.getExpoPushTokenAsync()).data;
-  expoPushTokenPromise.resolveExec();
+  const expoPushToken = (await Notifications.getExpoPushTokenAsync()).data;
+  expoPushTokenPromise.resolveExec(expoPushToken);
 
   if (Platform.OS === 'android') {
     Notifications.setNotificationChannelAsync('default', {
@@ -57,17 +56,17 @@ async function handleNotif() {
 }
 
 const subNotif = async (providerId?: string) => {
-  await expoPushTokenPromise;
+  const expoPushToken = await expoPushTokenPromise;
   await apiPost('/subNotif', { expoPushToken, providerId });
 };
 
 const unsubNotif = async (providerId?: string) => {
-  await expoPushTokenPromise;
+  const expoPushToken = await expoPushTokenPromise;
   await apiPost('/unsubNotif', { expoPushToken, providerId });
 };
 
 async function sendNotif() {
-  await expoPushTokenPromise;
+  const expoPushToken = await expoPushTokenPromise;
   const message = {
     to: expoPushToken,
     sound: 'default',
