@@ -30,13 +30,14 @@ function ItemTradeLive({
       </Group>
       <Group>
         <Profit order={order} prices={prices} />
-        <CloseOrder order={order} />
-        {mergedView && (
+        {mergedView ? (
           <FontAwesome
             name="expand"
             size={15}
             onPress={unmergeView}
           />
+        ) : (
+          <CloseOrder order={order} />
         )}
       </Group>
     </Group>
