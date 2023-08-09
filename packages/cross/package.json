@@ -21,7 +21,7 @@
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.43",
-    "zustand": "^4.4.0"
+    "zustand": "^4.4.1"
   },
   "devDependencies": {
     "socket.io-client": "^4.7.2"

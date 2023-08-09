@@ -38,8 +38,8 @@
     "cross-env": "^7.0.3",
     "electron": "25.4.0",
     "electron-builder": "24.6.3",
-    "happy-dom": "10.8.0",
+    "happy-dom": "10.9.0",
     "unplugin-auto-expose": "0.0.5",
-    "vite": "4.4.8"
+    "vite": "4.4.9"
   }
 }

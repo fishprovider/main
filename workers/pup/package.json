@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@fishprovider/core": "*",
-    "puppeteer-core": "^21.0.1",
+    "puppeteer-core": "^21.0.2",
     "puppeteer-extra": "^3.3.6",
     "puppeteer-extra-plugin-adblocker": "^2.13.6",
     "puppeteer-extra-plugin-anonymize-ua": "^2.4.6",
