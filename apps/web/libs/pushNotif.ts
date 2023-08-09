@@ -6,7 +6,6 @@ const env = {
   fcmVapidKey: process.env.NEXT_PUBLIC_FIREBASE_CLOUD_MESSAGING_VAPID_KEY,
 };
 
-let fcmToken: string;
 const fcmTokenPromise = promiseCreator();
 
 const requestNotif = async () => {
@@ -30,10 +29,10 @@ const requestNotif = async () => {
   }
 
   const messaging = getMessaging();
-  fcmToken = await getToken(messaging, {
+  const fcmToken = await getToken(messaging, {
     vapidKey: env.fcmVapidKey,
   });
-  fcmTokenPromise.resolveExec();
+  fcmTokenPromise.resolveExec(fcmToken);
 
   return finalStatus;
 };
@@ -58,12 +57,12 @@ const handleNotif = async (onNotif?: (title: string, body: string) => void) => {
 };
 
 const subNotif = async (providerId?: string) => {
-  await fcmTokenPromise;
+  const fcmToken = await fcmTokenPromise;
   await apiPost('/subNotif', { fcmToken, providerId });
 };
 
 const unsubNotif = async (providerId?: string) => {
-  await fcmTokenPromise;
+  const fcmToken = await fcmTokenPromise;
   await apiPost('/unsubNotif', { fcmToken, providerId });
 };
 

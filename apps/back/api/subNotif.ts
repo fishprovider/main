@@ -30,14 +30,11 @@ const subNotif = async ({ data, userInfo }: {
     }
   }
 
+  const topic = providerId ? `account-${providerId}` : 'allDevices';
+
   if (fcmToken) {
-    if (providerId) {
-      const subRes = await Firebase.messaging().subscribeToTopic(fcmToken, `account-${providerId}`);
-      Logger.debug('Subscribed to topic', subRes);
-    } else {
-      const subRes = await Firebase.messaging().subscribeToTopic(fcmToken, 'allDevices');
-      Logger.debug('Subscribed to topic', subRes);
-    }
+    const subRes = await Firebase.messaging().subscribeToTopic(fcmToken, topic);
+    Logger.debug('Subscribed to topic', subRes);
     const fcmInfo = await getInfo(fcmToken);
 
     await Mongo.collection<User>('users').updateOne(
@@ -50,9 +47,7 @@ const subNotif = async ({ data, userInfo }: {
           pushNotif: {
             type: 'fcm',
             token: fcmToken,
-            ...(providerId && {
-              topic: `account-${providerId}`,
-            }),
+            topic,
           },
         },
       },
@@ -67,9 +62,7 @@ const subNotif = async ({ data, userInfo }: {
           pushNotif: {
             type: 'fcm',
             token: fcmToken,
-            ...(providerId && {
-              topic: `account-${providerId}`,
-            }),
+            topic,
             data: fcmInfo,
           },
         },
@@ -88,9 +81,7 @@ const subNotif = async ({ data, userInfo }: {
           pushNotif: {
             type: 'expo',
             token: expoPushToken,
-            ...(providerId && {
-              topic: `account-${providerId}`,
-            }),
+            topic,
           },
         },
       },
@@ -105,9 +96,7 @@ const subNotif = async ({ data, userInfo }: {
           pushNotif: {
             type: 'expo',
             token: expoPushToken,
-            ...(providerId && {
-              topic: `account-${providerId}`,
-            }),
+            topic,
           },
         },
       },

@@ -21,7 +21,9 @@ const unsubNotif = async ({ data, userInfo }: {
     return { error: ErrorType.accessDenied };
   }
 
-  const subRes = await Firebase.messaging().unsubscribeFromTopic(fcmToken, `account-${providerId}`);
+  const topic = providerId ? `account-${providerId}` : 'allDevices';
+
+  const subRes = await Firebase.messaging().unsubscribeFromTopic(fcmToken, topic);
   Logger.debug('Unsubscribed to topic', subRes);
 
   if (fcmToken) {
@@ -35,7 +37,7 @@ const unsubNotif = async ({ data, userInfo }: {
           pushNotif: {
             type: 'fcm',
             token: fcmToken,
-            topic: `account-${providerId}`,
+            topic,
           },
         },
       },
@@ -53,7 +55,7 @@ const unsubNotif = async ({ data, userInfo }: {
           pushNotif: {
             type: 'expo',
             token: expoPushToken,
-            topic: `account-${providerId}`,
+            topic,
           },
         },
       },
