@@ -5,7 +5,7 @@ import { Platform } from 'react-native';
 
 type Notification = Notifications.Notification;
 
-const expoPushTokenPromise = promiseCreator();
+const expoPushTokenPromise = promiseCreator<string>();
 
 async function requestNotif() {
   const { status: existingStatus } = await Notifications.getPermissionsAsync();

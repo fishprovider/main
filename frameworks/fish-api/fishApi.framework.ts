@@ -4,8 +4,7 @@ import axios, { Axios, AxiosRequestConfig } from 'axios';
 
 export type ApiConfig = AxiosRequestConfig;
 
-let client: Axios | undefined;
-const clientPromise = promiseCreator();
+const clientPromise = promiseCreator<Axios>();
 
 let logDebug = console.log;
 let logError = console.error;
@@ -15,14 +14,14 @@ const start = async (params: {
   logDebug?: (...args: any[]) => void
   logError?: (...args: any[]) => void
 }) => {
-  client = axios.create({
+  const client = axios.create({
     ...(params.baseURL && {
       baseURL: params.baseURL,
     }),
     withCredentials: true,
   });
   console.info('Started fishApi.framework');
-  clientPromise.resolveExec();
+  clientPromise.resolveExec(client);
 
   if (params.logDebug) {
     logDebug = params.logDebug;
@@ -67,6 +66,7 @@ const apiGet = async <T>(
   payload: Record<string, any> = {},
   options?: ApiConfig,
 ) => errHandler<T>(async () => {
+  const client = await clientPromise;
   assert(client);
   const res = await client.get<T>(url, {
     ...options,
@@ -80,6 +80,7 @@ const apiPost = async<T>(
   payload: Record<string, any> = {},
   options?: ApiConfig,
 ) => errHandler<T>(async () => {
+  const client = await clientPromise;
   assert(client);
   const res = await client.post<T>(url, payload, options);
   return res.data;
@@ -87,7 +88,6 @@ const apiPost = async<T>(
 
 const get = async () => {
   await clientPromise;
-  assert(client);
   return {
     apiGet,
     apiPost,

@@ -1,11 +1,11 @@
 import promiseCreator from '@fishprovider/utils/dist/helpers/promiseCreator';
+import assert from 'assert';
 import type { Axios, AxiosRequestConfig } from 'axios';
 import axios from 'axios';
 
 type ApiConfig = AxiosRequestConfig;
 
-let axiosInstance: Axios;
-const axiosInstancePromise = promiseCreator();
+const axiosInstancePromise = promiseCreator<Axios>();
 
 let logDebug = console.log;
 let logError = console.error;
@@ -15,13 +15,13 @@ export const initApi = (params: {
   logDebug?: (...args: any[]) => void
   logError?: (...args: any[]) => void
 }) => {
-  axiosInstance = axios.create({
+  const axiosInstance = axios.create({
     ...(params.baseURL && {
       baseURL: params.baseURL,
     }),
     withCredentials: true,
   });
-  axiosInstancePromise.resolveExec();
+  axiosInstancePromise.resolveExec(axiosInstance);
 
   if (params.logDebug) {
     logDebug = params.logDebug;
@@ -61,7 +61,8 @@ function apiGet<T>(
   options?: ApiConfig,
 ) {
   return errHandler<T>(async () => {
-    await axiosInstancePromise;
+    const axiosInstance = await axiosInstancePromise;
+    assert(axiosInstance);
     const res = await axiosInstance.get<T>(url, {
       ...options,
       params: payload,
@@ -76,7 +77,8 @@ function apiPost<T>(
   options?: ApiConfig,
 ) {
   return errHandler<T>(async () => {
-    await axiosInstancePromise;
+    const axiosInstance = await axiosInstancePromise;
+    assert(axiosInstance);
     const res = await axiosInstance.post<T>(url, payload, options);
     return res.data;
   }, url, payload, options);

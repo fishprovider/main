@@ -1,6 +1,5 @@
+import type { PromiseCreator } from '@fishprovider/utils/dist/types/PromiseCreator.model';
 import type WebSocket from 'ws';
-
-import type { PromiseCreator } from '~types/PromiseCreator.model';
 
 interface ConnectionType {
   clientId: string;

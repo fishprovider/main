@@ -1,5 +1,6 @@
+import type { PromiseCreator } from '@fishprovider/utils/dist/types/PromiseCreator.model';
+
 import type { CommonErrorCode, ErrorCode, PayloadType } from '~constants/openApi';
-import type { PromiseCreator } from '~types/PromiseCreator.model';
 
 interface SendCommand {
   name: string;

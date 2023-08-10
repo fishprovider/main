@@ -1,8 +1,8 @@
+import type { PromiseCreator } from '@fishprovider/utils/dist/types/PromiseCreator.model';
 import type WebSocket from 'ws';
 
 import type { Config } from '~types/Config.model';
 import type { ConnectionType } from '~types/Connection.model';
-import type { PromiseCreator } from '~types/PromiseCreator.model';
 
 class Connection implements ConnectionType {
   name: string;

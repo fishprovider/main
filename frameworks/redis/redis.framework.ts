@@ -1,27 +1,26 @@
 import { promiseCreator } from '@fishprovider/application-rules';
-import type { RedisClientType } from '@redis/client';
 import assert from 'assert';
 import { createClient } from 'redis';
 
-let client: RedisClientType | undefined;
-const clientPromise = promiseCreator();
+const clientPromise = promiseCreator<ReturnType<typeof createClient>>();
 
 const start = async () => {
   if (!process.env.REDIS_HOST) {
     throw new Error('REDIS_HOST is not defined');
   }
-  client = createClient({
+  const client = createClient({
     name: `${process.env.TYPE}-${process.env.TYPE_ID}`,
     url: `redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`,
     ...(process.env.REDIS_KEY && { password: process.env.REDIS_KEY }),
   });
   await client.connect();
   console.info('Started redis.framework');
-  clientPromise.resolveExec();
+  clientPromise.resolveExec(client);
   return client;
 };
 
 const stop = async () => {
+  const client = await clientPromise;
   if (client) {
     await client.quit();
   }
@@ -29,7 +28,7 @@ const stop = async () => {
 };
 
 const get = async () => {
-  await clientPromise;
+  const client = await clientPromise;
   assert(client);
   return client;
 };

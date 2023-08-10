@@ -6,7 +6,7 @@ const env = {
   fcmVapidKey: process.env.NEXT_PUBLIC_FIREBASE_CLOUD_MESSAGING_VAPID_KEY,
 };
 
-const fcmTokenPromise = promiseCreator();
+const fcmTokenPromise = promiseCreator<string>();
 
 const requestNotif = async () => {
   if (!('serviceWorker' in navigator)) {

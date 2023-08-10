@@ -1,5 +1,6 @@
 import promiseCreator from '@fishprovider/utils/dist/helpers/promiseCreator';
 import random from '@fishprovider/utils/dist/helpers/random';
+import type { PromiseCreator } from '@fishprovider/utils/dist/types/PromiseCreator.model';
 import appRootPath from 'app-root-path';
 import path from 'path';
 import tls from 'tls';
@@ -10,7 +11,6 @@ import { State } from '~constants/connection';
 import type { Config } from '~types/Config.model';
 import type { Command, ConnectionType, SendCommand } from '~types/Connection.model';
 import type { CallbackPayload } from '~types/Event.model';
-import type { PromiseCreator } from '~types/PromiseCreator.model';
 import type { DecodedMessage } from '~types/ProtobufMessages.model';
 
 import handleEvents from './events';
