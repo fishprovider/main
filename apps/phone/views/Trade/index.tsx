@@ -6,7 +6,7 @@ import storeUser from '@fishprovider/cross/dist/stores/user';
 import _ from 'lodash';
 import { useEffect, useState } from 'react';
 
-import StrategyController from '~controllers/StrategyController';
+import AccountController from '~controllers/AccountController';
 import { cacheRead, cacheWrite } from '~libs/cache';
 import ScrollView from '~ui/ScrollView';
 import Select from '~ui/Select';
@@ -89,7 +89,7 @@ export default function Trade() {
         value={providerId}
         onChange={onSelect}
       />
-      <StrategyController providerId={providerId}>
+      <AccountController providerId={providerId}>
         <ScrollView>
           <Stack space="$4">
             <TradeWatch />
@@ -98,7 +98,7 @@ export default function Trade() {
             <ListTrade />
           </Stack>
         </ScrollView>
-      </StrategyController>
+      </AccountController>
     </Stack>
   );
 }
