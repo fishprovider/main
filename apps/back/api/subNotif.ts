@@ -37,70 +37,70 @@ const subNotif = async ({ data, userInfo }: {
     Logger.debug('Subscribed to topic', subRes);
     const fcmInfo = await getInfo(fcmToken);
 
-    await Mongo.collection<User>('users').updateOne(
-      { _id: uid },
+    const doc = await Mongo.collection<User>('users').findOne(
       {
-        $set: {
-          updatedAt: new Date(),
-        },
-        $pull: {
-          pushNotif: {
-            type: 'fcm',
-            token: fcmToken,
-            topic,
-          },
+        _id: uid,
+        'pushNotif.type': 'fcm',
+        'pushNotif.token': fcmToken,
+        'pushNotif.topic': topic,
+      },
+      {
+        projection: {
+          _id: 1,
         },
       },
     );
-    await Mongo.collection<User>('users').updateOne(
-      { _id: uid },
-      {
-        $set: {
-          updatedAt: new Date(),
-        },
-        $push: {
-          pushNotif: {
-            type: 'fcm',
-            token: fcmToken,
-            topic,
-            data: fcmInfo,
+    if (!doc) {
+      await Mongo.collection<User>('users').updateOne(
+        { _id: uid },
+        {
+          $set: {
+            updatedAt: new Date(),
+          },
+          $push: {
+            pushNotif: {
+              type: 'fcm',
+              token: fcmToken,
+              topic,
+              data: fcmInfo,
+            },
           },
         },
-      },
-    );
+      );
+    }
   }
 
   if (expoPushToken) {
-    await Mongo.collection<User>('users').updateOne(
-      { _id: uid },
+    const doc = await Mongo.collection<User>('users').findOne(
       {
-        $set: {
-          updatedAt: new Date(),
-        },
-        $pull: {
-          pushNotif: {
-            type: 'expo',
-            token: expoPushToken,
-            topic,
-          },
+        _id: uid,
+        'pushNotif.type': 'expo',
+        'pushNotif.token': expoPushToken,
+        'pushNotif.topic': topic,
+      },
+      {
+        projection: {
+          _id: 1,
         },
       },
     );
-    await Mongo.collection<User>('users').updateOne(
-      { _id: uid },
-      {
-        $set: {
-          updatedAt: new Date(),
-        },
-        $push: {
-          pushNotif: {
-            type: 'expo',
-            token: expoPushToken,
-            topic,
+    if (!doc) {
+      await Mongo.collection<User>('users').updateOne(
+        { _id: uid },
+        {
+          $set: {
+            updatedAt: new Date(),
+          },
+          $push: {
+            pushNotif: {
+              type: 'expo',
+              token: expoPushToken,
+              topic,
+            },
           },
         },
-      },
-    );
+      );
+    }
   }
 
   return {};
