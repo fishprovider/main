@@ -1,4 +1,4 @@
-import type { UpdateUserUseCase } from '@fishprovider/application-rules';
+import type { UpdateUserUseCase } from '@fishprovider/application';
 import { z } from 'zod';
 
 import { requireLogin } from '~helpers';

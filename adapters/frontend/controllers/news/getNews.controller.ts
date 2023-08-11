@@ -1,4 +1,4 @@
-import type { GetNewsUseCase, GetNewsUseCaseParams } from '@fishprovider/application-rules';
+import type { GetNewsUseCase, GetNewsUseCaseParams } from '@fishprovider/application';
 
 export class GetNewsController {
   getNewsUseCase: GetNewsUseCase;

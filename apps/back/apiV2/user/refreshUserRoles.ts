@@ -1,5 +1,5 @@
 import { ApiHandlerRequest, RefreshUserRolesController } from '@fishprovider/adapter-backend';
-import { RefreshUserRolesUseCase } from '@fishprovider/application-rules';
+import { RefreshUserRolesUseCase } from '@fishprovider/application';
 import { MongoAccountRepository, MongoUserRepository } from '@fishprovider/framework-mongo';
 
 export default (params: ApiHandlerRequest) => {

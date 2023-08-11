@@ -1,5 +1,5 @@
-import type { GetNewsUseCase } from '@fishprovider/application-rules';
-import type { News } from '@fishprovider/enterprise-rules';
+import type { GetNewsUseCase } from '@fishprovider/application';
+import type { News } from '@fishprovider/enterprise';
 import { z } from 'zod';
 
 import { requireLogin } from '~helpers';

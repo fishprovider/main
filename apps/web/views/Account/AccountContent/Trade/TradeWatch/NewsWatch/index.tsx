@@ -1,5 +1,5 @@
 import { GetNewsController } from '@fishprovider/adapter-frontend';
-import { GetNewsUseCase } from '@fishprovider/application-rules';
+import { GetNewsUseCase } from '@fishprovider/application';
 import storeUser from '@fishprovider/cross/dist/stores/user';
 import { OfflineFirstNewsRepository } from '@fishprovider/framework-offline-first';
 import { StoreNewsRepository } from '@fishprovider/framework-store';

@@ -1,5 +1,5 @@
 import { ApiHandlerRequest, GetNewsController } from '@fishprovider/adapter-backend';
-import { GetNewsUseCase } from '@fishprovider/application-rules';
+import { GetNewsUseCase } from '@fishprovider/application';
 import { CacheFirstNewsRepository } from '@fishprovider/framework-cache-first';
 
 export default (params: ApiHandlerRequest) => {

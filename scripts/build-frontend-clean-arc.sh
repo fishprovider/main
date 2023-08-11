@@ -13,12 +13,12 @@ function adapters() {
 }
 
 function frameworks() {
-  npm run build -w frameworks/local &
-  npm run build -w frameworks/store &
+  npm run build -w frameworks-frontend/local &
+  npm run build -w frameworks-frontend/store &
   wait
 
-  npm run build -w frameworks/fish-api
-  npm run build -w frameworks/offline-first
+  npm run build -w frameworks-frontend/fish-api
+  npm run build -w frameworks-frontend/offline-first
 }
 
 adapters &

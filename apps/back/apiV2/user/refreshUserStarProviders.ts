@@ -1,5 +1,5 @@
 import { ApiHandlerRequest, RefreshUserStarProvidersController } from '@fishprovider/adapter-backend';
-import { RefreshUserStarProvidersUseCase } from '@fishprovider/application-rules';
+import { RefreshUserStarProvidersUseCase } from '@fishprovider/application';
 import { MongoUserRepository } from '@fishprovider/framework-mongo';
 
 export default (params: ApiHandlerRequest) => {

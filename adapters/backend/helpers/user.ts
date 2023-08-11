@@ -1,4 +1,4 @@
-import { UserError } from '@fishprovider/enterprise-rules';
+import { UserError } from '@fishprovider/enterprise';
 
 import type { UserSession } from '~types';
 

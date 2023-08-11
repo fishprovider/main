@@ -1,4 +1,4 @@
-import type { GetUserUseCase, GetUserUseCaseParams } from '@fishprovider/application-rules';
+import type { GetUserUseCase, GetUserUseCaseParams } from '@fishprovider/application';
 
 export class GetUserController {
   getUserUseCase: GetUserUseCase;

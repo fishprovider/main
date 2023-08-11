@@ -1,5 +1,5 @@
 import { ApiHandlerRequest, JoinAccountController } from '@fishprovider/adapter-backend';
-import { JoinAccountUseCase } from '@fishprovider/application-rules';
+import { JoinAccountUseCase } from '@fishprovider/application';
 import { MongoAccountRepository, MongoUserRepository } from '@fishprovider/framework-mongo';
 
 export default (params: ApiHandlerRequest) => {

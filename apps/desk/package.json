@@ -24,9 +24,9 @@
   },
   "dependencies": {
     "@fishprovider/adapter-frontend": "*",
-    "@fishprovider/application-rules": "*",
+    "@fishprovider/application": "*",
     "@fishprovider/cross": "*",
-    "@fishprovider/enterprise-rules": "*",
+    "@fishprovider/enterprise": "*",
     "@fishprovider/framework-fish-api": "*",
     "@fishprovider/framework-local": "*",
     "@fishprovider/framework-offline-first": "*",
@@ -36,7 +36,7 @@
   "devDependencies": {
     "@vitejs/plugin-react": "^4.0.4",
     "cross-env": "^7.0.3",
-    "electron": "25.4.0",
+    "electron": "25.5.0",
     "electron-builder": "24.6.3",
     "happy-dom": "10.9.0",
     "unplugin-auto-expose": "0.0.5",

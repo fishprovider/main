@@ -1,4 +1,4 @@
-import type { JoinAccountUseCase, JoinAccountUseCaseParams } from '@fishprovider/application-rules';
+import type { JoinAccountUseCase, JoinAccountUseCaseParams } from '@fishprovider/application';
 
 export class JoinAccountController {
   joinAccountUseCase: JoinAccountUseCase;

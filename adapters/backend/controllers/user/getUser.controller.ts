@@ -1,5 +1,5 @@
-import type { GetUserUseCase } from '@fishprovider/application-rules';
-import type { User } from '@fishprovider/enterprise-rules';
+import type { GetUserUseCase } from '@fishprovider/application';
+import type { User } from '@fishprovider/enterprise';
 
 import { requireLogin } from '~helpers';
 import type { ApiHandlerRequest, ApiHandlerResponse } from '~types';

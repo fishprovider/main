@@ -13,11 +13,11 @@ function adapters() {
 }
 
 function frameworks() {
-  npm run build -w frameworks/mongo &
-  npm run build -w frameworks/redis &
+  npm run build -w frameworks-backend/redis &
+  npm run build -w frameworks-backend/mongo &
   wait
 
-  npm run build -w frameworks/cache-first
+  npm run build -w frameworks-backend/cache-first
 }
 
 adapters &

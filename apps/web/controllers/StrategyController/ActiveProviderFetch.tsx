@@ -1,5 +1,5 @@
 import { GetAccountController } from '@fishprovider/adapter-frontend';
-import { GetAccountUseCase } from '@fishprovider/application-rules';
+import { GetAccountUseCase } from '@fishprovider/application';
 import accountGet from '@fishprovider/cross/dist/api/accounts/get';
 import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
 import storeUser from '@fishprovider/cross/dist/stores/user';

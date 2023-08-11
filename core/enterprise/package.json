@@ -1,0 +1,32 @@
+{
+  "name": "@fishprovider/enterprise",
+  "version": "6.0.0",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "lint": "eslint --cache --fix .",
+    "type-check": "tsc --noEmit",
+    "test": "npm run test-unit",
+    "test-unit": "cross-env NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules npx jest",
+    "test-int": "cross-env NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules doppler run --print-config -- npx jest --runInBand",
+    "clean-build": "rm -rf dist && mkdir dist",
+    "build": "tsc -p tsconfig.build.json && tsc-alias -p tsconfig.build.json"
+  },
+  "dependencies": {
+    "crypto-random-string": "^5.0.0",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.4"
+  },
+  "devDependencies": {
+    "@tsconfig/next": "^2.0.0",
+    "@tsconfig/node-lts": "^18.12.3",
+    "@tsconfig/strictest": "^2.0.1",
+    "@types/lodash": "^4.14.197",
+    "tsc-alias": "^1.8.7",
+    "typescript": "^5.1.6"
+  }
+}

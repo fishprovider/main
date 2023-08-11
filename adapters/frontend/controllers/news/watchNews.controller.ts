@@ -1,4 +1,4 @@
-import type { WatchNewsUseCase, WatchNewsUseCaseParams } from '@fishprovider/application-rules';
+import type { WatchNewsUseCase, WatchNewsUseCaseParams } from '@fishprovider/application';
 
 export class WatchNewsController {
   watchNewsUseCase: WatchNewsUseCase;

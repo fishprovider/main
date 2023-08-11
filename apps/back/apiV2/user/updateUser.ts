@@ -1,5 +1,5 @@
 import { ApiHandlerRequest, UpdateUserController } from '@fishprovider/adapter-backend';
-import { UpdateUserUseCase } from '@fishprovider/application-rules';
+import { UpdateUserUseCase } from '@fishprovider/application';
 import { MongoUserRepository } from '@fishprovider/framework-mongo';
 
 export default (params: ApiHandlerRequest) => {

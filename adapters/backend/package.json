@@ -17,8 +17,8 @@
     "build": "tsc -p tsconfig.build.json && tsc-alias -p tsconfig.build.json"
   },
   "dependencies": {
-    "@fishprovider/application-rules": "*",
-    "@fishprovider/enterprise-rules": "*",
+    "@fishprovider/application": "*",
+    "@fishprovider/enterprise": "*",
     "zod": "^3.21.4"
   }
 }

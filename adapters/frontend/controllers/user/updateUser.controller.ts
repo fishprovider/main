@@ -1,4 +1,4 @@
-import type { UpdateUserUseCase, UpdateUserUseCaseParams } from '@fishprovider/application-rules';
+import type { UpdateUserUseCase, UpdateUserUseCaseParams } from '@fishprovider/application';
 
 export class UpdateUserController {
   updateUserUseCase: UpdateUserUseCase;

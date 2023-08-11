@@ -1,4 +1,4 @@
-import type { RefreshUserStarProvidersUseCase } from '@fishprovider/application-rules';
+import type { RefreshUserStarProvidersUseCase } from '@fishprovider/application';
 
 import { requireLogin } from '~helpers';
 import type { ApiHandlerRequest, ApiHandlerResponse } from '~types';

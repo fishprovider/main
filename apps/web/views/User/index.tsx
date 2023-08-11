@@ -1,5 +1,5 @@
 import { GetUserController } from '@fishprovider/adapter-frontend';
-import { GetUserUseCase } from '@fishprovider/application-rules';
+import { GetUserUseCase } from '@fishprovider/application';
 import getUser from '@fishprovider/cross/dist/api/user/getUser';
 import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';

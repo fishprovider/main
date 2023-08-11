@@ -1,5 +1,5 @@
 import { WatchNewsController } from '@fishprovider/adapter-frontend';
-import { WatchNewsUseCase } from '@fishprovider/application-rules';
+import { WatchNewsUseCase } from '@fishprovider/application';
 import { StoreNewsRepository } from '@fishprovider/framework-store';
 import _ from 'lodash';
 import moment from 'moment';

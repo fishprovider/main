@@ -1,5 +1,5 @@
 import { GetNewsController, WatchNewsController } from '@fishprovider/adapter-frontend';
-import { GetNewsUseCase, WatchNewsUseCase } from '@fishprovider/application-rules';
+import { GetNewsUseCase, WatchNewsUseCase } from '@fishprovider/application';
 import { OfflineFirstNewsRepository } from '@fishprovider/framework-offline-first';
 import { StoreNewsRepository } from '@fishprovider/framework-store';
 import type { News } from '@fishprovider/utils/dist/types/News.model';
