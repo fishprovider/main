@@ -3,6 +3,8 @@ module.exports = {
   format: ["group", "ownerChanged", "repo"],
   reject: [
     'eslint-config-next',
+    // packages/core
+    'googleapis',
     // packages/ctrader
     'protobufjs',
     // packages/metatrader
