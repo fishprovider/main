@@ -9,8 +9,6 @@ module.exports = {
     'protobufjs',
     // packages/metatrader
     'metaapi.cloud-sdk',
-    // apps/back
-    'glob',
     // apps/phone
     "@react-native-async-storage/async-storage",
     "@react-native-firebase/app",

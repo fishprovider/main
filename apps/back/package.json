@@ -27,7 +27,7 @@
     "@fishprovider/framework-mongo": "*",
     "@fishprovider/framework-redis": "*",
     "@fishprovider/swap": "*",
-    "glob": "^9.3.5",
+    "glob": "^10.3.3",
     "notion-client": "^6.16.0",
     "openai": "^3.3.0"
   }

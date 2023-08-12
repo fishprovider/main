@@ -141,7 +141,7 @@
     "express-session": "^1.17.3",
     "firebase": "^10.1.0",
     "firebase-admin": "^11.10.1",
-    "glob": "^9.3.5",
+    "glob": "^10.3.3",
     "googleapis": "~123.0.0",
     "happy-dom": "10.9.0",
     "html-react-parser": "^4.2.1",
