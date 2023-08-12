@@ -1,8 +1,5 @@
 {
-  "extends": [
-    "../../tsconfig.json",
-    "../../../../tsconfig.frontend.json",
-  ],
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
