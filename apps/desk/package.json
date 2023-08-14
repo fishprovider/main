@@ -20,7 +20,9 @@
     "build:renderer": "cd ./packages/renderer && vite build",
     "build": "npm run build:main && npm run build:preload && npm run build:renderer",
     "package": "electron-builder build --config .electron-builder.config.cjs --dir",
-    "dev": "cross-env NODE_ENV=development node scripts/watch.js"
+    "dev": "cross-env NODE_ENV=development node scripts/watch.js",
+    "ci-lint": "eslint --cache --fix",
+    "ci-type-check": "tsc-files --noEmit"
   },
   "dependencies": {
     "@fishprovider/adapter-frontend": "*",
