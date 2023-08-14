@@ -16,6 +16,8 @@ import Text from '~ui/core/Text';
 function UserMenu() {
   const router = useRouter();
 
+  console.log(123);
+
   const {
     isClientLoggedIn, isServerLoggedIn, userPicture, themeType, roles,
   } = storeUser.useStore((state) => ({

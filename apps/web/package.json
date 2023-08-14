@@ -13,7 +13,9 @@
     "export": "cross-env NODE_ENV=production next export",
     "build-export": "npm run build && npm run export",
     "dev": "cross-env NODE_ENV=development doppler run -p web -c prd_local --print-config -- next dev",
-    "analyze": "cross-env NODE_ENV=production ANALYZE=true doppler run --print-config -- next build"
+    "analyze": "cross-env NODE_ENV=production ANALYZE=true doppler run --print-config -- next build",
+    "ci-lint": "eslint --cache --fix",
+    "ci-type-check": "tsc-files --noEmit types/global.d.ts"
   },
   "dependencies": {
     "@emotion/cache": "^11.11.0",
