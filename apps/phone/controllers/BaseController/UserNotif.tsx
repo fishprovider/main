@@ -6,8 +6,6 @@ function UserNotif() {
   useEffect(() => {
     subNotif();
 
-    console.log(123);
-
     let unsub: () => void;
     handleNotif().then((res) => {
       unsub = res;
