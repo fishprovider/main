@@ -1,4 +1,4 @@
 module.exports = {
-  "*.{js,jsx,ts,tsx}": "eslint --cache --fix",
-  "*.{ts,tsx}": "tsc-files --noEmit",
+  "apps/phone/**/*.{js,jsx,ts,tsx}": "npm run -w apps/phone ci-lint",
+  "apps/phone/**/*.{ts,tsx}": "npm run -w apps/phone ci-type-check",
 };

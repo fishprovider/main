@@ -11,7 +11,9 @@
     "native-android": "expo run:android",
     "native-ios": "expo run:ios",
     "eas-build-pre-install": "./clean-deps.sh",
-    "eas-build-post-install": "./build-deps.sh"
+    "eas-build-post-install": "./build-deps.sh",
+    "ci-lint": "eslint --cache --fix",
+    "ci-type-check": "tsc-files --noEmit types/global.d.ts"
   },
   "dependencies": {
     "@fishprovider/adapter-frontend": "*",
