@@ -3,16 +3,14 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "~*": [
-        "./*"
-      ]
+      "~*": ["./*"],
     },
     "rootDir": ".",
-    "outDir": "dist"
+    "outDir": "dist",
   },
   "include": [
-    ".plasmo/index.d.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    ".plasmo/index.d.ts",
   ],
 }
