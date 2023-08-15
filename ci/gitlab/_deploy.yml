@@ -82,8 +82,8 @@
     - ./clean-deps.sh
     - npm ci --cache ~/.npm --prefer-offline --no-audit --no-progress --legacy-peer-deps
     # - npx eas-cli@latest build --non-interactive --no-wait -p all --profile production --auto-submit
-    # - npx eas-cli@latest build --non-interactive --no-wait --profile production --local -p ios
-    # - npx eas-cli@latest build --non-interactive --no-wait --profile production --local -p android
+    - npx eas-cli@latest build --local --non-interactive --profile production -p android
+    # - npx eas-cli@latest build --local --non-interactive --profile production -p ios
     - NOTIF_MSG="Deploy phone $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
     - !reference [.notif, script]
 
