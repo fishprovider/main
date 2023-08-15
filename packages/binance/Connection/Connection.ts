@@ -15,7 +15,7 @@ class Connection implements ConnectionType {
 
   socket: WebSocket | undefined;
   listenKey: string | undefined;
-  pingInterval: NodeJS.Timer | undefined;
+  pingInterval: NodeJS.Timeout | undefined;
   destroyPromise: PromiseCreator<void> | undefined;
 
   constructor(

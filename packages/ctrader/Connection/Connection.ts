@@ -50,7 +50,7 @@ class Connection implements ConnectionType {
   prevState: State = State.NEW;
   state: State = State.NEW;
 
-  heartbeatInterval: NodeJS.Timer | undefined;
+  heartbeatInterval: NodeJS.Timeout | undefined;
   destroyPromise: PromiseCreator<void> | undefined;
   socket: tls.TLSSocket | undefined;
 
