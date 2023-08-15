@@ -48,10 +48,10 @@
         "noPropertyAccessFromIndexSignature": false,
         "baseUrl": ".",
         "paths": {
-          "~*": ["./*"]
+          "~*": ["./*"],
         },
         "rootDir": ".",
-        "outDir": "dist"
+        "outDir": "dist",
       },
       "include": ["**/*.ts", "**/*.tsx", "index.js", "*.config.js"],
       "exclude": ["node_modules"],

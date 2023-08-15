@@ -9,10 +9,10 @@
     "noPropertyAccessFromIndexSignature": false,
     "baseUrl": ".",
     "paths": {
-      "~*": ["./*"]
+      "~*": ["./*"],
     },
     "rootDir": ".",
-    "outDir": "dist"
+    "outDir": "dist",
   },
   "include": [
     "**/*.ts",
