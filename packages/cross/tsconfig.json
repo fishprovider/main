@@ -9,7 +9,7 @@
       "~stores": ["./stores"],
     },
     "rootDir": ".",
-    "outDir": "dist"
+    "outDir": "dist",
   },
   "include": ["**/*.ts", "**/*.tsx"],
 }

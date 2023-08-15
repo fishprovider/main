@@ -6,7 +6,7 @@
       "~entities": ["./entities"],
     },
     "rootDir": ".",
-    "outDir": "dist"
+    "outDir": "dist",
   },
   "include": ["**/*.ts"],
 }
