@@ -10,10 +10,10 @@ interface ConnectionType {
   onError: (_: any) => void;
   onClose: () => void;
 
-  socket?: WebSocket | undefined;
-  listenKey?: string | undefined;
-  pingInterval?: NodeJS.Timeout | undefined;
-  destroyPromise?: PromiseCreator<void> | undefined;
+  socket?: WebSocket;
+  listenKey?: string;
+  pingInterval?: NodeJS.Timeout;
+  destroyPromise?: PromiseCreator<void>;
 
   start: () => Promise<void>;
   destroy: () => Promise<void>;
