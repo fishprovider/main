@@ -3,11 +3,10 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "~*": ["./*"]
+      "~*": ["./*"],
     },
     "rootDir": ".",
-    "outDir": "dist"
+    "outDir": "dist",
   },
   "include": ["**/*.ts"],
-  "exclude": ["node_modules", "dist"],
 }
