@@ -33,49 +33,41 @@ const checkAccount = async (providerId: string) => {
   try {
     const account = await getAccount(providerId);
     if (!account) return;
-    const {
-      providerType,
-      asset = 'USD',
-    } = account;
-
-    if (botTasks.account) {
-      await setBalanceStartDay(account);
-    }
 
     const todayOrders = await getTodayOrders(providerId);
     const liveOrders = await getLiveOrders(providerId);
 
-    if (botTasks.locks) {
-      await lockLostSeriesPair(account, todayOrders, liveOrders);
-    }
-
-    if (!liveOrders.length) {
-      if (botTasks.account) {
-        await setMaxEquity(account, 0);
-      }
-
-      return;
-    }
-
-    const prices = await getPrices(
-      providerType,
-      _.uniq([
-        ...getMajorPairs(providerType),
-        ...liveOrders.map((item) => item.symbol),
-      ]),
-    );
-    const profit = getProfit(liveOrders, prices, asset);
+    let profit = 0;
 
     if (botTasks.account) {
+      await setBalanceStartDay(account);
       await setEdd(account, profit);
       await setMaxEquity(account, profit);
     }
+
     if (botTasks.locks) {
+      await lockLostSeriesPair(account, todayOrders, liveOrders);
       await lockMaxBdd(account, todayOrders, liveOrders, profit);
       await lockMaxEdd(account, liveOrders, profit);
       await lockTarget(account, liveOrders, profit);
     }
+
+    if (!liveOrders.length) return;
+
     if (botTasks.orders) {
+      const {
+        providerType,
+        asset = 'USD',
+      } = account;
+      const prices = await getPrices(
+        providerType,
+        _.uniq([
+          ...getMajorPairs(providerType),
+          ...liveOrders.map((item) => item.symbol),
+        ]),
+      );
+      profit = getProfit(liveOrders, prices, asset);
+
       await closeOnProfit(account, liveOrders, profit);
       await closeOnEquity(account, liveOrders, profit);
       await closeAtTime(account, liveOrders, profit);
