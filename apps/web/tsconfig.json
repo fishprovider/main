@@ -3,23 +3,16 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "~*": ["./*"]
+      "~*": ["./*"],
     },
     "rootDir": ".",
-    "outDir": "dist"
+    "outDir": "dist",
   },
   "include": [
     "**/*.ts",
     "**/*.tsx",
     "**/*.js",
     "**/*.jsx",
-    "next-env.d.ts"
+    "next-env.d.ts",
   ],
-  "exclude": [
-    "**/node_modules",
-    "**/dist",
-    "**/build",
-    "**/tmp",
-    ".next",
-  ]
 }
