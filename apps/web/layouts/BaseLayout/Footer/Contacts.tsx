@@ -73,7 +73,7 @@ function Contacts() {
         <DefaultIcon name="Youtube" url={`https://www.youtube.com/@${commonKey}`} />
         <DefaultIcon name="Instagram" url={`https://www.instagram.com/${commonKey}`} />
         <CustomIcon name="Moj" url={`https://mojapp.in/@${commonKey}`} icon="/icons/moj.png" />
-        <DefaultIcon name="VK" url={`https://vk.com/${commonKey}.page`} />
+        {/* <DefaultIcon name="VK" url={`https://vk.com/${commonKey}.page`} /> */}
         <CustomIcon name="OK" url={`https://ok.ru/group/${okKey}`} icon="/icons/ok.png" />
         <DefaultIcon name="WhatsApp" url={`https://chat.whatsapp.com/${whatsAppChannelKey}`} />
         <DefaultIcon name="Pinterest" url={`https://www.pinterest.com/${commonKey}`} />
