@@ -78,6 +78,9 @@
 
 .deploy-phone:
   script:
+    - !reference [.install_pyenv, script]
+    - !reference [.install_rbenv, script]
+    - source ~/.zshrc
     - cd apps/phone
     - ./clean-deps.sh
     - npm ci --cache ~/.npm --prefer-offline --no-audit --no-progress --legacy-peer-deps
