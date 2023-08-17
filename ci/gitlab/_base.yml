@@ -25,36 +25,6 @@ stages:
     - apt update && apt install -y curl gnupg
     - curl -Ls --tlsv1.2 --proto "=https" --retry 3 https://cli.doppler.com/install.sh | sh
 
-.install_pyenv:
-  script: |
-    pyenv () { \
-      local command \
-      command="${1:-}"  \
-      if [ "$#" -gt 0 ] \
-      then \
-        shift \
-      fi \
-      case "$command" in \
-        (rehash | shell) eval "$(pyenv "sh-$command" "$@")" ;; \
-        (*) command pyenv "$command" "$@" ;; \
-      esac \
-    }
-
-.install_rbenv:
-  script: |
-    rbenv () { \
-      local command \
-      command="${1:-}" \
-      if [ "$#" -gt 0 ] \
-      then \
-        shift \
-      fi \
-      case "$command" in \
-        (rehash | shell) eval "$(rbenv "sh-$command" "$@")" ;; \
-        (*) command rbenv "$command" "$@" ;; \
-      esac \
-    }
-
 .notif:
   script:
     - '[ ! -z "$NOTIF_MSG" ] && curl -X POST -d "{\"content\": \"${NOTIF_MSG}\"}" -H "Content-Type: application/json" $DISCORD_URL || echo "No message to send"'
