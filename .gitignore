@@ -13,4 +13,5 @@ tmp
 
 # build
 **/dist
+*.ipa
 *.aab
