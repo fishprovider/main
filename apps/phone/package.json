@@ -15,6 +15,8 @@
     "build-local-ios": "EAS_LOCAL_BUILD_ARTIFACTS_DIR=~/work/fish/artifacts npx eas-cli@latest build --local --non-interactive --profile production -p ios",
     "build-local-android": "EAS_LOCAL_BUILD_ARTIFACTS_DIR=~/work/fish/artifacts npx eas-cli@latest build --local --non-interactive --profile production -p android",
     "build-local": "npm run build-local-ios && npm run build-local-android",
+    "build-cloud": "npx eas-cli@latest build --non-interactive --no-wait --profile production -p all --auto-submit",
+    "deploy-update": "npx eas-cli@latest update --auto --channel production",
     "ci-lint": "eslint --cache --fix",
     "ci-type-check": "tsc-files --noEmit types/global.d.ts"
   },
