@@ -12,6 +12,9 @@
     "native-ios": "expo run:ios",
     "eas-build-pre-install": "./clean-deps.sh",
     "eas-build-post-install": "./build-deps.sh",
+    "build-local-ios": "EAS_LOCAL_BUILD_ARTIFACTS_DIR=~/work/fish/artifacts npx eas-cli@latest build --local --non-interactive --profile production -p ios",
+    "build-local-android": "EAS_LOCAL_BUILD_ARTIFACTS_DIR=~/work/fish/artifacts npx eas-cli@latest build --local --non-interactive --profile production -p android",
+    "build-local": "npm run build-local-ios && npm run build-local-android",
     "ci-lint": "eslint --cache --fix",
     "ci-type-check": "tsc-files --noEmit types/global.d.ts"
   },
