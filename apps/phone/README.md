@@ -192,6 +192,16 @@
   Then download the build, extract, and drag to simulator to install the app
   Then run `npm run dev`
 
+# How to build in local?
+- For ios, run this to debug
+  ```shell
+  EAS_LOCAL_BUILD_SKIP_CLEANUP=1 EAS_LOCAL_BUILD_WORKINGDIR=~/work/fish/builds EAS_LOCAL_BUILD_ARTIFACTS_DIR=~/work/fish/artifacts eas build --non-interactive --no-wait --profile production --local -p ios
+  ```
+  - check error log in the `~/work/fish/builds/logs`
+  - one time setup
+    - open XCode, go to Settings > Accounts, login, click Download Manual Profiles
+    - go to `https://developer.apple.com/account/resources/certificates/list`, down the cert, open it
+
 # How to deploy?
 
 - Update `app.json`
