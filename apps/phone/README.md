@@ -193,14 +193,24 @@
   Then run `npm run dev`
 
 # How to build in local?
-- For ios, run this to debug
-  ```shell
-  EAS_LOCAL_BUILD_SKIP_CLEANUP=1 EAS_LOCAL_BUILD_WORKINGDIR=~/work/fish/builds EAS_LOCAL_BUILD_ARTIFACTS_DIR=~/work/fish/artifacts eas build --non-interactive --no-wait --profile production --local -p ios
-  ```
-  - check error log in the `~/work/fish/builds/logs`
+- For ios,
+  - install XCode, rbenv
   - one time setup
     - open XCode, go to Settings > Accounts, login, click Download Manual Profiles
     - go to `https://developer.apple.com/account/resources/certificates/list`, down the cert, open it
+  - to debug, run this
+    ```shell
+    EAS_LOCAL_BUILD_SKIP_CLEANUP=1 EAS_LOCAL_BUILD_WORKINGDIR=~/work/fish/builds EAS_LOCAL_BUILD_ARTIFACTS_DIR=~/work/fish/artifacts eas build --non-interactive --no-wait --profile production --local -p ios
+    ```
+    - check error log in the `~/work/fish/builds/logs`
+
+- For android,
+  - install Android Studio, NDK, sdkman
+  - setup env $ANDROID_HOME, $ANDROID_NDK_HOME
+  ```shell
+  export ANDROID_HOME=/Users/marco/Library/Android/sdk
+  export ANDROID_NDK_HOME=/Users/marco/Library/Android/sdk/ndk
+  ```
 
 # How to deploy?
 
