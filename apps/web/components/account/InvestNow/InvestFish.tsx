@@ -79,7 +79,7 @@ function InvestFish({
       onSuccess: () => {
         toastSuccess('Done');
         if (onClose) onClose();
-        router.push(Routes.invest);
+        router.push(Routes.wallets);
       },
       onError: (err) => toastError(`${err}`),
     });

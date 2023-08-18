@@ -13,7 +13,7 @@ function Invest() {
   return (
     <Stack py="xs">
       <Group>
-        <Title>Invest</Title>
+        <Title>Investment Wallets</Title>
         <Icon name="Add" href={Routes.strategies} button buttonProps={{ variant: 'light' }} size="large" color="primary" />
       </Group>
       <Tabs defaultValue="active">

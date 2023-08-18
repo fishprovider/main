@@ -18,13 +18,13 @@ const Routes = {
   accounts: '/accounts',
   // account: '/accounts/:providerId',
 
-  wallet: '/wallet',
+  wallets: '/wallets',
+  // wallet: '/wallets/:walletId',
   deposit: '/deposit',
   withdraw: '/withdraw',
   transfer: '/transfer',
   swap: '/swap',
   pay: '/pay',
-  invest: '/invest',
   verify: '/verify',
 
   love: '/love',
@@ -37,10 +37,12 @@ const Routes = {
 
 const toStrategy = (providerId: string) => `${Routes.strategies}/${providerId}`;
 const toAccount = (providerId: string) => `${Routes.accounts}/${providerId}`;
+const toWallet = (walletId: string) => `${Routes.wallets}/${walletId}`;
 
 export default Routes;
 
 export {
   toAccount,
   toStrategy,
+  toWallet,
 };

@@ -60,7 +60,7 @@ function InvestPending() {
     const { providerName } = investData || {};
 
     return (
-      <Link key={wallet._id} href={Routes.invest} variant="clean">
+      <Link key={wallet._id} href={Routes.wallets} variant="clean">
         <Card withBorder>
           <Group position="apart">
             <Text>{providerName || name}</Text>

@@ -9,24 +9,24 @@ const UserController = dynamic(() => import('~controllers/UserController'), {
 const WalletLayout = dynamic(() => import('~layouts/WalletLayout'), {
   loading: () => <Loading />,
 });
-const Invest = dynamic(() => import('~views/Invest'), {
+const Wallets = dynamic(() => import('~views/Wallets'), {
   loading: () => <Loading />,
 });
 
-function InvestPage() {
+function WalletsPage() {
   return (
     <>
       <Head>
-        <title>Invest</title>
-        <meta name="description" content="FishProvider Invest" />
+        <title>Wallets</title>
+        <meta name="description" content="FishProvider Wallets" />
       </Head>
-      <UserController title="Invest">
+      <UserController title="Wallets">
         <WalletLayout>
-          <Invest />
+          <Wallets />
         </WalletLayout>
       </UserController>
     </>
   );
 }
 
-export default InvestPage;
+export default WalletsPage;

@@ -40,9 +40,9 @@ const menuItems = [
 
 const walletMenuItems = [
   {
-    key: 'wallet',
-    label: 'Wallet',
-    href: Routes.wallet,
+    key: 'wallets',
+    label: 'Wallets',
+    href: Routes.wallets,
   },
   {
     key: 'deposit',
@@ -69,11 +69,6 @@ const walletMenuItems = [
   //   label: 'Pay',
   //   href: Routes.pay,
   // },
-  {
-    key: 'invest',
-    label: 'Invest',
-    href: Routes.invest,
-  },
   // {
   //   key: 'verify',
   //   label: 'Verify',

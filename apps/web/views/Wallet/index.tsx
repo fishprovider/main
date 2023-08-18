@@ -8,7 +8,7 @@ import type { Wallet as WalletModel } from '@fishprovider/utils/dist/types/Pay.m
 import _ from 'lodash';
 
 import Link from '~components/base/Link';
-import Routes from '~libs/routes';
+import { toWallet } from '~libs/routes';
 import Card from '~ui/core/Card';
 import Group from '~ui/core/Group';
 import Stack from '~ui/core/Stack';
@@ -57,7 +57,7 @@ function Wallet() {
   }
 
   const renderWallet = (wallet: WalletModel) => (
-    <Link key={wallet._id} href={Routes.wallet} variant="clean">
+    <Link key={wallet._id} href={toWallet(wallet._id)} variant="clean">
       <Card withBorder>
         <Group position="apart">
           <Text>{wallet.name || wallet.currency}</Text>
@@ -69,7 +69,7 @@ function Wallet() {
 
   return (
     <Stack py="xs">
-      <Title>Wallet</Title>
+      <Title>My Wallets</Title>
       {wallets.map(renderWallet)}
     </Stack>
   );

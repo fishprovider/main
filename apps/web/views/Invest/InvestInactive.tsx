@@ -84,7 +84,7 @@ function InvestInactive() {
       && moment.duration(moment(endedAt).diff(moment(startedAt))).humanize();
 
     return (
-      <Link key={wallet._id} href={Routes.invest} variant="clean">
+      <Link key={wallet._id} href={Routes.wallets} variant="clean">
         <Card withBorder>
           <Group position="apart">
             <Text>{providerName || name}</Text>

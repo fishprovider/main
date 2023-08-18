@@ -95,7 +95,7 @@ function CopyPlatforms() {
               <Divider />
             </Card.Section>
             <Group position="center" pt="lg" spacing="xl">
-              <Link href={Routes.invest} variant="noColor">
+              <Link href={Routes.wallets} variant="noColor">
                 <Stack align="center">
                   <Image
                     src="/icons/fishct.png"
