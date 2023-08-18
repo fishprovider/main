@@ -19,6 +19,6 @@
   "dependencies": {
     "@fishprovider/application": "*",
     "@fishprovider/enterprise": "*",
-    "zod": "^3.21.4"
+    "zod": "^3.22.1"
   }
 }
