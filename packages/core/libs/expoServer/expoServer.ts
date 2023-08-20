@@ -12,7 +12,7 @@ const getPushTokens = async (topic: string) => {
     }),
   }, {
     projection: {
-      'pushNotif.token': 1,
+      pushNotif: 1,
     },
   }).toArray();
   return _.flatMap(users, (item) => item.pushNotif)
