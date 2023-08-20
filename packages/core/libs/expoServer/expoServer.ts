@@ -6,10 +6,12 @@ const expo = new Expo({ accessToken: process.env.EXPO_TOKEN });
 
 const getPushTokens = async (topic: string) => {
   const users = await Mongo.collection<User>('users').find({
-    'pushNotif.type': 'expo',
-    ...(topic === 'allDevices' ? {} : {
-      'pushNotif.topic': topic,
-    }),
+    pushNotif: {
+      $elemMatch: {
+        type: 'expo',
+        topic,
+      },
+    },
   }, {
     projection: {
       pushNotif: 1,

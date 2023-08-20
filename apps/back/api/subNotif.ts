@@ -40,9 +40,13 @@ const subNotif = async ({ data, userInfo }: {
     const doc = await Mongo.collection<User>('users').findOne(
       {
         _id: uid,
-        'pushNotif.type': 'fcm',
-        'pushNotif.token': fcmToken,
-        'pushNotif.topic': topic,
+        pushNotif: {
+          $elemMatch: {
+            type: 'fcm',
+            token: fcmToken,
+            topic,
+          },
+        },
       },
       {
         projection: {
@@ -74,9 +78,13 @@ const subNotif = async ({ data, userInfo }: {
     const doc = await Mongo.collection<User>('users').findOne(
       {
         _id: uid,
-        'pushNotif.type': 'expo',
-        'pushNotif.token': expoPushToken,
-        'pushNotif.topic': topic,
+        pushNotif: {
+          $elemMatch: {
+            type: 'expo',
+            token: expoPushToken,
+            topic,
+          },
+        },
       },
       {
         projection: {
