@@ -33,6 +33,7 @@
 .deploy-copy:
   script:
     - curl $DEPLOY_COPY
+    - curl $DEPLOY_COPY_HACK_DEMO
     - curl $DEPLOY_COPY_DEMO
     - NOTIF_MSG="Deploy copy $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
     - !reference [.notif, script]
