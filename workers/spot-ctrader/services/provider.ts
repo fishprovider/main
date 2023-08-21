@@ -7,7 +7,7 @@ import connect from '@fishprovider/swap/dist/libs/ctrader/connect';
 import getSymbolTick from '@fishprovider/swap/dist/libs/ctrader/getSymbolTick';
 import renewTokensCTrader from '@fishprovider/swap/dist/libs/ctrader/renewTokens';
 import type { SymbolCTrader } from '@fishprovider/swap/dist/types/Symbol.model';
-import { savePrice } from '@fishprovider/swap/dist/utils/price';
+import { getSymbols, savePrice } from '@fishprovider/swap/dist/utils/price';
 import type { ProviderType } from '@fishprovider/utils/dist/constants/account';
 import type { Account } from '@fishprovider/utils/dist/types/Account.model';
 import _ from 'lodash';
@@ -56,6 +56,7 @@ const pollSymbols = async (all = false) => {
   }
 
   const { providerType } = account;
+  const { symbolNames } = await getSymbols(providerType);
 
   const now = moment();
   const to = now.unix() * 1000;
@@ -63,6 +64,7 @@ const pollSymbols = async (all = false) => {
 
   for (const symbolItem of (all ? allSymbols : symbols)) {
     const { symbol } = symbolItem;
+    const { digits } = symbolNames[symbol] || {};
 
     const { ticks } = await getSymbolTick({
       providerType,
@@ -72,9 +74,13 @@ const pollSymbols = async (all = false) => {
       fromTimestamp: from,
       toTimestamp: to,
     });
-    const { tick: last, timestamp } = _.last(ticks) || {};
+    const tick = _.findLast(
+      ticks,
+      (item) => item.timestamp > 0 && item.tick && _.round(item.tick, digits) > 0,
+    ) as { tick: number, timestamp: number } | undefined;
 
-    if (last) {
+    if (tick) {
+      const { tick: last, timestamp } = tick;
       const price = {
         _id: `${providerType}-${symbol}`,
         last,
