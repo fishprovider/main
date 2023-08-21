@@ -1,4 +1,3 @@
-import { ProviderTradeType } from '@fishprovider/utils/dist/constants/account';
 import { Roles } from '@fishprovider/utils/dist/constants/user';
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
@@ -12,7 +11,6 @@ import Stack from '~ui/core/Stack';
 import Text from '~ui/core/Text';
 import TextInput from '~ui/core/TextInput';
 import ContentSection from '~ui/layouts/ContentSection';
-import { isLive } from '~utils';
 
 const AccountsFetch = dynamic(() => import('./AccountsFetch'));
 const TradeCards = dynamic(() => import('./TradeCards'));
@@ -148,7 +146,6 @@ function Accounts() {
         <Stack py="xl">
           {renderToolbar()}
           <TradeCards
-            providerTradeType={isLive ? ProviderTradeType.live : ProviderTradeType.demo}
             favorite={favorite}
             search={search}
             filterBy={filterBy}

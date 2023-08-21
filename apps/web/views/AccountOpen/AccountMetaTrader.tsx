@@ -1,6 +1,6 @@
 import accountAdd from '@fishprovider/cross/dist/api/accounts/add';
 import { useMutate } from '@fishprovider/cross/dist/libs/query';
-import { ProviderPlatform, ProviderTradeType, ProviderType } from '@fishprovider/utils/dist/constants/account';
+import { ProviderPlatform, ProviderType } from '@fishprovider/utils/dist/constants/account';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
@@ -11,7 +11,6 @@ import Radio from '~ui/core/Radio';
 import Stack from '~ui/core/Stack';
 import TextInput from '~ui/core/TextInput';
 import { toastError, toastSuccess } from '~ui/toast';
-import { isLive } from '~utils';
 
 interface Props {
   providerType: ProviderType,
@@ -35,7 +34,6 @@ function AccountMetaTrader({ providerType }: Props) {
       name,
       providerType,
       providerPlatform: ProviderPlatform.metatrader,
-      providerTradeType: isLive ? ProviderTradeType.live : ProviderTradeType.demo,
       config: {
         clientId: '',
         clientSecret: '',

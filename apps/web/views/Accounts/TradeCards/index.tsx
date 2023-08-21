@@ -5,7 +5,7 @@ import { useQuery } from '@fishprovider/cross/dist/libs/query';
 import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
 import storeOrders from '@fishprovider/cross/dist/stores/orders';
 import storeUser from '@fishprovider/cross/dist/stores/user';
-import type { ProviderTradeType, ProviderType } from '@fishprovider/utils/dist/constants/account';
+import type { ProviderType } from '@fishprovider/utils/dist/constants/account';
 import { OrderStatus } from '@fishprovider/utils/dist/constants/order';
 import { Roles } from '@fishprovider/utils/dist/constants/user';
 import { getMajorPairs } from '@fishprovider/utils/dist/helpers/price';
@@ -54,7 +54,6 @@ const usePriceOrders = (allOrders: Order[]) => {
 };
 
 interface Props {
-  providerTradeType: ProviderTradeType,
   favorite?: boolean,
   search?: string,
   filterBy?: string[],
@@ -62,7 +61,6 @@ interface Props {
 }
 
 function TradeCards({
-  providerTradeType,
   favorite,
   search,
   filterBy = [],
@@ -131,8 +129,6 @@ function TradeCards({
 
   const accounts = storeAccounts.useStore((state) => {
     const filteredAccounts = _.filter(state, (account) => {
-      if (account.providerTradeType !== providerTradeType) return false;
-
       if (favorite && !starProviders[account._id]) return false;
 
       if (search && !account.name.toLowerCase().includes(search.toLowerCase())) return false;

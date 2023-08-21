@@ -1,4 +1,4 @@
-import { ProviderTradeType, ProviderType } from '@fishprovider/utils/dist/constants/account';
+import { ProviderType } from '@fishprovider/utils/dist/constants/account';
 import { jest } from '@jest/globals';
 
 import { afterAllSetup, beforeAllSetup } from '~tests/utils';
@@ -24,7 +24,6 @@ describe('accountAdd', () => {
         accountToNew: {
           name: 'test',
           providerType: ProviderType.exness,
-          providerTradeType: ProviderTradeType.demo,
           config: {
             clientId: '',
             clientSecret: '',

@@ -2,7 +2,7 @@ import newAccountMetaTrader from '@fishprovider/swap/dist/libs/metatrader/newAcc
 import { updateCache } from '@fishprovider/swap/dist/utils/account';
 import {
   AccountSourceType,
-  ProviderPlatform, ProviderViewType,
+  ProviderPlatform, ProviderTradeType, ProviderViewType,
 } from '@fishprovider/utils/dist/constants/account';
 import { ErrorType } from '@fishprovider/utils/dist/constants/error';
 import { Roles } from '@fishprovider/utils/dist/constants/user';
@@ -15,6 +15,7 @@ import isDemo from '~utils/isDemo';
 
 const env = {
   typePre: process.env.TYPE_PRE,
+  providerTradeType: process.env.PROVIDER_TRADE_TYPE || ProviderTradeType.demo,
 };
 
 const accountAdd = async ({ data, userInfo }: {
@@ -38,7 +39,6 @@ const accountAdd = async ({ data, userInfo }: {
     name,
     providerType,
     providerPlatform,
-    providerTradeType,
     config: baseConfig,
   } = data.accountToNew;
   if (!name || !providerType || !providerPlatform || !baseConfig) {
@@ -83,7 +83,7 @@ const accountAdd = async ({ data, userInfo }: {
     providerType,
     providerPlatform,
     providerViewType: ProviderViewType.private,
-    providerTradeType,
+    providerTradeType: env.providerTradeType as ProviderTradeType,
     sourceType: AccountSourceType.user,
     members: [
       {
@@ -172,13 +172,13 @@ const accountAdd = async ({ data, userInfo }: {
 
   switch (providerPlatform) {
     case ProviderPlatform.ctrader: {
-      Agenda.now(`${env.typePre}-${providerTradeType}-head-start-provider`, {
+      Agenda.now(`${env.typePre}-${env.providerTradeType}-head-start-provider`, {
         providerId,
       });
       break;
     }
     case ProviderPlatform.metatrader: {
-      Agenda.now(`${env.typePre}-${providerTradeType}-head-meta-start-provider`, {
+      Agenda.now(`${env.typePre}-${env.providerTradeType}-head-meta-start-provider`, {
         providerId,
       });
       break;
