@@ -91,9 +91,10 @@ interface InvestPayment extends InvestData {
   providerProfit?: number;
 }
 
-interface Wallet {
+interface BaseWallet {
   _id: string;
   type: WalletType;
+
   userId: string;
   userEmail: string;
   userName: string;
@@ -102,24 +103,30 @@ interface Wallet {
   currency: string;
   balance: number;
 
+  recentTransactions?: Transaction[];
+  manualData?: ManualData,
+
+  createdAt: Date;
+  updatedAt: Date;
+  deleted?: boolean;
+  deletedAt?: Date;
+}
+
+type SpotWallet = BaseWallet;
+
+interface ExternalWallet extends BaseWallet {
+  address?: string;
+  walletData?: Record<string, any>;
+}
+
+interface InvestWallet extends BaseWallet {
   investStatus?: InvestStatus;
   investData?: InvestData;
   investPayments?: InvestPayment[];
   nextInvestPayment?: InvestPayment;
-
-  address?: string; // external
-  walletData?: Record<string, any>; // external
-
-  manualData?: ManualData,
-
-  recentTransactions?: Transaction[];
-
-  createdAt: Date;
-  updatedAt: Date;
-
-  deleted?: boolean;
-  deletedAt?: Date;
 }
+
+type Wallet = SpotWallet & ExternalWallet & InvestWallet;
 
 export type {
   InvestData,
