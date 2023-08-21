@@ -40,6 +40,7 @@
 .deploy-head-ctrader:
   script:
     - curl $DEPLOY_HEAD_CTRADER
+    - curl $DEPLOY_HEAD_CTRADER_HACK_DEMO
     - curl $DEPLOY_HEAD_CTRADER_DEMO
     - NOTIF_MSG="Deploy head-ctrader $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
     - !reference [.notif, script]
