@@ -31,7 +31,6 @@ const env = {
 
 let account: Account | null;
 let connection: ConnectionType | undefined;
-let allSymbols: SymbolMetaTrader[] = [];
 let symbols: SymbolMetaTrader[] = [];
 let isRestarting = false;
 
@@ -43,7 +42,7 @@ const getIsRestarting = () => isRestarting;
 
 const renewSymbols = () => renewSymbolsHandler(symbols);
 
-const pollSymbols = async (all = false) => {
+const pollSymbols = async () => {
   if (!account) {
     Logger.error(`account not found ${env.typeId}`);
     return;
@@ -51,7 +50,7 @@ const pollSymbols = async (all = false) => {
 
   const { config, providerType } = account;
 
-  for (const symbol of (all ? allSymbols : symbols)) {
+  for (const symbol of symbols) {
     const price = await getSymbolTick({
       providerType,
       symbol,
@@ -172,7 +171,7 @@ const start = async () => {
   await startAccount(connection);
   await subAccount(connection);
 
-  allSymbols = await getSymbolList(connection);
+  const allSymbols = await getSymbolList(connection);
 
   const skipPattern = env.skipPattern && new RegExp(env.skipPattern);
   const watchPattern = new RegExp(env.watchPattern);
@@ -188,7 +187,8 @@ const start = async () => {
     renewSymbols();
   }
   if (spotTasks.poll) {
-    renewSymbolsHandler(allSymbols);
+    // renewSymbolsHandler(allSymbols);
+    renewSymbols();
   }
 
   sendHeartbeat();

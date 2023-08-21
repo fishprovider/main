@@ -52,7 +52,7 @@ const startPollAllSymbols = async () => {
   Agenda.define(
     jobName,
     { lockLifetime: 1000 * 60 * 2 },
-    () => pollSymbols(true),
+    () => pollSymbols(),
   );
 
   const jobs = await Agenda.jobs({

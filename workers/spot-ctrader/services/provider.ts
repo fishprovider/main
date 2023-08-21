@@ -31,7 +31,6 @@ const env = {
 
 let account: Account | null;
 let connection: ConnectionType | undefined;
-let allSymbols: SymbolCTrader[] = [];
 let symbols: SymbolCTrader[] = [];
 let isRenewing = false;
 let isRestarting = false;
@@ -45,7 +44,7 @@ const getIsRestarting = () => isRestarting;
 
 const renewSymbols = () => renewSymbolsHandler(symbols);
 
-const pollSymbols = async (all = false) => {
+const pollSymbols = async () => {
   if (!connection) {
     Logger.error('connection not found');
     return;
@@ -62,7 +61,7 @@ const pollSymbols = async (all = false) => {
   const to = now.unix() * 1000;
   const from = now.subtract(30, 'seconds').unix() * 1000;
 
-  for (const symbolItem of (all ? allSymbols : symbols)) {
+  for (const symbolItem of symbols) {
     const { symbol } = symbolItem;
     const { digits } = symbolNames[symbol] || {};
 
@@ -234,7 +233,7 @@ const start = async () => {
   });
 
   const { symbols: symbolList } = await getSymbolList(connection);
-  allSymbols = symbolList.filter(({ symbolName }) => !!symbolName) as SymbolCTrader[];
+  const allSymbols = symbolList.filter(({ symbolName }) => !!symbolName) as SymbolCTrader[];
 
   const skipPattern = env.skipPattern && new RegExp(env.skipPattern);
   const watchPattern = new RegExp(env.watchPattern);
@@ -251,7 +250,8 @@ const start = async () => {
     renewSymbols();
   }
   if (spotTasks.poll) {
-    renewSymbolsHandler(allSymbols);
+    // renewSymbolsHandler(allSymbols);
+    renewSymbols();
   }
   if (spotTasks.bar) {
     await updateLastBars(connection, symbols, providerType);
