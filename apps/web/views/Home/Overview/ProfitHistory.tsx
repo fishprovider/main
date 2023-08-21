@@ -23,7 +23,7 @@ function ProfitHistory() {
   return (
     <Stack>
       <Title ta="center" size="h3">
-        Historical profit performance
+        Historical Profit Performance
       </Title>
       <Text fz="lg">
         This is the strategy named Earth 🍀 one of the top FishProvider

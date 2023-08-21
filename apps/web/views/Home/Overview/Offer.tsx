@@ -9,7 +9,7 @@ function Offer() {
   return (
     <Stack>
       <Title ta="center" size="h3">
-        We offer Copy Trading strategies
+        We offer Copy Trading Strategies
       </Title>
       <Grid>
         <Grid.Col sm={12} md={4}>
