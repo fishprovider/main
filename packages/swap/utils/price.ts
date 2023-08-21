@@ -194,7 +194,15 @@ const getSymbols = async (providerType: ProviderType) => {
   return { symbolIds, symbolNames };
 };
 
-const saveSymbols = async (providerType: ProviderType, symbols: Omit<Price, 'last'>[]) => {
+const saveSymbols = async (providerType: ProviderType, newSymbols: Omit<Price, 'last'>[]) => {
+  const newSymbolsByName = _.keyBy(newSymbols, 'symbol');
+  const { symbolNames } = await getSymbols(providerType);
+  const newSymbolsNames = {
+    ...symbolNames,
+    ...newSymbolsByName,
+  };
+  const symbols = Object.values(newSymbolsNames);
+
   setSymbols(providerType, symbols);
   await setSymbolsToRedis(providerType, symbols.map((item) => ({
     symbol: item.symbol,
