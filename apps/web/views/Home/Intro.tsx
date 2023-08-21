@@ -33,13 +33,12 @@ function Intro() {
             },
           })}
         >
-          <Title>Never Lose Money</Title>
+          <Title>Follow Leader, Amplify Profit</Title>
           <Title size="h2">
-            Consistently generate profit for investors at least 2% on a monthly basis
+            Everlasting and Stable Success with FishProvider Copy Trading Strategies
           </Title>
-          <Title size="h4">
-            From FishProvider - Australian experts delivering
-            robust trading strategies
+          <Title size="h3">
+            Consistently generate profit at least 2% monthly
           </Title>
           <span>
             <Link href="#overview">

@@ -8,8 +8,8 @@ function MyDocument() {
   return (
     <Html lang="en">
       <Head>
-        <meta name="description" content="FishProvider: Never Lose Money - Think Big Do Small" />
-        <meta name="keywords" content="FishProvider" />
+        <meta name="description" content="Follow Our Leaders, Amplify Your Profits - Everlasting and Stable Success with FishProvider Copy Trading Strategies" />
+        <meta name="keywords" content="Follow Our Leaders, Amplify Your Profits - Everlasting and Stable Success with FishProvider Copy Trading Strategies" />
 
         <meta charSet="utf-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
@@ -43,7 +43,7 @@ function MyDocument() {
 
         <meta property="og:type" content="website" />
         <meta property="og:title" content="FishProvider" />
-        <meta property="og:description" content="FishProvider: Never Lose Money - Think Big Do Small" />
+        <meta property="og:description" content="Follow Our Leaders, Amplify Your Profits - Everlasting and Stable Success with FishProvider Copy Trading Strategies" />
         <meta property="og:site_name" content="FishProvider" />
         <meta property="og:url" content="https://www.fishprovider.com" />
         <meta property="og:image" content="/banner-with-text.png" />
@@ -51,7 +51,7 @@ function MyDocument() {
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:url" content="https://www.fishprovider.com" />
         <meta name="twitter:title" content="FishProvider" />
-        <meta name="twitter:description" content="FishProvider: Never Lose Money - Think Big Do Small" />
+        <meta name="twitter:description" content="Follow Our Leaders, Amplify Your Profits - Everlasting and Stable Success with FishProvider Copy Trading Strategies" />
         <meta name="twitter:image" content="/banner-with-text.png" />
         <meta name="twitter:creator" content="@FishProvider" />
       </Head>

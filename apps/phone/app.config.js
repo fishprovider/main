@@ -6,7 +6,7 @@ const appId = IS_DEV ? 'com.fishprovider.dev' : 'com.fishprovider.app';
 export default {
   expo: {
     name,
-    description: 'Never Lose Money - Think Big Do Small',
+    description: 'Follow Our Leaders, Amplify Your Profits - Everlasting and Stable Success with FishProvider Copy Trading Strategies',
     version: '5.0.0',
     slug: 'fishprovider',
     owner: 'fishprovider',
