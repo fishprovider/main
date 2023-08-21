@@ -251,7 +251,7 @@ const start = async () => {
     renewSymbols();
   }
   if (spotTasks.poll) {
-    renewSymbolsHandler(symbols);
+    renewSymbolsHandler(allSymbols);
   }
   if (spotTasks.bar) {
     await updateLastBars(connection, symbols, providerType);

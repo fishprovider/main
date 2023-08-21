@@ -188,7 +188,7 @@ const start = async () => {
     renewSymbols();
   }
   if (spotTasks.poll) {
-    renewSymbolsHandler(symbols);
+    renewSymbolsHandler(allSymbols);
   }
 
   sendHeartbeat();
