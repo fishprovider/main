@@ -23,7 +23,7 @@ const getTickData = async (
     payload: {
       ctidTraderAccountId: connection.accountId,
       symbolId,
-      quoteType,
+      type: quoteType,
       fromTimestamp,
       toTimestamp,
     },
