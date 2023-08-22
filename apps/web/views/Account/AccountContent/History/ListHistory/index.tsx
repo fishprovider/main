@@ -130,7 +130,7 @@ function History() {
 
   const renderRowTotal = () => (
     <Table.Row>
-      <Table.Cell>{`${orders.length} orders (${totalLots} lots, ${symbols.length} pairs)`}</Table.Cell>
+      <Table.Cell>{`${orders.length} orders (${_.round(totalLots, 2)} lots, ${symbols.length} pairs)`}</Table.Cell>
       <Table.Cell>{`${totalChats} chats`}</Table.Cell>
       {showAllCols && (
         <>
