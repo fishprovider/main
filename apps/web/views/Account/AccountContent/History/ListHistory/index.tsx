@@ -4,11 +4,12 @@ import priceGetMany from '@fishprovider/cross/dist/api/prices/getMany';
 import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useMutate, useQuery } from '@fishprovider/cross/dist/libs/query';
 import storeOrders from '@fishprovider/cross/dist/stores/orders';
+import storePrices from '@fishprovider/cross/dist/stores/prices';
 import storeUser from '@fishprovider/cross/dist/stores/user';
 import { ProviderType } from '@fishprovider/utils/dist/constants/account';
 import { OrderStatus } from '@fishprovider/utils/dist/constants/order';
 import { getProfitIcon } from '@fishprovider/utils/dist/helpers/order';
-import { getMajorPairs } from '@fishprovider/utils/dist/helpers/price';
+import { getLotFromVolume, getMajorPairs } from '@fishprovider/utils/dist/helpers/price';
 import _ from 'lodash';
 import { useEffect, useState } from 'react';
 
@@ -83,10 +84,17 @@ function History() {
     });
   };
 
+  let totalLots = 0;
   let totalChats = 0;
   let totalGrossProfit = 0;
   let totalFee = 0;
   _.forEach(orders, (order) => {
+    totalLots += getLotFromVolume({
+      providerType: order.providerType,
+      symbol: order.symbol,
+      prices: storePrices.getState(),
+      volume: order.volume,
+    }).lot || 0;
     totalChats += _.size(order.chats); // + _.size(order.comments);
     totalGrossProfit += order.grossProfit || 0;
     totalFee += (order.commissionClose || 0) + (order.commission || 0) + (order.swap || 0);
@@ -122,7 +130,7 @@ function History() {
 
   const renderRowTotal = () => (
     <Table.Row>
-      <Table.Cell>{`${orders.length} orders (${symbols.length} pairs)`}</Table.Cell>
+      <Table.Cell>{`${orders.length} orders (${totalLots} lots, ${symbols.length} pairs)`}</Table.Cell>
       <Table.Cell>{`${totalChats} chats`}</Table.Cell>
       {showAllCols && (
         <>
