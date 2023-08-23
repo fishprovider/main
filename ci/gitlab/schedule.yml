@@ -15,10 +15,13 @@ schedule-deploy-gate:
 schedule-deploy-cron:
   tags:
     - local
+  variables:
+    DEPLOY: $SCHEDULE_CRON
   rules:
     - if: $CI_PIPELINE_SOURCE == "schedule"
       when: always
   script:
+    - echo $DEPLOY
     - if [ -z $SCHEDULE_CRON ]; then exit 0; fi
     - !reference [.deploy-cron, script]
 
