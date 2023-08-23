@@ -12,7 +12,7 @@ deploy-gate:
       when: always
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       changes:
-      - workers/gate/**/*
+        - workers/gate/**/*
       when: always
   script:
     - !reference [.deploy-gate, script]

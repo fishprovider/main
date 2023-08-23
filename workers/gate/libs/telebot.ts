@@ -133,6 +133,7 @@ const startTelegramVerify = async () => {
 
 const destroyTeleBot = async () => {
   await bot.close();
+  Logger.info('Telegram bot destroyed');
 };
 
 export {
