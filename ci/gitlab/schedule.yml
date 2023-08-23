@@ -15,7 +15,9 @@ schedule-deploy-cron:
     - local
   variables:
     DEPLOY: $SCHEDULE_CRON
-  rules: !reference [.rule_schedule_deploy, rules]
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule" && $DEPLOY == "true"
+      when: always
   script: !reference [.deploy-cron, script]
 
 # schedule-deploy-mon:
