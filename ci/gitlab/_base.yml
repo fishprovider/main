@@ -24,8 +24,3 @@ stages:
   script:
     - '[ ! -z "$NOTIF_MSG" ] && curl -X POST -d "{\"content\": \"${NOTIF_MSG}\"}" -H "Content-Type: application/json" $DISCORD_URL || echo "No message to send"'
     - '[ ! -z "$NOTIF_MSG" ] && curl -X POST -d "{\"text\": \"${NOTIF_MSG}\"}" -H "Content-Type: application/json" $SLACK_URL || echo "No message to send"'
-
-.rule_schedule_deploy:
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "schedule" && $DEPLOY == "true"
-      when: always
