@@ -27,7 +27,7 @@ deploy-cron:
       when: always
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       changes:
-      - workers/cron/**/*
+        - workers/cron/**/*
       when: always
   script:
     - !reference [.deploy-cron, script]
@@ -42,7 +42,7 @@ deploy-mon:
       when: always
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       changes:
-      - workers/mon/**/*
+        - workers/mon/**/*
       when: always
   script:
     - !reference [.deploy-mon, script]
@@ -57,7 +57,7 @@ deploy-pay:
       when: always
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       changes:
-      - workers/pay/**/*
+        - workers/pay/**/*
       when: always
   script:
     - !reference [.deploy-pay, script]
@@ -72,7 +72,7 @@ deploy-bot:
       when: always
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       changes:
-      - workers/bot/**/*
+        - workers/bot/**/*
       when: always
   script:
     - !reference [.deploy-bot, script]
@@ -87,7 +87,7 @@ deploy-copy:
       when: always
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       changes:
-      - workers/copy/**/*
+        - workers/copy/**/*
       when: always
   script:
     - !reference [.deploy-copy, script]
@@ -102,7 +102,7 @@ deploy-head-ctrader:
       when: always
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       changes:
-      - workers/head-ctrader/**/*
+        - workers/head-ctrader/**/*
       when: always
   script:
     - !reference [.deploy-head-ctrader, script]
@@ -117,7 +117,7 @@ deploy-head-meta:
       when: always
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       changes:
-      - workers/head-meta/**/*
+        - workers/head-meta/**/*
       when: always
   script:
     - !reference [.deploy-head-meta, script]
@@ -132,7 +132,7 @@ deploy-spot-ctrader:
       when: always
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       changes:
-      - workers/spot-ctrader/**/*
+        - workers/spot-ctrader/**/*
       when: always
   script:
     - !reference [.deploy-spot-ctrader, script]
@@ -147,7 +147,7 @@ deploy-spot-meta:
       when: always
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       changes:
-      - workers/spot-meta/**/*
+        - workers/spot-meta/**/*
       when: always
   script:
     - !reference [.deploy-spot-meta, script]
@@ -162,7 +162,7 @@ deploy-back:
       when: always
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       changes:
-      - apps/back/**/*
+        - apps/back/**/*
       when: always
   script:
     - !reference [.deploy-back, script]
