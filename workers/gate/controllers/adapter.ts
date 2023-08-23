@@ -1,6 +1,7 @@
 import { start as startSysInfo } from '@fishprovider/core/dist/libs/sysinfo';
 
-import { startTelegramVerify } from '~libs/telebot';
+import { destroyTeleBot, startTelegramVerify } from '~libs/telebot';
+import { destroyTeleSignals } from '~libs/teleSignals';
 
 import routes from './routes';
 
@@ -18,6 +19,8 @@ const resume = async () => {
 
 const destroy = async () => {
   Logger.warn('💣 Destroying...');
+  await destroyTeleBot();
+  await destroyTeleSignals();
 };
 
 const start = async () => {

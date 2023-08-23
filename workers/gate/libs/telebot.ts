@@ -131,6 +131,11 @@ const startTelegramVerify = async () => {
   Logger.info('Telegram bot started');
 };
 
+const destroyTeleBot = async () => {
+  await bot.close();
+};
+
 export {
+  destroyTeleBot,
   startTelegramVerify,
 };

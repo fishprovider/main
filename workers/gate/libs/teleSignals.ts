@@ -17,6 +17,11 @@ const sendMessage = async (msg: string, parse_mode: ParseMode = 'HTML') => {
   });
 };
 
+const destroyTeleSignals = async () => {
+  await bot.close();
+};
+
 export {
+  destroyTeleSignals,
   sendMessage,
 };
