@@ -2,13 +2,13 @@ include:
   - local: /ci/gitlab/_base.yml
   - local: /ci/gitlab/_deploy.yml
 
-schedule-deploy-gate:
-  tags:
-    - local
-  variables:
-    DEPLOY: $SCHEDULE_GATE
-  rules: !reference [.rule_schedule_deploy, rules]
-  script: !reference [.deploy-gate, script]
+# schedule-deploy-gate:
+#   tags:
+#     - local
+#   variables:
+#     DEPLOY: $SCHEDULE_GATE
+#   rules: !reference [.rule_schedule_deploy, rules]
+#   script: !reference [.deploy-gate, script]
 
 schedule-deploy-cron:
   tags:
@@ -18,7 +18,8 @@ schedule-deploy-cron:
   rules:
     - if: $CI_PIPELINE_SOURCE == "schedule" && $DEPLOY == "true"
       when: always
-  script: !reference [.deploy-cron, script]
+  script:
+    - !reference [.deploy-cron, script]
 
 # schedule-deploy-mon:
 #   tags:
