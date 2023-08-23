@@ -2,7 +2,7 @@ include:
   - local: /ci/gitlab/_base.yml
   - local: /ci/gitlab/_deploy.yml
 
-deploy-gate:
+schedule-deploy-gate:
   tags:
     - local
   rules:
@@ -12,7 +12,7 @@ deploy-gate:
     - if [ -z $SCHEDULE_GATE ]; then exit 0; fi
     - !reference [.deploy-gate, script]
 
-deploy-cron:
+schedule-deploy-cron:
   tags:
     - local
   rules:
@@ -22,7 +22,7 @@ deploy-cron:
     - if [ -z $SCHEDULE_CRON ]; then exit 0; fi
     - !reference [.deploy-cron, script]
 
-deploy-mon:
+schedule-deploy-mon:
   tags:
     - local
   rules:
@@ -32,7 +32,7 @@ deploy-mon:
     - if [ -z $SCHEDULE_MON ]; then exit 0; fi
     - !reference [.deploy-mon, script]
 
-deploy-pay:
+schedule-deploy-pay:
   tags:
     - local
   rules:
@@ -42,7 +42,7 @@ deploy-pay:
     - if [ -z $SCHEDULE_PAY ]; then exit 0; fi
     - !reference [.deploy-pay, script]
 
-deploy-bot:
+schedule-deploy-bot:
   tags:
     - local
   rules:
@@ -52,7 +52,7 @@ deploy-bot:
     - if [ -z $SCHEDULE_BOT ]; then exit 0; fi
     - !reference [.deploy-bot, script]
 
-deploy-copy:
+schedule-deploy-copy:
   tags:
     - local
   rules:
@@ -62,7 +62,7 @@ deploy-copy:
     - if [ -z $SCHEDULE_COPY ]; then exit 0; fi
     - !reference [.deploy-copy, script]
 
-deploy-head-ctrader:
+schedule-deploy-head-ctrader:
   tags:
     - local
   rules:
@@ -72,7 +72,7 @@ deploy-head-ctrader:
     - if [ -z $SCHEDULE_HEAD_CTRADER ]; then exit 0; fi
     - !reference [.deploy-head-ctrader, script]
 
-deploy-head-meta:
+schedule-deploy-head-meta:
   tags:
     - local
   rules:
@@ -82,7 +82,7 @@ deploy-head-meta:
     - if [ -z $SCHEDULE_HEAD_META ]; then exit 0; fi
     - !reference [.deploy-head-meta, script]
 
-deploy-spot-ctrader:
+schedule-deploy-spot-ctrader:
   tags:
     - local
   rules:
@@ -92,7 +92,7 @@ deploy-spot-ctrader:
     - if [ -z $SCHEDULE_SPOT_CTRADER ]; then exit 0; fi
     - !reference [.deploy-spot-ctrader, script]
 
-deploy-spot-meta:
+schedule-deploy-spot-meta:
   tags:
     - local
   rules:
@@ -102,7 +102,7 @@ deploy-spot-meta:
     - if [ -z $SCHEDULE_SPOT_META ]; then exit 0; fi
     - !reference [.deploy-spot-meta, script]
 
-deploy-back:
+schedule-deploy-back:
   tags:
     - local
   rules:
@@ -112,7 +112,7 @@ deploy-back:
     - if [ -z $SCHEDULE_BACK ]; then exit 0; fi
     - !reference [.deploy-back, script]
 
-deploy-phone:
+schedule-deploy-phone:
   tags:
     - local
   rules:
