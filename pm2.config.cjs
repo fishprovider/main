@@ -25,7 +25,6 @@ const apps = appConfigs.map(({
   },
   script: 'npm',
   args: `run start -w ${workspace}/${name}`,
-  watch: [`${workspace}/${name}`],
 }));
 
 const deploy = {
