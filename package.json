@@ -27,6 +27,7 @@
     "pm2-deploy-setup": "pm2 deploy pm2.config.cjs localhost setup",
     "pm2-deploy-list": "pm2 deploy pm2.config.cjs localhost list",
     "pm2-deploy": "pm2 deploy pm2.config.cjs localhost",
+    "pm2-post-deploy": "npm ci --prefer-offline --no-audit --no-progress --legacy-peer-deps",
     "heroku-build": "npm run build -w workers/pup",
     "heroku-cleanup": "NPM_CONFIG_PRODUCTION=true npm prune --production",
     "heroku-postbuild": "npm run heroku-build && npm run heroku-cleanup"
