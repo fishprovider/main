@@ -28,12 +28,12 @@ const apps = appConfigs.map(({
 }));
 
 const deploy = {
-  production: {
+  localhost: {
     user: 'marco',
     host: ['localhost'],
     repo: 'git@gitlab.com:fishprovider/main.git',
     ref: 'origin/master',
-    path: '~/pm2-apps/fishprovider',
+    path: '/tmp/pm2-apps/fishprovider',
     'post-deploy': 'npm i',
   },
 };
