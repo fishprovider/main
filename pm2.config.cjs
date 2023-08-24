@@ -1,4 +1,5 @@
 const envBackend = {
+  HUSKY: 0,
   DOPPLER_PROJECT: 'backend',
   DOPPLER_CONFIG: 'prd',
 };
