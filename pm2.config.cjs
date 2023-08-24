@@ -34,7 +34,7 @@ const deploy = {
     repo: 'git@gitlab.com:fishprovider/main.git',
     ref: 'origin/master',
     path: '/tmp/pm2-apps/fishprovider',
-    'post-deploy': 'npm run pm2-post-deploy',
+    'post-deploy': 'npm run ci',
   },
 };
 
