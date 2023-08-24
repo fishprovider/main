@@ -1,3 +1,9 @@
+#
+# Important Notes
+#
+# `rules` cannot see `variables`, only `script` can see `variables`
+#
+
 include:
   - local: /ci/gitlab/_base.yml
   - local: /ci/gitlab/_deploy.yml
