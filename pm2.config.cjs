@@ -26,6 +26,18 @@ const apps = appConfigs.map(({
   },
 }));
 
+const deploy = {
+  production: {
+    user: 'marco',
+    host: ['localhost'],
+    repo: 'git@gitlab.com:fishprovider/main.git',
+    ref: 'origin/master',
+    path: '/Users/marco/work/fish/pm2',
+    'post-deploy': 'pwd',
+  },
+};
+
 module.exports = {
   apps,
+  deploy,
 };
