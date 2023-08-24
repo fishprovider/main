@@ -19,12 +19,13 @@ const apps = appConfigs.map(({
   env,
 }) => ({
   name,
-  script: 'npm',
-  args: `run start -w ${workspace}/${name}`,
   env: {
     ...envBackend,
     ...env,
   },
+  script: 'npm',
+  args: `run start -w ${workspace}/${name}`,
+  watch: [`${workspace}/${name}`],
 }));
 
 const deploy = {
