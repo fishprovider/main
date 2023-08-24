@@ -33,7 +33,7 @@ const deploy = {
     repo: 'git@gitlab.com:fishprovider/main.git',
     ref: 'origin/master',
     path: '/Users/marco/work/fish/pm2',
-    'post-deploy': 'pwd',
+    'post-deploy': 'npm i',
   },
 };
 
