@@ -5,12 +5,17 @@ const envBackend = {
 };
 
 const appConfigs = [
-  {
-    name: 'cron',
-  },
-  {
-    name: 'bot',
-  },
+  { name: 'gate' },
+  { name: 'cron' },
+  { name: 'mon' },
+  { name: 'pay' },
+  { name: 'bot' },
+  { name: 'copy' },
+  { name: 'head-ctrader' },
+  { name: 'head-meta' },
+  { name: 'spot-ctrader' },
+  { name: 'spot-meta' },
+  { name: 'pup' },
 ];
 
 const apps = appConfigs.map(({
