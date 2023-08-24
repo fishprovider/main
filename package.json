@@ -20,7 +20,10 @@
     "lint": "npm run lint -ws",
     "type-check": "npm run type-check -ws",
     "check-deps": "cd scripts && node check-deps.cjs",
-    "doctor": "./build-deps.sh && npm run lint && npm run type-check && npm run check-deps",
+    "build": "./build-deps.sh",
+    "doctor": "npm run build && npm run lint && npm run type-check && npm run check-deps",
+    "pm2-start": "pm2 startOrReload pm2.config.cjs",
+    "pm2-start-only": "npm run pm2-start -- --only",
     "heroku-build": "npm run build -w workers/pup",
     "heroku-cleanup": "NPM_CONFIG_PRODUCTION=true npm prune --production",
     "heroku-postbuild": "npm run heroku-build && npm run heroku-cleanup"
