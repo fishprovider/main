@@ -27,12 +27,16 @@ const apps = appConfigs.map(({
   args: `run start -w ${workspace}/${name}`,
 }));
 
+const deployConfig = {
+  repo: 'git@gitlab.com:fishprovider/main.git',
+  ref: 'origin/master',
+};
+
 const deploy = {
   localhost: {
+    ...deployConfig,
     user: 'marco',
-    host: ['localhost'],
-    repo: 'git@gitlab.com:fishprovider/main.git',
-    ref: 'origin/master',
+    host: 'localhost',
     path: '/tmp/pm2-apps/fishprovider',
     'post-deploy': 'git rev-parse HEAD',
   },
