@@ -12,7 +12,7 @@ doctor:
       when: always
   cache: !reference [.cache_npm, cache]
   script:
-    - npm run ci -- --cache ~/.npm
+    - npm ci --prefer-offline --no-audit --no-progress --legacy-peer-deps --cache ~/.npm
     - npm run doctor
 
 doctor-error:

@@ -82,7 +82,7 @@
   script:
     - cd apps/phone
     - ./clean-deps.sh
-    - npm run ci -- --cache ~/.npm
+    - npm ci --prefer-offline --no-audit --no-progress --legacy-peer-deps --cache ~/.npm
     - npm run build-submit-local
     - cp build-* ~
     - NOTIF_MSG="Deploy phone $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
@@ -92,7 +92,7 @@
   script:
     - cd apps/phone
     - ./clean-deps.sh
-    - npm run ci -- --cache ~/.npm
+    - npm ci --prefer-offline --no-audit --no-progress --legacy-peer-deps --cache ~/.npm
     - npm run deploy-update
     - NOTIF_MSG="Deploy phone update $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
     - !reference [.notif, script]
