@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-
 const esbuild = require('esbuild');
 
 const watchMode = process.env.WATCH_MODE;

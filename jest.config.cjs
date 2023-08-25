@@ -12,7 +12,7 @@ module.exports = {
       'ts-jest',
       {
         useESM: true,
-        isolatedModules: true, // avoid OOM
+        isolatedModules: true,
       },
     ],
   },

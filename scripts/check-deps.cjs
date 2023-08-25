@@ -1,5 +1,4 @@
 /* eslint-disable import/no-dynamic-require */
-/* eslint-disable @typescript-eslint/no-var-requires */
 
 const fs = require('fs');
 const { globSync } = require('glob');

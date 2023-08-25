@@ -2,5 +2,5 @@
 
 cd ..
 
-npm run build -w core/enterprise
-npm run build -w core/application
+npm run build -w ca/enterprise
+npm run build -w ca/application

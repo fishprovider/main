@@ -3,6 +3,7 @@
   "version": "6.0.0",
   "private": true,
   "workspaces": [
+    "ca/*",
     "core/*",
     "adapters/*",
     "frameworks-backend/*",

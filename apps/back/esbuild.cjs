@@ -1,8 +1,6 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-
 const { globSync } = require('glob');
 const build = require('../../esbuild.cjs');
-const dependencies = require('./package.json').dependencies;
+const { dependencies } = require('./package.json');
 
 const watchMode = process.env.WATCH_MODE;
 
@@ -23,7 +21,7 @@ const main = async () => {
     await Promise.all([
       await build(dependencies, apiOptions),
       await build(dependencies, apiV2Options),
-      await build(dependencies)
+      await build(dependencies),
     ]);
   } else {
     await build(dependencies, apiOptions);

@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-
 const path = require('path');
 const { getDefaultConfig } = require('@expo/metro-config');
 
@@ -12,8 +10,8 @@ config.watchFolders = [
   path.resolve(workspaceRoot, 'node_modules'),
   path.resolve(workspaceRoot, 'packages', 'utils'),
   path.resolve(workspaceRoot, 'packages', 'cross'),
-  path.resolve(workspaceRoot, 'core', 'enterprise'),
-  path.resolve(workspaceRoot, 'core', 'application'),
+  path.resolve(workspaceRoot, 'ca', 'enterprise'),
+  path.resolve(workspaceRoot, 'ca', 'application'),
   path.resolve(workspaceRoot, 'adapters', 'frontend'),
   path.resolve(workspaceRoot, 'frameworks-frontend', 'local'),
   path.resolve(workspaceRoot, 'frameworks-frontend', 'store'),

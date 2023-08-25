@@ -1,0 +1,22 @@
+{
+  "name": "@fishprovider/models",
+  "version": "7.0.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "lint": "eslint --cache --fix .",
+    "type-check": "tsc --noEmit",
+    "test": "echo models",
+    "clean": "rm -rf dist && mkdir dist",
+    "build": "tsc -p tsconfig.build.json"
+  },
+  "devDependencies": {
+    "@tsconfig/node-lts": "^18.12.3",
+    "@tsconfig/strictest": "^2.0.1",
+    "typescript": "^5.1.6"
+  }
+}
