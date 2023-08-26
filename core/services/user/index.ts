@@ -1,6 +1,7 @@
-import type { GetUser, User, UserRepository } from '@fishprovider/models';
+import type { UserRepository } from '@fishprovider/models';
 
 import { getUser } from './getUser';
+import { updateUser } from './updateUser';
 
 export interface UserServiceParams {
   userRepository: UserRepository,
@@ -13,5 +14,6 @@ export class UserService {
     this.userRepository = params.userRepository;
   }
 
-  getUser: (params: GetUser) => Promise<Partial<User>> = getUser(this);
+  getUser = getUser(this);
+  updateUser = updateUser(this);
 }

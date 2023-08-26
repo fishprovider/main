@@ -1,21 +1,21 @@
 import type { News } from '.';
 
-export interface GetNews {
+export interface GetNewsParams {
   today?: boolean,
   week?: string,
   upcoming?: boolean,
 }
 
-export interface SetNews {
+export interface SetNewsParams {
   news: News[],
 }
 
-export interface WatchNews<T> {
+export interface WatchNewsParams<T> {
   selector: (input: Record<string, News>) => T,
 }
 
 export interface NewsRepository {
-  getNews: (params: GetNews) => Promise<News[] | null>;
-  setNews: (params: SetNews) => Promise<boolean>;
-  watchNews: <T>(params: WatchNews<T>) => T;
+  getNews: (params: GetNewsParams) => Promise<News[] | null>;
+  setNews: (params: SetNewsParams) => Promise<boolean>;
+  watchNews: <T>(params: WatchNewsParams<T>) => T;
 }

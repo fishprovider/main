@@ -3,14 +3,14 @@ import type {
   Account, AccountMember, AccountPlatform, AccountType,
 } from '.';
 
-export interface GetAccount {
+export interface GetAccountParams {
   accountId?: string,
   accountType?: AccountType,
   accountPlatform?: AccountPlatform,
   projection?: Projection<Account>,
 }
 
-export interface UpdateAccount {
+export interface UpdateAccountParams {
   accountId: string,
   name?: string,
   memberInviteEmail?: string,
@@ -18,6 +18,6 @@ export interface UpdateAccount {
 }
 
 export interface AccountRepository {
-  getAccount: (params: GetAccount) => Promise<Partial<Account> | null>;
-  updateAccount: (params: UpdateAccount) => Promise<boolean>;
+  getAccount: (params: GetAccountParams) => Promise<Partial<Account> | null>;
+  updateAccount: (params: UpdateAccountParams) => Promise<boolean>;
 }

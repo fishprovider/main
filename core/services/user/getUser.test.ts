@@ -3,7 +3,7 @@ import { UserError, userRepositoryDefault } from '@fishprovider/models';
 import { UserService } from '.';
 
 test('getUser will return user', async () => {
-  const userId = '123';
+  const userId = 'testId';
   const userService = new UserService({
     userRepository: {
       ...userRepositoryDefault,
@@ -21,12 +21,12 @@ test('getUser will throw UserError.USER_NOT_FOUND', async () => {
     userRepository: userRepositoryDefault,
   });
   await expect(userService.getUser({
-    userId: 'test',
+    userId: 'testId',
   })).rejects.toThrow(UserError.USER_NOT_FOUND);
 });
 
 test('getUser will return user with projection', async () => {
-  const userId = '123';
+  const userId = 'testId';
   const userService = new UserService({
     userRepository: {
       ...userRepositoryDefault,
