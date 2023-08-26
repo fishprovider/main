@@ -1,6 +1,8 @@
+import { validateProjection } from '@fishprovider/core-utils';
 import {
   type GetUserParams,
   type Projection,
+  RepositoryError,
   ServiceError,
   type User,
   UserError,
@@ -56,12 +58,8 @@ export const getUser = (
     throw new Error(UserError.USER_NOT_FOUND);
   }
 
-  if (!Object.entries(user).every(([key, value]) => {
-    if (projection[key as keyof User] === 0) return value === undefined;
-    if (projection[key as keyof User] === undefined) return false;
-    return true;
-  })) {
-    throw new Error(UserError.USER_ACCESS_DENIED);
+  if (!validateProjection(projection, user)) {
+    throw new Error(RepositoryError.BAD_RESULT);
   }
 
   return user;

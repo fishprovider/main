@@ -1,19 +1,26 @@
-import { userRepositoryDefault } from '@fishprovider/models';
+import { ServiceError, userRepositoryDefault } from '@fishprovider/models';
 
 import { UserService } from '.';
 
-test('updateUser will not return doc', async () => {
+test('updateUser with bad request', async () => {
   const userService = new UserService({
     userRepository: userRepositoryDefault,
   });
-  const res = await userService.updateUser({
-    userId: 'testId',
-    name: 'testName',
-  });
-  expect(res._id).toBeUndefined();
+  await expect(userService.updateUser({
+  })).rejects.toThrow(ServiceError.BAD_REQUEST);
 });
 
-test('updateUser will return doc', async () => {
+test('updateUser updates starProviders with bad request', async () => {
+  const userService = new UserService({
+    userRepository: userRepositoryDefault,
+  });
+  await expect(userService.updateUser({
+    userId: 'testId',
+    starProviders: {},
+  })).rejects.toThrow(ServiceError.BAD_REQUEST);
+});
+
+test('updateUser returns a doc', async () => {
   const userId = 'testId';
   const name = 'testName';
   const userService = new UserService({

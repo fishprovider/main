@@ -7,7 +7,7 @@ import _ from 'lodash';
 
 import { UserService } from '.';
 
-export const updateUserRoles = (
+export const refreshUserRoles = (
   userService: UserService,
 ) => async (params: UpdateUserParams) => {
   const { userId, roles } = params;

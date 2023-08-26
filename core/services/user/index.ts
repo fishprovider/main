@@ -1,8 +1,8 @@
 import type { AccountRepository, UserRepository } from '@fishprovider/models';
 
 import { getUser } from './getUser';
+import { refreshUserRoles } from './refreshUserRoles';
 import { updateUser } from './updateUser';
-import { updateUserRoles } from './updateUserRoles';
 
 export interface UserServiceParams {
   userRepository: UserRepository,
@@ -20,5 +20,5 @@ export class UserService {
 
   getUser = getUser(this);
   updateUser = updateUser(this);
-  updateUserRoles = updateUserRoles(this);
+  refreshUserRoles = refreshUserRoles(this);
 }

@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@fishprovider/models": "*",
+    "@fishprovider/core-utils": "*",
     "lodash": "^4.17.21"
   },
   "devDependencies": {
