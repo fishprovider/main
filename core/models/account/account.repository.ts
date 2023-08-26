@@ -7,6 +7,7 @@ export interface GetAccountParams {
   accountId?: string,
   accountType?: AccountType,
   accountPlatform?: AccountPlatform,
+  memberId?: string,
   projection?: Projection<Account>,
 }
 

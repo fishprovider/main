@@ -1,6 +1,7 @@
 import {
   type GetUserParams,
   type Projection,
+  ServiceError,
   type User,
   UserError,
 } from '@fishprovider/models';
@@ -32,6 +33,11 @@ const getUserAllowReadFieldsProjection = getUserAllowReadFields.reduce<Projectio
 );
 
 export const getUser = (userService: UserService) => async (params: GetUserParams) => {
+  const { userId, email } = params;
+  if (!(userId || email)) throw new Error(ServiceError.BAD_REQUEST);
+
+  const { userRepository } = userService;
+
   const projection = {
     ...getUserAllowReadFieldsProjection,
     ..._.pick(params.projection, getUserAllowReadFields),
@@ -42,7 +48,7 @@ export const getUser = (userService: UserService) => async (params: GetUserParam
     projection,
   };
 
-  const user = await userService.userRepository.getUser(repositoryParams);
+  const user = await userRepository.getUser(repositoryParams);
 
   if (!user) {
     throw new Error(UserError.USER_NOT_FOUND);
