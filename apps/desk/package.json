@@ -28,7 +28,7 @@
     "@fishprovider/adapter-frontend": "*",
     "@fishprovider/application": "*",
     "@fishprovider/cross": "*",
-    "@fishprovider/enterprise": "*",
+    "@fishprovider/models": "*",
     "@fishprovider/framework-fish-api": "*",
     "@fishprovider/framework-local": "*",
     "@fishprovider/framework-offline-first": "*",

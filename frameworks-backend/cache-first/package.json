@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@fishprovider/application": "*",
-    "@fishprovider/enterprise": "*",
+    "@fishprovider/models": "*",
     "@fishprovider/framework-mongo": "*",
     "@fishprovider/framework-redis": "*"
   }

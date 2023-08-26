@@ -2,7 +2,7 @@ import {
   DefaultUserRepository,
   type GetUserRepositoryParams, type UpdateUserRepositoryParams, type UserRepository,
 } from '@fishprovider/application';
-import type { User } from '@fishprovider/enterprise';
+import type { User } from '@fishprovider/models';
 import assert from 'assert';
 
 import { mongo } from '../mongo.framework';

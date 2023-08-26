@@ -1,5 +1,5 @@
 import { DefaultNewsRepository, type GetNewsRepositoryParams, type NewsRepository } from '@fishprovider/application';
-import type { News } from '@fishprovider/enterprise';
+import type { News } from '@fishprovider/models';
 import moment from 'moment';
 
 import { mongo } from '../mongo.framework';

@@ -1,4 +1,4 @@
-import type { Account, User } from '@fishprovider/enterprise';
+import type { Account, User } from '@fishprovider/models';
 import type { Socket } from 'socket.io-client';
 
 import { buildStoreObj } from '../store.framework';

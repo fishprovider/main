@@ -1,4 +1,0 @@
-export enum UserError {
-  'USER_NOT_FOUND' = 'USER_NOT_FOUND',
-  'USER_ACCESS_DENIED' = 'USER_ACCESS_DENIED',
-}

@@ -1,4 +1,4 @@
-import { AccountRoles, type User } from '@fishprovider/enterprise';
+import { AccountRoles, type User } from '@fishprovider/models';
 import _ from 'lodash';
 
 import type { AccountRepository, UpdateUserRepositoryParams, UserRepository } from '~repositories';

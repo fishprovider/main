@@ -1,4 +1,4 @@
-import type { News } from '@fishprovider/enterprise';
+import type { News } from '@fishprovider/models';
 
 import { RepositoryError } from '~types';
 

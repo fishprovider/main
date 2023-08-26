@@ -18,7 +18,8 @@
   },
   "dependencies": {
     "@fishprovider/application": "*",
-    "@fishprovider/enterprise": "*",
+    "@fishprovider/models": "*",
+    "@fishprovider/core-utils": "*",
     "zod": "^3.22.1"
   }
 }

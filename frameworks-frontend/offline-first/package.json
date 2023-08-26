@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@fishprovider/application": "*",
-    "@fishprovider/enterprise": "*",
+    "@fishprovider/models": "*",
     "@fishprovider/framework-fish-api": "*",
     "@fishprovider/framework-local": "*",
     "@fishprovider/framework-store": "*"

@@ -1,5 +1,5 @@
 import type { GetAccountUseCase } from '@fishprovider/application';
-import type { Account } from '@fishprovider/enterprise';
+import type { Account } from '@fishprovider/models';
 import { z } from 'zod';
 
 import type { ApiHandlerRequest, ApiHandlerResponse } from '~types';

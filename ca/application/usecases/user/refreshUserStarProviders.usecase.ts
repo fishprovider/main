@@ -1,4 +1,4 @@
-import type { User } from '@fishprovider/enterprise';
+import type { User } from '@fishprovider/models';
 import _ from 'lodash';
 
 import type { UpdateUserRepositoryParams, UserRepository } from '~repositories';

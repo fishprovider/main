@@ -1,4 +1,4 @@
-import type { User } from '@fishprovider/enterprise';
+import type { User } from '@fishprovider/models';
 
 import { type Projection, RepositoryError } from '~types';
 

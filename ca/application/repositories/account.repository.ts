@@ -1,6 +1,6 @@
 import type {
   Account, AccountConfig, AccountPlatform, AccountType,
-} from '@fishprovider/enterprise';
+} from '@fishprovider/models';
 
 import { type Projection, RepositoryError } from '~types';
 

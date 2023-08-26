@@ -3,7 +3,7 @@ import {
   DefaultAccountRepository,
   type GetAccountRepositoryParams, type UpdateAccountRepositoryParams,
 } from '@fishprovider/application';
-import type { Account } from '@fishprovider/enterprise';
+import type { Account } from '@fishprovider/models';
 import assert from 'assert';
 
 import { mongo } from '../mongo.framework';

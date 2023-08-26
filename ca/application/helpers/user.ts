@@ -1,4 +1,4 @@
-import type { UserRoles } from '@fishprovider/enterprise';
+import type { UserRoles } from '@fishprovider/models';
 
 export const getRoleProvider = (
   roles?: UserRoles,
