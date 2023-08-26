@@ -1,4 +1,4 @@
-import { UserError } from '@fishprovider/models';
+import { UserError, userRepositoryDefault } from '@fishprovider/models';
 
 import { UserService } from '.';
 
@@ -6,11 +6,8 @@ test('getUser will return user', async () => {
   const userId = '123';
   const userService = new UserService({
     userRepository: {
+      ...userRepositoryDefault,
       getUser: async () => ({ _id: userId }),
-      updateUser: async () => false,
-      updateUserAccountRole: async () => false,
-      updateUserStarProviders: async () => false,
-      refreshUserRoles: async () => false,
     },
   });
   const user = await userService.getUser({
@@ -21,13 +18,7 @@ test('getUser will return user', async () => {
 
 test('getUser will throw UserError.USER_NOT_FOUND', async () => {
   const userService = new UserService({
-    userRepository: {
-      getUser: async () => null,
-      updateUser: async () => false,
-      updateUserAccountRole: async () => false,
-      updateUserStarProviders: async () => false,
-      refreshUserRoles: async () => false,
-    },
+    userRepository: userRepositoryDefault,
   });
   await expect(userService.getUser({
     userId: 'test',
@@ -38,11 +29,8 @@ test('getUser will return user with projection', async () => {
   const userId = '123';
   const userService = new UserService({
     userRepository: {
+      ...userRepositoryDefault,
       getUser: async () => ({ _id: userId, pushNotif: [] }),
-      updateUser: async () => false,
-      updateUserAccountRole: async () => false,
-      updateUserStarProviders: async () => false,
-      refreshUserRoles: async () => false,
     },
   });
   await expect(userService.getUser({

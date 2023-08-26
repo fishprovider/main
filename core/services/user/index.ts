@@ -1,4 +1,4 @@
-import { GetUser, User, UserRepository } from '@fishprovider/models';
+import type { GetUser, User, UserRepository } from '@fishprovider/models';
 
 import { getUser } from './getUser';
 

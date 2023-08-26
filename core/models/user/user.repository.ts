@@ -36,3 +36,11 @@ export interface UserRepository {
   updateUserStarProviders: (params: UpdateUserStarProviders) => Promise<boolean>;
   refreshUserRoles: (params: RefreshUserRoles) => Promise<boolean>;
 }
+
+export const userRepositoryDefault: UserRepository = {
+  getUser: async () => null,
+  updateUser: async () => false,
+  updateUserAccountRole: async () => false,
+  updateUserStarProviders: async () => false,
+  refreshUserRoles: async () => false,
+};
