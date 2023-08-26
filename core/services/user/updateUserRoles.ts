@@ -7,9 +7,9 @@ import _ from 'lodash';
 
 import { UserService } from '.';
 
-export const updateUserRoles = (userService: UserService) => async (
-  params: UpdateUserParams,
-) => {
+export const updateUserRoles = (
+  userService: UserService,
+) => async (params: UpdateUserParams) => {
   const { userId, roles } = params;
   if (!userId || !roles) throw new Error(ServiceError.BAD_REQUEST);
 

@@ -32,7 +32,9 @@ const getUserAllowReadFieldsProjection = getUserAllowReadFields.reduce<Projectio
   {},
 );
 
-export const getUser = (userService: UserService) => async (params: GetUserParams) => {
+export const getUser = (
+  userService: UserService,
+) => async (params: GetUserParams) => {
   const { userId, email } = params;
   if (!(userId || email)) throw new Error(ServiceError.BAD_REQUEST);
 
