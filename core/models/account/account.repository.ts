@@ -1,31 +1,23 @@
-import { type Projection } from '../repository';
+import type { Projection } from '../repository';
 import type {
-  Account, AccountConfig, AccountPlatform, AccountType,
+  Account, AccountMember, AccountPlatform, AccountType,
 } from '.';
 
-export interface GetAccountRepositoryParams {
+export interface GetAccount {
   accountId?: string,
-  query?: Record<string, any>,
+  accountType?: AccountType,
+  accountPlatform?: AccountPlatform,
   projection?: Projection<Account>,
 }
 
-export interface GetAccountExternalRepositoryParams {
+export interface UpdateAccount {
   accountId: string,
-  accountType: AccountType,
-  accountPlatform: AccountPlatform,
-  handler: (config?: AccountConfig) => Promise<Partial<Account>>,
-}
-
-export interface UpdateAccountRepositoryParams {
-  accountId: string,
-  payload?: Record<string, any>,
-  payloadDelete?: Record<string, any>,
-  payloadPush?: Record<string, any>,
-  payloadPull?: Record<string, any>,
+  name?: string,
+  memberInviteEmail?: string,
+  member?: AccountMember,
 }
 
 export interface AccountRepository {
-  getAccount: (params: GetAccountRepositoryParams) => Promise<Partial<Account> | null>;
-  getAccountExternal: (params: GetAccountExternalRepositoryParams) => Promise<Partial<Account> | null>;
-  updateAccount: (params: UpdateAccountRepositoryParams) => Promise<boolean>;
+  getAccount: (params: GetAccount) => Promise<Partial<Account> | null>;
+  updateAccount: (params: UpdateAccount) => Promise<boolean>;
 }
