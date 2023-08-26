@@ -25,6 +25,7 @@ test('updateUser will return doc', async () => {
   const res = await userService.updateUser({
     userId,
     name,
+    returnDoc: true,
   });
   expect(res._id).toBe(userId);
   expect(res.name).toBe(name);
