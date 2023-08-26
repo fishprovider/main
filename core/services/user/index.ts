@@ -1,6 +1,6 @@
-import { UserRepository } from '@fishprovider/models';
+import { GetUser, User, UserRepository } from '@fishprovider/models';
 
-import { getUserUseCase } from './getUser.usecase';
+import { getUser } from './getUser';
 
 export interface UserServiceParams {
   userRepository: UserRepository,
@@ -13,5 +13,5 @@ export class UserService {
     this.userRepository = params.userRepository;
   }
 
-  getUser = getUserUseCase(this);
+  getUser: (params: GetUser) => Promise<Partial<User>> = getUser(this);
 }

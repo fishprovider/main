@@ -1,5 +1,5 @@
 {
-  "name": "@fishprovider/core-utils",
+  "name": "@fishprovider/services",
   "version": "7.0.0",
   "type": "module",
   "main": "dist/index.js",
