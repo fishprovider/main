@@ -1,10 +1,12 @@
 import {
+  AccountRepository,
   type IAccountService,
   type UpdateAccountService,
 } from '../..';
 
 export const updateAccount = (
   service: IAccountService,
+  getRepo: () => AccountRepository,
 ): UpdateAccountService => async (params) => {
   const { accountId } = params;
   await service.getAccount({
@@ -12,5 +14,5 @@ export const updateAccount = (
     projection: { _id: 1 },
   });
 
-  return service.repo.updateAccount(params);
+  return getRepo().updateAccount(params);
 };

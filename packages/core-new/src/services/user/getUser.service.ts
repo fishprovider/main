@@ -9,6 +9,7 @@ import {
   ServiceError,
   type User,
   UserError,
+  type UserRepository,
   validateProjection,
 } from '../..';
 
@@ -36,7 +37,8 @@ const getUserAllowReadFieldsProjection = getUserAllowReadFields.reduce<Projectio
 );
 
 export const getUser = (
-  service: IUserService,
+  _service: IUserService,
+  getRepo: () => UserRepository,
 ): GetUserService => async (params) => {
   const { userId, email } = params;
   if (!(userId || email)) throw new BaseError(ServiceError.SERVICE_BAD_REQUEST);
@@ -46,7 +48,7 @@ export const getUser = (
     ..._.pick(params.projection, getUserAllowReadFields),
   };
 
-  const user = await service.repo.getUser({
+  const user = await getRepo().getUser({
     ...params,
     projection,
   });

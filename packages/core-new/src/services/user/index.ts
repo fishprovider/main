@@ -1,5 +1,5 @@
 import {
-  containerServiceDefault,
+  type IContainerService,
   type IUserService,
   ServiceName,
   type UserRepository,
@@ -10,14 +10,14 @@ import { updateUser } from './updateUser.service';
 
 export class UserService implements IUserService {
   name = ServiceName.user;
-  repo;
+  _repo;
   getService;
-  getUser = getUser(this);
-  updateUser = updateUser(this);
-  refreshUserRoles = refreshUserRoles(this);
+  getUser = getUser(this, () => this._repo);
+  updateUser = updateUser(this, () => this._repo);
+  refreshUserRoles = refreshUserRoles(this, () => this._repo);
 
-  constructor(repo: UserRepository, container = containerServiceDefault) {
-    this.repo = repo;
+  constructor(repo: UserRepository, container: IContainerService) {
+    this._repo = repo;
     this.getService = <N extends ServiceName>(name: N) => container.getService(name);
   }
 }

@@ -3,10 +3,12 @@ import {
   type IUserService,
   ServiceError,
   type UpdateUserService,
+  type UserRepository,
 } from '../..';
 
 export const updateUser = (
-  service: IUserService,
+  _service: IUserService,
+  getRepo: () => UserRepository,
 ): UpdateUserService => async (params, roles) => {
   const { userId, email, starProvider } = params;
   if (!(userId || email)) throw new BaseError(ServiceError.SERVICE_BAD_REQUEST);
@@ -22,7 +24,7 @@ export const updateUser = (
       return true;
     };
 
-    return service.repo.updateUser({
+    return getRepo().updateUser({
       ...params,
       starProvider: {
         ...starProvider,
@@ -31,5 +33,5 @@ export const updateUser = (
     });
   }
 
-  return service.repo.updateUser(params);
+  return getRepo().updateUser(params);
 };

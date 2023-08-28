@@ -1,25 +1,25 @@
 import {
   type Account,
   AccountError,
+  type AccountRepository,
   AccountViewType,
   BaseError,
   type GetAccountService,
   getRoleProvider,
-  type IAccountService,
   type Projection,
   RepositoryError,
   validateProjection,
 } from '../..';
 
 export const getAccount = (
-  service: IAccountService,
+  getRepo: () => AccountRepository,
 ): GetAccountService => async (params, user) => {
   const projection: Projection<Account> = {
     ...params.projection,
     config: 0,
   };
 
-  const account = await service.repo.getAccount({
+  const account = await getRepo().getAccount({
     ...params,
     projection,
   });

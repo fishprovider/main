@@ -7,10 +7,12 @@ import {
   type RefreshUserRolesService,
   ServiceError,
   ServiceName,
+  type UserRepository,
 } from '../..';
 
 export const refreshUserRoles = (
   service: IUserService,
+  getRepo: () => UserRepository,
 ): RefreshUserRolesService => async (params) => {
   const { userId, roles } = params;
   if (!userId || !roles) throw new BaseError(ServiceError.SERVICE_BAD_REQUEST);
@@ -97,5 +99,5 @@ export const refreshUserRoles = (
   };
   await cleanRoleProviders();
 
-  return service.repo.refreshUserRoles({ userId, roles });
+  return getRepo().refreshUserRoles({ userId, roles });
 };

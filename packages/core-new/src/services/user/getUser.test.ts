@@ -1,6 +1,7 @@
 import {
   BaseError,
   ContainerService,
+  containerServiceDefault,
   RepositoryError,
   ServiceError,
   UserError,
@@ -15,7 +16,7 @@ test('getUser with bad request', async () => {
 });
 
 test('getUser throws no user', async () => {
-  const userService = new UserService(userRepoDefault);
+  const userService = new UserService(userRepoDefault, containerServiceDefault);
   await expect(userService.getUser({
     userId: 'testId',
   })).rejects.toThrow(new BaseError(UserError.USER_NOT_FOUND));
@@ -26,7 +27,7 @@ test('getUser throws bad result', async () => {
   const userService = new UserService({
     ...userRepoDefault,
     getUser: async () => ({ _id: userId, pushNotif: [] }),
-  });
+  }, containerServiceDefault);
   await expect(userService.getUser({
     userId,
   })).rejects.toThrow(new BaseError(RepositoryError.REPOSITORY_BAD_RESULT));
@@ -37,7 +38,7 @@ test('getUser returns a user', async () => {
   const userService = new UserService({
     ...userRepoDefault,
     getUser: async () => ({ _id: userId }),
-  });
+  }, containerServiceDefault);
   const user = await userService.getUser({
     userId,
   });

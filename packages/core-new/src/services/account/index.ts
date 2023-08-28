@@ -1,7 +1,7 @@
 import {
   type AccountRepository,
-  containerServiceDefault,
   type IAccountService,
+  type IContainerService,
   ServiceName,
 } from '../..';
 import { getAccount } from './getAccount.service';
@@ -10,14 +10,14 @@ import { updateAccount } from './updateAccount.service';
 
 export class AccountService implements IAccountService {
   name = ServiceName.account;
-  repo;
+  _repo;
   getService;
-  getAccount = getAccount(this);
-  updateAccount = updateAccount(this);
+  getAccount = getAccount(() => this._repo);
+  updateAccount = updateAccount(this, () => this._repo);
   joinAccount = joinAccount(this);
 
-  constructor(repo: AccountRepository, container = containerServiceDefault) {
-    this.repo = repo;
+  constructor(repo: AccountRepository, container: IContainerService) {
+    this._repo = repo;
     this.getService = <N extends ServiceName>(name: N) => container.getService(name);
   }
 }

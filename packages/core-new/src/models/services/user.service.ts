@@ -17,7 +17,7 @@ export type RefreshUserRolesService = (
 ) => Promise<Partial<User>>;
 
 export interface IUserService extends BaseService {
-  repo: UserRepository
+  _repo: UserRepository
   getUser: GetUserService;
   updateUser: UpdateUserService;
   refreshUserRoles: RefreshUserRolesService;

@@ -1,12 +1,13 @@
 import {
   BaseError,
+  containerServiceDefault,
   ServiceError,
   userRepoDefault,
   UserService,
 } from '../..';
 
 test('updateUser with bad request', async () => {
-  const userService = new UserService(userRepoDefault);
+  const userService = new UserService(userRepoDefault, containerServiceDefault);
   await expect(userService.updateUser({
   })).rejects.toThrow(new BaseError(ServiceError.SERVICE_BAD_REQUEST));
 });
@@ -17,7 +18,7 @@ test('updateUser returns a doc', async () => {
   const userService = new UserService({
     ...userRepoDefault,
     updateUser: async () => ({ _id: userId, name }),
-  });
+  }, containerServiceDefault);
   const res = await userService.updateUser({
     userId,
     name,
