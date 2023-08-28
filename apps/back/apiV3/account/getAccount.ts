@@ -1,4 +1,5 @@
 import { Account } from '@fishprovider/core-new';
+import { MongoAccountRepository } from '@fishprovider/repository-mongo';
 import { z } from 'zod';
 
 import { getAccountService } from '~controllers/container';
@@ -14,7 +15,11 @@ const handler: ApiHandler<Partial<Account>> = async (data, userSession) => {
   }).strict()
     .parse(data);
 
-  const result = await getAccountService().getAccount(params, userSession);
+  const result = await getAccountService().getAccount(
+    { account: MongoAccountRepository },
+    params,
+    userSession,
+  );
   return { result };
 };
 

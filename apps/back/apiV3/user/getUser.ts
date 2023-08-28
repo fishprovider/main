@@ -1,4 +1,5 @@
 import { User } from '@fishprovider/core-new';
+import { MongoUserRepository } from '@fishprovider/repository-mongo';
 import { z } from 'zod';
 
 import { getUserService } from '~controllers/container';
@@ -14,7 +15,11 @@ const handler: ApiHandler<Partial<User>> = async (data, userSession) => {
   }).strict()
     .parse(data);
 
-  const result = await getUserService().getUser(params, userSession);
+  const result = await getUserService().getUser(
+    { user: MongoUserRepository },
+    params,
+    userSession,
+  );
   return { result };
 };
 
