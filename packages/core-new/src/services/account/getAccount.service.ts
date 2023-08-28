@@ -11,13 +11,17 @@ import {
 } from '../..';
 
 export const getAccount = (
-  service: IAccountService,
-): GetAccountService => async (params, userSession) => {
+  _service: IAccountService,
+): GetAccountService => async (
+  repositories,
+  params,
+  userSession,
+) => {
   const projection = getProjectionBlacklist({
     config: 0,
   }, params.projection);
 
-  const account = await service.repo.getAccount({
+  const account = await repositories.account.getAccount({
     ...params,
     projection,
   });

@@ -9,7 +9,10 @@ import {
 
 export const refreshUserRoles = (
   service: IUserService,
-): RefreshUserRolesService => async (userSession) => {
+): RefreshUserRolesService => async (
+  repositories,
+  userSession,
+) => {
   const { _id: userId, roles = {} } = userSession;
 
   const cleanDisabledProviders = () => {
@@ -47,13 +50,17 @@ export const refreshUserRoles = (
     const accountService = service.getService(ServiceName.account);
 
     for (const accountId of accountIds) {
-      const account = await accountService.getAccount({
-        accountId,
-        memberId: userId,
-        projection: {
-          members: 1,
+      const account = await accountService.getAccount(
+        repositories,
+        {
+          accountId,
+          memberId: userId,
+          projection: {
+            members: 1,
+          },
         },
-      });
+        userSession,
+      );
       if (!account) {
         _.unset(roles.adminProviders, accountId);
         _.unset(roles.traderProviders, accountId);
@@ -94,5 +101,9 @@ export const refreshUserRoles = (
   };
   await cleanRoleProviders();
 
-  return service.repo.updateUser({ userId, roles });
+  return service.updateUser(
+    repositories,
+    { userId, roles },
+    userSession,
+  );
 };

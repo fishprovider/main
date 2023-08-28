@@ -5,12 +5,20 @@ import {
 
 export const updateAccount = (
   service: IAccountService,
-): UpdateAccountService => async (params, userSession) => {
+): UpdateAccountService => async (
+  repositories,
+  params,
+  userSession,
+) => {
   const { accountId } = params;
-  await service.getAccount({
-    accountId,
-    projection: { _id: 1 },
-  }, userSession);
+  await service.getAccount(
+    repositories,
+    {
+      accountId,
+      projection: { _id: 1 },
+    },
+    userSession,
+  );
 
-  return service.repo.updateAccount(params);
+  return repositories.account.updateAccount(params);
 };

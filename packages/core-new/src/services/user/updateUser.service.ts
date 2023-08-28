@@ -7,8 +7,12 @@ import {
 } from '../..';
 
 export const updateUser = (
-  service: IUserService,
-): UpdateUserService => async (params, userSession) => {
+  _service: IUserService,
+): UpdateUserService => async (
+  repositories,
+  params,
+  userSession,
+) => {
   const { userId, email, starProvider } = params;
   if (!(userId || email)) throw new BaseError(ServiceError.SERVICE_BAD_REQUEST);
   if (userId !== userSession._id) throw new BaseError(UserError.USER_ACCESS_DENIED);
@@ -30,7 +34,7 @@ export const updateUser = (
       return true;
     };
 
-    return service.repo.updateUser({
+    return repositories.user.updateUser({
       ...params,
       starProvider: {
         ...starProvider,
@@ -39,5 +43,5 @@ export const updateUser = (
     });
   }
 
-  return service.repo.updateUser(params);
+  return repositories.user.updateUser(params);
 };

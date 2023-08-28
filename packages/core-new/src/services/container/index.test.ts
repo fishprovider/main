@@ -5,11 +5,10 @@ import {
   ServiceName,
   UserService,
 } from '../..';
-import { userRepoDefault } from '../../tests';
 
 test('ContainerService', async () => {
   const container = new ContainerService();
-  container.register(ServiceName.user, UserService, userRepoDefault);
+  container.register(ServiceName.user, UserService);
 
   const { user } = container.services;
   expect(user).toBeDefined();
