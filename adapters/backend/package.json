@@ -19,7 +19,6 @@
   "dependencies": {
     "@fishprovider/application": "*",
     "@fishprovider/core-new": "*",
-    "@fishprovider/core-utils": "*",
     "zod": "^3.22.1"
   }
 }
