@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@fishprovider/application": "*",
-    "@fishprovider/models": "*",
+    "@fishprovider/core-new": "*",
     "moment": "^2.29.4",
     "mongodb": "^5.7.0"
   }

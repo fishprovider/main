@@ -1,4 +1,4 @@
-import { type User, UserError } from '@fishprovider/models';
+import { type User, UserError } from '@fishprovider/core-new';
 import _ from 'lodash';
 
 import type { GetUserRepositoryParams, UserRepository } from '~repositories';

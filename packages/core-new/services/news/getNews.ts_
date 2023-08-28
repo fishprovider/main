@@ -1,0 +1,10 @@
+import type { GetNewsParams } from '@fishprovider/core-new';
+
+import { NewsService } from '.';
+
+export const getNews = (
+  userService: NewsService,
+) => async (params: GetNewsParams) => {
+  const { newsRepository } = userService;
+  return newsRepository.getNews(params) || [];
+};

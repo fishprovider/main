@@ -1,0 +1,17 @@
+import {
+  ServiceError,
+  type UpdateAccountParams,
+} from '@fishprovider/core-new';
+
+import { AccountService } from '.';
+
+export const updateAccount = (
+  accountService: AccountService,
+) => async (params: UpdateAccountParams) => {
+  const { accountId } = params;
+  if (!accountId) throw new Error(ServiceError.BAD_REQUEST);
+
+  const { accountRepository } = accountService;
+
+  return accountRepository.updateAccount(params);
+};

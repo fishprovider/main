@@ -30,7 +30,7 @@
     "@fishprovider/adapter-frontend": "*",
     "@fishprovider/application": "*",
     "@fishprovider/cross": "*",
-    "@fishprovider/models": "*",
+    "@fishprovider/core-new": "*",
     "@fishprovider/framework-fish-api": "*",
     "@fishprovider/framework-local": "*",
     "@fishprovider/framework-offline-first": "*",

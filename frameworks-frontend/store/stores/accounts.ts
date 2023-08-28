@@ -1,4 +1,4 @@
-import type { Account } from '@fishprovider/models';
+import type { Account } from '@fishprovider/core-new';
 
 import { buildStoreSet } from '../store.framework';
 

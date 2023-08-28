@@ -1,4 +1,4 @@
-import type { Account } from '@fishprovider/models';
+import type { Account } from '@fishprovider/core-new';
 import _ from 'lodash';
 
 import type { AccountRepository, UpdateAccountRepositoryParams } from '~repositories';

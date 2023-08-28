@@ -1,5 +1,5 @@
 import type { GetNewsUseCase } from '@fishprovider/application';
-import type { News } from '@fishprovider/models';
+import type { News } from '@fishprovider/core-new';
 import { z } from 'zod';
 
 import { requireLogin } from '~helpers';

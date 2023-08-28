@@ -1,4 +1,4 @@
-import { UserError } from '@fishprovider/models';
+import { UserError } from '@fishprovider/core-new';
 
 import type { UserSession } from '~types';
 

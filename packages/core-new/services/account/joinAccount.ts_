@@ -1,0 +1,68 @@
+import {
+  AccountError,
+  AccountRoles,
+  type JoinAccountParams,
+  ServiceError,
+} from '@fishprovider/core-new';
+
+import { AccountService } from '.';
+
+export const joinAccount = (
+  accountService: AccountService,
+) => async (params: JoinAccountParams) => {
+  const { accountId, email } = params;
+  if (!accountId || !email) throw new Error(ServiceError.BAD_REQUEST);
+
+  const { accountRepository, userRepository } = accountService;
+
+  const account = await accountRepository.getAccount({
+    accountId,
+    projection: {
+      memberInvites: 1,
+    },
+  });
+  if (!account) {
+    throw new Error(AccountError.ACCOUNT_NOT_FOUND);
+  }
+
+  const { memberInvites } = account;
+  const memberInvite = memberInvites?.find((item) => item.email === email);
+  if (!memberInvite) {
+    throw new Error(AccountError.ACCOUNT_ACCESS_DENIED);
+  }
+
+  const { role } = memberInvite;
+  const setRoles = {
+    ...(role === AccountRoles.admin && {
+      [`roles.adminProviders.${accountId}`]: true,
+    }),
+    ...(role === AccountRoles.trader && {
+      [`roles.traderProviders.${accountId}`]: true,
+    }),
+    ...(role === AccountRoles.protector && {
+      [`roles.protectorProviders.${accountId}`]: true,
+    }),
+    ...(role === AccountRoles.viewer && {
+      [`roles.viewerProviders.${accountId}`]: true,
+    }),
+  };
+  const deleteRoles = {
+    ...(role !== AccountRoles.admin && {
+      [`roles.adminProviders.${accountId}`]: '',
+    }),
+    ...(role !== AccountRoles.trader && {
+      [`roles.traderProviders.${accountId}`]: '',
+    }),
+    ...(role !== AccountRoles.protector && {
+      [`roles.protectorProviders.${accountId}`]: '',
+    }),
+    ...(role !== AccountRoles.viewer && {
+      [`roles.viewerProviders.${accountId}`]: '',
+    }),
+  };
+  await userRepository.updateUser({
+    email,
+  });
+
+  return accountRepository.updateAccount(params);
+};

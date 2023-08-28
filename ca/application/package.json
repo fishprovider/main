@@ -17,6 +17,6 @@
     "build": "tsc -p tsconfig.build.json && tsc-alias -p tsconfig.build.json"
   },
   "dependencies": {
-    "@fishprovider/models": "*"
+    "@fishprovider/core-new": "*"
   }
 }

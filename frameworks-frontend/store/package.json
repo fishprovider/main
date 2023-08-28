@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@fishprovider/application": "*",
-    "@fishprovider/models": "*",
+    "@fishprovider/core-new": "*",
     "zustand": "^4.4.1"
   },
   "devDependencies": {

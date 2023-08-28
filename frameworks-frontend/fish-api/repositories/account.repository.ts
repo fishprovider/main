@@ -1,5 +1,5 @@
 import { type AccountRepository, DefaultAccountRepository, type GetAccountRepositoryParams } from '@fishprovider/application';
-import type { Account } from '@fishprovider/models';
+import type { Account } from '@fishprovider/core-new';
 
 // import { StoreAccountRepository } from '@fishprovider/framework-store';
 import { fishApi } from '../fishApi.framework';

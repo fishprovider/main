@@ -1,5 +1,5 @@
 import { DefaultUserRepository, type UserRepository } from '@fishprovider/application';
-import type { User } from '@fishprovider/models';
+import type { User } from '@fishprovider/core-new';
 
 // import { StoreUserRepository } from '@fishprovider/framework-store';
 import { fishApi } from '../fishApi.framework';

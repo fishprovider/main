@@ -24,7 +24,7 @@
     "@fishprovider/application": "*",
     "@fishprovider/coin": "*",
     "@fishprovider/core": "*",
-    "@fishprovider/models": "*",
+    "@fishprovider/core-new": "*",
     "@fishprovider/framework-cache-first": "*",
     "@fishprovider/framework-mongo": "*",
     "@fishprovider/framework-redis": "*",

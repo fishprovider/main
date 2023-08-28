@@ -5,7 +5,7 @@ import {
   type NewsRepository,
   type SetNewsRepositoryParams,
 } from '@fishprovider/application';
-import type { News } from '@fishprovider/models';
+import type { News } from '@fishprovider/core-new';
 
 import { local } from '../local.framework';
 

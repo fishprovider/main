@@ -1,4 +1,4 @@
-import type { UserRoles } from '@fishprovider/models';
+import type { UserRoles } from '@fishprovider/core-new';
 
 export interface UserSession {
   _id: string;

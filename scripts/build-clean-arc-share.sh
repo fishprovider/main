@@ -2,5 +2,5 @@
 
 cd ..
 
-npm run build -w core/models
+npm run build -w packages/core-new
 npm run build -w ca/application

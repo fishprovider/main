@@ -1,6 +1,6 @@
 import {
   type Account, AccountError, AccountViewType, type User,
-} from '@fishprovider/models';
+} from '@fishprovider/core-new';
 
 import { getRoleProvider } from '~helpers';
 import type { AccountRepository, GetAccountRepositoryParams } from '~repositories';

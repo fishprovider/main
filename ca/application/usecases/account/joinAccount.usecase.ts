@@ -1,6 +1,6 @@
 import {
   AccountError, AccountMember, AccountRoles, type User,
-} from '@fishprovider/models';
+} from '@fishprovider/core-new';
 import _ from 'lodash';
 
 import type { AccountRepository, GetAccountRepositoryParams, UserRepository } from '~repositories';

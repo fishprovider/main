@@ -1,0 +1,10 @@
+import type { WatchNewsParams } from '@fishprovider/core-new';
+
+import { NewsService } from '.';
+
+export const watchNews = (
+  userService: NewsService,
+) => async <T>(params: WatchNewsParams<T>) => {
+  const { newsRepository } = userService;
+  return newsRepository.watchNews(params);
+};

@@ -18,6 +18,6 @@
   },
   "dependencies": {
     "@fishprovider/application": "*",
-    "@fishprovider/models": "*"
+    "@fishprovider/core-new": "*"
   }
 }
