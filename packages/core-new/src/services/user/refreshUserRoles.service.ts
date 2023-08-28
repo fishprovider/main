@@ -7,13 +7,16 @@ import {
   type RefreshUserRolesService,
   ServiceError,
   ServiceName,
+  UserError,
   type UserRepository,
 } from '../..';
 
 export const refreshUserRoles = (
   service: IUserService,
   getRepo: () => UserRepository,
-): RefreshUserRolesService => async (params) => {
+): RefreshUserRolesService => async (params, userSession) => {
+  if (!userSession._id) throw new BaseError(UserError.USER_ACCESS_DENIED);
+
   const { userId, roles } = params;
   if (!userId || !roles) throw new BaseError(ServiceError.SERVICE_BAD_REQUEST);
 

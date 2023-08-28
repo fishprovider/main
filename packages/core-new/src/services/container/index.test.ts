@@ -3,9 +3,9 @@ import {
   ContainerService,
   ServiceError,
   ServiceName,
-  userRepoDefault,
   UserService,
 } from '../..';
+import { userRepoDefault } from '../../tests';
 
 test('ContainerService', async () => {
   const container = new ContainerService();

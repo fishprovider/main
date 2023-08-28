@@ -1,24 +1,23 @@
 import {
   BaseError,
-  ContainerService,
   RepositoryError,
   ServiceError,
   UserError,
-  userRepoDefault,
   UserService,
 } from '../..';
+import { containerServiceDefault, userRepoDefault, userSessionDefault } from '../../tests';
 
 test('getUser with bad request', async () => {
-  const userService = new UserService(userRepoDefault, new ContainerService());
+  const userService = new UserService(userRepoDefault, containerServiceDefault);
   await expect(userService.getUser({
-  })).rejects.toThrow(new BaseError(ServiceError.SERVICE_BAD_REQUEST));
+  }, userSessionDefault)).rejects.toThrow(new BaseError(ServiceError.SERVICE_BAD_REQUEST));
 });
 
 test('getUser throws no user', async () => {
-  const userService = new UserService(userRepoDefault, new ContainerService());
+  const userService = new UserService(userRepoDefault, containerServiceDefault);
   await expect(userService.getUser({
     userId: 'testId',
-  })).rejects.toThrow(new BaseError(UserError.USER_NOT_FOUND));
+  }, userSessionDefault)).rejects.toThrow(new BaseError(UserError.USER_NOT_FOUND));
 });
 
 test('getUser throws bad result', async () => {
@@ -26,10 +25,10 @@ test('getUser throws bad result', async () => {
   const userService = new UserService({
     ...userRepoDefault,
     getUser: async () => ({ _id: userId, pushNotif: [] }),
-  }, new ContainerService());
+  }, containerServiceDefault);
   await expect(userService.getUser({
     userId,
-  })).rejects.toThrow(new BaseError(RepositoryError.REPOSITORY_BAD_RESULT));
+  }, userSessionDefault)).rejects.toThrow(new BaseError(RepositoryError.REPOSITORY_BAD_RESULT));
 });
 
 test('getUser returns a user', async () => {
@@ -37,10 +36,10 @@ test('getUser returns a user', async () => {
   const userService = new UserService({
     ...userRepoDefault,
     getUser: async () => ({ _id: userId }),
-  }, new ContainerService());
+  }, containerServiceDefault);
   const user = await userService.getUser({
     userId,
-  });
+  }, userSessionDefault);
   expect(user).toBeDefined();
   expect(user?._id).toBe(userId);
 });

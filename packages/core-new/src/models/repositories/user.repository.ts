@@ -36,9 +36,3 @@ export interface UserRepository {
   // create a separate one to avoid human error to update roles, which is an important key
   refreshUserRoles: (params: RefreshUserRolesParams) => Promise<Partial<User>>;
 }
-
-export const userRepoDefault: UserRepository = {
-  getUser: async () => null,
-  updateUser: async () => ({}),
-  refreshUserRoles: async () => ({}),
-};

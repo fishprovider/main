@@ -20,8 +20,3 @@ export interface AccountRepository {
   getAccount: (params: GetAccountParams) => Promise<Partial<Account> | null>;
   updateAccount: (params: UpdateAccountParams) => Promise<Partial<Account>>;
 }
-
-export const accountRepoDefault: AccountRepository = {
-  getAccount: async () => null,
-  updateAccount: async () => ({}),
-};

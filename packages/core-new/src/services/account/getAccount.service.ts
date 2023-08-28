@@ -13,7 +13,7 @@ import {
 
 export const getAccount = (
   getRepo: () => AccountRepository,
-): GetAccountService => async (params, user) => {
+): GetAccountService => async (params, userSession) => {
   const projection: Projection<Account> = {
     ...params.projection,
     config: 0,
@@ -32,7 +32,7 @@ export const getAccount = (
     throw new BaseError(RepositoryError.REPOSITORY_BAD_RESULT);
   }
 
-  const { isManagerWeb } = getRoleProvider(user?.roles);
+  const { isManagerWeb } = getRoleProvider(userSession?.roles);
 
   const {
     providerViewType, userId, members, memberInvites, deleted,
@@ -44,10 +44,10 @@ export const getAccount = (
     if (providerViewType === AccountViewType.public) return true;
 
     // for private accounts
-    if (!user?._id) return false;
-    if (userId === user._id) return true;
-    if (members?.some((item) => item.userId === user._id)) return true;
-    if (memberInvites?.some((item) => item.email === user.email)) return true;
+    if (!userSession?._id) return false;
+    if (userId === userSession._id) return true;
+    if (members?.some((item) => item.userId === userSession._id)) return true;
+    if (memberInvites?.some((item) => item.email === userSession.email)) return true;
 
     return false;
   };

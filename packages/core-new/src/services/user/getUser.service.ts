@@ -39,7 +39,9 @@ const getUserAllowReadFieldsProjection = getUserAllowReadFields.reduce<Projectio
 export const getUser = (
   _service: IUserService,
   getRepo: () => UserRepository,
-): GetUserService => async (params) => {
+): GetUserService => async (params, userSession) => {
+  if (!userSession._id) throw new BaseError(UserError.USER_ACCESS_DENIED);
+
   const { userId, email } = params;
   if (!(userId || email)) throw new BaseError(ServiceError.SERVICE_BAD_REQUEST);
 

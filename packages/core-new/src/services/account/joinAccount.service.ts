@@ -5,12 +5,15 @@ import {
   type JoinAccountService,
   ServiceError,
   ServiceName,
+  UserError,
 } from '../..';
 
 export const joinAccount = (
   service: IAccountService,
-): JoinAccountService => async (params, user) => {
-  if (!user._id || !user.email || !user.name) {
+): JoinAccountService => async (params, userSession) => {
+  if (!userSession._id) throw new BaseError(UserError.USER_ACCESS_DENIED);
+
+  if (!userSession.email || !userSession.name) {
     throw new BaseError(ServiceError.SERVICE_BAD_REQUEST);
   }
 
@@ -24,7 +27,7 @@ export const joinAccount = (
   });
 
   const { memberInvites } = account;
-  const memberInvite = memberInvites?.find((item) => item.email === user.email);
+  const memberInvite = memberInvites?.find((item) => item.email === userSession.email);
   if (!memberInvite) {
     throw new BaseError(AccountError.ACCOUNT_ACCESS_DENIED);
   }
@@ -39,21 +42,21 @@ export const joinAccount = (
       accountId,
       role,
     },
-  });
+  }, userSession);
 
   return service.updateAccount({
     accountId,
     addMember: {
-      userId: user._id,
+      userId: userSession._id,
       email,
       role,
-      name: user.name,
+      name: userSession.name,
 
-      picture: user.picture,
+      picture: userSession.picture,
 
       updatedAt: new Date(),
       createdAt: new Date(),
     },
     removeMemberInvite: memberInvite,
-  }, user);
+  }, userSession);
 };

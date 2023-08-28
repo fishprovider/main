@@ -1,19 +1,21 @@
 import type {
   BaseService, GetUserParams, RefreshUserRolesParams,
-  UpdateUserParams, User, UserRepository, UserRoles,
+  UpdateUserParams, User, UserRepository, UserSession,
 } from '..';
 
 export type GetUserService = (
-  params: GetUserParams
+  params: GetUserParams,
+  userSession: UserSession,
 ) => Promise<Partial<User>>;
 
 export type UpdateUserService = (
   params: UpdateUserParams,
-  roles?: UserRoles
+  userSession: UserSession,
 ) => Promise<Partial<User>>;
 
 export type RefreshUserRolesService = (
-  params: RefreshUserRolesParams
+  params: RefreshUserRolesParams,
+  userSession: UserSession,
 ) => Promise<Partial<User>>;
 
 export interface IUserService extends BaseService {
