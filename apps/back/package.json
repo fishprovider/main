@@ -28,6 +28,7 @@
     "@fishprovider/framework-cache-first": "*",
     "@fishprovider/framework-mongo": "*",
     "@fishprovider/framework-redis": "*",
+    "@fishprovider/repository-mongo": "*",
     "@fishprovider/swap": "*",
     "glob": "^10.3.3",
     "notion-client": "^6.16.0",

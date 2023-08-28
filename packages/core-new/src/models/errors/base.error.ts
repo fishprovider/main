@@ -4,7 +4,7 @@ export class BaseError extends Error {
   constructor(
     code: string,
     message?: string,
-    cause?: Error,
+    cause?: any,
   ) {
     super(message, { cause });
 

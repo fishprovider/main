@@ -1,12 +1,11 @@
 import {
-  type Account,
   AccountError,
   AccountViewType,
   BaseError,
   type GetAccountService,
+  getProjectionBlacklist,
   getRoleProvider,
   type IAccountService,
-  type Projection,
   RepositoryError,
   validateProjection,
 } from '../..';
@@ -14,10 +13,9 @@ import {
 export const getAccount = (
   service: IAccountService,
 ): GetAccountService => async (params, userSession) => {
-  const projection: Projection<Account> = {
-    ...params.projection,
+  const projection = getProjectionBlacklist({
     config: 0,
-  };
+  }, params.projection);
 
   const account = await service.repo.getAccount({
     ...params,
