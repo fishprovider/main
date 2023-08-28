@@ -1,17 +1,19 @@
 import type {
-  AccountRoles, Projection, User, UserRoles,
+  AccountRoles, BaseGetParams, BaseUpdateParams, User, UserRoles,
 } from '../..';
 
-interface UserKeys {
+export interface UserBaseGetParams extends BaseGetParams<User> {
   userId?: string
   email?: string
 }
 
-export interface GetUserParams extends UserKeys {
-  projection?: Projection<User>
+export interface UserBaseUpdateParams extends BaseUpdateParams, UserBaseGetParams {
 }
 
-export interface UpdateUserParams extends UserKeys {
+export interface GetUserParams extends UserBaseGetParams {
+}
+
+export interface UpdateUserParams extends UserBaseUpdateParams {
   name?: string
   picture?: string
   starProvider?: {
@@ -21,18 +23,11 @@ export interface UpdateUserParams extends UserKeys {
   addRole?: {
     accountId: string
     role: AccountRoles
-  }
-  returnDoc?: boolean
-}
-
-export interface RefreshUserRolesParams extends UserKeys {
+  },
   roles?: UserRoles
-  returnDoc?: boolean
 }
 
 export interface UserRepository {
   getUser: (params: GetUserParams) => Promise<Partial<User> | null>;
   updateUser: (params: UpdateUserParams) => Promise<Partial<User>>;
-  // create a separate one to avoid human error to update roles, which is an important key
-  refreshUserRoles: (params: RefreshUserRolesParams) => Promise<Partial<User>>;
 }

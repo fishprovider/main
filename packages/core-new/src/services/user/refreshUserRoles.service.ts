@@ -5,20 +5,16 @@ import {
   BaseError,
   type IUserService,
   type RefreshUserRolesService,
-  ServiceError,
   ServiceName,
   UserError,
-  type UserRepository,
 } from '../..';
 
 export const refreshUserRoles = (
   service: IUserService,
-  getRepo: () => UserRepository,
-): RefreshUserRolesService => async (params, userSession) => {
+): RefreshUserRolesService => async (userSession) => {
   if (!userSession._id) throw new BaseError(UserError.USER_ACCESS_DENIED);
 
-  const { userId, roles } = params;
-  if (!userId || !roles) throw new BaseError(ServiceError.SERVICE_BAD_REQUEST);
+  const { _id: userId, roles = {} } = userSession;
 
   const cleanDisabledProviders = () => {
     _.forEach(roles.adminProviders, (enabled, accountId) => {
@@ -102,5 +98,5 @@ export const refreshUserRoles = (
   };
   await cleanRoleProviders();
 
-  return getRepo().refreshUserRoles({ userId, roles });
+  return service.repo.updateUser({ userId, roles });
 };

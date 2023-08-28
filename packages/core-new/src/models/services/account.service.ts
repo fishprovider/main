@@ -19,7 +19,7 @@ export type JoinAccountService = (
 ) => Promise<Partial<Account>>;
 
 export interface IAccountService extends BaseService {
-  _repo: AccountRepository
+  repo: AccountRepository
   getAccount: GetAccountService;
   updateAccount: UpdateAccountService;
   joinAccount: JoinAccountService;

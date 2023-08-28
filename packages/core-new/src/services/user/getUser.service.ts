@@ -9,7 +9,6 @@ import {
   ServiceError,
   type User,
   UserError,
-  type UserRepository,
   validateProjection,
 } from '../..';
 
@@ -37,8 +36,7 @@ const getUserAllowReadFieldsProjection = getUserAllowReadFields.reduce<Projectio
 );
 
 export const getUser = (
-  _service: IUserService,
-  getRepo: () => UserRepository,
+  service: IUserService,
 ): GetUserService => async (params, userSession) => {
   if (!userSession._id) throw new BaseError(UserError.USER_ACCESS_DENIED);
 
@@ -50,7 +48,7 @@ export const getUser = (
     ..._.pick(params.projection, getUserAllowReadFields),
   };
 
-  const user = await getRepo().getUser({
+  const user = await service.repo.getUser({
     ...params,
     projection,
   });

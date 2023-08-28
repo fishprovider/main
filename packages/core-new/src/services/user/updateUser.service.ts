@@ -4,12 +4,10 @@ import {
   ServiceError,
   type UpdateUserService,
   UserError,
-  type UserRepository,
 } from '../..';
 
 export const updateUser = (
-  _service: IUserService,
-  getRepo: () => UserRepository,
+  service: IUserService,
 ): UpdateUserService => async (params, userSession) => {
   if (!userSession._id) throw new BaseError(UserError.USER_ACCESS_DENIED);
 
@@ -33,7 +31,7 @@ export const updateUser = (
       return true;
     };
 
-    return getRepo().updateUser({
+    return service.repo.updateUser({
       ...params,
       starProvider: {
         ...starProvider,
@@ -42,5 +40,5 @@ export const updateUser = (
     });
   }
 
-  return getRepo().updateUser(params);
+  return service.repo.updateUser(params);
 };

@@ -1,5 +1,4 @@
 import {
-  AccountRepository,
   BaseError,
   type IAccountService,
   type UpdateAccountService,
@@ -8,7 +7,6 @@ import {
 
 export const updateAccount = (
   service: IAccountService,
-  getRepo: () => AccountRepository,
 ): UpdateAccountService => async (params, userSession) => {
   if (!userSession._id) throw new BaseError(UserError.USER_ACCESS_DENIED);
 
@@ -18,5 +16,5 @@ export const updateAccount = (
     projection: { _id: 1 },
   });
 
-  return getRepo().updateAccount(params);
+  return service.repo.updateAccount(params);
 };

@@ -10,14 +10,14 @@ import { updateAccount } from './updateAccount.service';
 
 export class AccountService implements IAccountService {
   name = ServiceName.account;
-  _repo;
+  repo;
   getService;
-  getAccount = getAccount(() => this._repo);
-  updateAccount = updateAccount(this, () => this._repo);
+  getAccount = getAccount(this);
+  updateAccount = updateAccount(this);
   joinAccount = joinAccount(this);
 
   constructor(repo: AccountRepository, container: IContainerService) {
-    this._repo = repo;
+    this.repo = repo;
     this.getService = <N extends ServiceName>(name: N) => container.getService(name);
   }
 }
