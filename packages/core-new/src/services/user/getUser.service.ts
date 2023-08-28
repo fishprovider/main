@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import {
   BaseError,
   type GetUserService,
@@ -12,29 +10,6 @@ import {
   validateProjection,
 } from '../..';
 
-const getUserAllowReadFields: Array<keyof User> = [
-  '_id',
-  'email',
-  'name',
-  'picture',
-
-  'roles',
-  'starProviders',
-
-  'telegram',
-
-  'updatedAt',
-  'createdAt',
-];
-
-const getUserAllowReadFieldsProjection = getUserAllowReadFields.reduce<Projection<User>>(
-  (acc, field) => {
-    acc[field] = 1;
-    return acc;
-  },
-  {},
-);
-
 export const getUser = (
   service: IUserService,
 ): GetUserService => async (params, userSession) => {
@@ -43,9 +18,9 @@ export const getUser = (
   const { userId, email } = params;
   if (!(userId || email)) throw new BaseError(ServiceError.SERVICE_BAD_REQUEST);
 
-  const projection = {
-    ...getUserAllowReadFieldsProjection,
-    ..._.pick(params.projection, getUserAllowReadFields),
+  const projection: Projection<User> = {
+    ...params.projection,
+    pushNotif: 0,
   };
 
   const user = await service.repo.getUser({
