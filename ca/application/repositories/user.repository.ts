@@ -1,6 +1,4 @@
-import type { User } from '@fishprovider/core-new';
-
-import { type Projection, RepositoryError } from '~types';
+import { type Projection, RepositoryError, User } from '@fishprovider/core-new';
 
 export interface GetUserRepositoryParams {
   userId: string,

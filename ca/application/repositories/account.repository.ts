@@ -1,8 +1,7 @@
-import type {
+import {
   Account, AccountConfig, AccountPlatform, AccountType,
+  Projection, RepositoryError,
 } from '@fishprovider/core-new';
-
-import { type Projection, RepositoryError } from '~types';
 
 export interface GetAccountRepositoryParams {
   accountId?: string,

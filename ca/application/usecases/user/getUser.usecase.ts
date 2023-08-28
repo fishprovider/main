@@ -1,8 +1,7 @@
-import { type User, UserError } from '@fishprovider/core-new';
+import { Projection, type User, UserError } from '@fishprovider/core-new';
 import _ from 'lodash';
 
 import type { GetUserRepositoryParams, UserRepository } from '~repositories';
-import type { Projection } from '~types';
 
 const getUserAllowReadFields: Array<keyof User> = [
   'email',

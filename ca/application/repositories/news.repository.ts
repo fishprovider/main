@@ -1,6 +1,4 @@
-import type { News } from '@fishprovider/core-new';
-
-import { RepositoryError } from '~types';
+import { News, RepositoryError } from '@fishprovider/core-new';
 
 export interface GetNewsRepositoryParams {
   today?: boolean,

@@ -1,8 +1,8 @@
 import {
-  type Account, AccountError, AccountViewType, type User,
+  type Account, AccountError, AccountViewType, getRoleProvider,
+  type User,
 } from '@fishprovider/core-new';
 
-import { getRoleProvider } from '~helpers';
 import type { AccountRepository, GetAccountRepositoryParams } from '~repositories';
 
 export interface GetAccountUseCaseParams extends GetAccountRepositoryParams {
