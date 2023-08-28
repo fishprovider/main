@@ -20,6 +20,6 @@
     "@fishprovider/application": "*",
     "@fishprovider/core-new": "*",
     "@fishprovider/framework-store": "*",
-    "axios": "^1.4.0"
+    "axios": "^1.5.0"
   }
 }

@@ -31,9 +31,9 @@
   "devDependencies": {
     "@vitejs/plugin-react": "^4.0.4",
     "cross-env": "^7.0.3",
-    "electron": "26.0.0",
+    "electron": "26.1.0",
     "electron-builder": "24.6.3",
-    "happy-dom": "10.10.2",
+    "happy-dom": "10.11.1",
     "unplugin-auto-expose": "0.0.5",
     "vite": "4.4.9"
   }

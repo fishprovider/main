@@ -2,8 +2,8 @@
 
 /* eslint-disable no-undef */
 
-importScripts('https://www.gstatic.com/firebasejs/10.2.0/firebase-app-compat.js');
-importScripts('https://www.gstatic.com/firebasejs/10.2.0/firebase-messaging-compat.js');
+importScripts('https://www.gstatic.com/firebasejs/10.3.0/firebase-app-compat.js');
+importScripts('https://www.gstatic.com/firebasejs/10.3.0/firebase-messaging-compat.js');
 
 /** @type {import('@firebase/app').FirebaseOptions} */
 const config = {
