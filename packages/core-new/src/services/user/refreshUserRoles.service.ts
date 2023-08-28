@@ -2,6 +2,7 @@ import _ from 'lodash';
 
 import {
   AccountRoles,
+  BaseError,
   type IUserService,
   type RefreshUserRolesService,
   ServiceError,
@@ -12,7 +13,7 @@ export const refreshUserRoles = (
   service: IUserService,
 ): RefreshUserRolesService => async (params) => {
   const { userId, roles } = params;
-  if (!userId || !roles) throw new Error(ServiceError.BAD_REQUEST);
+  if (!userId || !roles) throw new BaseError(ServiceError.SERVICE_BAD_REQUEST);
 
   const cleanDisabledProviders = () => {
     _.forEach(roles.adminProviders, (enabled, accountId) => {
@@ -47,7 +48,6 @@ export const refreshUserRoles = (
     ]);
 
     const accountService = service.getService(ServiceName.account);
-    if (!accountService) throw new Error(ServiceError.BAD_REQUEST);
 
     for (const accountId of accountIds) {
       const account = await accountService.repo.getAccount({
@@ -97,5 +97,5 @@ export const refreshUserRoles = (
   };
   await cleanRoleProviders();
 
-  return service.repo.updateUser({ userId, roles });
+  return service.repo.refreshUserRoles({ userId, roles });
 };

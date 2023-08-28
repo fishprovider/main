@@ -1,6 +1,5 @@
-import _ from 'lodash';
-
 import {
+  BaseError,
   type IUserService,
   ServiceError,
   type UpdateUserService,
@@ -8,30 +7,29 @@ import {
 
 export const updateUser = (
   service: IUserService,
-): UpdateUserService => async (params) => {
-  const { roles, starProviders, ...rest } = params;
-  const { userId, email } = rest;
-  if (!(userId || email)) throw new Error(ServiceError.BAD_REQUEST);
+): UpdateUserService => async (params, roles) => {
+  const { userId, email, starProvider } = params;
+  if (!(userId || email)) throw new BaseError(ServiceError.SERVICE_BAD_REQUEST);
 
-  if (starProviders) {
-    if (!roles) throw new Error(ServiceError.BAD_REQUEST);
+  if (starProvider) {
+    const hasAccess = () => {
+      if (!roles) return false;
+      if (roles.adminProviders?.[starProvider.accountId] === undefined
+        && roles.traderProviders?.[starProvider.accountId] === undefined
+        && roles.protectorProviders?.[starProvider.accountId] === undefined
+        && roles.viewerProviders?.[starProvider.accountId] === undefined
+      ) return false;
+      return true;
+    };
 
-    const userRoleProviderIds = _.keyBy(_.uniq([
-      ..._.keys(roles.adminProviders),
-      ..._.keys(roles.traderProviders),
-      ..._.keys(roles.protectorProviders),
-      ..._.keys(roles.viewerProviders),
-    ]));
-    _.forEach(starProviders, (enabled, providerId) => {
-      if (!enabled || !userRoleProviderIds[providerId]) {
-        _.unset(starProviders, providerId);
-      }
-    });
     return service.repo.updateUser({
-      ...rest,
-      starProviders,
+      ...params,
+      starProvider: {
+        ...starProvider,
+        enabled: hasAccess() && starProvider.enabled,
+      },
     });
   }
 
-  return service.repo.updateUser(rest);
+  return service.repo.updateUser(params);
 };

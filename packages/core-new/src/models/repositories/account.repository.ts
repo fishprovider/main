@@ -1,4 +1,6 @@
-import type { Account, Projection } from '..';
+import type {
+  Account, AccountMember, AccountMemberInvite, Projection,
+} from '..';
 
 export interface GetAccountParams {
   accountId: string,
@@ -9,23 +11,17 @@ export interface GetAccountParams {
 export interface UpdateAccountParams {
   accountId: string,
   name?: string,
-  returnDoc?: boolean,
-}
-
-export interface JoinAccountParams {
-  accountId: string,
-  email: string,
+  addMember?: AccountMember,
+  removeMemberInvite?: AccountMemberInvite,
   returnDoc?: boolean,
 }
 
 export interface AccountRepository {
   getAccount: (params: GetAccountParams) => Promise<Partial<Account> | null>;
   updateAccount: (params: UpdateAccountParams) => Promise<Partial<Account>>;
-  joinAccount: (params: JoinAccountParams) => Promise<Partial<Account>>;
 }
 
 export const accountRepoDefault: AccountRepository = {
   getAccount: async () => null,
   updateAccount: async () => ({}),
-  joinAccount: async () => ({}),
 };

@@ -2,23 +2,18 @@ import {
   type Account,
   AccountError,
   AccountViewType,
+  BaseError,
   type GetAccountService,
   getRoleProvider,
   type IAccountService,
   type Projection,
   RepositoryError,
-  ServiceError,
   validateProjection,
 } from '../..';
 
 export const getAccount = (
   service: IAccountService,
 ): GetAccountService => async (params, user) => {
-  const { accountId } = params;
-  if (!accountId) {
-    throw new Error(ServiceError.BAD_REQUEST);
-  }
-
   const projection: Projection<Account> = {
     ...params.projection,
     config: 0,
@@ -30,11 +25,11 @@ export const getAccount = (
   });
 
   if (!account) {
-    throw new Error(AccountError.ACCOUNT_NOT_FOUND);
+    throw new BaseError(AccountError.ACCOUNT_NOT_FOUND);
   }
 
   if (!validateProjection(projection, account)) {
-    throw new Error(RepositoryError.BAD_RESULT);
+    throw new BaseError(RepositoryError.REPOSITORY_BAD_RESULT);
   }
 
   const { isManagerWeb } = getRoleProvider(user?.roles);
@@ -57,7 +52,7 @@ export const getAccount = (
     return false;
   };
   if (!checkAccess()) {
-    throw new Error(AccountError.ACCOUNT_ACCESS_DENIED);
+    throw new BaseError(AccountError.ACCOUNT_ACCESS_DENIED);
   }
 
   return account;

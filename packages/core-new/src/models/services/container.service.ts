@@ -1,5 +1,7 @@
-import type {
-  BaseService, ServiceList, ServiceName, Services,
+import {
+  BaseError,
+  type BaseService, ServiceError,
+  type ServiceList, type ServiceName, type Services,
 } from '../..';
 
 export interface IContainerService extends BaseService {
@@ -10,3 +12,12 @@ export interface IContainerService extends BaseService {
     ...args: any[]
   ) => void
 }
+
+export const containerServiceDefault: IContainerService = {
+  name: 'container',
+  services: {},
+  register: () => undefined,
+  getService: () => {
+    throw new BaseError(ServiceError.SERVICE_UNKNOWN);
+  },
+};

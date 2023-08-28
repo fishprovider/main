@@ -1,6 +1,7 @@
 import _ from 'lodash';
 
 import {
+  BaseError,
   type GetUserService,
   type IUserService,
   type Projection,
@@ -38,7 +39,7 @@ export const getUser = (
   service: IUserService,
 ): GetUserService => async (params) => {
   const { userId, email } = params;
-  if (!(userId || email)) throw new Error(ServiceError.BAD_REQUEST);
+  if (!(userId || email)) throw new BaseError(ServiceError.SERVICE_BAD_REQUEST);
 
   const projection = {
     ...getUserAllowReadFieldsProjection,
@@ -51,11 +52,11 @@ export const getUser = (
   });
 
   if (!user) {
-    throw new Error(UserError.USER_NOT_FOUND);
+    throw new BaseError(UserError.USER_NOT_FOUND);
   }
 
   if (!validateProjection(projection, user)) {
-    throw new Error(RepositoryError.BAD_RESULT);
+    throw new BaseError(RepositoryError.REPOSITORY_BAD_RESULT);
   }
 
   return user;

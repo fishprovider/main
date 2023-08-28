@@ -21,9 +21,9 @@ export interface UserRepository {
 
 export const DefaultUserRepository: UserRepository = {
   getUser: () => {
-    throw new Error(RepositoryError.NOT_IMPLEMENTED);
+    throw new Error(RepositoryError.REPOSITORY_BAD_RESULT);
   },
   updateUser: () => {
-    throw new Error(RepositoryError.NOT_IMPLEMENTED);
+    throw new Error(RepositoryError.REPOSITORY_BAD_RESULT);
   },
 };

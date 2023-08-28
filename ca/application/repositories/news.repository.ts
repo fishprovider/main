@@ -26,13 +26,13 @@ export interface NewsRepository {
 
 export const DefaultNewsRepository: NewsRepository = {
   getNews: () => {
-    throw new Error(RepositoryError.NOT_IMPLEMENTED);
+    throw new Error(RepositoryError.REPOSITORY_BAD_RESULT);
   },
   setNews: () => {
-    throw new Error(RepositoryError.NOT_IMPLEMENTED);
+    throw new Error(RepositoryError.REPOSITORY_BAD_RESULT);
   },
   watchNews: () => {
-    throw new Error(RepositoryError.NOT_IMPLEMENTED);
+    throw new Error(RepositoryError.REPOSITORY_BAD_RESULT);
   },
 };
 

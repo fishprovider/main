@@ -1,5 +1,5 @@
 import {
-  type IContainerService,
+  containerServiceDefault,
   type IUserService,
   ServiceName,
   type UserRepository,
@@ -16,8 +16,8 @@ export class UserService implements IUserService {
   updateUser = updateUser(this);
   refreshUserRoles = refreshUserRoles(this);
 
-  constructor(repo: UserRepository, container?: IContainerService) {
+  constructor(repo: UserRepository, container = containerServiceDefault) {
     this.repo = repo;
-    this.getService = <N extends ServiceName>(name: N) => container?.getService(name);
+    this.getService = <N extends ServiceName>(name: N) => container.getService(name);
   }
 }

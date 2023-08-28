@@ -35,12 +35,12 @@ export interface AccountRepository {
 
 export const DefaultAccountRepository: AccountRepository = {
   getAccount: () => {
-    throw new Error(RepositoryError.NOT_IMPLEMENTED);
+    throw new Error(RepositoryError.REPOSITORY_BAD_RESULT);
   },
   getAccountExternal: () => {
-    throw new Error(RepositoryError.NOT_IMPLEMENTED);
+    throw new Error(RepositoryError.REPOSITORY_BAD_RESULT);
   },
   updateAccount: () => {
-    throw new Error(RepositoryError.NOT_IMPLEMENTED);
+    throw new Error(RepositoryError.REPOSITORY_BAD_RESULT);
   },
 };

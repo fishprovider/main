@@ -14,5 +14,5 @@ export type Services = Partial<ServiceList>;
 
 export interface BaseService {
   name: string;
-  getService: <N extends ServiceName>(name: N) => ServiceList[N] | undefined;
+  getService: <N extends ServiceName>(name: N) => ServiceList[N];
 }

@@ -1,4 +1,6 @@
 import {
+  BaseError,
+  ContainerService,
   RepositoryError,
   ServiceError,
   UserError,
@@ -7,16 +9,16 @@ import {
 } from '../..';
 
 test('getUser with bad request', async () => {
-  const userService = new UserService(userRepoDefault);
+  const userService = new UserService(userRepoDefault, new ContainerService());
   await expect(userService.getUser({
-  })).rejects.toThrow(ServiceError.BAD_REQUEST);
+  })).rejects.toThrow(new BaseError(ServiceError.SERVICE_BAD_REQUEST));
 });
 
 test('getUser throws no user', async () => {
   const userService = new UserService(userRepoDefault);
   await expect(userService.getUser({
     userId: 'testId',
-  })).rejects.toThrow(UserError.USER_NOT_FOUND);
+  })).rejects.toThrow(new BaseError(UserError.USER_NOT_FOUND));
 });
 
 test('getUser throws bad result', async () => {
@@ -27,7 +29,7 @@ test('getUser throws bad result', async () => {
   });
   await expect(userService.getUser({
     userId,
-  })).rejects.toThrow(RepositoryError.BAD_RESULT);
+  })).rejects.toThrow(new BaseError(RepositoryError.REPOSITORY_BAD_RESULT));
 });
 
 test('getUser returns a user', async () => {

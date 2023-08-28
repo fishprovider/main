@@ -1,5 +1,7 @@
 import {
+  BaseError,
   ContainerService,
+  ServiceError,
   ServiceName,
   userRepoDefault,
   UserService,
@@ -18,5 +20,5 @@ test('ContainerService', async () => {
   expect(extractService).toBeInstanceOf(UserService);
 
   expect(() => user?.getService(ServiceName.account))
-    .toThrow('Unknown Service account');
+    .toThrow(new BaseError(ServiceError.SERVICE_UNKNOWN, ServiceName.account));
 });

@@ -1,5 +1,7 @@
 import {
+  BaseError,
   type IContainerService,
+  ServiceError,
   type ServiceList,
   type ServiceName,
   type Services,
@@ -21,7 +23,7 @@ export class ContainerService implements IContainerService {
   getService <N extends ServiceName>(name: N) {
     const service = this.services[name];
     if (!service) {
-      throw new Error(`Unknown Service ${name}`);
+      throw new BaseError(ServiceError.SERVICE_UNKNOWN, name);
     }
     return service;
   }
