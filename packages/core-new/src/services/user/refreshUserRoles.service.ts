@@ -2,18 +2,14 @@ import _ from 'lodash';
 
 import {
   AccountRoles,
-  BaseError,
   type IUserService,
   type RefreshUserRolesService,
   ServiceName,
-  UserError,
 } from '../..';
 
 export const refreshUserRoles = (
   service: IUserService,
 ): RefreshUserRolesService => async (userSession) => {
-  if (!userSession._id) throw new BaseError(UserError.USER_ACCESS_DENIED);
-
   const { _id: userId, roles = {} } = userSession;
 
   const cleanDisabledProviders = () => {

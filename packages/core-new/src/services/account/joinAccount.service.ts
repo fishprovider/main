@@ -5,14 +5,11 @@ import {
   type JoinAccountService,
   ServiceError,
   ServiceName,
-  UserError,
 } from '../..';
 
 export const joinAccount = (
   service: IAccountService,
 ): JoinAccountService => async (params, userSession) => {
-  if (!userSession._id) throw new BaseError(UserError.USER_ACCESS_DENIED);
-
   if (!userSession.email || !userSession.name) {
     throw new BaseError(ServiceError.SERVICE_BAD_REQUEST);
   }

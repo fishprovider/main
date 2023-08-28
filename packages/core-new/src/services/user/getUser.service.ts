@@ -13,10 +13,9 @@ import {
 export const getUser = (
   service: IUserService,
 ): GetUserService => async (params, userSession) => {
-  if (!userSession._id) throw new BaseError(UserError.USER_ACCESS_DENIED);
-
   const { userId, email } = params;
   if (!(userId || email)) throw new BaseError(ServiceError.SERVICE_BAD_REQUEST);
+  if (userId !== userSession._id) throw new BaseError(UserError.USER_ACCESS_DENIED);
 
   const projection: Projection<User> = {
     ...params.projection,

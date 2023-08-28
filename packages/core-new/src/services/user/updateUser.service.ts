@@ -9,10 +9,9 @@ import {
 export const updateUser = (
   service: IUserService,
 ): UpdateUserService => async (params, userSession) => {
-  if (!userSession._id) throw new BaseError(UserError.USER_ACCESS_DENIED);
-
   const { userId, email, starProvider } = params;
   if (!(userId || email)) throw new BaseError(ServiceError.SERVICE_BAD_REQUEST);
+  if (userId !== userSession._id) throw new BaseError(UserError.USER_ACCESS_DENIED);
 
   if (starProvider) {
     const { roles } = userSession;
