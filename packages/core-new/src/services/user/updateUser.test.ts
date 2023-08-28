@@ -1,19 +1,17 @@
-import { ServiceError, userRepositoryDefault } from '@fishprovider/core-new';
-
-import { UserService } from '.';
+import {
+  ServiceError,
+  userRepoDefault,
+  UserService,
+} from '../..';
 
 test('updateUser with bad request', async () => {
-  const userService = new UserService({
-    userRepository: userRepositoryDefault,
-  });
+  const userService = new UserService(userRepoDefault);
   await expect(userService.updateUser({
   })).rejects.toThrow(ServiceError.BAD_REQUEST);
 });
 
 test('updateUser updates starProviders with bad request', async () => {
-  const userService = new UserService({
-    userRepository: userRepositoryDefault,
-  });
+  const userService = new UserService(userRepoDefault);
   await expect(userService.updateUser({
     userId: 'testId',
     starProviders: {},
@@ -24,10 +22,8 @@ test('updateUser returns a doc', async () => {
   const userId = 'testId';
   const name = 'testName';
   const userService = new UserService({
-    userRepository: {
-      ...userRepositoryDefault,
-      updateUser: async () => ({ _id: userId, name }),
-    },
+    ...userRepoDefault,
+    updateUser: async () => ({ _id: userId, name }),
   });
   const res = await userService.updateUser({
     userId,

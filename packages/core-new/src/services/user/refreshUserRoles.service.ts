@@ -1,20 +1,18 @@
-import {
-  AccountRoles,
-  ServiceError,
-  type UpdateUserParams,
-} from '@fishprovider/core-new';
 import _ from 'lodash';
 
-import { UserService } from '.';
+import {
+  AccountRoles,
+  type IUserService,
+  type RefreshUserRolesService,
+  ServiceError,
+  ServiceName,
+} from '../..';
 
 export const refreshUserRoles = (
-  userService: UserService,
-) => async (params: UpdateUserParams) => {
+  service: IUserService,
+): RefreshUserRolesService => async (params) => {
   const { userId, roles } = params;
   if (!userId || !roles) throw new Error(ServiceError.BAD_REQUEST);
-
-  const { userRepository, accountRepository } = userService;
-  if (!accountRepository) throw new Error(ServiceError.BAD_REQUEST);
 
   const cleanDisabledProviders = () => {
     _.forEach(roles.adminProviders, (enabled, accountId) => {
@@ -48,8 +46,11 @@ export const refreshUserRoles = (
       ..._.keys(roles.viewerProviders),
     ]);
 
+    const accountService = service.getService(ServiceName.account);
+    if (!accountService) throw new Error(ServiceError.BAD_REQUEST);
+
     for (const accountId of accountIds) {
-      const account = await accountRepository.getAccount({
+      const account = await accountService.repo.getAccount({
         accountId,
         memberId: userId,
         projection: {
@@ -96,5 +97,5 @@ export const refreshUserRoles = (
   };
   await cleanRoleProviders();
 
-  return userRepository.updateUser({ userId, roles });
+  return service.repo.updateUser({ userId, roles });
 };

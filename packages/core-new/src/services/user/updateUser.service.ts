@@ -1,19 +1,17 @@
-import {
-  ServiceError,
-  type UpdateUserParams,
-} from '@fishprovider/core-new';
 import _ from 'lodash';
 
-import { UserService } from '.';
+import {
+  type IUserService,
+  ServiceError,
+  type UpdateUserService,
+} from '../..';
 
 export const updateUser = (
-  userService: UserService,
-) => async (params: UpdateUserParams) => {
+  service: IUserService,
+): UpdateUserService => async (params) => {
   const { roles, starProviders, ...rest } = params;
   const { userId, email } = rest;
   if (!(userId || email)) throw new Error(ServiceError.BAD_REQUEST);
-
-  const { userRepository } = userService;
 
   if (starProviders) {
     if (!roles) throw new Error(ServiceError.BAD_REQUEST);
@@ -29,11 +27,11 @@ export const updateUser = (
         _.unset(starProviders, providerId);
       }
     });
-    return userRepository.updateUser({
+    return service.repo.updateUser({
       ...rest,
       starProviders,
     });
   }
 
-  return userRepository.updateUser(rest);
+  return service.repo.updateUser(rest);
 };

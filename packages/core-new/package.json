@@ -12,7 +12,9 @@
     "type-check": "tsc --noEmit",
     "test": "cross-env NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules npx jest",
     "clean": "rm -rf dist && mkdir dist",
-    "build": "tsc -p tsconfig.build.json"
+    "build": "tsc -p tsconfig.build.json",
+    "ci-lint": "eslint --cache --fix",
+    "ci-type-check": "tsc-files --noEmit"
   },
   "devDependencies": {
     "@tsconfig/node-lts": "^18.12.3",
