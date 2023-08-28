@@ -54,6 +54,6 @@ export const joinAccount = (
       updatedAt: new Date(),
       createdAt: new Date(),
     },
-    removeMemberInvite: memberInvite,
+    removeMemberInviteEmail: memberInvite.email,
   }, userSession);
 };

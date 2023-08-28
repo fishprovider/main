@@ -1,5 +1,5 @@
 import type {
-  Account, AccountMember, AccountMemberInvite, BaseGetParams, BaseUpdateParams,
+  Account, AccountMember, BaseGetParams, BaseUpdateParams,
 } from '..';
 
 export interface AccountBaseGetParams extends BaseGetParams<Account> {
@@ -16,8 +16,8 @@ export interface GetAccountParams extends AccountBaseGetParams {
 export interface UpdateAccountParams extends AccountBaseUpdateParams {
   name?: string,
   addMember?: AccountMember,
-  removeMember?: AccountMember,
-  removeMemberInvite?: AccountMemberInvite,
+  removeMemberId?: string,
+  removeMemberInviteEmail?: string,
 }
 
 export interface AccountRepository {

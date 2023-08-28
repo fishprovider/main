@@ -1,6 +1,7 @@
 import type {
   Account, AccountRepository, GetAccountParams, UpdateAccountParams,
 } from '@fishprovider/core-new';
+import { Filter, ReturnDocument, UpdateFilter } from 'mongodb';
 
 import { mongo } from '../main';
 
@@ -23,7 +24,43 @@ const getAccount = async (params: GetAccountParams) => {
 };
 
 const updateAccount = async (params: UpdateAccountParams) => {
-  throw new Error('Not implemented', { cause: params });
+  const {
+    accountId, name, addMember, removeMemberId, removeMemberInviteEmail,
+    returnDoc, projection,
+  } = params;
+
+  const filter: Filter<Account> = {
+    accountId,
+  };
+
+  const updateFilter: UpdateFilter<Account> = {
+    $set: {
+      ...(name && { name }),
+    },
+    $push: {
+      ...(addMember && { members: addMember }),
+    },
+    $pull: {
+      ...(removeMemberId && {
+        members: { userId: removeMemberId },
+      }),
+      ...(removeMemberInviteEmail && {
+        memberInvites: { email: removeMemberInviteEmail },
+      }),
+    },
+  };
+
+  const { db } = await mongo.get();
+  const collection = db.collection<Account>('accounts');
+
+  if (returnDoc) {
+    return collection.findOneAndUpdate(filter, updateFilter, {
+      returnDocument: ReturnDocument.AFTER,
+      projection,
+    });
+  }
+  await collection.updateOne(filter, updateFilter);
+  return {};
 };
 
 export const MongoAccountRepository: AccountRepository = {
