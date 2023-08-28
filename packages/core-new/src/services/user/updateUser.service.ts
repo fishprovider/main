@@ -18,12 +18,17 @@ export const updateUser = (
 
   if (starProvider) {
     const { roles } = userSession;
+    const { accountId, enabled } = starProvider;
+
     const hasAccess = () => {
       if (!roles) return false;
-      if (roles.adminProviders?.[starProvider.accountId] === undefined
-        && roles.traderProviders?.[starProvider.accountId] === undefined
-        && roles.protectorProviders?.[starProvider.accountId] === undefined
-        && roles.viewerProviders?.[starProvider.accountId] === undefined
+      const {
+        adminProviders, traderProviders, protectorProviders, viewerProviders,
+      } = roles;
+      if (adminProviders?.[accountId] === undefined
+        && traderProviders?.[accountId] === undefined
+        && protectorProviders?.[accountId] === undefined
+        && viewerProviders?.[accountId] === undefined
       ) return false;
       return true;
     };
@@ -32,7 +37,7 @@ export const updateUser = (
       ...params,
       starProvider: {
         ...starProvider,
-        enabled: hasAccess() && starProvider.enabled,
+        enabled: hasAccess() && enabled,
       },
     });
   }
