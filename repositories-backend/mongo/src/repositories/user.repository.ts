@@ -33,7 +33,7 @@ const updateUser = async (params: UpdateUserParams) => {
     returnDoc, projection,
   } = params;
 
-  if (!userId && !email) throw new Error(RepositoryError.REPOSITORY_BAD_REQUEST);
+  if (!userId && !email) throw new Error(RepositoryError.REPOSITORY_BAD_RESULT);
 
   const filter: Filter<User> = {
     ...(userId && { _id: userId }),

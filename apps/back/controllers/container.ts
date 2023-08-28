@@ -1,11 +1,11 @@
 import {
   AccountService, ContainerService, ServiceName, UserService,
 } from '@fishprovider/core-new';
-import { MongoUserRepository } from '@fishprovider/repository-mongo';
+import { MongoAccountRepository, MongoUserRepository } from '@fishprovider/repository-mongo';
 
 const container = new ContainerService();
 container.register(ServiceName.user, UserService, MongoUserRepository);
-container.register(ServiceName.account, AccountService, MongoUserRepository);
+container.register(ServiceName.account, AccountService, MongoAccountRepository);
 
 export const getContainer = () => container;
 export const getUserService = () => container.getService(ServiceName.user);
