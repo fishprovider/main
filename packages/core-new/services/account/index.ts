@@ -4,12 +4,13 @@ import {
   type IContainerService,
   ServiceName,
 } from '../..';
+import { getAccount } from './getAccount.service';
 
 export class AccountService implements IAccountService {
   name = ServiceName.account;
   repo;
   getService;
-  getAccount = (() => () => { throw new Error('Not implemented'); })();
+  getAccount = getAccount(this);
 
   constructor(repo: AccountRepository, container?: IContainerService) {
     this.repo = repo;

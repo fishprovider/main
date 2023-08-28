@@ -45,12 +45,10 @@ export const getUser = (
     ..._.pick(params.projection, getUserAllowReadFields),
   };
 
-  const RepoParams = {
+  const user = await service.repo.getUser({
     ...params,
     projection,
-  };
-
-  const user = await service.repo.getUser(RepoParams);
+  });
 
   if (!user) {
     throw new Error(UserError.USER_NOT_FOUND);
