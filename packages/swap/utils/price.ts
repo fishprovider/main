@@ -289,7 +289,7 @@ const savePrice = async (providerType: ProviderType, symbol: string, price: Redi
       runs: savePriceRuns,
       runId: docId,
       timeUnit: 'seconds',
-      timeAmt: Math.random() * 30 + 30, // random from 30s to 60s
+      timeAmt: Math.random() * 300 + 300, // random from 5m to 10m
       checkIds: [],
     })
   ) return;
