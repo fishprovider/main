@@ -30,6 +30,7 @@ const apps = appConfigs.map(({
   },
   script: 'npm',
   args: `run start -w ${workspace}/${name}`,
+  cron_restart: '0 0 * * *',
 }));
 
 const deployConfig = {
