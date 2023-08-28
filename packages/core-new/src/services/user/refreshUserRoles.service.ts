@@ -50,7 +50,7 @@ export const refreshUserRoles = (
     const accountService = service.getService(ServiceName.account);
 
     for (const accountId of accountIds) {
-      const account = await accountService.repo.getAccount({
+      const account = await accountService.getAccount({
         accountId,
         memberId: userId,
         projection: {
