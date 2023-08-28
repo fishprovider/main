@@ -38,7 +38,7 @@ export const getAccount = (
     providerViewType, userId, members, memberInvites, deleted,
   } = account;
 
-  const checkAccess = () => {
+  const hasAccess = () => {
     if (isManagerWeb) return true;
     if (deleted) return false;
     if (providerViewType === AccountViewType.public) return true;
@@ -51,7 +51,7 @@ export const getAccount = (
 
     return false;
   };
-  if (!checkAccess()) {
+  if (!hasAccess()) {
     throw new BaseError(AccountError.ACCOUNT_ACCESS_DENIED);
   }
 
