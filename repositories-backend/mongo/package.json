@@ -1,0 +1,22 @@
+{
+  "name": "@fishprovider/repository-mongo",
+  "version": "7.0.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "lint": "eslint --cache --fix .",
+    "type-check": "tsc --noEmit",
+    "test": "echo repository-mongo",
+    "clean-build": "rm -rf dist && mkdir dist",
+    "build": "tsc -p tsconfig.build.json"
+  },
+  "dependencies": {
+    "@fishprovider/core-new": "*",
+    "moment": "^2.29.4",
+    "mongodb": "^5.7.0"
+  }
+}

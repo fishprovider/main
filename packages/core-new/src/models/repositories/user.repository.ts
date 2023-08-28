@@ -16,6 +16,7 @@ export interface GetUserParams extends UserBaseGetParams {
 export interface UpdateUserParams extends UserBaseUpdateParams {
   name?: string
   picture?: string
+  roles?: UserRoles
   starProvider?: {
     accountId: string
     enabled: boolean
@@ -24,7 +25,6 @@ export interface UpdateUserParams extends UserBaseUpdateParams {
     accountId: string
     role: AccountRoles
   },
-  roles?: UserRoles
 }
 
 export interface UserRepository {
