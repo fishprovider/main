@@ -3,7 +3,6 @@ import { AccountRepository, UserRepository } from '..';
 export const userRepoDefault: UserRepository = {
   getUser: async () => null,
   updateUser: async () => ({}),
-  refreshUserRoles: async () => ({}),
 };
 
 export const accountRepoDefault: AccountRepository = {
