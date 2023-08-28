@@ -25,14 +25,7 @@
     "ci-type-check": "tsc-files --noEmit"
   },
   "dependencies": {
-    "@fishprovider/adapter-frontend": "*",
-    "@fishprovider/application": "*",
     "@fishprovider/cross": "*",
-    "@fishprovider/core-new": "*",
-    "@fishprovider/framework-fish-api": "*",
-    "@fishprovider/framework-local": "*",
-    "@fishprovider/framework-offline-first": "*",
-    "@fishprovider/framework-store": "*",
     "electron-updater": "6.1.4"
   },
   "devDependencies": {

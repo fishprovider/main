@@ -10,13 +10,6 @@ config.watchFolders = [
   path.resolve(workspaceRoot, 'node_modules'),
   path.resolve(workspaceRoot, 'packages', 'utils'),
   path.resolve(workspaceRoot, 'packages', 'cross'),
-  path.resolve(workspaceRoot, 'core', 'models'),
-  path.resolve(workspaceRoot, 'ca', 'application'),
-  path.resolve(workspaceRoot, 'adapters', 'frontend'),
-  path.resolve(workspaceRoot, 'frameworks-frontend', 'local'),
-  path.resolve(workspaceRoot, 'frameworks-frontend', 'store'),
-  path.resolve(workspaceRoot, 'frameworks-frontend', 'fish-api'),
-  path.resolve(workspaceRoot, 'frameworks-frontend', 'offline-first'),
 ];
 
 config.resolver.nodeModulesPaths = [
