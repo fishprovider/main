@@ -4,7 +4,6 @@
   "private": true,
   "workspaces": [
     "ca/*",
-    "core/*",
     "adapters/*",
     "frameworks-backend/*",
     "frameworks-frontend/*",
