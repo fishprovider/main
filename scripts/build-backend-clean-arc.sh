@@ -15,6 +15,9 @@ function adapters() {
 function frameworks() {
   npm run build -w frameworks-backend/redis &
   npm run build -w frameworks-backend/mongo &
+
+  # npm run build -w repositories-backend/redis &
+  npm run build -w repositories-backend/mongo &
   wait
 
   npm run build -w frameworks-backend/cache-first
