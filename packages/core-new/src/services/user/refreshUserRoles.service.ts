@@ -103,7 +103,10 @@ export const refreshUserRoles = (
 
   return service.updateUser(
     repositories,
-    { userId, roles },
+    {
+      userId,
+      roles,
+    },
     userSession,
   );
 };
