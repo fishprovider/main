@@ -4,12 +4,12 @@ import { apiGet } from '~libs/api';
 import storeUser from '~stores/user';
 
 const getUser = async (payload: {
-  reload?: boolean;
+  userId?: string;
 }) => {
-  const updatedInfo = await apiGet<User>('/v3/user/getUser', payload);
+  const user = await apiGet<Partial<User>>('/v3/user/getUser', payload);
   const info = {
     ...storeUser.getState().info,
-    ...updatedInfo,
+    ...user,
   };
   storeUser.mergeState({ info });
   return info;

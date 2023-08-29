@@ -9,19 +9,12 @@ const updateUser = async (payload: {
     enabled: boolean;
   };
 }) => {
-  const oldInfo = {
-    ...storeUser.getState().info,
-  };
+  const user = await apiPost<Partial<User>>('/v3/user/updateUser', payload);
   const info = {
-    ...oldInfo,
-    ...payload,
+    ...storeUser.getState().info,
+    ...user,
   };
   storeUser.mergeState({ info });
-  const res = await apiPost<User>('/v3/user/updateUser', payload);
-  if (!res) {
-    storeUser.mergeState({ info: oldInfo });
-    return oldInfo;
-  }
   return info;
 };
 
