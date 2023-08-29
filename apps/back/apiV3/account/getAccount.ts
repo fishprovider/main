@@ -1,4 +1,4 @@
-import { Account, getAccount } from '@fishprovider/core-new';
+import { Account, getAccountService } from '@fishprovider/core-new';
 import { MongoAccountRepository } from '@fishprovider/repository-mongo';
 import { z } from 'zod';
 
@@ -11,7 +11,7 @@ const handler: ApiHandler<Partial<Account>> = async (data, userSession) => {
   }).strict()
     .parse(data);
 
-  const result = await getAccount({
+  const result = await getAccountService({
     params,
     repositories: { account: MongoAccountRepository },
     context: { userSession },
