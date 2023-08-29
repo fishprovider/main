@@ -1,21 +1,15 @@
 import {
   BaseError,
-  type IUserService,
-  ServiceError,
   type UpdateUserService,
   UserError,
 } from '../..';
 
-export const updateUser = (
-  _service: IUserService,
-): UpdateUserService => async (
-  repositories,
-  params,
-  userSession,
-) => {
-  const { userId, email, starProvider } = params;
-  if (!(userId || email)) throw new BaseError(ServiceError.SERVICE_BAD_REQUEST);
-  if (userId !== userSession._id) throw new BaseError(UserError.USER_ACCESS_DENIED);
+export const updateUser: UpdateUserService = async ({
+  params, repositories, context,
+}) => {
+  if (!context?.userSession?._id) throw new BaseError(UserError.USER_ACCESS_DENIED);
+  const { userSession } = context;
+  const { starProvider } = params;
 
   if (starProvider) {
     const { roles } = userSession;

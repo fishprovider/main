@@ -10,6 +10,10 @@ export interface UserBaseGetParams extends BaseGetParams<User> {
 export interface UserBaseUpdateParams extends BaseUpdateParams, UserBaseGetParams {
 }
 
+//
+// function params
+//
+
 export interface GetUserParams extends UserBaseGetParams {
 }
 

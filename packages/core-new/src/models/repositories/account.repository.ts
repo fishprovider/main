@@ -9,6 +9,10 @@ export interface AccountBaseGetParams extends BaseGetParams<Account> {
 export interface AccountBaseUpdateParams extends BaseUpdateParams, AccountBaseGetParams {
 }
 
+//
+// function params
+//
+
 export interface GetAccountParams extends AccountBaseGetParams {
   memberId?: string,
 }

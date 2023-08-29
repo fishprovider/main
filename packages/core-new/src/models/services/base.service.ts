@@ -1,21 +1,4 @@
-import type { IAccountService, IUserService, UserRoles } from '../..';
-
-export enum ServiceName {
-  user = 'user',
-  account = 'account',
-}
-
-export interface ServiceList {
-  [ServiceName.user]: IUserService;
-  [ServiceName.account]: IAccountService;
-}
-
-export type Services = Partial<ServiceList>;
-
-export interface BaseService {
-  name: string;
-  getService: <N extends ServiceName>(name: N) => ServiceList[N];
-}
+import type { UserRoles } from '../..';
 
 export interface UserSession {
   _id: string;
@@ -25,4 +8,16 @@ export interface UserSession {
 
   roles?: UserRoles;
   starProviders?: Record<string, boolean>;
+}
+
+export interface ServiceContext {
+  userSession?: UserSession;
+}
+
+export interface BaseServiceParams {
+  context?: ServiceContext;
+}
+
+export interface BaseService {
+  name: string;
 }

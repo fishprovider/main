@@ -2,17 +2,16 @@ import _ from 'lodash';
 
 import {
   AccountRoles,
-  type IUserService,
+  BaseError,
   type RefreshUserRolesService,
-  ServiceName,
+  UserError,
 } from '../..';
 
-export const refreshUserRoles = (
-  service: IUserService,
-): RefreshUserRolesService => async (
-  repositories,
-  userSession,
-) => {
+export const refreshUserRoles: RefreshUserRolesService = async ({
+  repositories, context,
+}) => {
+  if (!context?.userSession?._id) throw new BaseError(UserError.USER_ACCESS_DENIED);
+  const { userSession } = context;
   const { _id: userId, roles = {} } = userSession;
 
   const cleanDisabledProviders = () => {
@@ -47,20 +46,14 @@ export const refreshUserRoles = (
       ..._.keys(roles.viewerProviders),
     ]);
 
-    const accountService = service.getService(ServiceName.account);
-
     for (const accountId of accountIds) {
-      const account = await accountService.getAccount(
-        repositories,
-        {
-          accountId,
-          memberId: userId,
-          projection: {
-            members: 1,
-          },
+      const account = await repositories.account.getAccount({
+        accountId,
+        memberId: userId,
+        projection: {
+          members: 1,
         },
-        userSession,
-      );
+      });
       if (!account) {
         _.unset(roles.adminProviders, accountId);
         _.unset(roles.traderProviders, accountId);
@@ -101,12 +94,5 @@ export const refreshUserRoles = (
   };
   await cleanRoleProviders();
 
-  return service.updateUser(
-    repositories,
-    {
-      userId,
-      roles,
-    },
-    userSession,
-  );
+  return repositories.user.updateUser({ userId, roles });
 };

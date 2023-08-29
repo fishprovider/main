@@ -1,37 +1,31 @@
-import {
-  BaseError,
-  ServiceError,
-  UserService,
-} from '../..';
-import { containerServiceDefault, userRepoDefault, userSessionDefault } from '../../tests';
+import { BaseError, updateUser, UserError } from '../..';
+import { userServiceBaseParams, userSessionDefault } from '../../tests';
 
 test('updateUser with bad request', async () => {
-  const userService = new UserService(containerServiceDefault);
-  await expect(userService.updateUser(
-    { user: userRepoDefault },
-    {},
-    userSessionDefault,
-  )).rejects.toThrow(new BaseError(ServiceError.SERVICE_BAD_REQUEST));
+  await expect(updateUser({
+    ...userServiceBaseParams,
+    context: undefined,
+  })).rejects.toThrow(new BaseError(UserError.USER_ACCESS_DENIED));
 });
 
 test('updateUser returns a doc', async () => {
-  const userId = 'testId';
-  const name = 'testName';
-  const userService = new UserService(containerServiceDefault);
-  const res = await userService.updateUser(
-    {
-      user: {
-        ...userRepoDefault,
-        updateUser: async () => ({ _id: userId, name }),
-      },
-    },
-    {
-      userId,
+  const name = 'new name';
+  const res = await updateUser({
+    ...userServiceBaseParams,
+    params: {
       name,
       returnDoc: true,
     },
-    userSessionDefault,
-  );
-  expect(res._id).toBe(userId);
+    repositories: {
+      user: {
+        ...userServiceBaseParams.repositories.user,
+        updateUser: async () => ({
+          ...userSessionDefault,
+          name,
+        }),
+      },
+    },
+  });
+  expect(res._id).toBe(userSessionDefault._id);
   expect(res.name).toBe(name);
 });

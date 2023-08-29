@@ -1,7 +1,9 @@
-import { UserSession } from '..';
+import { serviceContextDefault, userRepoDefault } from '.';
 
-export const userSessionDefault: UserSession = {
-  _id: 'testId',
-  email: 'testEmail',
-  name: 'testName',
+export const userServiceBaseParams = {
+  params: {},
+  repositories: {
+    user: userRepoDefault,
+  },
+  context: serviceContextDefault,
 };

@@ -1,32 +1,33 @@
 import type {
-  Account, AccountRepository, BaseService, GetAccountParams,
-  UpdateAccountParams, UserRepository, UserSession,
+  Account, AccountRepository, BaseService, BaseServiceParams,
+  GetAccountParams, UpdateAccountParams, UserRepository,
 } from '..';
 
-export type GetAccountService = (
+export interface AccountServiceBaseParams extends BaseServiceParams {
   repositories: {
     account: AccountRepository
   },
+}
+
+//
+// function params
+//
+
+export type GetAccountService = (params: AccountServiceBaseParams & {
   params: GetAccountParams,
-  userSession?: UserSession,
-) => Promise<Partial<Account>>;
+}) => Promise<Partial<Account>>;
 
-export type UpdateAccountService = (
-  repositories: {
-    account: AccountRepository
-  },
+export type UpdateAccountService = (params: AccountServiceBaseParams & {
   params: UpdateAccountParams,
-  userSession: UserSession,
-) => Promise<Partial<Account>>;
+}) => Promise<Partial<Account>>;
 
-export type JoinAccountService = (
+export type JoinAccountService = (params: AccountServiceBaseParams & {
+  params: UpdateAccountParams,
   repositories: {
     account: AccountRepository
     user: UserRepository,
   },
-  params: UpdateAccountParams,
-  userSession: UserSession,
-) => Promise<Partial<Account>>;
+}) => Promise<Partial<Account>>;
 
 export interface IAccountService extends BaseService {
   getAccount: GetAccountService;

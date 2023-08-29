@@ -5,18 +5,13 @@ import {
   type GetAccountService,
   getProjectionBlacklist,
   getRoleProvider,
-  type IAccountService,
   RepositoryError,
   validateProjection,
 } from '../..';
 
-export const getAccount = (
-  _service: IAccountService,
-): GetAccountService => async (
-  repositories,
-  params,
-  userSession,
-) => {
+export const getAccount: GetAccountService = async ({
+  params, repositories, context,
+}) => {
   const projection = getProjectionBlacklist({
     config: 0,
   }, params.projection);
@@ -34,7 +29,7 @@ export const getAccount = (
     throw new BaseError(RepositoryError.REPOSITORY_BAD_RESULT);
   }
 
-  const { isManagerWeb } = getRoleProvider(userSession?.roles);
+  const { isManagerWeb } = getRoleProvider(context?.userSession?.roles);
 
   const {
     providerViewType, userId, members, memberInvites, deleted,
@@ -46,7 +41,8 @@ export const getAccount = (
     if (providerViewType === AccountViewType.public) return true;
 
     // for private accounts
-    if (!userSession?._id) return false;
+    if (!context?.userSession?._id) return false;
+    const { userSession } = context;
     if (userId === userSession._id) return true;
     if (members?.some((item) => item.userId === userSession._id)) return true;
     if (memberInvites?.some((item) => item.email === userSession.email)) return true;

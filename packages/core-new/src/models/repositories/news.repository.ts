@@ -14,8 +14,3 @@ export interface NewsRepository {
   getNews: (params: GetNewsParams) => Promise<News[] | null>;
   watchNews: <T>(params: WatchNewsParams<T>) => T;
 }
-
-export const newsRepoDefault: NewsRepository = {
-  getNews: async () => null,
-  watchNews: <any>({ selector: () => [] }),
-};

@@ -2,30 +2,23 @@ import {
   BaseError,
   getProjectionBlacklist,
   type GetUserService,
-  type IUserService,
   RepositoryError,
-  ServiceError,
   UserError,
   validateProjection,
 } from '../..';
 
-export const getUser = (
-  _service: IUserService,
-): GetUserService => async (
-  repositories,
-  params,
-  userSession,
-) => {
-  const { userId, email } = params;
-  if (!(userId || email)) throw new BaseError(ServiceError.SERVICE_BAD_REQUEST);
-  if (userId !== userSession._id) throw new BaseError(UserError.USER_ACCESS_DENIED);
+export const getUser: GetUserService = async ({
+  params, repositories, context,
+}) => {
+  if (!context?.userSession?._id) throw new BaseError(UserError.USER_ACCESS_DENIED);
+  const { userSession } = context;
 
   const projection = getProjectionBlacklist({
     pushNotif: 0,
   }, params.projection);
 
   const user = await repositories.user.getUser({
-    ...params,
+    userId: userSession._id,
     projection,
   });
 
