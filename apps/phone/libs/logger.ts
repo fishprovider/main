@@ -22,4 +22,5 @@ const log = logger.createLogger({
   ],
 });
 
+// @ts-ignore not an error
 global.Logger = log as any;
