@@ -1,5 +1,5 @@
 import type {
-  Account, AccountRepository, BaseService, BaseServiceParams,
+  Account, AccountRepository, BaseServiceParams,
   GetAccountParams, UpdateAccountParams, UserRepository,
 } from '..';
 
@@ -10,7 +10,7 @@ export interface AccountServiceBaseParams extends BaseServiceParams {
 }
 
 //
-// function params
+// services
 //
 
 export type GetAccountService = (params: AccountServiceBaseParams & {
@@ -28,9 +28,3 @@ export type JoinAccountService = (params: AccountServiceBaseParams & {
     user: UserRepository,
   },
 }) => Promise<Partial<Account>>;
-
-export interface IAccountService extends BaseService {
-  getAccount: GetAccountService;
-  updateAccount: UpdateAccountService;
-  joinAccount: JoinAccountService;
-}

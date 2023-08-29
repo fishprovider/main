@@ -17,7 +17,3 @@ export interface ServiceContext {
 export interface BaseServiceParams {
   context?: ServiceContext;
 }
-
-export interface BaseService {
-  name: string;
-}
