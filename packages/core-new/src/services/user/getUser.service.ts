@@ -19,6 +19,7 @@ export const getUserService: GetUserService = async ({
 
   const user = await repositories.user.getUser({
     userId: userSession._id,
+    email: userSession.email,
     projection,
   });
 

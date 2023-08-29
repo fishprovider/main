@@ -11,6 +11,11 @@ export const updateUserService: UpdateUserService = async ({
   const { userSession } = context;
   const { starProvider } = params;
 
+  const userParams = {
+    userId: userSession._id,
+    email: userSession.email,
+  };
+
   if (starProvider) {
     const { roles } = userSession;
     const { accountId, enabled } = starProvider;
@@ -30,6 +35,7 @@ export const updateUserService: UpdateUserService = async ({
 
     return repositories.user.updateUser({
       ...params,
+      ...userParams,
       starProvider: {
         ...starProvider,
         enabled: hasAccess() && enabled,
@@ -37,5 +43,8 @@ export const updateUserService: UpdateUserService = async ({
     });
   }
 
-  return repositories.user.updateUser(params);
+  return repositories.user.updateUser({
+    ...params,
+    ...userParams,
+  });
 };
