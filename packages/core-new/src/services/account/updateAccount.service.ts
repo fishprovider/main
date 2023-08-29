@@ -1,17 +1,17 @@
 import {
   BaseError,
-  getAccount,
+  getAccountService,
   type UpdateAccountService,
   UserError,
 } from '../..';
 
-export const updateAccount: UpdateAccountService = async ({
+export const updateAccountService: UpdateAccountService = async ({
   params, repositories, context,
 }) => {
   if (!context?.userSession?._id) throw new BaseError(UserError.USER_ACCESS_DENIED);
 
   const { accountId } = params;
-  await getAccount({
+  await getAccountService({
     params: {
       accountId,
       projection: { _id: 1 },

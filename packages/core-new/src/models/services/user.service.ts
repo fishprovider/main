@@ -10,7 +10,7 @@ export interface UserServiceBaseParams extends BaseServiceParams {
 }
 
 //
-// function params
+// services
 //
 
 export type GetUserService = (params: UserServiceBaseParams & {

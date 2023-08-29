@@ -4,7 +4,7 @@ import {
   UserError,
 } from '../..';
 
-export const updateUser: UpdateUserService = async ({
+export const updateUserService: UpdateUserService = async ({
   params, repositories, context,
 }) => {
   if (!context?.userSession?._id) throw new BaseError(UserError.USER_ACCESS_DENIED);

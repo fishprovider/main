@@ -7,7 +7,7 @@ import {
   validateProjection,
 } from '../..';
 
-export const getUser: GetUserService = async ({
+export const getUserService: GetUserService = async ({
   params, repositories, context,
 }) => {
   if (!context?.userSession?._id) throw new BaseError(UserError.USER_ACCESS_DENIED);

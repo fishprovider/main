@@ -7,7 +7,7 @@ import {
   UserError,
 } from '../..';
 
-export const refreshUserRoles: RefreshUserRolesService = async ({
+export const refreshUserRolesService: RefreshUserRolesService = async ({
   repositories, context,
 }) => {
   if (!context?.userSession?._id) throw new BaseError(UserError.USER_ACCESS_DENIED);

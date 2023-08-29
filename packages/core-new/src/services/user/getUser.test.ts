@@ -1,10 +1,10 @@
 import {
-  BaseError, getUser, RepositoryError, UserError,
+  BaseError, getUserService, RepositoryError, UserError,
 } from '../..';
-import { userServiceBaseParams, userSessionDefault } from '../../tests';
+import { userServiceBaseParams } from '../../tests';
 
 test('getUser with bad request', async () => {
-  await expect(getUser({
+  await expect(getUserService({
     ...userServiceBaseParams,
     context: undefined,
   })).rejects.toThrow(new BaseError(UserError.USER_ACCESS_DENIED));
@@ -13,7 +13,7 @@ test('getUser with bad request', async () => {
 test('getUser throws bad result', async () => {
   const userId = 'testId';
   const badDoc = { _id: userId, pushNotif: [] };
-  await expect(getUser({
+  await expect(getUserService({
     ...userServiceBaseParams,
     repositories: {
       user: {
@@ -26,7 +26,7 @@ test('getUser throws bad result', async () => {
 
 test('getUser returns a user', async () => {
   const userId = 'testId';
-  const user = await getUser({
+  const user = await getUserService({
     ...userServiceBaseParams,
     repositories: {
       user: {

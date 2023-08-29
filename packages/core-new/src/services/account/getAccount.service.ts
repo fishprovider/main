@@ -9,7 +9,7 @@ import {
   validateProjection,
 } from '../..';
 
-export const getAccount: GetAccountService = async ({
+export const getAccountService: GetAccountService = async ({
   params, repositories, context,
 }) => {
   const projection = getProjectionBlacklist({

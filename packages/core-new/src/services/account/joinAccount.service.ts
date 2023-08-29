@@ -1,15 +1,15 @@
 import {
   AccountError,
   BaseError,
-  getAccount,
+  getAccountService,
   type JoinAccountService,
   ServiceError,
-  updateAccount,
-  updateUser,
+  updateAccountService,
+  updateUserService,
   UserError,
 } from '../..';
 
-export const joinAccount: JoinAccountService = async ({
+export const joinAccountService: JoinAccountService = async ({
   params, repositories, context,
 }) => {
   if (!context?.userSession?._id) throw new BaseError(UserError.USER_ACCESS_DENIED);
@@ -20,7 +20,7 @@ export const joinAccount: JoinAccountService = async ({
   }
 
   const { accountId } = params;
-  const account = await getAccount({
+  const account = await getAccountService({
     params: {
       accountId,
       projection: {
@@ -40,7 +40,7 @@ export const joinAccount: JoinAccountService = async ({
 
   const { email, role } = memberInvite;
 
-  await updateUser({
+  await updateUserService({
     params: {
       email,
       addRole: {
@@ -52,7 +52,7 @@ export const joinAccount: JoinAccountService = async ({
     context,
   });
 
-  return updateAccount({
+  return updateAccountService({
     params: {
       accountId,
       addMember: {
