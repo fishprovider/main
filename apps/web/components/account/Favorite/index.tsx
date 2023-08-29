@@ -7,16 +7,17 @@ interface Props {
   providerId: string,
 }
 
-function Favorite({ providerId }: Props) {
-  const star = storeUser.useStore((state) => state.info?.starProviders?.[providerId]);
+function Favorite({ providerId: accountId }: Props) {
+  const star = storeUser.useStore((state) => state.info?.starProviders?.[accountId]);
 
   const onStar = () => {
     const user = storeUser.getState().info;
-    const starProviders = {
-      ...user?.starProviders,
-      [providerId]: !user?.starProviders?.[providerId],
-    };
-    updateUser({ starProviders });
+    updateUser({
+      starProvider: {
+        accountId,
+        enabled: !user?.starProviders?.[accountId],
+      },
+    });
   };
 
   return (

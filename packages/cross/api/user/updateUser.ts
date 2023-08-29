@@ -4,7 +4,10 @@ import { apiPost } from '~libs/api';
 import storeUser from '~stores/user';
 
 const updateUser = async (payload: {
-  starProviders?: Record<string, boolean>;
+  starProvider?: {
+    accountId: string;
+    enabled: boolean;
+  };
 }) => {
   const oldInfo = {
     ...storeUser.getState().info,
@@ -14,7 +17,7 @@ const updateUser = async (payload: {
     ...payload,
   };
   storeUser.mergeState({ info });
-  const res = await apiPost<User>('/v2/user/updateUser', payload);
+  const res = await apiPost<User>('/v3/user/updateUser', payload);
   if (!res) {
     storeUser.mergeState({ info: oldInfo });
     return oldInfo;
