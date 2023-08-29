@@ -1,5 +1,3 @@
-import './container';
-
 import { destroyAsync, start as startCore } from '@fishprovider/core/dist/controllers/main';
 import { cacheFirst } from '@fishprovider/framework-cache-first';
 import { mongo } from '@fishprovider/repository-mongo';
