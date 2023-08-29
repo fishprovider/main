@@ -6,8 +6,6 @@ import { ApiHandler } from '~types/ApiHandler.model';
 
 const handler: ApiHandler<Partial<User>> = async (data, userSession) => {
   const params = z.object({
-    userId: z.string().optional(),
-    email: z.string().optional(),
   }).strict()
     .parse(data);
 
