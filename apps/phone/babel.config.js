@@ -4,6 +4,10 @@ process.env.EXPO_PUBLIC_SOCKET_URL = 'wss://back.fishprovider.com';
 process.env.EXPO_PUBLIC_DEMO_BACKEND_URL = 'https://back-demo.fishprovider.com';
 process.env.EXPO_PUBLIC_DEMO_SOCKET_URL = 'wss://back-demo.fishprovider.com';
 
+process.env.EXPO_PUBLIC_LOGS_LEVEL = '';
+process.env.EXPO_PUBLIC_SOCKET_TRANSPORTS = '';
+process.env.EXPO_PUBLIC_SOCKET_HEARTBEAT = '';
+
 // eslint-disable-next-line func-names
 module.exports = function (api) {
   api.cache(true);
