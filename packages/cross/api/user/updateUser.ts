@@ -4,12 +4,18 @@ import { apiPost } from '~libs/api';
 import storeUser from '~stores/user';
 
 const updateUser = async (payload: {
-  starProvider?: {
-    accountId: string;
-    enabled: boolean;
+  filter: {
+    userId?: string;
+    email?: string;
+  },
+  payload: {
+    starProvider?: {
+      accountId: string;
+      enabled: boolean;
+    }
   };
 }) => {
-  const user = await apiPost<Partial<User>>('/v3/user/updateUser', payload);
+  const user = await apiPost<Partial<User> | undefined>('/v3/user/updateUser', payload);
   const info = {
     ...storeUser.getState().info,
     ...user,

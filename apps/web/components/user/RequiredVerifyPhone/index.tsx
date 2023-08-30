@@ -16,7 +16,7 @@ function RequiredVerifyPhone() {
   }));
 
   useQuery({
-    queryFn: () => getUser({}),
+    queryFn: () => getUser({ filter: {} }),
     queryKey: queryKeys.user(userId),
     enabled: !!userId,
     refetchInterval: refreshMS,

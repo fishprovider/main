@@ -21,7 +21,7 @@ function VerifyPhone() {
   }));
 
   const { mutate: reload, isLoading: isLoadingReload } = useMutate({
-    mutationFn: () => getUser({}),
+    mutationFn: () => getUser({ filter: {} }),
   });
 
   return (

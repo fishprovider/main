@@ -13,9 +13,12 @@ function Favorite({ providerId: accountId }: Props) {
   const onStar = () => {
     const user = storeUser.getState().info;
     updateUser({
-      starProvider: {
-        accountId,
-        enabled: !user?.starProviders?.[accountId],
+      filter: {},
+      payload: {
+        starProvider: {
+          accountId,
+          enabled: !user?.starProviders?.[accountId],
+        },
       },
     });
   };

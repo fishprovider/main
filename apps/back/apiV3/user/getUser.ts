@@ -4,17 +4,21 @@ import { z } from 'zod';
 
 import { ApiHandler } from '~types/ApiHandler.model';
 
-const handler: ApiHandler<Partial<User>> = async (data, userSession) => {
-  const params = z.object({
+const handler: ApiHandler<Partial<User> | undefined> = async (data, userSession) => {
+  const { filter } = z.object({
+    filter: z.object({
+      userId: z.string().optional(),
+      email: z.string().optional(),
+    }).strict(),
   }).strict()
     .parse(data);
 
-  const result = await getUserService({
-    params,
+  const { doc } = await getUserService({
+    filter,
     repositories: { user: MongoUserRepository },
     context: { userSession },
   });
-  return { result };
+  return { result: doc };
 };
 
 export default handler;

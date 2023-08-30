@@ -4,21 +4,28 @@ import { z } from 'zod';
 
 import { ApiHandler } from '~types/ApiHandler.model';
 
-const handler: ApiHandler<Partial<User>> = async (data, userSession) => {
-  const params = z.object({
-    starProvider: z.object({
-      accountId: z.string(),
-      enabled: z.boolean(),
-    }).optional(),
+const handler: ApiHandler<Partial<User> | undefined> = async (data, userSession) => {
+  const { filter, payload } = z.object({
+    filter: z.object({
+      userId: z.string().optional(),
+      email: z.string().optional(),
+    }).strict(),
+    payload: z.object({
+      starProvider: z.object({
+        accountId: z.string(),
+        enabled: z.boolean(),
+      }).optional(),
+    }).strict(),
   }).strict()
     .parse(data);
 
-  const result = await updateUserService({
-    params,
+  const { doc } = await updateUserService({
+    filter,
+    payload,
     repositories: { user: MongoUserRepository },
     context: { userSession },
   });
-  return { result };
+  return { result: doc };
 };
 
 export default handler;
