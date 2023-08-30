@@ -6,31 +6,38 @@ import {
   getProjectionBlacklist,
   getRoleProvider,
   RepositoryError,
+  ServiceError,
   validateProjection,
 } from '../..';
 
 export const getAccountService: GetAccountService = async ({
-  params, repositories, context,
+  filter, repositories, context,
 }) => {
+  //
+  // pre-check
+  //
+  const { accountId } = filter;
+  if (!accountId) throw new BaseError(ServiceError.SERVICE_BAD_REQUEST);
+
+  //
+  // main
+  //
   const projection = getProjectionBlacklist({
     config: 0,
-  }, params.projection);
+  }, filter.projection);
 
-  const account = await repositories.account.getAccount({
-    ...params,
+  const { doc: account } = await repositories.account.getAccount({
+    ...filter,
     projection,
   });
-
   if (!account) {
     throw new BaseError(AccountError.ACCOUNT_NOT_FOUND);
   }
-
   if (!validateProjection(projection, account)) {
     throw new BaseError(RepositoryError.REPOSITORY_BAD_RESULT);
   }
 
   const { isManagerWeb } = getRoleProvider(context?.userSession?.roles);
-
   const {
     providerViewType, userId, members, memberInvites, deleted,
   } = account;
@@ -53,5 +60,5 @@ export const getAccountService: GetAccountService = async ({
     throw new BaseError(AccountError.ACCOUNT_ACCESS_DENIED);
   }
 
-  return account;
+  return { doc: account };
 };

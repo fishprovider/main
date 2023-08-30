@@ -1,23 +1,32 @@
 import {
   BaseError,
   getAccountService,
+  ServiceError,
   type UpdateAccountService,
   UserError,
 } from '../..';
 
 export const updateAccountService: UpdateAccountService = async ({
-  params, repositories, context,
+  filter, payload, repositories, context,
 }) => {
+  //
+  // pre-check
+  //
+  const { accountId } = filter;
+  if (!accountId) throw new BaseError(ServiceError.SERVICE_BAD_REQUEST);
   if (!context?.userSession?._id) throw new BaseError(UserError.USER_ACCESS_DENIED);
-
-  const { accountId } = params;
+  // check account access
   await getAccountService({
-    params: {
-      accountId,
+    filter: {
+      ...filter,
       projection: { _id: 1 },
     },
     repositories,
     context,
   });
-  return repositories.account.updateAccount(params);
+
+  //
+  // main
+  //
+  return repositories.account.updateAccount(filter, payload);
 };

@@ -10,19 +10,22 @@ import {
 } from '../..';
 
 export const joinAccountService: JoinAccountService = async ({
-  params, repositories, context,
+  filter, repositories, context,
 }) => {
+  //
+  // pre-check
+  //
   if (!context?.userSession?._id) throw new BaseError(UserError.USER_ACCESS_DENIED);
   const { userSession } = context;
-
   if (!userSession.email || !userSession.name) {
     throw new BaseError(ServiceError.SERVICE_BAD_REQUEST);
   }
-
-  const { accountId } = params;
-  const account = await getAccountService({
-    params: {
-      accountId,
+  const { accountId } = filter;
+  if (!accountId) throw new BaseError(ServiceError.SERVICE_BAD_REQUEST);
+  // check account access
+  const { doc: account } = await getAccountService({
+    filter: {
+      ...filter,
       projection: {
         _id: 1,
         memberInvites: 1,
@@ -31,6 +34,9 @@ export const joinAccountService: JoinAccountService = async ({
     repositories,
     context,
   });
+  if (!account) {
+    throw new BaseError(AccountError.ACCOUNT_NOT_FOUND);
+  }
 
   const { memberInvites } = account;
   const memberInvite = memberInvites?.find((item) => item.email === userSession.email);
@@ -41,8 +47,10 @@ export const joinAccountService: JoinAccountService = async ({
   const { email, role } = memberInvite;
 
   await updateUserService({
-    params: {
+    filter: {
       email,
+    },
+    payload: {
       addRole: {
         accountId,
         role,
@@ -53,8 +61,10 @@ export const joinAccountService: JoinAccountService = async ({
   });
 
   return updateAccountService({
-    params: {
+    filter: {
       accountId,
+    },
+    payload: {
       addMember: {
         userId: userSession._id,
         email,

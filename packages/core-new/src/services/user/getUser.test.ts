@@ -18,7 +18,7 @@ test('getUser throws bad result', async () => {
     repositories: {
       user: {
         ...userServiceBaseParams.repositories.user,
-        getUser: async () => badDoc,
+        getUser: async () => ({ doc: badDoc }),
       },
     },
   })).rejects.toThrow(new BaseError(RepositoryError.REPOSITORY_BAD_RESULT, 'projection', badDoc));
@@ -26,12 +26,12 @@ test('getUser throws bad result', async () => {
 
 test('getUser returns a user', async () => {
   const userId = 'testId';
-  const user = await getUserService({
+  const { doc: user } = await getUserService({
     ...userServiceBaseParams,
     repositories: {
       user: {
         ...userServiceBaseParams.repositories.user,
-        getUser: async () => ({ _id: userId }),
+        getUser: async () => ({ doc: { _id: userId } }),
       },
     },
   });

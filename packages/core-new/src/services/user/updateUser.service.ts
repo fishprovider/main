@@ -5,16 +5,27 @@ import {
 } from '../..';
 
 export const updateUserService: UpdateUserService = async ({
-  params, repositories, context,
+  filter: filterRaw, payload: payloadRaw, repositories, context,
 }) => {
+  //
+  // pre-check
+  //
   if (!context?.userSession?._id) throw new BaseError(UserError.USER_ACCESS_DENIED);
-  const { userSession } = context;
-  const { starProvider } = params;
 
-  const userParams = {
+  //
+  // main
+  //
+  const { userSession } = context;
+  const filter = {
+    filterRaw,
     userId: userSession._id,
     email: userSession.email,
   };
+
+  let payload = {
+    ...payloadRaw,
+  };
+  const { starProvider } = payload;
 
   if (starProvider) {
     const { roles } = userSession;
@@ -33,18 +44,14 @@ export const updateUserService: UpdateUserService = async ({
       return true;
     };
 
-    return repositories.user.updateUser({
-      ...params,
-      ...userParams,
+    payload = {
+      ...payload,
       starProvider: {
         ...starProvider,
         enabled: hasAccess() && enabled,
       },
-    });
+    };
   }
 
-  return repositories.user.updateUser({
-    ...params,
-    ...userParams,
-  });
+  return repositories.user.updateUser(filter, payload);
 };

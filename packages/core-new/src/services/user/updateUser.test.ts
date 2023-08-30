@@ -10,9 +10,9 @@ test('updateUser with bad request', async () => {
 
 test('updateUser returns a doc', async () => {
   const name = 'new name';
-  const res = await updateUserService({
+  const { doc } = await updateUserService({
     ...userServiceBaseParams,
-    params: {
+    payload: {
       name,
       returnDoc: true,
     },
@@ -20,12 +20,14 @@ test('updateUser returns a doc', async () => {
       user: {
         ...userServiceBaseParams.repositories.user,
         updateUser: async () => ({
-          ...userSessionDefault,
-          name,
+          doc: {
+            ...userSessionDefault,
+            name,
+          },
         }),
       },
     },
   });
-  expect(res._id).toBe(userSessionDefault._id);
-  expect(res.name).toBe(name);
+  expect(doc?._id).toBe(userSessionDefault._id);
+  expect(doc?.name).toBe(name);
 });

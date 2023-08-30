@@ -1,7 +1,8 @@
 import { serviceContextDefault, userRepoDefault } from '.';
 
 export const userServiceBaseParams = {
-  params: {},
+  filter: {},
+  payload: {},
   repositories: {
     user: userRepoDefault,
   },

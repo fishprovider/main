@@ -17,3 +17,7 @@ export interface ServiceContext {
 export interface BaseServiceParams {
   context?: ServiceContext;
 }
+
+export interface BaseServiceGetResult<T> {
+  doc?: Partial<T>;
+}

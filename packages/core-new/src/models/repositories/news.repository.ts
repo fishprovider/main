@@ -1,6 +1,6 @@
-import type { News } from '..';
+import type { BaseGetManyResult, BaseGetOptions, News } from '..';
 
-export interface GetNewsParams {
+export interface GetNewsFilter extends BaseGetOptions<News> {
   today?: boolean,
   week?: string,
   upcoming?: boolean,
@@ -11,6 +11,11 @@ export interface WatchNewsParams<T> {
 }
 
 export interface NewsRepository {
-  getNews: (params: GetNewsParams) => Promise<News[] | null>;
-  watchNews: <T>(params: WatchNewsParams<T>) => T;
+  getNews: (
+    filter: GetNewsFilter
+  ) => Promise<BaseGetManyResult<News>>;
+
+  watchNews: <T, State = Record<string, News>>(
+    selector: (state: State) => T,
+  ) => T;
 }

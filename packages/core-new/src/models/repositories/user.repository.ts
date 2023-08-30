@@ -1,23 +1,14 @@
 import type {
-  AccountRoles, BaseGetParams, BaseUpdateParams, User, UserRoles,
+  AccountRoles, BaseGetOptions, BaseGetResult, BaseUpdateOptions,
+  BaseUpdateResult, User, UserRoles,
 } from '../..';
 
-export interface UserBaseGetParams extends BaseGetParams<User> {
+export interface GetUserFilter extends BaseGetOptions<User> {
   userId?: string
   email?: string
 }
 
-export interface UserBaseUpdateParams extends BaseUpdateParams, UserBaseGetParams {
-}
-
-//
-// function params
-//
-
-export interface GetUserParams extends UserBaseGetParams {
-}
-
-export interface UpdateUserParams extends UserBaseUpdateParams {
+export interface UpdateUserPayload extends BaseUpdateOptions {
   name?: string
   picture?: string
   roles?: UserRoles
@@ -32,6 +23,12 @@ export interface UpdateUserParams extends UserBaseUpdateParams {
 }
 
 export interface UserRepository {
-  getUser: (params: GetUserParams) => Promise<Partial<User> | null>;
-  updateUser: (params: UpdateUserParams) => Promise<Partial<User>>;
+  getUser: (
+    filter: GetUserFilter
+  ) => Promise<BaseGetResult<User>>;
+
+  updateUser: (
+    filter: GetUserFilter,
+    payload: UpdateUserPayload
+  ) => Promise<BaseUpdateResult<User>>;
 }

@@ -1,11 +1,12 @@
 import { AccountRepository, UserRepository } from '..';
 
 export const userRepoDefault: UserRepository = {
-  getUser: async () => null,
+  getUser: async () => ({}),
   updateUser: async () => ({}),
 };
 
 export const accountRepoDefault: AccountRepository = {
-  getAccount: async () => null,
+  getAccount: async () => ({}),
+  getAccounts: async () => ({ docs: [] }),
   updateAccount: async () => ({}),
 };

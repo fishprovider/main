@@ -8,21 +8,32 @@ import {
 } from '../..';
 
 export const getUserService: GetUserService = async ({
-  params, repositories, context,
+  filter, repositories, context,
 }) => {
+  //
+  // pre-check
+  //
   if (!context?.userSession?._id) throw new BaseError(UserError.USER_ACCESS_DENIED);
+
+  //
+  // main
+  //
   const { userSession } = context;
 
   const projection = getProjectionBlacklist({
     pushNotif: 0,
-  }, params.projection);
+  }, filter.projection);
 
-  const user = await repositories.user.getUser({
+  const { doc: user } = await repositories.user.getUser({
+    ...filter,
     userId: userSession._id,
     email: userSession.email,
     projection,
   });
 
+  //
+  // post-check
+  //
   if (!user) {
     throw new BaseError(UserError.USER_NOT_FOUND);
   }
@@ -31,5 +42,5 @@ export const getUserService: GetUserService = async ({
     throw new BaseError(RepositoryError.REPOSITORY_BAD_RESULT, 'projection', user);
   }
 
-  return user;
+  return { doc: user };
 };

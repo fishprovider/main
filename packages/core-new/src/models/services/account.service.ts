@@ -1,30 +1,27 @@
 import type {
-  Account, AccountRepository, BaseServiceParams,
-  GetAccountParams, UpdateAccountParams, UserRepository,
+  Account, AccountRepository, BaseServiceGetResult, BaseServiceParams,
+  GetAccountFilter, UpdateAccountPayload, UserRepository,
 } from '..';
 
-export interface AccountServiceBaseParams extends BaseServiceParams {
+export type GetAccountService = (params: BaseServiceParams & {
+  filter: GetAccountFilter,
   repositories: {
     account: AccountRepository
   },
-}
+}) => Promise<BaseServiceGetResult<Account>>;
 
-//
-// services
-//
+export type UpdateAccountService = (params: BaseServiceParams & {
+  filter: GetAccountFilter,
+  payload: UpdateAccountPayload,
+  repositories: {
+    account: AccountRepository
+  },
+}) => Promise<BaseServiceGetResult<Account>>;
 
-export type GetAccountService = (params: AccountServiceBaseParams & {
-  params: GetAccountParams,
-}) => Promise<Partial<Account>>;
-
-export type UpdateAccountService = (params: AccountServiceBaseParams & {
-  params: UpdateAccountParams,
-}) => Promise<Partial<Account>>;
-
-export type JoinAccountService = (params: AccountServiceBaseParams & {
-  params: UpdateAccountParams,
+export type JoinAccountService = (params: BaseServiceParams & {
+  filter: GetAccountFilter,
   repositories: {
     account: AccountRepository
     user: UserRepository,
   },
-}) => Promise<Partial<Account>>;
+}) => Promise<BaseServiceGetResult<Account>>;
