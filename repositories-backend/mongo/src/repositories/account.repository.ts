@@ -1,12 +1,17 @@
 import type {
-  Account, AccountRepository, GetAccountParams, UpdateAccountParams,
+  Account, AccountRepository, BaseGetOptions, BaseUpdateOptions, GetAccountFilter,
+  UpdateAccountPayload,
 } from '@fishprovider/core-new';
 import { Filter, ReturnDocument, UpdateFilter } from 'mongodb';
 
 import { mongo } from '../main';
 
-const getAccount = async (params: GetAccountParams) => {
-  const { accountId, memberId, projection } = params;
+const getAccount = async (
+  filter: GetAccountFilter,
+  options: BaseGetOptions<Account>,
+) => {
+  const { accountId, memberId } = filter;
+  const { projection } = options;
   const { db } = await mongo.get();
   const account = await db.collection<Account>('accounts').findOne({
     ...(accountId && { _id: accountId }),
@@ -14,14 +19,39 @@ const getAccount = async (params: GetAccountParams) => {
   }, {
     projection,
   });
-  return account;
+  return { doc: account };
 };
 
-const updateAccount = async (params: UpdateAccountParams) => {
+const getAccounts = async (
+  filter: GetAccountFilter,
+  options: BaseGetOptions<Account>,
+) => {
+  const { accountIds, memberId } = filter;
+  const { projection } = options;
+  const { db } = await mongo.get();
+  const accounts = await db.collection<Account>('accounts').find({
+    ...(accountIds && { _id: { $in: accountIds } }),
+    ...(memberId && { 'members.userId': memberId }),
+  }, {
+    projection,
+  }).toArray();
+  return { docs: accounts };
+};
+
+const updateAccount = async (
+  filterRaw: GetAccountFilter,
+  payload: UpdateAccountPayload,
+  options: BaseUpdateOptions<Account>,
+) => {
   const {
-    accountId, name, addMember, removeMemberId, removeMemberInviteEmail,
-    returnDoc, projection,
-  } = params;
+    accountId,
+  } = filterRaw;
+  const {
+    name, addMember, removeMemberId, removeMemberInviteEmail,
+  } = payload;
+  const {
+    returnAfter, projection,
+  } = options;
 
   const filter: Filter<Account> = {
     accountId,
@@ -47,11 +77,12 @@ const updateAccount = async (params: UpdateAccountParams) => {
   const { db } = await mongo.get();
   const collection = db.collection<Account>('accounts');
 
-  if (returnDoc) {
-    return collection.findOneAndUpdate(filter, updateFilter, {
+  if (returnAfter) {
+    const { value: account } = await collection.findOneAndUpdate(filter, updateFilter, {
       returnDocument: ReturnDocument.AFTER,
       projection,
     });
+    return { doc: account };
   }
   await collection.updateOne(filter, updateFilter);
   return {};
@@ -59,5 +90,6 @@ const updateAccount = async (params: UpdateAccountParams) => {
 
 export const MongoAccountRepository: AccountRepository = {
   getAccount,
+  getAccounts,
   updateAccount,
 };

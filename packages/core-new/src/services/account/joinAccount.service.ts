@@ -3,14 +3,17 @@ import {
   BaseError,
   getAccountService,
   type JoinAccountService,
+  RepositoryError,
+  sanitizeAccountBaseGetOptions,
   ServiceError,
   updateAccountService,
   updateUserService,
   UserError,
+  validateProjection,
 } from '../..';
 
 export const joinAccountService: JoinAccountService = async ({
-  filter, repositories, context,
+  filter, options: optionsRaw, repositories, context,
 }) => {
   //
   // pre-check
@@ -22,10 +25,10 @@ export const joinAccountService: JoinAccountService = async ({
   }
   const { accountId } = filter;
   if (!accountId) throw new BaseError(ServiceError.SERVICE_BAD_REQUEST);
-  // check account access
-  const { doc: account } = await getAccountService({
-    filter: {
-      ...filter,
+
+  const { doc: accountMemberInvites } = await getAccountService({
+    filter,
+    options: {
       projection: {
         _id: 1,
         memberInvites: 1,
@@ -34,18 +37,20 @@ export const joinAccountService: JoinAccountService = async ({
     repositories,
     context,
   });
-  if (!account) {
+  if (!accountMemberInvites) {
     throw new BaseError(AccountError.ACCOUNT_NOT_FOUND);
   }
 
-  const { memberInvites } = account;
+  const { memberInvites } = accountMemberInvites;
   const memberInvite = memberInvites?.find((item) => item.email === userSession.email);
   if (!memberInvite) {
     throw new BaseError(AccountError.ACCOUNT_ACCESS_DENIED);
   }
 
+  //
+  // main
+  //
   const { email, role } = memberInvite;
-
   await updateUserService({
     filter: {
       email,
@@ -56,11 +61,13 @@ export const joinAccountService: JoinAccountService = async ({
         role,
       },
     },
+    options: {},
     repositories,
     context,
   });
 
-  return updateAccountService({
+  const options = sanitizeAccountBaseGetOptions(optionsRaw);
+  const { doc: account } = await updateAccountService({
     filter: {
       accountId,
     },
@@ -76,7 +83,14 @@ export const joinAccountService: JoinAccountService = async ({
       },
       removeMemberInviteEmail: memberInvite.email,
     },
+    options,
     repositories,
     context,
   });
+
+  if (account && !validateProjection(options.projection, account)) {
+    throw new BaseError(RepositoryError.REPOSITORY_BAD_RESULT);
+  }
+
+  return { doc: account };
 };

@@ -19,5 +19,5 @@ export interface BaseServiceParams {
 }
 
 export interface BaseServiceGetResult<T> {
-  doc?: Partial<T>;
+  doc?: Partial<T> | null;
 }

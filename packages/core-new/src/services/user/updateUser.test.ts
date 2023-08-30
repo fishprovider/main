@@ -14,7 +14,9 @@ test('updateUser returns a doc', async () => {
     ...userServiceBaseParams,
     payload: {
       name,
-      returnDoc: true,
+    },
+    options: {
+      returnAfter: true,
     },
     repositories: {
       user: {

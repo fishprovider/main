@@ -1,4 +1,8 @@
-import type { UserRoles } from '../..';
+import {
+  BaseGetOptions, GetUserFilter, sanitizeBaseGetOptions,
+  User, type UserRoles,
+  UserSession,
+} from '..';
 
 export const getRoleProvider = (
   roles?: UserRoles,
@@ -32,3 +36,21 @@ export const getRoleProvider = (
     isViewerProvider,
   };
 };
+
+export const sanitizeUserGetFilter = (
+  filter: GetUserFilter,
+  userSession: UserSession,
+) => ({
+  ...filter,
+  userId: userSession._id,
+  email: userSession.email,
+});
+
+export const sanitizeUserBaseGetOptions = (
+  options: BaseGetOptions<User>,
+) => sanitizeBaseGetOptions(
+  options,
+  {
+    pushNotif: 0,
+  },
+);

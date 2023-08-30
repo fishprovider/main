@@ -4,12 +4,12 @@ export interface BaseGetOptions<T> {
   projection?: Projection<T>
 }
 
-export interface BaseUpdateOptions {
-  returnDoc?: boolean
+export interface BaseUpdateOptions<T> extends BaseGetOptions<T> {
+  returnAfter?: boolean,
 }
 
 export interface BaseGetResult<T> {
-  doc?: Partial<T>;
+  doc?: Partial<T> | null;
 }
 
 export interface BaseGetManyResult<T> {
@@ -19,5 +19,5 @@ export interface BaseGetManyResult<T> {
 export interface BaseUpdateResult<T> {
   matchedCount?: number;
   modifiedCount?: number;
-  doc?: Partial<T>;
+  doc?: Partial<T> | null;
 }

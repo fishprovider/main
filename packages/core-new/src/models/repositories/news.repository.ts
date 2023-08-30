@@ -1,6 +1,6 @@
 import type { BaseGetManyResult, BaseGetOptions, News } from '..';
 
-export interface GetNewsFilter extends BaseGetOptions<News> {
+export interface GetNewsFilter {
   today?: boolean,
   week?: string,
   upcoming?: boolean,
@@ -12,7 +12,8 @@ export interface WatchNewsParams<T> {
 
 export interface NewsRepository {
   getNews: (
-    filter: GetNewsFilter
+    filter: GetNewsFilter,
+    options: BaseGetOptions<News>,
   ) => Promise<BaseGetManyResult<News>>;
 
   watchNews: <T, State = Record<string, News>>(

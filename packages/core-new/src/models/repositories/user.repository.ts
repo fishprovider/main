@@ -3,12 +3,12 @@ import type {
   BaseUpdateResult, User, UserRoles,
 } from '../..';
 
-export interface GetUserFilter extends BaseGetOptions<User> {
+export interface GetUserFilter {
   userId?: string
   email?: string
 }
 
-export interface UpdateUserPayload extends BaseUpdateOptions {
+export interface UpdateUserPayload {
   name?: string
   picture?: string
   roles?: UserRoles
@@ -24,11 +24,13 @@ export interface UpdateUserPayload extends BaseUpdateOptions {
 
 export interface UserRepository {
   getUser: (
-    filter: GetUserFilter
+    filter: GetUserFilter,
+    options: BaseGetOptions<User>,
   ) => Promise<BaseGetResult<User>>;
 
   updateUser: (
     filter: GetUserFilter,
-    payload: UpdateUserPayload
+    payload: UpdateUserPayload,
+    options: BaseUpdateOptions<User>,
   ) => Promise<BaseUpdateResult<User>>;
 }

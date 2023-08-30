@@ -1,14 +1,15 @@
 import {
   BaseError,
-  getProjectionBlacklist,
   type GetUserService,
   RepositoryError,
+  sanitizeUserBaseGetOptions,
+  sanitizeUserGetFilter,
   UserError,
   validateProjection,
 } from '../..';
 
 export const getUserService: GetUserService = async ({
-  filter, repositories, context,
+  filter: filterRaw, options: optionsRaw, repositories, context,
 }) => {
   //
   // pre-check
@@ -20,25 +21,15 @@ export const getUserService: GetUserService = async ({
   //
   const { userSession } = context;
 
-  const projection = getProjectionBlacklist({
-    pushNotif: 0,
-  }, filter.projection);
+  const filter = sanitizeUserGetFilter(filterRaw, userSession);
+  const options = sanitizeUserBaseGetOptions(optionsRaw);
 
-  const { doc: user } = await repositories.user.getUser({
-    ...filter,
-    userId: userSession._id,
-    email: userSession.email,
-    projection,
-  });
+  const { doc: user } = await repositories.user.getUser(filter, options);
 
-  //
-  // post-check
-  //
   if (!user) {
     throw new BaseError(UserError.USER_NOT_FOUND);
   }
-
-  if (!validateProjection(projection, user)) {
+  if (!validateProjection(options.projection, user)) {
     throw new BaseError(RepositoryError.REPOSITORY_BAD_RESULT, 'projection', user);
   }
 

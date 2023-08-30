@@ -1,6 +1,8 @@
 import _ from 'lodash';
 
-import { BaseError, type Projection, ServiceError } from '../..';
+import {
+  BaseError, type BaseGetOptions, type Projection, ServiceError,
+} from '..';
 
 export const validateProjection = <T extends Record<string, any>>(
   projection: Projection<T>,
@@ -36,3 +38,11 @@ export const getProjectionBlacklist = <T extends Record<string, any>>(
 
   throw new BaseError(ServiceError.SERVICE_BAD_REQUEST);
 };
+
+export const sanitizeBaseGetOptions = <T>(
+  options: BaseGetOptions<T>,
+  blacklist: Projection<T>,
+) => ({
+    ...options,
+    projection: getProjectionBlacklist(blacklist, options.projection),
+  });

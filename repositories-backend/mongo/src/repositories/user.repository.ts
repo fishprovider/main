@@ -1,7 +1,9 @@
 import {
   AccountRoles,
-  type GetUserParams, RepositoryError,
-  type UpdateUserParams, type User, type UserRepository,
+  BaseGetOptions,
+  BaseUpdateOptions,
+  type GetUserFilter, RepositoryError,
+  type UpdateUserPayload, type User, type UserRepository,
 } from '@fishprovider/core-new';
 import { Filter, ReturnDocument, UpdateFilter } from 'mongodb';
 
@@ -14,8 +16,12 @@ const roleFields = {
   [AccountRoles.viewer]: 'viewerProviders',
 };
 
-const getUser = async (params: GetUserParams) => {
-  const { userId, email, projection } = params;
+const getUser = async (
+  filter: GetUserFilter,
+  options: BaseGetOptions<User>,
+) => {
+  const { userId, email } = filter;
+  const { projection } = options;
   const { db } = await mongo.get();
   const user = await db.collection<User>('users').findOne({
     ...(userId && { _id: userId }),
@@ -23,15 +29,21 @@ const getUser = async (params: GetUserParams) => {
   }, {
     projection,
   });
-  return user;
+  return { doc: user };
 };
 
-const updateUser = async (params: UpdateUserParams) => {
+const updateUser = async (
+  filterRaw: GetUserFilter,
+  payload: UpdateUserPayload,
+  options: BaseUpdateOptions<User>,
+) => {
+  const { userId, email } = filterRaw;
   const {
-    userId, email,
     name, picture, starProvider, addRole, roles,
-    returnDoc, projection,
-  } = params;
+  } = payload;
+  const {
+    returnAfter, projection,
+  } = options;
 
   if (!userId && !email) throw new Error(RepositoryError.REPOSITORY_BAD_RESULT);
 
@@ -57,11 +69,12 @@ const updateUser = async (params: UpdateUserParams) => {
   const { db } = await mongo.get();
   const collection = db.collection<User>('users');
 
-  if (returnDoc) {
-    return collection.findOneAndUpdate(filter, updateFilter, {
+  if (returnAfter) {
+    const { value: user } = await collection.findOneAndUpdate(filter, updateFilter, {
       returnDocument: ReturnDocument.AFTER,
       projection,
     });
+    return { doc: user };
   }
   await collection.updateOne(filter, updateFilter);
   return {};

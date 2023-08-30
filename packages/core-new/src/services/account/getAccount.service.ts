@@ -3,15 +3,15 @@ import {
   AccountViewType,
   BaseError,
   type GetAccountService,
-  getProjectionBlacklist,
   getRoleProvider,
   RepositoryError,
+  sanitizeAccountBaseGetOptions,
   ServiceError,
   validateProjection,
 } from '../..';
 
 export const getAccountService: GetAccountService = async ({
-  filter, repositories, context,
+  filter, options: optionsRaw, repositories, context,
 }) => {
   //
   // pre-check
@@ -22,18 +22,13 @@ export const getAccountService: GetAccountService = async ({
   //
   // main
   //
-  const projection = getProjectionBlacklist({
-    config: 0,
-  }, filter.projection);
+  const options = sanitizeAccountBaseGetOptions(optionsRaw);
 
-  const { doc: account } = await repositories.account.getAccount({
-    ...filter,
-    projection,
-  });
+  const { doc: account } = await repositories.account.getAccount(filter, options);
   if (!account) {
     throw new BaseError(AccountError.ACCOUNT_NOT_FOUND);
   }
-  if (!validateProjection(projection, account)) {
+  if (!validateProjection(options.projection, account)) {
     throw new BaseError(RepositoryError.REPOSITORY_BAD_RESULT);
   }
 

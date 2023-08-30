@@ -4,11 +4,14 @@ import {
   AccountRoles,
   BaseError,
   type RefreshUserRolesService,
+  RepositoryError,
+  sanitizeUserBaseGetOptions,
   UserError,
+  validateProjection,
 } from '../..';
 
 export const refreshUserRolesService: RefreshUserRolesService = async ({
-  repositories, context,
+  options: optionsRaw, repositories, context,
 }) => {
   //
   // pre-check
@@ -50,13 +53,17 @@ export const refreshUserRolesService: RefreshUserRolesService = async ({
     ..._.keys(roles.protectorProviders),
     ..._.keys(roles.viewerProviders),
   ]);
-  const { docs: accounts } = await repositories.account.getAccounts({
-    accountIds,
-    memberId: userId,
-    projection: {
-      members: 1,
+  const { docs: accounts } = await repositories.account.getAccounts(
+    {
+      accountIds,
+      memberId: userId,
     },
-  });
+    {
+      projection: {
+        members: 1,
+      },
+    },
+  );
 
   for (const accountId of accountIds) {
     const account = accounts.find((item) => item._id === accountId);
@@ -98,5 +105,17 @@ export const refreshUserRolesService: RefreshUserRolesService = async ({
     }
   }
 
-  return repositories.user.updateUser({ userId, email }, { roles });
+  const options = sanitizeUserBaseGetOptions(optionsRaw);
+
+  const { doc: user } = await repositories.user.updateUser(
+    { userId, email },
+    { roles },
+    options,
+  );
+
+  if (user && !validateProjection(options.projection, user)) {
+    throw new BaseError(RepositoryError.REPOSITORY_BAD_RESULT, 'projection', user);
+  }
+
+  return { doc: user };
 };

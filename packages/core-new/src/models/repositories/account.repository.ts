@@ -1,15 +1,15 @@
 import type {
-  Account, AccountMember, BaseGetManyResult, BaseGetOptions, BaseGetResult,
-  BaseUpdateOptions, BaseUpdateResult,
+  Account, AccountMember, BaseGetManyResult, BaseGetOptions,
+  BaseGetResult, BaseUpdateOptions, BaseUpdateResult,
 } from '..';
 
-export interface GetAccountFilter extends BaseGetOptions<Account> {
+export interface GetAccountFilter {
   accountId?: string,
   accountIds?: string[],
   memberId?: string,
 }
 
-export interface UpdateAccountPayload extends BaseUpdateOptions {
+export interface UpdateAccountPayload {
   name?: string,
   addMember?: AccountMember,
   removeMemberId?: string,
@@ -18,15 +18,18 @@ export interface UpdateAccountPayload extends BaseUpdateOptions {
 
 export interface AccountRepository {
   getAccount: (
-    filter: GetAccountFilter
+    filter: GetAccountFilter,
+    options: BaseGetOptions<Account>,
   ) => Promise<BaseGetResult<Account>>;
 
   getAccounts: (
-    filter: GetAccountFilter
+    filter: GetAccountFilter,
+    options: BaseGetOptions<Account>,
   ) => Promise<BaseGetManyResult<Account>>;
 
   updateAccount: (
     filter: GetAccountFilter,
-    payload: UpdateAccountPayload
+    payload: UpdateAccountPayload,
+    options: BaseUpdateOptions<Account>,
   ) => Promise<BaseUpdateResult<Account>>;
 }

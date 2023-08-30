@@ -1,11 +1,15 @@
 import {
   BaseError,
+  RepositoryError,
+  sanitizeUserBaseGetOptions,
+  sanitizeUserGetFilter,
   type UpdateUserService,
   UserError,
+  validateProjection,
 } from '../..';
 
 export const updateUserService: UpdateUserService = async ({
-  filter: filterRaw, payload: payloadRaw, repositories, context,
+  filter: filterRaw, payload: payloadRaw, options: optionsRaw, repositories, context,
 }) => {
   //
   // pre-check
@@ -16,17 +20,11 @@ export const updateUserService: UpdateUserService = async ({
   // main
   //
   const { userSession } = context;
-  const filter = {
-    filterRaw,
-    userId: userSession._id,
-    email: userSession.email,
-  };
 
   let payload = {
     ...payloadRaw,
   };
   const { starProvider } = payload;
-
   if (starProvider) {
     const { roles } = userSession;
     const { accountId, enabled } = starProvider;
@@ -53,5 +51,18 @@ export const updateUserService: UpdateUserService = async ({
     };
   }
 
-  return repositories.user.updateUser(filter, payload);
+  const filter = sanitizeUserGetFilter(filterRaw, userSession);
+  const options = sanitizeUserBaseGetOptions(optionsRaw);
+
+  const { doc: user } = await repositories.user.updateUser(
+    filter,
+    payload,
+    options,
+  );
+
+  if (user && !validateProjection(options.projection, user)) {
+    throw new BaseError(RepositoryError.REPOSITORY_BAD_RESULT, 'projection', user);
+  }
+
+  return { doc: user };
 };

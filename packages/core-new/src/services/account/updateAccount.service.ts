@@ -1,13 +1,16 @@
 import {
   BaseError,
   getAccountService,
+  RepositoryError,
+  sanitizeAccountBaseGetOptions,
   ServiceError,
   type UpdateAccountService,
   UserError,
+  validateProjection,
 } from '../..';
 
 export const updateAccountService: UpdateAccountService = async ({
-  filter, payload, repositories, context,
+  filter, payload, options: optionsRaw, repositories, context,
 }) => {
   //
   // pre-check
@@ -15,10 +18,10 @@ export const updateAccountService: UpdateAccountService = async ({
   const { accountId } = filter;
   if (!accountId) throw new BaseError(ServiceError.SERVICE_BAD_REQUEST);
   if (!context?.userSession?._id) throw new BaseError(UserError.USER_ACCESS_DENIED);
-  // check account access
+
   await getAccountService({
-    filter: {
-      ...filter,
+    filter,
+    options: {
       projection: { _id: 1 },
     },
     repositories,
@@ -28,5 +31,12 @@ export const updateAccountService: UpdateAccountService = async ({
   //
   // main
   //
-  return repositories.account.updateAccount(filter, payload);
+  const options = sanitizeAccountBaseGetOptions(optionsRaw);
+  const { doc: account } = await repositories.account.updateAccount(filter, payload, options);
+
+  if (account && !validateProjection(options.projection, account)) {
+    throw new BaseError(RepositoryError.REPOSITORY_BAD_RESULT);
+  }
+
+  return { doc: account };
 };
