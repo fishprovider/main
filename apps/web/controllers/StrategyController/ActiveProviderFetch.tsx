@@ -1,16 +1,9 @@
-import { GetAccountController } from '@fishprovider/adapter-frontend';
-import { GetAccountUseCase } from '@fishprovider/application';
 import accountGet from '@fishprovider/cross/dist/api/accounts/get';
 import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
 import storeUser from '@fishprovider/cross/dist/stores/user';
-import { FishApiAccountRepository } from '@fishprovider/framework-fish-api';
 import { useEffect } from 'react';
 
 import { toastError } from '~ui/toast';
-
-const getAccountController = new GetAccountController(
-  new GetAccountUseCase(FishApiAccountRepository),
-);
 
 interface Props {
   providerId: string;
@@ -33,8 +26,6 @@ function ActiveProviderFetch({ providerId }: Props) {
       storeUser.mergeState({ activeProvider: undefined });
       toastError(err.message);
     });
-
-    getAccountController.run({ accountId: providerId });
   }, [providerId]);
 
   return null;
