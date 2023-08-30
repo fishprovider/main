@@ -20,14 +20,10 @@
     "ci-type-check": "tsc-files --noEmit types/global.d.ts"
   },
   "dependencies": {
-    "@fishprovider/adapter-backend": "*",
     "@fishprovider/application": "*",
     "@fishprovider/coin": "*",
     "@fishprovider/core": "*",
     "@fishprovider/core-new": "*",
-    "@fishprovider/framework-cache-first": "*",
-    "@fishprovider/framework-mongo": "*",
-    "@fishprovider/framework-redis": "*",
     "@fishprovider/repository-mongo": "*",
     "@fishprovider/swap": "*",
     "glob": "^10.3.3",

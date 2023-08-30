@@ -7,5 +7,4 @@ cd ../workers && rm -rf *
 cd ../apps && ls | grep -vE "$APP" | xargs rm -rf
 
 cd ../adapters && ls | grep -vE "frontend" | xargs rm -rf
-cd ../frameworks-backend && rm -rf *
 cd ../repositories-backend && rm -rf *

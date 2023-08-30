@@ -10,12 +10,6 @@ const apiOptions = {
   splitting: false,
 };
 
-const apiV2Options = {
-  entryPoints: globSync('apiV2/**/*.ts', { ignore: '**/*.test.*' }),
-  outdir: 'dist/apiV2',
-  splitting: false,
-};
-
 const apiV3Options = {
   entryPoints: globSync('apiV3/**/*.ts', { ignore: '**/*.test.*' }),
   outdir: 'dist/apiV3',
@@ -26,13 +20,11 @@ const main = async () => {
   if (watchMode) {
     await Promise.all([
       await build(dependencies, apiOptions),
-      await build(dependencies, apiV2Options),
       await build(dependencies, apiV3Options),
       await build(dependencies),
     ]);
   } else {
     await build(dependencies, apiOptions);
-    await build(dependencies, apiV2Options);
     await build(dependencies, apiV3Options);
     await build(dependencies);
   }

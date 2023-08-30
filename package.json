@@ -7,7 +7,6 @@
     "adapters/*",
     "repositories-backend/*",
     "repositories-frontend/*",
-    "frameworks-backend/*",
     "frameworks-frontend/*",
     "packages/*",
     "workers/*",
