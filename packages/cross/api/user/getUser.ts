@@ -6,7 +6,7 @@ import storeUser from '~stores/user';
 const getUser = async (payload: {
   userId?: string;
   email?: string;
-}) => {
+} = {}) => {
   const user = await apiGet<Partial<User> | null | undefined>('/v3/user/getUser', payload);
   const info = {
     ...storeUser.getState().info,
