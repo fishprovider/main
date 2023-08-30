@@ -20,6 +20,12 @@ function Favorite({ providerId: accountId }: Props) {
           enabled: !user?.starProviders?.[accountId],
         },
       },
+      options: {
+        projection: {
+          _id: 1,
+          starProviders: 1,
+        },
+      },
     });
   };
 

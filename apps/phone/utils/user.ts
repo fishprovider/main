@@ -14,7 +14,7 @@ const onClientLoggedIn = async (userInfo: User, token: string) => {
   Logger.info('[user] onClientLoggedIn', userInfo);
   storeUser.mergeState({ isClientLoggedIn: true });
   await userLogin({ token });
-  updateUser({ filter: {}, payload: {} });
+  updateUser();
 };
 
 export {

@@ -37,7 +37,7 @@ const onClientLoggedIn = async (
   storeUser.mergeState({ isClientLoggedIn: true });
   await userLogin({ token });
   cacheWrite(cacheKeyUser, userInfo);
-  updateUser({ filter: {}, payload: {} });
+  updateUser();
   redirectPreLoginPage();
 };
 

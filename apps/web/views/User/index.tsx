@@ -46,7 +46,7 @@ function User() {
   useQuery({
     queryFn: () => {
       if (userId) getUserController.run({ userId });
-      return getUser({ filter: {} });
+      return getUser();
     },
     queryKey: queryKeys.user(userId),
     enabled: !!userId,

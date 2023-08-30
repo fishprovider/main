@@ -1,3 +1,4 @@
+import type { Projection } from '@fishprovider/core-new';
 import type { User } from '@fishprovider/utils/dist/types/User.model';
 
 import { apiPost } from '~libs/api';
@@ -14,8 +15,15 @@ const updateUser = async (payload: {
       enabled: boolean;
     }
   };
+  options: {
+    projection?: Projection<User>
+  },
+} = {
+  filter: {},
+  payload: {},
+  options: {},
 }) => {
-  const user = await apiPost<Partial<User> | undefined>('/v3/user/updateUser', payload);
+  const user = await apiPost<Partial<User> | null | undefined>('/v3/user/updateUser', payload);
   const info = {
     ...storeUser.getState().info,
     ...user,

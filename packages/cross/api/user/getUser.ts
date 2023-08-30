@@ -1,3 +1,4 @@
+import type { Projection } from '@fishprovider/core-new';
 import type { User } from '@fishprovider/utils/dist/types/User.model';
 
 import { apiGet } from '~libs/api';
@@ -8,8 +9,14 @@ const getUser = async (payload: {
     userId?: string;
     email?: string;
   },
+  options: {
+    projection?: Projection<User>
+  },
+} = {
+  filter: {},
+  options: {},
 }) => {
-  const user = await apiGet<Partial<User> | undefined>('/v3/user/getUser', payload);
+  const user = await apiGet<Partial<User> | null | undefined>('/v3/user/getUser', payload);
   const info = {
     ...storeUser.getState().info,
     ...user,
