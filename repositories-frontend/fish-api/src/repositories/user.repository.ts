@@ -3,7 +3,7 @@ import {
   type GetUserFilter, type UpdateUserPayload, type User, type UserRepository,
 } from '@fishprovider/core-new';
 
-// import { StoreUserRepository } from '@fishprovider/framework-store';
+// import { StoreUserRepository } from '@fishprovider/repository-store';
 import { fishApi } from '../main';
 
 const getUser = async (
