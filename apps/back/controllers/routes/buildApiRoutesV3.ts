@@ -34,10 +34,9 @@ const buildApiRoutes = (router: Router) => {
       if (route.includes('/get')) {
         Logger.debug('GET', route);
         router.get(route, wrapApiHandler(handler));
-      } else {
-        Logger.debug('POST', route);
-        router.post(route, wrapApiHandler(handler));
       }
+      Logger.debug('POST', route);
+      router.post(route, wrapApiHandler(handler));
     }),
   );
 };
