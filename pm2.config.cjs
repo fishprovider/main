@@ -43,7 +43,7 @@ const deploy = {
     ...deployConfig,
     user: 'marco',
     host: 'localhost',
-    path: '/tmp/pm2-apps/fishprovider',
+    path: 'Users/marco/pm2-apps/fishprovider',
     'post-deploy': 'git rev-parse HEAD',
   },
 };
