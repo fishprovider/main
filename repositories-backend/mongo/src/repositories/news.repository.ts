@@ -1,0 +1,50 @@
+import {
+  GetNewsFilter, type News, type NewsRepository, RepositoryError,
+} from '@fishprovider/core-new';
+import moment from 'moment';
+
+import { mongo } from '..';
+
+const getNews = async (filter: GetNewsFilter) => {
+  const { today, week, upcoming } = filter;
+  const { db } = await mongo.get();
+
+  if (today) {
+    const news = await db.collection<News>('news').find({
+      datetime: {
+        $gte: new Date(),
+        $lte: moment().add(24, 'hours').toDate(),
+      },
+    }).toArray();
+    return { docs: news };
+  }
+
+  if (week) {
+    const news = await db.collection<News>('news').find({
+      week,
+    }).toArray();
+    return { docs: news };
+  }
+
+  if (upcoming) {
+    const news = await db.collection<News>('news').find({
+      impact: { $in: ['high', 'medium'] },
+      datetime: {
+        $gte: moment().subtract(1, 'hour').toDate(),
+        $lte: moment().add(1, 'hour').toDate(),
+      },
+    }).toArray();
+    return { docs: news };
+  }
+
+  return { docs: null };
+};
+
+const watchNews = () => {
+  throw new Error(RepositoryError.REPOSITORY_BAD_RESULT);
+};
+
+export const MongoNewsRepository: NewsRepository = {
+  getNews,
+  watchNews,
+};

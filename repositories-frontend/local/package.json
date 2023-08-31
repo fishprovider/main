@@ -1,0 +1,21 @@
+{
+  "name": "@fishprovider/repository-local",
+  "version": "7.0.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "lint": "eslint --cache --fix .",
+    "type-check": "tsc --noEmit",
+    "test": "npm run repository-local",
+    "clean-build": "rm -rf dist && mkdir dist",
+    "build": "tsc -p tsconfig.build.json"
+  },
+  "dependencies": {
+    "@fishprovider/core-new": "*",
+    "localforage": "^1.10.0"
+  }
+}

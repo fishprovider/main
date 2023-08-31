@@ -1,0 +1,24 @@
+{
+  "name": "@fishprovider/repository-store",
+  "version": "7.0.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "lint": "eslint --cache --fix .",
+    "type-check": "tsc --noEmit",
+    "test": "echo repository-store",
+    "clean-build": "rm -rf dist && mkdir dist",
+    "build": "tsc -p tsconfig.build.json"
+  },
+  "dependencies": {
+    "@fishprovider/core-new": "*",
+    "zustand": "^4.4.1"
+  },
+  "devDependencies": {
+    "socket.io-client": "^4.7.2"
+  }
+}

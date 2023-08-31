@@ -3,12 +3,9 @@
   "version": "6.0.0",
   "private": true,
   "workspaces": [
-    "ca/*",
-    "adapters/*",
+    "packages/*",
     "repositories-backend/*",
     "repositories-frontend/*",
-    "frameworks-frontend/*",
-    "packages/*",
     "workers/*",
     "apps/*"
   ],

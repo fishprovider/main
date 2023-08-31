@@ -13,7 +13,7 @@ export interface BaseGetResult<T> {
 }
 
 export interface BaseGetManyResult<T> {
-  docs: Partial<T>[];
+  docs: Partial<T>[] | null;
 }
 
 export interface BaseUpdateResult<T> {

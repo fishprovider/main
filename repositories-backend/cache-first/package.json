@@ -1,0 +1,22 @@
+{
+  "name": "@fishprovider/repository-cache-first",
+  "version": "7.0.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "lint": "eslint --cache --fix .",
+    "type-check": "tsc --noEmit",
+    "test": "echo repository-cache-first",
+    "clean-build": "rm -rf dist && mkdir dist",
+    "build": "tsc -p tsconfig.build.json"
+  },
+  "dependencies": {
+    "@fishprovider/core-new": "*",
+    "@fishprovider/repository-mongo": "*",
+    "@fishprovider/repository-redis": "*"
+  }
+}

@@ -66,7 +66,7 @@ export const refreshUserRolesService: RefreshUserRolesService = async ({
   );
 
   for (const accountId of accountIds) {
-    const account = accounts.find((item) => item._id === accountId);
+    const account = accounts?.find((item) => item._id === accountId);
     if (!account) {
       _.unset(roles.adminProviders, accountId);
       _.unset(roles.traderProviders, accountId);

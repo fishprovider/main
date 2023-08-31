@@ -1,0 +1,21 @@
+{
+  "name": "@fishprovider/repository-redis",
+  "version": "7.0.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "lint": "eslint --cache --fix .",
+    "type-check": "tsc --noEmit",
+    "test": "echo repository-redis",
+    "clean-build": "rm -rf dist && mkdir dist",
+    "build": "tsc -p tsconfig.build.json"
+  },
+  "dependencies": {
+    "@fishprovider/core-new": "*",
+    "redis": "^4.6.8"
+  }
+}

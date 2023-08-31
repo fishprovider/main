@@ -1,0 +1,23 @@
+{
+  "name": "@fishprovider/repository-offline-first",
+  "version": "6.0.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "lint": "eslint --cache --fix .",
+    "type-check": "tsc --noEmit",
+    "test": "npm run repository-offline-first",
+    "clean-build": "rm -rf dist && mkdir dist",
+    "build": "tsc -p tsconfig.build.json"
+  },
+  "dependencies": {
+    "@fishprovider/core-new": "*",
+    "@fishprovider/repository-fish-api": "*",
+    "@fishprovider/repository-local": "*",
+    "@fishprovider/repository-store": "*"
+  }
+}

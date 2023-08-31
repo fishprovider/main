@@ -8,19 +8,14 @@ fi
 
 cd ..
 
-function adapters() {
-  npm run build -w adapters/frontend
-}
-
 function frameworks() {
-  npm run build -w frameworks-frontend/local &
-  npm run build -w frameworks-frontend/store &
+  npm run build -w repositories-frontend/local &
+  npm run build -w repositories-frontend/store &
   wait
 
-  npm run build -w frameworks-frontend/fish-api
-  npm run build -w frameworks-frontend/offline-first
+  npm run build -w repositories-frontend/fish-api
+  npm run build -w repositories-frontend/offline-first
 }
 
-adapters &
 frameworks &
 wait

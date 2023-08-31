@@ -6,17 +6,13 @@ export interface GetNewsFilter {
   upcoming?: boolean,
 }
 
-export interface WatchNewsParams<T> {
-  selector: (input: Record<string, News>) => T,
-}
-
 export interface NewsRepository {
   getNews: (
     filter: GetNewsFilter,
     options: BaseGetOptions<News>,
   ) => Promise<BaseGetManyResult<News>>;
 
-  watchNews: <T, State = Record<string, News>>(
-    selector: (state: State) => T,
+  watchNews: <T>(
+    selector: (state: Record<string, News>) => T,
   ) => T;
 }

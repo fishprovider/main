@@ -1,8 +1,7 @@
-import { GetNewsController } from '@fishprovider/adapter-frontend';
-import { GetNewsUseCase } from '@fishprovider/application';
+import { getNewsService } from '@fishprovider/core-new';
 import storeUser from '@fishprovider/cross/dist/stores/user';
-import { OfflineFirstNewsRepository } from '@fishprovider/framework-offline-first';
-import { StoreNewsRepository } from '@fishprovider/framework-store';
+import { OfflineFirstNewsRepository } from '@fishprovider/repository-offline-first';
+import { StoreNewsRepository } from '@fishprovider/repository-store';
 import _ from 'lodash';
 import moment from 'moment';
 import { useEffect } from 'react';
@@ -10,20 +9,18 @@ import { useEffect } from 'react';
 const bannerIdBigNews = 'BigNews';
 const bannerIdBigNewsNear = 'BigNewsNear';
 
-const getNewsController = new GetNewsController(
-  new GetNewsUseCase(OfflineFirstNewsRepository),
-);
-
-const storeGetNewsController = new GetNewsController(
-  new GetNewsUseCase(StoreNewsRepository),
-);
-
 function NewsWatch() {
   const getBigNews = async () => {
-    const news = await getNewsController.run({
-      upcoming: true,
+    const { docs: news } = await getNewsService({
+      filter: {
+        upcoming: true,
+      },
+      options: {},
+      repositories: {
+        news: OfflineFirstNewsRepository,
+      },
     });
-    if (news.length) {
+    if (news?.length) {
       storeUser.mergeState({
         banners: {
           ...storeUser.getState().banners,
@@ -32,10 +29,17 @@ function NewsWatch() {
       });
     }
 
-    const allNews = await storeGetNewsController.run({});
+    const { docs: allNews } = await getNewsService({
+      filter: {},
+      options: {},
+      repositories: {
+        news: StoreNewsRepository,
+      },
+    });
     const hasBigNews = _.some(
       allNews,
-      ({ impact, datetime }) => ['high', 'medium'].includes(impact)
+      ({ impact, datetime }) => impact
+        && ['high', 'medium'].includes(impact)
         && moment(datetime) > moment().subtract(1, 'hour')
         && moment(datetime) < moment().add(1, 'hour'),
     );
