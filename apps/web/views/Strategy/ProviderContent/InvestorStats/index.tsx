@@ -67,16 +67,16 @@ function InvestorStats() {
                 <Text fw={700} span c="orange">{`${maxYearProfit}% / year`}</Text>
               </Text>
               <Text>
-                💰 All-Time Profit:
-                {' '}
-                <Text fw={700} span c="green">{`${profit}%`}</Text>
-              </Text>
-              <Text>
                 🏊 Active:
                 {' '}
                 <Text fw={700} span c="blue">
                   {moment.duration(moment().diff(moment(createdAt))).humanize()}
                 </Text>
+              </Text>
+              <Text>
+                💰 All-Time Profit:
+                {' '}
+                <Text fw={700} span c="green">{`${profit}%`}</Text>
               </Text>
               <Text>
                 🗓️ Average Profit:

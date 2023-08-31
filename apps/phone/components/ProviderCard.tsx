@@ -76,14 +76,14 @@ export default function ProviderCard({ providerId }: Props) {
                 <Text color="orange">{target}</Text>
               </Text>
               <Text>
-                All-Time Profit:
-                {' '}
-                <Text color="green">{allTimeProfit}</Text>
-              </Text>
-              <Text>
                 Active:
                 {' '}
                 <Text color="blue">{active}</Text>
+              </Text>
+              <Text>
+                All-Time Profit:
+                {' '}
+                <Text color="green">{allTimeProfit}</Text>
               </Text>
               <Text>
                 Avg. Profit:
