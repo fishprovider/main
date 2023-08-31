@@ -1,5 +1,5 @@
 import { getNewsService, News } from '@fishprovider/core-new';
-import { MongoNewsRepository } from '@fishprovider/repository-mongo';
+import { CacheFirstNewsRepository } from '@fishprovider/repository-cache-first';
 import { z } from 'zod';
 
 import { ApiHandler } from '~types/ApiHandler.model';
@@ -19,7 +19,7 @@ const handler: ApiHandler<Partial<News>[] | null> = async (data, userSession) =>
       upcoming: filter.upcoming === 'true',
     },
     options: {},
-    repositories: { news: MongoNewsRepository },
+    repositories: { news: CacheFirstNewsRepository },
     context: { userSession },
   });
   return { result: docs };

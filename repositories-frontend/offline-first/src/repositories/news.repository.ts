@@ -15,28 +15,28 @@ const getNews = async (
     docs = res.docs;
   }
 
-  if (!docs) {
-    if (FishApiNewsRepository.getNews) {
+  if (FishApiNewsRepository.getNews) {
+    const set = async (news?: Partial<News>[]) => {
+      if (LocalNewsRepository.setNews) {
+        LocalNewsRepository.setNews(filter, { news }, options);
+      }
+      if (StoreNewsRepository.setNews) {
+        StoreNewsRepository.setNews(filter, { news }, options);
+      }
+    };
+
+    if (!docs) {
       const res = await FishApiNewsRepository.getNews(filter, options);
       docs = res.docs;
-      if (LocalNewsRepository.setNews) {
-        // non-blocking
-        LocalNewsRepository.setNews(filter, { news: docs ?? undefined }, options);
-      }
+
+      // non-blocking
+      set(docs ?? undefined);
+    } else {
+      // non-blocking
+      FishApiNewsRepository.getNews(filter, options).then((res) => {
+        set(res.docs ?? undefined);
+      });
     }
-  }
-
-  // non-blocking
-  if (FishApiNewsRepository.getNews) {
-    FishApiNewsRepository.getNews(filter, options).then((res) => {
-      if (LocalNewsRepository.setNews) {
-        LocalNewsRepository.setNews(filter, { news: res.docs ?? undefined }, options);
-      }
-    });
-  }
-
-  if (StoreNewsRepository.setNews) {
-    StoreNewsRepository.setNews(filter, { news: docs ?? undefined }, options);
   }
 
   return { docs };
