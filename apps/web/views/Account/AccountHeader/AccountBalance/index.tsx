@@ -1,8 +1,10 @@
+import { getAccountService } from '@fishprovider/core-new';
 import accountGet from '@fishprovider/cross/dist/api/accounts/get';
 import { useMutate } from '@fishprovider/cross/dist/libs/query';
 import storeOrders from '@fishprovider/cross/dist/stores/orders';
 import storePrices from '@fishprovider/cross/dist/stores/prices';
 import storeUser from '@fishprovider/cross/dist/stores/user';
+import { FishApiAccountRepository } from '@fishprovider/repository-fish-api';
 import { ProviderType } from '@fishprovider/utils/dist/constants/account';
 import { OrderStatus } from '@fishprovider/utils/dist/constants/order';
 import { getProfit, getProfitIcon } from '@fishprovider/utils/dist/helpers/order';
@@ -63,8 +65,22 @@ function AccountBalance() {
   const { mutate: reload, isLoading } = useMutate({
     mutationFn: accountGet,
   });
+  const { mutate: reloadV3, isLoading: isLoadingV3 } = useMutate({
+    mutationFn: (accountId: string) => getAccountService({
+      filter: {
+        accountId,
+      },
+      options: {},
+      repositories: {
+        account: FishApiAccountRepository,
+      },
+    }),
+  });
 
-  const onReload = () => reload({ providerId, reload: true });
+  const onReload = () => {
+    reload({ providerId, reload: true });
+    reloadV3(providerId);
+  };
 
   return (
     <Stack>
@@ -77,7 +93,7 @@ function AccountBalance() {
                 {' '}
                 <Text fw={700} span>{`${balance} ${asset}`}</Text>
               </Text>
-              <Icon name="Sync" size="small" button onClick={onReload} loading={isLoading} />
+              <Icon name="Sync" size="small" button onClick={onReload} loading={isLoading || isLoadingV3} />
             </Group>
           </Tooltip>
           {!!leverage && (
