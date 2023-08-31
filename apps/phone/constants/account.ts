@@ -136,6 +136,13 @@ const metatraderPlatforms = {
     partnerUrl: 'https://my.roboforex.com/en/?a=vtft',
     rank: 28,
   },
+  alpari: {
+    name: 'Alpari',
+    icon: '/icons/alpari.jpg',
+    href: 'https://www.alpari.org',
+    partnerUrl: 'https://gobymylink.com/en/?partner_id=170008567',
+    rank: 460,
+  },
   admiralmarkets: {
     name: 'AdmiralMarkets',
     icon: '/icons/admiralmarkets.png',
@@ -143,12 +150,6 @@ const metatraderPlatforms = {
     partnerUrl: 'https://partners.admiralmarkets.com/3oceUI',
     rank: 35,
   },
-  // avatrade: {
-  //   name: 'AvaTrade',
-  //   icon: '/icons/avatrade.png',
-  //   href: 'https://www.avatrade.com',
-  // rank: 64,
-  // },
   fpmarkets: {
     name: 'FPMarkets',
     icon: '/icons/fpmarkets.png',
@@ -163,20 +164,19 @@ const metatraderPlatforms = {
     partnerUrl: 'https://portal.fpmarkets.com/int-EN/register?redir=stv&fpm-affiliate-utm-source=IB&fpm-affiliate-agt=22506',
     rank: 90,
   },
-  zulutrade: {
-    name: 'ZuluTrade',
-    icon: '/icons/zulutrade.png',
-    href: 'https://www.zulutrade.com',
-    partnerUrl: 'https://www.zulutrade.com/?ref=2488273&utm_medium=affiliate&utm_source=2488273&utm_campaign=affiliate',
-    rank: 269,
-  },
-  alpari: {
-    name: 'Alpari',
-    icon: '/icons/alpari.jpg',
-    href: 'https://www.alpari.org',
-    partnerUrl: 'https://gobymylink.com/en/?partner_id=170008567',
-    rank: 460,
-  },
+  // avatrade: {
+  //   name: 'AvaTrade',
+  //   icon: '/icons/avatrade.png',
+  //   href: 'https://www.avatrade.com',
+  //   rank: 64,
+  // },
+  // zulutrade: {
+  //   name: 'ZuluTrade',
+  //   icon: '/icons/zulutrade.png',
+  //   href: 'https://www.zulutrade.com',
+  //   partnerUrl: 'https://www.zulutrade.com/?ref=2488273&utm_medium=affiliate&utm_source=2488273&utm_campaign=affiliate',
+  //   rank: 269,
+  // },
 };
 
 const ProviderTypeText: Record<string, string> = {
