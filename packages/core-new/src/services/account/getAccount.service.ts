@@ -18,6 +18,7 @@ export const getAccountService: GetAccountService = async ({
   //
   const { accountId } = filter;
   if (!accountId) throw new BaseError(ServiceError.SERVICE_BAD_REQUEST);
+  if (!repositories.account.getAccount) throw new BaseError(RepositoryError.REPOSITORY_NOT_IMPLEMENT);
 
   //
   // main

@@ -1,4 +1,6 @@
-import { GetNewsFilter, News, NewsRepository } from '@fishprovider/core-new';
+import {
+  BaseUpdateOptions, GetNewsFilter, News, NewsRepository, UpdateNewsPayload,
+} from '@fishprovider/core-new';
 import _ from 'lodash';
 import moment from 'moment';
 
@@ -40,11 +42,24 @@ const getNews = async (filter: GetNewsFilter) => {
   return { docs: null };
 };
 
+const setNews = async (
+  _filter: GetNewsFilter,
+  payload: UpdateNewsPayload,
+  _options: BaseUpdateOptions<News>,
+) => {
+  const { news } = payload;
+  if (news) {
+    storeNews.mergeDocs(news);
+  }
+  return { docs: news ?? null };
+};
+
 const watchNews = <T>(
   selector: (state: Record<string, News>) => T,
 ) => storeNews.useStore(selector);
 
 export const StoreNewsRepository: NewsRepository = {
   getNews,
+  setNews,
   watchNews,
 };

@@ -1,4 +1,6 @@
-import type { BaseGetManyResult, BaseGetOptions, News } from '..';
+import type {
+  BaseGetManyResult, BaseGetOptions, BaseUpdateOptions, News,
+} from '..';
 
 export interface GetNewsFilter {
   today?: boolean,
@@ -6,13 +8,23 @@ export interface GetNewsFilter {
   upcoming?: boolean,
 }
 
+export interface UpdateNewsPayload {
+  news?: Partial<News>[],
+}
+
 export interface NewsRepository {
-  getNews: (
+  getNews?: (
     filter: GetNewsFilter,
     options: BaseGetOptions<News>,
   ) => Promise<BaseGetManyResult<News>>;
 
-  watchNews: <T>(
+  setNews?: (
+    filter: GetNewsFilter,
+    payload: UpdateNewsPayload,
+    options: BaseUpdateOptions<News>,
+  ) => Promise<BaseGetManyResult<News>>;
+
+  watchNews?: <T>(
     selector: (state: Record<string, News>) => T,
   ) => T;
 }

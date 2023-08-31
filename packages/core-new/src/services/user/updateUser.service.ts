@@ -15,6 +15,7 @@ export const updateUserService: UpdateUserService = async ({
   // pre-check
   //
   if (!context?.userSession?._id) throw new BaseError(UserError.USER_ACCESS_DENIED);
+  if (!repositories.user.updateUser) throw new BaseError(RepositoryError.REPOSITORY_NOT_IMPLEMENT);
 
   //
   // main

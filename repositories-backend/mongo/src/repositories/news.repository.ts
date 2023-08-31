@@ -1,5 +1,5 @@
 import {
-  GetNewsFilter, type News, type NewsRepository, RepositoryError,
+  GetNewsFilter, type News, type NewsRepository,
 } from '@fishprovider/core-new';
 import moment from 'moment';
 
@@ -40,11 +40,6 @@ const getNews = async (filter: GetNewsFilter) => {
   return { docs: null };
 };
 
-const watchNews = () => {
-  throw new Error(RepositoryError.REPOSITORY_BAD_RESULT);
-};
-
 export const MongoNewsRepository: NewsRepository = {
   getNews,
-  watchNews,
 };

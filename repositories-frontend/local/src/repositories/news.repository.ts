@@ -1,5 +1,6 @@
 import {
-  GetNewsFilter, type News, NewsRepository, RepositoryError,
+  BaseUpdateOptions,
+  GetNewsFilter, type News, NewsRepository, UpdateNewsPayload,
 } from '@fishprovider/core-new';
 
 import { buildNewsKeys, local } from '..';
@@ -11,11 +12,19 @@ const getNews = async (filter: GetNewsFilter) => {
   return { docs: news ?? null };
 };
 
-const watchNews = () => {
-  throw new Error(RepositoryError.REPOSITORY_BAD_RESULT);
+const setNews = async (
+  filter: GetNewsFilter,
+  payload: UpdateNewsPayload,
+  _options: BaseUpdateOptions<News>,
+) => {
+  const key = buildNewsKeys(filter);
+  const { news } = payload;
+  const { localSet } = await local.get();
+  await localSet(key, news);
+  return { docs: news ?? null };
 };
 
 export const LocalNewsRepository: NewsRepository = {
   getNews,
-  watchNews,
+  setNews,
 };

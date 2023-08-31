@@ -1,5 +1,15 @@
-import { GetNewsService } from '../..';
+import { BaseError, GetNewsService, RepositoryError } from '../..';
 
 export const getNewsService: GetNewsService = async ({
   filter, options, repositories,
-}) => repositories.news.getNews(filter, options);
+}) => {
+  //
+  // pre-check
+  //
+  if (!repositories.news.getNews) throw new BaseError(RepositoryError.REPOSITORY_NOT_IMPLEMENT);
+
+  //
+  // main
+  //
+  return repositories.news.getNews(filter, options);
+};

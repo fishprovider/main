@@ -17,17 +17,17 @@ export interface UpdateAccountPayload {
 }
 
 export interface AccountRepository {
-  getAccount: (
+  getAccount?: (
     filter: GetAccountFilter,
     options: BaseGetOptions<Account>,
   ) => Promise<BaseGetResult<Account>>;
 
-  getAccounts: (
+  getAccounts?: (
     filter: GetAccountFilter,
     options: BaseGetOptions<Account>,
   ) => Promise<BaseGetManyResult<Account>>;
 
-  updateAccount: (
+  updateAccount?: (
     filter: GetAccountFilter,
     payload: UpdateAccountPayload,
     options: BaseUpdateOptions<Account>,

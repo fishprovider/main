@@ -23,12 +23,12 @@ export interface UpdateUserPayload {
 }
 
 export interface UserRepository {
-  getUser: (
+  getUser?: (
     filter: GetUserFilter,
     options: BaseGetOptions<User>,
   ) => Promise<BaseGetResult<User>>;
 
-  updateUser: (
+  updateUser?: (
     filter: GetUserFilter,
     payload: UpdateUserPayload,
     options: BaseUpdateOptions<User>,
