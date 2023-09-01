@@ -12,7 +12,7 @@ export const sanitizeAccountBaseGetOptions = (
   },
 );
 
-export const checkAddress = (
+export const checkAccess = (
   account: Partial<Account>,
   context?: ServiceContext,
 ) => {

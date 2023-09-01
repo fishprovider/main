@@ -1,7 +1,7 @@
 import {
   AccountError,
   BaseError,
-  checkAddress,
+  checkAccess,
   type GetAccountService,
   RepositoryError,
   sanitizeAccountBaseGetOptions,
@@ -32,7 +32,7 @@ export const getAccountService: GetAccountService = async ({
     throw new BaseError(RepositoryError.REPOSITORY_BAD_RESULT);
   }
 
-  checkAddress(account, context);
+  checkAccess(account, context);
 
   return { doc: account };
 };
