@@ -7,9 +7,14 @@ const packageDependencies = {
   ...require('./packages/utils/package.json').dependencies,
   ...require('./packages/ctrader/package.json').dependencies,
   ...require('./packages/metatrader/package.json').dependencies,
+  ...require('./packages/binance/package.json').dependencies,
   ...require('./packages/swap/package.json').dependencies,
   ...require('./packages/coin/package.json').dependencies,
   ...require('./packages/core/package.json').dependencies,
+  ...require('./packages/core-new/package.json').dependencies,
+  ...require('./repositories-backend/mongo/package.json').dependencies,
+  ...require('./repositories-backend/redis/package.json').dependencies,
+  ...require('./repositories-backend/cache-first/package.json').dependencies,
 };
 
 const baseOptions = {
