@@ -1,6 +1,6 @@
 import type {
-  Account, AccountRepository, BaseGetOptions, BaseServiceGetResult,
-  BaseServiceParams, BaseUpdateOptions, GetAccountFilter,
+  Account, AccountRepository, BaseGetOptions, BaseServiceGetManyResult,
+  BaseServiceGetResult, BaseServiceParams, BaseUpdateOptions, GetAccountFilter,
   UpdateAccountPayload, UserRepository,
 } from '..';
 
@@ -11,6 +11,14 @@ export type GetAccountService = (params: BaseServiceParams & {
     account: AccountRepository
   },
 }) => Promise<BaseServiceGetResult<Account>>;
+
+export type GetAccountsService = (params: BaseServiceParams & {
+  filter: GetAccountFilter,
+  options: BaseGetOptions<Account>,
+  repositories: {
+    account: AccountRepository
+  },
+}) => Promise<BaseServiceGetManyResult<Account>>;
 
 export type UpdateAccountService = (params: BaseServiceParams & {
   filter: GetAccountFilter,

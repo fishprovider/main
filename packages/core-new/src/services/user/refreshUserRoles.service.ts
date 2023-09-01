@@ -3,6 +3,7 @@ import _ from 'lodash';
 import {
   AccountRoles,
   BaseError,
+  getAccountsService,
   type RefreshUserRolesService,
   RepositoryError,
   sanitizeUserBaseGetOptions,
@@ -17,7 +18,6 @@ export const refreshUserRolesService: RefreshUserRolesService = async ({
   // pre-check
   //
   if (!context?.userSession?._id) throw new BaseError(UserError.USER_ACCESS_DENIED);
-  if (!repositories.account.getAccounts) throw new BaseError(RepositoryError.REPOSITORY_NOT_IMPLEMENT);
   if (!repositories.user.updateUser) throw new BaseError(RepositoryError.REPOSITORY_NOT_IMPLEMENT);
 
   //
@@ -55,17 +55,20 @@ export const refreshUserRolesService: RefreshUserRolesService = async ({
     ..._.keys(roles.protectorProviders),
     ..._.keys(roles.viewerProviders),
   ]);
-  const { docs: accounts } = await repositories.account.getAccounts(
-    {
+  const { docs: accounts } = await getAccountsService({
+    filter: {
       accountIds,
       memberId: userId,
     },
-    {
+    options: {
       projection: {
+        _id: 1,
         members: 1,
       },
     },
-  );
+    repositories,
+    context,
+  });
 
   for (const accountId of accountIds) {
     const account = accounts?.find((item) => item._id === accountId);
