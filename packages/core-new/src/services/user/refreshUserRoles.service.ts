@@ -7,6 +7,7 @@ import {
   type RefreshUserRolesService,
   RepositoryError,
   sanitizeUserBaseGetOptions,
+  updateUserService,
   UserError,
   validateProjection,
 } from '../..';
@@ -18,7 +19,6 @@ export const refreshUserRolesService: RefreshUserRolesService = async ({
   // pre-check
   //
   if (!context?.userSession?._id) throw new BaseError(UserError.USER_ACCESS_DENIED);
-  if (!repositories.user.updateUser) throw new BaseError(RepositoryError.REPOSITORY_NOT_IMPLEMENT);
 
   //
   // main
@@ -112,11 +112,12 @@ export const refreshUserRolesService: RefreshUserRolesService = async ({
 
   const options = sanitizeUserBaseGetOptions(optionsRaw);
 
-  const { doc: user } = await repositories.user.updateUser(
-    { userId, email },
-    { roles },
+  const { doc: user } = await updateUserService({
+    filter: { userId, email },
+    payload: { roles },
     options,
-  );
+    repositories,
+  });
 
   if (user && !validateProjection(options.projection, user)) {
     throw new BaseError(RepositoryError.REPOSITORY_BAD_RESULT, 'projection', user);
