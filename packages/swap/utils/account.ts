@@ -44,13 +44,13 @@ const updateRedis = async (account: Account) => {
 
 const updateFirebase = async (account: Account) => {
   const slimAccountPublic = _.omit(account, ['config', 'providerData']);
-  const membersSlimUpdatePaths: Record<string, boolean> = {};
+  const membersSlim: Record<string, boolean> = {};
   account.members?.forEach((member) => {
-    membersSlimUpdatePaths[`membersSlim.${member.userId}`] = true;
+    membersSlim[member.userId] = true;
   });
   await Firebase.firestore().collection('account').doc(account._id).set({
     ...slimAccountPublic,
-    ...account.members && membersSlimUpdatePaths,
+    membersSlim,
   });
 };
 
