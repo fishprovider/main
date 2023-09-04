@@ -62,7 +62,7 @@ const updateMongo = async (account: Account) => {
 };
 
 const updateCache = async (account: Account) => {
-  Promise.all([
+  await Promise.all([
     updateRedis(account),
     updateFirebase(account),
     updateMongo(account),
