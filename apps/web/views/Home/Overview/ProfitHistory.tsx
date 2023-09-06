@@ -1,3 +1,6 @@
+import accountGet from '@fishprovider/cross/dist/api/accounts/get';
+import { useEffect } from 'react';
+
 import MonthProfit from '~components/account/MonthProfit';
 import Link from '~components/base/Link';
 import { ctraderPlatforms } from '~constants/account';
@@ -20,6 +23,10 @@ const myFxBookId = 'earth/10192142';
 const myFxBookUrl = `https://www.myfxbook.com/portfolio/${myFxBookId}`;
 
 function ProfitHistory() {
+  useEffect(() => {
+    accountGet({ providerId });
+  }, []);
+
   return (
     <Stack>
       <Title ta="center" size="h3">
