@@ -8,46 +8,77 @@ const appConfigs = [
   {
     name: 'gate',
     cron_restart: '0 0 * * *',
+    env: {
+      PORT: 8001,
+    },
   },
   {
     name: 'cron',
     cron_restart: '5 0 * * *',
+    env: {
+      PORT: 8002,
+    },
   },
   {
     name: 'pay',
     cron_restart: '10 0 * * *',
+    env: {
+      PORT: 8020,
+    },
   },
   {
     name: 'bot',
     cron_restart: '15 0 * * *',
+    env: {
+      PORT: 8007,
+    },
   },
   {
     name: 'copy',
     cron_restart: '20 0 * * *',
+    env: {
+      PORT: 8006,
+    },
   },
   {
     name: 'head-ctrader',
     cron_restart: '25 0 * * *',
+    env: {
+      PORT: 8005,
+    },
   },
   {
     name: 'head-meta',
     cron_restart: '30 0 * * *',
+    env: {
+      PORT: 8009,
+    },
   },
   {
     name: 'spot-ctrader',
     cron_restart: '35 0 * * *',
+    env: {
+      PORT: 8004,
+    },
   },
   {
     name: 'spot-meta',
     cron_restart: '40 0 * * *',
+    env: {
+      PORT: 8008,
+    },
   },
   {
     name: 'pup',
     cron_restart: '45 0 * * *',
+    env: {
+      PORT: 8003,
+    },
   },
   {
     name: 'mon',
     env: {
+      PORT: 8000,
       DRY_RUN: true,
     },
     cron_restart: '50 0 * * *',
@@ -56,10 +87,10 @@ const appConfigs = [
     name: 'spot-ctrader-poll',
     project: 'spot-ctrader',
     env: {
+      PORT: 8104,
       TYPE_ID: 'spot-ctrader-icmarkets-poll',
       SPOT_TASKS: 'poll',
       WATCH_PATTERN: '^(AUDCAD|AUDCHF|AUDJPY|AUDNZD|AUDUSD|CADCHF|CADJPY|CHFJPY|EURAUD|EURCAD|EURCHF|EURGBP|EURJPY|EURNZD|EURUSD|GBPAUD|GBPCAD|GBPCHF|GBPJPY|GBPNZD|GBPUSD|NZDCAD|NZDCHF|NZDJPY|NZDUSD|USDCAD|USDCHF|USDJPY|XAGUSD|XAUUSD)$',
-      PORT: 8104,
     },
     cron_restart: '55 0 * * *',
   },
@@ -67,10 +98,10 @@ const appConfigs = [
     name: 'spot-meta-poll',
     project: 'spot-meta',
     env: {
+      PORT: 8108,
       TYPE_ID: 'spot-meta-exness-poll',
       SPOT_TASKS: 'poll',
       WATCH_PATTERN: '^(AUDCAD|AUDCHF|AUDJPY|AUDNZD|AUDUSD|CADCHF|CADJPY|CHFJPY|EURAUD|EURCAD|EURCHF|EURGBP|EURJPY|EURNZD|EURUSD|GBPAUD|GBPCAD|GBPCHF|GBPJPY|GBPNZD|GBPUSD|NZDCAD|NZDCHF|NZDJPY|NZDUSD|USDCAD|USDCHF|USDJPY|XAGUSD|XAUUSD|BTCUSD|ETHUSD)$',
-      PORT: 8108,
     },
     cron_restart: '0 1 * * *',
   },
