@@ -25,7 +25,7 @@ const appConfigs = [
     name: 'spot-ctrader-poll',
     project: 'spot-ctrader',
     env: {
-      TYPE_ID: 'spot-ctrader-poll',
+      TYPE_ID: 'spot-ctrader-icmarkets-poll',
       SPOT_TASKS: 'poll',
       WATCH_PATTERN: '^(AUDCAD|AUDCHF|AUDJPY|AUDNZD|AUDUSD|CADCHF|CADJPY|CHFJPY|EURAUD|EURCAD|EURCHF|EURGBP|EURJPY|EURNZD|EURUSD|GBPAUD|GBPCAD|GBPCHF|GBPJPY|GBPNZD|GBPUSD|NZDCAD|NZDCHF|NZDJPY|NZDUSD|USDCAD|USDCHF|USDJPY|XAGUSD|XAUUSD)$',
       PORT: 8104,
@@ -35,7 +35,7 @@ const appConfigs = [
     name: 'spot-meta-poll',
     project: 'spot-meta',
     env: {
-      TYPE_ID: 'spot-meta-poll',
+      TYPE_ID: 'spot-meta-exness-poll',
       SPOT_TASKS: 'poll',
       WATCH_PATTERN: '^(AUDCAD|AUDCHF|AUDJPY|AUDNZD|AUDUSD|CADCHF|CADJPY|CHFJPY|EURAUD|EURCAD|EURCHF|EURGBP|EURJPY|EURNZD|EURUSD|GBPAUD|GBPCAD|GBPCHF|GBPJPY|GBPNZD|GBPUSD|NZDCAD|NZDCHF|NZDJPY|NZDUSD|USDCAD|USDCHF|USDJPY|XAGUSD|XAUUSD|BTCUSD|ETHUSD)$',
       PORT: 8108,
