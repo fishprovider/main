@@ -37,7 +37,19 @@ const checkAccount = async (providerId: string) => {
     const todayOrders = await getTodayOrders(providerId);
     const liveOrders = await getLiveOrders(providerId);
 
-    let profit = 0;
+    const {
+      providerType,
+      asset = 'USD',
+    } = account;
+
+    const prices = await getPrices(
+      providerType,
+      _.uniq([
+        ...getMajorPairs(providerType),
+        ...liveOrders.map((item) => item.symbol),
+      ]),
+    );
+    const profit = getProfit(liveOrders, prices, asset);
 
     if (botTasks.account) {
       await setBalanceStartDay(account);
@@ -55,19 +67,6 @@ const checkAccount = async (providerId: string) => {
     if (!liveOrders.length) return;
 
     if (botTasks.orders) {
-      const {
-        providerType,
-        asset = 'USD',
-      } = account;
-      const prices = await getPrices(
-        providerType,
-        _.uniq([
-          ...getMajorPairs(providerType),
-          ...liveOrders.map((item) => item.symbol),
-        ]),
-      );
-      profit = getProfit(liveOrders, prices, asset);
-
       await closeOnProfit(account, liveOrders, profit);
       await closeOnEquity(account, liveOrders, profit);
       await closeAtTime(account, liveOrders, profit);
