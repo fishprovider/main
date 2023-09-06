@@ -46,6 +46,13 @@ const deploy = {
     path: '/Users/marco/pm2-apps/fishprovider',
     'post-deploy': 'git rev-parse HEAD',
   },
+  fish: {
+    ...deployConfig,
+    user: 'marco',
+    host: '185.255.131.17',
+    path: '/home/marco/work/pm2-apps/fishprovider',
+    'post-deploy': 'git rev-parse HEAD',
+  },
 };
 
 module.exports = {
