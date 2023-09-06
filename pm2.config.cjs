@@ -76,6 +76,7 @@ const deploy = {
     ...deployConfig,
     user: 'marco',
     host: '185.255.131.171',
+    ssh_options: 'Port=1503',
     path: '/home/marco/work/pm2-apps/fishprovider',
     'post-deploy': 'git rev-parse HEAD',
   },
