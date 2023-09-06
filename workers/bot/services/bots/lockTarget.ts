@@ -1,4 +1,4 @@
-import { send } from '@fishprovider/core/dist/libs/notif';
+import { push, send } from '@fishprovider/core/dist/libs/notif';
 import removeOrder from '@fishprovider/swap/dist/commands/removeOrder';
 import removePosition from '@fishprovider/swap/dist/commands/removePosition';
 import { botUser, getProvider } from '@fishprovider/swap/dist/utils/account';
@@ -226,6 +226,10 @@ const lockTarget = async (account: Account, liveOrders: Order[], profit: number)
     const msg = '[bot] Target/Lock, close all orders and lock account';
     Logger.debug(`[${providerId}] ${msg}`);
     send(msg, [`${monthTarget}`, `${levelTarget?.target}`, `${equityLock?.target}`], `p-${providerId}`);
+    push(
+      { title: `[${providerId}] Target/Lock`, body: msg },
+      `account-${providerId}`,
+    );
 
     if (env.dryRun) return;
 
