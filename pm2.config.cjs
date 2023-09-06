@@ -23,6 +23,7 @@ const appConfigs = [
   },
   {
     name: 'spot-ctrader-poll',
+    project: 'spot-ctrader',
     env: {
       TYPE_ID: 'spot-ctrader-poll',
       SPOT_TASKS: 'poll',
@@ -31,6 +32,7 @@ const appConfigs = [
   },
   {
     name: 'spot-meta-poll',
+    project: 'spot-meta',
     env: {
       TYPE_ID: 'spot-meta-poll',
       SPOT_TASKS: 'poll',
@@ -42,6 +44,7 @@ const appConfigs = [
 const apps = appConfigs.map(({
   workspace = 'workers',
   name,
+  project,
   env,
 }) => ({
   name,
@@ -50,7 +53,7 @@ const apps = appConfigs.map(({
     ...env,
   },
   script: 'npm',
-  args: `run start -w ${workspace}/${name}`,
+  args: `run start -w ${workspace}/${project || name}`,
   cron_restart: '0 0 * * *',
 }));
 
