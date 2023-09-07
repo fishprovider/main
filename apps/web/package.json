@@ -9,7 +9,7 @@
     "prebuild": "./build-deps.sh",
     "build": "NODE_ENV=production doppler run --print-config next build",
     "postbuild": "NODE_ENV=production next-sitemap",
-    "build-vercel": "NODE_ENV=production next build && npm run postbuild",
+    "build-vercel": "NODE_ENV=production && npm run prebuild && next build && npm run postbuild",
     "start": "NODE_ENV=production doppler run --print-config next start",
     "export": "NODE_ENV=production next export",
     "dev": "NODE_ENV=development doppler run --print-config -- next dev",
