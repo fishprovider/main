@@ -1,0 +1,32 @@
+{
+  "name": "@fishprovider/libs",
+  "version": "7.0.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "lint": "eslint --cache --fix .",
+    "type-check": "tsc --noEmit",
+    "test": "cross-env NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules npx jest",
+    "clean": "rm -rf dist && mkdir dist",
+    "build": "tsc -p tsconfig.build.json",
+    "ci-lint": "eslint --cache --fix",
+    "ci-type-check": "tsc-files --noEmit"
+  },
+  "dependencies": {
+    "@fishprovider/core-new": "*",
+    "axios": "^1.5.0",
+    "discord.js": "^14.13.0",
+    "expo-server-sdk": "^3.7.0",
+    "firebase-admin": "^11.10.1",
+    "lodash": "^4.17.21",
+    "loglevel": "^1.8.1",
+    "moment": "^2.29.4",
+    "moment-timezone": "^0.5.43",
+    "p-queue": "^7.3.4",
+    "systeminformation": "^5.21.1"
+  }
+}
