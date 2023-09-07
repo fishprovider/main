@@ -6,24 +6,10 @@ const envBackend = {
 
 const appConfigs = [
   {
-    name: 'gate',
-    cron_restart: '0 0 * * *',
+    name: 'back',
+    cron_restart: '5 1 * * *',
     env: {
-      PORT: 8001,
-    },
-  },
-  {
-    name: 'cron',
-    cron_restart: '5 0 * * *',
-    env: {
-      PORT: 8002,
-    },
-  },
-  {
-    name: 'pay',
-    cron_restart: '10 0 * * *',
-    env: {
-      PORT: 8020,
+      PORT: 3001,
     },
   },
   {
@@ -41,6 +27,20 @@ const appConfigs = [
     },
   },
   {
+    name: 'cron',
+    cron_restart: '5 0 * * *',
+    env: {
+      PORT: 8002,
+    },
+  },
+  {
+    name: 'gate',
+    cron_restart: '0 0 * * *',
+    env: {
+      PORT: 8001,
+    },
+  },
+  {
     name: 'head-ctrader',
     cron_restart: '25 0 * * *',
     env: {
@@ -55,17 +55,18 @@ const appConfigs = [
     },
   },
   {
-    name: 'spot-ctrader',
-    cron_restart: '35 0 * * *',
+    name: 'mon',
     env: {
-      PORT: 8004,
+      PORT: 8000,
+      DRY_RUN: true,
     },
+    cron_restart: '50 0 * * *',
   },
   {
-    name: 'spot-meta',
-    cron_restart: '40 0 * * *',
+    name: 'pay',
+    cron_restart: '10 0 * * *',
     env: {
-      PORT: 8008,
+      PORT: 8020,
     },
   },
   {
@@ -76,12 +77,11 @@ const appConfigs = [
     },
   },
   {
-    name: 'mon',
+    name: 'spot-ctrader',
+    cron_restart: '35 0 * * *',
     env: {
-      PORT: 8000,
-      DRY_RUN: true,
+      PORT: 8004,
     },
-    cron_restart: '50 0 * * *',
   },
   {
     name: 'spot-ctrader-poll',
@@ -93,6 +93,13 @@ const appConfigs = [
       WATCH_PATTERN: '^(AUDCAD|AUDCHF|AUDJPY|AUDNZD|AUDUSD|CADCHF|CADJPY|CHFJPY|EURAUD|EURCAD|EURCHF|EURGBP|EURJPY|EURNZD|EURUSD|GBPAUD|GBPCAD|GBPCHF|GBPJPY|GBPNZD|GBPUSD|NZDCAD|NZDCHF|NZDJPY|NZDUSD|USDCAD|USDCHF|USDJPY|XAGUSD|XAUUSD)$',
     },
     cron_restart: '55 0 * * *',
+  },
+  {
+    name: 'spot-meta',
+    cron_restart: '40 0 * * *',
+    env: {
+      PORT: 8008,
+    },
   },
   {
     name: 'spot-meta-poll',
