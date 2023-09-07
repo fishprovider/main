@@ -1,11 +1,13 @@
 import type {
-  AccountRoles, BaseGetOptions, BaseGetResult, BaseUpdateOptions,
-  BaseUpdateResult, User, UserRoles,
+  AccountRoles, BaseGetManyResult,
+  BaseGetOptions, BaseGetResult, BaseUpdateOptions,
+  BaseUpdateResult, User, UserPushNotif, UserRoles,
 } from '../..';
 
 export interface GetUserFilter {
   userId?: string
-  email?: string
+  email?: string,
+  pushNotif?: Partial<UserPushNotif>,
 }
 
 export interface UpdateUserPayload {
@@ -27,6 +29,11 @@ export interface UserRepository {
     filter: GetUserFilter,
     options: BaseGetOptions<User>,
   ) => Promise<BaseGetResult<User>>;
+
+  getUsers?: (
+    filter: GetUserFilter,
+    options: BaseGetOptions<User>,
+  ) => Promise<BaseGetManyResult<User>>;
 
   updateUser?: (
     filter: GetUserFilter,

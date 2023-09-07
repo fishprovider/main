@@ -8,6 +8,13 @@ export interface UserRoles {
   viewerProviders?: Record<string, boolean>;
 }
 
+export interface UserPushNotif {
+  type: 'fcm' | 'expo',
+  token: string,
+  topic?: string,
+  data?: any,
+}
+
 export interface User {
   _id: string;
   email: string;
@@ -23,12 +30,7 @@ export interface User {
     phoneNumber?: string;
   };
 
-  pushNotif?: {
-    type: 'fcm' | 'expo',
-    token: string,
-    topic?: string,
-    data?: any,
-  }[];
+  pushNotif?: UserPushNotif[];
 
   updatedAt?: Date;
   createdAt?: Date;
