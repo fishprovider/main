@@ -6,6 +6,7 @@ const envBackend = {
 
 const appConfigs = [
   {
+    workspace: 'apps',
     name: 'back',
     cron_restart: '5 1 * * *',
     env: {
