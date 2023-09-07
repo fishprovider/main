@@ -140,7 +140,7 @@ const deploy = {
   fish: {
     ...deployConfig,
     user: 'marco',
-    host: 'fish-server.fishprovider.com', // 185.255.131.171
+    host: '185.255.131.171',
     ssh_options: 'Port=1503',
     path: '/home/marco/work/pm2-apps/fishprovider',
   },
