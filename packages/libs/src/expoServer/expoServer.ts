@@ -2,12 +2,18 @@ import { Expo } from 'expo-server-sdk';
 
 import { log } from '..';
 
-const expo = new Expo({ accessToken: process.env.EXPO_TOKEN });
+let expo: Expo | undefined;
+
+export const startExpo = () => {
+  expo = new Expo({ accessToken: process.env.EXPO_TOKEN });
+};
 
 export const pushExpo = async (
   notification: { title: string, body: string },
   pushTokens: string[],
 ) => {
+  if (!expo) return;
+
   const messages = pushTokens.map((to) => ({
     to,
     ...notification,

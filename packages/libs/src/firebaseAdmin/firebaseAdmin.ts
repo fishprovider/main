@@ -2,19 +2,23 @@ import admin from 'firebase-admin';
 
 import { log } from '..';
 
-const firebaseApp = admin.initializeApp({
-  credential: admin.credential.cert({
-    projectId: process.env.FIREBASE_PROJECT_ID,
-    privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
-    clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-  }),
-  databaseURL: `https://${process.env.FIREBASE_PROJECT_ID}.firebaseio.com`,
-  storageBucket: `${process.env.FIREBASE_PROJECT_ID}.appspot.com`,
-});
+let firebaseApp: admin.app.App | undefined;
 
-firebaseApp.firestore().settings({
-  ignoreUndefinedProperties: true,
-});
+export const startFirebase = () => {
+  firebaseApp = admin.initializeApp({
+    credential: admin.credential.cert({
+      projectId: process.env.FIREBASE_PROJECT_ID,
+      privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+      clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+    }),
+    databaseURL: `https://${process.env.FIREBASE_PROJECT_ID}.firebaseio.com`,
+    storageBucket: `${process.env.FIREBASE_PROJECT_ID}.appspot.com`,
+  });
+
+  firebaseApp.firestore().settings({
+    ignoreUndefinedProperties: true,
+  });
+};
 
 // const getToken = async () => {
 //   if (!process.env.FIREBASE_ADMIN_UID || !process.env.FIREBASE_CLIENT_API_KEY) {
@@ -66,6 +70,6 @@ export const pushFirebase = async (
 
 export const destroyFirebase = async () => {
   console.log('Firebase destroying...');
-  await firebaseApp.delete();
+  await firebaseApp?.delete();
   console.log('Firebase destroyed');
 };

@@ -5,10 +5,12 @@ import {
 
 import { log } from '..';
 
-const discordClient = new Client({ intents: [GatewayIntentBits.Guilds] });
-if (process.env.DISCORD_TOKEN) {
+let discordClient: Client | undefined;
+
+export const startDiscord = () => {
+  discordClient = new Client({ intents: [GatewayIntentBits.Guilds] });
   discordClient.login(process.env.DISCORD_TOKEN);
-}
+};
 
 const sendDiscordWebhook = async (
   summary: string,
@@ -33,13 +35,14 @@ const sendDiscordForum = async (
   details: string[],
   channel: string,
 ) => {
+  if (!discordClient) return;
   if (!process.env.DISCORD_TOKEN || !process.env.DISCORD_CHANNEL) return;
 
   await new Promise((resolve) => {
-    discordClient.once(Events.ClientReady, () => resolve(true));
+    discordClient?.once(Events.ClientReady, () => resolve(true));
   });
 
-  const res = discordClient.channels.cache.get(process.env.DISCORD_CHANNEL);
+  const res = discordClient?.channels.cache.get(process.env.DISCORD_CHANNEL);
   if (!res) return;
 
   const forum = res as ForumChannel;
