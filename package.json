@@ -105,7 +105,6 @@
     "@types/protobufjs": "^5.0.31",
     "@typescript-eslint/eslint-plugin": "^6.4.1",
     "@typescript-eslint/parser": "^6.4.1",
-    "@vercel/analytics": "^1.0.2",
     "@vitejs/plugin-react": "^4.0.4",
     "agenda": "^5.0.0",
     "amqplib": "^0.10.3",

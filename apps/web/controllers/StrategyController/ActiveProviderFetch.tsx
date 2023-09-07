@@ -25,6 +25,7 @@ function ActiveProviderFetch({ providerId }: Props) {
   // load from api on first load
   useEffect(() => {
     accountGet({ providerId }).catch((err) => {
+      Logger.error(err);
       storeUser.mergeState({ activeProvider: undefined });
       toastError(err.message);
     });
@@ -37,8 +38,9 @@ function ActiveProviderFetch({ providerId }: Props) {
         account: FishApiAccountRepository,
       },
     }).catch((err) => {
-      storeUser.mergeState({ activeProvider: undefined });
-      toastError(err.message);
+      Logger.error(err);
+      // storeUser.mergeState({ activeProvider: undefined });
+      // toastError(err.message);
     });
   }, [providerId]);
 

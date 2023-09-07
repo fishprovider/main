@@ -16,7 +16,6 @@ import 'prismjs/themes/prism-tomorrow.css'; // used for code syntax highlighting
 // eslint-disable-next-line import/no-extraneous-dependencies
 import 'katex/dist/katex.min.css'; // used for rendering equations (optional)
 
-import { Analytics } from '@vercel/analytics/react';
 import type { AppProps } from 'next/app';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
@@ -43,7 +42,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       <BaseController>
         <Component {...pageProps} />
       </BaseController>
-      <Analytics />
     </>
   );
 }
