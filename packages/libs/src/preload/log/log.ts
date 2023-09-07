@@ -47,6 +47,7 @@ loglevel.methodFactory = (methodName, level, loggerName) => {
 
 // error > warn > info > debug
 loglevel.setLevel('info' as LogLevelDesc);
+
 if (process.env.LOGS_LEVEL) {
   loglevel.setLevel(process.env.LOGS_LEVEL as LogLevelDesc);
 }

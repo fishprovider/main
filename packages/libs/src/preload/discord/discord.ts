@@ -5,21 +5,22 @@ import {
 
 import { log } from '..';
 
-let discordClient: Client | undefined;
+const discordClient = new Client({ intents: [GatewayIntentBits.Guilds] });
 
-export const startDiscord = () => {
-  discordClient = new Client({ intents: [GatewayIntentBits.Guilds] });
+if (process.env.DISCORD_TOKEN) {
   discordClient.login(process.env.DISCORD_TOKEN);
-};
+}
 
 const sendDiscordWebhook = async (
   summary: string,
   details: string[],
   channel: string,
-  webhookId: string = process.env.DISCORD_WEBHOOK_ID || '',
-  webhookToken: string = process.env.DISCORD_WEBHOOK_TOKEN || '',
-  webhookThread: string = process.env.DISCORD_THREAD || '',
 ) => {
+  if (!process.env.DISCORD_WEBHOOK_ID || !process.env.DISCORD_WEBHOOK_TOKEN) {
+    log.warn('Require DISCORD_WEBHOOK_ID, DISCORD_WEBHOOK_TOKEN');
+    return;
+  }
+
   const message = {
     content: `${channel ? `[${channel}] ` : ''}${summary}`,
     embeds: details.map((detail) => ({
@@ -27,7 +28,7 @@ const sendDiscordWebhook = async (
     })),
   };
 
-  await axios.post(`https://discord.com/api/webhooks/${webhookId}/${webhookToken}${webhookThread ? `?thread_id=${webhookThread}` : ''}`, message);
+  await axios.post(`https://discord.com/api/webhooks/${process.env.DISCORD_WEBHOOK_ID}/${process.env.DISCORD_WEBHOOK_TOKEN}${process.env.DISCORD_THREAD ? `?thread_id=${process.env.DISCORD_THREAD}` : ''}`, message);
 };
 
 const sendDiscordForum = async (
@@ -35,14 +36,16 @@ const sendDiscordForum = async (
   details: string[],
   channel: string,
 ) => {
-  if (!discordClient) return;
-  if (!process.env.DISCORD_TOKEN || !process.env.DISCORD_CHANNEL) return;
+  if (!process.env.DISCORD_TOKEN || !process.env.DISCORD_CHANNEL) {
+    log.warn('Require DISCORD_TOKEN, DISCORD_CHANNEL');
+    return;
+  }
 
   await new Promise((resolve) => {
     discordClient?.once(Events.ClientReady, () => resolve(true));
   });
 
-  const res = discordClient?.channels.cache.get(process.env.DISCORD_CHANNEL);
+  const res = discordClient.channels.cache.get(process.env.DISCORD_CHANNEL);
   if (!res) return;
 
   const forum = res as ForumChannel;

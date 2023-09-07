@@ -71,10 +71,6 @@ const start = async (options?: {
   return pQueue as QueuePromise;
 };
 
-const destroy = async (pQueue: QueuePromise) => {
-  await pQueue.onIdle();
-};
-
 export const queuePromises = async <T>(
   promiseFns: (() => Promise<T>)[],
   options?: {
@@ -88,7 +84,10 @@ export const queuePromises = async <T>(
     await pQueue.onIdle();
     const results = await Promise.all(promises);
     return results;
-  } finally {
-    await destroy(pQueue);
+  } catch (err) {
+    log.error('Failed in queuePromises', err);
+    pQueue.clear();
+    await pQueue.onIdle();
+    throw err;
   }
 };

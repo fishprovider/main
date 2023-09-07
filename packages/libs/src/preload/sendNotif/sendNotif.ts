@@ -10,9 +10,7 @@ export const sendNotif = async (
   summary: string,
   details: string[] = [],
   channel: string = getDefaultChannel(),
-) => {
-  await Promise.all([
-    sendDiscord(summary, details, channel),
-    sendSlack(summary, details, channel),
-  ]);
-};
+) => Promise.all([
+  sendDiscord(summary, details, channel),
+  sendSlack(summary, details, channel),
+]);
