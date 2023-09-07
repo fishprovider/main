@@ -7,7 +7,7 @@
     "test": "cross-env NODE_ENV=test doppler run --print-config -- jest",
     "clean-build": "rm -rf .next",
     "prebuild": "./build-deps.sh",
-    "build": "cross-env NODE_ENV=production DOPPLER_PROJECT=${DOPPLER_PROJECT:-web} DOPPLER_CONFIG=${DOPPLER_CONFIG:-prd} doppler run --print-config next build",
+    "build": "cross-env NODE_ENV=production doppler run --print-config next build",
     "postbuild": "cross-env NODE_ENV=production next-sitemap",
     "build-vercel": "cross-env NODE_ENV=production next build && npm run postbuild",
     "start": "cross-env NODE_ENV=production doppler run --print-config next start",
