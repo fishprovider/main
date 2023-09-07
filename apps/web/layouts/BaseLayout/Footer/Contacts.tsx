@@ -16,7 +16,7 @@ const whatsAppChatKey = 'Lr2M5zX4GTZEyZSES798xs';
 const zaloKey = 'autuht309';
 const lineKey = 'qeQpcnfzVs';
 const viberKey = 'AQAwbzM9MBf3jlEffyPzHXOCz9faehdoci%2BrzPWzmcgkCY10b7HGUNFzPwq5VMDU';
-const okKey = '70000002570204';
+// const okKey = '70000002570204';
 
 // { url: `https://www.youtube.com/@${commonKey}` },
 // { url: `https://www.tiktok.com/@${commonKey}` },
@@ -72,19 +72,19 @@ function Contacts() {
         <DefaultIcon name="Tiktok" url={`https://www.tiktok.com/@${commonKey}`} />
         <DefaultIcon name="Youtube" url={`https://www.youtube.com/@${commonKey}`} />
         <DefaultIcon name="Instagram" url={`https://www.instagram.com/${commonKey}`} />
-        <CustomIcon name="Moj" url={`https://mojapp.in/@${commonKey}`} icon="/icons/moj.png" />
+        {/* <CustomIcon name="Moj" url={`https://mojapp.in/@${commonKey}`} icon="/icons/moj.png" /> */}
         {/* <DefaultIcon name="VK" url={`https://vk.com/${commonKey}.page`} /> */}
-        <CustomIcon name="OK" url={`https://ok.ru/group/${okKey}`} icon="/icons/ok.png" />
+        {/* <CustomIcon name="OK" url={`https://ok.ru/group/${okKey}`} icon="/icons/ok.png" /> */}
         <DefaultIcon name="WhatsApp" url={`https://chat.whatsapp.com/${whatsAppChannelKey}`} />
         <DefaultIcon name="Pinterest" url={`https://www.pinterest.com/${commonKey}`} />
         <DefaultIcon name="Reddit" url={`https://www.reddit.com/r/${commonKey}`} />
         <CustomIcon name="Quora" url={`https://${commonKey}.quora.com`} icon="/icons/quora.svg" />
-        <CustomIcon name="CTrader Forum" url="https://ctrader.com/forum/third-party-products" icon="/icons/ctrader-logo-only.png" />
+        {/* <CustomIcon name="CTrader Forum" url="https://ctrader.com/forum/third-party-products" icon="/icons/ctrader-logo-only.png" /> */}
         <DefaultIcon name="Medium" url={`https://www.medium.com/@${commonKey}`} />
         <DefaultIcon name="Tumblr" url={`https://www.tumblr.com/blog/${commonKey}`} />
         <CustomIcon name="Mastodon" url={`https://mastodon.social/@${commonKey}`} icon="/icons/mastodon.svg" />
         <DefaultIcon name="Github" url="https://github.com/orgs/fishprovider/discussions/categories/announcements" />
-        <CustomIcon name="Forex Peace Army" url="https://www.forexpeacearmy.com/community/threads/fishprovider-your-gateway-to-successful-forex-trading.80403" icon="/icons/fpa.jpeg" />
+        {/* <CustomIcon name="Forex Peace Army" url="https://www.forexpeacearmy.com/community/threads/fishprovider-your-gateway-to-successful-forex-trading.80403" icon="/icons/fpa.jpeg" /> */}
 
         {/* <CustomIcon name="MQL5 Forum" url="https://www.mql5.com/en/forum" icon="/icons/mql5.png" /> */}
         {/* <CustomIcon name="Forex Factory" url="https://www.forexfactory.com/forum/71-trading-systems" icon="/icons/forexfactory.png" /> */}
