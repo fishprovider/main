@@ -1,13 +1,12 @@
 import {
   GetNewsFilter, type News, type NewsRepository,
 } from '@fishprovider/core-new';
+import { getMongo } from '@fishprovider/libs';
 import moment from 'moment';
-
-import { mongo } from '..';
 
 const getNews = async (filter: GetNewsFilter) => {
   const { today, week, upcoming } = filter;
-  const { db } = await mongo.get();
+  const { db } = await getMongo();
 
   if (today) {
     const news = await db.collection<News>('news').find({

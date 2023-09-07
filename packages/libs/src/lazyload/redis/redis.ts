@@ -1,40 +1,36 @@
 import { promiseCreator } from '@fishprovider/core-new';
-import assert from 'assert';
 import { createClient } from 'redis';
+
+import { log } from '../..';
 
 const clientPromise = promiseCreator<ReturnType<typeof createClient>>();
 
-const start = async () => {
+export const startRedis = async () => {
   if (!process.env.REDIS_HOST) {
     throw new Error('REDIS_HOST is not defined');
   }
+  log.info('Starting Redis');
   const client = createClient({
     name: `${process.env.TYPE}-${process.env.TYPE_ID}`,
     url: `redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`,
     ...(process.env.REDIS_KEY && { password: process.env.REDIS_KEY }),
   });
   await client.connect();
-  console.info('Started redis.framework');
+  log.info('Started Redis');
   clientPromise.resolveExec(client);
   return client;
 };
 
-const stop = async () => {
+export const stopRedis = async () => {
+  log.info('Stopping Redis');
   const client = await clientPromise;
-  if (client) {
-    await client.quit();
-  }
-  console.info('Stopped redis.framework');
+  await client.quit();
+  log.info('Stopped Redis');
 };
 
-const get = async () => {
+export const getRedis = async () => {
   const client = await clientPromise;
-  assert(client);
-  return client;
-};
-
-export const redis = {
-  start,
-  stop,
-  get,
+  return {
+    client,
+  };
 };

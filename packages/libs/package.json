@@ -28,6 +28,6 @@
     "moment-timezone": "^0.5.43",
     "mongodb": "^5.8.1",
     "p-queue": "^7.3.4",
-    "systeminformation": "^5.21.1"
+    "redis": "^4.6.8"
   }
 }

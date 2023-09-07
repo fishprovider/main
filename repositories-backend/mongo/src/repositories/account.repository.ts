@@ -2,9 +2,8 @@ import type {
   Account, AccountRepository, BaseGetOptions, BaseUpdateOptions, GetAccountFilter,
   UpdateAccountPayload,
 } from '@fishprovider/core-new';
+import { getMongo } from '@fishprovider/libs';
 import { Filter, ReturnDocument, UpdateFilter } from 'mongodb';
-
-import { mongo } from '../main';
 
 const getAccount = async (
   filter: GetAccountFilter,
@@ -12,7 +11,7 @@ const getAccount = async (
 ) => {
   const { accountId, memberId } = filter;
   const { projection } = options;
-  const { db } = await mongo.get();
+  const { db } = await getMongo();
   const account = await db.collection<Account>('accounts').findOne({
     ...(accountId && { _id: accountId }),
     ...(memberId && { 'members.userId': memberId }),
@@ -28,7 +27,7 @@ const getAccounts = async (
 ) => {
   const { accountIds, memberId } = filter;
   const { projection } = options;
-  const { db } = await mongo.get();
+  const { db } = await getMongo();
   const accounts = await db.collection<Account>('accounts').find({
     ...(accountIds && { _id: { $in: accountIds } }),
     ...(memberId && { 'members.userId': memberId }),
@@ -74,7 +73,7 @@ const updateAccount = async (
     },
   };
 
-  const { db } = await mongo.get();
+  const { db } = await getMongo();
   const collection = db.collection<Account>('accounts');
 
   if (returnAfter) {

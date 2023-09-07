@@ -5,9 +5,8 @@ import {
   type GetUserFilter, RepositoryError,
   type UpdateUserPayload, type User, type UserRepository,
 } from '@fishprovider/core-new';
+import { getMongo } from '@fishprovider/libs';
 import { Filter, ReturnDocument, UpdateFilter } from 'mongodb';
-
-import { mongo } from '../main';
 
 const roleFields = {
   [AccountRoles.admin]: 'adminProviders',
@@ -22,7 +21,7 @@ const getUser = async (
 ) => {
   const { userId, email } = filter;
   const { projection } = options;
-  const { db } = await mongo.get();
+  const { db } = await getMongo();
   const user = await db.collection<User>('users').findOne({
     ...(userId && { _id: userId }),
     ...(email && { email }),
@@ -66,7 +65,7 @@ const updateUser = async (
     },
   };
 
-  const { db } = await mongo.get();
+  const { db } = await getMongo();
   const collection = db.collection<User>('users');
 
   if (returnAfter) {

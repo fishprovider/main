@@ -15,8 +15,6 @@
     "build": "tsc -p tsconfig.build.json"
   },
   "dependencies": {
-    "@fishprovider/core-new": "*",
-    "moment": "^2.29.4",
-    "mongodb": "^5.8.1"
+    "@fishprovider/libs": "*"
   }
 }

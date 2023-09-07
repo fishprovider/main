@@ -15,7 +15,6 @@
     "build": "tsc -p tsconfig.build.json"
   },
   "dependencies": {
-    "@fishprovider/core-new": "*",
-    "redis": "^4.6.8"
+    "@fishprovider/libs": "*"
   }
 }
