@@ -1,8 +1,7 @@
 import type { LogLevelDesc } from 'loglevel';
 import loglevel from 'loglevel';
 
-// TODO: import { send } from '~libs/notif';
-const send = (...args: any[]) => console.log('TODO send', args);
+import { sendNotif } from '..';
 
 type Message = Error | object | string;
 
@@ -17,14 +16,14 @@ const getString = (message: Message) => {
 const warnHandler = async (messages: Message[]) => {
   console.warn(...messages);
   const parsedMessages = messages.map((item) => getString(item));
-  await send('[Warning]', parsedMessages);
+  await sendNotif('[Warning]', parsedMessages);
 };
 
 const errorHandler = async (messages: Message[]) => {
   console.error(...messages);
   const parsedMessages = messages.map((item) => getString(item));
-  await send('[Error]', parsedMessages);
-  await send(`[${typeId}]`, parsedMessages, process.env.NOTIF_CHANNEL_ERROR || `${process.env.TYPE_PRE}-errors`);
+  await sendNotif('[Error]', parsedMessages);
+  await sendNotif(`[${typeId}]`, parsedMessages, process.env.NOTIF_CHANNEL_ERROR || `${process.env.TYPE_PRE}-errors`);
 };
 
 const originalFactory = loglevel.methodFactory;
