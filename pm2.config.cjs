@@ -217,5 +217,9 @@ module.exports = {
 // Examples:
 // DEPLOY_ENV=fish npm run pm2-deploy-setup
 // DEPLOY_ENV=fish npm run pm2-deploy
+//
 // DEPLOY_ENV=fish npm run pm2-deploy-build workers/cron
 // DEPLOY_ENV=fish npm run pm2-deploy-start cron
+//
+// DEPLOY_ENV=fish npm run pm2-deploy-exec 'source ~/.zshrc && DOPPLER_PROJECT=web DOPPLER_CONFIG=prd npm run build -w apps/web'
+// DEPLOY_ENV=fish npm run pm2-deploy-start web
