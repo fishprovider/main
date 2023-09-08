@@ -11,7 +11,9 @@ const packageDependencies = {
   ...require('./packages/swap/package.json').dependencies,
   ...require('./packages/coin/package.json').dependencies,
   ...require('./packages/core/package.json').dependencies,
-  ...require('./packages/core-new/package.json').dependencies,
+  // new
+  ...require('./packages-new/core/package.json').dependencies,
+  ...require('./packages-new/libs/package.json').dependencies,
   ...require('./repositories-backend/mongo/package.json').dependencies,
   ...require('./repositories-backend/redis/package.json').dependencies,
   ...require('./repositories-backend/cache-first/package.json').dependencies,
