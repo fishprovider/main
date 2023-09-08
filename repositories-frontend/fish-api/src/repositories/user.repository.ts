@@ -1,6 +1,5 @@
 import {
-  BaseUpdateOptions,
-  type GetUserFilter, type UpdateUserPayload, type User, type UserRepository,
+  BaseUpdateOptions, GetUserFilter, UpdateUserPayload, User, UserRepository,
 } from '@fishprovider/core-new';
 
 import { fishApi } from '../main';

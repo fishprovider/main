@@ -1,0 +1,27 @@
+{
+  "name": "@fishprovider/services",
+  "version": "7.0.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "lint": "eslint --cache --fix .",
+    "type-check": "tsc --noEmit",
+    "test": "NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules npx jest",
+    "clean": "rm -rf dist && mkdir dist",
+    "build": "tsc -p tsconfig.build.json",
+    "ci-lint": "eslint --cache --fix",
+    "ci-type-check": "tsc-files --noEmit"
+  },
+  "dependencies": {
+    "@fishprovider/core-new": "*"
+  },
+  "devDependencies": {
+    "@tsconfig/node-lts": "^18.12.5",
+    "@tsconfig/strictest": "^2.0.1",
+    "typescript": "^5.2.2"
+  }
+}

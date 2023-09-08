@@ -1,10 +1,10 @@
-import { getAccountService } from '@fishprovider/core-new';
 import accountGet from '@fishprovider/cross/dist/api/accounts/get';
 import { useMutate } from '@fishprovider/cross/dist/libs/query';
 import storeOrders from '@fishprovider/cross/dist/stores/orders';
 import storePrices from '@fishprovider/cross/dist/stores/prices';
 import storeUser from '@fishprovider/cross/dist/stores/user';
 import { FishApiAccountRepository } from '@fishprovider/repository-fish-api';
+import { getAccountService } from '@fishprovider/services';
 import { ProviderType } from '@fishprovider/utils/dist/constants/account';
 import { OrderStatus } from '@fishprovider/utils/dist/constants/order';
 import { getProfit, getProfitIcon } from '@fishprovider/utils/dist/helpers/order';

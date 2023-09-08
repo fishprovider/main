@@ -1,5 +1,5 @@
 import {
-  type GetNewsFilter, type News, type NewsRepository,
+  GetNewsFilter, News, NewsRepository,
 } from '@fishprovider/core-new';
 
 import { fishApi } from '../main';

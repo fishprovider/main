@@ -1,4 +1,4 @@
-import { promiseCreator } from '@fishprovider/core-new';
+import { promiseCreator } from '@fishprovider/services';
 import { createClient } from 'redis';
 
 import { log } from '../..';

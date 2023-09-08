@@ -1,4 +1,4 @@
-import { promiseCreator } from '@fishprovider/core-new';
+import { promiseCreator } from '@fishprovider/services';
 import { MongoClient } from 'mongodb';
 
 import { log } from '../..';

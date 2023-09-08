@@ -1,6 +1,6 @@
-import { getNewsService, watchNewsService } from '@fishprovider/core-new';
 import { OfflineFirstNewsRepository } from '@fishprovider/repository-offline-first';
 import { StoreNewsRepository } from '@fishprovider/repository-store';
+import { getNewsService, watchNewsService } from '@fishprovider/services';
 import type { News } from '@fishprovider/utils/dist/types/News.model';
 import _ from 'lodash';
 import moment from 'moment';

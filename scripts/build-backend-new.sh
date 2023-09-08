@@ -8,7 +8,7 @@ fi
 
 cd ..
 
-npm run build -w packages/libs
+npm run build -w packages-new/libs
 
 npm run build -w repositories-backend/redis &
 npm run build -w repositories-backend/mongo &

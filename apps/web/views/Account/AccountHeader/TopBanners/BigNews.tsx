@@ -1,5 +1,5 @@
-import { watchNewsService } from '@fishprovider/core-new';
 import { StoreNewsRepository } from '@fishprovider/repository-store';
+import { watchNewsService } from '@fishprovider/services';
 import _ from 'lodash';
 import moment from 'moment';
 import React from 'react';

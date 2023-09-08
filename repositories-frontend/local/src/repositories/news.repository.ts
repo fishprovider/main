@@ -1,6 +1,5 @@
 import {
-  BaseUpdateOptions,
-  GetNewsFilter, type News, NewsRepository, UpdateNewsPayload,
+  BaseUpdateOptions, GetNewsFilter, News, NewsRepository, UpdateNewsPayload,
 } from '@fishprovider/core-new';
 
 import { buildNewsKeys, local } from '..';

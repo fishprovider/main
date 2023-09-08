@@ -1,4 +1,4 @@
-import type { Account } from '@fishprovider/core-new';
+import { Account } from '@fishprovider/core-new';
 
 import { buildStoreSet } from '../main';
 

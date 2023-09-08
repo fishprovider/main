@@ -1,4 +1,4 @@
-import { promiseCreator } from '@fishprovider/core-new';
+import { promiseCreator } from '@fishprovider/services';
 import assert from 'assert';
 import axios, { Axios, AxiosRequestConfig } from 'axios';
 

@@ -1,5 +1,6 @@
-import { getNewsService, News } from '@fishprovider/core-new';
+import { News } from '@fishprovider/core-new';
 import { CacheFirstNewsRepository } from '@fishprovider/repository-cache-first';
+import { getNewsService } from '@fishprovider/services';
 import { z } from 'zod';
 
 import { ApiHandler } from '~types/ApiHandler.model';
