@@ -11,10 +11,10 @@ function old() {
 }
 
 function new() {
-  bash ./build-clean-arc-share.sh
+  bash ./build-share-new.sh
 
-  bash ./build-backend-clean-arc.sh &
-  bash ./build-frontend-clean-arc.sh &
+  bash ./build-backend-new.sh &
+  bash ./build-frontend-new.sh &
   wait
 }
 

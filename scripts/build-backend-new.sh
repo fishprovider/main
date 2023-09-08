@@ -3,10 +3,12 @@
 MODE=$1
 
 if [ "$MODE" = "build-share" ]; then
-  bash ./build-clean-arc-share.sh
+  bash ./build-share-new.sh
 fi
 
 cd ..
+
+npm run build -w packages/libs
 
 npm run build -w repositories-backend/redis &
 npm run build -w repositories-backend/mongo &

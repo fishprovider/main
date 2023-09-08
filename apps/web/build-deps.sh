@@ -7,5 +7,5 @@ function old() {
 }
 
 old &
-bash ./build-frontend-clean-arc.sh build-share &
+bash ./build-frontend-new.sh build-share &
 wait
