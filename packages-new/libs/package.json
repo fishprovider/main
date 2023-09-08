@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@fishprovider/core-new": "*",
+    "@fishprovider/services": "*",
     "axios": "^1.5.0",
     "discord.js": "^14.13.0",
     "expo-server-sdk": "^3.7.0",
