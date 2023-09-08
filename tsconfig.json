@@ -12,7 +12,7 @@
     "allowJs": true,
     "checkJs": false,
     "declaration": true,
-    // "incremental": true,cm
+    // "incremental": true,
 
     // "lib": ["es2021"],
     "module": "ESNext",
