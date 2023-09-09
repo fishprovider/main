@@ -5,7 +5,7 @@ import { z } from 'zod';
 
 import { ApiHandler } from '~types/ApiHandler.model';
 
-const handler: ApiHandler<Partial<User> | null | undefined> = async (data, userSession) => {
+const handler: ApiHandler<Partial<User>> = async (data, userSession) => {
   const { filter, payload, options } = z.object({
     filter: z.object({
       userId: z.string().optional(),

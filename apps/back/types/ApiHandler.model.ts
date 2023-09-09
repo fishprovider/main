@@ -4,6 +4,6 @@ export type ApiHandler<T> = (
   data: any,
   userSession: UserSession,
 ) => Promise<{
-  result: T,
+  result?: T,
   userSessionNew?: UserSession,
 }>;

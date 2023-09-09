@@ -5,7 +5,7 @@ import { z } from 'zod';
 
 import { ApiHandler } from '~types/ApiHandler.model';
 
-const handler: ApiHandler<Partial<News>[] | null> = async (data, userSession) => {
+const handler: ApiHandler<Partial<News>[]> = async (data, userSession) => {
   const filter = z.object({
     today: z.string().optional(),
     week: z.string().optional(),
