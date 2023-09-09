@@ -15,7 +15,7 @@
     "build": "tsc -p tsconfig.build.json"
   },
   "dependencies": {
-    "@fishprovider/core-new": "*",
+    "@fishprovider/services": "*",
     "zustand": "^4.4.1"
   },
   "devDependencies": {

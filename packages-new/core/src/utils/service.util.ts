@@ -19,9 +19,9 @@ export interface BaseServiceParams {
 }
 
 export interface BaseServiceGetResult<T> {
-  doc?: Partial<T> | null;
+  doc?: Partial<T>;
 }
 
 export interface BaseServiceGetManyResult<T> {
-  docs: Partial<T>[] | null;
+  docs?: Partial<T>[];
 }

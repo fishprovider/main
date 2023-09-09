@@ -18,10 +18,5 @@
   },
   "dependencies": {
     "@fishprovider/core-new": "*"
-  },
-  "devDependencies": {
-    "@tsconfig/node-lts": "^18.12.5",
-    "@tsconfig/strictest": "^2.0.1",
-    "typescript": "^5.2.2"
   }
 }

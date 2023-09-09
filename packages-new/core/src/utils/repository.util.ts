@@ -9,15 +9,15 @@ export interface BaseUpdateOptions<T> extends BaseGetOptions<T> {
 }
 
 export interface BaseGetResult<T> {
-  doc?: Partial<T> | null;
+  doc?: Partial<T>;
 }
 
 export interface BaseGetManyResult<T> {
-  docs: Partial<T>[] | null;
+  docs?: Partial<T>[];
 }
 
 export interface BaseUpdateResult<T> {
   matchedCount?: number;
   modifiedCount?: number;
-  doc?: Partial<T> | null;
+  doc?: Partial<T>;
 }
