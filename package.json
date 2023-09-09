@@ -4,9 +4,9 @@
   "private": true,
   "workspaces": [
     "packages/*",
-    "packages-new/*",
-    "repositories-backend/*",
-    "repositories-frontend/*",
+    "packages-share/*",
+    "packages-backend/*",
+    "packages-frontend/*",
     "workers/*",
     "apps/*"
   ],

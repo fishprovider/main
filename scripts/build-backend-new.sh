@@ -8,10 +8,10 @@ fi
 
 cd ..
 
-npm run build -w packages-new/libs
+npm run build -w packages-share/libs
 
-npm run build -w repositories-backend/redis &
-npm run build -w repositories-backend/mongo &
+npm run build -w packages-backend/redis &
+npm run build -w packages-backend/mongo &
 wait
 
-npm run build -w repositories-backend/cache-first
+npm run build -w packages-backend/cache-first

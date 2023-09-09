@@ -2,5 +2,5 @@
 
 cd ..
 
-npm run build -w packages-new/core
-npm run build -w packages-new/services
+npm run build -w packages-share/core
+npm run build -w packages-share/services

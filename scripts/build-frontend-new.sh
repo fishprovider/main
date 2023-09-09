@@ -9,12 +9,12 @@ fi
 cd ..
 
 function frameworks() {
-  npm run build -w repositories-frontend/local &
-  npm run build -w repositories-frontend/store &
+  npm run build -w packages-frontend/local &
+  npm run build -w packages-frontend/store &
   wait
 
-  npm run build -w repositories-frontend/fish-api
-  npm run build -w repositories-frontend/offline-first
+  npm run build -w packages-frontend/fish-api
+  npm run build -w packages-frontend/offline-first
 }
 
 frameworks &

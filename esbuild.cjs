@@ -12,11 +12,11 @@ const packageDependencies = {
   ...require('./packages/coin/package.json').dependencies,
   ...require('./packages/core/package.json').dependencies,
   // new
-  ...require('./packages-new/core/package.json').dependencies,
-  ...require('./packages-new/libs/package.json').dependencies,
-  ...require('./repositories-backend/mongo/package.json').dependencies,
-  ...require('./repositories-backend/redis/package.json').dependencies,
-  ...require('./repositories-backend/cache-first/package.json').dependencies,
+  ...require('./packages-share/core/package.json').dependencies,
+  ...require('./packages-share/libs/package.json').dependencies,
+  ...require('./packages-backend/mongo/package.json').dependencies,
+  ...require('./packages-backend/redis/package.json').dependencies,
+  ...require('./packages-backend/cache-first/package.json').dependencies,
 };
 
 const baseOptions = {
