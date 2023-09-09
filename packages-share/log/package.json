@@ -1,5 +1,5 @@
 {
-  "name": "@fishprovider/redis",
+  "name": "@fishprovider/log",
   "version": "7.0.0",
   "type": "module",
   "main": "dist/index.js",
@@ -10,11 +10,11 @@
   "scripts": {
     "lint": "eslint --cache --fix .",
     "type-check": "tsc --noEmit",
-    "test": "echo redis",
+    "test": "echo log",
     "clean-build": "rm -rf dist && mkdir dist",
     "build": "tsc -p tsconfig.build.json"
   },
   "dependencies": {
-    "@fishprovider/libs": "*"
+    "loglevel": "^1.8.1"
   }
 }

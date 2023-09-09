@@ -10,7 +10,7 @@
   "scripts": {
     "lint": "eslint --cache --fix .",
     "type-check": "tsc --noEmit",
-    "test": "echo repository-store",
+    "test": "echo store",
     "clean-build": "rm -rf dist && mkdir dist",
     "build": "tsc -p tsconfig.build.json"
   },

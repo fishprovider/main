@@ -1,5 +1,5 @@
 {
-  "name": "@fishprovider/redis",
+  "name": "@fishprovider/slack",
   "version": "7.0.0",
   "type": "module",
   "main": "dist/index.js",
@@ -10,11 +10,12 @@
   "scripts": {
     "lint": "eslint --cache --fix .",
     "type-check": "tsc --noEmit",
-    "test": "echo redis",
+    "test": "echo log",
     "clean-build": "rm -rf dist && mkdir dist",
     "build": "tsc -p tsconfig.build.json"
   },
   "dependencies": {
-    "@fishprovider/libs": "*"
+    "@fishprovider/log": "*",
+    "axios": "^1.5.0"
   }
 }
