@@ -13,7 +13,7 @@ const packageDependencies = {
   ...require('./packages/core/package.json').dependencies,
   // new
   ...require('./packages-share/core/package.json').dependencies,
-  ...require('./packages-share/libs/package.json').dependencies,
+  ...require('./packages-backend/libs/package.json').dependencies,
   ...require('./packages-backend/mongo/package.json').dependencies,
   ...require('./packages-backend/redis/package.json').dependencies,
   ...require('./packages-backend/cache-first/package.json').dependencies,

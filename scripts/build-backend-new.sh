@@ -8,7 +8,7 @@ fi
 
 cd ..
 
-npm run build -w packages-share/libs
+npm run build -w packages-backend/libs
 
 npm run build -w packages-backend/redis &
 npm run build -w packages-backend/mongo &
