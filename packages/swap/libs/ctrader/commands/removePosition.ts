@@ -1,4 +1,3 @@
-import { send } from '@fishprovider/core/dist/libs/notif';
 import closePosition from '@fishprovider/ctrader/dist/commands/closePosition';
 import {
   CallbackType, ExecutionType, OrderStatus as OrderStatusCTrader, PositionStatus,
@@ -6,6 +5,7 @@ import {
 import type { Config as ConfigCTrader } from '@fishprovider/ctrader/dist/types/Config.model';
 import type { CallbackPayload } from '@fishprovider/ctrader/dist/types/Event.model';
 import type { transformDeal as transformDealCTrader, transformOrder as transformOrderCTrader, transformPosition as transformPositionCTrader } from '@fishprovider/ctrader/dist/utils/transform';
+import { send } from '@fishprovider/old-core/dist/libs/notif';
 import type { ProviderType } from '@fishprovider/utils/dist/constants/account';
 import promiseCreator from '@fishprovider/utils/dist/helpers/promiseCreator';
 import type { Config } from '@fishprovider/utils/dist/types/Account.model';

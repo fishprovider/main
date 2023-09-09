@@ -1,8 +1,8 @@
-import { send } from '@fishprovider/core/dist/libs/notif';
 import newOrderMetaTrader from '@fishprovider/metatrader/dist/commands/newOrder';
 import { ActionType } from '@fishprovider/metatrader/dist/constants/metaApi';
 import type { Config as ConfigMetaTrader } from '@fishprovider/metatrader/dist/types/Config.model';
 import type { ConnectionType } from '@fishprovider/metatrader/dist/types/Connection.model';
+import { send } from '@fishprovider/old-core/dist/libs/notif';
 import { Direction, OrderStatus, OrderType } from '@fishprovider/utils/dist/constants/order';
 import { getLotFromVolume } from '@fishprovider/utils/dist/helpers/price';
 import random from '@fishprovider/utils/dist/helpers/random';

@@ -1,4 +1,4 @@
-import { push } from '@fishprovider/core/dist/libs/notif';
+import { push } from '@fishprovider/old-core/dist/libs/notif';
 import { ErrorType } from '@fishprovider/utils/dist/constants/error';
 import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
 import type { Order } from '@fishprovider/utils/dist/types/Order.model';

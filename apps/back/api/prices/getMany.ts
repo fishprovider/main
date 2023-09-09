@@ -1,4 +1,4 @@
-import runPromises from '@fishprovider/core/dist/libs/queuePromise/runPromises';
+import runPromises from '@fishprovider/old-core/dist/libs/queuePromise/runPromises';
 import getSymbolTick from '@fishprovider/swap/dist/libs/metatrader/getSymbolTick';
 import { getProvider } from '@fishprovider/swap/dist/utils/account';
 import { getPrices } from '@fishprovider/swap/dist/utils/price';

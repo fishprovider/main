@@ -1,7 +1,7 @@
-import { send } from '@fishprovider/core/dist/libs/notif';
 import cancelOrder from '@fishprovider/ctrader/dist/commands/cancelOrder';
 import { OrderStatus as OrderStatusCTrader, PositionStatus } from '@fishprovider/ctrader/dist/constants/openApi';
 import type { Config as ConfigCTrader } from '@fishprovider/ctrader/dist/types/Config.model';
+import { send } from '@fishprovider/old-core/dist/libs/notif';
 import type { ProviderType } from '@fishprovider/utils/dist/constants/account';
 import type { Config } from '@fishprovider/utils/dist/types/Account.model';
 import type { Order } from '@fishprovider/utils/dist/types/Order.model';

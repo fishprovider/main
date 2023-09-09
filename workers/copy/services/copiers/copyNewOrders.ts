@@ -1,4 +1,4 @@
-import { send } from '@fishprovider/core/dist/libs/notif';
+import { send } from '@fishprovider/old-core/dist/libs/notif';
 import newOrder from '@fishprovider/swap/dist/commands/newOrder';
 import { botUser } from '@fishprovider/swap/dist/utils/account';
 import { getPrices } from '@fishprovider/swap/dist/utils/price';

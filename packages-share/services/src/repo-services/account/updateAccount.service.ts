@@ -1,6 +1,6 @@
 import {
   BaseError, RepositoryError, ServiceError, UpdateAccountService, UserError,
-} from '@fishprovider-new/core';
+} from '@fishprovider/core';
 
 import {
   getAccountService, sanitizeAccountBaseGetOptions, validateProjection,

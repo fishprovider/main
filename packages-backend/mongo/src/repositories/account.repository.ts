@@ -1,8 +1,8 @@
-import { getMongo } from '@fishprovider/libs';
 import type {
   Account, AccountRepository, BaseGetOptions, BaseUpdateOptions, GetAccountFilter,
   UpdateAccountPayload,
-} from '@fishprovider-new/core';
+} from '@fishprovider/core';
+import { getMongo } from '@fishprovider/libs';
 import { Filter, ReturnDocument, UpdateFilter } from 'mongodb';
 
 const getAccount = async (

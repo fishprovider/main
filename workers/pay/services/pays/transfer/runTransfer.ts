@@ -1,5 +1,5 @@
 import updateTransaction from '@fishprovider/coin/dist/utils/transaction/updateTransaction';
-import { runDBTransaction } from '@fishprovider/core/dist/libs/mongo';
+import { runDBTransaction } from '@fishprovider/old-core/dist/libs/mongo';
 import { TransactionStatus, TransactionStatusRequest } from '@fishprovider/utils/dist/constants/pay';
 import type { Transaction, Wallet } from '@fishprovider/utils/dist/types/Pay.model';
 

@@ -1,6 +1,6 @@
-import { push } from '@fishprovider/core/dist/libs/notif';
 import { EntryType } from '@fishprovider/metatrader/dist/constants/metaApi';
 import type { CallbackPayload } from '@fishprovider/metatrader/dist/types/Event.model';
+import { push } from '@fishprovider/old-core/dist/libs/notif';
 import { transformDeal } from '@fishprovider/swap/dist/libs/metatrader/transform';
 import { newRequestOrder } from '@fishprovider/swap/dist/utils/command';
 import { OrderStatus } from '@fishprovider/utils/dist/constants/order';

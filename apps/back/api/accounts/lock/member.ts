@@ -1,4 +1,4 @@
-import { send } from '@fishprovider/core/dist/libs/notif';
+import { send } from '@fishprovider/old-core/dist/libs/notif';
 import { ErrorType } from '@fishprovider/utils/dist/constants/error';
 import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
 import type { Account, Lock } from '@fishprovider/utils/dist/types/Account.model';

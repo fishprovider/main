@@ -1,7 +1,7 @@
-import * as firebase from '@fishprovider/core/dist/libs/firebase';
-import * as mongo from '@fishprovider/core/dist/libs/mongo';
-import * as redis from '@fishprovider/core/dist/libs/redis';
 import { isMarketClosed as isMarketClosedCTrader } from '@fishprovider/ctrader/dist/utils/validate';
+import * as firebase from '@fishprovider/old-core/dist/libs/firebase';
+import * as mongo from '@fishprovider/old-core/dist/libs/mongo';
+import * as redis from '@fishprovider/old-core/dist/libs/redis';
 import newOrder from '@fishprovider/swap/dist/commands/newOrder';
 import removeOrder from '@fishprovider/swap/dist/commands/removeOrder';
 import removePosition from '@fishprovider/swap/dist/commands/removePosition';

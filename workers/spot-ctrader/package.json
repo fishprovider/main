@@ -18,7 +18,7 @@
     "dev": "NODE_ENV=development concurrently -k 'npm run build-watch' 'npm run start-watch'"
   },
   "dependencies": {
-    "@fishprovider/core": "*",
+    "@fishprovider/old-core": "*",
     "@fishprovider/swap": "*"
   }
 }

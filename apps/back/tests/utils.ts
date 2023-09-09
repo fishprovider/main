@@ -1,6 +1,6 @@
-import * as firebase from '@fishprovider/core/dist/libs/firebase';
-import * as mongo from '@fishprovider/core/dist/libs/mongo';
-import * as redis from '@fishprovider/core/dist/libs/redis';
+import * as firebase from '@fishprovider/old-core/dist/libs/firebase';
+import * as mongo from '@fishprovider/old-core/dist/libs/mongo';
+import * as redis from '@fishprovider/old-core/dist/libs/redis';
 import { ErrorType } from '@fishprovider/utils/dist/constants/error';
 import type { Account } from '@fishprovider/utils/dist/types/Account.model';
 import type { User } from '@fishprovider/utils/dist/types/User.model';

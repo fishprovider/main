@@ -1,4 +1,4 @@
-import { push } from '@fishprovider/core/dist/libs/notif';
+import { push } from '@fishprovider/old-core/dist/libs/notif';
 import random from '@fishprovider/utils/dist/helpers/random';
 import type { Order, OrderWithoutId } from '@fishprovider/utils/dist/types/Order.model';
 import _ from 'lodash';

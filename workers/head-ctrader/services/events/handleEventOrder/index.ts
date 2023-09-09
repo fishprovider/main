@@ -1,7 +1,7 @@
-import { start as startQueue } from '@fishprovider/core/dist/libs/queuePromise';
 import { ExecutionType } from '@fishprovider/ctrader/dist/constants/openApi';
 import type { ConnectionType } from '@fishprovider/ctrader/dist/types/Connection.model';
 import type { CallbackPayload } from '@fishprovider/ctrader/dist/types/Event.model';
+import { start as startQueue } from '@fishprovider/old-core/dist/libs/queuePromise';
 import { getSymbols } from '@fishprovider/swap/dist/utils/price';
 
 import type { ClientAccount } from '~types/Client.model';

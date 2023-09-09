@@ -1,5 +1,5 @@
+import type { Projection } from '@fishprovider/core';
 import type { User } from '@fishprovider/utils/dist/types/User.model';
-import type { Projection } from '@fishprovider-new/core';
 
 import { apiPost } from '~libs/api';
 import storeUser from '~stores/user';

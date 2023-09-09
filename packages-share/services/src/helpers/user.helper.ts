@@ -1,6 +1,6 @@
 import {
   BaseGetOptions, GetUserFilter, User, UserRoles, UserSession,
-} from '@fishprovider-new/core';
+} from '@fishprovider/core';
 
 import { sanitizeBaseGetOptions } from '..';
 

@@ -1,4 +1,4 @@
-import { destroy as destroyQueue, QueuePromise, start as startQueue } from '@fishprovider/core/dist/libs/queuePromise';
+import { destroy as destroyQueue, QueuePromise, start as startQueue } from '@fishprovider/old-core/dist/libs/queuePromise';
 import { SourceType, TransactionStatus, TransactionType } from '@fishprovider/utils/dist/constants/pay';
 import type { Transaction } from '@fishprovider/utils/dist/types/Pay.model';
 

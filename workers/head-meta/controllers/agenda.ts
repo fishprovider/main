@@ -1,4 +1,4 @@
-import { clean } from '@fishprovider/core/dist/libs/agenda';
+import { clean } from '@fishprovider/old-core/dist/libs/agenda';
 import { ProviderTradeType } from '@fishprovider/utils/dist/constants/account';
 import type { Job, JobAttributesData } from 'agenda';
 

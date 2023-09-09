@@ -20,7 +20,7 @@
     "ci-type-check": "tsc-files --noEmit types/global.d.ts"
   },
   "dependencies": {
-    "@fishprovider/core": "*",
+    "@fishprovider/old-core": "*",
     "@fishprovider/swap": "*"
   }
 }

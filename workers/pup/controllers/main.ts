@@ -1,4 +1,4 @@
-import { destroyAsync, start as startCore } from '@fishprovider/core/dist/controllers/main';
+import { destroyAsync, start as startCore } from '@fishprovider/old-core/dist/controllers/main';
 
 import * as adapter from '~controllers/adapter';
 import { start as startAgenda } from '~controllers/agenda';

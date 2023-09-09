@@ -1,6 +1,6 @@
 import { getTransactionUpdates } from '@fishprovider/coin/dist/libs/coinbaseApi/utils';
 import updateTransaction from '@fishprovider/coin/dist/utils/transaction/updateTransaction';
-import { runDBTransaction } from '@fishprovider/core/dist/libs/mongo';
+import { runDBTransaction } from '@fishprovider/old-core/dist/libs/mongo';
 import { DestinationPayType, TransactionStatus, TransactionStatusRequest } from '@fishprovider/utils/dist/constants/pay';
 import type { Transaction } from '@fishprovider/utils/dist/types/Pay.model';
 

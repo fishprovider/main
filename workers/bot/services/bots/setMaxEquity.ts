@@ -1,4 +1,4 @@
-import { send } from '@fishprovider/core/dist/libs/notif';
+import { send } from '@fishprovider/old-core/dist/libs/notif';
 import { isLastRunExpired } from '@fishprovider/utils/dist/helpers/lastRunChecks';
 import type { Account } from '@fishprovider/utils/dist/types/Account.model';
 import _ from 'lodash';

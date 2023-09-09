@@ -1,6 +1,6 @@
 import {
   BaseError, GetUserService, RepositoryError, UserError,
-} from '@fishprovider-new/core';
+} from '@fishprovider/core';
 
 import {
   sanitizeUserBaseGetOptions, sanitizeUserGetFilter, validateProjection,

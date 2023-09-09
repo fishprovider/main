@@ -1,7 +1,7 @@
-import { getMongo } from '@fishprovider/libs';
 import {
   GetNewsFilter, type News, type NewsRepository,
-} from '@fishprovider-new/core';
+} from '@fishprovider/core';
+import { getMongo } from '@fishprovider/libs';
 import moment from 'moment';
 
 const getNews = async (filter: GetNewsFilter) => {

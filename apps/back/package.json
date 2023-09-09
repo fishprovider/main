@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@fishprovider/coin": "*",
-    "@fishprovider/core": "*",
+    "@fishprovider/old-core": "*",
     "@fishprovider/repository-cache-first": "*",
     "@fishprovider/swap": "*",
     "glob": "^10.3.3",

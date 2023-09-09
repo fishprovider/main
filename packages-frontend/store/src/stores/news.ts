@@ -1,4 +1,4 @@
-import { News } from '@fishprovider-new/core';
+import { News } from '@fishprovider/core';
 
 import { buildStoreSet } from '../main';
 

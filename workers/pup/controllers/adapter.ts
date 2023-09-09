@@ -1,4 +1,4 @@
-import { start as startSysInfo } from '@fishprovider/core/dist/libs/sysinfo';
+import { start as startSysInfo } from '@fishprovider/old-core/dist/libs/sysinfo';
 
 import getNextWeekNews from '~services/getNextWeekNews';
 import getStrategyInfos from '~services/getStrategyInfos';

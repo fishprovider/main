@@ -1,4 +1,4 @@
-import { send } from '@fishprovider/core/dist/libs/notif';
+import { send } from '@fishprovider/old-core/dist/libs/notif';
 import type { News } from '@fishprovider/utils/dist/types/News.model';
 import axios from 'axios';
 import moment from 'moment';

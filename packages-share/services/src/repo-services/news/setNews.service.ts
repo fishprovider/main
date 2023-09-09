@@ -1,4 +1,4 @@
-import { BaseError, RepositoryError, SetNewsService } from '@fishprovider-new/core';
+import { BaseError, RepositoryError, SetNewsService } from '@fishprovider/core';
 
 export const setNewsService: SetNewsService = async ({
   filter, payload, options, repositories,

@@ -1,4 +1,4 @@
-import { AccountRepository, UserRepository } from '@fishprovider-new/core';
+import { AccountRepository, UserRepository } from '@fishprovider/core';
 
 export const userRepoDefault: UserRepository = {
   getUser: async () => ({}),

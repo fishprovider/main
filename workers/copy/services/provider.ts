@@ -1,5 +1,5 @@
-import type { QueuePromise } from '@fishprovider/core/dist/libs/queuePromise';
-import { destroy as destroyQueue, start as startQueue } from '@fishprovider/core/dist/libs/queuePromise';
+import type { QueuePromise } from '@fishprovider/old-core/dist/libs/queuePromise';
+import { destroy as destroyQueue, start as startQueue } from '@fishprovider/old-core/dist/libs/queuePromise';
 import { getProviderIds } from '@fishprovider/swap/dist/utils/account';
 import { ProviderTradeType } from '@fishprovider/utils/dist/constants/account';
 import { isPausedWeekend } from '@fishprovider/utils/dist/helpers/pause';

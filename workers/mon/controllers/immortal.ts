@@ -1,4 +1,4 @@
-import { send } from '@fishprovider/core/dist/libs/notif';
+import { send } from '@fishprovider/old-core/dist/libs/notif';
 import fs from 'fs';
 
 import restartProcess from '~services/restartProcess';

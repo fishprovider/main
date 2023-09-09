@@ -1,6 +1,6 @@
 import {
   Account, AccountError, AccountViewType, BaseError, BaseGetOptions, ServiceContext,
-} from '@fishprovider-new/core';
+} from '@fishprovider/core';
 
 import { getRoleProvider, sanitizeBaseGetOptions } from '..';
 

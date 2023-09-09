@@ -1,9 +1,9 @@
-import * as agenda from '@fishprovider/core/dist/libs/agenda';
-import * as firebase from '@fishprovider/core/dist/libs/firebase';
-import * as mongo from '@fishprovider/core/dist/libs/mongo';
-import * as redis from '@fishprovider/core/dist/libs/redis';
 import { isMarketClosed as isMarketClosedCTrader } from '@fishprovider/ctrader/dist/utils/validate';
 import { isMarketClosed as isMarketClosedMetaTrader } from '@fishprovider/metatrader/dist/utils/validate';
+import * as agenda from '@fishprovider/old-core/dist/libs/agenda';
+import * as firebase from '@fishprovider/old-core/dist/libs/firebase';
+import * as mongo from '@fishprovider/old-core/dist/libs/mongo';
+import * as redis from '@fishprovider/old-core/dist/libs/redis';
 import { ProviderPlatform, ProviderType } from '@fishprovider/utils/dist/constants/account';
 import { ErrorType } from '@fishprovider/utils/dist/constants/error';
 import { Direction, OrderStatus, OrderType } from '@fishprovider/utils/dist/constants/order';

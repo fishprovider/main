@@ -17,6 +17,6 @@
     "ci-type-check": "tsc-files --noEmit"
   },
   "dependencies": {
-    "@fishprovider-new/core": "*"
+    "@fishprovider/core": "*"
   }
 }

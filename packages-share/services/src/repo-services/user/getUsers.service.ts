@@ -1,6 +1,6 @@
 import {
   BaseError, GetUsersService, RepositoryError, UserError,
-} from '@fishprovider-new/core';
+} from '@fishprovider/core';
 
 export const getUsersService: GetUsersService = async ({
   filter, options, repositories, context,

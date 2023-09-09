@@ -1,6 +1,6 @@
 import {
   BaseError, RepositoryError, UserError,
-} from '@fishprovider-new/core';
+} from '@fishprovider/core';
 
 import {
   getUserService,

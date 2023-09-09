@@ -1,4 +1,4 @@
-import { send } from '@fishprovider/core/dist/libs/notif';
+import { send } from '@fishprovider/old-core/dist/libs/notif';
 import removeOrder from '@fishprovider/swap/dist/commands/removeOrder';
 import removePosition from '@fishprovider/swap/dist/commands/removePosition';
 import { botUser } from '@fishprovider/swap/dist/utils/account';

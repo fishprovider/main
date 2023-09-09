@@ -1,4 +1,4 @@
-// import { send } from '@fishprovider/core/dist/libs/notif';
+// import { send } from '@fishprovider/old-core/dist/libs/notif';
 import type { CallbackPayload } from '@fishprovider/metatrader/dist/types/Event.model';
 
 import type { ClientAccount } from '~types/Client.model';

@@ -1,6 +1,6 @@
 // ref: https://developers.google.com/instance-id/reference/server#get_information_about_app_instances
 
-import { getInfo } from '@fishprovider/core/dist/libs/firebase';
+import { getInfo } from '@fishprovider/old-core/dist/libs/firebase';
 import { ErrorType } from '@fishprovider/utils/dist/constants/error';
 import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
 import type { User } from '@fishprovider/utils/dist/types/User.model';

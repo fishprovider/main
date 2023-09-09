@@ -1,5 +1,5 @@
-import { destroyAsync, start as startCore } from '@fishprovider/core/dist/controllers/main';
 import { startMongo, stopMongo } from '@fishprovider/libs';
+import { destroyAsync, start as startCore } from '@fishprovider/old-core/dist/controllers/main';
 
 import * as adapter from '~controllers/adapter';
 

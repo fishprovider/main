@@ -1,4 +1,4 @@
-import { start as startSysInfo } from '@fishprovider/core/dist/libs/sysinfo';
+import { start as startSysInfo } from '@fishprovider/old-core/dist/libs/sysinfo';
 
 import routes from './routes';
 

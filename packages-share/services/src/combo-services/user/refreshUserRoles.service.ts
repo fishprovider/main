@@ -1,6 +1,6 @@
 import {
   AccountRoles, BaseError, RefreshUserRolesService, RepositoryError, UserError,
-} from '@fishprovider-new/core';
+} from '@fishprovider/core';
 import _ from 'lodash';
 
 import {

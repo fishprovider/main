@@ -1,4 +1,4 @@
-import { send } from '@fishprovider/core/dist/libs/notif';
+import { send } from '@fishprovider/old-core/dist/libs/notif';
 import { getProvider } from '@fishprovider/swap/dist/utils/account';
 import { isLastRunExpired } from '@fishprovider/utils/dist/helpers/lastRunChecks';
 import type { Account, CopySettings } from '@fishprovider/utils/dist/types/Account.model';
