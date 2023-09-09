@@ -1,7 +1,7 @@
 import storeUser from '@fishprovider/cross/dist/stores/user';
-import { OfflineFirstNewsRepository } from '@fishprovider/repository-offline-first';
-import { StoreNewsRepository } from '@fishprovider/repository-store';
+import { OfflineFirstNewsRepository } from '@fishprovider/offline-first';
 import { getNewsService } from '@fishprovider/services';
+import { StoreNewsRepository } from '@fishprovider/store';
 import _ from 'lodash';
 import moment from 'moment';
 import { useEffect } from 'react';

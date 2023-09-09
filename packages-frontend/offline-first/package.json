@@ -1,5 +1,5 @@
 {
-  "name": "@fishprovider/repository-offline-first",
+  "name": "@fishprovider/offline-first",
   "version": "6.0.0",
   "type": "module",
   "main": "dist/index.js",
@@ -16,8 +16,8 @@
   },
   "dependencies": {
     "@fishprovider/services": "*",
-    "@fishprovider/repository-fish-api": "*",
-    "@fishprovider/repository-local": "*",
-    "@fishprovider/repository-store": "*"
+    "@fishprovider/fish-api": "*",
+    "@fishprovider/local": "*",
+    "@fishprovider/store": "*"
   }
 }

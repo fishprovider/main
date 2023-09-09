@@ -1,7 +1,7 @@
 import { initApi } from '@fishprovider/cross/dist/libs/api';
 import { initStore } from '@fishprovider/cross/dist/libs/store';
-import { fishApi } from '@fishprovider/repository-fish-api';
-import { store } from '@fishprovider/repository-store';
+import { fishApi } from '@fishprovider/fish-api';
+import { store } from '@fishprovider/store';
 import moment from 'moment-timezone';
 
 import { initAnalytics } from '~libs/analytics';

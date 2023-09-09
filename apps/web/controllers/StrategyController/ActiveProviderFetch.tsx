@@ -1,7 +1,7 @@
 import accountGet from '@fishprovider/cross/dist/api/accounts/get';
 import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
 import storeUser from '@fishprovider/cross/dist/stores/user';
-import { FishApiAccountRepository } from '@fishprovider/repository-fish-api';
+import { FishApiAccountRepository } from '@fishprovider/fish-api';
 import { getAccountService } from '@fishprovider/services';
 import { useEffect } from 'react';
 

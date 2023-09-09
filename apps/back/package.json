@@ -20,9 +20,9 @@
     "ci-type-check": "tsc-files --noEmit types/global.d.ts"
   },
   "dependencies": {
+    "@fishprovider/cache-first": "*",
     "@fishprovider/coin": "*",
     "@fishprovider/old-core": "*",
-    "@fishprovider/repository-cache-first": "*",
     "@fishprovider/swap": "*",
     "glob": "^10.3.3",
     "notion-client": "^6.16.0",

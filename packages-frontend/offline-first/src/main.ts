@@ -1,5 +1,5 @@
-import { fishApi } from '@fishprovider/repository-fish-api';
-import { local } from '@fishprovider/repository-local';
+import { fishApi } from '@fishprovider/fish-api';
+import { local } from '@fishprovider/local';
 
 const start = async (params: {
   baseURL?: string,

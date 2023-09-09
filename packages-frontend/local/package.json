@@ -1,5 +1,5 @@
 {
-  "name": "@fishprovider/repository-local",
+  "name": "@fishprovider/local",
   "version": "7.0.0",
   "type": "module",
   "main": "dist/index.js",

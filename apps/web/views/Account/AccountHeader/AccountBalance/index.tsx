@@ -3,7 +3,7 @@ import { useMutate } from '@fishprovider/cross/dist/libs/query';
 import storeOrders from '@fishprovider/cross/dist/stores/orders';
 import storePrices from '@fishprovider/cross/dist/stores/prices';
 import storeUser from '@fishprovider/cross/dist/stores/user';
-import { FishApiAccountRepository } from '@fishprovider/repository-fish-api';
+import { FishApiAccountRepository } from '@fishprovider/fish-api';
 import { getAccountService } from '@fishprovider/services';
 import { ProviderType } from '@fishprovider/utils/dist/constants/account';
 import { OrderStatus } from '@fishprovider/utils/dist/constants/order';

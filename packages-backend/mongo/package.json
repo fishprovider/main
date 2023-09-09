@@ -1,5 +1,5 @@
 {
-  "name": "@fishprovider/repository-mongo",
+  "name": "@fishprovider/mongo",
   "version": "7.0.0",
   "type": "module",
   "main": "dist/index.js",

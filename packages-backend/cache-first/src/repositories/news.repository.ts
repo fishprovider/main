@@ -1,8 +1,8 @@
 import {
   BaseGetOptions, GetNewsFilter, News, NewsRepository,
 } from '@fishprovider/core';
-import { MongoNewsRepository } from '@fishprovider/repository-mongo';
-import { RedisNewsRepository } from '@fishprovider/repository-redis';
+import { MongoNewsRepository } from '@fishprovider/mongo';
+import { RedisNewsRepository } from '@fishprovider/redis';
 
 const getNews = async (filter: GetNewsFilter, options: BaseGetOptions<News>) => {
   let docs;

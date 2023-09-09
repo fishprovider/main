@@ -3,7 +3,7 @@ import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
 import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
 import storeUser from '@fishprovider/cross/dist/stores/user';
-import { FishApiAccountRepository } from '@fishprovider/repository-fish-api';
+import { FishApiAccountRepository } from '@fishprovider/fish-api';
 import { getAccountService } from '@fishprovider/services';
 import { redisKeys } from '@fishprovider/utils/dist/constants/redis';
 import type { Account } from '@fishprovider/utils/dist/types/Account.model';
