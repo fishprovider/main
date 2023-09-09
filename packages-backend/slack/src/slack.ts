@@ -1,4 +1,4 @@
-import { log } from '@fishprovider/log';
+import { log } from '@fishprovider/core-utils';
 import axios from 'axios';
 
 const sendSlackWebhook = async (
