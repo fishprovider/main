@@ -1,5 +1,5 @@
 {
-  "name": "@fishprovider/pushNotif",
+  "name": "@fishprovider/push-notif",
   "version": "7.0.0",
   "type": "module",
   "main": "dist/index.js",

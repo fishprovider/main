@@ -1,5 +1,5 @@
 {
-  "name": "@fishprovider/sendNotif",
+  "name": "@fishprovider/send-notif",
   "version": "7.0.0",
   "type": "module",
   "main": "dist/index.js",
