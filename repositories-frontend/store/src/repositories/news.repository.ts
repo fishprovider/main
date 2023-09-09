@@ -39,7 +39,7 @@ const getNews = async (filter: GetNewsFilter) => {
     };
   }
 
-  return { docs: null };
+  return {};
 };
 
 const setNews = async (
@@ -51,7 +51,7 @@ const setNews = async (
   if (news) {
     storeNews.mergeDocs(news);
   }
-  return { docs: news ?? null };
+  return { docs: news };
 };
 
 const watchNews = <T>(

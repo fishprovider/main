@@ -9,7 +9,7 @@ const getNews = async (
   filter: GetNewsFilter,
   options: BaseGetOptions<News>,
 ) => {
-  let docs = null;
+  let docs;
   if (LocalNewsRepository.getNews) {
     const res = await LocalNewsRepository.getNews(filter, options);
     docs = res.docs;
@@ -30,11 +30,11 @@ const getNews = async (
       docs = res.docs;
 
       // non-blocking
-      set(docs ?? undefined);
+      set(docs);
     } else {
       // non-blocking
       FishApiNewsRepository.getNews(filter, options).then((res) => {
-        set(res.docs ?? undefined);
+        set(res.docs);
       });
     }
   }

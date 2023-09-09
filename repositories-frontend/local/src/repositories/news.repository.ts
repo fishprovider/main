@@ -8,7 +8,7 @@ const getNews = async (filter: GetNewsFilter) => {
   const key = buildNewsKeys(filter);
   const { localGet } = await local.get();
   const news = await localGet<News[]>(key);
-  return { docs: news ?? null };
+  return { docs: news };
 };
 
 const setNews = async (
@@ -20,7 +20,7 @@ const setNews = async (
   const { news } = payload;
   const { localSet } = await local.get();
   await localSet(key, news);
-  return { docs: news ?? null };
+  return { docs: news };
 };
 
 export const LocalNewsRepository: NewsRepository = {

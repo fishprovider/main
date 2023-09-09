@@ -8,7 +8,7 @@ import { fishApi } from '../main';
 
 const getAccount = async (filter: GetAccountFilter) => {
   const { apiGet } = await fishApi.get();
-  const account = await apiGet<Partial<Account> | null | undefined>('/account/getAccount', filter);
+  const account = await apiGet<Partial<Account> | undefined>('/account/getAccount', filter);
   return { doc: account };
 };
 

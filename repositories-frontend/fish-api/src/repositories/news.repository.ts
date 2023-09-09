@@ -8,7 +8,7 @@ const getNews = async (
   filter: GetNewsFilter,
 ) => {
   const { apiGet } = await fishApi.get();
-  const news = await apiGet<Partial<News>[] | null>('/news/getNews', filter);
+  const news = await apiGet<Partial<News>[] | undefined>('/news/getNews', filter);
   return { docs: news };
 };
 

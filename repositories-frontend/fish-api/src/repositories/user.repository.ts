@@ -6,7 +6,7 @@ import { fishApi } from '../main';
 
 const getUser = async (filter: GetUserFilter) => {
   const { apiGet } = await fishApi.get();
-  const user = await apiGet<Partial<User> | null | undefined>('/user/getUser', filter);
+  const user = await apiGet<Partial<User> | undefined>('/user/getUser', filter);
   return { doc: user };
 };
 
@@ -16,7 +16,7 @@ const updateUser = async (
   options: BaseUpdateOptions<User>,
 ) => {
   const { apiPost } = await fishApi.get();
-  const user = await apiPost<Partial<User> | null | undefined>('/user/updateUser', {
+  const user = await apiPost<Partial<User> | undefined>('/user/updateUser', {
     filter, payload, options,
   });
   return { doc: user };
