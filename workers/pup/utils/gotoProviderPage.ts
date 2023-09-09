@@ -8,7 +8,7 @@ const gotoProviderPage = async (page: Page, strategyId: string) => {
   await gotoAttempt(async (isRetried) => {
     if (isRetried) await page.reload();
     else {
-      const url = `https://ct.icmarkets.com/copy/strategy/${strategyId}`;
+      const url = `https://ct.spotware.com/copy/strategy/${strategyId}`;
       await page.goto(url, {
         waitUntil: 'networkidle2',
         timeout: 0,

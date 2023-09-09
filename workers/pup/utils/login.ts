@@ -16,7 +16,7 @@ const login = async (config: {
     await gotoAttempt(async (isRetried) => {
       if (isRetried) await page.reload();
       else {
-        await page.goto('https://ct.icmarkets.com/automate', {
+        await page.goto('https://ct.spotware.com/automate', {
           waitUntil: 'networkidle2',
           timeout: 0,
         });
