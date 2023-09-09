@@ -28,7 +28,7 @@ const getUser = async (
   }, {
     projection,
   });
-  return { doc: user };
+  return { doc: user || undefined };
 };
 
 const updateUser = async (
@@ -73,7 +73,7 @@ const updateUser = async (
       returnDocument: ReturnDocument.AFTER,
       projection,
     });
-    return { doc: user };
+    return { doc: user || undefined };
   }
   await collection.updateOne(filter, updateFilter);
   return {};

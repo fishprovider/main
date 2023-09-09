@@ -5,7 +5,7 @@ import { MongoNewsRepository } from '@fishprovider/repository-mongo';
 import { RedisNewsRepository } from '@fishprovider/repository-redis';
 
 const getNews = async (filter: GetNewsFilter, options: BaseGetOptions<News>) => {
-  let docs = null;
+  let docs;
   if (RedisNewsRepository.getNews) {
     const res = await RedisNewsRepository.getNews(filter, options);
     docs = res.docs;

@@ -18,7 +18,7 @@ const getAccount = async (
   }, {
     projection,
   });
-  return { doc: account };
+  return { doc: account || undefined };
 };
 
 const getAccounts = async (
@@ -81,7 +81,7 @@ const updateAccount = async (
       returnDocument: ReturnDocument.AFTER,
       projection,
     });
-    return { doc: account };
+    return { doc: account || undefined };
   }
   await collection.updateOne(filter, updateFilter);
   return {};

@@ -36,7 +36,7 @@ const getNews = async (filter: GetNewsFilter) => {
     return { docs: news };
   }
 
-  return { docs: null };
+  return {};
 };
 
 export const MongoNewsRepository: NewsRepository = {
