@@ -23,10 +23,8 @@ const start = async () => {
   try {
     Logger.info('⭐ Starting...');
     startSysInfo();
-    (async () => {
-      await getStrategyInfos();
-      await getNextWeekNews();
-    })();
+    await getStrategyInfos();
+    await getNextWeekNews();
     Logger.info('⭐ Started');
   } catch (err) {
     Logger.error(`🔥 Failed to start: ${err}`);
