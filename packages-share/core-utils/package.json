@@ -1,5 +1,5 @@
 {
-  "name": "@fishprovider/services",
+  "name": "@fishprovider/core-utils",
   "version": "7.0.0",
   "type": "module",
   "main": "dist/index.js",
@@ -17,6 +17,6 @@
     "ci-type-check": "tsc-files --noEmit"
   },
   "dependencies": {
-    "@fishprovider/core": "*"
+    "loglevel": "^1.8.1"
   }
 }
