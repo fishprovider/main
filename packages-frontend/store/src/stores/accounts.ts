@@ -1,5 +1,5 @@
 import { Account } from '@fishprovider/core';
 
-import { buildStoreSet } from '../main';
+import { buildStoreSet } from '..';
 
 export const storeAccounts = buildStoreSet<Account>({}, 'accounts');

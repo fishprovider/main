@@ -204,25 +204,14 @@ export const buildStoreObj = <State extends Record<string, any>>(
   };
 };
 
-const start = async (params: {
+export const initStore = async (params: {
   logDebug?: (...args: any[]) => void,
   logError?: (...args: any[]) => void
 }) => {
-  console.info('Started store.framework');
-
   if (params.logDebug) {
     logDebug = params.logDebug;
   }
   if (params.logError) {
     logError = params.logError;
   }
-};
-
-const stop = async () => {
-  console.info('Stopped store.framework');
-};
-
-export const store = {
-  start,
-  stop,
 };
