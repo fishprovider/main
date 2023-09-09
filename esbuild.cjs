@@ -13,6 +13,9 @@ const packageDependencies = {
   ...require('./packages/core/package.json').dependencies,
   // new
   ...require('./packages-share/core/package.json').dependencies,
+  ...require('./packages-share/core-utils/package.json').dependencies,
+  ...require('./packages-usecase/repositories/package.json').dependencies,
+  ...require('./packages-usecase/services/package.json').dependencies,
   ...require('./packages-backend/libs/package.json').dependencies,
   ...require('./packages-backend/mongo/package.json').dependencies,
   ...require('./packages-backend/redis/package.json').dependencies,
