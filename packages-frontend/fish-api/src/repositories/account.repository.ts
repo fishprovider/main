@@ -2,7 +2,7 @@ import {
   Account,
   type AccountRepository,
   type GetAccountFilter,
-} from '@fishprovider/core-new';
+} from '@fishprovider-new/core';
 
 import { fishApi } from '../main';
 

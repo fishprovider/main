@@ -1,6 +1,6 @@
 import {
   BaseError, BaseGetOptions, Projection, ServiceError,
-} from '@fishprovider/core-new';
+} from '@fishprovider-new/core';
 import _ from 'lodash';
 
 export const validateProjection = <T extends Record<string, any>>(

@@ -1,4 +1,4 @@
-import { UserSession } from '@fishprovider/core-new';
+import { UserSession } from '@fishprovider-new/core';
 
 export type ApiHandler<T> = (
   data: any,

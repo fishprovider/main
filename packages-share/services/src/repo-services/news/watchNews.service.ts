@@ -1,4 +1,4 @@
-import { BaseError, RepositoryError, WatchNewsService } from '@fishprovider/core-new';
+import { BaseError, RepositoryError, WatchNewsService } from '@fishprovider-new/core';
 
 export const watchNewsService: WatchNewsService = ({
   selector, repositories,

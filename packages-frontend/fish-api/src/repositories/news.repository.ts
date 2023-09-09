@@ -1,6 +1,6 @@
 import {
   GetNewsFilter, News, NewsRepository,
-} from '@fishprovider/core-new';
+} from '@fishprovider-new/core';
 
 import { fishApi } from '../main';
 

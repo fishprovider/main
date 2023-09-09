@@ -1,4 +1,4 @@
-import { BaseError, UserError } from '@fishprovider/core-new';
+import { BaseError, UserError } from '@fishprovider-new/core';
 
 import { userServiceBaseParams, userSessionDefault } from '../../tests';
 import { updateUserService } from '..';

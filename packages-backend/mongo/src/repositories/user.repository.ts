@@ -1,11 +1,11 @@
+import { getMongo } from '@fishprovider/libs';
 import {
   AccountRoles,
   BaseGetOptions,
   BaseUpdateOptions,
   type GetUserFilter, RepositoryError,
   type UpdateUserPayload, type User, type UserRepository,
-} from '@fishprovider/core-new';
-import { getMongo } from '@fishprovider/libs';
+} from '@fishprovider-new/core';
 import { Filter, ReturnDocument, UpdateFilter } from 'mongodb';
 
 const roleFields = {

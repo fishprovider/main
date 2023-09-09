@@ -1,4 +1,4 @@
-import { Account, User } from '@fishprovider/core-new';
+import { Account, User } from '@fishprovider-new/core';
 import { Socket } from 'socket.io-client';
 
 import { buildStoreObj } from '../main';
