@@ -1,6 +1,6 @@
 import { NewsRepository } from '@fishprovider/core-new';
 
-const getNews = async () => ({ docs: null });
+const getNews = async () => ({});
 
 export const RedisNewsRepository: NewsRepository = {
   getNews,
