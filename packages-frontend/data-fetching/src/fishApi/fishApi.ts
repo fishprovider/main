@@ -1,15 +1,14 @@
-import { promiseCreator } from '@fishprovider/services';
-import assert from 'assert';
+import { log, promiseCreator } from '@fishprovider/core-utils';
 import axios, { Axios, AxiosRequestConfig } from 'axios';
 
 export type ApiConfig = AxiosRequestConfig;
 
 const clientPromise = promiseCreator<Axios>();
 
-let logDebug = console.log;
-let logError = console.error;
+let logDebug = log.debug;
+let logError = log.error;
 
-const start = async (params: {
+export const startFishApi = async (params: {
   baseURL?: string,
   logDebug?: (...args: any[]) => void
   logError?: (...args: any[]) => void
@@ -20,7 +19,6 @@ const start = async (params: {
     }),
     withCredentials: true,
   });
-  console.info('Started fishApi.framework');
   clientPromise.resolveExec(client);
 
   if (params.logDebug) {
@@ -31,10 +29,6 @@ const start = async (params: {
   }
 
   return client;
-};
-
-const stop = async () => {
-  console.info('Stopped fishApi.framework');
 };
 
 const checkSkipLog = (url: string) => url === '/logger';
@@ -52,22 +46,21 @@ const errHandler = async <T>(
     if (!checkSkipLog(url)) {
       logDebug(err, url, payload, options);
       if (axios.isCancel(err)) {
-        logDebug(`API Cancelled: ${url}`);
+        logDebug('API Cancelled', url);
       } else {
-        logError(`API Error: ${url}, ${errMsg}`);
+        logError('API Error', url, errMsg);
       }
     }
     throw new Error(errMsg);
   }
 };
 
-const apiGet = async <T>(
+export const fishApiGet = async <T>(
   url: string,
   payload: Record<string, any> = {},
   options?: ApiConfig,
 ) => errHandler<T>(async () => {
   const client = await clientPromise;
-  assert(client);
   const res = await client.get<T>(url, {
     ...options,
     params: payload,
@@ -75,27 +68,12 @@ const apiGet = async <T>(
   return res.data;
 }, url, payload, options);
 
-const apiPost = async<T>(
+export const fishApiPost = async<T>(
   url: string,
   payload: Record<string, any> = {},
   options?: ApiConfig,
 ) => errHandler<T>(async () => {
   const client = await clientPromise;
-  assert(client);
   const res = await client.post<T>(url, payload, options);
   return res.data;
 }, url, payload, options);
-
-const get = async () => {
-  await clientPromise;
-  return {
-    apiGet,
-    apiPost,
-  };
-};
-
-export const fishApi = {
-  start,
-  stop,
-  get,
-};
