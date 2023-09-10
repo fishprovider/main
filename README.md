@@ -1,16 +1,3 @@
-# Intro
-- This project is set up based on NPM Workspaces https://docs.npmjs.com/cli/v9/using-npm/workspaces
-  ```json
-  "workspaces": [
-    "packages/*",
-    "workers/*",
-    "apps/*"
-  ]
-  ```
-- All packages are under `packages` directory
-- All workers are under `workers` directory
-- All apps are under `apps` directory
-
 # Rules for the best performance
 
 - In each local `package.json` of sub-projects, only include `dependencies` and `devDependencies` that required

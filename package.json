@@ -8,8 +8,8 @@
     "packages-usecase/*",
     "packages-backend/*",
     "packages-frontend/*",
-    "workers/*",
-    "apps/*"
+    "apps-backend/*",
+    "apps-frontend/*"
   ],
   "type": "module",
   "engines": {
@@ -33,10 +33,7 @@
     "pm2-deploy-build": "pm2 deploy pm2.config.cjs ${DEPLOY_ENV:-localhost} exec 'source ~/.zshrc; npm run build -w'",
     "pm2-deploy-start": "DOPPLER_TOKEN=$(doppler configure get token --plain) pm2 deploy pm2.config.cjs ${DEPLOY_ENV:-localhost} exec 'source ~/.zshrc; npm run pm2-start-only'",
     "pm2-deploy-stop": "pm2 deploy pm2.config.cjs ${DEPLOY_ENV:-localhost} exec 'source ~/.zshrc; npm run pm2-stop-only'",
-    "pm2-deploy-exec": "pm2 deploy pm2.config.cjs ${DEPLOY_ENV:-localhost} exec",
-    "heroku-build": "npm run build -w workers/pup",
-    "heroku-cleanup": "NPM_CONFIG_PRODUCTION=true npm prune --production",
-    "heroku-postbuild": "npm run heroku-build && npm run heroku-cleanup"
+    "pm2-deploy-exec": "pm2 deploy pm2.config.cjs ${DEPLOY_ENV:-localhost} exec"
   },
   "devDependencies": {
     "@emotion/cache": "^11.11.0",
