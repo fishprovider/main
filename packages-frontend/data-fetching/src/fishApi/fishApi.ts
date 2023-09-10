@@ -8,29 +8,6 @@ const clientPromise = promiseCreator<Axios>();
 let logDebug = log.debug;
 let logError = log.error;
 
-export const startFishApi = async (params: {
-  baseURL?: string,
-  logDebug?: (...args: any[]) => void
-  logError?: (...args: any[]) => void
-}) => {
-  const client = axios.create({
-    ...(params.baseURL && {
-      baseURL: params.baseURL,
-    }),
-    withCredentials: true,
-  });
-  clientPromise.resolveExec(client);
-
-  if (params.logDebug) {
-    logDebug = params.logDebug;
-  }
-  if (params.logError) {
-    logError = params.logError;
-  }
-
-  return client;
-};
-
 const checkSkipLog = (url: string) => url === '/logger';
 
 const errHandler = async <T>(
@@ -77,3 +54,26 @@ export const fishApiPost = async<T>(
   const res = await client.post<T>(url, payload, options);
   return res.data;
 }, url, payload, options);
+
+export const initFishApi = async (params: {
+  baseURL?: string,
+  logDebug?: (...args: any[]) => void
+  logError?: (...args: any[]) => void
+}) => {
+  const client = axios.create({
+    ...(params.baseURL && {
+      baseURL: params.baseURL,
+    }),
+    withCredentials: true,
+  });
+  clientPromise.resolveExec(client);
+
+  if (params.logDebug) {
+    logDebug = params.logDebug;
+  }
+  if (params.logError) {
+    logError = params.logError;
+  }
+
+  return client;
+};
