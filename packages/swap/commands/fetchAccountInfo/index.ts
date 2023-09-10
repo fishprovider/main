@@ -66,8 +66,7 @@ const saveAccountInfo = async (
     ...res,
     ...assetInfo,
   };
-  // non-blocking
-  updateCache(accountInfo);
+  updateCache(accountInfo); // non-blocking
 
   return accountInfo;
 };

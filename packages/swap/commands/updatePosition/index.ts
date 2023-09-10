@@ -40,8 +40,7 @@ const postUpdatePosition = async (
     updatedAt: new Date(),
   };
 
-  // non-blocking
-  Mongo.collection<Order>('orders').updateOne(
+  Mongo.collection<Order>('orders').updateOne( // non-blocking
     { _id: requestOrder._id },
     {
       $set: updateDoc,

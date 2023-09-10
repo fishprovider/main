@@ -67,8 +67,7 @@ const preNewOrder = async (order: OrderWithoutId) => {
     createdAt: new Date(),
   };
 
-  // non-blocking
-  Mongo.collection<Order>('orders').insertOne({
+  Mongo.collection<Order>('orders').insertOne({ // non-blocking
     ...doc,
     updatedLogs: [doc],
   });

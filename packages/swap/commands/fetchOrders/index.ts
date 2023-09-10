@@ -140,8 +140,7 @@ const saveOrders = async (
     });
   };
 
-  // non-blocking
-  Promise.all([
+  Promise.all([ // non-blocking
     savePendingOrders(),
     saveLiveOrders(),
     saveClosedOrders(),

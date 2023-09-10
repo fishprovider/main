@@ -9,6 +9,21 @@ const getNews = async (
   filter: GetNewsFilter,
   options: BaseGetOptions<News>,
 ) => {
+  const setNews = async (news?: Partial<News>[]) => {
+    const promises = [];
+    if (LocalNewsRepository.setNews) {
+      promises.push(
+        LocalNewsRepository.setNews(filter, { news }, options),
+      );
+    }
+    if (StoreNewsRepository.setNews) {
+      promises.push(
+        StoreNewsRepository.setNews(filter, { news }, options),
+      );
+    }
+    await Promise.all(promises);
+  };
+
   let docs;
   if (LocalNewsRepository.getNews) {
     const res = await LocalNewsRepository.getNews(filter, options);
@@ -16,30 +31,12 @@ const getNews = async (
   }
 
   if (FishApiNewsRepository.getNews) {
-    const setNews = async (news?: Partial<News>[]) => {
-      const promises = [];
-      if (LocalNewsRepository.setNews) {
-        promises.push(
-          LocalNewsRepository.setNews(filter, { news }, options),
-        );
-      }
-      if (StoreNewsRepository.setNews) {
-        promises.push(
-          StoreNewsRepository.setNews(filter, { news }, options),
-        );
-      }
-      await Promise.all(promises);
-    };
-
     if (!docs) {
       const res = await FishApiNewsRepository.getNews(filter, options);
       docs = res.docs;
-
-      // non-blocking
-      setNews(docs);
+      setNews(docs); // non-blocking
     } else {
-      // non-blocking
-      FishApiNewsRepository.getNews(filter, options).then((res) => {
+      FishApiNewsRepository.getNews(filter, options).then((res) => { // non-blocking
         setNews(res.docs);
       });
     }
