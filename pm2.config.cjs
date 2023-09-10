@@ -231,7 +231,7 @@ const deploy = {
     ssh_options: 'Port=1503',
     path: '/home/marco/work/pm2-apps/fishprovider-secondary',
     ref: 'tags/secondary',
-    'pre-deploy': 'git tag --delete tags/secondary && git fetch --tags -f',
+    'pre-deploy': 'git tag --delete tags/secondary; git fetch --tags -f',
   },
 };
 
