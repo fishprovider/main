@@ -1,5 +1,5 @@
 {
-  "name": "@fishprovider/send-notif",
+  "name": "@fishprovider/queue",
   "version": "7.0.0",
   "type": "module",
   "main": "dist/index.js",
@@ -10,7 +10,7 @@
   "scripts": {
     "lint": "eslint --cache --fix .",
     "type-check": "tsc --noEmit",
-    "test": "echo 'TODO: add tests'",
+    "test": "NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules npx jest",
     "clean": "rm -rf dist && mkdir dist",
     "build": "tsc -p tsconfig.build.json",
     "ci-lint": "eslint --cache --fix",
@@ -18,7 +18,6 @@
   },
   "dependencies": {
     "@fishprovider/core-utils": "*",
-    "axios": "^1.5.0",
-    "discord.js": "^14.13.0"
+    "p-queue": "^7.3.4"
   }
 }

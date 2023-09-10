@@ -10,7 +10,7 @@
   "scripts": {
     "lint": "eslint --cache --fix .",
     "type-check": "tsc --noEmit",
-    "test": "echo pushNotif",
+    "test": "echo 'TODO: add tests'",
     "clean": "rm -rf dist && mkdir dist",
     "build": "tsc -p tsconfig.build.json",
     "ci-lint": "eslint --cache --fix",
