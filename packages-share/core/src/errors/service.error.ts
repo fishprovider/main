@@ -1,4 +1,0 @@
-export enum ServiceError {
-  'SERVICE_BAD_REQUEST' = 'SERVICE_BAD_REQUEST',
-  'SERVICE_UNKNOWN' = 'SERVICE_UNKNOWN',
-}
