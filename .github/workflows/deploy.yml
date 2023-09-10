@@ -12,11 +12,11 @@ jobs:
       - name: Install NPM packages
         uses: ./ci/github/install-npm
         with:
-          app-dir: "apps/extension"
+          app-dir: "apps-frontend/extension"
 
       - name: Build
         run: |
-          cd apps/extension
+          cd apps-frontend/extension
           npm run build -- --verbose
           npm run package
 
@@ -24,4 +24,4 @@ jobs:
         uses: PlasmoHQ/bpp@v3
         with:
           keys: ${{ secrets.BBP_KEYS }}
-          artifact: apps/extension/build/chrome-mv3-prod.zip
+          artifact: apps-frontend/extension/build/chrome-mv3-prod.zip

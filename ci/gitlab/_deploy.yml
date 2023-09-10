@@ -1,38 +1,17 @@
-.deploy-gate:
-  script:
-    - curl $DEPLOY_GATE
-    - NOTIF_MSG="Deploy gate $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
-    - !reference [.notif, script]
-
-.deploy-cron:
-  script:
-    - curl $DEPLOY_CRON
-    - NOTIF_MSG="Deploy cron $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
-    - !reference [.notif, script]
-
-.deploy-mon:
-  script:
-    - curl $DEPLOY_MON
-    - NOTIF_MSG="Deploy mon $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
-    - !reference [.notif, script]
-
 .deploy-pay:
   script:
-    - curl $DEPLOY_PAY
     - curl $DEPLOY_PAY_DEMO
     - NOTIF_MSG="Deploy pay $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
     - !reference [.notif, script]
 
 .deploy-bot:
   script:
-    - curl $DEPLOY_BOT
     - curl $DEPLOY_BOT_DEMO
     - NOTIF_MSG="Deploy bot $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
     - !reference [.notif, script]
 
 .deploy-copy:
   script:
-    - curl $DEPLOY_COPY
     - curl $DEPLOY_COPY_HACK_DEMO
     - curl $DEPLOY_COPY_DEMO
     - NOTIF_MSG="Deploy copy $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
@@ -40,7 +19,6 @@
 
 .deploy-head-ctrader:
   script:
-    - curl $DEPLOY_HEAD_CTRADER
     - curl $DEPLOY_HEAD_CTRADER_HACK_DEMO
     - curl $DEPLOY_HEAD_CTRADER_DEMO
     - NOTIF_MSG="Deploy head-ctrader $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
@@ -48,30 +26,24 @@
 
 .deploy-head-meta:
   script:
-    - curl $DEPLOY_HEAD_META
     - curl $DEPLOY_HEAD_META_DEMO
     - NOTIF_MSG="Deploy head-meta $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
     - !reference [.notif, script]
 
 .deploy-spot-ctrader:
   script:
-    - curl $DEPLOY_SPOT_CTRADER_ICMARKETS
-    - curl $DEPLOY_SPOT_CTRADER_ICMARKETS_POLL
     - curl $DEPLOY_SPOT_CTRADER_ICMARKETS_DEMO
     - NOTIF_MSG="Deploy spot-ctrader $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
     - !reference [.notif, script]
 
 .deploy-spot-meta:
   script:
-    - curl $DEPLOY_SPOT_META_EXNESS
-    - curl $DEPLOY_SPOT_META_EXNESS_POLL
     - curl $DEPLOY_SPOT_META_EXNESS_DEMO
     - NOTIF_MSG="Deploy spot-meta $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
     - !reference [.notif, script]
 
 .deploy-back:
   script:
-    - curl $DEPLOY_BACK
     - curl $DEPLOY_BACK_DEMO
     - curl $DEPLOY_BACK_CANARY
     - curl $DEPLOY_BACK_CANARY_DEMO
@@ -80,7 +52,7 @@
 
 .deploy-phone:
   script:
-    - cd apps/phone
+    - cd apps-frontend/phone
     - ./clean-deps.sh
     - npm ci --prefer-offline --no-audit --no-progress --legacy-peer-deps --cache ~/.npm
     - npm run build-submit-local
@@ -90,7 +62,7 @@
 
 .deploy-phone-update:
   script:
-    - cd apps/phone
+    - cd apps-frontend/phone
     - ./clean-deps.sh
     - npm ci --prefer-offline --no-audit --no-progress --legacy-peer-deps --cache ~/.npm
     - npm run deploy-update

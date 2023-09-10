@@ -2,51 +2,6 @@ include:
   - local: /ci/gitlab/_base.yml
   - local: /ci/gitlab/_deploy.yml
 
-deploy-gate:
-  tags:
-    - local
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "schedule"
-      when: never
-    - if: $CI_COMMIT_TITLE =~ /deploy-gate/
-      when: always
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-      changes:
-        - workers/gate/**/*
-      when: always
-  script:
-    - !reference [.deploy-gate, script]
-
-deploy-cron:
-  tags:
-    - local
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "schedule"
-      when: never
-    - if: $CI_COMMIT_TITLE =~ /deploy-cron/
-      when: always
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-      changes:
-        - workers/cron/**/*
-      when: always
-  script:
-    - !reference [.deploy-cron, script]
-
-deploy-mon:
-  tags:
-    - local
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "schedule"
-      when: never
-    - if: $CI_COMMIT_TITLE =~ /deploy-mon/
-      when: always
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-      changes:
-        - workers/mon/**/*
-      when: always
-  script:
-    - !reference [.deploy-mon, script]
-
 deploy-pay:
   tags:
     - local
@@ -57,7 +12,7 @@ deploy-pay:
       when: always
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       changes:
-        - workers/pay/**/*
+        - apps-backend/pay/**/*
       when: always
   script:
     - !reference [.deploy-pay, script]
@@ -72,7 +27,7 @@ deploy-bot:
       when: always
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       changes:
-        - workers/bot/**/*
+        - apps-backend/bot/**/*
       when: always
   script:
     - !reference [.deploy-bot, script]
@@ -87,7 +42,7 @@ deploy-copy:
       when: always
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       changes:
-        - workers/copy/**/*
+        - apps-backend/copy/**/*
       when: always
   script:
     - !reference [.deploy-copy, script]
@@ -102,7 +57,7 @@ deploy-head-ctrader:
       when: always
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       changes:
-        - workers/head-ctrader/**/*
+        - apps-backend/head-ctrader/**/*
       when: always
   script:
     - !reference [.deploy-head-ctrader, script]
@@ -117,7 +72,7 @@ deploy-head-meta:
       when: always
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       changes:
-        - workers/head-meta/**/*
+        - apps-backend/head-meta/**/*
       when: always
   script:
     - !reference [.deploy-head-meta, script]
@@ -132,7 +87,7 @@ deploy-spot-ctrader:
       when: always
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       changes:
-        - workers/spot-ctrader/**/*
+        - apps-backend/spot-ctrader/**/*
       when: always
   script:
     - !reference [.deploy-spot-ctrader, script]
@@ -147,7 +102,7 @@ deploy-spot-meta:
       when: always
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       changes:
-        - workers/spot-meta/**/*
+        - apps-backend/spot-meta/**/*
       when: always
   script:
     - !reference [.deploy-spot-meta, script]
@@ -162,7 +117,7 @@ deploy-back:
       when: always
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       changes:
-        - apps/back/**/*
+        - apps-backend/back/**/*
       when: always
   script:
     - !reference [.deploy-back, script]
