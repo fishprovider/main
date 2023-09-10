@@ -230,6 +230,7 @@ const deploy = {
     host: '185.255.131.171',
     ssh_options: 'Port=1503',
     path: '/home/marco/work/pm2-apps/fishprovider-secondary',
+    ref: 'tags/secondary',
   },
 };
 
