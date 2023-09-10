@@ -14,7 +14,7 @@ export const startFirebase = () => {
   log.info('Starting Firebase');
   const app = admin.initializeApp({
     credential: admin.credential.cert({ projectId, privateKey, clientEmail }),
-  });
+  }, 'database');
   app.firestore().settings({
     ignoreUndefinedProperties: true,
   });

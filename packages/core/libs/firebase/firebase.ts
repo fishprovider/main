@@ -19,7 +19,7 @@ const start = async () => {
     }),
     databaseURL: `https://${env.projectId}.firebaseio.com`,
     storageBucket: `${env.projectId}.appspot.com`,
-  });
+  }, 'old-database');
   _firebase.firestore().settings({
     ignoreUndefinedProperties: true,
   });

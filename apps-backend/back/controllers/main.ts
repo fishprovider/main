@@ -3,19 +3,17 @@ import { destroyAsync, start as startCore } from '@fishprovider/old-core/dist/co
 
 import * as adapter from '~controllers/adapter';
 
-const start = async () => {
-  // apiV3
-  await startCacheFirst();
+const start = () => Promise.all([
+  startCacheFirst(), // new
+  (async () => {
+    await startCore(adapter);
+    await adapter.start();
+  })(),
+]);
 
-  await startCore(adapter);
-  await adapter.start();
-};
-
-const destroy = async () => {
-  await destroyAsync(adapter);
-
-  // apiV3
-  await stopCacheFirst();
-};
+const destroy = () => Promise.all([
+  stopCacheFirst(), // new
+  destroyAsync(adapter),
+]);
 
 export { destroy, start };
