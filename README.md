@@ -18,17 +18,17 @@ for `build` and `start`, not for `dev`. If `dev` needs some `devDependencies`, p
   npm i
 
   # Case 2: for one project
-  npm i -w apps/back
+  npm i -w apps-backend/back
   ```
 
 - Start dev server
   ```shell
   # Option 1: run at root level
-  npm run prebuild -w apps/back
-  npm run dev -w apps/back
+  npm run prebuild -w apps-backend/back
+  npm run dev -w apps-backend/back
 
   # Option 2: run at project level
-  cd apps/back
+  cd apps-backend/back
   npm run prebuild
   npm run dev
   ```
@@ -43,9 +43,9 @@ for `build` and `start`, not for `dev`. If `dev` needs some `devDependencies`, p
 
 - Option 1: run at root level
   ```shell
-  npm i -w apps/back
-  npm run build -w apps/back
-  npm start -w apps/back
+  npm i -w apps-backend/back
+  npm run build -w apps-backend/back
+  npm start -w apps-backend/back
   ```
 
 - Option 2: run at project level
@@ -58,4 +58,4 @@ for `build` and `start`, not for `dev`. If `dev` needs some `devDependencies`, p
 
 # How to deploy?
 - Git push will trigger CI to deploy, see `ci/deploy.yml`
-- For `apps/web`, use script `deploy-dev.sh`, `deploy-canary.sh`, `deploy-prod.sh`
+- For `apps-frontend/web`, use script `deploy-dev.sh`, `deploy-canary.sh`, `deploy-prod.sh`
