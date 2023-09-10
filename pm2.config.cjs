@@ -210,7 +210,7 @@ const deployConfigBase = {
   user: 'marco',
   repo: 'git@gitlab.com:fishprovider/main.git',
   ref: 'origin/master',
-  'post-deploy': 'git log -1 --pretty=format:"%h - %s"',
+  'post-deploy': 'git rev-parse HEAD',
 };
 
 const deploy = {
