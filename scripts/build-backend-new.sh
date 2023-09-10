@@ -8,10 +8,8 @@ fi
 
 cd ..
 
-npm run build -w packages-backend/libs
-
-npm run build -w packages-backend/redis &
-npm run build -w packages-backend/mongo &
+npm run build -w packages-backend/send-notif &
+npm run build -w packages-backend/push-notif &
+npm run build -w packages-backend/queue &
+npm run build -w packages-backend/database &
 wait
-
-npm run build -w packages-backend/cache-first

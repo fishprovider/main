@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const esbuild = require('esbuild');
 
 const watchMode = process.env.WATCH_MODE;
@@ -14,12 +15,14 @@ const packageDependencies = {
   // new
   ...require('./packages-share/core/package.json').dependencies,
   ...require('./packages-share/core-utils/package.json').dependencies,
+
   ...require('./packages-usecase/repositories/package.json').dependencies,
   ...require('./packages-usecase/services/package.json').dependencies,
-  ...require('./packages-backend/libs/package.json').dependencies,
-  ...require('./packages-backend/mongo/package.json').dependencies,
-  ...require('./packages-backend/redis/package.json').dependencies,
-  ...require('./packages-backend/cache-first/package.json').dependencies,
+
+  ...require('./packages-backend/send-notif/package.json').dependencies,
+  ...require('./packages-backend/push-notif/package.json').dependencies,
+  ...require('./packages-backend/queue/package.json').dependencies,
+  ...require('./packages-backend/database/package.json').dependencies,
 };
 
 const baseOptions = {
