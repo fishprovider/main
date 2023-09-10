@@ -14,6 +14,17 @@ const frontendApps = [
     script: 'npm',
     args: 'run start -w apps-frontend/web',
   },
+  {
+    name: 'web-secondary',
+    env: {
+      HUSKY: 0,
+      DOPPLER_PROJECT: 'web',
+      DOPPLER_CONFIG: 'prd',
+      PORT: 3100,
+    },
+    script: 'npm',
+    args: 'run start -w apps-frontend/web',
+  },
 ];
 
 //
@@ -37,6 +48,16 @@ const backendAppConfigs = [
     env: {
       ...backendAppConfigBase.env,
       PORT: 3001,
+    },
+  },
+  {
+    ...backendAppConfigBase,
+    name: 'back-secondary',
+    project: 'back',
+    cron_restart: '6 1 * * *',
+    env: {
+      ...backendAppConfigBase.env,
+      PORT: 3101,
     },
   },
   {
@@ -203,6 +224,12 @@ const deploy = {
     host: '185.255.131.171',
     ssh_options: 'Port=1503',
     path: '/home/marco/work/pm2-apps/fishprovider',
+  },
+  fishSecondary: {
+    ...deployConfigBase,
+    host: '185.255.131.171',
+    ssh_options: 'Port=1503',
+    path: '/home/marco/work/pm2-apps/fishprovider-secondary',
   },
 };
 
