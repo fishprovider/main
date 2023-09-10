@@ -245,5 +245,6 @@ module.exports = {
 // DEPLOY_ENV=fish npm run pm2-deploy
 // DEPLOY_ENV=fish npm run pm2-deploy-ci
 //
-// DEPLOY_ENV=fish npm run pm2-deploy-build apps-backend/cron
-// DEPLOY_ENV=fish npm run pm2-deploy-start cron
+// DEPLOY_ENV=fish npm run pm2-deploy-build-deps
+// DEPLOY_ENV=fish npm run pm2-deploy-build apps-backend/back
+// DEPLOY_ENV=fish npm run pm2-deploy-start back
