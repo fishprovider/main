@@ -50,7 +50,7 @@ for `build` and `start`, not for `dev`. If `dev` needs some `devDependencies`, p
 
 - Option 2: run at project level
   ```shell
-  cd workers/cron
+  cd apps-backend/back
   npm i
   npm run build
   npm start
