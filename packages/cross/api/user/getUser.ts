@@ -7,7 +7,7 @@ const getUser = async (payload: {
   userId?: string;
   email?: string;
 } = {}) => {
-  const user = await apiGet<Partial<User> | null | undefined>('/v3/user/getUser', payload);
+  const user = await apiGet<Partial<User> | undefined>('/v3/user/getUser', payload);
   const info = {
     ...storeUser.getState().info,
     ...user,

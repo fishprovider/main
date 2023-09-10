@@ -1,3 +1,4 @@
+import { log } from '@fishprovider/core-utils';
 import isEqual from 'lodash/isEqual';
 import keyBy from 'lodash/keyBy';
 import pickBy from 'lodash/pickBy';
@@ -13,9 +14,6 @@ interface DocWithId extends Record<string, any> {
 export type TransformState<State> = (state: State) => State;
 
 export type StateSet<Doc> = Record<string, Doc>;
-
-let logDebug = console.log;
-let logError = console.error;
 
 export interface Options {
   skipLog?: boolean
@@ -62,7 +60,7 @@ export const buildStoreSet = <Doc extends DocWithId>(
     state: initState,
     setState: (transform: Transform, options?: Options) => {
       const { skipLog } = options || {};
-      if (!skipLog) logDebug(`[store ${name}] setState`);
+      if (!skipLog) log.debug(`[store ${name}] setState`);
 
       set(({ state }) => ({
         state: transform(state),
@@ -70,7 +68,7 @@ export const buildStoreSet = <Doc extends DocWithId>(
     },
     mergeDocs: (docs: Partial<Doc>[], options?: MergeDocsOptions) => {
       const { replace, replaceAll, skipLog } = options || {};
-      if (!skipLog) logDebug(`[store ${name}] mergeDocs`, replace, replaceAll, docs);
+      if (!skipLog) log.debug(`[store ${name}] mergeDocs`, replace, replaceAll, docs);
 
       set(({ state }) => {
         const newDocs: State = {};
@@ -82,7 +80,7 @@ export const buildStoreSet = <Doc extends DocWithId>(
             };
             newDocs[doc._id] = newDoc as Doc;
           } else {
-            logError(`[store ${name}] mergeDocs: doc has no _id`, doc);
+            log.error(`[store ${name}] mergeDocs: doc has no _id`, doc);
           }
         });
         return {
@@ -95,7 +93,7 @@ export const buildStoreSet = <Doc extends DocWithId>(
     },
     mergeDoc: (doc: Partial<Doc>, options?: MergeDocOptions) => {
       const { replace, skipLog } = options || {};
-      if (!skipLog) logDebug(`[store ${name}] mergeDoc`, replace, doc);
+      if (!skipLog) log.debug(`[store ${name}] mergeDoc`, replace, doc);
 
       set(({ state }) => {
         if (doc._id) {
@@ -110,13 +108,13 @@ export const buildStoreSet = <Doc extends DocWithId>(
             },
           };
         }
-        logError(`[store ${name}] mergeDoc: doc has no _id`, doc);
+        log.error(`[store ${name}] mergeDoc: doc has no _id`, doc);
         return state;
       });
     },
     removeDoc: (docId: string, options?: Options) => {
       const { skipLog } = options || {};
-      if (!skipLog) logDebug(`[store ${name}] removeDoc`, docId);
+      if (!skipLog) log.debug(`[store ${name}] removeDoc`, docId);
 
       set(({ state }) => ({
         state: pickBy(state, (doc) => doc._id !== docId),
@@ -124,7 +122,7 @@ export const buildStoreSet = <Doc extends DocWithId>(
     },
     removeDocs: (docIds: string[], options?: Options) => {
       const { skipLog } = options || {};
-      if (!skipLog) logDebug(`[store ${name}] removeDocs`, docIds);
+      if (!skipLog) log.debug(`[store ${name}] removeDocs`, docIds);
 
       const objDocIds = keyBy(docIds);
       set(({ state }) => ({
@@ -160,7 +158,7 @@ export const buildStoreObj = <State extends Record<string, any>>(
     state: initState,
     setState: (transform: Transform, options?: Options) => {
       const { skipLog } = options || {};
-      if (!skipLog) logDebug(`[store ${name}] setState`);
+      if (!skipLog) log.debug(`[store ${name}] setState`);
 
       set(({ state }) => ({
         state: transform(state),
@@ -168,7 +166,7 @@ export const buildStoreObj = <State extends Record<string, any>>(
     },
     mergeState: (data: Partial<State>, options?: Options) => {
       const { skipLog } = options || {};
-      if (!skipLog) logDebug(`[store ${name}] mergeState`, data);
+      if (!skipLog) log.debug(`[store ${name}] mergeState`, data);
 
       set(({ state }) => ({
         state: {
@@ -179,7 +177,7 @@ export const buildStoreObj = <State extends Record<string, any>>(
     },
     removeKey: (key: string, options?: Options) => {
       const { skipLog } = options || {};
-      if (!skipLog) logDebug(`[store ${name}] removeKey`, key);
+      if (!skipLog) log.debug(`[store ${name}] removeKey`, key);
 
       set(({ state }) => ({
         state: pickBy(state, (doc) => doc._id !== key) as State,
@@ -202,16 +200,4 @@ export const buildStoreObj = <State extends Record<string, any>>(
   return {
     ...store.getState(), getState, useStore,
   };
-};
-
-export const initStore = async (params: {
-  logDebug?: (...args: any[]) => void,
-  logError?: (...args: any[]) => void
-}) => {
-  if (params.logDebug) {
-    logDebug = params.logDebug;
-  }
-  if (params.logError) {
-    logError = params.logError;
-  }
 };

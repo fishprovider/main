@@ -1,7 +1,6 @@
 import { initApi } from '@fishprovider/cross/dist/libs/api';
 import { initStore as initStoreOld } from '@fishprovider/cross/dist/libs/store';
-import { fishApi } from '@fishprovider/fish-api';
-import { initStore } from '@fishprovider/store';
+import { initOfflineFirst } from '@fishprovider/data-fetching';
 import moment from 'moment-timezone';
 
 import { initAnalytics } from '~libs/analytics';
@@ -20,24 +19,17 @@ const env = {
 };
 
 const initialize = () => {
+  initOfflineFirst({
+    baseURL: `${isLive ? env.backendUrl : env.demoBackendUrl}${env.api}/v3`,
+  });
+
   initApi({
     baseURL: `${isLive ? env.backendUrl : env.demoBackendUrl}${env.api}`,
     logDebug: Logger.debug,
     logError: Logger.info,
   });
 
-  fishApi.start({
-    baseURL: `${isLive ? env.backendUrl : env.demoBackendUrl}${env.api}/v3`,
-    logDebug: Logger.debug,
-    logError: Logger.info,
-  });
-
   initStoreOld({
-    logDebug: Logger.debug,
-    logError: Logger.info,
-  });
-
-  initStore({
     logDebug: Logger.debug,
     logError: Logger.info,
   });

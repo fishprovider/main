@@ -1,24 +1,17 @@
 import storeUser from '@fishprovider/cross/dist/stores/user';
-import { OfflineFirstNewsRepository } from '@fishprovider/offline-first';
-import { getNewsService } from '@fishprovider/services';
-import { StoreNewsRepository } from '@fishprovider/store';
 import _ from 'lodash';
 import moment from 'moment';
 import { useEffect } from 'react';
+
+import { getNewsController } from '~service-controllers/news/getNews.controller';
 
 const bannerIdBigNews = 'BigNews';
 const bannerIdBigNewsNear = 'BigNewsNear';
 
 function NewsWatch() {
   const getBigNews = async () => {
-    const { docs: news } = await getNewsService({
-      filter: {
-        upcoming: true,
-      },
-      options: {},
-      repositories: {
-        news: OfflineFirstNewsRepository,
-      },
+    const { docs: news } = await getNewsController({
+      upcoming: true,
     });
     if (news?.length) {
       storeUser.mergeState({
@@ -29,13 +22,7 @@ function NewsWatch() {
       });
     }
 
-    const { docs: allNews } = await getNewsService({
-      filter: {},
-      options: {},
-      repositories: {
-        news: StoreNewsRepository,
-      },
-    });
+    const { docs: allNews } = await getNewsController({});
     const hasBigNews = _.some(
       allNews,
       ({ impact, datetime }) => impact

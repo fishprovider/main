@@ -1,10 +1,9 @@
 import accountGet from '@fishprovider/cross/dist/api/accounts/get';
 import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
 import storeUser from '@fishprovider/cross/dist/stores/user';
-import { FishApiAccountRepository } from '@fishprovider/fish-api';
-import { getAccountService } from '@fishprovider/services';
 import { useEffect } from 'react';
 
+import { getAccountController } from '~service-controllers/account/getAccount.controller';
 import { toastError } from '~ui/toast';
 
 interface Props {
@@ -29,14 +28,8 @@ function ActiveProviderFetch({ providerId }: Props) {
       storeUser.mergeState({ activeProvider: undefined });
       toastError(err.message);
     });
-    getAccountService({
-      filter: {
-        accountId: providerId,
-      },
-      options: {},
-      repositories: {
-        account: FishApiAccountRepository,
-      },
+    getAccountController({
+      accountId: providerId,
     }).catch((err) => {
       Logger.error(err);
       // storeUser.mergeState({ activeProvider: undefined });

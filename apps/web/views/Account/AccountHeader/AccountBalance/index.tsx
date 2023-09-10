@@ -3,8 +3,6 @@ import { useMutate } from '@fishprovider/cross/dist/libs/query';
 import storeOrders from '@fishprovider/cross/dist/stores/orders';
 import storePrices from '@fishprovider/cross/dist/stores/prices';
 import storeUser from '@fishprovider/cross/dist/stores/user';
-import { FishApiAccountRepository } from '@fishprovider/fish-api';
-import { getAccountService } from '@fishprovider/services';
 import { ProviderType } from '@fishprovider/utils/dist/constants/account';
 import { OrderStatus } from '@fishprovider/utils/dist/constants/order';
 import { getProfit, getProfitIcon } from '@fishprovider/utils/dist/helpers/order';
@@ -12,6 +10,7 @@ import { getMajorPairs } from '@fishprovider/utils/dist/helpers/price';
 import _ from 'lodash';
 
 import EquityProgress from '~components/account/EquityProgress';
+import { getAccountController } from '~service-controllers/account/getAccount.controller';
 import Grid from '~ui/core/Grid';
 import Group from '~ui/core/Group';
 import Icon from '~ui/core/Icon';
@@ -66,14 +65,8 @@ function AccountBalance() {
     mutationFn: accountGet,
   });
   const { mutate: reloadV3, isLoading: isLoadingV3 } = useMutate({
-    mutationFn: (accountId: string) => getAccountService({
-      filter: {
-        accountId,
-      },
-      options: {},
-      repositories: {
-        account: FishApiAccountRepository,
-      },
+    mutationFn: (accountId: string) => getAccountController({
+      accountId,
     }),
   });
 

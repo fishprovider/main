@@ -1,16 +1,11 @@
 import { log } from '@fishprovider/core-utils';
 
-import { initFishApi, initStore } from '..';
+import { initFishApi } from '..';
 
-export const initOfflineFirst = async (params: {
+export const initOfflineFirst = (params: {
   baseURL?: string,
-  logDebug?: (...args: any[]) => void
-  logError?: (...args: any[]) => void
 }) => {
-  log.info('Starting OfflineFirst');
-  await Promise.all([
-    initFishApi(params),
-    initStore(params),
-  ]);
-  log.info('Started OfflineFirst');
+  log.info('Starting initOfflineFirst');
+  initFishApi(params);
+  log.info('Started initOfflineFirst');
 };

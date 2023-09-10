@@ -1,11 +1,10 @@
-import { OfflineFirstNewsRepository } from '@fishprovider/offline-first';
-import { getNewsService, watchNewsService } from '@fishprovider/services';
-import { StoreNewsRepository } from '@fishprovider/store';
 import type { News } from '@fishprovider/utils/dist/types/News.model';
 import _ from 'lodash';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 
+import { getNewsController } from '~service-controllers/news/getNews.controller';
+import { watchNewsController } from '~service-controllers/news/watchNews.controller';
 import Button from '~ui/core/Button';
 import Group from '~ui/core/Group';
 import Stack from '~ui/core/Stack';
@@ -17,26 +16,15 @@ function NewsList() {
   const [type, setType] = useState('today'); // today, this, next
   const [showAll, setShowAll] = useState(false);
 
-  const news = watchNewsService({
-    selector: (state) => (type === 'today'
-      ? _.filter(state, (item) => moment(item.datetime) >= moment()
-          && moment(item.datetime) <= moment().add(1, 'day'))
-      : _.filter(state, (item) => item.week === type)
-    ),
-    repositories: {
-      news: StoreNewsRepository,
-    },
-  });
+  const news = watchNewsController((state) => (type === 'today'
+    ? _.filter(state, (item) => moment(item.datetime) >= moment()
+      && moment(item.datetime) <= moment().add(1, 'day'))
+    : _.filter(state, (item) => item.week === type)
+  ));
 
   useEffect(() => {
-    getNewsService({
-      filter: {
-        week: type === 'next' ? 'next' : 'this',
-      },
-      options: {},
-      repositories: {
-        news: OfflineFirstNewsRepository,
-      },
+    getNewsController({
+      week: type === 'next' ? 'next' : 'this',
     });
   }, [type]);
 

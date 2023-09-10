@@ -5,9 +5,6 @@ export type ApiConfig = AxiosRequestConfig;
 
 const clientPromise = promiseCreator<Axios>();
 
-let logDebug = log.debug;
-let logError = log.error;
-
 const checkSkipLog = (url: string) => url === '/logger';
 
 const errHandler = async <T>(
@@ -21,11 +18,11 @@ const errHandler = async <T>(
   } catch (err: any) {
     const errMsg = err.response?.data || err.message || err;
     if (!checkSkipLog(url)) {
-      logDebug(err, url, payload, options);
+      log.debug(err, url, payload, options);
       if (axios.isCancel(err)) {
-        logDebug('API Cancelled', url);
+        log.debug('API Cancelled', url);
       } else {
-        logError('API Error', url, errMsg);
+        log.error('API Error', url, errMsg);
       }
     }
     throw new Error(errMsg);
@@ -55,10 +52,8 @@ export const fishApiPost = async<T>(
   return res.data;
 }, url, payload, options);
 
-export const initFishApi = async (params: {
+export const initFishApi = (params: {
   baseURL?: string,
-  logDebug?: (...args: any[]) => void
-  logError?: (...args: any[]) => void
 }) => {
   const client = axios.create({
     ...(params.baseURL && {
@@ -67,13 +62,4 @@ export const initFishApi = async (params: {
     withCredentials: true,
   });
   clientPromise.resolveExec(client);
-
-  if (params.logDebug) {
-    logDebug = params.logDebug;
-  }
-  if (params.logError) {
-    logError = params.logError;
-  }
-
-  return client;
 };

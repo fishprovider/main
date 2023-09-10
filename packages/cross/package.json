@@ -15,7 +15,6 @@
   },
   "dependencies": {
     "@fishprovider/utils": "*",
-    "@fishprovider/services": "*",
     "@tanstack/react-query": "^4.33.0",
     "@tanstack/react-query-devtools": "^4.33.0",
     "@tanstack/react-query-persist-client": "^4.33.0",
