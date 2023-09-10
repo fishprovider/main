@@ -1,5 +1,5 @@
-import { CacheFirstNewsRepository } from '@fishprovider/cache-first';
 import { News } from '@fishprovider/core';
+import { CacheFirstNewsRepository } from '@fishprovider/database';
 import { getNewsService } from '@fishprovider/services';
 import { z } from 'zod';
 

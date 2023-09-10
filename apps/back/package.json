@@ -20,8 +20,9 @@
     "ci-type-check": "tsc-files --noEmit types/global.d.ts"
   },
   "dependencies": {
-    "@fishprovider/cache-first": "*",
     "@fishprovider/coin": "*",
+    "@fishprovider/database": "*",
+    "@fishprovider/services": "*",
     "@fishprovider/old-core": "*",
     "@fishprovider/swap": "*",
     "glob": "^10.3.3",

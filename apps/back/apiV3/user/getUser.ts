@@ -1,5 +1,5 @@
 import { User } from '@fishprovider/core';
-import { MongoUserRepository } from '@fishprovider/mongo';
+import { MongoUserRepository } from '@fishprovider/database';
 import { getUserService } from '@fishprovider/services';
 import { z } from 'zod';
 
