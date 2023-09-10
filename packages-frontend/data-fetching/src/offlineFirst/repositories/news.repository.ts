@@ -1,9 +1,9 @@
+import { News } from '@fishprovider/core';
 import {
-  BaseGetOptions, GetNewsFilter, News, NewsRepository,
-} from '@fishprovider/core';
-import { FishApiNewsRepository } from '@fishprovider/fish-api';
-import { LocalNewsRepository } from '@fishprovider/local';
-import { StoreNewsRepository } from '@fishprovider/store';
+  BaseGetOptions, GetNewsFilter, NewsRepository,
+} from '@fishprovider/repositories';
+
+import { FishApiNewsRepository, LocalNewsRepository, StoreNewsRepository } from '../..';
 
 const getNews = async (
   filter: GetNewsFilter,
