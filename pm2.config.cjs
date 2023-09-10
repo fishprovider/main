@@ -12,7 +12,7 @@ const frontendApps = [
       PORT: 3000,
     },
     script: 'npm',
-    args: 'run start -w apps/web',
+    args: 'run start -w apps-frontend/web',
   },
 ];
 
@@ -21,7 +21,6 @@ const frontendApps = [
 //
 
 const backendAppConfigBase = {
-  workspace: 'workers',
   script: 'npm',
   env: {
     HUSKY: 0,
@@ -33,7 +32,6 @@ const backendAppConfigBase = {
 const backendAppConfigs = [
   {
     ...backendAppConfigBase,
-    workspace: 'apps',
     name: 'back',
     cron_restart: '5 1 * * *',
     env: {
@@ -171,10 +169,9 @@ const backendAppConfigs = [
 
 const backendApps = backendAppConfigs.map((config) => {
   const {
-    workspace,
     name,
     project = name,
-    args = `run start -w ${workspace}/${project}`,
+    args = `run start -w apps-backend/${project}`,
   } = config;
   return {
     ...config,
