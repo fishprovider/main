@@ -1,4 +1,4 @@
-import { ServiceContext, UserSession } from '@fishprovider/core';
+import { ServiceContext, UserSession } from '..';
 
 export const userSessionDefault: UserSession = {
   _id: 'testId',
