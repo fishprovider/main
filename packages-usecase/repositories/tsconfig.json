@@ -4,5 +4,5 @@
     "rootDir": "src",
     "outDir": "dist",
   },
-  "include": ["**/*.ts"],
+  "include": ["**/*.ts", "src/models/repository.util.ts"],
 }

@@ -1,10 +1,10 @@
-import {
-  AccountRoles, BaseError, RepositoryError, UserError,
-} from '@fishprovider/core';
+import { AccountRoles, BaseError, UserError } from '@fishprovider/core';
+import { RepositoryError } from '@fishprovider/repositories';
 import _ from 'lodash';
 
 import {
-  getAccountsService, RefreshUserRolesService, sanitizeUserBaseGetOptions, updateUserService, validateProjection,
+  getAccountsService, RefreshUserRolesService, sanitizeUserBaseGetOptions,
+  updateUserService, validateProjection,
 } from '../..';
 
 export const refreshUserRolesService: RefreshUserRolesService = async ({

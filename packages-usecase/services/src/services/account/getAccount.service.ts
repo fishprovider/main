@@ -1,9 +1,9 @@
-import {
-  AccountError, BaseError, RepositoryError, ServiceError,
-} from '@fishprovider/core';
+import { AccountError, BaseError } from '@fishprovider/core';
+import { RepositoryError } from '@fishprovider/repositories';
 
 import {
-  checkAccess, GetAccountService, sanitizeAccountBaseGetOptions, validateProjection,
+  checkAccess, GetAccountService, sanitizeAccountBaseGetOptions, ServiceError,
+  validateProjection,
 } from '../..';
 
 export const getAccountService: GetAccountService = async ({

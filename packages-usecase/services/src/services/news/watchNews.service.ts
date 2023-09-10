@@ -1,4 +1,5 @@
-import { BaseError, RepositoryError } from '@fishprovider/core';
+import { BaseError } from '@fishprovider/core';
+import { RepositoryError } from '@fishprovider/repositories';
 
 import { WatchNewsService } from '../..';
 

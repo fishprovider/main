@@ -1,6 +1,5 @@
-import {
-  AccountError, BaseError, RepositoryError,
-} from '@fishprovider/core';
+import { AccountError, BaseError } from '@fishprovider/core';
+import { RepositoryError } from '@fishprovider/repositories';
 
 import {
   checkAccess, GetAccountsService, sanitizeAccountBaseGetOptions, validateProjection,

@@ -1,4 +1,5 @@
 export * from './account.repository';
 export * from './news.repository';
+export * from './repository.error';
+export * from './repository.util';
 export * from './user.repository';
-export * from './utils';
