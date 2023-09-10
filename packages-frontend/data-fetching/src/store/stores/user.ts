@@ -1,7 +1,7 @@
 import { Account, User } from '@fishprovider/core';
 import { Socket } from 'socket.io-client';
 
-import { buildStoreObj } from '..';
+import { buildStoreObj } from '../store';
 
 export interface UserStore extends Record<string, any> {
   isClientLoggedIn?: boolean;

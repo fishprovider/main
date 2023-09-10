@@ -1,5 +1,5 @@
 import { initApi } from '@fishprovider/cross/dist/libs/api';
-import { initStore as initStoreOld } from '@fishprovider/cross/dist/libs/store';
+import { initStore } from '@fishprovider/cross/dist/libs/store';
 import { initOfflineFirst } from '@fishprovider/data-fetching';
 import moment from 'moment-timezone';
 
@@ -29,7 +29,7 @@ const initialize = () => {
     logError: Logger.info,
   });
 
-  initStoreOld({
+  initStore({
     logDebug: Logger.debug,
     logError: Logger.info,
   });
