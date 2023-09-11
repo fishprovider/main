@@ -44,7 +44,7 @@ const backendAppConfigs = [
   {
     ...backendAppConfigBase,
     name: 'back',
-    cron_restart: '5 1 * * *',
+    cron_restart: '0 */4 * * *',
     env: {
       ...backendAppConfigBase.env,
       PORT: 3001,
@@ -54,7 +54,7 @@ const backendAppConfigs = [
     ...backendAppConfigBase,
     name: 'back-secondary',
     project: 'back',
-    cron_restart: '6 1 * * *',
+    cron_restart: '2 */4 * * *',
     env: {
       ...backendAppConfigBase.env,
       PORT: 3101,
@@ -63,7 +63,7 @@ const backendAppConfigs = [
   {
     ...backendAppConfigBase,
     name: 'bot',
-    cron_restart: '15 0 * * *',
+    cron_restart: '4 */4 * * *',
     env: {
       ...backendAppConfigBase.env,
       PORT: 8007,
@@ -72,7 +72,7 @@ const backendAppConfigs = [
   {
     ...backendAppConfigBase,
     name: 'copy',
-    cron_restart: '20 0 * * *',
+    cron_restart: '6 */4 * * *',
     env: {
       ...backendAppConfigBase.env,
       PORT: 8006,
@@ -81,7 +81,7 @@ const backendAppConfigs = [
   {
     ...backendAppConfigBase,
     name: 'cron',
-    cron_restart: '5 0 * * *',
+    cron_restart: '8 */4 * * *',
     env: {
       ...backendAppConfigBase.env,
       PORT: 8002,
@@ -90,7 +90,7 @@ const backendAppConfigs = [
   {
     ...backendAppConfigBase,
     name: 'gate',
-    cron_restart: '0 0 * * *',
+    cron_restart: '10 */4 * * *',
     env: {
       ...backendAppConfigBase.env,
       PORT: 8001,
@@ -99,7 +99,7 @@ const backendAppConfigs = [
   {
     ...backendAppConfigBase,
     name: 'head-ctrader',
-    cron_restart: '25 0 * * *',
+    cron_restart: '12 */4 * * *',
     env: {
       ...backendAppConfigBase.env,
       PORT: 8005,
@@ -108,7 +108,7 @@ const backendAppConfigs = [
   {
     ...backendAppConfigBase,
     name: 'head-meta',
-    cron_restart: '30 0 * * *',
+    cron_restart: '14 */4 * * *',
     env: {
       ...backendAppConfigBase.env,
       PORT: 8009,
@@ -122,12 +122,12 @@ const backendAppConfigs = [
       PORT: 8000,
       DRY_RUN: true,
     },
-    cron_restart: '50 0 * * *',
+    cron_restart: '16 */4 * * *',
   },
   {
     ...backendAppConfigBase,
     name: 'pay',
-    cron_restart: '10 0 * * *',
+    cron_restart: '18 */4 * * *',
     env: {
       ...backendAppConfigBase.env,
       PORT: 8020,
@@ -136,7 +136,7 @@ const backendAppConfigs = [
   {
     ...backendAppConfigBase,
     name: 'pup',
-    cron_restart: '45 0 * * *',
+    cron_restart: '20 */4 * * *',
     env: {
       ...backendAppConfigBase.env,
       PORT: 8003,
@@ -145,7 +145,7 @@ const backendAppConfigs = [
   {
     ...backendAppConfigBase,
     name: 'spot-ctrader',
-    cron_restart: '35 0 * * *',
+    cron_restart: '22 */4 * * *',
     env: {
       ...backendAppConfigBase.env,
       PORT: 8004,
@@ -162,12 +162,12 @@ const backendAppConfigs = [
       SPOT_TASKS: 'poll',
       WATCH_PATTERN: '^(AUDCAD|AUDCHF|AUDJPY|AUDNZD|AUDUSD|CADCHF|CADJPY|CHFJPY|EURAUD|EURCAD|EURCHF|EURGBP|EURJPY|EURNZD|EURUSD|GBPAUD|GBPCAD|GBPCHF|GBPJPY|GBPNZD|GBPUSD|NZDCAD|NZDCHF|NZDJPY|NZDUSD|USDCAD|USDCHF|USDJPY|XAGUSD|XAUUSD)$',
     },
-    cron_restart: '55 0 * * *',
+    cron_restart: '24 */4 * * *',
   },
   {
     ...backendAppConfigBase,
     name: 'spot-meta',
-    cron_restart: '40 0 * * *',
+    cron_restart: '26 */4 * * *',
     env: {
       ...backendAppConfigBase.env,
       PORT: 8008,
@@ -184,7 +184,7 @@ const backendAppConfigs = [
       SPOT_TASKS: 'poll',
       WATCH_PATTERN: '^(AUDCAD|AUDCHF|AUDJPY|AUDNZD|AUDUSD|CADCHF|CADJPY|CHFJPY|EURAUD|EURCAD|EURCHF|EURGBP|EURJPY|EURNZD|EURUSD|GBPAUD|GBPCAD|GBPCHF|GBPJPY|GBPNZD|GBPUSD|NZDCAD|NZDCHF|NZDJPY|NZDUSD|USDCAD|USDCHF|USDJPY|XAGUSD|XAUUSD|BTCUSD|ETHUSD)$',
     },
-    cron_restart: '0 1 * * *',
+    cron_restart: '28 */4 * * *',
   },
 ];
 
