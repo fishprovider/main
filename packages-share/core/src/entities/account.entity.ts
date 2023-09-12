@@ -1,6 +1,7 @@
 export enum AccountType {
   icmarkets = 'icmarkets',
   exness = 'exness',
+  myfxbook = 'myfxbook',
 }
 
 export enum AccountPlatform {

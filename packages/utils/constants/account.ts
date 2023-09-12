@@ -1,6 +1,7 @@
 enum ProviderType {
   icmarkets = 'icmarkets',
   exness = 'exness',
+  myfxbook = 'myfxbook',
 }
 
 enum ProviderPlatform {

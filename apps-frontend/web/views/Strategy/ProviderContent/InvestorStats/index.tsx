@@ -15,6 +15,7 @@ import Text from '~ui/core/Text';
 import { getRiskScoreColor, getRiskScoreText } from '~utils/account';
 
 import CTraderStats from './CTraderStats';
+import MyFxBook from './MyFxBook';
 
 function InvestorStats() {
   const {
@@ -106,7 +107,10 @@ function InvestorStats() {
         <Grid.Col xs={12} sm={8}>
           <Stack align="center">
             <MonthProfit providerId={providerId} />
-            {providerPlatform === ProviderPlatform.ctrader && <CTraderStats />}
+            <Group position="center">
+              <MyFxBook />
+              {providerPlatform === ProviderPlatform.ctrader && <CTraderStats />}
+            </Group>
           </Stack>
         </Grid.Col>
       </Grid>

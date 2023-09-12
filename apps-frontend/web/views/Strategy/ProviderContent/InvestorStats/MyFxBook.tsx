@@ -1,26 +1,26 @@
 import storeUser from '@fishprovider/cross/dist/stores/user';
+import { ProviderType } from '@fishprovider/utils/dist/constants/account';
 
 import Link from '~components/base/Link';
-import { ctraderPlatforms } from '~constants/account';
 import Card from '~ui/core/Card';
 import Image from '~ui/core/Image';
 import ThemeProvider from '~ui/themes/ThemeProvider';
 
-function CTraderStats() {
-  const strategyId = storeUser.useStore((state) => state.activeProvider?.strategyId);
+function MyFxBook() {
+  const myfxbookUrl = storeUser.useStore(
+    (state) => state.activeProvider?.strategyLinks
+      ?.find((item) => item.type === ProviderType.myfxbook)?.url,
+  );
 
-  if (!strategyId) return null;
-
-  const platformId = 'icmarkets';
-  const ctraderUrl = `${ctraderPlatforms[platformId]?.copyUrl}/${strategyId}`;
+  if (!myfxbookUrl) return null;
 
   return (
-    <Link href={ctraderUrl} target="_blank">
+    <Link href={myfxbookUrl} target="_blank">
       <ThemeProvider colorScheme="light">
         <Card withBorder p="xs" radius="md" shadow="xl">
           <Image
-            src="/icons/ctrader.png"
-            alt="ctrader"
+            src="/icons/myfxbook.png"
+            alt="myfxbook"
             fit="contain"
             height={25}
           />
@@ -30,4 +30,4 @@ function CTraderStats() {
   );
 }
 
-export default CTraderStats;
+export default MyFxBook;
