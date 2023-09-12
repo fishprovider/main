@@ -9,12 +9,12 @@ import { isLastRunExpired } from '@fishprovider/utils/dist/helpers/lastRunChecks
 import type { User } from '@fishprovider/utils/dist/types/User.model';
 import _ from 'lodash';
 
-const watchingProviderTypeSymbols = {
+const watchingProviderTypeSymbols: Record<string, string[]> = {
   [ProviderType.icmarkets]: forexMajorPairs,
   [ProviderType.exness]: [...forexMajorPairs, ...cryptoSymbols],
 };
 
-const adminProviderIds = {
+const adminProviderIds: Record<string, string> = {
   [ProviderType.icmarkets]: 'earth',
   [ProviderType.exness]: 'earth2',
   roboforex: 'earth3',
@@ -69,6 +69,9 @@ const priceGetMany = async ({ data, userInfo }: {
   Logger.debug('Reload symbols', providerType, symbols);
 
   const providerId = adminProviderIds[providerType];
+  if (!providerId) {
+    return { error: ErrorType.badRequest };
+  }
   const account = await getProvider(providerId);
   if (!account?.config) {
     return { error: ErrorType.badRequest };
