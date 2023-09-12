@@ -12,8 +12,6 @@ const commonKey = 'fishprovider';
 const discordKey = 'KpHQjdhKmC';
 const whatsAppChatKey = 'Lr2M5zX4GTZEyZSES798xs';
 const zaloKey = 'autuht309';
-const lineKey = 'qeQpcnfzVs';
-const viberKey = 'AQAwbzM9MBf3jlEffyPzHXOCz9faehdoci%2BrzPWzmcgkCY10b7HGUNFzPwq5VMDU';
 
 interface CustomIconProps {
   name: string;
