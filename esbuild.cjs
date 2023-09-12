@@ -15,8 +15,8 @@ const packageDependencies = {
   // new
   ...require('./packages-share/core/package.json').dependencies,
   ...require('./packages-share/core-utils/package.json').dependencies,
+  ...require('./packages-share/repositories/package.json').dependencies,
 
-  ...require('./packages-usecase/repositories/package.json').dependencies,
   ...require('./packages-usecase/services/package.json').dependencies,
 
   ...require('./packages-backend/send-notif/package.json').dependencies,
