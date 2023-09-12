@@ -65,7 +65,7 @@ function Contacts() {
       <Title size="h2">Our Contacts</Title>
 
       <Group spacing={4}>
-        <Text span>Latest Updates via</Text>
+        <Text span>Latest Updates</Text>
         <DefaultIcon name="Telegram" url={`https://t.me/${commonKey}`} />
         <DefaultIcon name="Discord" url={`https://discord.gg/${discordKey}`} />
         <CustomIcon name="X (Twitter)" url={`https://twitter.com/${commonKey}`} icon="/icons/twitter.png" />
@@ -81,23 +81,23 @@ function Contacts() {
         <DefaultIcon name="Tumblr" url={`https://www.tumblr.com/blog/${commonKey}`} />
         <CustomIcon name="Mastodon" url={`https://mastodon.social/@${commonKey}`} icon="/icons/mastodon.svg" />
         <DefaultIcon name="Github" url="https://github.com/orgs/fishprovider/discussions/categories/announcements" />
-        <CustomIcon name="MyFxBook" url="https://www.myfxbook.com/members/FishProvider" icon="/icons/myfxbook-icon-only.png" background="black" />
-        <CustomIcon name="CTrader" url="https://ctrader.com/u/FishProvider" icon="/icons/ctrader-logo-only.png" />
       </Group>
 
       <Group spacing={4}>
-        <Text span>Chat via</Text>
+        <Text span>Chat and Email</Text>
         <DefaultIcon name="Telegram Chat" url={`https://t.me/${commonKey}chat`} />
         <DefaultIcon name="Discord" url={`https://discord.gg/${discordKey}`} />
         <DefaultIcon name="WhatsApp" url={`https://chat.whatsapp.com/${whatsAppChatKey}`} />
         <CustomIcon name="Zalo" url={`https://zalo.me/g/${zaloKey}`} icon="/icons/zalo.svg" />
         {/* <CustomIcon name="Viber" url={`https://invite.viber.com/?g2=${viberKey}`} icon="/icons/viber.png" /> */}
         {/* <CustomIcon name="Line" url={`https://line.me/R/ti/g/${lineKey}`} icon="/icons/line.svg" /> */}
+        <DefaultIcon name="admin@fishprovider.com" url="mailto:admin@fishprovider.com" />
       </Group>
 
       <Group spacing={4}>
-        <Text span>Email:</Text>
-        <DefaultIcon name="admin@fishprovider.com" url="mailto:admin@fishprovider.com" />
+        <Text span>Our Portfolio</Text>
+        <CustomIcon name="MyFxBook" url="https://www.myfxbook.com/members/FishProvider" icon="/icons/myfxbook-icon-only.png" background="black" />
+        <CustomIcon name="CTrader" url="https://ctrader.com/u/FishProvider" icon="/icons/ctrader-logo-only.png" />
       </Group>
     </Stack>
   );
