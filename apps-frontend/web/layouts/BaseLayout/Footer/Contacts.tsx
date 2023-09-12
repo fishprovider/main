@@ -72,8 +72,8 @@ function Contacts() {
         <DefaultIcon name="Facebook" url={`https://www.facebook.com/${commonKey}`} />
         <DefaultIcon name="Linkedin" url={`https://www.linkedin.com/company/${commonKey}`} />
         <DefaultIcon name="Tiktok" url={`https://www.tiktok.com/@${commonKey}`} />
-        <DefaultIcon name="Youtube" url={`https://www.youtube.com/@${commonKey}`} />
         <DefaultIcon name="Instagram" url={`https://www.instagram.com/${commonKey}`} />
+        <DefaultIcon name="Youtube" url={`https://www.youtube.com/@${commonKey}`} />
         <DefaultIcon name="Pinterest" url={`https://www.pinterest.com/${commonKey}`} />
         <DefaultIcon name="Reddit" url={`https://www.reddit.com/r/${commonKey}`} />
         <CustomIcon name="Quora" url={`https://${commonKey}.quora.com`} icon="/icons/quora.svg" />
@@ -88,12 +88,11 @@ function Contacts() {
       <Group spacing={4}>
         <Text span>Chat via</Text>
         <DefaultIcon name="Telegram Chat" url={`https://t.me/${commonKey}chat`} />
+        <DefaultIcon name="Discord" url={`https://discord.gg/${discordKey}`} />
+        <DefaultIcon name="WhatsApp" url={`https://chat.whatsapp.com/${whatsAppChatKey}`} />
         <CustomIcon name="Zalo" url={`https://zalo.me/g/${zaloKey}`} icon="/icons/zalo.svg" />
-        <DefaultIcon name="WhatsApp Chat" url={`https://chat.whatsapp.com/${whatsAppChatKey}`} />
-        <CustomIcon name="Line" url={`https://line.me/R/ti/g/${lineKey}`} icon="/icons/line.svg" />
-        <CustomIcon name="Viber" url={`https://invite.viber.com/?g2=${viberKey}`} icon="/icons/viber.png" />
-        <DefaultIcon name="Snapchat" url={`https://www.snapchat.com/add/${commonKey}`} />
-        <DefaultIcon name="Wechat ID: @fishprovider" url={`https://www.wechat.com/@${commonKey}`} />
+        {/* <CustomIcon name="Viber" url={`https://invite.viber.com/?g2=${viberKey}`} icon="/icons/viber.png" /> */}
+        {/* <CustomIcon name="Line" url={`https://line.me/R/ti/g/${lineKey}`} icon="/icons/line.svg" /> */}
       </Group>
 
       <Group spacing={4}>
