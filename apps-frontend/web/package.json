@@ -34,7 +34,7 @@
     "@fishbot/chart-utils": "^1.3.0",
     "@fishprovider/cross": "*",
     "@fishprovider/data-fetching": "*",
-    "@fishprovider/services": "*",
+    "@fishprovider/base-services": "*",
     "@giscus/react": "^2.3.0",
     "@mantine/core": "^6.0.19",
     "@mantine/dates": "^6.0.19",

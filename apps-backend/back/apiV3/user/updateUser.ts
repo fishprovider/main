@@ -1,6 +1,6 @@
+import { updateUserService } from '@fishprovider/base-services';
 import { User } from '@fishprovider/core';
 import { MongoUserRepository } from '@fishprovider/database';
-import { updateUserService } from '@fishprovider/services';
 import { z } from 'zod';
 
 import { ApiHandler } from '~types/ApiHandler.model';

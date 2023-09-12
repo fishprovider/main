@@ -22,7 +22,7 @@
   "dependencies": {
     "@fishprovider/coin": "*",
     "@fishprovider/database": "*",
-    "@fishprovider/services": "*",
+    "@fishprovider/base-services": "*",
     "@fishprovider/old-core": "*",
     "@fishprovider/swap": "*",
     "glob": "^10.3.3",
