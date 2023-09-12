@@ -19,9 +19,12 @@ interface CustomIconProps {
   name: string;
   url: string;
   icon: string;
+  background?: string;
 }
 
-function CustomIcon({ name, url, icon }: CustomIconProps) {
+function CustomIcon({
+  name, url, icon, background,
+}: CustomIconProps) {
   return (
     <Tooltip label={name}>
       <Link href={url} target="_blank">
@@ -31,6 +34,12 @@ function CustomIcon({ name, url, icon }: CustomIconProps) {
           fit="contain"
           width={30}
           height={30}
+          style={{
+            borderRadius: '100%',
+            ...background && {
+              background,
+            },
+          }}
         />
       </Link>
     </Tooltip>
@@ -72,7 +81,7 @@ function Contacts() {
         <DefaultIcon name="Tumblr" url={`https://www.tumblr.com/blog/${commonKey}`} />
         <CustomIcon name="Mastodon" url={`https://mastodon.social/@${commonKey}`} icon="/icons/mastodon.svg" />
         <DefaultIcon name="Github" url="https://github.com/orgs/fishprovider/discussions/categories/announcements" />
-        <CustomIcon name="MyFxBook" url="https://www.myfxbook.com/members/FishProvider" icon="/icons/myfxbook-icon-only.png" />
+        <CustomIcon name="MyFxBook" url="https://www.myfxbook.com/members/FishProvider" icon="/icons/myfxbook-icon-only.png" background="black" />
         <CustomIcon name="CTrader" url="https://ctrader.com/u/FishProvider" icon="/icons/ctrader-logo-only.png" />
       </Group>
 
