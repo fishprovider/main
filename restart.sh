@@ -4,6 +4,5 @@ APP=$1
 APP_TYPE=${2:-backend}
 DEPLOY_ENV=${3:-fish}
 
-DEPLOY_ENV=$DEPLOY_ENV npm run pm2-deploy-stop $APP
-DEPLOY_ENV=$DEPLOY_ENV npm run pm2-deploy-build apps-$APP_TYPE/$APP
-DEPLOY_ENV=$DEPLOY_ENV npm run pm2-deploy-start $APP
+DOPPLER_TOKEN=$(doppler configure get token --plain) pm2 deploy pm2.config.cjs $DEPLOY_ENV \
+exec "source ~/.zshrc; npm run pm2-stop-only $APP; npm run build -w apps-$APP_TYPE/$APP; npm run pm2-start-only $APP"
