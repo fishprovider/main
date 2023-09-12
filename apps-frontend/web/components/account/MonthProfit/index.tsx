@@ -20,7 +20,7 @@ import useTablet from '~ui/styles/useTablet';
 
 const defaultProfitMonths: Record<number, number[]> = {
   2022: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3.07],
-  2023: [3.16, 1.8, 3.15, 2.14, 2.1, 4.18, 2.22, 2.05, 5.09],
+  2023: [3.16, 1.8, 3.15, 2.14, 2.1, 4.18, 2.22, 2.05, 2.09],
 };
 
 const nameProfit = 'Month Profit (%)';
