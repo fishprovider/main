@@ -1,108 +1,112 @@
+/* eslint-disable max-len */
+/* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable import/no-dynamic-require */
+
+/*
+  What: This script checks if all projects have the same version of dependencies and fixes them
+  Why:
+    - This is to avoid having different versions of the same dependency in different projects
+    - By having the same versions of the same dependency, all dependencies are placed under
+      the same node_modules folder at the root folder of the monorepo
+    - In some special cases, we need to have different versions of the same dependency,
+      those dependencies will be placed under the node_modules folder of the project
+      (not at the root folder of the monorepo), e.g apps/backend/node_modules
+  How:
+    - It reads all package.json files in all workspaces and checks if the dependencies are the same
+    - If there are different versions of the same dependency, it will print out the name and version
+    - It will then update the root package.json file with the latest version of the dependencies
+    - Note that all in the root package.json file, all dependencies are devDependencies
+
+  Usage:
+    cd scripts && node check-deps.cjs
+    // or
+    npm run check-deps
+    // or
+    npm run doctor
+*/
 
 const fs = require('fs');
 const { globSync } = require('glob');
 const rootPackageJson = require('../package.json');
 
-const result = {
-  deleted: 0,
-  updated: 0,
-};
+const ORG_NAME = '@fishprovider';
 
 const packageJsonFiles = rootPackageJson.workspaces
   .map((item) => `../${item}/package.json`)
   .flatMap((item) => globSync(item));
-// console.log(packageJsonFiles);
 
-const dependenciesWorkspaces = {};
-const dependenciesVersionMismatch = [];
-packageJsonFiles.forEach((item) => {
-  const { dependencies, devDependencies } = require(item);
-  Object.entries(dependencies || {}).forEach(([name, version]) => {
-    if (dependenciesWorkspaces[name] && dependenciesWorkspaces[name] !== version) {
-      dependenciesVersionMismatch.push({ name, version });
-    } else {
-      dependenciesWorkspaces[name] = version;
-    }
-  });
-  Object.entries(devDependencies || {}).forEach(([name, version]) => {
-    if (dependenciesWorkspaces[name] && dependenciesWorkspaces[name] !== version) {
-      dependenciesVersionMismatch.push({ name, version });
-    } else {
-      dependenciesWorkspaces[name] = version;
-    }
-  });
-});
-if (dependenciesVersionMismatch.length) {
-  console.error('Dependencies version mismatch', dependenciesVersionMismatch);
-  process.exit(1);
-}
+//
+// utils
+//
 
-const dependenciesAll = packageJsonFiles.flatMap((item) => {
+const getVersionMismatchDependencies = () => {
+  const dependenciesWorkspaces = {};
+  const dependenciesVersionMismatch = [];
+
+  packageJsonFiles.forEach((item) => {
+    const { dependencies = {}, devDependencies = {} } = require(item);
+
+    [...Object.entries(dependencies), ...Object.entries(devDependencies)]
+      .forEach(([name, version]) => {
+        if (dependenciesWorkspaces[name] && dependenciesWorkspaces[name] !== version) {
+          console.warn('Version mismatch', name, dependenciesWorkspaces[name], version);
+          dependenciesVersionMismatch.push({ name, version });
+        } else {
+          dependenciesWorkspaces[name] = version;
+        }
+      });
+  });
+
+  return dependenciesVersionMismatch;
+};
+
+const getAllDependencies = () => packageJsonFiles.flatMap((item) => {
   const { dependencies, devDependencies } = require(item);
   return [
     ...Object.entries(dependencies || {})
-      .filter(([name]) => !name.startsWith('@fishprovider'))
+      .filter(([name]) => !name.startsWith(ORG_NAME))
       .map(([name, version]) => ({ name, version })),
     ...Object.entries(devDependencies || {})
-      .filter(([name]) => !name.startsWith('@fishprovider'))
+      .filter(([name]) => !name.startsWith(ORG_NAME))
       .map(([name, version]) => ({ name, version })),
   ];
 });
-// console.log(dependenciesAll);
 
-const devDependenciesOnly = [
-  '@jest/globals',
-  '@testing-library/jest-dom',
-  '@testing-library/react',
-  '@types/d3-format',
-  '@types/d3-time-format',
-  '@types/dotenv-flow',
-  '@types/jest',
-  '@types/lqip-modern',
-  '@types/node',
-  '@types/node-telegram-bot-api',
-  '@typescript-eslint/eslint-plugin',
-  '@typescript-eslint/parser',
-  'concurrently',
-  'eslint',
-  'eslint-config-airbnb',
-  'eslint-config-airbnb-typescript',
-  'eslint-config-next',
-  'eslint-plugin-simple-import-sort',
-  'husky',
-  'identity-obj-proxy',
-  'jest',
-  'jest-environment-jsdom',
-  'lint-staged',
-  'nodemon',
-  'ts-jest',
-  'ts-node',
-  'tsc-files',
-  'tsc-watch',
-];
-Object.entries(rootPackageJson.devDependencies)
-  .filter(([name]) => !devDependenciesOnly.includes(name))
-  .forEach(([name, version]) => {
-    if (!dependenciesAll.some((item) => item.name === name && item.version === version)) {
-      console.log(`Redundant package: "${name}": "${version}"`);
-      delete rootPackageJson.devDependencies[name];
-      result.deleted += 1;
+const getRootDevDependencies = () => {
+  const rootDevDependencies = {
+    ...rootPackageJson.devDependencies,
+  };
+  const allDependencies = getAllDependencies();
+
+  let updated = 0;
+
+  allDependencies.forEach(({ name, version }) => {
+    if (!rootDevDependencies[name] || rootDevDependencies[name] !== version) {
+      rootDevDependencies[name] = version;
+      updated += 1;
+      console.warn(`[${updated}] Updated package`, `"${name}": "${version}"`);
     }
   });
 
-const devDependenciesRoot = rootPackageJson.devDependencies;
-dependenciesAll.forEach(({ name, version }) => {
-  if (!devDependenciesRoot[name] || devDependenciesRoot[name] !== version) {
-    console.log(`Update package: "${name}": "${version}"`);
-    devDependenciesRoot[name] = version;
-    result.updated += 1;
-  }
-});
+  return {
+    updated,
+    rootDevDependencies,
+  };
+};
 
-console.log('Done', result);
-if (result.deleted || result.updated) {
-  rootPackageJson.devDependencies = devDependenciesRoot;
+//
+// main
+//
+
+const dependenciesVersionMismatch = getVersionMismatchDependencies();
+if (dependenciesVersionMismatch.length) {
+  console.warn('Please resolve to use the same version', dependenciesVersionMismatch);
+}
+
+const { updated, rootDevDependencies } = getRootDevDependencies();
+if (updated) {
+  console.info(`Updated ${updated} rootDevDependencies`);
+  rootPackageJson.devDependencies = rootDevDependencies;
   fs.writeFileSync('../package.json', JSON.stringify(rootPackageJson, null, 2));
   process.exit(1);
 }
