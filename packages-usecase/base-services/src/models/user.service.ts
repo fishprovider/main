@@ -1,10 +1,10 @@
 import { User } from '@fishprovider/core';
 import {
-  AccountRepository, BaseGetOptions, BaseUpdateOptions, GetUserFilter,
-  UpdateUserPayload, UserRepository,
+  AccountRepository, BaseGetManyResult, BaseGetOptions, BaseGetResult,
+  BaseUpdateOptions, GetUserFilter, UpdateUserPayload, UserRepository,
 } from '@fishprovider/repositories';
 
-import { BaseServiceGetManyResult, BaseServiceGetResult, BaseServiceParams } from '..';
+import { BaseServiceParams } from '..';
 
 export type GetUserService = (params: BaseServiceParams & {
   filter: GetUserFilter,
@@ -12,7 +12,7 @@ export type GetUserService = (params: BaseServiceParams & {
   repositories: {
     user: UserRepository
   },
-}) => Promise<BaseServiceGetResult<User>>;
+}) => Promise<BaseGetResult<User>>;
 
 export type GetUsersService = (params: BaseServiceParams & {
   filter: GetUserFilter,
@@ -20,7 +20,7 @@ export type GetUsersService = (params: BaseServiceParams & {
   repositories: {
     user: UserRepository
   },
-}) => Promise<BaseServiceGetManyResult<User>>;
+}) => Promise<BaseGetManyResult<User>>;
 
 export type UpdateUserService = (params: BaseServiceParams & {
   filter: GetUserFilter,
@@ -29,7 +29,7 @@ export type UpdateUserService = (params: BaseServiceParams & {
   repositories: {
     user: UserRepository
   },
-}) => Promise<BaseServiceGetResult<User>>;
+}) => Promise<BaseGetResult<User>>;
 
 export type RefreshUserRolesService = (params: BaseServiceParams & {
   options: BaseUpdateOptions<User>,
@@ -37,4 +37,4 @@ export type RefreshUserRolesService = (params: BaseServiceParams & {
     account: AccountRepository
     user: UserRepository
   },
-}) => Promise<BaseServiceGetResult<User>>;
+}) => Promise<BaseGetResult<User>>;

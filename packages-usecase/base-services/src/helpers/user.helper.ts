@@ -36,7 +36,7 @@ export const getRoleProvider = (
   };
 };
 
-export const sanitizeUserGetFilter = (
+export const sanitizeGetUserFilter = (
   filter: GetUserFilter,
   userSession: UserSession,
 ) => ({

@@ -1,9 +1,10 @@
 import { News } from '@fishprovider/core';
 import {
-  BaseGetOptions, BaseUpdateOptions, GetNewsFilter, NewsRepository, UpdateNewsPayload,
+  BaseGetManyResult, BaseGetOptions, BaseUpdateOptions, GetNewsFilter,
+  NewsRepository, UpdateNewsPayload,
 } from '@fishprovider/repositories';
 
-import { BaseServiceGetManyResult, BaseServiceParams } from '..';
+import { BaseServiceParams } from '..';
 
 export type GetNewsService = (params: BaseServiceParams & {
   filter: GetNewsFilter,
@@ -11,7 +12,7 @@ export type GetNewsService = (params: BaseServiceParams & {
   repositories: {
     news: NewsRepository
   },
-}) => Promise<BaseServiceGetManyResult<News>>;
+}) => Promise<BaseGetManyResult<News>>;
 
 export type SetNewsService = (params: BaseServiceParams & {
   filter: GetNewsFilter,
@@ -20,7 +21,7 @@ export type SetNewsService = (params: BaseServiceParams & {
   repositories: {
     news: NewsRepository
   },
-}) => Promise<BaseServiceGetManyResult<News>>;
+}) => Promise<BaseGetManyResult<News>>;
 
 export type WatchNewsService = <T>(params: BaseServiceParams & {
   selector: (state: Record<string, News>) => T,

@@ -17,11 +17,3 @@ export interface ServiceContext {
 export interface BaseServiceParams {
   context?: ServiceContext;
 }
-
-export interface BaseServiceGetResult<T> {
-  doc?: Partial<T>;
-}
-
-export interface BaseServiceGetManyResult<T> {
-  docs?: Partial<T>[];
-}

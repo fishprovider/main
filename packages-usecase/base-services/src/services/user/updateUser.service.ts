@@ -2,7 +2,7 @@ import { BaseError, UserError } from '@fishprovider/core';
 import { RepositoryError } from '@fishprovider/repositories';
 
 import {
-  sanitizeUserBaseGetOptions, sanitizeUserGetFilter, UpdateUserService, validateProjection,
+  sanitizeGetUserFilter, sanitizeUserBaseGetOptions, UpdateUserService, validateProjection,
 } from '../..';
 
 export const updateUserService: UpdateUserService = async ({
@@ -49,7 +49,7 @@ export const updateUserService: UpdateUserService = async ({
     };
   }
 
-  const filter = sanitizeUserGetFilter(filterRaw, userSession);
+  const filter = sanitizeGetUserFilter(filterRaw, userSession);
   const options = sanitizeUserBaseGetOptions(optionsRaw);
 
   const { doc: user } = await repositories.user.updateUser(

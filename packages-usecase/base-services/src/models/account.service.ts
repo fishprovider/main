@@ -1,10 +1,10 @@
 import { Account } from '@fishprovider/core';
 import {
-  AccountRepository, BaseGetOptions, BaseUpdateOptions, GetAccountFilter,
-  UpdateAccountPayload, UserRepository,
+  AccountRepository, BaseGetManyResult, BaseGetOptions, BaseGetResult,
+  BaseUpdateOptions, GetAccountFilter, UpdateAccountPayload, UserRepository,
 } from '@fishprovider/repositories';
 
-import { BaseServiceGetManyResult, BaseServiceGetResult, BaseServiceParams } from '..';
+import { BaseServiceParams } from '..';
 
 export type GetAccountService = (params: BaseServiceParams & {
   filter: GetAccountFilter,
@@ -12,7 +12,7 @@ export type GetAccountService = (params: BaseServiceParams & {
   repositories: {
     account: AccountRepository
   },
-}) => Promise<BaseServiceGetResult<Account>>;
+}) => Promise<BaseGetResult<Account>>;
 
 export type GetAccountsService = (params: BaseServiceParams & {
   filter: GetAccountFilter,
@@ -20,7 +20,7 @@ export type GetAccountsService = (params: BaseServiceParams & {
   repositories: {
     account: AccountRepository
   },
-}) => Promise<BaseServiceGetManyResult<Account>>;
+}) => Promise<BaseGetManyResult<Account>>;
 
 export type UpdateAccountService = (params: BaseServiceParams & {
   filter: GetAccountFilter,
@@ -29,7 +29,7 @@ export type UpdateAccountService = (params: BaseServiceParams & {
   repositories: {
     account: AccountRepository
   },
-}) => Promise<BaseServiceGetResult<Account>>;
+}) => Promise<BaseGetResult<Account>>;
 
 export type JoinAccountService = (params: BaseServiceParams & {
   filter: GetAccountFilter,
@@ -38,4 +38,4 @@ export type JoinAccountService = (params: BaseServiceParams & {
     account: AccountRepository
     user: UserRepository,
   },
-}) => Promise<BaseServiceGetResult<Account>>;
+}) => Promise<BaseGetResult<Account>>;
