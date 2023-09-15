@@ -1,6 +1,6 @@
 import { AccountRoles, User } from '@fishprovider/core';
 import {
-  BaseGetOptions, BaseUpdateOptions, GetUserFilter, RepositoryError,
+  BaseGetOptions, BaseUpdateOptions, GetUserFilter,
   UpdateUserPayload, UserRepository,
 } from '@fishprovider/repositories';
 import { Filter, ReturnDocument, UpdateFilter } from 'mongodb';
@@ -14,41 +14,39 @@ const roleFields = {
   [AccountRoles.viewer]: 'viewerProviders',
 };
 
+const buildUserFilter = (filter: GetUserFilter): Filter<User> => {
+  const { userId, email } = filter;
+  return {
+    ...(userId && { _id: userId }),
+    ...(email && { email }),
+  };
+};
+
 const getUser = async (
   filter: GetUserFilter,
   options: BaseGetOptions<User>,
 ) => {
-  const { userId, email } = filter;
-  const { projection } = options;
   const { db } = await getMongo();
-  const user = await db.collection<User>('users').findOne({
-    ...(userId && { _id: userId }),
-    ...(email && { email }),
-  }, {
-    projection,
-  });
-  return { doc: user || undefined };
+  const user = await db.collection<User>('users').findOne(
+    buildUserFilter(filter),
+    options,
+  );
+  return { doc: user ?? undefined };
 };
 
 const updateUser = async (
-  filterRaw: GetUserFilter,
+  filter: GetUserFilter,
   payload: UpdateUserPayload,
   options: BaseUpdateOptions<User>,
 ) => {
-  const { userId, email } = filterRaw;
+  const userFilter = buildUserFilter(filter);
+
   const {
     name, picture, starProvider, addRole, roles,
   } = payload;
   const {
     returnAfter, projection,
   } = options;
-
-  if (!userId && !email) throw new Error(RepositoryError.REPOSITORY_BAD_RESULT);
-
-  const filter: Filter<User> = {
-    ...(userId && { _id: userId }),
-    ...(email && { email }),
-  };
 
   const updateFilter: UpdateFilter<User> = {
     $set: {
@@ -68,13 +66,17 @@ const updateUser = async (
   const collection = db.collection<User>('users');
 
   if (returnAfter) {
-    const { value: user } = await collection.findOneAndUpdate(filter, updateFilter, {
-      returnDocument: ReturnDocument.AFTER,
-      projection,
-    });
-    return { doc: user || undefined };
+    const { value: user } = await collection.findOneAndUpdate(
+      userFilter,
+      updateFilter,
+      {
+        returnDocument: ReturnDocument.AFTER,
+        projection,
+      },
+    );
+    return { doc: user ?? undefined };
   }
-  await collection.updateOne(filter, updateFilter);
+  await collection.updateOne(userFilter, updateFilter);
   return {};
 };
 

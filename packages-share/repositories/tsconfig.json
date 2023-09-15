@@ -4,5 +4,8 @@
     "rootDir": "src",
     "outDir": "dist",
   },
-  "include": ["**/*.ts", "src/models/repository.util.ts"],
+  "include": ["**/*.ts"],
+  "references": [
+    { "path": "../../packages-share/core" }
+  ]
 }

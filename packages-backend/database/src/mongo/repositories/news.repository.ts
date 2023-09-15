@@ -1,42 +1,38 @@
 import { News } from '@fishprovider/core';
 import { GetNewsFilter, NewsRepository } from '@fishprovider/repositories';
 import moment from 'moment';
+import { Filter } from 'mongodb';
 
 import { getMongo } from '..';
 
-const getNews = async (filter: GetNewsFilter) => {
+const buildNewsFilter = (filter: GetNewsFilter): Filter<News> => {
   const { today, week, upcoming } = filter;
-  const { db } = await getMongo();
-
-  if (today) {
-    const news = await db.collection<News>('news').find({
+  return {
+    ...(today && {
       datetime: {
         $gte: new Date(),
         $lte: moment().add(24, 'hours').toDate(),
       },
-    }).toArray();
-    return { docs: news };
-  }
-
-  if (week) {
-    const news = await db.collection<News>('news').find({
+    }),
+    ...(week && {
       week,
-    }).toArray();
-    return { docs: news };
-  }
-
-  if (upcoming) {
-    const news = await db.collection<News>('news').find({
+    }),
+    ...(upcoming && {
       impact: { $in: ['high', 'medium'] },
       datetime: {
         $gte: moment().subtract(1, 'hour').toDate(),
         $lte: moment().add(1, 'hour').toDate(),
       },
-    }).toArray();
-    return { docs: news };
-  }
+    }),
+  };
+};
 
-  return {};
+const getNews = async (filter: GetNewsFilter) => {
+  const { db } = await getMongo();
+  const news = await db.collection<News>('news').find(
+    buildNewsFilter(filter),
+  ).toArray();
+  return { docs: news };
 };
 
 export const MongoNewsRepository: NewsRepository = {
