@@ -9,7 +9,12 @@ const handler: ApiHandler<Partial<Account>[]> = async (_data, userSession) => {
     filter: {
       accountViewType: AccountViewType.public,
     },
-    options: {},
+    options: {
+      projection: {
+        config: 0,
+        providerData: 0,
+      },
+    },
     repositories: { account: MongoAccountRepository },
     context: { userSession },
   });
