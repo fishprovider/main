@@ -24,7 +24,7 @@ test('getUser throws bad result', async () => {
         getUser: async () => ({ doc: badDoc }),
       },
     },
-  })).rejects.toThrow(new BaseError(RepositoryError.REPOSITORY_BAD_RESULT, 'projection', badDoc));
+  })).rejects.toThrow(new BaseError(RepositoryError.REPOSITORY_BAD_RESULT, 'projection', badDoc._id));
 });
 
 test('getUser returns a user', async () => {

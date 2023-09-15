@@ -59,7 +59,7 @@ export const updateUserService: UpdateUserService = async ({
   );
 
   if (user && !validateProjection(options.projection, user)) {
-    throw new BaseError(RepositoryError.REPOSITORY_BAD_RESULT, 'projection', user);
+    throw new BaseError(RepositoryError.REPOSITORY_BAD_RESULT, 'projection', user._id);
   }
 
   return { doc: user };

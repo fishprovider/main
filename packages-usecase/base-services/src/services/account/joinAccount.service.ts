@@ -83,7 +83,7 @@ export const joinAccountService: JoinAccountService = async ({
   });
 
   if (account && !validateProjection(options.projection, account)) {
-    throw new BaseError(RepositoryError.REPOSITORY_BAD_RESULT);
+    throw new BaseError(RepositoryError.REPOSITORY_BAD_RESULT, 'projection', account._id);
   }
 
   return { doc: account };

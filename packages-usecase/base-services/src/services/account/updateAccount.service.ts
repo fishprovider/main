@@ -33,7 +33,7 @@ export const updateAccountService: UpdateAccountService = async ({
   const { doc: account } = await repositories.account.updateAccount(filter, payload, options);
 
   if (account && !validateProjection(options.projection, account)) {
-    throw new BaseError(RepositoryError.REPOSITORY_BAD_RESULT);
+    throw new BaseError(RepositoryError.REPOSITORY_BAD_RESULT, 'projection', account._id);
   }
 
   return { doc: account };

@@ -26,7 +26,7 @@ export const getAccountService: GetAccountService = async ({
     throw new BaseError(AccountError.ACCOUNT_NOT_FOUND);
   }
   if (!validateProjection(options.projection, account)) {
-    throw new BaseError(RepositoryError.REPOSITORY_BAD_RESULT);
+    throw new BaseError(RepositoryError.REPOSITORY_BAD_RESULT, 'projection', account._id);
   }
 
   checkAccess(account, context);
