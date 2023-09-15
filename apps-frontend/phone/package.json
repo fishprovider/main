@@ -19,7 +19,7 @@
     "build-local": "npm run build-local-ios && npm run build-local-android",
     "submit-local-ios": "BUILD_FILE_NAME=`ls build-*.ipa` && npx eas-cli@latest submit --path=./${BUILD_FILE_NAME} -p ios",
     "submit-local-android": "BUILD_FILE_NAME=`ls build-*.aab` && npx eas-cli@latest submit --path=./${BUILD_FILE_NAME} -p android",
-    "submit-local": "npm run submit-local-ios && npm run submit-local-android",
+    "submit-local": "npm run submit-local-ios; npm run submit-local-android",
     "build-submit-local": "npm run build-local && npm run submit-local",
     "build-cloud": "npx eas-cli@latest build --non-interactive --no-wait --profile production -p all --auto-submit",
     "deploy-update": "npx eas-cli@latest update --auto --channel production",
