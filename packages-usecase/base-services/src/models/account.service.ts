@@ -40,10 +40,11 @@ export type JoinAccountService = (params: BaseServiceParams & {
   },
 }) => Promise<BaseGetResult<Account>>;
 
-export type ReloadAccountService = (params: BaseServiceParams & {
+export type GetBrokerAccountService = (params: BaseServiceParams & {
   filter: GetAccountFilter,
   options: BaseGetOptions<Account>,
   repositories: {
-    account: AccountRepository
+    account: AccountRepository,
+    broker: AccountRepository,
   },
 }) => Promise<BaseGetResult<Account>>;

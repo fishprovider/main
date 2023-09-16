@@ -1,4 +1,6 @@
-import { Account, AccountMember, AccountViewType } from '@fishprovider/core';
+import {
+  Account, AccountConfig, AccountMember, AccountViewType,
+} from '@fishprovider/core';
 
 import {
   BaseGetManyResult, BaseGetOptions, BaseGetResult, BaseUpdateOptions, BaseUpdateResult,
@@ -10,6 +12,7 @@ export interface GetAccountFilter {
   accountViewType?: AccountViewType,
   memberId?: string,
   email?: string,
+  config?: AccountConfig,
 }
 
 export interface UpdateAccountPayload {

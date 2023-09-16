@@ -1,4 +1,4 @@
-import { reloadAccountService } from '@fishprovider/base-services';
+import { getBrokerAccountService } from '@fishprovider/base-services';
 import { Account } from '@fishprovider/core';
 import { MongoAccountRepository } from '@fishprovider/database';
 import { z } from 'zod';
@@ -11,10 +11,13 @@ const handler: ApiHandler<Partial<Account>> = async (data, userSession) => {
   }).strict()
     .parse(data);
 
-  const { doc } = await reloadAccountService({
+  const { doc } = await getBrokerAccountService({
     filter,
     options: {},
-    repositories: { account: MongoAccountRepository },
+    repositories: {
+      account: MongoAccountRepository,
+      broker: MongoAccountRepository, // TODO: use broker repository
+    },
     context: { userSession },
   });
   return { result: doc };

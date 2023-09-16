@@ -2,10 +2,10 @@ import { AccountError, AccountFull, BaseError } from '@fishprovider/core';
 import { RepositoryError } from '@fishprovider/repositories';
 
 import {
-  checkAccess, ReloadAccountService, ServiceError, validateProjection,
+  checkAccess, GetBrokerAccountService, ServiceError, validateProjection,
 } from '../..';
 
-export const reloadAccountService: ReloadAccountService = async ({
+export const getBrokerAccountService: GetBrokerAccountService = async ({
   filter, options, repositories, context,
 }) => {
   //
@@ -14,6 +14,7 @@ export const reloadAccountService: ReloadAccountService = async ({
   const { accountId } = filter;
   if (!accountId) throw new BaseError(ServiceError.SERVICE_BAD_REQUEST);
   if (!repositories.account.getAccount) throw new BaseError(RepositoryError.REPOSITORY_NOT_IMPLEMENT);
+  if (!repositories.broker.getAccount) throw new BaseError(RepositoryError.REPOSITORY_NOT_IMPLEMENT);
 
   //
   // main
@@ -29,10 +30,17 @@ export const reloadAccountService: ReloadAccountService = async ({
   checkAccess(account, context);
 
   const { config } = account as AccountFull;
-  console.log('TODO: call broker', config);
+  const { doc: brokerAccount } = await repositories.account.getAccount({
+    ...filter,
+    config,
+  }, options);
+  if (!account) {
+    throw new BaseError(AccountError.ACCOUNT_NOT_FOUND);
+  }
 
   const accountPublic: Partial<AccountFull> = {
     ...account,
+    ...brokerAccount,
   };
   delete accountPublic.config; // NEVER leak config to user
 
