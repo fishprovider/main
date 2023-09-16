@@ -8,11 +8,24 @@ import { Filter, ReturnDocument, UpdateFilter } from 'mongodb';
 import { getMongo } from '..';
 
 const buildAccountFilter = (filter: GetAccountFilter): Filter<Account> => {
-  const { accountId, memberId, accountViewType } = filter;
+  const {
+    accountId, accountViewType, memberId, email,
+  } = filter;
+
+  const orFiler: Filter<Account>['$or'] = [
+    ...(memberId ? [
+      { userId: memberId }, // owner
+      { 'members.userId': memberId }, // member
+    ] : []),
+    ...(email ? [
+      { 'memberInvites.email': email }, // memberInvite
+    ] : []),
+  ];
+
   return {
     ...(accountId && { _id: accountId }),
-    ...(memberId && { 'members.userId': memberId }),
     ...(accountViewType && { providerViewType: accountViewType }),
+    ...(orFiler.length && { $or: orFiler }),
     deleted: { $ne: true },
   };
 };

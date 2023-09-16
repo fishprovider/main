@@ -191,7 +191,7 @@ export interface AccountStats extends Record<string, any> {
   profitMonths: Record<number, number[]>;
 }
 
-export interface AccountPublic {
+export interface Account {
   _id: string;
   name: string;
 
@@ -274,6 +274,8 @@ export interface AccountPublic {
   deletedAt?: Date;
 }
 
-export interface Account extends AccountPublic {
-  config: AccountConfig; // private
+export interface AccountPrivate {
+  config: AccountConfig;
 }
+
+export type AccountFull = Account & AccountPrivate;

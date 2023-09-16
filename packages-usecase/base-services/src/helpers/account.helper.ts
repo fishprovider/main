@@ -1,5 +1,5 @@
 import {
-  Account, AccountError, AccountViewType, BaseError,
+  Account, AccountError, AccountFull, AccountViewType, BaseError,
 } from '@fishprovider/core';
 import { BaseGetOptions } from '@fishprovider/repositories';
 
@@ -8,7 +8,7 @@ import {
 } from '..';
 
 export const sanitizeAccountBaseGetOptions = (
-  options: BaseGetOptions<Account>,
+  options: BaseGetOptions<AccountFull>,
 ) => sanitizeBaseGetOptions(
   options,
   {

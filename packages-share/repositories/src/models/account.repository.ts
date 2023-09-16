@@ -7,8 +7,9 @@ import {
 export interface GetAccountFilter {
   accountId?: string,
   accountIds?: string[],
-  memberId?: string,
   accountViewType?: AccountViewType,
+  memberId?: string,
+  email?: string,
 }
 
 export interface UpdateAccountPayload {
