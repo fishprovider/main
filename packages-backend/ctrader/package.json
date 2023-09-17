@@ -1,0 +1,27 @@
+{
+  "name": "@fishprovider/ctrader-new",
+  "version": "7.0.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "lint": "eslint --cache --fix .",
+    "type-check": "tsc --noEmit",
+    "test": "NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules npx jest",
+    "clean": "rm -rf dist && mkdir dist",
+    "build": "tsc -p tsconfig.build.json",
+    "ci-lint": "eslint --cache --fix",
+    "ci-type-check": "tsc-files --noEmit"
+  },
+  "dependencies": {
+    "@fishprovider/core-utils": "*",
+    "app-root-path": "^3.1.0",
+    "protobufjs": "^5.0.3"
+  },
+  "devDependencies": {
+    "@types/protobufjs": "^5.0.31"
+  }
+}
