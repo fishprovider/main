@@ -22,6 +22,11 @@ const menuItems = [
     href: Routes.strategies,
   },
   {
+    key: 'reports',
+    label: 'Reports',
+    href: Routes.reports,
+  },
+  {
     key: 'faq',
     label: 'FAQs',
     href: Routes.faq,

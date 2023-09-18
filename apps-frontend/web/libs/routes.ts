@@ -4,6 +4,7 @@ const Routes = {
   plans: '/plans',
   strategies: '/strategies',
   // strategy: '/strategies/:providerId',
+  reports: '/reports',
   faq: '/faq',
   blog: '/blog',
   news: '/news',
