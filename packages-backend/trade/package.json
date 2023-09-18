@@ -1,5 +1,5 @@
 {
-  "name": "@fishprovider/ctrader-new",
+  "name": "@fishprovider/trade",
   "version": "7.0.0",
   "type": "module",
   "main": "dist/index.js",
@@ -17,11 +17,6 @@
     "ci-type-check": "tsc-files --noEmit"
   },
   "dependencies": {
-    "@fishprovider/core-utils": "*",
-    "app-root-path": "^3.1.0",
-    "protobufjs": "^5.0.3"
-  },
-  "devDependencies": {
-    "@types/protobufjs": "^5.0.31"
+    "@fishprovider/ctrader-api": "*"
   }
 }
