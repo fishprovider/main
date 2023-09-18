@@ -1,5 +1,5 @@
 {
-  "name": "@fishprovider/trade",
+  "name": "@fishprovider/metatrader-api",
   "version": "7.0.0",
   "type": "module",
   "main": "dist/index.js",
@@ -10,13 +10,13 @@
   "scripts": {
     "lint": "eslint --cache --fix .",
     "type-check": "tsc --noEmit",
-    "test": "echo trade",
+    "test": "echo metatrader-api",
     "clean": "rm -rf dist && mkdir dist",
     "build": "tsc -p tsconfig.build.json",
     "ci-lint": "eslint --cache --fix",
     "ci-type-check": "tsc-files --noEmit"
   },
   "dependencies": {
-    "@fishprovider/ctrader-api": "*"
+    "@fishprovider/core-utils": "*"
   }
 }
