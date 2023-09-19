@@ -38,7 +38,8 @@ export interface UserRepository {
 
   getUsers?: (
     filter: {
-      // TODO
+      pushNotifType?: string
+      pushNotifTopic?: string
     },
     options?: BaseGetOptions<User>,
   ) => Promise<BaseGetManyResult<User>>;

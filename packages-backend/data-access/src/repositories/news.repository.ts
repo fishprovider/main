@@ -28,6 +28,6 @@ const getNews = async (
   return { docs };
 };
 
-export const CacheFirstNewsRepository: NewsRepository = {
+export const DataAccessNewsRepository: NewsRepository = {
   getNews,
 };

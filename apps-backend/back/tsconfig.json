@@ -10,7 +10,8 @@
   },
   "include": ["**/*.ts"],
   "references": [
-    { "path": "../../packages-backend/data-access" },
     { "path": "../../packages-usecase/base-services" },
+    { "path": "../../packages-backend/data-access" },
+    { "path": "../../packages-backend/trade" },
   ]
 }

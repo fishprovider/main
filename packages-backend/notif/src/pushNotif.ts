@@ -3,10 +3,11 @@ import { pushFirebase } from '@fishprovider/firebase';
 
 export const pushNotif = async (
   notification: { title: string, body: string },
-  topic = 'allDevices',
+  topic: string = 'allDevices',
+  pushTokens: string[] = [],
 ) => {
   await Promise.all([
     pushFirebase(notification, topic),
-    pushExpo(notification, topic),
+    pushExpo(notification, pushTokens),
   ]);
 };

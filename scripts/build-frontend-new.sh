@@ -8,5 +8,5 @@ fi
 
 cd ..
 
-npm run build -w packages-frontend/data-fetching
+npm run build -w packages-frontend/data-fetch
 # npm run build -w packages-frontend/subscription

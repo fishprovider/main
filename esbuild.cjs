@@ -19,10 +19,22 @@ const packageDependencies = {
 
   ...require('./packages-usecase/base-services/package.json').dependencies,
 
-  ...require('./packages-backend/send-notif/package.json').dependencies,
-  ...require('./packages-backend/push-notif/package.json').dependencies,
   ...require('./packages-backend/queue/package.json').dependencies,
-  ...require('./packages-backend/database/package.json').dependencies,
+
+  ...require('./packages-backend/slack/package.json').dependencies,
+  ...require('./packages-backend/discord/package.json').dependencies,
+  ...require('./packages-backend/expo/package.json').dependencies,
+  ...require('./packages-backend/notif/package.json').dependencies,
+
+  ...require('./packages-backend/firebase/package.json').dependencies,
+  ...require('./packages-backend/mongo/package.json').dependencies,
+  ...require('./packages-backend/redis/package.json').dependencies,
+  ...require('./packages-backend/data-access/package.json').dependencies,
+
+  ...require('./packages-backend/ctrader-api/package.json').dependencies,
+  ...require('./packages-backend/metatrader-api/package.json').dependencies,
+  ...require('./packages-backend/meta-api/package.json').dependencies,
+  ...require('./packages-backend/trade/package.json').dependencies,
 };
 
 const baseOptions = {

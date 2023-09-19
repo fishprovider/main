@@ -47,7 +47,8 @@ export type RefreshUserRolesService = (params: BaseUpdateServiceParams<User> & {
 
 export type GetUsersService = (params: BaseGetServiceParams<User> & {
   filter: {
-    // TODO
+    pushNotifType?: string
+    pushNotifTopic?: string
   },
   repositories: {
     user: UserRepository

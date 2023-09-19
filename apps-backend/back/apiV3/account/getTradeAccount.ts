@@ -1,6 +1,7 @@
-import { getBrokerAccountService } from '@fishprovider/base-services';
+import { getTradeAccountService } from '@fishprovider/base-services';
 import { Account } from '@fishprovider/core';
-import { MongoAccountRepository } from '@fishprovider/mongo';
+import { DataAccessAccountRepository } from '@fishprovider/data-access';
+import { TradeAccountRepository } from '@fishprovider/trade';
 import { z } from 'zod';
 
 import { ApiHandler } from '~types/ApiHandler.model';
@@ -11,12 +12,12 @@ const handler: ApiHandler<Partial<Account>> = async (data, userSession) => {
   }).strict()
     .parse(data);
 
-  const { doc } = await getBrokerAccountService({
+  const { doc } = await getTradeAccountService({
     filter,
     options: {},
     repositories: {
-      account: MongoAccountRepository, // TODO: use cacheFirst repo
-      broker: MongoAccountRepository, // TODO: use broker repo
+      account: DataAccessAccountRepository,
+      trade: TradeAccountRepository,
     },
     context: { userSession },
   });

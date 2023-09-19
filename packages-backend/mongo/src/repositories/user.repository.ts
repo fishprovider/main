@@ -16,11 +16,23 @@ const roleFields = {
 const buildUserFilter = (filter: {
   userId?: string
   email?: string,
+  pushNotifType?: string
+  pushNotifTopic?: string
 }): Filter<User> => {
-  const { userId, email } = filter;
+  const {
+    userId, email, pushNotifType, pushNotifTopic,
+  } = filter;
   return {
     ...(userId && { _id: userId }),
     ...(email && { email }),
+    ...(pushNotifType && {
+      pushNotif: {
+        $elemMatch: {
+          type: pushNotifType,
+          topic: pushNotifTopic || 'allDevices',
+        },
+      },
+    }),
   };
 };
 
@@ -100,7 +112,23 @@ const updateUser = async (
   return {};
 };
 
+const getUsers = async (
+  filter: {
+    pushNotifType?: string
+    pushNotifTopic?: string
+  },
+  options?: BaseGetOptions<User>,
+) => {
+  const { db } = await getMongo();
+  const users = await db.collection<User>('users').find(
+    buildUserFilter(filter),
+    options,
+  ).toArray();
+  return { docs: users };
+};
+
 export const MongoUserRepository: UserRepository = {
   getUser,
   updateUser,
+  getUsers,
 };
