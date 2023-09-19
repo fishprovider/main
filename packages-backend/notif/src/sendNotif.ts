@@ -1,4 +1,5 @@
-import { sendDiscord, sendSlack } from '.';
+import { sendDiscord } from '@fishprovider/discord';
+import { sendSlack } from '@fishprovider/slack';
 
 const getDefaultChannel = () => {
   if (process.env.NODE_ENV === 'staging') return `${process.env.TYPE_PRE}-staging`;
