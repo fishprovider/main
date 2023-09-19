@@ -15,8 +15,8 @@ const handler: ApiHandler<Partial<Account>> = async (data, userSession) => {
     filter,
     options: {},
     repositories: {
-      account: MongoAccountRepository,
-      broker: MongoAccountRepository, // TODO: use broker repository
+      account: MongoAccountRepository, // TODO: use cacheFirst repo
+      broker: MongoAccountRepository, // TODO: use broker repo
     },
     context: { userSession },
   });

@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@fishprovider/core-utils": "*",
+    "@fishprovider/repositories": "*",
     "app-root-path": "^3.1.0",
     "protobufjs": "^5.0.3"
   },

@@ -30,7 +30,7 @@ export const getBrokerAccountService: GetBrokerAccountService = async ({
   checkAccess(account, context);
 
   const { config } = account as AccountFull;
-  const { doc: brokerAccount } = await repositories.account.getAccount({
+  const { doc: brokerAccount } = await repositories.broker.getAccount({
     ...filter,
     config,
   }, options);
@@ -43,6 +43,9 @@ export const getBrokerAccountService: GetBrokerAccountService = async ({
     ...brokerAccount,
   };
   delete accountPublic.config; // NEVER leak config to user
+
+  // TODO: const assetInfo = await getAssetInfo();
+  // TODO: updateCache(accountInfo); // non-blocking
 
   return { doc: accountPublic };
 };

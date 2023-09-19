@@ -4,26 +4,26 @@ import {
   BaseGetManyResult, BaseGetOptions, BaseUpdateOptions,
 } from '..';
 
-export interface GetNewsFilter {
-  today?: boolean,
-  week?: string,
-  upcoming?: boolean,
-}
-
-export interface UpdateNewsPayload {
-  news?: Partial<News>[],
-}
-
 export interface NewsRepository {
   getNews?: (
-    filter: GetNewsFilter,
-    options: BaseGetOptions<News>,
+    filter: {
+      today?: boolean,
+      week?: string,
+      upcoming?: boolean,
+    },
+    options?: BaseGetOptions<News>,
   ) => Promise<BaseGetManyResult<News>>;
 
-  setNews?: (
-    filter: GetNewsFilter,
-    payload: UpdateNewsPayload,
-    options: BaseUpdateOptions<News>,
+  updateNews?: (
+    filter: {
+      today?: boolean,
+      week?: string,
+      upcoming?: boolean,
+    },
+    payload: {
+      news?: Partial<News>[],
+    },
+    options?: BaseUpdateOptions<News>,
   ) => Promise<BaseGetManyResult<News>>;
 
   watchNews?: <T>(
