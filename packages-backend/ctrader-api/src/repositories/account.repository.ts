@@ -1,23 +1,17 @@
-import { Account, BaseError } from '@fishprovider/core';
+import { AccountConfig, BaseError } from '@fishprovider/core';
 import {
-  AccountRepository, GetAccountFilter, RepositoryError,
+  AccountRepository, RepositoryError,
 } from '@fishprovider/repositories';
 
 import {
   connectAndRun, CTraderConfig, getAccountInformation,
 } from '..';
 
-const transform = (res: Awaited<ReturnType<typeof getAccountInformation>>): Partial<Account> => ({
-  providerPlatformAccountId: res.traderLogin || res.accountId,
-  leverage: res.leverage || 0,
-  balance: res.balance,
-  assetId: res.assetId,
-  providerData: res,
-  updatedAt: new Date(),
-});
-
 const getAccount = async (
-  filter: GetAccountFilter,
+  filter: {
+    accountId: string,
+    config?: AccountConfig,
+  },
 ) => {
   const { config: rawConfig, accountId } = filter;
   if (!rawConfig) {
@@ -40,7 +34,16 @@ const getAccount = async (
     handler: (connection) => getAccountInformation(connection, accountId),
   });
 
-  return { doc: transform(account) };
+  return {
+    doc: {
+      providerPlatformAccountId: account.traderLogin || account.accountId,
+      leverage: account.leverage || 0,
+      balance: account.balance,
+      assetId: account.assetId,
+      providerData: account,
+      updatedAt: new Date(),
+    },
+  };
 };
 
 export const CTraderAccountRepository: AccountRepository = {
