@@ -14,7 +14,7 @@ export const startFirebase = () => {
   log.info('Starting Firebase');
   const app = admin.initializeApp({
     credential: admin.credential.cert({ projectId, privateKey, clientEmail }),
-  }, 'database');
+  }, 'fishprovider');
   app.firestore().settings({
     ignoreUndefinedProperties: true,
   });
@@ -36,4 +36,34 @@ export const getFirebase = async () => {
     auth: app.auth(),
     db: app.firestore(),
   };
+};
+
+export const subscribeFirebase = async (
+  token: string,
+  topic: string,
+) => {
+  const app = await appPromise;
+  app.messaging().subscribeToTopic(token, topic);
+};
+
+export const unsubscribeFirebase = async (
+  token: string,
+  topic: string,
+) => {
+  const app = await appPromise;
+  app.messaging().unsubscribeFromTopic(token, topic);
+};
+
+export const pushFirebase = async (
+  notification: { title: string, body: string },
+  topic: string,
+) => {
+  const app = await appPromise;
+  const message = {
+    notification,
+    topic,
+  };
+  await app.messaging().send(message).catch((error) => {
+    log.debug('Failed to pushNotif Firebase', error);
+  });
 };
