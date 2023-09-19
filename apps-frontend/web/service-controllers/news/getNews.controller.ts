@@ -1,5 +1,5 @@
 import { getNewsService } from '@fishprovider/base-services';
-import { OfflineFirstNewsRepository } from '@fishprovider/data-fetching';
+import { OfflineFirstNewsRepository } from '@fishprovider/data-fetch';
 
 export const getNewsController = (filter: {
   week?: string,

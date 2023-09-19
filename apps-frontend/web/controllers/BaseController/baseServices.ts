@@ -1,6 +1,6 @@
 import { initApi } from '@fishprovider/cross/dist/libs/api';
 import { initStore } from '@fishprovider/cross/dist/libs/store';
-import { initOfflineFirst } from '@fishprovider/data-fetching';
+import { initOfflineFirst } from '@fishprovider/data-fetch';
 import moment from 'moment-timezone';
 
 import { initAnalytics } from '~libs/analytics';
