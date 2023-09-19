@@ -1,23 +1,30 @@
 import { News } from '@fishprovider/core';
 import {
-  BaseGetManyResult, BaseGetOptions, BaseUpdateOptions, GetNewsFilter,
-  NewsRepository, UpdateNewsPayload,
+  BaseGetManyResult, NewsRepository,
 } from '@fishprovider/repositories';
 
-import { BaseServiceParams } from '..';
+import { BaseGetServiceParams, BaseServiceParams, BaseUpdateServiceParams } from '..';
 
-export type GetNewsService = (params: BaseServiceParams & {
-  filter: GetNewsFilter,
-  options: BaseGetOptions<News>,
+export type GetNewsService = (params: BaseGetServiceParams<News> & {
+  filter: {
+    today?: boolean,
+    week?: string,
+    upcoming?: boolean,
+  },
   repositories: {
     news: NewsRepository
   },
 }) => Promise<BaseGetManyResult<News>>;
 
-export type SetNewsService = (params: BaseServiceParams & {
-  filter: GetNewsFilter,
-  payload: UpdateNewsPayload,
-  options: BaseUpdateOptions<News>,
+export type SetNewsService = (params: BaseUpdateServiceParams<News> & {
+  filter: {
+    today?: boolean,
+    week?: string,
+    upcoming?: boolean,
+  },
+  payload: {
+    news?: Partial<News>[],
+  },
   repositories: {
     news: NewsRepository
   },

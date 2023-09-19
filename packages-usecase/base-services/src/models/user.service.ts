@@ -1,40 +1,54 @@
-import { User } from '@fishprovider/core';
+import { AccountRoles, User, UserRoles } from '@fishprovider/core';
 import {
-  AccountRepository, BaseGetManyResult, BaseGetOptions, BaseGetResult,
-  BaseUpdateOptions, GetUserFilter, UpdateUserPayload, UserRepository,
+  AccountRepository, BaseGetResult, UserRepository,
 } from '@fishprovider/repositories';
 
-import { BaseServiceParams } from '..';
+import { BaseGetServiceParams, BaseUpdateServiceParams } from '..';
 
-export type GetUserService = (params: BaseServiceParams & {
-  filter: GetUserFilter,
-  options: BaseGetOptions<User>,
+export type GetUserService = (params: BaseGetServiceParams<User> & {
+  filter: {
+    userId?: string
+    email?: string,
+  },
   repositories: {
     user: UserRepository
   },
 }) => Promise<BaseGetResult<User>>;
 
-export type GetUsersService = (params: BaseServiceParams & {
-  filter: GetUserFilter,
-  options: BaseGetOptions<User>,
-  repositories: {
-    user: UserRepository
+export type UpdateUserService = (params: BaseUpdateServiceParams<User> & {
+  filter: {
+    userId?: string
+    email?: string,
   },
-}) => Promise<BaseGetManyResult<User>>;
-
-export type UpdateUserService = (params: BaseServiceParams & {
-  filter: GetUserFilter,
-  payload: UpdateUserPayload,
-  options: BaseUpdateOptions<User>,
+  payload: {
+    name?: string
+    picture?: string
+    roles?: UserRoles
+    starProvider?: {
+      accountId: string
+      enabled: boolean
+    }
+    addRole?: {
+      accountId: string
+      role: AccountRoles
+    },
+  },
   repositories: {
     user: UserRepository
   },
 }) => Promise<BaseGetResult<User>>;
 
-export type RefreshUserRolesService = (params: BaseServiceParams & {
-  options: BaseUpdateOptions<User>,
+export type RefreshUserRolesService = (params: BaseUpdateServiceParams<User> & {
   repositories: {
     account: AccountRepository
     user: UserRepository
   },
 }) => Promise<BaseGetResult<User>>;
+
+// export type GetUsersService = (params: BaseServiceParams & {
+//   filter: GetUserFilter,
+//   options: BaseGetOptions<User>,
+//   repositories: {
+//     user: UserRepository
+//   },
+// }) => Promise<BaseGetManyResult<User>>;
