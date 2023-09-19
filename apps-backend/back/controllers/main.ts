@@ -1,10 +1,10 @@
-import { startCacheFirst, stopCacheFirst } from '@fishprovider/database';
+import { startDataAccess, stopDataAccess } from '@fishprovider/data-access';
 import { destroyAsync, start as startCore } from '@fishprovider/old-core/dist/controllers/main';
 
 import * as adapter from '~controllers/adapter';
 
 const start = () => Promise.all([
-  startCacheFirst(), // new
+  startDataAccess(), // new
   (async () => {
     await startCore(adapter);
     await adapter.start();
@@ -12,7 +12,7 @@ const start = () => Promise.all([
 ]);
 
 const destroy = () => Promise.all([
-  stopCacheFirst(), // new
+  stopDataAccess(), // new
   destroyAsync(adapter),
 ]);
 

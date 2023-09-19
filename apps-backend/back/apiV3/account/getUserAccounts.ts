@@ -1,6 +1,6 @@
 import { getAccountsService } from '@fishprovider/base-services';
 import { Account } from '@fishprovider/core';
-import { MongoAccountRepository } from '@fishprovider/database';
+import { MongoAccountRepository } from '@fishprovider/mongo';
 
 import { ApiHandler } from '~types/ApiHandler.model';
 

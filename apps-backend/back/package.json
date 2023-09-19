@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@fishprovider/coin": "*",
-    "@fishprovider/database": "*",
+    "@fishprovider/data-access": "*",
     "@fishprovider/base-services": "*",
     "@fishprovider/old-core": "*",
     "@fishprovider/swap": "*",
