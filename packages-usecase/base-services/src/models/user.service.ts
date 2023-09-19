@@ -1,6 +1,6 @@
 import { AccountRoles, User, UserRoles } from '@fishprovider/core';
 import {
-  AccountRepository, BaseGetResult, UserRepository,
+  AccountRepository, BaseGetManyResult, BaseGetResult, UserRepository,
 } from '@fishprovider/repositories';
 
 import { BaseGetServiceParams, BaseUpdateServiceParams } from '..';
@@ -45,10 +45,11 @@ export type RefreshUserRolesService = (params: BaseUpdateServiceParams<User> & {
   },
 }) => Promise<BaseGetResult<User>>;
 
-// export type GetUsersService = (params: BaseServiceParams & {
-//   filter: GetUserFilter,
-//   options: BaseGetOptions<User>,
-//   repositories: {
-//     user: UserRepository
-//   },
-// }) => Promise<BaseGetManyResult<User>>;
+export type GetUsersService = (params: BaseGetServiceParams<User> & {
+  filter: {
+    // TODO
+  },
+  repositories: {
+    user: UserRepository
+  },
+}) => Promise<BaseGetManyResult<User>>;

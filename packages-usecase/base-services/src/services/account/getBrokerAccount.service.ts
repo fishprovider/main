@@ -22,7 +22,7 @@ export const getBrokerAccountService: GetBrokerAccountService = async ({
     throw new BaseError(AccountError.ACCOUNT_NOT_FOUND);
   }
   if (!validateProjection(options?.projection, account)) {
-    throw new BaseError(RepositoryError.REPOSITORY_BAD_RESULT, 'projection', account._id);
+    throw new BaseError(RepositoryError.REPOSITORY_INVALID_PROJECTION);
   }
   checkAccess(account, context);
 
@@ -32,7 +32,7 @@ export const getBrokerAccountService: GetBrokerAccountService = async ({
     config,
   }, options);
   if (!brokerAccount) {
-    throw new BaseError(AccountError.ACCOUNT_NOT_FOUND, 'brokerAccount');
+    throw new BaseError(AccountError.ACCOUNT_NOT_FOUND);
   }
 
   const accountPublic: Partial<AccountFull> = {

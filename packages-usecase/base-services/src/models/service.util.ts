@@ -15,14 +15,12 @@ export interface ServiceContext {
   userSession?: UserSession;
 }
 
-export interface BaseServiceParams {
+export interface BaseGetServiceParams<T> {
   context?: ServiceContext;
-}
-
-export interface BaseGetServiceParams<T> extends BaseServiceParams {
   options?: BaseGetOptions<T>,
 }
 
-export interface BaseUpdateServiceParams<T> extends BaseServiceParams {
+export interface BaseUpdateServiceParams<T> {
+  context?: ServiceContext;
   options?: BaseUpdateOptions<T>,
 }

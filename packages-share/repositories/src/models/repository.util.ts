@@ -14,12 +14,11 @@ export interface BaseGetResult<T> {
   doc?: Partial<T>;
 }
 
-export interface BaseGetManyResult<T> {
-  docs?: Partial<T>[];
-}
-
-export interface BaseUpdateResult<T> {
+export interface BaseUpdateResult<T> extends BaseGetResult<T> {
   matchedCount?: number;
   modifiedCount?: number;
-  doc?: Partial<T>;
+}
+
+export interface BaseGetManyResult<T> {
+  docs?: Partial<T>[];
 }

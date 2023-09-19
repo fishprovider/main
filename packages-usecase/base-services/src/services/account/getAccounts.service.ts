@@ -25,7 +25,7 @@ export const getAccountsService: GetAccountsService = async ({
 
   accounts.forEach((account) => {
     if (!validateProjection(options?.projection, account)) {
-      throw new BaseError(RepositoryError.REPOSITORY_BAD_RESULT, 'projection', account._id);
+      throw new BaseError(RepositoryError.REPOSITORY_INVALID_PROJECTION);
     }
     checkAccess(account, context);
   });

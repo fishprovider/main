@@ -59,7 +59,7 @@ export const updateUserService: UpdateUserService = async ({
   );
 
   if (!validateProjection(options?.projection, user)) {
-    throw new BaseError(RepositoryError.REPOSITORY_BAD_RESULT, 'projection', userSession._id);
+    throw new BaseError(RepositoryError.REPOSITORY_INVALID_PROJECTION);
   }
 
   return { doc: user };

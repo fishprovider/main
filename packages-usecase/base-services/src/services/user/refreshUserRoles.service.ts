@@ -115,7 +115,7 @@ export const refreshUserRolesService: RefreshUserRolesService = async ({
   });
 
   if (!validateProjection(options?.projection, user)) {
-    throw new BaseError(RepositoryError.REPOSITORY_BAD_RESULT, 'projection', userId);
+    throw new BaseError(RepositoryError.REPOSITORY_INVALID_PROJECTION);
   }
 
   return { doc: user };

@@ -3,7 +3,7 @@ import {
 } from '@fishprovider/core';
 
 import {
-  BaseGetOptions, BaseGetResult, BaseUpdateOptions, BaseUpdateResult,
+  BaseGetManyResult, BaseGetOptions, BaseGetResult, BaseUpdateOptions, BaseUpdateResult,
 } from '..';
 
 export interface UserRepository {
@@ -36,8 +36,10 @@ export interface UserRepository {
     options?: BaseUpdateOptions<User>,
   ) => Promise<BaseUpdateResult<User>>;
 
-  // getUsers?: (
-  //   filter: GetUserFilter,
-  //   options?: BaseGetOptions<User>,
-  // ) => Promise<BaseGetManyResult<User>>;
+  getUsers?: (
+    filter: {
+      // TODO
+    },
+    options?: BaseGetOptions<User>,
+  ) => Promise<BaseGetManyResult<User>>;
 }

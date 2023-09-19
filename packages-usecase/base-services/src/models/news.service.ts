@@ -3,7 +3,7 @@ import {
   BaseGetManyResult, NewsRepository,
 } from '@fishprovider/repositories';
 
-import { BaseGetServiceParams, BaseServiceParams, BaseUpdateServiceParams } from '..';
+import { BaseGetServiceParams, BaseUpdateServiceParams } from '..';
 
 export type GetNewsService = (params: BaseGetServiceParams<News> & {
   filter: {
@@ -30,7 +30,7 @@ export type UpdateNewsService = (params: BaseUpdateServiceParams<News> & {
   },
 }) => Promise<BaseGetManyResult<News>>;
 
-export type WatchNewsService = <T>(params: BaseServiceParams & {
+export type WatchNewsService = <T>(params: BaseGetServiceParams<News> & {
   selector: (state: Record<string, News>) => T,
   repositories: {
     news: NewsRepository

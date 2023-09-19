@@ -27,7 +27,7 @@ export const getUserService: GetUserService = async ({
     throw new BaseError(UserError.USER_NOT_FOUND);
   }
   if (!validateProjection(options?.projection, user)) {
-    throw new BaseError(RepositoryError.REPOSITORY_BAD_RESULT, 'projection', userSession._id);
+    throw new BaseError(RepositoryError.REPOSITORY_INVALID_PROJECTION);
   }
 
   return { doc: user };
