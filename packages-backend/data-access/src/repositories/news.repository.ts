@@ -1,11 +1,18 @@
 import { News } from '@fishprovider/core';
+import { MongoNewsRepository } from '@fishprovider/mongo';
+import { RedisNewsRepository } from '@fishprovider/redis';
 import {
-  BaseGetOptions, GetNewsFilter, NewsRepository,
+  BaseGetOptions, NewsRepository,
 } from '@fishprovider/repositories';
 
-import { MongoNewsRepository, RedisNewsRepository } from '../..';
-
-const getNews = async (filter: GetNewsFilter, options: BaseGetOptions<News>) => {
+const getNews = async (
+  filter: {
+    today?: boolean,
+    week?: string,
+    upcoming?: boolean,
+  },
+  options?: BaseGetOptions<News>,
+) => {
   let docs;
   if (RedisNewsRepository.getNews) {
     const res = await RedisNewsRepository.getNews(filter, options);

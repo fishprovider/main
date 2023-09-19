@@ -1,2 +1,2 @@
-export * from './cacheFirst';
+export * from './dataAccess';
 export * from './repositories';
