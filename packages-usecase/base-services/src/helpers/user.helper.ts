@@ -1,5 +1,5 @@
 import { User, UserRoles } from '@fishprovider/core';
-import { BaseGetOptions, GetUserFilter } from '@fishprovider/repositories';
+import { BaseGetOptions } from '@fishprovider/repositories';
 
 import { sanitizeBaseGetOptions, UserSession } from '..';
 
@@ -37,7 +37,10 @@ export const getRoleProvider = (
 };
 
 export const sanitizeGetUserFilter = (
-  filter: GetUserFilter,
+  filter: {
+    userId?: string
+    email?: string,
+  },
   userSession: UserSession,
 ) => ({
   ...filter,
@@ -46,8 +49,8 @@ export const sanitizeGetUserFilter = (
 });
 
 export const sanitizeUserBaseGetOptions = (
-  options: BaseGetOptions<User>,
-) => sanitizeBaseGetOptions(
+  options?: BaseGetOptions<User>,
+) => options && sanitizeBaseGetOptions(
   options,
   {
     pushNotif: 0,

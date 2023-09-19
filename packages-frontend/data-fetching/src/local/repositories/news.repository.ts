@@ -21,5 +21,5 @@ const setNews = async (
 
 export const LocalNewsRepository: NewsRepository = {
   getNews,
-  setNews,
+  updateNews: setNews,
 };

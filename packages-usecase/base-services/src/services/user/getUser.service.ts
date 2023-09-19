@@ -23,12 +23,11 @@ export const getUserService: GetUserService = async ({
   const options = sanitizeUserBaseGetOptions(optionsRaw);
 
   const { doc: user } = await repositories.user.getUser(filter, options);
-
   if (!user) {
     throw new BaseError(UserError.USER_NOT_FOUND);
   }
-  if (!validateProjection(options.projection, user)) {
-    throw new BaseError(RepositoryError.REPOSITORY_BAD_RESULT, 'projection', user._id);
+  if (!validateProjection(options?.projection, user)) {
+    throw new BaseError(RepositoryError.REPOSITORY_BAD_RESULT, 'projection', userSession._id);
   }
 
   return { doc: user };

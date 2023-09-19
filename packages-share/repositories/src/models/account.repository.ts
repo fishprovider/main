@@ -1,5 +1,5 @@
 import {
-  Account, AccountMember, AccountViewType,
+  Account, AccountConfig, AccountMember, AccountViewType,
 } from '@fishprovider/core';
 
 import {
@@ -10,6 +10,7 @@ export interface AccountRepository {
   getAccount?: (
     filter: {
       accountId: string,
+      config?: AccountConfig,
     },
     options?: BaseGetOptions<Account>,
   ) => Promise<BaseGetResult<Account>>;

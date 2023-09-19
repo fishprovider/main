@@ -16,7 +16,7 @@ export type GetNewsService = (params: BaseGetServiceParams<News> & {
   },
 }) => Promise<BaseGetManyResult<News>>;
 
-export type SetNewsService = (params: BaseUpdateServiceParams<News> & {
+export type UpdateNewsService = (params: BaseUpdateServiceParams<News> & {
   filter: {
     today?: boolean,
     week?: string,

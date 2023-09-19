@@ -8,8 +8,8 @@ import {
 } from '..';
 
 export const sanitizeAccountBaseGetOptions = (
-  options: BaseGetOptions<AccountFull>,
-) => sanitizeBaseGetOptions(
+  options?: BaseGetOptions<AccountFull>,
+) => options && sanitizeBaseGetOptions(
   options,
   {
     config: 0,

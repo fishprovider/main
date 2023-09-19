@@ -11,14 +11,14 @@ const getNews = async (
 ) => {
   const setNews = async (news?: Partial<News>[]) => {
     const promises = [];
-    if (LocalNewsRepository.setNews) {
+    if (LocalNewsRepository.updateNews) {
       promises.push(
-        LocalNewsRepository.setNews(filter, { news }, options),
+        LocalNewsRepository.updateNews(filter, { news }, options),
       );
     }
-    if (StoreNewsRepository.setNews) {
+    if (StoreNewsRepository.updateNews) {
       promises.push(
-        StoreNewsRepository.setNews(filter, { news }, options),
+        StoreNewsRepository.updateNews(filter, { news }, options),
       );
     }
     await Promise.all(promises);

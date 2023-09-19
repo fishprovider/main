@@ -2,7 +2,7 @@ import { BaseError, UserError } from '@fishprovider/core';
 import { RepositoryError } from '@fishprovider/repositories';
 
 import {
-  getAccountService, sanitizeAccountBaseGetOptions, ServiceError,
+  getAccountService, sanitizeAccountBaseGetOptions,
   UpdateAccountService, validateProjection,
 } from '../..';
 
@@ -12,8 +12,6 @@ export const updateAccountService: UpdateAccountService = async ({
   //
   // pre-check
   //
-  const { accountId } = filter;
-  if (!accountId) throw new BaseError(ServiceError.SERVICE_BAD_REQUEST);
   if (!context?.userSession?._id) throw new BaseError(UserError.USER_ACCESS_DENIED);
   if (!repositories.account.updateAccount) throw new BaseError(RepositoryError.REPOSITORY_NOT_IMPLEMENT);
 
@@ -32,8 +30,9 @@ export const updateAccountService: UpdateAccountService = async ({
   const options = sanitizeAccountBaseGetOptions(optionsRaw);
   const { doc: account } = await repositories.account.updateAccount(filter, payload, options);
 
-  if (account && !validateProjection(options.projection, account)) {
-    throw new BaseError(RepositoryError.REPOSITORY_BAD_RESULT, 'projection', account._id);
+  if (!validateProjection(options?.projection, account)) {
+    const { accountId } = filter;
+    throw new BaseError(RepositoryError.REPOSITORY_BAD_RESULT, 'projection', accountId);
   }
 
   return { doc: account };

@@ -1,5 +1,5 @@
 import {
-  Account, AccountConfig, AccountMember, AccountViewType,
+  Account, AccountMember, AccountViewType,
 } from '@fishprovider/core';
 import {
   AccountRepository, BaseGetManyResult, BaseGetResult, UserRepository,
@@ -44,7 +44,7 @@ export type JoinAccountService = (params: BaseUpdateServiceParams<Account> & {
 
 export type GetBrokerAccountService = (params: BaseUpdateServiceParams<Account> & {
   filter: {
-    config: AccountConfig,
+    accountId: string,
   },
   repositories: {
     account: AccountRepository,

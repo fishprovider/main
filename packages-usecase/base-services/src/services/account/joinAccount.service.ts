@@ -17,8 +17,6 @@ export const joinAccountService: JoinAccountService = async ({
   if (!userSession.email || !userSession.name) {
     throw new BaseError(ServiceError.SERVICE_BAD_REQUEST);
   }
-  const { accountId } = filter;
-  if (!accountId) throw new BaseError(ServiceError.SERVICE_BAD_REQUEST);
 
   const { doc: accountMemberInvites } = await getAccountService({
     filter,
@@ -44,6 +42,7 @@ export const joinAccountService: JoinAccountService = async ({
   //
   // main
   //
+  const { accountId } = filter;
   const { email, role } = memberInvite;
   await updateUserService({
     filter: {
@@ -82,8 +81,8 @@ export const joinAccountService: JoinAccountService = async ({
     context,
   });
 
-  if (account && !validateProjection(options.projection, account)) {
-    throw new BaseError(RepositoryError.REPOSITORY_BAD_RESULT, 'projection', account._id);
+  if (!validateProjection(options?.projection, account)) {
+    throw new BaseError(RepositoryError.REPOSITORY_BAD_RESULT, 'projection', accountId);
   }
 
   return { doc: account };

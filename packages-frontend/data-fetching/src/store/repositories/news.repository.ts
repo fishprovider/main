@@ -61,6 +61,6 @@ const watchNews = <T>(
 
 export const StoreNewsRepository: NewsRepository = {
   getNews,
-  setNews,
+  updateNews: setNews,
   watchNews,
 };
