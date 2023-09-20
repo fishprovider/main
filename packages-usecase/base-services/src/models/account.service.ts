@@ -25,6 +25,12 @@ export type UpdateAccountService = (params: BaseUpdateServiceParams<Account> & {
     addMember?: AccountMember,
     removeMemberId?: string,
     removeMemberInviteEmail?: string,
+    providerPlatformAccountId?: string,
+    leverage?: number,
+    balance?: number,
+    assetId?: string,
+    providerData?: any,
+    updatedAt?: Date,
   },
   repositories: {
     account: AccountRepository

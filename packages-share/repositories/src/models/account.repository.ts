@@ -24,6 +24,12 @@ export interface AccountRepository {
       addMember?: AccountMember,
       removeMemberId?: string,
       removeMemberInviteEmail?: string,
+      providerPlatformAccountId?: string,
+      leverage?: number,
+      balance?: number,
+      assetId?: string,
+      providerData?: any,
+      updatedAt?: Date,
     },
     options?: BaseUpdateOptions<Account>,
   ) => Promise<BaseUpdateResult<Account>>;

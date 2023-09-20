@@ -2,27 +2,26 @@ import { AccountError, AccountFull, BaseError } from '@fishprovider/core';
 import { RepositoryError } from '@fishprovider/repositories';
 
 import {
-  checkAccess, GetTradeAccountService, validateProjection,
+  checkAccess, GetTradeAccountService,
 } from '../..';
 
 export const getTradeAccountService: GetTradeAccountService = async ({
-  filter, options, repositories, context,
+  filter, repositories, context,
 }) => {
   //
   // pre-check
   //
   if (!repositories.account.getAccount) throw new BaseError(RepositoryError.REPOSITORY_NOT_IMPLEMENT);
+  if (!repositories.account.updateAccount) throw new BaseError(RepositoryError.REPOSITORY_NOT_IMPLEMENT);
   if (!repositories.trade.getAccount) throw new BaseError(RepositoryError.REPOSITORY_NOT_IMPLEMENT);
 
   //
   // main
   //
-  const { doc: account } = await repositories.account.getAccount(filter, options);
+  // call repository directly to get account config, getAccountService sanitize config by default
+  const { doc: account } = await repositories.account.getAccount(filter);
   if (!account) {
     throw new BaseError(AccountError.ACCOUNT_NOT_FOUND);
-  }
-  if (!validateProjection(options?.projection, account)) {
-    throw new BaseError(RepositoryError.REPOSITORY_INVALID_PROJECTION);
   }
   checkAccess(account, context);
 
@@ -30,19 +29,22 @@ export const getTradeAccountService: GetTradeAccountService = async ({
   const { doc: tradeAccount } = await repositories.trade.getAccount({
     ...filter,
     config,
-  }, options);
+  });
   if (!tradeAccount) {
     throw new BaseError(AccountError.ACCOUNT_NOT_FOUND);
   }
+
+  // TODO: const assetInfo = await getAssetInfo();
+  // tradeAccount.asset = ...
+
+  // non-blocking
+  repositories.account.updateAccount(filter, tradeAccount);
 
   const accountPublic: Partial<AccountFull> = {
     ...account,
     ...tradeAccount,
   };
   delete accountPublic.config; // NEVER leak config to user
-
-  // TODO: const assetInfo = await getAssetInfo();
-  // TODO: updateCache(accountInfo); // non-blocking
 
   return { doc: accountPublic };
 };
