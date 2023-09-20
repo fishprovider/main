@@ -19,10 +19,10 @@ console.log('rootPath', rootPath);
 
 const protoFile1 = env.ctraderProtoTmp
   ? path.join('/tmp', 'proto', 'OpenApiCommonMessages.proto')
-  : path.join(rootPath, 'packages-backend', 'ctrader', 'proto', 'OpenApiCommonMessages.proto');
+  : path.join(rootPath, 'packages-backend', 'ctrader-api', 'proto', 'OpenApiCommonMessages.proto');
 const protoFile2 = env.ctraderProtoTmp
   ? path.join('/tmp', 'proto', 'OpenApiMessages.proto')
-  : path.join(rootPath, 'packages-backend', 'ctrader', 'proto', 'OpenApiMessages.proto');
+  : path.join(rootPath, 'packages-backend', 'ctrader-api', 'proto', 'OpenApiMessages.proto');
 console.log('protoFiles', protoFile1, protoFile2);
 
 export class Connection implements TCTraderConnection {

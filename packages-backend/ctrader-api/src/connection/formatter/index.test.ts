@@ -51,7 +51,7 @@ describe('EncodeDecode', () => {
 
   beforeAll(() => {
     protoMessages = new ProtobufMessages([
-      path.join(rootPath, 'packages-backend', 'ctrader', 'proto', 'CommonMessages.test.proto'),
+      path.join(rootPath, 'packages-backend', 'ctrader-api', 'proto', 'CommonMessages.test.proto'),
     ]);
 
     checkBuffer = (buff: Buffer) => {
@@ -62,7 +62,7 @@ describe('EncodeDecode', () => {
 
   beforeEach(() => {
     buffer = fs.readFileSync(
-      path.join(rootPath, 'packages-backend', 'ctrader', 'bin', 'test-file'),
+      path.join(rootPath, 'packages-backend', 'ctrader-api', 'bin', 'test-file'),
     );
     encodeDecode = new Formatter();
   });
