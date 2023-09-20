@@ -1,13 +1,18 @@
 import { News } from '@fishprovider/core';
+import { FishApiNewsRepository } from '@fishprovider/fish-api';
+import { LocalNewsRepository } from '@fishprovider/local';
 import {
-  BaseGetOptions, GetNewsFilter, NewsRepository,
+  BaseGetOptions, NewsRepository,
 } from '@fishprovider/repositories';
-
-import { FishApiNewsRepository, LocalNewsRepository, StoreNewsRepository } from '../..';
+import { StoreNewsRepository } from '@fishprovider/store';
 
 const getNews = async (
-  filter: GetNewsFilter,
-  options: BaseGetOptions<News>,
+  filter: {
+    today?: boolean,
+    week?: string,
+    upcoming?: boolean,
+  },
+  options?: BaseGetOptions<News>,
 ) => {
   const setNews = async (news?: Partial<News>[]) => {
     const promises = [];
@@ -45,6 +50,6 @@ const getNews = async (
   return { docs };
 };
 
-export const OfflineFirstNewsRepository: NewsRepository = {
+export const DataFetchNewsRepository: NewsRepository = {
   getNews,
 };

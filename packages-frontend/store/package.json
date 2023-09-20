@@ -1,5 +1,5 @@
 {
-  "name": "@fishprovider/data-fetch",
+  "name": "@fishprovider/store",
   "version": "7.0.0",
   "type": "module",
   "main": "dist/index.js",
@@ -17,8 +17,11 @@
     "ci-type-check": "tsc-files --noEmit"
   },
   "dependencies": {
-    "@fishprovider/fish-api": "*",
-    "@fishprovider/local": "*",
-    "@fishprovider/store": "*"
+    "@fishprovider/core-utils": "*",
+    "@fishprovider/repositories": "*",
+    "zustand": "^4.4.1"
+  },
+  "devDependencies": {
+    "socket.io-client": "^4.7.2"
   }
 }

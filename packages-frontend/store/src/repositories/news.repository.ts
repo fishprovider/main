@@ -1,13 +1,17 @@
 import { News } from '@fishprovider/core';
 import {
-  BaseUpdateOptions, GetNewsFilter, NewsRepository, UpdateNewsPayload,
+  NewsRepository,
 } from '@fishprovider/repositories';
 import _ from 'lodash';
 import moment from 'moment';
 
 import { storeNews } from '..';
 
-const getNews = async (filter: GetNewsFilter) => {
+const getNews = async (filter: {
+  today?: boolean,
+  week?: string,
+  upcoming?: boolean,
+}) => {
   const { today, week, upcoming } = filter;
 
   if (today) {
@@ -43,10 +47,13 @@ const getNews = async (filter: GetNewsFilter) => {
   return {};
 };
 
-const setNews = async (
-  _filter: GetNewsFilter,
-  payload: UpdateNewsPayload,
-  _options: BaseUpdateOptions<News>,
+const updateNews = async (
+  _filter: {
+    //
+  },
+  payload: {
+    news?: Partial<News>[],
+  },
 ) => {
   const { news } = payload;
   if (news) {
@@ -61,6 +68,6 @@ const watchNews = <T>(
 
 export const StoreNewsRepository: NewsRepository = {
   getNews,
-  updateNews: setNews,
+  updateNews,
   watchNews,
 };

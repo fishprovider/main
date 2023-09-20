@@ -8,8 +8,5 @@
   "references": [
     { "path": "../../packages-share/core-utils" },
     { "path": "../../packages-share/repositories" },
-    { "path": "../../packages-share/local" },
-    { "path": "../../packages-share/store" },
-    { "path": "../../packages-share/fish-api" },
   ]
 }

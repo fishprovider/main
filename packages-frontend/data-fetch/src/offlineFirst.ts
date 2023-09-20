@@ -1,6 +1,5 @@
 import { log } from '@fishprovider/core-utils';
-
-import { initFishApi } from '..';
+import { initFishApi } from '@fishprovider/fish-api';
 
 export const initOfflineFirst = (params: {
   baseURL?: string,

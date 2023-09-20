@@ -1,22 +1,32 @@
 import { User } from '@fishprovider/core';
 import {
-  BaseUpdateOptions, GetUserFilter, UpdateUserPayload, UserRepository,
+  UserRepository,
 } from '@fishprovider/repositories';
 
 import { fishApiGet, fishApiPost } from '..';
 
-const getUser = async (filter: GetUserFilter) => {
+const getUser = async (filter: {
+  userId?: string
+  email?: string,
+}) => {
   const user = await fishApiGet<Partial<User> | undefined>('/user/getUser', filter);
   return { doc: user };
 };
 
 const updateUser = async (
-  filter: GetUserFilter,
-  payload: UpdateUserPayload,
-  options: BaseUpdateOptions<User>,
+  filter: {
+    userId?: string
+    email?: string,
+  },
+  payload: {
+    starProvider?: {
+      accountId: string
+      enabled: boolean
+    }
+  },
 ) => {
   const user = await fishApiPost<Partial<User> | undefined>('/user/updateUser', {
-    filter, payload, options,
+    filter, payload,
   });
   return { doc: user };
 };

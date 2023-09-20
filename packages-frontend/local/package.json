@@ -1,5 +1,5 @@
 {
-  "name": "@fishprovider/data-fetch",
+  "name": "@fishprovider/local",
   "version": "7.0.0",
   "type": "module",
   "main": "dist/index.js",
@@ -17,8 +17,8 @@
     "ci-type-check": "tsc-files --noEmit"
   },
   "dependencies": {
-    "@fishprovider/fish-api": "*",
-    "@fishprovider/local": "*",
-    "@fishprovider/store": "*"
+    "@fishprovider/core-utils": "*",
+    "@fishprovider/repositories": "*",
+    "localforage": "^1.10.0"
   }
 }
