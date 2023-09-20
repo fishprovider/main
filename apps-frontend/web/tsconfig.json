@@ -16,4 +16,8 @@
     "**/*.jsx",
     "next-env.d.ts",
   ],
+  "references": [
+    { "path": "../../packages-usecase/base-services" },
+    { "path": "../../packages-frontend/data-fetch" },
+  ]
 }

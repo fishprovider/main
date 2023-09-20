@@ -52,4 +52,5 @@ const getNews = async (
 
 export const DataFetchNewsRepository: NewsRepository = {
   getNews,
+  watchNews: StoreNewsRepository.watchNews,
 };

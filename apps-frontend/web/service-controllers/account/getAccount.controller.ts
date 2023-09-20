@@ -1,5 +1,5 @@
 import { getAccountService } from '@fishprovider/base-services';
-import { FishApiAccountRepository } from '@fishprovider/data-fetch';
+import { DataFetchAccountRepository } from '@fishprovider/data-fetch';
 
 export const getAccountController = (filter: {
   accountId: string,
@@ -7,6 +7,6 @@ export const getAccountController = (filter: {
   filter,
   options: {},
   repositories: {
-    account: FishApiAccountRepository,
+    account: DataFetchAccountRepository,
   },
 });

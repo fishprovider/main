@@ -1,6 +1,6 @@
 import { initApi } from '@fishprovider/cross/dist/libs/api';
 import { initStore } from '@fishprovider/cross/dist/libs/store';
-import { initOfflineFirst } from '@fishprovider/data-fetch';
+import { initDataFetch } from '@fishprovider/data-fetch';
 import moment from 'moment-timezone';
 
 import { initAnalytics } from '~libs/analytics';
@@ -19,7 +19,7 @@ const env = {
 };
 
 const initialize = () => {
-  initOfflineFirst({
+  initDataFetch({
     baseURL: `${isLive ? env.backendUrl : env.demoBackendUrl}${env.api}/v3`,
   });
 

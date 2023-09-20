@@ -1,2 +1,2 @@
-export * from './offlineFirst';
+export * from './dataFetch';
 export * from './repositories';

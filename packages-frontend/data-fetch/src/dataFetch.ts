@@ -1,10 +1,10 @@
 import { log } from '@fishprovider/core-utils';
 import { initFishApi } from '@fishprovider/fish-api';
 
-export const initOfflineFirst = (params: {
+export const initDataFetch = (params: {
   baseURL?: string,
 }) => {
-  log.info('Starting initOfflineFirst');
+  log.info('Starting initDataFetch');
   initFishApi(params);
-  log.info('Started initOfflineFirst');
+  log.info('Started initDataFetch');
 };
