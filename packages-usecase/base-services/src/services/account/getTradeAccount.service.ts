@@ -11,9 +11,15 @@ export const getTradeAccountService: GetTradeAccountService = async ({
   //
   // pre-check
   //
-  if (!repositories.account.getAccount) throw new BaseError(RepositoryError.REPOSITORY_NOT_IMPLEMENT);
-  if (!repositories.account.updateAccount) throw new BaseError(RepositoryError.REPOSITORY_NOT_IMPLEMENT);
-  if (!repositories.trade.getAccount) throw new BaseError(RepositoryError.REPOSITORY_NOT_IMPLEMENT);
+  if (!repositories.account.getAccount) {
+    throw new BaseError(RepositoryError.REPOSITORY_NOT_IMPLEMENT);
+  }
+  if (!repositories.account.updateAccount) {
+    throw new BaseError(RepositoryError.REPOSITORY_NOT_IMPLEMENT);
+  }
+  if (!repositories.trade.getAccount) {
+    throw new BaseError(RepositoryError.REPOSITORY_NOT_IMPLEMENT);
+  }
 
   //
   // main

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const ChainedBackend = require('i18next-chained-backend').default;
 const LocalforageBackend = require('i18next-localforage-backend').default;
 const HttpBackend = require('i18next-http-backend/cjs');

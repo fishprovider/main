@@ -11,7 +11,9 @@ export const getAccountsService: GetAccountsService = async ({
   //
   // pre-check
   //
-  if (!repositories.account.getAccounts) throw new BaseError(RepositoryError.REPOSITORY_NOT_IMPLEMENT);
+  if (!repositories.account.getAccounts) {
+    throw new BaseError(RepositoryError.REPOSITORY_NOT_IMPLEMENT);
+  }
 
   //
   // main

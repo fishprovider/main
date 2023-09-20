@@ -13,7 +13,9 @@ export const updateAccountService: UpdateAccountService = async ({
   // pre-check
   //
   if (!context?.userSession?._id) throw new BaseError(UserError.USER_ACCESS_DENIED);
-  if (!repositories.account.updateAccount) throw new BaseError(RepositoryError.REPOSITORY_NOT_IMPLEMENT);
+  if (!repositories.account.updateAccount) {
+    throw new BaseError(RepositoryError.REPOSITORY_NOT_IMPLEMENT);
+  }
 
   await getAccountService({
     filter,
