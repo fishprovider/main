@@ -7,8 +7,8 @@ const rootPath = appRootPath.toString();
 
 test('protobuf', () => {
   const protocol = new ProtobufMessages([
-    path.join(rootPath, 'packages-backend', 'ctrader-api', 'proto', 'OpenApiCommonMessages.proto'),
-    path.join(rootPath, 'packages-backend', 'ctrader-api', 'proto', 'OpenApiMessages.proto'),
+    path.join(rootPath, 'packages-backend/ctrader-api/proto/OpenApiCommonMessages.proto'),
+    path.join(rootPath, 'packages-backend/ctrader-api/proto/OpenApiMessages.proto'),
   ]);
 
   const clientId = 'clientId';
