@@ -8,6 +8,7 @@
     "lint": "eslint --cache --fix .",
     "type-check": "tsc --noEmit",
     "test": "plasmo test",
+    "clean": "rm -rf dist *.tsbuildinfo && mkdir dist",
     "build": "plasmo build",
     "build-all": "plasmo build && plasmo build --target=firefox-mv2 && plasmo build --target=edge-mv3",
     "package": "plasmo package",
