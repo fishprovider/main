@@ -1,10 +1,10 @@
 const Routes = {
   home: '/',
-  about: '/about',
-  plans: '/plans',
   strategies: '/strategies',
   // strategy: '/strategies/:providerId',
   reports: '/reports',
+  plans: '/plans',
+  about: '/about',
   faq: '/faq',
   blog: '/blog',
   news: '/news',
