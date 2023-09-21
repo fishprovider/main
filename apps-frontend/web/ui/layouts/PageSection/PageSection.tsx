@@ -7,22 +7,30 @@ interface Props {
   bg?: string;
 }
 
+const colors = {
+  white: '#f2f3f6',
+  dark: '#0a0a23',
+  blue: '#afdaeb',
+  green: '#e6fcf5',
+  yellow: '#fff9db',
+};
+
 const PageSection = styled(Box)<Props>`
   background-color: ${({ theme, variant }) => {
-    if (variant === 'dark') return '#0a0a23';
-    if (variant === 'light') return '#f2f3f6';
-    if (variant === 'blue') return '#e7f5ff';
-    if (variant === 'green') return '#e6fcf5';
-    if (variant === 'yellow') return '#fff9db';
-    return theme.colorScheme === 'dark' ? '#0a0a23' : '#f2f3f6';
+    if (variant === 'dark') return colors.dark;
+    if (variant === 'light') return colors.white;
+    if (variant === 'blue') return colors.blue;
+    if (variant === 'green') return colors.green;
+    if (variant === 'yellow') return colors.yellow;
+    return theme.colorScheme === 'dark' ? colors.dark : colors.white;
   }};
   color: ${({ theme, variant }) => {
-    if (variant === 'dark') return '#f2f3f6';
-    if (variant === 'light') return '#0a0a23';
-    if (variant === 'blue') return '#0a0a23';
-    if (variant === 'green') return '#0a0a23';
-    if (variant === 'yellow') return '#0a0a23';
-    return theme.colorScheme === 'dark' ? '#f2f3f6' : '#0a0a23';
+    if (variant === 'dark') return colors.white;
+    if (variant === 'light') return colors.dark;
+    if (variant === 'blue') return colors.dark;
+    if (variant === 'green') return colors.dark;
+    if (variant === 'yellow') return colors.dark;
+    return theme.colorScheme === 'dark' ? colors.white : colors.dark;
   }};
   background-image: ${({ bg }) => bg && `url(${bg})`};
   background-position: center;

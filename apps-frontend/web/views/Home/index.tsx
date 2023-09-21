@@ -23,13 +23,13 @@ function Home(props: NotionPageProps) {
       <PageSection variant="light">
         <Overview />
       </PageSection>
-      <PageSection variant="dark">
+      <PageSection variant="blue">
         <TopStrategies />
       </PageSection>
       <PageSection variant="light">
         <HotNews {...props} />
       </PageSection>
-      <PageSection variant="dark">
+      <PageSection variant="blue">
         <ContentSection>
           <Gift />
         </ContentSection>
