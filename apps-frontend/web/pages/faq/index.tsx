@@ -1,6 +1,4 @@
-import type { ExtendedRecordMap } from 'notion-types';
-
-import { NotionPage } from '~components/view/NotionPage';
+import { NotionPage, NotionPageProps } from '~components/view/NotionPage';
 import OpenAI from '~components/view/OpenAI';
 import { notionPages } from '~constants/view';
 import { getDefaultStaticProps } from '~libs/notion';
@@ -10,12 +8,7 @@ import ContentSection from '~ui/layouts/ContentSection';
 
 export const getStaticProps = getDefaultStaticProps(notionPages.faq.rootId);
 
-interface Props {
-  recordMap: ExtendedRecordMap
-  pageId: string
-}
-
-export default function Page({ pageId, recordMap }: Props) {
+export default function Page({ pageId, recordMap }: NotionPageProps) {
   return (
     <>
       <NotionPage
@@ -23,6 +16,7 @@ export default function Page({ pageId, recordMap }: Props) {
         pageId={pageId}
         rootPageId={notionPages.faq.rootId}
         basePath="faq"
+        withEstimateReadTime={false}
       />
       <ContentSection>
         <Stack spacing="xs" py="xl">

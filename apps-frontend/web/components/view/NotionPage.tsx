@@ -50,11 +50,14 @@ function Header({ block }: {
   );
 }
 
-interface Props {
+export interface NotionPageProps {
   recordMap: ExtendedRecordMap
   pageId: string
   rootPageId?: string
   basePath?: string
+  withMeta?: boolean
+  withEstimateReadTime?: boolean
+  fullPage?: boolean
 }
 
 export function NotionPage({
@@ -62,7 +65,10 @@ export function NotionPage({
   pageId: pageIdRaw,
   rootPageId,
   basePath = 'notion',
-}: Props) {
+  withMeta = true,
+  withEstimateReadTime = true,
+  fullPage = true,
+}: NotionPageProps) {
   const {
     theme,
   } = storeUser.useStore((state) => ({
@@ -101,11 +107,15 @@ export function NotionPage({
     const block = recordMap.block[pageId]?.value;
     if (!block) return null;
 
-    const time = estimatePageReadTimeAsHumanizedString(block, recordMap, {
-      wordsPerMinute: 275,
-      imageReadTimeInSeconds: 12,
-    });
-    return <Text>{`${time} read`}</Text>;
+    if (withEstimateReadTime) {
+      const time = estimatePageReadTimeAsHumanizedString(block, recordMap, {
+        wordsPerMinute: 275,
+        imageReadTimeInSeconds: 12,
+      });
+      return <Text>{`${time} read`}</Text>;
+    }
+
+    return null;
   };
 
   const title = getPageTitle(recordMap);
@@ -113,10 +123,12 @@ export function NotionPage({
 
   return (
     <>
-      <Head>
-        <title>{title}</title>
-        <meta name="description" content={`FishProvider ${title}`} />
-      </Head>
+      {withMeta && (
+        <Head>
+          <title>{title}</title>
+          <meta name="description" content={`FishProvider ${title}`} />
+        </Head>
+      )}
 
       <NotionRenderer
         recordMap={recordMap}
@@ -136,7 +148,7 @@ export function NotionPage({
           Header,
         }}
         pageHeader={renderPageHeader(pageId)}
-        fullPage
+        fullPage={fullPage}
         rootPageId={rootPageId}
         searchNotion={searchNotion}
         mapPageUrl={mapPageUrl}
