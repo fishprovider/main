@@ -7,16 +7,6 @@ const menuItems = [
     href: Routes.home,
   },
   {
-    key: 'about',
-    label: 'About Us',
-    href: Routes.about,
-  },
-  {
-    key: 'plan',
-    label: 'Plans',
-    href: Routes.plans,
-  },
-  {
     key: 'strategies',
     label: 'Strategies',
     href: Routes.strategies,
@@ -25,6 +15,16 @@ const menuItems = [
     key: 'reports',
     label: 'Reports',
     href: Routes.reports,
+  },
+  {
+    key: 'plan',
+    label: 'Plans',
+    href: Routes.plans,
+  },
+  {
+    key: 'about',
+    label: 'About Us',
+    href: Routes.about,
   },
   {
     key: 'faq',
