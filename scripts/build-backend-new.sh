@@ -12,12 +12,12 @@ function notif() {
   npm run build -w packages-backend/slack &
   npm run build -w packages-backend/discord &
   npm run build -w packages-backend/expo &
+  npm run build -w packages-backend/firebase &
   wait
   npm run build -w packages-backend/notif
 }
 
 function dataAccess() {
-  npm run build -w packages-backend/firebase &
   npm run build -w packages-backend/mongo &
   npm run build -w packages-backend/redis &
   wait
@@ -34,6 +34,8 @@ function trade() {
 
 npm run build -w packages-backend/queue &
 notif &
+wait
+
 dataAccess &
 trade &
 wait
