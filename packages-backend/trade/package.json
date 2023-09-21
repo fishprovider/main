@@ -11,7 +11,7 @@
     "lint": "eslint --cache --fix .",
     "type-check": "tsc --noEmit",
     "test": "echo trade",
-    "clean": "rm -rf dist && mkdir dist",
+    "clean": "rm -rf dist *.tsbuildinfo && mkdir dist",
     "build": "tsc -p tsconfig.build.json",
     "ci-lint": "eslint --cache --fix",
     "ci-type-check": "tsc-files --noEmit"
