@@ -19,6 +19,7 @@
     "ci": "npm ci --prefer-offline --no-audit --no-progress --legacy-peer-deps",
     "postinstall": "npx husky install",
     "lint": "npm run lint -ws",
+    "clean": "npm run clean -ws",
     "build": "./build-deps.sh",
     "check-deps": "cd scripts && node check-deps.cjs",
     "doctor": "npm run lint && npm run build && npm run check-deps",
