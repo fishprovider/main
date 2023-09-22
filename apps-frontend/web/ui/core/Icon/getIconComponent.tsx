@@ -24,6 +24,7 @@ const BatteryFull = lazy(() => import('@mui/icons-material/BatteryFull'));
 const Brightness4 = lazy(() => import('@mui/icons-material/Brightness4'));
 const Brightness7 = lazy(() => import('@mui/icons-material/Brightness7'));
 const CandlestickChart = lazy(() => import('@mui/icons-material/CandlestickChart'));
+const CheckIcon = lazy(() => import('@mui/icons-material/Check'));
 const CircleOutlinedIcon = lazy(() => import('@mui/icons-material/CircleOutlined'));
 const Close = lazy(() => import('@mui/icons-material/Close'));
 const Comment = lazy(() => import('@mui/icons-material/Comment'));
@@ -119,6 +120,7 @@ const renderIcon = (name: string, props: SvgIconProps) => {
     case 'Brightness4': return <Brightness4 {...props} />;
     case 'Brightness7': return <Brightness7 {...props} />;
     case 'CandlestickChart': return <CandlestickChart {...props} />;
+    case 'Check': return <CheckIcon {...props} />;
     case 'CircleOutlinedIcon': return <CircleOutlinedIcon {...props} />;
     case 'Close': return <Close {...props} />;
     case 'Comment': return <Comment {...props} />;

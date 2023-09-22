@@ -3,22 +3,27 @@ import accountGetManyUser from '@fishprovider/cross/dist/api/accounts/getManyUse
 import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
 import storeUser from '@fishprovider/cross/dist/stores/user';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 import { CardVariant } from '~constants/account';
 import useToggle from '~hooks/useToggle';
 import useToggleMulti from '~hooks/useToggleMulti';
+import CopyButton from '~ui/core/CopyButton';
+import Divider from '~ui/core/Divider';
 import Group from '~ui/core/Group';
 import Icon from '~ui/core/Icon';
 import Stack from '~ui/core/Stack';
 import Text from '~ui/core/Text';
 import TextInput from '~ui/core/TextInput';
+import Title from '~ui/core/Title';
 import useMobile from '~ui/styles/useMobile';
 
 import BannerStatus from './BannerStatus';
 import ProviderCards from './ProviderCards';
 
 function Catalog() {
+  const router = useRouter();
   const isMobile = useMobile();
 
   const {
@@ -42,41 +47,68 @@ function Catalog() {
   });
 
   return (
-    <Stack py="xl">
-      <BannerStatus />
-      <Group position="center">
-        {favorite ? (
-          <Icon
-            name="Star"
-            button
-            color="orange"
-            onClick={() => toggleFavorite()}
+    <Stack py="xl" spacing="xl">
+      <Stack>
+        <BannerStatus />
+        <Group position="center">
+          {favorite ? (
+            <Icon
+              name="Star"
+              button
+              color="orange"
+              onClick={() => toggleFavorite()}
+            />
+          ) : (
+            <Icon
+              name="Star"
+              button
+              onClick={() => toggleFavorite()}
+            />
+          )}
+          <TextInput
+            placeholder="Search"
+            onChange={(event) => setSearch(event.target.value)}
           />
-        ) : (
-          <Icon
-            name="Star"
-            button
-            onClick={() => toggleFavorite()}
-          />
-        )}
-        <TextInput
-          placeholder="Search"
-          onChange={(event) => setSearch(event.target.value)}
-        />
-        {!isMobile && (
+          {!isMobile && (
           <Icon
             name={cardVariant === CardVariant.slim ? 'Apps' : 'List'}
             button
             onClick={() => toggleCardVariant()}
           />
-        )}
-      </Group>
-      <Text ta="center">Click on the card for more details</Text>
-      <ProviderCards
-        favorite={favorite}
-        search={search}
-        variant={cardVariant}
-      />
+          )}
+        </Group>
+        <Text ta="center">Click on the card for more details</Text>
+      </Stack>
+
+      <Divider />
+      <Stack align="center" id="nature-elements">
+        <CopyButton href={`https://www.fishprovider.com${router.pathname}#nature-elements`}>
+          <Title size="h2">
+            Nature Elements
+          </Title>
+        </CopyButton>
+        <ProviderCards
+          favorite={favorite}
+          search={search}
+          variant={cardVariant}
+          category="nature-elements"
+        />
+      </Stack>
+
+      <Divider />
+      <Stack align="center" id="ocean-marine">
+        <CopyButton href={`https://www.fishprovider.com${router.pathname}#ocean-marine`}>
+          <Title size="h2">
+            Ocean and Marine
+          </Title>
+        </CopyButton>
+        <ProviderCards
+          favorite={favorite}
+          search={search}
+          variant={cardVariant}
+          category="ocean-marine"
+        />
+      </Stack>
     </Stack>
   );
 }

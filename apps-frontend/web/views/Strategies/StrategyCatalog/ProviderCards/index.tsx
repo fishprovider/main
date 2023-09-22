@@ -18,12 +18,14 @@ interface Props {
   favorite?: boolean,
   search?: string,
   variant?: CardVariant,
+  category?: string,
 }
 
 function ProviderCards({
   favorite,
   search,
   variant = CardVariant.default,
+  category,
 }: Props) {
   const {
     starProviders = {},
@@ -40,6 +42,7 @@ function ProviderCards({
       if (account.providerGroupId && account.providerGroupId !== account._id) return false;
       if (favorite && !starProviders[account._id]) return false;
       if (search && !account.name.toLowerCase().includes(search.toLowerCase())) return false;
+      if (category && account.category !== category) return false;
       return true;
     }),
     [
@@ -62,23 +65,25 @@ function ProviderCards({
           />
         ))}
       </Flex>
-      <Group position="center">
-        <Pagination
-          total={page + (providerIds.length < pageSize ? 0 : 1)}
-          value={page}
-          onChange={(value) => setPage(value)}
-          size="lg"
-        />
-        <Select
-          data={pageSizeOptions}
-          value={String(pageSize)}
-          onChange={(value) => {
-            if (!value) return;
-            setPageSize(+value);
-          }}
-          w={80}
-        />
-      </Group>
+      {providerIds.length > 10 && (
+        <Group position="center">
+          <Pagination
+            total={page + (providerIds.length < pageSize ? 0 : 1)}
+            value={page}
+            onChange={(value) => setPage(value)}
+            size="lg"
+          />
+          <Select
+            data={pageSizeOptions}
+            value={String(pageSize)}
+            onChange={(value) => {
+              if (!value) return;
+              setPageSize(+value);
+            }}
+            w={80}
+          />
+        </Group>
+      )}
     </>
   );
 }
