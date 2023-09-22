@@ -64,7 +64,7 @@ export function NotionPage({
   recordMap,
   pageId: pageIdRaw,
   rootPageId,
-  basePath = 'notion',
+  basePath,
   withMeta = true,
   withEstimateReadTime = true,
   fullPage = true,
@@ -101,7 +101,8 @@ export function NotionPage({
   const searchNotion = (params: SearchParams) => apiPost<SearchResults>('/notion/search', params);
   const mapPageUrl = (pageId: string) => {
     const seoUrl = getCanonicalPageId(pageId, recordMap);
-    return `/${basePath}/${seoUrl}`;
+    if (basePath) return `/${basePath}/${seoUrl}`;
+    return `${seoUrl}`;
   };
   const renderPageHeader = (pageId: string) => {
     const block = recordMap.block[pageId]?.value;
