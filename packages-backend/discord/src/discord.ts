@@ -8,7 +8,9 @@ const discordClient = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 const discordToken = process.env.DISCORD_TOKEN;
 if (discordToken) {
-  discordClient.login(discordToken);
+  discordClient.login(discordToken).catch((err) => {
+    log.error('Failed to login Discord', err);
+  });
 }
 
 const sendDiscordWebhook = async (

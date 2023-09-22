@@ -21,7 +21,9 @@ const env = {
 
 const discordClient = new Client({ intents: [GatewayIntentBits.Guilds] });
 if (env.discordToken) {
-  discordClient.login(env.discordToken);
+  discordClient.login(env.discordToken).catch((err) => {
+    Logger.error('Failed to login Discord', err);
+  });
 }
 
 const getDefaultChannel = () => {
