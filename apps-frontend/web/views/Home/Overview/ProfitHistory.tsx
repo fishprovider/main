@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 
 import MonthProfit from '~components/account/MonthProfit';
 import Link from '~components/base/Link';
-import { ctraderPlatforms } from '~constants/account';
 import Box from '~ui/core/Box';
 import Card from '~ui/core/Card';
 import Group from '~ui/core/Group';
@@ -15,9 +14,8 @@ import ThemeProvider from '~ui/themes/ThemeProvider';
 import { isLive, isProd } from '~utils';
 
 const providerId = isProd && isLive ? 'earth' : 'octopus';
-const platformId = 'icmarkets';
 const strategyId = '65916';
-const ctraderUrl = `${ctraderPlatforms[platformId]?.copyUrl}/${strategyId}`;
+const ctraderUrl = `https://ct.spotware.com/copy/strategy/${strategyId}`;
 
 const myFxBookId = 'earth/10192142';
 const myFxBookUrl = `https://www.myfxbook.com/portfolio/${myFxBookId}`;

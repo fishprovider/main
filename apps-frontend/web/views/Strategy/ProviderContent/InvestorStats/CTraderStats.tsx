@@ -1,7 +1,6 @@
 import storeUser from '@fishprovider/cross/dist/stores/user';
 
 import Link from '~components/base/Link';
-import { ctraderPlatforms } from '~constants/account';
 import Card from '~ui/core/Card';
 import Image from '~ui/core/Image';
 import ThemeProvider from '~ui/themes/ThemeProvider';
@@ -11,8 +10,7 @@ function CTraderStats() {
 
   if (!strategyId) return null;
 
-  const platformId = 'icmarkets';
-  const ctraderUrl = `${ctraderPlatforms[platformId]?.copyUrl}/${strategyId}`;
+  const ctraderUrl = `https://ct.spotware.com/copy/strategy/${strategyId}`;
 
   return (
     <Link href={ctraderUrl} target="_blank">
