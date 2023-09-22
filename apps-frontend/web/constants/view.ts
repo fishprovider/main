@@ -11,6 +11,9 @@ const notionPages = {
   hotNews: {
     rootId: '4f9c972dfd054df8bacdc20e82cb4057',
   },
+  reports: {
+    rootId: 'ebc7f43e6b5342729502e01ac57fc4f1',
+  },
 };
 
 export {
