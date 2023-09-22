@@ -8,7 +8,7 @@
     "clean": "rm -rf .next *.tsbuildinfo",
     "prebuild": "./build-deps.sh",
     "build": "NODE_ENV=production DOPPLER_PROJECT=${DOPPLER_PROJECT:-web} DOPPLER_CONFIG=${DOPPLER_CONFIG:-prd} doppler run --print-config -- next build",
-    "postbuild": "NODE_ENV=production DOPPLER_PROJECT=${DOPPLER_PROJECT:-web} DOPPLER_CONFIG=${DOPPLER_CONFIG:-prd} doppler run --print-config -- next-sitemap",
+    "postbuild": "NODE_ENV=production next-sitemap",
     "build-vercel": "NODE_ENV=production && npm run prebuild && next build && npm run postbuild",
     "start": "NODE_ENV=production DOPPLER_PROJECT=${DOPPLER_PROJECT:-web} DOPPLER_CONFIG=${DOPPLER_CONFIG:-prd} doppler run --print-config -- next start",
     "export": "NODE_ENV=production DOPPLER_PROJECT=${DOPPLER_PROJECT:-web} DOPPLER_CONFIG=${DOPPLER_CONFIG:-prd} doppler run --print-config -- next export",
