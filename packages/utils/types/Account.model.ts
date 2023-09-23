@@ -172,7 +172,8 @@ interface Account {
   copiers?: number;
   rank?: string;
   order?: number;
-  category?: string; // nature-elements, ocean-marine
+  category?: string;
+  categories?: string[];
 
   investors?: Investor[];
   members?: Member[];

@@ -96,17 +96,17 @@ function Catalog() {
       </Stack>
 
       <Divider />
-      <Stack align="center" id="ocean-marine">
-        <CopyButton href={`https://www.fishprovider.com${router.pathname}#ocean-marine`}>
+      <Stack align="center" id="ocean-series">
+        <CopyButton href={`https://www.fishprovider.com${router.pathname}#ocean-series`}>
           <Title size="h2">
-            Ocean and Marine
+            Ocean Series
           </Title>
         </CopyButton>
         <ProviderCards
           favorite={favorite}
           search={search}
           variant={cardVariant}
-          category="ocean-marine"
+          category="ocean-series"
         />
       </Stack>
     </Stack>

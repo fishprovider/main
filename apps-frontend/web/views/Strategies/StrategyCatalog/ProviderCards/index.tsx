@@ -42,7 +42,8 @@ function ProviderCards({
       if (account.providerGroupId && account.providerGroupId !== account._id) return false;
       if (favorite && !starProviders[account._id]) return false;
       if (search && !account.name.toLowerCase().includes(search.toLowerCase())) return false;
-      if (category && account.category !== category) return false;
+      if (category && !(account.category === category || account.categories?.includes(category)
+      )) return false;
       return true;
     }),
     [
