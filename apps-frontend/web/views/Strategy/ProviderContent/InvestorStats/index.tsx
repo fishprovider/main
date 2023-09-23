@@ -21,7 +21,7 @@ function InvestorStats() {
   const {
     providerId = '',
     providerPlatform,
-    edd = 0,
+    // edd = 0,
     createdAt,
     capital = 0,
     riskScore,
@@ -32,7 +32,7 @@ function InvestorStats() {
   } = storeUser.useStore((state) => ({
     providerId: state.activeProvider?._id,
     providerPlatform: state.activeProvider?.providerPlatform,
-    edd: state.activeProvider?.edd,
+    // edd: state.activeProvider?.edd,
     createdAt: state.activeProvider?.createdAt,
     capital: state.activeProvider?.capital,
     riskScore: state.activeProvider?.riskScore,
@@ -42,8 +42,10 @@ function InvestorStats() {
     summary: state.activeProvider?.summary,
   }));
 
-  const profit = summary?.roi || roi || 0;
+  const totalProfit = summary?.roi || roi || 0;
   const activeMonths = moment().diff(moment(createdAt), 'months') + 1;
+  const avgProfit = totalProfit / activeMonths;
+  const copyFund = summary?.copyFund || capital;
 
   return (
     <Stack>
@@ -65,7 +67,12 @@ function InvestorStats() {
               <Text>
                 🎯 Target:
                 {' '}
-                <Text fw={700} span c="orange">{`${maxYearProfit}% / year`}</Text>
+                <Text fw={700} span c="orange">{`${maxYearProfit}%/year`}</Text>
+              </Text>
+              <Text>
+                💰 Total Profit:
+                {' '}
+                <Text fw={700} span c="green">{`${totalProfit}%`}</Text>
               </Text>
               <Text>
                 🏊 Active:
@@ -75,27 +82,24 @@ function InvestorStats() {
                 </Text>
               </Text>
               <Text>
-                💰 All-Time Profit:
-                {' '}
-                <Text fw={700} span c="green">{`${profit}%`}</Text>
-              </Text>
-              <Text>
                 🗓️ Average Profit:
                 {' '}
                 <Text fw={700} span c="grape">
-                  {`${_.round(profit / activeMonths, 2)}%/month`}
+                  {`${_.round(avgProfit, 2)}%/month`}
                 </Text>
               </Text>
-              <Text>
-                🏦 Capital:
-                {' '}
-                <Text fw={700} span c="yellow">{`${capital} USD`}</Text>
-              </Text>
-              <Text>
+              {!!copyFund && (
+                <Text>
+                  🏦 Copy Capital:
+                  {' '}
+                  <Text fw={700} span c="yellow">{`${copyFund} USD`}</Text>
+                </Text>
+              )}
+              {/* <Text>
                 📉 Max EDD:
                 {' '}
                 <Text fw={700} span c="red">{`${edd}%`}</Text>
-              </Text>
+              </Text> */}
             </Box>
             <Group>
               <InvestNow providerId={providerId} />

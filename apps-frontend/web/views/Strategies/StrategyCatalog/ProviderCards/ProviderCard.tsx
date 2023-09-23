@@ -54,8 +54,9 @@ function ProviderCard({
     summary: state[providerId]?.summary,
   }));
 
-  const profit = summary?.roi || roi || 0;
+  const totalProfit = summary?.roi || roi || 0;
   const activeMonths = moment().diff(moment(createdAt), 'months') + 1;
+  const avgProfit = totalProfit / activeMonths;
 
   const renderCardBig = () => (
     <Link href={toStrategy(providerId)} variant="clean">
@@ -81,6 +82,11 @@ function ProviderCard({
               <Text fw={700} span c="orange">{`${maxYearProfit}%/year`}</Text>
             </Text>
             <Text>
+              Total Profit:
+              {' '}
+              <Text fw={700} span c="green">{`${totalProfit}%`}</Text>
+            </Text>
+            <Text>
               Active:
               {' '}
               <Text fw={700} span c="blue">
@@ -88,14 +94,9 @@ function ProviderCard({
               </Text>
             </Text>
             <Text>
-              All-Time Profit:
-              {' '}
-              <Text fw={700} span c="green">{`${profit}%`}</Text>
-            </Text>
-            <Text>
               Avg. Profit:
               {' '}
-              <Text fw={700} span c="grape">{`${_.round(profit / activeMonths, 2)}%/month`}</Text>
+              <Text fw={700} span c="grape">{`${_.round(avgProfit, 2)}%/month`}</Text>
             </Text>
           </Box>
           <Group position="center">
@@ -148,6 +149,11 @@ function ProviderCard({
                 <Text fw={700} span c="orange">{`${maxYearProfit}%/year`}</Text>
               </Text>
               <Text size="sm">
+                Total Profit:
+                {' '}
+                <Text fw={700} span c="green">{`${totalProfit}%`}</Text>
+              </Text>
+              <Text size="sm">
                 Active:
                 {' '}
                 <Text fw={700} span c="blue">
@@ -155,14 +161,9 @@ function ProviderCard({
                 </Text>
               </Text>
               <Text size="sm">
-                All-Time Profit:
-                {' '}
-                <Text fw={700} span c="green">{`${profit}%`}</Text>
-              </Text>
-              <Text size="sm">
                 Avg. Profit:
                 {' '}
-                <Text fw={700} span c="grape">{`${_.round(profit / activeMonths, 2)}%/month`}</Text>
+                <Text fw={700} span c="grape">{`${_.round(avgProfit, 2)}%/month`}</Text>
               </Text>
             </Box>
           </Group>

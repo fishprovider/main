@@ -72,8 +72,9 @@ function ProviderCardTop({ providerId }: Props) {
     summary = {},
   } = account || defaultTopProviders[providerId] || {};
 
-  const profit = summary?.roi || roi || 0;
+  const totalProfit = summary?.roi || roi || 0;
   const activeMonths = moment().diff(moment(createdAt), 'months') + 1;
+  const avgProfit = totalProfit / activeMonths;
 
   return (
     <Link href={toStrategy(providerId)} variant="clean">
@@ -101,6 +102,11 @@ function ProviderCardTop({ providerId }: Props) {
               <Text fw={700} span c="orange">{`${maxYearProfit}%/year`}</Text>
             </Text>
             <Text>
+              Total Profit:
+              {' '}
+              <Text fw={700} span c="green">{`${totalProfit}%`}</Text>
+            </Text>
+            <Text>
               Active:
               {' '}
               <Text fw={700} span c="blue">
@@ -108,14 +114,9 @@ function ProviderCardTop({ providerId }: Props) {
               </Text>
             </Text>
             <Text>
-              All-Time Profit:
-              {' '}
-              <Text fw={700} span c="green">{`${profit}%`}</Text>
-            </Text>
-            <Text>
               Avg. Profit:
               {' '}
-              <Text fw={700} span c="grape">{`${_.round(profit / activeMonths, 2)}%/month`}</Text>
+              <Text fw={700} span c="grape">{`${_.round(avgProfit, 2)}%/month`}</Text>
             </Text>
           </Box>
           <InvestNow providerId={providerId} />

@@ -6,8 +6,6 @@ import {
   Brush,
   CartesianGrid,
   ComposedChart,
-  LabelList,
-  LabelProps,
   Legend,
   Line,
   Rectangle,
@@ -24,8 +22,8 @@ const defaultProfitMonths: Record<number, number[]> = {
   2023: [3.16, 1.8, 3.15, 2.14, 2.1, 4.18, 2.22, 2.05, 2.09],
 };
 
-const nameProfit = 'Month Profit (%)';
-const nameProfitAcc = 'All-Time Profit (%)';
+const nameProfit = 'Monthly Profit (%)';
+const nameProfitAcc = 'Total Profit (%)';
 
 function BarProfit(props: { value: number }) {
   const { value } = props;

@@ -43,19 +43,15 @@ export default function ProviderCard({ providerId }: Props) {
     summary: state[providerId]?.summary,
   }));
 
-  const profit = summary?.roi || roi || 0;
+  const totalProfit = summary?.roi || roi || 0;
   const activeMonths = moment().diff(moment(createdAt), 'months') + 1;
+  const avgProfit = totalProfit / activeMonths;
 
   const onInvest = () => {
     WebBrowser.openBrowserAsync(mode === 'live'
       ? `https://www.fishprovider.com/strategies/${providerId}?notrack=true`
       : `https://demo.fishprovider.com/strategies/${providerId}?notrack=true`);
   };
-
-  const target = `${maxYearProfit}%/year`;
-  const allTimeProfit = `${profit}%`;
-  const active = moment.duration(moment().diff(moment(createdAt))).humanize();
-  const avgProfit = `${_.round(profit / activeMonths, 2)}%/month`;
 
   return (
     <ThemeProvider name="light">
@@ -73,22 +69,22 @@ export default function ProviderCard({ providerId }: Props) {
               <Text>
                 Target:
                 {' '}
-                <Text color="orange">{target}</Text>
+                <Text color="orange">{`${maxYearProfit}%/year`}</Text>
+              </Text>
+              <Text>
+                Total Profit:
+                {' '}
+                <Text color="green">{`${totalProfit}%`}</Text>
               </Text>
               <Text>
                 Active:
                 {' '}
-                <Text color="blue">{active}</Text>
-              </Text>
-              <Text>
-                All-Time Profit:
-                {' '}
-                <Text color="green">{allTimeProfit}</Text>
+                <Text color="blue">{moment.duration(moment().diff(moment(createdAt))).humanize()}</Text>
               </Text>
               <Text>
                 Avg. Profit:
                 {' '}
-                <Text color="purple">{avgProfit}</Text>
+                <Text color="purple">{`${_.round(avgProfit, 2)}%/month`}</Text>
               </Text>
             </Stack>
           </Group>
