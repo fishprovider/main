@@ -16,7 +16,7 @@
     "node": ">=16 <19"
   },
   "scripts": {
-    "ci": "npm ci --prefer-offline --no-audit --no-progress --legacy-peer-deps",
+    "ci": "npm ci --legacy-peer-deps",
     "postinstall": "npx husky install",
     "lint": "npm run lint -ws",
     "clean": "npm run clean -ws",
