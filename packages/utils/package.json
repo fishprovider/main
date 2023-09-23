@@ -21,9 +21,9 @@
   "devDependencies": {
     "@tsconfig/next": "^2.0.0",
     "@tsconfig/node-lts": "^18.12.5",
-    "@tsconfig/strictest": "^2.0.1",
-    "@types/lodash": "^4.14.197",
-    "tsc-alias": "^1.8.7",
+    "@tsconfig/strictest": "^2.0.2",
+    "@types/lodash": "^4.14.199",
+    "tsc-alias": "^1.8.8",
     "typescript": "^5.2.2"
   }
 }

@@ -19,6 +19,6 @@
   "dependencies": {
     "@fishprovider/core-utils": "*",
     "@fishprovider/repositories": "*",
-    "redis": "^4.6.8"
+    "redis": "^4.6.10"
   }
 }

@@ -22,7 +22,7 @@
   "dependencies": {
     "@fishprovider/old-core": "*",
     "@fishprovider/swap": "*",
-    "node-telegram-bot-api": "^0.61.0",
+    "node-telegram-bot-api": "^0.63.0",
     "node-telegram-keyboard-wrapper": "^3.1.0"
   }
 }

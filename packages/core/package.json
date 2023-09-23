@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@fishprovider/utils": "*",
-    "@sentry/node": "^7.65.0",
+    "@sentry/node": "^7.70.0",
     "agenda": "^5.0.0",
     "amqplib": "^0.10.3",
     "axios": "^1.5.0",
@@ -33,18 +33,18 @@
     "loglevel": "^1.8.1",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.43",
-    "mongodb": "^5.8.1",
-    "p-queue": "^7.3.4",
+    "mongodb": "^5.9.0",
+    "p-queue": "^7.4.1",
     "pg": "^8.11.3",
-    "redis": "^4.6.8",
+    "redis": "^4.6.10",
     "socket.io": "^4.7.2",
-    "systeminformation": "^5.21.1"
+    "systeminformation": "^5.21.8"
   },
   "devDependencies": {
-    "@types/amqplib": "^0.10.1",
-    "@types/compression": "^1.7.2",
+    "@types/amqplib": "^0.10.2",
+    "@types/compression": "^1.7.3",
     "@types/express-session": "^1.17.7",
     "@types/pg": "^8.10.2",
-    "esbuild": "^0.19.2"
+    "esbuild": "^0.19.3"
   }
 }

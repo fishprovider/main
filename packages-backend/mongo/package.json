@@ -19,6 +19,6 @@
   "dependencies": {
     "@fishprovider/core-utils": "*",
     "@fishprovider/repositories": "*",
-    "mongodb": "^5.8.1"
+    "mongodb": "^5.9.0"
   }
 }

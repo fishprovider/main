@@ -26,9 +26,9 @@
     "@fishprovider/old-core": "*",
     "@fishprovider/swap": "*",
     "@fishprovider/trade": "*",
-    "glob": "^10.3.3",
+    "glob": "^10.3.6",
     "notion-client": "^6.16.0",
-    "openai": "^4.3.0",
+    "openai": "^4.10.0",
     "zod": "^3.22.2"
   }
 }
