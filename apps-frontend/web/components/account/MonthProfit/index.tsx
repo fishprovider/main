@@ -99,17 +99,16 @@ function MonthProfit({
       <ComposedChart data={data}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="month" fontSize={12} />
-        <YAxis yAxisId="profitMonth" unit="%" hide />
-        <YAxis yAxisId="profitAcc" unit="%" orientation="right" />
+        <YAxis yAxisId="profitMonth" unit="%" orientation="right" />
+        <YAxis yAxisId="profitAcc" unit="%" hide />
         <Tooltip />
         <Legend />
         <Bar
           yAxisId="profitMonth"
           dataKey={nameProfit}
           shape={BarProfit}
-        >
-          <LabelList dataKey={nameProfit} content={renderLabel} />
-        </Bar>
+          label={{ content: renderLabel }}
+        />
         <Line
           yAxisId="profitAcc"
           dataKey={nameProfitAcc}
