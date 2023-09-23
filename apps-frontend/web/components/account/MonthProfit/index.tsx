@@ -84,7 +84,7 @@ function MonthProfit({
 
   const renderLabel = ({
     x, y, width, value,
-  }: LabelProps) => _.isNumber(x) && _.isNumber(y) && _.isNumber(width) && (
+  }: any) => (
     <g>
       <text x={x + width / 2} y={y - 5} textAnchor="middle" fontSize={isTablet ? 10 : 14}>
         {`${value}%`}
