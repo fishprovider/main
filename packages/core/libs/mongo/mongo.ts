@@ -52,7 +52,7 @@ const destroyAsync = async () => {
   console.log('Mongo destroyed');
 };
 
-const runDBTransaction = async (handler: (session: ClientSession) => Promise<void>) => {
+const runDBTransaction = async <T>(handler: (session: ClientSession) => Promise<T>) => {
   const session = MongoConnection.startSession({
     defaultTransactionOptions: {
       readConcern: { level: 'snapshot' },
@@ -68,9 +68,7 @@ const runDBTransaction = async (handler: (session: ClientSession) => Promise<voi
       * - Will throw if one of the operations throws or `throw` statement is used inside the `withTransaction` callback
     */
     /* eslint-enable max-len */
-    const res = await session.withTransaction(async () => {
-      await handler(session);
-    });
+    const res = await session.withTransaction(() => handler(session));
     if (res) {
       await session.commitTransaction();
     }

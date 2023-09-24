@@ -108,7 +108,7 @@ const updateAccount = async (
   const collection = db.collection<Account>('accounts');
 
   if (returnAfter) {
-    const { value: account } = await collection.findOneAndUpdate(
+    const account = await collection.findOneAndUpdate(
       accountFilter,
       updateFilter,
       {
