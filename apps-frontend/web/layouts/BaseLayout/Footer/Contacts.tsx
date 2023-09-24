@@ -47,12 +47,13 @@ function CustomIcon({
 interface DefaultIconProps {
   name: string;
   url: string;
+  network?: string
 }
 
-function DefaultIcon({ name, url }: DefaultIconProps) {
+function DefaultIcon({ name, url, network }: DefaultIconProps) {
   return (
     <Tooltip label={name}>
-      <SocialIcon style={{ height: 30, width: 30 }} url={url} target="_blank" />
+      <SocialIcon style={{ height: 30, width: 30 }} url={url} target="_blank" network={network} />
     </Tooltip>
   );
 }
@@ -64,9 +65,9 @@ function Contacts() {
 
       <Group spacing={4}>
         <Text span>Latest Updates</Text>
-        <DefaultIcon name="Telegram" url={`https://t.me/${commonKey}`} />
+        <DefaultIcon name="Telegram" url={`https://t.me/${commonKey}`} network="telegram" />
         <DefaultIcon name="Discord" url={`https://discord.gg/${discordKey}`} />
-        <CustomIcon name="X (Twitter)" url={`https://twitter.com/${commonKey}`} icon="/icons/twitter.png" />
+        <DefaultIcon name="X (Twitter)" url={`https://twitter.com/${commonKey}`} network="x" />
         <DefaultIcon name="Facebook" url={`https://www.facebook.com/${commonKey}`} />
         <DefaultIcon name="Linkedin" url={`https://www.linkedin.com/company/${commonKey}`} />
         <DefaultIcon name="Tiktok" url={`https://www.tiktok.com/@${commonKey}`} />
@@ -77,13 +78,13 @@ function Contacts() {
         <CustomIcon name="Quora" url={`https://${commonKey}.quora.com`} icon="/icons/quora.svg" />
         <DefaultIcon name="Medium" url={`https://www.medium.com/@${commonKey}`} />
         <DefaultIcon name="Tumblr" url={`https://www.tumblr.com/blog/${commonKey}`} />
-        <CustomIcon name="Mastodon" url={`https://mastodon.social/@${commonKey}`} icon="/icons/mastodon.svg" />
+        <DefaultIcon name="Mastodon" url={`https://mastodon.social/@${commonKey}`} />
         <DefaultIcon name="Github" url="https://github.com/orgs/fishprovider/discussions/categories/announcements" />
       </Group>
 
       <Group spacing={4}>
         <Text span>Chat and Email</Text>
-        <DefaultIcon name="Telegram Chat" url={`https://t.me/${commonKey}chat`} />
+        <DefaultIcon name="Telegram Chat" url={`https://t.me/${commonKey}chat`} network="telegram" />
         <DefaultIcon name="Discord" url={`https://discord.gg/${discordKey}`} />
         <DefaultIcon name="WhatsApp" url={`https://chat.whatsapp.com/${whatsAppChatKey}`} />
         <CustomIcon name="Zalo" url={`https://zalo.me/g/${zaloKey}`} icon="/icons/zalo.svg" />
