@@ -33,7 +33,7 @@
     "loglevel": "^1.8.1",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.43",
-    "mongodb": "^5.9.0",
+    "mongodb": "^6.1.0",
     "p-queue": "^7.4.1",
     "pg": "^8.11.3",
     "redis": "^4.6.10",
@@ -43,7 +43,7 @@
   "devDependencies": {
     "@types/amqplib": "^0.10.2",
     "@types/compression": "^1.7.3",
-    "@types/express-session": "^1.17.7",
+    "@types/express-session": "^1.17.8",
     "@types/pg": "^8.10.2",
     "esbuild": "^0.19.3"
   }
