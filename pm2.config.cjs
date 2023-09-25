@@ -2,28 +2,34 @@
 // frontend
 //
 
+const frontendAppBase = {
+  script: 'npm',
+  exp_backoff_restart_delay: 100,
+  env: {
+    HUSKY: 0,
+    DOPPLER_PROJECT: 'web',
+    DOPPLER_CONFIG: 'prd',
+  },
+};
+
 const frontendApps = [
   {
+    ...frontendAppBase,
     name: 'web',
+    args: 'run start -w apps-frontend/web',
     env: {
-      HUSKY: 0,
-      DOPPLER_PROJECT: 'web',
-      DOPPLER_CONFIG: 'prd',
+      ...frontendAppBase.env,
       PORT: 3000,
     },
-    script: 'npm',
-    args: 'run start -w apps-frontend/web',
   },
   {
+    ...frontendAppBase,
     name: 'web-secondary',
+    args: 'run start -w apps-frontend/web',
     env: {
-      HUSKY: 0,
-      DOPPLER_PROJECT: 'web',
-      DOPPLER_CONFIG: 'prd',
+      ...frontendAppBase.env,
       PORT: 3100,
     },
-    script: 'npm',
-    args: 'run start -w apps-frontend/web',
   },
 ];
 
@@ -31,174 +37,142 @@ const frontendApps = [
 // backend
 //
 
-const backendAppConfigBase = {
+const backendAppBase = {
   script: 'npm',
+  exp_backoff_restart_delay: 100,
   env: {
     HUSKY: 0,
     DOPPLER_PROJECT: 'backend',
     DOPPLER_CONFIG: 'prd_fish_server',
+    PORT: 0, // system will assign a random port
   },
 };
 
-const backendAppConfigs = [
+const backendApps = [
   {
-    ...backendAppConfigBase,
+    ...backendAppBase,
     name: 'back',
+    args: 'run start -w apps-backend/back',
     cron_restart: '0 */4 * * *',
     env: {
-      ...backendAppConfigBase.env,
+      ...backendAppBase.env,
       PORT: 3001,
     },
   },
   {
-    ...backendAppConfigBase,
+    ...backendAppBase,
     name: 'back-secondary',
-    project: 'back',
+    args: 'run start -w apps-backend/back',
     cron_restart: '2 */4 * * *',
     env: {
-      ...backendAppConfigBase.env,
+      ...backendAppBase.env,
       PORT: 3101,
     },
   },
   {
-    ...backendAppConfigBase,
+    ...backendAppBase,
     name: 'bot',
+    args: 'run start -w apps-backend/bot',
     cron_restart: '4 */4 * * *',
-    env: {
-      ...backendAppConfigBase.env,
-      PORT: 8007,
-    },
   },
   {
-    ...backendAppConfigBase,
+    ...backendAppBase,
     name: 'copy',
+    args: 'run start -w apps-backend/copy',
     cron_restart: '6 */4 * * *',
-    env: {
-      ...backendAppConfigBase.env,
-      PORT: 8006,
-    },
   },
   {
-    ...backendAppConfigBase,
+    ...backendAppBase,
     name: 'cron',
+    args: 'run start -w apps-backend/cron',
     cron_restart: '8 */4 * * *',
-    env: {
-      ...backendAppConfigBase.env,
-      PORT: 8002,
-    },
   },
   {
-    ...backendAppConfigBase,
+    ...backendAppBase,
     name: 'gate',
+    args: 'run start -w apps-backend/gate',
     cron_restart: '10 */4 * * *',
     env: {
-      ...backendAppConfigBase.env,
+      ...backendAppBase.env,
       PORT: 8001,
     },
   },
   {
-    ...backendAppConfigBase,
+    ...backendAppBase,
     name: 'head-ctrader',
+    args: 'run start -w apps-backend/head-ctrader',
     cron_restart: '12 */4 * * *',
-    env: {
-      ...backendAppConfigBase.env,
-      PORT: 8005,
-    },
   },
   {
-    ...backendAppConfigBase,
+    ...backendAppBase,
     name: 'head-meta',
+    args: 'run start -w apps-backend/head-meta',
     cron_restart: '14 */4 * * *',
-    env: {
-      ...backendAppConfigBase.env,
-      PORT: 8009,
-    },
   },
   {
-    ...backendAppConfigBase,
+    ...backendAppBase,
     name: 'mon',
+    args: 'run start -w apps-backend/mon',
+    cron_restart: '16 */4 * * *',
     env: {
-      ...backendAppConfigBase.env,
+      ...backendAppBase.env,
       PORT: 8000,
       DRY_RUN: true,
     },
-    cron_restart: '16 */4 * * *',
   },
   {
-    ...backendAppConfigBase,
+    ...backendAppBase,
     name: 'pay',
+    args: 'run start -w apps-backend/pay',
     cron_restart: '18 */4 * * *',
     env: {
-      ...backendAppConfigBase.env,
+      ...backendAppBase.env,
       PORT: 8020,
     },
   },
   {
-    ...backendAppConfigBase,
+    ...backendAppBase,
     name: 'pup',
+    args: 'run start -w apps-backend/pup',
     cron_restart: '20 */4 * * *',
-    env: {
-      ...backendAppConfigBase.env,
-      PORT: 8003,
-    },
   },
   {
-    ...backendAppConfigBase,
+    ...backendAppBase,
     name: 'spot-ctrader',
+    args: 'run start -w apps-backend/spot-ctrader',
     cron_restart: '22 */4 * * *',
-    env: {
-      ...backendAppConfigBase.env,
-      PORT: 8004,
-    },
   },
   {
-    ...backendAppConfigBase,
+    ...backendAppBase,
+    name: 'spot-meta',
+    args: 'run start -w apps-backend/spot-meta',
+    cron_restart: '24 */4 * * *',
+  },
+  {
+    ...backendAppBase,
     name: 'spot-ctrader-poll',
-    project: 'spot-ctrader',
+    args: 'run start -w apps-backend/spot-ctrader',
+    cron_restart: '26 */4 * * *',
     env: {
-      ...backendAppConfigBase.env,
-      PORT: 8104,
+      ...backendAppBase.env,
       TYPE_ID: 'spot-ctrader-icmarkets-poll',
       SPOT_TASKS: 'poll',
       WATCH_PATTERN: '^(AUDCAD|AUDCHF|AUDJPY|AUDNZD|AUDUSD|CADCHF|CADJPY|CHFJPY|EURAUD|EURCAD|EURCHF|EURGBP|EURJPY|EURNZD|EURUSD|GBPAUD|GBPCAD|GBPCHF|GBPJPY|GBPNZD|GBPUSD|NZDCAD|NZDCHF|NZDJPY|NZDUSD|USDCAD|USDCHF|USDJPY|XAGUSD|XAUUSD)$',
     },
-    cron_restart: '24 */4 * * *',
   },
   {
-    ...backendAppConfigBase,
-    name: 'spot-meta',
-    cron_restart: '26 */4 * * *',
-    env: {
-      ...backendAppConfigBase.env,
-      PORT: 8008,
-    },
-  },
-  {
-    ...backendAppConfigBase,
+    ...backendAppBase,
     name: 'spot-meta-poll',
-    project: 'spot-meta',
+    args: 'run start -w apps-backend/spot-meta',
+    cron_restart: '28 */4 * * *',
     env: {
-      ...backendAppConfigBase.env,
-      PORT: 8108,
+      ...backendAppBase.env,
       TYPE_ID: 'spot-meta-exness-poll',
       SPOT_TASKS: 'poll',
       WATCH_PATTERN: '^(AUDCAD|AUDCHF|AUDJPY|AUDNZD|AUDUSD|CADCHF|CADJPY|CHFJPY|EURAUD|EURCAD|EURCHF|EURGBP|EURJPY|EURNZD|EURUSD|GBPAUD|GBPCAD|GBPCHF|GBPJPY|GBPNZD|GBPUSD|NZDCAD|NZDCHF|NZDJPY|NZDUSD|USDCAD|USDCHF|USDJPY|XAGUSD|XAUUSD|BTCUSD|ETHUSD)$',
     },
-    cron_restart: '28 */4 * * *',
   },
 ];
-
-const backendApps = backendAppConfigs.map((config) => {
-  const {
-    name,
-    project = name,
-    args = `run start -w apps-backend/${project}`,
-  } = config;
-  return {
-    ...config,
-    args,
-  };
-});
 
 const apps = [...backendApps, ...frontendApps];
 

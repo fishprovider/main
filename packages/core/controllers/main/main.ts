@@ -115,15 +115,13 @@ const start = async (adapter: Adapter) => {
     ]);
     await startExpress(adapter);
     await startMain(adapter);
+
+    // send the ready signal to PM2 for the `reload` process
+    if (process.send) {
+      process.send('ready');
+    }
   } catch (err) {
     Logger.error(`🔥 Failed to start: ${err}`);
-  }
-};
-
-const ready = () => {
-  // send the ready signal to PM2 for the `reload` process
-  if (process.send) {
-    process.send('ready');
   }
 };
 
@@ -182,6 +180,5 @@ const destroyAsync = async (adapter: Adapter) => {
 export {
   destroy,
   destroyAsync,
-  ready,
   start,
 };
