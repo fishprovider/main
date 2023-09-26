@@ -2,7 +2,7 @@
   "name": "@fishprovider/phone",
   "version": "5.0.0",
   "scripts": {
-    "doctor": "npx expo-doctor",
+    "doctor": "npx expo-doctor@latest",
     "lint": "eslint --cache --fix .",
     "type-check": "tsc --noEmit",
     "clean": "rm -rf .expo *.tsbuildinfo",

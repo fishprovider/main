@@ -8,5 +8,5 @@ function old() {
 }
 
 old &
-bash ./build-frontend-new.sh build-share &
+# bash ./build-frontend-new.sh build-share &
 wait

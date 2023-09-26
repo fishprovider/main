@@ -1,6 +1,6 @@
 export default {
   expo: {
-    name: 'FishProvider',
+    name: 'FishProvider (Dev)',
     description: 'Follow Our Leaders, Amplify Your Profits - Everlasting and Stable Success with FishProvider Copy Trading Strategies',
     version: '5.0.0',
     slug: 'fishprovider',
@@ -18,8 +18,8 @@ export default {
       '**/*',
     ],
     ios: {
-      bundleIdentifier: 'com.fishprovider.app',
-      googleServicesFile: './GoogleService-Info.plist',
+      bundleIdentifier: 'com.fishprovider.dev',
+      googleServicesFile: './GoogleService-Info-dev.plist' ,
       infoPlist: {
         ITSAppUsesNonExemptEncryption: false,
       },
@@ -30,8 +30,8 @@ export default {
       supportsTablet: true,
     },
     android: {
-      package: 'com.fishprovider.app',
-      googleServicesFile: './google-services.json',
+      package: 'com.fishprovider.dev',
+      googleServicesFile: './google-services-dev.json',
       adaptiveIcon: {
         foregroundImage: './assets/images/adaptive-icon.png',
         backgroundColor: '#ffffff',
