@@ -32,7 +32,7 @@ const memberRemove = async ({ data, userInfo }: {
     },
   );
 
-  const { value: account } = await Mongo.collection<Account>('accounts').findOneAndUpdate(
+  const account = await Mongo.collection<Account>('accounts').findOneAndUpdate(
     {
       _id: providerId,
     },

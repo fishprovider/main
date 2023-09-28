@@ -49,7 +49,7 @@ const accountGet = async ({ data, userInfo }: {
   const memberInvite = memberInvites?.find(({ email }) => email === userInfo.email);
   if (memberInvite) {
     const { email, role } = memberInvite;
-    const { value: user } = await Mongo.collection<User>('users').findOneAndUpdate({
+    const user = await Mongo.collection<User>('users').findOneAndUpdate({
       email,
     }, {
       $unset: {
@@ -99,7 +99,7 @@ const accountGet = async ({ data, userInfo }: {
       updatedAt: new Date(),
     };
 
-    const { value: accountUpdated } = await Mongo.collection<Account>('accounts').findOneAndUpdate(
+    const accountUpdated = await Mongo.collection<Account>('accounts').findOneAndUpdate(
       {
         _id: providerId,
       },

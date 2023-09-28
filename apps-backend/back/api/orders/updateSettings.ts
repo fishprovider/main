@@ -37,7 +37,7 @@ const orderUpdateSettings = async ({ data, userInfo }: {
     return { error: ErrorType.accessDenied };
   }
 
-  const { value } = await Mongo.collection<Order>('orders').findOneAndUpdate(
+  const value = await Mongo.collection<Order>('orders').findOneAndUpdate(
     {
       _id: orderId,
     },

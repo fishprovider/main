@@ -43,7 +43,7 @@ const memberAdd = async ({ data, userInfo }: {
     },
   );
 
-  const { value: user } = await Mongo.collection<User>('users').findOneAndUpdate({
+  const user = await Mongo.collection<User>('users').findOneAndUpdate({
     email,
   }, {
     $unset: {
@@ -89,7 +89,7 @@ const memberAdd = async ({ data, userInfo }: {
       createdAt: new Date(),
     };
 
-    const { value: account } = await Mongo.collection<Account>('accounts').findOneAndUpdate(
+    const account = await Mongo.collection<Account>('accounts').findOneAndUpdate(
       {
         _id: providerId,
       },
@@ -126,7 +126,7 @@ const memberAdd = async ({ data, userInfo }: {
     createdAt: new Date(),
   };
 
-  const { value: account } = await Mongo.collection<Account>('accounts').findOneAndUpdate(
+  const account = await Mongo.collection<Account>('accounts').findOneAndUpdate(
     {
       _id: providerId,
     },
