@@ -1,6 +1,7 @@
 #!/bin/bash
 
-. ./git-config.sh
+git config --global push.default current
+git config --global checkout.defaultRemote origin
 
 git checkout dev; git pull origin dev; git merge master --no-verify
 git checkout canary; git pull origin canary; git merge dev --no-verify

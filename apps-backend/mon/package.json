@@ -11,7 +11,7 @@
     "clean": "rm -rf dist *.tsbuildinfo",
     "prebuild": "./build-deps.sh",
     "build": "node esbuild.cjs",
-    "postbuild": "./build-check.sh",
+    "postbuild": "../../scripts/build-check.sh",
     "build-watch": "WATCH_MODE=true node esbuild.cjs",
     "start-mon": "doppler run --print-config -- node --experimental-specifier-resolution=node dist/index.js",
     "start-immortal": "doppler run --print-config -- node --experimental-specifier-resolution=node dist/immortal.js",
