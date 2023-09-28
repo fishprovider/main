@@ -29,18 +29,18 @@ const getAccount = async (
     port,
   };
 
-  const account = await connectAndRun({
+  const tradeAccount = await connectAndRun({
     config,
     handler: (connection) => getAccountInformation(connection, accountId),
   });
 
   return {
     doc: {
-      providerPlatformAccountId: account.traderLogin || account.accountId,
-      leverage: account.leverage || 0,
-      balance: account.balance,
-      assetId: account.assetId,
-      providerData: account,
+      balance: tradeAccount.balance,
+      assetId: tradeAccount.assetId,
+      leverage: tradeAccount.leverage || 0,
+      providerPlatformAccountId: tradeAccount.traderLogin || tradeAccount.accountId,
+      providerData: tradeAccount,
       updatedAt: new Date(),
     },
   };

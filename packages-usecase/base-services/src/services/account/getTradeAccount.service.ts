@@ -44,7 +44,10 @@ export const getTradeAccountService: GetTradeAccountService = async ({
   // tradeAccount.asset = ...
 
   // non-blocking
-  repositories.account.updateAccount(filter, tradeAccount);
+  repositories.account.updateAccount(filter, {
+    ...tradeAccount,
+    providerId: tradeAccount.providerPlatformAccountId,
+  });
 
   const accountPublic: Partial<AccountFull> = {
     ...account,

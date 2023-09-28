@@ -1,5 +1,6 @@
 import {
-  Account, AccountConfig, AccountMember, AccountViewType,
+  Account, AccountConfig, AccountMember, AccountPlatform, AccountPrivate,
+  AccountSourceType, AccountTradeType, AccountType, AccountViewType,
 } from '@fishprovider/core';
 
 import {
@@ -24,10 +25,11 @@ export interface AccountRepository {
       addMember?: AccountMember,
       removeMemberId?: string,
       removeMemberInviteEmail?: string,
-      providerPlatformAccountId?: string,
-      leverage?: number,
+      // from TradeAccount
       balance?: number,
       assetId?: string,
+      leverage?: number,
+      providerId?: string,
       providerData?: any,
       updatedAt?: Date,
     },
@@ -40,7 +42,47 @@ export interface AccountRepository {
       accountViewType?: AccountViewType,
       memberId?: string,
       email?: string,
+      redirectCode?: string,
+      redirectUrl?: string,
+      config?: AccountConfig,
     },
     options?: BaseGetOptions<Account>,
   ) => Promise<BaseGetManyResult<Account>>;
+
+  allocateAccountConfig?: (
+    filter: {
+      accountPlatform: AccountPlatform,
+      accountType?: AccountType,
+      clientId?: string,
+      accountTradeType?: AccountTradeType,
+    },
+    options?: BaseGetOptions<Account>,
+  ) => Promise<BaseGetResult<AccountPrivate['config']>>;
+
+  addAccount?: (
+    filter: {
+      config: AccountConfig,
+      accountId: string,
+      name: string,
+      accountType: AccountType,
+      accountPlatform: AccountPlatform,
+      accountViewType: AccountViewType,
+      accountTradeType: AccountTradeType,
+      sourceType: AccountSourceType,
+      members: AccountMember[],
+      userId: string,
+      userEmail: string,
+      userName?: string,
+      userPicture?: string,
+      updatedAt: Date,
+      createdAt: Date,
+    },
+    options?: BaseGetOptions<Account>,
+  ) => Promise<BaseGetResult<Account>>;
+
+  removeAccount?: (
+    filter: {
+      accountId: string,
+    },
+  ) => Promise<string>;
 }
