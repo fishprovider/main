@@ -3,7 +3,6 @@
   "version": "5.0.0",
   "type": "module",
   "scripts": {
-    "postinstall": "npm run build -w ../../packages-usecase/base-services && npm run build -w ../../packages-backend/data-access && npm run build -w ../../packages-backend/trade",
     "lint": "eslint --cache --fix .",
     "type-check": "tsc --noEmit",
     "test": "npm run test-unit",

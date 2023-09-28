@@ -8,7 +8,6 @@
     "dist/"
   ],
   "scripts": {
-    "postinstall": "npm run build -w ../../packages-share/core-utils",
     "lint": "eslint --cache --fix .",
     "type-check": "tsc --noEmit",
     "test": "echo 'TODO: add tests'",

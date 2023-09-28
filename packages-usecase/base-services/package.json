@@ -8,7 +8,6 @@
     "dist/"
   ],
   "scripts": {
-    "postinstall": "npm run build -w ../../packages-share/core-utils && npm run build -w ../../packages-share/repositories",
     "lint": "eslint --cache --fix .",
     "type-check": "tsc --noEmit",
     "test": "NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules npx jest",
