@@ -85,4 +85,7 @@ export interface AccountRepository {
       accountId: string,
     },
   ) => Promise<string>;
+
+  // TODO: add/remove/fetch member
+  // TODO: lock account/member
 }
