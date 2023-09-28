@@ -12,7 +12,7 @@
     "lint": "eslint --cache --fix .",
     "type-check": "tsc --noEmit",
     "test": "NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules npx jest",
-    "clean": "rm -rf dist *.tsbuildinfo && mkdir dist",
+    "clean": "rm -rf dist *.tsbuildinfo",
     "build": "tsc -p tsconfig.build.json",
     "ci-lint": "eslint --cache --fix",
     "ci-type-check": "tsc-files --noEmit"
