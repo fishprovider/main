@@ -18,7 +18,9 @@ export const getAccountService: GetAccountService = async ({
   //
   // main
   //
-  const options = sanitizeAccountBaseGetOptions(optionsRaw);
+  const options = context?.internal
+    ? optionsRaw
+    : sanitizeAccountBaseGetOptions(optionsRaw);
 
   const { doc: account } = await repositories.account.getAccount(filter, options);
   if (!account) {

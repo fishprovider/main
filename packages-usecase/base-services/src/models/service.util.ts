@@ -13,6 +13,7 @@ export interface UserSession {
 
 export interface ServiceContext {
   userSession?: UserSession;
+  internal?: boolean;
 }
 
 export interface BaseGetServiceParams<T> {

@@ -2,7 +2,7 @@ import { AccountError, AccountFull, BaseError } from '@fishprovider/core';
 import { RepositoryError } from '@fishprovider/repositories';
 
 import {
-  checkAccess, GetTradeAccountService,
+  checkAccess, getAccountService, GetTradeAccountService,
 } from '../..';
 
 export const getTradeAccountService: GetTradeAccountService = async ({
@@ -25,7 +25,17 @@ export const getTradeAccountService: GetTradeAccountService = async ({
   // main
   //
   // call repository directly to get account config, getAccountService sanitize config by default
-  const { doc: account } = await repositories.account.getAccount(filter);
+  const { doc: account } = await getAccountService({
+    filter: {
+      accountId: filter.accountId,
+    },
+    options: {},
+    repositories,
+    context: {
+      ...context,
+      internal: true,
+    },
+  });
   if (!account) {
     throw new BaseError(AccountError.ACCOUNT_NOT_FOUND);
   }
