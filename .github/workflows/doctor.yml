@@ -19,8 +19,5 @@ jobs:
       - name: Install NPM packages
         uses: ./ci/github/install-npm
 
-      - name: Build
-        run: npm run build
-
       - name: Run doctor
         run: npm run doctor
