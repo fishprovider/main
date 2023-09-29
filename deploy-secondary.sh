@@ -18,4 +18,4 @@ pm2 deploy pm2.config.cjs $DEPLOY_ENV \
 exec "source ./pm2-preload.sh; npm i -w $APP_DIR"
 
 # stop, build, and start
-./restart $APP $APP_TYPE $DEPLOY_ENV
+source ./restart.sh $APP $APP_TYPE $DEPLOY_ENV

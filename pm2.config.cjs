@@ -194,12 +194,6 @@ const deploy = {
     host: 'localhost',
     path: '/Users/marco/pm2-apps/fishprovider',
   },
-  fish: {
-    ...deployConfigBase,
-    host: '185.255.131.171',
-    ssh_options: 'Port=1503',
-    path: '/home/marco/work/pm2-apps/fishprovider',
-  },
   fishWeb: { // web
     ...deployConfigBase,
     host: '185.255.131.171',
