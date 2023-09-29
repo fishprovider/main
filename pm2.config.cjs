@@ -250,11 +250,29 @@ module.exports = {
   deploy,
 };
 
-// Examples:
-// DEPLOY_ENV=fish npm run pm2-deploy-setup
-// DEPLOY_ENV=fish npm run pm2-deploy
-// DEPLOY_ENV=fish npm run pm2-deploy-ci
-//
-// DEPLOY_ENV=fish npm run pm2-deploy-build-deps
-// DEPLOY_ENV=fish npm run pm2-deploy-build apps-backend/back
-// DEPLOY_ENV=fish npm run pm2-deploy-start back
+/* Examples:
+
+./deploy.sh web frontend fishWeb
+./deploy.sh back backend fishBack
+
+./deploy.sh spot-ctrader backend fishPrice
+./deploy.sh spot-meta backend fishPrice
+./deploy.sh spot-ctrader-poll backend fishPrice
+./deploy.sh spot-meta-poll backend fishPrice
+
+./deploy.sh head-ctrader backend fishOrder
+./deploy.sh head-meta backend fishOrder
+
+./deploy.sh bot backend fishBot
+./deploy.sh copy backend fishBot
+
+./deploy.sh pay backend fishPay
+
+./deploy.sh cron backend fishCron
+./deploy.sh gate backend fishCron
+./deploy.sh mon backend fishCron
+
+./deploy-secondary.sh web frontend
+./deploy-secondary.sh back backend
+
+*/
