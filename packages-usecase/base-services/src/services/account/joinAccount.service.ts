@@ -24,12 +24,8 @@ export const joinAccountService: JoinAccountService = async ({
     repositories,
     context,
   });
-  if (!account) {
-    throw new BaseError(AccountError.ACCOUNT_NOT_FOUND);
-  }
 
-  const { memberInvites } = account;
-  const memberInvite = memberInvites?.find((item) => item.email === userSession.email);
+  const memberInvite = account?.memberInvites?.find((item) => item.email === userSession.email);
   if (!memberInvite) {
     throw new BaseError(AccountError.ACCOUNT_ACCESS_DENIED);
   }
