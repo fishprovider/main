@@ -14,7 +14,7 @@ export type GetAccountService = (params: BaseGetServiceParams<AccountFull> & {
   repositories: {
     account: AccountRepository
   },
-}) => Promise<BaseGetResult<Account>>;
+}) => Promise<BaseGetResult<AccountFull>>;
 
 export type UpdateAccountService = (params: BaseUpdateServiceParams<Account> & {
   filter: {

@@ -1,6 +1,4 @@
-import {
-  AccountError, AccountFull, BaseError,
-} from '@fishprovider/core';
+import { AccountError, BaseError } from '@fishprovider/core';
 
 import {
   checkLogin, checkRepository, getAccountService, GetTradeAccountService, updateAccountService,
@@ -35,8 +33,11 @@ export const getTradeAccountService: GetTradeAccountService = async ({
       internal: true,
     },
   });
+  if (!privateAccount) {
+    throw new BaseError(AccountError.ACCOUNT_NOT_FOUND);
+  }
 
-  const { config } = privateAccount as AccountFull;
+  const { config } = privateAccount;
   const { doc: tradeAccount } = await getAccountRepo({
     ...filter,
     config,
@@ -53,7 +54,10 @@ export const getTradeAccountService: GetTradeAccountService = async ({
     filter,
     payload: tradeAccount,
     repositories,
-    context,
+    context: {
+      ...context,
+      internal: true,
+    },
   });
 
   return { doc: tradeAccount };

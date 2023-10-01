@@ -1,9 +1,6 @@
 import {
-  checkLogin,
-  checkProjection,
-  checkRepository,
-  getAccountService, sanitizeAccountBaseGetOptions,
-  UpdateAccountService,
+  checkLogin, checkProjection, checkRepository, getAccountService,
+  sanitizeAccountBaseGetOptions, UpdateAccountService,
 } from '../..';
 
 export const updateAccountService: UpdateAccountService = async ({
@@ -15,18 +12,20 @@ export const updateAccountService: UpdateAccountService = async ({
   checkLogin(context?.userSession);
   const updateAccountRepo = checkRepository(repositories.account.updateAccount);
 
-  await getAccountService({
-    filter,
-    options: {
-      projection: {
-        _id: 1,
-        members: 1,
-        memberInvites: 1,
+  if (!context?.internal) {
+    await getAccountService({
+      filter,
+      options: {
+        projection: {
+          _id: 1,
+          members: 1,
+          memberInvites: 1,
+        },
       },
-    },
-    repositories,
-    context,
-  });
+      repositories,
+      context,
+    });
+  }
 
   //
   // main

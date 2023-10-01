@@ -1,10 +1,8 @@
 import { AccountError, BaseError } from '@fishprovider/core';
 
 import {
-  checkLogin,
-  checkProjection,
-  getAccountService, JoinAccountService, sanitizeAccountBaseGetOptions,
-  updateAccountService, updateUserService,
+  checkLogin, checkProjection, getAccountService, JoinAccountService,
+  sanitizeAccountBaseGetOptions, updateAccountService, updateUserService,
 } from '../..';
 
 export const joinAccountService: JoinAccountService = async ({
@@ -81,7 +79,10 @@ export const joinAccountService: JoinAccountService = async ({
       },
     },
     repositories,
-    context,
+    context: {
+      ...context,
+      internal: true,
+    },
   });
 
   checkProjection(options?.projection, accountNew);
