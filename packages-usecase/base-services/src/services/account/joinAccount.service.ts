@@ -35,19 +35,6 @@ export const joinAccountService: JoinAccountService = async ({
   //
   const { accountId } = filter;
   const { email, role } = memberInvite;
-  await updateUserService({
-    filter: {
-      email,
-    },
-    payload: {
-      addRole: {
-        accountId,
-        role,
-      },
-    },
-    repositories,
-    context,
-  });
 
   const options = sanitizeAccountBaseGetOptions(optionsRaw);
   const { doc: accountNew } = await updateAccountService({
@@ -82,6 +69,21 @@ export const joinAccountService: JoinAccountService = async ({
   });
 
   checkProjection(options?.projection, accountNew);
+
+  // non-blocking
+  updateUserService({
+    filter: {
+      email,
+    },
+    payload: {
+      addRole: {
+        accountId,
+        role,
+      },
+    },
+    repositories,
+    context,
+  });
 
   return { doc: accountNew };
 };
