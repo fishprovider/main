@@ -97,8 +97,8 @@ function MonthProfit({
       <ComposedChart data={data}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="month" fontSize={12} />
-        <YAxis yAxisId="profitMonth" unit="%" orientation="right" />
-        <YAxis yAxisId="profitAcc" unit="%" hide />
+        <YAxis yAxisId="profitMonth" unit="%" stroke="green" orientation="right" />
+        <YAxis yAxisId="profitAcc" unit="%" stroke="orange" />
         <Tooltip />
         <Legend />
         <Bar
