@@ -166,10 +166,8 @@ interface Account {
     type: ProviderType;
     url: string;
   }[];
-  strategyCommission?: number;
   minInvest?: number;
   capital?: number;
-  copiers?: number;
   rank?: string;
   order?: number;
   category?: string;

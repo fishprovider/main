@@ -1,5 +1,5 @@
 import {
-  Account, AccountMember, AccountViewType,
+  Account, AccountFull, AccountMember, AccountViewType,
 } from '@fishprovider/core';
 import {
   AccountRepository, BaseGetManyResult, BaseGetResult, UserRepository,
@@ -7,7 +7,7 @@ import {
 
 import { BaseGetServiceParams, BaseUpdateServiceParams } from '..';
 
-export type GetAccountService = (params: BaseGetServiceParams<Account> & {
+export type GetAccountService = (params: BaseGetServiceParams<AccountFull> & {
   filter: {
     accountId: string,
   },
@@ -25,10 +25,10 @@ export type UpdateAccountService = (params: BaseUpdateServiceParams<Account> & {
     addMember?: AccountMember,
     removeMemberId?: string,
     removeMemberInviteEmail?: string,
-    providerPlatformAccountId?: string,
+    // from TradeAccount
+    assetId?: string,
     leverage?: number,
     balance?: number,
-    assetId?: string,
     providerData?: any,
     updatedAt?: Date,
   },

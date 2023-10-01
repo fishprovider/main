@@ -195,14 +195,29 @@ export interface Account {
   _id: string;
   name: string;
 
+  /** @deprecated use accountType instead */
   providerType: AccountType;
+  /** @deprecated use accountPlatform instead */
   providerPlatform: AccountPlatform;
+  /** @deprecated use accountPlatformType instead */
   providerPlatformType?: string;
+  /** @deprecated use providerId instead */
   providerPlatformAccountId?: string;
 
+  /** @deprecated use accountGroupId instead */
   providerGroupId?: string;
+  /** @deprecated use accountViewType instead */
   providerViewType?: AccountViewType;
+  /** @deprecated use accountTradeType instead */
   providerTradeType?: AccountTradeType;
+
+  accountType: AccountType;
+  accountPlatform: AccountPlatform;
+  accountPlatformType?: string;
+
+  accountGroupId?: string;
+  accountViewType?: AccountViewType;
+  accountTradeType?: AccountTradeType;
 
   asset?: string;
   assetId?: string;
@@ -210,11 +225,13 @@ export interface Account {
   leverage?: number;
 
   balance?: number;
+  /** @deprecated use balanceStartMonth instead */
   balanceStart?: number;
+  balanceStartMonth?: number;
   balanceStartDay?: number;
   balanceStartDayUpdatedAt?: Date;
 
-  margin?: number; // MetaTrader only
+  margin?: number;
 
   maxEquity?: number;
   maxEquityTime?: Date;
@@ -231,10 +248,8 @@ export interface Account {
     type: AccountType;
     url: string;
   }[];
-  strategyCommission?: number;
   minInvest?: number;
   capital?: number;
-  copiers?: number;
   rank?: string;
   order?: number;
 
@@ -258,7 +273,7 @@ export interface Account {
   activities?: Record<string, AccountActivity>;
   stats?: AccountStats;
 
-  providerData?: Record<string, any>; // external
+  providerData?: Record<string, any>; // trade data
   summary?: Record<string, any>; // cron data
 
   userId?: string;

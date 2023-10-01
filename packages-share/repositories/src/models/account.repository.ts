@@ -26,10 +26,9 @@ export interface AccountRepository {
       removeMemberId?: string,
       removeMemberInviteEmail?: string,
       // from TradeAccount
-      balance?: number,
       assetId?: string,
       leverage?: number,
-      providerId?: string,
+      balance?: number,
       providerData?: any,
       updatedAt?: Date,
     },

@@ -1,9 +1,9 @@
-import { BaseError, UserError } from '@fishprovider/core';
-import { RepositoryError } from '@fishprovider/repositories';
-
 import {
+  checkLogin,
+  checkProjection,
+  checkRepository,
   getAccountService, sanitizeAccountBaseGetOptions,
-  UpdateAccountService, validateProjection,
+  UpdateAccountService,
 } from '../..';
 
 export const updateAccountService: UpdateAccountService = async ({
@@ -12,15 +12,17 @@ export const updateAccountService: UpdateAccountService = async ({
   //
   // pre-check
   //
-  if (!context?.userSession?._id) throw new BaseError(UserError.USER_ACCESS_DENIED);
-  if (!repositories.account.updateAccount) {
-    throw new BaseError(RepositoryError.REPOSITORY_NOT_IMPLEMENT);
-  }
+  checkLogin(context?.userSession);
+  const updateAccountRepo = checkRepository(repositories.account.updateAccount);
 
   await getAccountService({
     filter,
     options: {
-      projection: { _id: 1 },
+      projection: {
+        _id: 1,
+        members: 1,
+        memberInvites: 1,
+      },
     },
     repositories,
     context,
@@ -30,11 +32,9 @@ export const updateAccountService: UpdateAccountService = async ({
   // main
   //
   const options = sanitizeAccountBaseGetOptions(optionsRaw);
-  const { doc: account } = await repositories.account.updateAccount(filter, payload, options);
+  const { doc: account } = await updateAccountRepo(filter, payload, options);
 
-  if (!validateProjection(options?.projection, account)) {
-    throw new BaseError(RepositoryError.REPOSITORY_INVALID_PROJECTION);
-  }
+  checkProjection(options?.projection, account);
 
   return { doc: account };
 };

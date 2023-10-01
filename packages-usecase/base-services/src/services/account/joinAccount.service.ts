@@ -1,9 +1,10 @@
-import { AccountError, BaseError, UserError } from '@fishprovider/core';
-import { RepositoryError } from '@fishprovider/repositories';
+import { AccountError, BaseError } from '@fishprovider/core';
 
 import {
-  getAccountService, JoinAccountService, sanitizeAccountBaseGetOptions, ServiceError,
-  updateAccountService, updateUserService, validateProjection,
+  checkLogin,
+  checkProjection,
+  getAccountService, JoinAccountService, sanitizeAccountBaseGetOptions,
+  updateAccountService, updateUserService,
 } from '../..';
 
 export const joinAccountService: JoinAccountService = async ({
@@ -12,13 +13,9 @@ export const joinAccountService: JoinAccountService = async ({
   //
   // pre-check
   //
-  if (!context?.userSession?._id) throw new BaseError(UserError.USER_ACCESS_DENIED);
-  const { userSession } = context;
-  if (!userSession.email || !userSession.name) {
-    throw new BaseError(ServiceError.SERVICE_BAD_REQUEST);
-  }
+  const userSession = checkLogin(context?.userSession);
 
-  const { doc: accountMemberInvites } = await getAccountService({
+  const { doc: account } = await getAccountService({
     filter,
     options: {
       projection: {
@@ -29,11 +26,11 @@ export const joinAccountService: JoinAccountService = async ({
     repositories,
     context,
   });
-  if (!accountMemberInvites) {
+  if (!account) {
     throw new BaseError(AccountError.ACCOUNT_NOT_FOUND);
   }
 
-  const { memberInvites } = accountMemberInvites;
+  const { memberInvites } = account;
   const memberInvite = memberInvites?.find((item) => item.email === userSession.email);
   if (!memberInvite) {
     throw new BaseError(AccountError.ACCOUNT_ACCESS_DENIED);
@@ -54,13 +51,12 @@ export const joinAccountService: JoinAccountService = async ({
         role,
       },
     },
-    options: {},
     repositories,
     context,
   });
 
   const options = sanitizeAccountBaseGetOptions(optionsRaw);
-  const { doc: account } = await updateAccountService({
+  const { doc: accountNew } = await updateAccountService({
     filter: {
       accountId,
     },
@@ -76,14 +72,19 @@ export const joinAccountService: JoinAccountService = async ({
       },
       removeMemberInviteEmail: memberInvite.email,
     },
-    options,
+    options: {
+      returnAfter: true,
+      projection: {
+        _id: 1,
+        members: 1,
+        memberInvites: 1,
+      },
+    },
     repositories,
     context,
   });
 
-  if (!validateProjection(options?.projection, account)) {
-    throw new BaseError(RepositoryError.REPOSITORY_INVALID_PROJECTION);
-  }
+  checkProjection(options?.projection, accountNew);
 
-  return { doc: account };
+  return { doc: accountNew };
 };

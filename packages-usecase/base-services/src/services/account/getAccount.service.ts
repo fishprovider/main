@@ -1,8 +1,6 @@
-import { AccountError, BaseError } from '@fishprovider/core';
-import { RepositoryError } from '@fishprovider/repositories';
-
 import {
-  checkAccess, GetAccountService, sanitizeAccountBaseGetOptions, validateProjection,
+  checkAccountAccess, checkProjection, checkRepository, GetAccountService,
+  sanitizeAccountBaseGetOptions,
 } from '../..';
 
 export const getAccountService: GetAccountService = async ({
@@ -11,9 +9,7 @@ export const getAccountService: GetAccountService = async ({
   //
   // pre-check
   //
-  if (!repositories.account.getAccount) {
-    throw new BaseError(RepositoryError.REPOSITORY_NOT_IMPLEMENT);
-  }
+  const getAccountRepo = checkRepository(repositories.account.getAccount);
 
   //
   // main
@@ -22,14 +18,10 @@ export const getAccountService: GetAccountService = async ({
     ? optionsRaw
     : sanitizeAccountBaseGetOptions(optionsRaw);
 
-  const { doc: account } = await repositories.account.getAccount(filter, options);
-  if (!account) {
-    throw new BaseError(AccountError.ACCOUNT_NOT_FOUND);
-  }
-  if (!validateProjection(options?.projection, account)) {
-    throw new BaseError(RepositoryError.REPOSITORY_INVALID_PROJECTION);
-  }
-  checkAccess(account, context);
+  const { doc: account } = await getAccountRepo(filter, options);
+
+  checkProjection(options?.projection, account);
+  checkAccountAccess(account, context);
 
   return { doc: account };
 };

@@ -1,4 +1,6 @@
-import { User, UserRoles } from '@fishprovider/core';
+import {
+  BaseError, User, UserError, UserRoles,
+} from '@fishprovider/core';
 import { BaseGetOptions } from '@fishprovider/repositories';
 
 import { sanitizeBaseGetOptions, UserSession } from '..';
@@ -56,3 +58,14 @@ export const sanitizeUserBaseGetOptions = (
     pushNotif: 0,
   },
 );
+
+//
+// check functions
+//
+
+export const checkLogin = (userSession?: UserSession) => {
+  if (!userSession?._id) {
+    throw new BaseError(UserError.USER_ACCESS_DENIED);
+  }
+  return userSession;
+};

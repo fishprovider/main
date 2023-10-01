@@ -16,10 +16,20 @@ export const sanitizeAccountBaseGetOptions = (
   },
 );
 
-export const checkAccess = (
-  account: Partial<Account>,
+//
+// check functions
+//
+
+export const checkAccountAccess = (
+  account?: Partial<Account>,
   context?: ServiceContext,
 ) => {
+  if (!account) {
+    throw new BaseError(AccountError.ACCOUNT_NOT_FOUND);
+  }
+
+  if (context?.internal) return account;
+
   const { isManagerWeb } = getRoleProvider(context?.userSession?.roles);
   const {
     providerViewType, userId, members, memberInvites, deleted,
@@ -43,4 +53,6 @@ export const checkAccess = (
   if (!hasAccess()) {
     throw new BaseError(AccountError.ACCOUNT_ACCESS_DENIED);
   }
+
+  return account;
 };

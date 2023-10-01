@@ -1,8 +1,9 @@
-import { AccountError, AccountFull, BaseError } from '@fishprovider/core';
-import { RepositoryError } from '@fishprovider/repositories';
+import {
+  AccountError, AccountFull, BaseError,
+} from '@fishprovider/core';
 
 import {
-  checkAccess, getAccountService, GetTradeAccountService,
+  checkLogin, checkRepository, getAccountService, GetTradeAccountService, updateAccountService,
 } from '../..';
 
 export const getTradeAccountService: GetTradeAccountService = async ({
@@ -11,38 +12,32 @@ export const getTradeAccountService: GetTradeAccountService = async ({
   //
   // pre-check
   //
-  if (!repositories.account.getAccount) {
-    throw new BaseError(RepositoryError.REPOSITORY_NOT_IMPLEMENT);
-  }
-  if (!repositories.account.updateAccount) {
-    throw new BaseError(RepositoryError.REPOSITORY_NOT_IMPLEMENT);
-  }
-  if (!repositories.trade.getAccount) {
-    throw new BaseError(RepositoryError.REPOSITORY_NOT_IMPLEMENT);
-  }
+  checkLogin(context?.userSession);
+  const getAccountRepo = checkRepository(repositories.trade.getAccount);
 
   //
   // main
   //
   // call repository directly to get account config, getAccountService sanitize config by default
-  const { doc: account } = await getAccountService({
+  const { doc: privateAccount } = await getAccountService({
     filter: {
       accountId: filter.accountId,
     },
-    options: {},
+    options: {
+      projection: {
+        _id: 1,
+        config: 1,
+      },
+    },
     repositories,
     context: {
       ...context,
       internal: true,
     },
   });
-  if (!account) {
-    throw new BaseError(AccountError.ACCOUNT_NOT_FOUND);
-  }
-  checkAccess(account, context);
 
-  const { config } = account as AccountFull;
-  const { doc: tradeAccount } = await repositories.trade.getAccount({
+  const { config } = privateAccount as AccountFull;
+  const { doc: tradeAccount } = await getAccountRepo({
     ...filter,
     config,
   });
@@ -54,16 +49,12 @@ export const getTradeAccountService: GetTradeAccountService = async ({
   // tradeAccount.asset = ...
 
   // non-blocking
-  repositories.account.updateAccount(filter, {
-    ...tradeAccount,
-    providerId: tradeAccount.providerPlatformAccountId,
+  updateAccountService({
+    filter,
+    payload: tradeAccount,
+    repositories,
+    context,
   });
 
-  const accountPublic: Partial<AccountFull> = {
-    ...account,
-    ...tradeAccount,
-  };
-  delete accountPublic.config; // NEVER leak config to user
-
-  return { doc: accountPublic };
+  return { doc: tradeAccount };
 };

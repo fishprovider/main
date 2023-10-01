@@ -18,7 +18,6 @@ function AccountEdit() {
     icon: state.activeProvider?.icon,
     providerGroupId: state.activeProvider?.providerGroupId,
     strategyId: state.activeProvider?.strategyId,
-    minInvest: state.activeProvider?.minInvest,
   }));
 
   const [isEdit, setIsEdit] = useState(false);
