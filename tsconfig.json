@@ -4,6 +4,7 @@
     "@tsconfig/node-lts/tsconfig"
   ],
   "compilerOptions": {
+    "composite": true,
     "allowSyntheticDefaultImports": true,
     "exactOptionalPropertyTypes": false,
     "noPropertyAccessFromIndexSignature": false,
@@ -12,7 +13,6 @@
     "allowJs": true,
     "checkJs": false,
     "declaration": true,
-    "composite": true,
     // "incremental": true,
 
     // "lib": ["es2021"],
