@@ -16,14 +16,12 @@ import Group from '~ui/core/Group';
 import Icon from '~ui/core/Icon';
 import Stack from '~ui/core/Stack';
 import Text from '~ui/core/Text';
-import Tooltip from '~ui/core/Tooltip';
 import { getAccountStats } from '~utils/account';
 
 function AccountBalance() {
   const {
     providerId = '',
     providerType = ProviderType.icmarkets,
-    providerPlatformAccountId,
     balance = 0,
     leverage,
     marginRaw = 0,
@@ -31,7 +29,6 @@ function AccountBalance() {
   } = storeUser.useStore((state) => ({
     providerId: state.activeProvider?._id,
     providerType: state.activeProvider?.providerType,
-    providerPlatformAccountId: state.activeProvider?.providerPlatformAccountId,
     balance: state.activeProvider?.balance,
     leverage: state.activeProvider?.leverage,
     marginRaw: state.activeProvider?.margin,
@@ -79,16 +76,14 @@ function AccountBalance() {
     <Stack>
       <Grid>
         <Grid.Col xs={12} md={4}>
-          <Tooltip label={`Broker AccountId: ${providerPlatformAccountId}`}>
-            <Group spacing={0}>
-              <Text>
-                💰 Balance:
-                {' '}
-                <Text fw={700} span>{`${balance} ${asset}`}</Text>
-              </Text>
-              <Icon name="Sync" size="small" button onClick={onReload} loading={isLoading || isLoadingV3} />
-            </Group>
-          </Tooltip>
+          <Group spacing={0}>
+            <Text>
+              💰 Balance:
+              {' '}
+              <Text fw={700} span>{`${balance} ${asset}`}</Text>
+            </Text>
+            <Icon name="Sync" size="small" button onClick={onReload} loading={isLoading || isLoadingV3} />
+          </Group>
           {!!leverage && (
             <Text>
               ⚖️ Leverage:

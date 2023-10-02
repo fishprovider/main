@@ -36,10 +36,9 @@ const getAccount = async (
 
   return {
     doc: {
-      balance: tradeAccount.balance,
       assetId: tradeAccount.assetId,
       leverage: tradeAccount.leverage || 0,
-      providerPlatformAccountId: tradeAccount.traderLogin || tradeAccount.accountId,
+      balance: tradeAccount.balance,
       providerData: tradeAccount,
       updatedAt: new Date(),
     },

@@ -20,7 +20,6 @@ const getFromDB = async () => {
       projection: {
         providerViewType: 1,
         providerTradeType: 1,
-        providerPlatformAccountId: 1,
 
         assetId: 1,
         leverage: 1,

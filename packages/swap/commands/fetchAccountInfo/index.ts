@@ -20,7 +20,6 @@ interface AccountInfoReq {
 }
 
 interface AccountInfoRes {
-  providerPlatformAccountId: string;
   leverage: number;
   balance: number;
   margin?: number;

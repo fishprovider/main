@@ -23,7 +23,6 @@ const getFromDB = async () => {
 
         providerViewType: 0,
         providerTradeType: 0,
-        providerPlatformAccountId: 0,
 
         assetId: 0,
         leverage: 0,

@@ -7,11 +7,10 @@ import type { AsyncReturnType } from 'type-fest';
 import connectAndRun from '../connectAndRun';
 
 const transformAccountInfo = (res: AsyncReturnType<typeof getAccountInformation>) => ({
-  providerPlatformAccountId: `${res.login}`,
+  asset: res.currency,
   leverage: res.leverage,
   balance: res.balance,
   margin: res.margin,
-  asset: res.currency,
   providerData: res,
   updatedAt: new Date(),
 });

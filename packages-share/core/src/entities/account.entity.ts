@@ -201,8 +201,6 @@ export interface Account {
   providerPlatform: AccountPlatform;
   /** @deprecated use accountPlatformType instead */
   providerPlatformType?: string;
-  /** @deprecated use providerId instead */
-  providerPlatformAccountId?: string;
 
   /** @deprecated use accountGroupId instead */
   providerGroupId?: string;

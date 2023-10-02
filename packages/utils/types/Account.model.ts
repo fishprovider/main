@@ -133,7 +133,6 @@ interface Account {
   providerType: ProviderType; // icmarkets, exness, roboforex
   providerPlatform: ProviderPlatform; // ctrader, metatrader
   providerPlatformType?: string; // standard, pro
-  providerPlatformAccountId?: string;
 
   providerGroupId?: string; // earth, earth2, earth3
   providerViewType?: ProviderViewType; // private, public

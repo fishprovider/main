@@ -61,10 +61,9 @@ const updateAccount = async (
     addMember?: AccountMember,
     removeMemberId?: string,
     removeMemberInviteEmail?: string,
-    providerPlatformAccountId?: string,
+    assetId?: string,
     leverage?: number,
     balance?: number,
-    assetId?: string,
     providerData?: any,
     updatedAt?: Date,
   },
@@ -74,7 +73,7 @@ const updateAccount = async (
 
   const {
     name, addMember, removeMemberId, removeMemberInviteEmail,
-    providerPlatformAccountId, leverage, balance, assetId, providerData,
+    assetId, leverage, balance, providerData,
     updatedAt,
   } = payload;
   const {
@@ -84,10 +83,9 @@ const updateAccount = async (
   const updateFilter: UpdateFilter<Account> = {
     $set: {
       ...(name && { name }),
-      ...(providerPlatformAccountId && { providerPlatformAccountId }),
+      ...(assetId && { assetId }),
       ...(leverage && { leverage }),
       ...(balance && { balance }),
-      ...(assetId && { assetId }),
       ...(providerData && { providerData }),
       ...(updatedAt && { updatedAt }),
     },
