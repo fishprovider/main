@@ -7,9 +7,9 @@ import { redisKeys } from '@fishprovider/utils/dist/constants/redis';
 import type { Account } from '@fishprovider/utils/dist/types/Account.model';
 import { useEffect, useRef } from 'react';
 
+import { getAccountController } from '~controller-services/account/getAccount.controller';
 import { subNotif, unsubNotif } from '~libs/pushNotif';
 import { subDoc } from '~libs/sdb';
-import { getAccountController } from '~services/account/getAccount.controller';
 import { refreshMS } from '~utils';
 
 function useAccountSocket(providerId: string) {

@@ -3,8 +3,8 @@ import _ from 'lodash';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 
-import { getNewsController } from '~services/news/getNews.controller';
-import { watchNewsController } from '~services/news/watchNews.controller';
+import { getNewsController } from '~controller-services/news/getNews.controller';
+import { watchNewsController } from '~controller-services/news/watchNews.controller';
 import Button from '~ui/core/Button';
 import Group from '~ui/core/Group';
 import Stack from '~ui/core/Stack';

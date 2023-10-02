@@ -3,7 +3,7 @@ import _ from 'lodash';
 import moment from 'moment';
 import { useEffect } from 'react';
 
-import { getNewsController } from '~services/news/getNews.controller';
+import { getNewsController } from '~controller-services/news/getNews.controller';
 
 const bannerIdBigNews = 'BigNews';
 const bannerIdBigNewsNear = 'BigNewsNear';

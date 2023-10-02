@@ -2,7 +2,7 @@ import _ from 'lodash';
 import moment from 'moment';
 import React from 'react';
 
-import { watchNewsController } from '~services/news/watchNews.controller';
+import { watchNewsController } from '~controller-services/news/watchNews.controller';
 import Alert from '~ui/core/Alert';
 import List from '~ui/core/List';
 

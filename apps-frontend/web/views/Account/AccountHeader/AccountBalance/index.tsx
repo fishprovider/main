@@ -10,7 +10,7 @@ import { getMajorPairs } from '@fishprovider/utils/dist/helpers/price';
 import _ from 'lodash';
 
 import EquityProgress from '~components/account/EquityProgress';
-import { getAccountController } from '~services/account/getAccount.controller';
+import { getAccountController } from '~controller-services/account/getAccount.controller';
 import Grid from '~ui/core/Grid';
 import Group from '~ui/core/Group';
 import Icon from '~ui/core/Icon';
