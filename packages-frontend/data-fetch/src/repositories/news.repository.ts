@@ -1,9 +1,7 @@
 import { News } from '@fishprovider/core';
 import { FishApiNewsRepository } from '@fishprovider/fish-api';
 import { LocalNewsRepository } from '@fishprovider/local';
-import {
-  BaseGetOptions, NewsRepository,
-} from '@fishprovider/repositories';
+import { BaseGetOptions, NewsRepository } from '@fishprovider/repositories';
 import { StoreNewsRepository } from '@fishprovider/store';
 
 const getNews = async (
@@ -14,25 +12,27 @@ const getNews = async (
   },
   options?: BaseGetOptions<News>,
 ) => {
-  const setNews = async (news?: Partial<News>[]) => {
-    const promises = [];
+  const setNewsToLocal = async (news?: Partial<News>[]) => {
     if (LocalNewsRepository.updateNews) {
-      promises.push(
-        LocalNewsRepository.updateNews(filter, { news }, options),
-      );
+      await LocalNewsRepository.updateNews(filter, { news }, options);
     }
-    if (StoreNewsRepository.updateNews) {
-      promises.push(
-        StoreNewsRepository.updateNews(filter, { news }, options),
-      );
-    }
-    await Promise.all(promises);
   };
+  const setNewsToStore = async (news?: Partial<News>[]) => {
+    if (StoreNewsRepository.updateNews) {
+      await StoreNewsRepository.updateNews(filter, { news }, options);
+    }
+  };
+  const setNews = async (news?: Partial<News>[]) => Promise.all([
+    setNewsToLocal(news),
+    setNewsToStore(news),
+  ]);
 
   let docs;
+
   if (LocalNewsRepository.getNews) {
     const res = await LocalNewsRepository.getNews(filter, options);
     docs = res.docs;
+    setNewsToStore(docs); // non-blocking
   }
 
   if (FishApiNewsRepository.getNews) {
@@ -41,9 +41,8 @@ const getNews = async (
       docs = res.docs;
       setNews(docs); // non-blocking
     } else {
-      FishApiNewsRepository.getNews(filter, options).then((res) => { // non-blocking
-        setNews(res.docs);
-      });
+      FishApiNewsRepository.getNews(filter, options) // non-blocking
+        .then((res) => setNews(res.docs));
     }
   }
 
