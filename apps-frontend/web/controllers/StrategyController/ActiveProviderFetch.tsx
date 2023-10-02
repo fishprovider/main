@@ -3,7 +3,7 @@ import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
 import storeUser from '@fishprovider/cross/dist/stores/user';
 import { useEffect } from 'react';
 
-import { getAccountController } from '~service-controllers/account/getAccount.controller';
+import { getAccountController } from '~services/account/getAccount.controller';
 import { toastError } from '~ui/toast';
 
 interface Props {

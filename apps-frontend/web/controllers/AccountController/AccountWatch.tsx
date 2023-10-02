@@ -9,7 +9,7 @@ import { useEffect, useRef } from 'react';
 
 import { subNotif, unsubNotif } from '~libs/pushNotif';
 import { subDoc } from '~libs/sdb';
-import { getAccountController } from '~service-controllers/account/getAccount.controller';
+import { getAccountController } from '~services/account/getAccount.controller';
 import { refreshMS } from '~utils';
 
 function useAccountSocket(providerId: string) {
