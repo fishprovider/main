@@ -11,10 +11,22 @@ export interface AccountRepository {
   getAccount?: (
     filter: {
       accountId: string,
+      // trade
       config?: AccountConfig,
     },
     options?: BaseGetOptions<Account>,
   ) => Promise<BaseGetResult<Account>>;
+
+  getAccounts?: (
+    filter: {
+      accountViewType?: AccountViewType,
+      email?: string,
+      accountIds?: string[],
+      // trade
+      config?: AccountConfig,
+    },
+    options?: BaseGetOptions<Account>,
+  ) => Promise<BaseGetManyResult<Account>>;
 
   updateAccount?: (
     filter: {
@@ -22,31 +34,18 @@ export interface AccountRepository {
     },
     payload: {
       name?: string,
-      addMember?: AccountMember,
-      removeMemberId?: string,
-      removeMemberInviteEmail?: string,
-      // from TradeAccount
+      // trade
       assetId?: string,
       leverage?: number,
       balance?: number,
       providerData?: any,
-      updatedAt?: Date,
+      // members
+      member?: AccountMember,
     },
     options?: BaseUpdateOptions<Account>,
   ) => Promise<BaseUpdateResult<Account>>;
 
-  getAccounts?: (
-    filter: {
-      accountIds?: string[],
-      accountViewType?: AccountViewType,
-      memberId?: string,
-      email?: string,
-      redirectCode?: string,
-      redirectUrl?: string,
-      config?: AccountConfig,
-    },
-    options?: BaseGetOptions<Account>,
-  ) => Promise<BaseGetManyResult<Account>>;
+  // TODO:
 
   allocateAccountConfig?: (
     filter: {

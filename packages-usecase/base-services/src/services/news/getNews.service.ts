@@ -1,7 +1,4 @@
-import { BaseError } from '@fishprovider/core';
-import { RepositoryError } from '@fishprovider/repositories';
-
-import { GetNewsService } from '../..';
+import { checkRepository, GetNewsService } from '../..';
 
 export const getNewsService: GetNewsService = async ({
   filter, options, repositories,
@@ -9,10 +6,10 @@ export const getNewsService: GetNewsService = async ({
   //
   // pre-check
   //
-  if (!repositories.news.getNews) throw new BaseError(RepositoryError.REPOSITORY_NOT_IMPLEMENT);
+  const getNewsRepo = checkRepository(repositories.news.getNews);
 
   //
   // main
   //
-  return repositories.news.getNews(filter, options);
+  return getNewsRepo(filter, options);
 };

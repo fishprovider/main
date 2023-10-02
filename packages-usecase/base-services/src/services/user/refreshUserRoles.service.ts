@@ -1,10 +1,9 @@
-import { AccountRoles, BaseError, UserError } from '@fishprovider/core';
-import { RepositoryError } from '@fishprovider/repositories';
+import { AccountRoles } from '@fishprovider/core';
 import _ from 'lodash';
 
 import {
-  getAccountsService, RefreshUserRolesService, sanitizeUserBaseGetOptions,
-  updateUserService, validateProjection,
+  checkLogin, checkProjection, getAccountsService, RefreshUserRolesService,
+  sanitizeUserBaseGetOptions, updateUserService,
 } from '../..';
 
 export const refreshUserRolesService: RefreshUserRolesService = async ({
@@ -13,15 +12,14 @@ export const refreshUserRolesService: RefreshUserRolesService = async ({
   //
   // pre-check
   //
-  if (!context?.userSession?._id) throw new BaseError(UserError.USER_ACCESS_DENIED);
+  const userSession = checkLogin(context?.userSession);
 
   //
   // main
   //
-  const { userSession } = context;
-  const { _id: userId, email, roles = {} } = userSession;
+  const { email, roles = {} } = userSession;
 
-  // cleanDisabledProviders
+  // remove disabled
   _.forEach(roles.adminProviders, (enabled, accountId) => {
     if (!enabled) {
       _.unset(roles.adminProviders, accountId);
@@ -42,18 +40,42 @@ export const refreshUserRolesService: RefreshUserRolesService = async ({
       _.unset(roles.viewerProviders, accountId);
     }
   });
+  _.forEach(roles.adminAccounts, (enabled, accountId) => {
+    if (!enabled) {
+      _.unset(roles.adminAccounts, accountId);
+    }
+  });
+  _.forEach(roles.traderAccounts, (enabled, accountId) => {
+    if (!enabled) {
+      _.unset(roles.traderAccounts, accountId);
+    }
+  });
+  _.forEach(roles.protectorAccounts, (enabled, accountId) => {
+    if (!enabled) {
+      _.unset(roles.protectorAccounts, accountId);
+    }
+  });
+  _.forEach(roles.viewerAccounts, (enabled, accountId) => {
+    if (!enabled) {
+      _.unset(roles.viewerAccounts, accountId);
+    }
+  });
 
-  // cleanRoleProviders
+  // clean roles
   const accountIds = _.uniq([
     ..._.keys(roles.adminProviders),
     ..._.keys(roles.traderProviders),
     ..._.keys(roles.protectorProviders),
     ..._.keys(roles.viewerProviders),
+    ..._.keys(roles.adminAccounts),
+    ..._.keys(roles.traderAccounts),
+    ..._.keys(roles.protectorAccounts),
+    ..._.keys(roles.viewerAccounts),
   ]);
   const { docs: accounts } = await getAccountsService({
     filter: {
+      email,
       accountIds,
-      memberId: userId,
     },
     options: {
       projection: {
@@ -72,32 +94,48 @@ export const refreshUserRolesService: RefreshUserRolesService = async ({
       _.unset(roles.traderProviders, accountId);
       _.unset(roles.protectorProviders, accountId);
       _.unset(roles.viewerProviders, accountId);
+      _.unset(roles.adminAccounts, accountId);
+      _.unset(roles.traderAccounts, accountId);
+      _.unset(roles.protectorAccounts, accountId);
+      _.unset(roles.viewerAccounts, accountId);
     } else {
       const { members } = account;
-      const member = _.find(members, (item) => item.userId === userId);
+      const member = _.find(members, (item) => item.email === email);
       switch (member?.role) {
         case AccountRoles.admin: {
           _.unset(roles.traderProviders, accountId);
           _.unset(roles.protectorProviders, accountId);
           _.unset(roles.viewerProviders, accountId);
+          _.unset(roles.traderAccounts, accountId);
+          _.unset(roles.protectorAccounts, accountId);
+          _.unset(roles.viewerAccounts, accountId);
           break;
         }
         case AccountRoles.trader: {
           _.unset(roles.adminProviders, accountId);
           _.unset(roles.protectorProviders, accountId);
           _.unset(roles.viewerProviders, accountId);
+          _.unset(roles.adminAccounts, accountId);
+          _.unset(roles.protectorAccounts, accountId);
+          _.unset(roles.viewerAccounts, accountId);
           break;
         }
         case AccountRoles.protector: {
           _.unset(roles.adminProviders, accountId);
           _.unset(roles.traderProviders, accountId);
           _.unset(roles.viewerProviders, accountId);
+          _.unset(roles.adminAccounts, accountId);
+          _.unset(roles.traderAccounts, accountId);
+          _.unset(roles.viewerAccounts, accountId);
           break;
         }
         case AccountRoles.viewer: {
           _.unset(roles.adminProviders, accountId);
           _.unset(roles.traderProviders, accountId);
           _.unset(roles.protectorProviders, accountId);
+          _.unset(roles.adminAccounts, accountId);
+          _.unset(roles.traderAccounts, accountId);
+          _.unset(roles.protectorAccounts, accountId);
           break;
         }
         default:
@@ -108,15 +146,17 @@ export const refreshUserRolesService: RefreshUserRolesService = async ({
   const options = sanitizeUserBaseGetOptions(optionsRaw);
 
   const { doc: user } = await updateUserService({
-    filter: { userId, email },
-    payload: { roles },
+    filter: {
+      email,
+    },
+    payload: {
+      roles,
+    },
     options,
     repositories,
   });
 
-  if (!validateProjection(options?.projection, user)) {
-    throw new BaseError(RepositoryError.REPOSITORY_INVALID_PROJECTION);
-  }
+  checkProjection(options?.projection, user);
 
   return { doc: user };
 };

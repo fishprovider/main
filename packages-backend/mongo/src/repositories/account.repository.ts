@@ -1,9 +1,5 @@
-import {
-  Account, AccountConfig, AccountMember, AccountViewType,
-} from '@fishprovider/core';
-import {
-  AccountRepository, BaseGetOptions, BaseUpdateOptions,
-} from '@fishprovider/repositories';
+import { Account, AccountMember, AccountViewType } from '@fishprovider/core';
+import { AccountRepository, BaseGetOptions, BaseUpdateOptions } from '@fishprovider/repositories';
 import { Filter, ReturnDocument, UpdateFilter } from 'mongodb';
 
 import { getMongo } from '..';
@@ -12,28 +8,19 @@ const buildAccountFilter = (filter: {
   accountId?: string,
   accountIds?: string[],
   accountViewType?: AccountViewType,
-  memberId?: string,
   email?: string,
-  config?: AccountConfig,
+  member?: AccountMember,
 }): Filter<Account> => {
   const {
-    accountId, accountViewType, memberId, email,
+    accountId, accountViewType, email, accountIds, member,
   } = filter;
-
-  const orFiler: Filter<Account>['$or'] = [
-    ...(memberId ? [
-      { userId: memberId }, // owner
-      { 'members.userId': memberId }, // member
-    ] : []),
-    ...(email ? [
-      { 'memberInvites.email': email }, // memberInvite
-    ] : []),
-  ];
 
   return {
     ...(accountId && { _id: accountId }),
+    ...(accountIds && { _id: { $in: accountIds } }),
     ...(accountViewType && { providerViewType: accountViewType }),
-    ...(orFiler.length && { $or: orFiler }),
+    ...(email && { 'members.email': email }),
+    ...(member?.status === 'update' && { 'members.email': member.email }),
     deleted: { $ne: true },
   };
 };
@@ -52,29 +39,42 @@ const getAccount = async (
   return { doc: account ?? undefined };
 };
 
+const getAccounts = async (
+  filter: {
+    accountIds?: string[],
+    accountViewType?: AccountViewType,
+    email?: string,
+  },
+  options?: BaseGetOptions<Account>,
+) => {
+  const { db } = await getMongo();
+  const accounts = await db.collection<Account>('accounts').find(
+    buildAccountFilter(filter),
+    options,
+  ).toArray();
+  return { docs: accounts };
+};
+
 const updateAccount = async (
   filter: {
     accountId: string,
   },
   payload: {
     name?: string,
-    addMember?: AccountMember,
-    removeMemberId?: string,
-    removeMemberInviteEmail?: string,
     assetId?: string,
     leverage?: number,
     balance?: number,
     providerData?: any,
-    updatedAt?: Date,
+    member?: AccountMember,
   },
   options?: BaseUpdateOptions<Account>,
 ) => {
   const accountFilter = buildAccountFilter(filter);
 
   const {
-    name, addMember, removeMemberId, removeMemberInviteEmail,
+    name,
     assetId, leverage, balance, providerData,
-    updatedAt,
+    member,
   } = payload;
   const {
     returnAfter, projection,
@@ -87,17 +87,27 @@ const updateAccount = async (
       ...(leverage && { leverage }),
       ...(balance && { balance }),
       ...(providerData && { providerData }),
-      ...(updatedAt && { updatedAt }),
+      ...(member?.status === 'update' && {
+        'members.$': {
+          ...member,
+          status: 'done',
+        },
+      }),
+      updatedAt: new Date(),
     },
     $push: {
-      ...(addMember && { members: addMember }),
+      ...(member?.status === 'add' && {
+        members: {
+          ...member,
+          status: 'done',
+        },
+      }),
     },
     $pull: {
-      ...(removeMemberId && {
-        members: { userId: removeMemberId },
-      }),
-      ...(removeMemberInviteEmail && {
-        memberInvites: { email: removeMemberInviteEmail },
+      ...(member?.status === 'remove' && {
+        members: {
+          email: member.email,
+        },
       }),
     },
   };
@@ -120,25 +130,8 @@ const updateAccount = async (
   return {};
 };
 
-const getAccounts = async (
-  filter: {
-    accountIds?: string[],
-    accountViewType?: AccountViewType,
-    memberId?: string,
-    email?: string,
-  },
-  options?: BaseGetOptions<Account>,
-) => {
-  const { db } = await getMongo();
-  const accounts = await db.collection<Account>('accounts').find(
-    buildAccountFilter(filter),
-    options,
-  ).toArray();
-  return { docs: accounts };
-};
-
 export const MongoAccountRepository: AccountRepository = {
   getAccount,
-  updateAccount,
   getAccounts,
+  updateAccount,
 };

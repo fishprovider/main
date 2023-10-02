@@ -14,7 +14,6 @@ const handler: ApiHandler<Partial<Account>> = async (data, userSession) => {
 
   const { doc } = await getTradeAccountService({
     filter,
-    options: {},
     repositories: {
       account: DataAccessAccountRepository,
       trade: TradeAccountRepository,

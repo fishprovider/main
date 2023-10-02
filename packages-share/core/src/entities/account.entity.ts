@@ -91,13 +91,13 @@ export interface AccountInvestor {
 }
 
 export interface AccountMember {
-  userId: string;
   email: string;
   role: AccountRoles;
   name: string;
 
   picture?: string;
   locks?: AccountLock[];
+  status?: 'add' | 'remove' | 'update' | 'done';
 
   updatedAt?: Date;
   createdAt?: Date;
@@ -253,7 +253,6 @@ export interface Account {
 
   investors?: AccountInvestor[];
   members?: AccountMember[];
-  memberInvites?: AccountMemberInvite[];
 
   tradeSettings?: AccountTradeSettings;
   protectSettings?: AccountProtectSettings;

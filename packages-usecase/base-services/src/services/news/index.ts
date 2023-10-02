@@ -1,3 +1,3 @@
 export * from './getNews.service';
-export * from './setNews.service';
+export * from './updateNews.service';
 export * from './watchNews.service';

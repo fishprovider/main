@@ -1,8 +1,8 @@
 import { BaseError, UserError } from '@fishprovider/core';
-import { RepositoryError } from '@fishprovider/repositories';
 
 import {
-  GetUserService, sanitizeGetUserFilter, sanitizeUserBaseGetOptions, validateProjection,
+  checkLogin, checkProjection, checkRepository, GetUserService,
+  sanitizeGetUserFilter, sanitizeUserBaseGetOptions,
 } from '../..';
 
 export const getUserService: GetUserService = async ({
@@ -11,24 +11,21 @@ export const getUserService: GetUserService = async ({
   //
   // pre-check
   //
-  if (!context?.userSession?._id) throw new BaseError(UserError.USER_ACCESS_DENIED);
-  if (!repositories.user.getUser) throw new BaseError(RepositoryError.REPOSITORY_NOT_IMPLEMENT);
+  const userSession = checkLogin(context?.userSession);
+  const getUserRepo = checkRepository(repositories.user.getUser);
 
   //
   // main
   //
-  const { userSession } = context;
-
   const filter = sanitizeGetUserFilter(filterRaw, userSession);
   const options = sanitizeUserBaseGetOptions(optionsRaw);
 
-  const { doc: user } = await repositories.user.getUser(filter, options);
+  const { doc: user } = await getUserRepo(filter, options);
   if (!user) {
     throw new BaseError(UserError.USER_NOT_FOUND);
   }
-  if (!validateProjection(options?.projection, user)) {
-    throw new BaseError(RepositoryError.REPOSITORY_INVALID_PROJECTION);
-  }
+
+  checkProjection(options?.projection, user);
 
   return { doc: user };
 };

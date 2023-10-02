@@ -6,7 +6,6 @@ import {
 import { fishApiGet, fishApiPost } from '..';
 
 const getUser = async (filter: {
-  userId?: string
   email?: string,
 }) => {
   const user = await fishApiGet<Partial<User> | undefined>('/user/getUser', filter);
@@ -15,11 +14,11 @@ const getUser = async (filter: {
 
 const updateUser = async (
   filter: {
-    userId?: string
     email?: string,
   },
   payload: {
-    starProvider?: {
+    name?: string
+    starAccount?: {
       accountId: string
       enabled: boolean
     }

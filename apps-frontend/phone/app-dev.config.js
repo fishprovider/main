@@ -19,7 +19,7 @@ export default {
     ],
     ios: {
       bundleIdentifier: 'com.fishprovider.dev',
-      googleServicesFile: './GoogleService-Info-dev.plist' ,
+      googleServicesFile: './GoogleService-Info-dev.plist',
       infoPlist: {
         ITSAppUsesNonExemptEncryption: false,
       },

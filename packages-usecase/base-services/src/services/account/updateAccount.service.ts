@@ -19,7 +19,6 @@ export const updateAccountService: UpdateAccountService = async ({
         projection: {
           _id: 1,
           members: 1,
-          memberInvites: 1,
         },
       },
       repositories,

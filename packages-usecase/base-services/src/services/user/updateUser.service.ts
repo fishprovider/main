@@ -1,8 +1,6 @@
-import { BaseError, UserError } from '@fishprovider/core';
-import { RepositoryError } from '@fishprovider/repositories';
-
 import {
-  sanitizeGetUserFilter, sanitizeUserBaseGetOptions, UpdateUserService, validateProjection,
+  checkLogin, checkProjection, checkRepository, sanitizeGetUserFilter,
+  sanitizeUserBaseGetOptions, UpdateUserService,
 } from '../..';
 
 export const updateUserService: UpdateUserService = async ({
@@ -11,56 +9,53 @@ export const updateUserService: UpdateUserService = async ({
   //
   // pre-check
   //
-  if (!context?.userSession?._id) throw new BaseError(UserError.USER_ACCESS_DENIED);
-  if (!repositories.user.updateUser) throw new BaseError(RepositoryError.REPOSITORY_NOT_IMPLEMENT);
+  const userSession = checkLogin(context?.userSession);
+  const updateUserRepo = checkRepository(repositories.user.updateUser);
 
   //
   // main
   //
-  const { userSession } = context;
+  const payload = { ...payloadRaw };
+  const { starAccount } = payload;
 
-  let payload = {
-    ...payloadRaw,
-  };
-  const { starProvider } = payload;
-  if (starProvider) {
+  if (starAccount) {
     const { roles } = userSession;
-    const { accountId, enabled } = starProvider;
+    const { accountId, enabled } = starAccount;
 
     const hasAccess = () => {
       if (!roles) return false;
       const {
         adminProviders, traderProviders, protectorProviders, viewerProviders,
+        adminAccounts, traderAccounts, protectorAccounts, viewerAccounts,
       } = roles;
-      if (adminProviders?.[accountId] === undefined
-        && traderProviders?.[accountId] === undefined
-        && protectorProviders?.[accountId] === undefined
-        && viewerProviders?.[accountId] === undefined
+      if (!adminProviders?.[accountId]
+        && !traderProviders?.[accountId]
+        && !protectorProviders?.[accountId]
+        && !viewerProviders?.[accountId]
+        && !adminAccounts?.[accountId]
+        && !traderAccounts?.[accountId]
+        && !protectorAccounts?.[accountId]
+        && !viewerAccounts?.[accountId]
       ) return false;
       return true;
     };
 
-    payload = {
-      ...payload,
-      starProvider: {
-        ...starProvider,
-        enabled: hasAccess() && enabled,
-      },
+    payload.starAccount = {
+      ...starAccount,
+      enabled: hasAccess() && enabled,
     };
   }
 
   const filter = sanitizeGetUserFilter(filterRaw, userSession);
   const options = sanitizeUserBaseGetOptions(optionsRaw);
 
-  const { doc: user } = await repositories.user.updateUser(
+  const { doc: user } = await updateUserRepo(
     filter,
     payload,
     options,
   );
 
-  if (!validateProjection(options?.projection, user)) {
-    throw new BaseError(RepositoryError.REPOSITORY_INVALID_PROJECTION);
-  }
+  checkProjection(options?.projection, user);
 
   return { doc: user };
 };

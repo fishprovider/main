@@ -2,7 +2,7 @@ import {
   Account, AccountFull, AccountMember, AccountViewType,
 } from '@fishprovider/core';
 import {
-  AccountRepository, BaseGetManyResult, BaseGetResult, UserRepository,
+  AccountRepository, BaseGetManyResult, BaseGetResult,
 } from '@fishprovider/repositories';
 
 import { BaseGetServiceParams, BaseUpdateServiceParams } from '..';
@@ -16,37 +16,16 @@ export type GetAccountService = (params: BaseGetServiceParams<AccountFull> & {
   },
 }) => Promise<BaseGetResult<AccountFull>>;
 
-export type UpdateAccountService = (params: BaseUpdateServiceParams<Account> & {
+export type GetAccountsService = (params: BaseGetServiceParams<Account> & {
   filter: {
-    accountId: string,
-  },
-  payload: {
-    name?: string,
-    addMember?: AccountMember,
-    removeMemberId?: string,
-    removeMemberInviteEmail?: string,
-    // from TradeAccount
-    assetId?: string,
-    leverage?: number,
-    balance?: number,
-    providerData?: any,
-    updatedAt?: Date,
+    accountIds?: string[],
+    accountViewType?: AccountViewType,
+    email?: string,
   },
   repositories: {
     account: AccountRepository
   },
-}) => Promise<BaseGetResult<Account>>;
-
-export type JoinAccountService = (params: BaseUpdateServiceParams<Account> & {
-  filter: {
-    accountId: string,
-    email: string,
-  },
-  repositories: {
-    account: AccountRepository
-    user: UserRepository,
-  },
-}) => Promise<BaseGetResult<Account>>;
+}) => Promise<BaseGetManyResult<Account>>;
 
 export type GetTradeAccountService = (params: BaseUpdateServiceParams<Account> & {
   filter: {
@@ -58,14 +37,21 @@ export type GetTradeAccountService = (params: BaseUpdateServiceParams<Account> &
   },
 }) => Promise<BaseGetResult<Account>>;
 
-export type GetAccountsService = (params: BaseGetServiceParams<Account> & {
+export type UpdateAccountService = (params: BaseUpdateServiceParams<Account> & {
   filter: {
-    accountIds?: string[],
-    accountViewType?: AccountViewType,
-    memberId?: string,
-    email?: string,
+    accountId: string,
+  },
+  payload: {
+    name?: string,
+    // trade
+    assetId?: string,
+    leverage?: number,
+    balance?: number,
+    providerData?: any,
+    // members
+    member?: AccountMember,
   },
   repositories: {
     account: AccountRepository
   },
-}) => Promise<BaseGetManyResult<Account>>;
+}) => Promise<BaseGetResult<Account>>;

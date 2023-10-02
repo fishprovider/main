@@ -19,7 +19,6 @@ const handler: ApiHandler<Partial<News>[]> = async (data, userSession) => {
       today: filter.today === 'true',
       upcoming: filter.upcoming === 'true',
     },
-    options: {},
     repositories: { news: DataAccessNewsRepository },
     context: { userSession },
   });

@@ -40,7 +40,6 @@ const getAccount = async (
       leverage: tradeAccount.leverage || 0,
       balance: tradeAccount.balance,
       providerData: tradeAccount,
-      updatedAt: new Date(),
     },
   };
 };

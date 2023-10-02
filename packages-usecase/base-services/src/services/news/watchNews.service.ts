@@ -1,7 +1,4 @@
-import { BaseError } from '@fishprovider/core';
-import { RepositoryError } from '@fishprovider/repositories';
-
-import { WatchNewsService } from '../..';
+import { checkRepository, WatchNewsService } from '../..';
 
 export const watchNewsService: WatchNewsService = ({
   selector, repositories,
@@ -9,10 +6,10 @@ export const watchNewsService: WatchNewsService = ({
   //
   // pre-check
   //
-  if (!repositories.news.watchNews) throw new BaseError(RepositoryError.REPOSITORY_NOT_IMPLEMENT);
+  const watchNewsRepo = checkRepository(repositories.news.watchNews);
 
   //
   // main
   //
-  return repositories.news.watchNews(selector);
+  return watchNewsRepo(selector);
 };
