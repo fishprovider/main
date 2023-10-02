@@ -6,7 +6,6 @@ export const getNewsController = (filter: {
   upcoming?: boolean,
 }) => getNewsService({
   filter,
-  options: {},
   repositories: {
     news: DataFetchNewsRepository,
   },
