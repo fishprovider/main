@@ -11,7 +11,7 @@ export const getTradeAccountService: GetTradeAccountService = async ({
   // pre-check
   //
   checkLogin(context?.userSession);
-  const getAccountRepo = checkRepository(repositories.trade.getAccount);
+  const getTradeAccountRepo = checkRepository(repositories.trade.getAccount);
 
   //
   // main
@@ -38,7 +38,7 @@ export const getTradeAccountService: GetTradeAccountService = async ({
   }
 
   const { config } = privateAccount;
-  const { doc: tradeAccount } = await getAccountRepo({
+  const { doc: tradeAccount } = await getTradeAccountRepo({
     ...filter,
     config,
   });
