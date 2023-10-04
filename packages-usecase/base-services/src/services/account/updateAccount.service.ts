@@ -12,19 +12,18 @@ export const updateAccountService: UpdateAccountService = async ({
   checkLogin(context?.userSession);
   const updateAccountRepo = checkRepository(repositories.account.updateAccount);
 
-  if (!context?.internal) {
-    await getAccountService({
-      filter,
-      options: {
-        projection: {
-          _id: 1,
-          members: 1,
-        },
+  const checkAccess = () => context?.internal || getAccountService({
+    filter,
+    options: {
+      projection: {
+        _id: 1,
+        members: 1,
       },
-      repositories,
-      context,
-    });
-  }
+    },
+    repositories,
+    context,
+  });
+  await checkAccess();
 
   //
   // main
