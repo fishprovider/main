@@ -1,8 +1,62 @@
 import {
   CTraderAccount, CTraderAccountInfo, CTraderClientPermissionScope,
-  CTraderPayloadType, TCTraderConnection,
-  transformAccountInfo, validate,
+  CTraderPayloadType, TCTraderConnection, transformAccountInfo, validate,
 } from '..';
+
+export const getNewTokens = async ({
+  clientId,
+  clientSecret,
+  code,
+  redirectUrl,
+}: {
+  clientId: string,
+  clientSecret: string,
+  code: string,
+  redirectUrl: string,
+}) => {
+  const baseUrl = 'https://openapi.ctrader.com/apps/token';
+  const params = {
+    grant_type: 'authorization_code',
+    client_id: clientId,
+    client_secret: clientSecret,
+    code,
+    redirect_uri: redirectUrl,
+  };
+  const paramsUrl = Object.entries(params).map(([key, value]) => `${key}=${value}`).join('&');
+  const url = `${baseUrl}?${paramsUrl}`;
+
+  const data = await fetch(url).then((res) => res.json());
+  return data as {
+    accessToken: string,
+    refreshToken: string,
+  };
+};
+
+export const refreshTokens = async ({
+  clientId,
+  clientSecret,
+  refreshToken,
+}: {
+  clientId: string,
+  clientSecret: string,
+  refreshToken: string,
+}) => {
+  const baseUrl = 'https://openapi.ctrader.com/apps/token';
+  const params = {
+    grant_type: 'refresh_token',
+    client_id: clientId,
+    client_secret: clientSecret,
+    refresh_token: refreshToken,
+  };
+  const paramsUrl = Object.entries(params).map(([key, value]) => `${key}=${value}`).join('&');
+  const url = `${baseUrl}?${paramsUrl}`;
+
+  const data = await fetch(url).then((res) => res.json());
+  return data as {
+    accessToken: string,
+    refreshToken: string,
+  };
+};
 
 export const authorizeAccount = async (
   connection: TCTraderConnection,

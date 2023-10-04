@@ -1,5 +1,5 @@
 import {
-  Account, AccountConfig, AccountMember, AccountPlatform, AccountPrivate,
+  Account, AccountConfig, AccountFull, AccountMember, AccountPlatform, AccountPrivate,
   AccountSourceType, AccountTradeType, AccountType, AccountViewType,
 } from '@fishprovider/core';
 
@@ -26,7 +26,7 @@ export interface AccountRepository {
       config?: AccountConfig,
     },
     options?: BaseGetOptions<Account>,
-  ) => Promise<BaseGetManyResult<Account>>;
+  ) => Promise<BaseGetManyResult<AccountFull>>;
 
   updateAccount?: (
     filter: {

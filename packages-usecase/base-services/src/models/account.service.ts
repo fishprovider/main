@@ -37,6 +37,16 @@ export type GetTradeAccountService = (params: BaseUpdateServiceParams<Account> &
   },
 }) => Promise<BaseGetResult<Account>>;
 
+// export type GetTradeAccountsService = (params: BaseUpdateServiceParams<Account> & {
+//   filter: {
+//     tradeCode: string,
+//   },
+//   repositories: {
+//     account: AccountRepository,
+//     trade: AccountRepository,
+//   },
+// }) => Promise<BaseGetResult<Account>>;
+
 export type UpdateAccountService = (params: BaseUpdateServiceParams<Account> & {
   filter: {
     accountId: string,
