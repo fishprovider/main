@@ -1,4 +1,7 @@
 {
+  // "extends": "@tsconfig/node-lts-strictest-esm/tsconfig.json",
+  // "extends": "@tsconfig/strictest/tsconfig.json",
+  // "extends": "@tsconfig/node-lts/tsconfig.json",
   "extends": [
     "@tsconfig/strictest/tsconfig",
     "@tsconfig/node-lts/tsconfig"
@@ -13,9 +16,8 @@
     "allowJs": true,
     "checkJs": false,
     "declaration": true,
-    // "incremental": true,
+    "incremental": true,
 
-    // "lib": ["es2021"],
     "module": "ESNext",
     "moduleResolution": "Node",
   },
