@@ -13,7 +13,7 @@ git push origin secondary -f
 # pull tag
 pm2 deploy pm2.config.cjs $DEPLOY_ENV
 
-# npm ci
+# npm i
 pm2 deploy pm2.config.cjs $DEPLOY_ENV \
 exec "source ./pm2-preload.sh; npm run ci -- -w $APP_DIR"
 
