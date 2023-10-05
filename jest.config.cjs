@@ -1,3 +1,5 @@
+const baseConfig = require('./jest.config.base.cjs');
+
 /** @type {import('jest').Config} */
 module.exports = {
   setupFiles: ['<rootDir>/../../jest.setupFiles.js'],
@@ -5,15 +7,11 @@ module.exports = {
   moduleNameMapper: {
     '~(.*)': '<rootDir>/$1',
   },
-
   preset: 'ts-jest/presets/default-esm',
   transform: {
-    '^.+\\.tsx?$': [
+    [baseConfig.tsJestFilePattern]: [
       'ts-jest',
-      {
-        useESM: true,
-        isolatedModules: true,
-      },
+      baseConfig.tsJestOptions,
     ],
   },
   forceExit: true,
