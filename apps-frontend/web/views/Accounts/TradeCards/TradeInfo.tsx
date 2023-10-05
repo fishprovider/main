@@ -17,6 +17,7 @@ import Group from '~ui/core/Group';
 import Icon from '~ui/core/Icon';
 import Indicator from '~ui/core/Indicator';
 import Popover from '~ui/core/Popover';
+import Stack from '~ui/core/Stack';
 import Text from '~ui/core/Text';
 import { refreshMS } from '~utils';
 import { getAccountStats } from '~utils/account';
@@ -120,7 +121,6 @@ function TradeInfo({
   return (
     <Popover content={(
       <>
-        <EquityProgress providerId={providerId} profit={profit} />
         <Text>{`Equity: ${_.round(equity, 2)} ${asset}`}</Text>
         <Text>{`Margin: ${_.round(margin, 2)} ${asset}`}</Text>
         <Text>{`Live Orders [${liveOrders.length}]`}</Text>
@@ -130,14 +130,17 @@ function TradeInfo({
       </>
     )}
     >
-      <Group spacing={0} onClick={skipClick}>
-        <Text color={profit > 0 ? 'green' : 'red'}>
-          {`Profit: ${_.round(profit, 2)} ${asset} (${_.round(profitRatio, 2)}% ${profitIcon})`}
-        </Text>
-        <Indicator label={orders.length} size={orders.length && 16}>
-          <Icon name="Info" button />
-        </Indicator>
-      </Group>
+      <Stack spacing={4}>
+        <Group spacing={0} onClick={skipClick}>
+          <Text color={profit > 0 ? 'green' : 'red'}>
+            {`Profit: ${_.round(profit, 2)} ${asset} (${_.round(profitRatio, 2)}% ${profitIcon})`}
+          </Text>
+          <Indicator label={orders.length} size={orders.length && 16}>
+            <Icon name="Info" button />
+          </Indicator>
+        </Group>
+        <EquityProgress providerId={providerId} profit={profit} slim />
+      </Stack>
     </Popover>
   );
 }

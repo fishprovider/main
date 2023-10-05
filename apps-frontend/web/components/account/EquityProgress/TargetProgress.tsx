@@ -19,9 +19,10 @@ const targetIcons = [
 interface Props {
   providerId: string,
   profit: number,
+  slim?: boolean,
 }
 
-function TargetProgress({ providerId, profit }: Props) {
+function TargetProgress({ providerId, profit, slim }: Props) {
   const {
     balance = 0,
     balanceStart,
@@ -42,22 +43,26 @@ function TargetProgress({ providerId, profit }: Props) {
   const progressAmt = Math.max(0, equity - balanceStart);
   const progress = (100 * progressAmt) / targetAmt;
 
+  const offset = slim ? 20 : 0;
+
   return (
-    <Box h={60} w={200} pos="relative">
-      {targetIcons.map((item) => (
+    <Box h={60 - offset * 2} w={200} pos="relative">
+      {slim ? null : targetIcons.map((item) => (
         <Box key={item.ratio} pos="absolute" top={0} right={`${100 - item.ratio - 8}%`}>
           <Text>{item.icon}</Text>
         </Box>
       ))}
-      <Box pos="absolute" top={20} left={0} right={0}>
+      <Box pos="absolute" top={20 - offset} left={0} right={0}>
         <ProgressStyled value={progress} color="green" h={20} radius={0} animate={profit !== 0} />
       </Box>
-      <Box pos="absolute" top={20} left={0} right={0} ta="center">
+      <Box pos="absolute" top={20 - offset} left={0} right={0} ta="center">
         <Text size="sm">{`${_.round(progressAmt, 2)} (${_.round(progress, 2)}%)`}</Text>
       </Box>
-      <Box pos="absolute" top={40} right={0}>
-        <Text size="sm" color="green">{_.round(target, 2)}</Text>
-      </Box>
+      {slim ? null : (
+        <Box pos="absolute" top={40 - offset} right={0}>
+          <Text size="sm" color="green">{_.round(target, 2)}</Text>
+        </Box>
+      )}
     </Box>
   );
 }
