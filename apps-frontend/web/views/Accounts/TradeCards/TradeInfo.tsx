@@ -121,6 +121,7 @@ function TradeInfo({
   return (
     <Popover content={(
       <>
+        <EquityProgress providerId={providerId} profit={profit} />
         <Text>{`Equity: ${_.round(equity, 2)} ${asset}`}</Text>
         <Text>{`Margin: ${_.round(margin, 2)} ${asset}`}</Text>
         <Text>{`Live Orders [${liveOrders.length}]`}</Text>

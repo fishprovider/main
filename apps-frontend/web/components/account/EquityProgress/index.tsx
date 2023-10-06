@@ -15,7 +15,7 @@ function EquityProgress({ providerId, profit, slim }: Props) {
     <Group spacing={0}>
       {slim ? null : <BddProgress providerId={providerId} profit={profit} />}
       {slim ? null : <EddProgress providerId={providerId} profit={profit} />}
-      <TargetProgress providerId={providerId} profit={profit} slim />
+      <TargetProgress providerId={providerId} profit={profit} slim={slim} />
     </Group>
   );
 }
