@@ -1,8 +1,8 @@
 import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
-import { PlanType } from '@fishprovider/utils/dist/constants/account';
 import type { Lock } from '@fishprovider/utils/dist/types/Account.model';
 
 import BotChips from '~components/account/BotChips';
+import TargetProgress from '~components/account/EquityProgress/TargetProgress';
 import LockTypeInfo from '~components/account/LockTypeInfo';
 import Box from '~ui/core/Box';
 import Group from '~ui/core/Group';
@@ -25,7 +25,6 @@ function AccInfo({
     tradeSettings,
     protectSettings,
     settings,
-    plan = [],
   } = storeAccounts.useStore((state) => ({
     balance: state[providerId]?.balance,
     leverage: state[providerId]?.leverage,
@@ -34,7 +33,6 @@ function AccInfo({
     tradeSettings: state[providerId]?.tradeSettings,
     protectSettings: state[providerId]?.protectSettings,
     settings: state[providerId]?.settings,
-    plan: state[providerId]?.plan,
   }));
 
   const skipClick = (e: React.SyntheticEvent) => e.preventDefault();
@@ -45,14 +43,11 @@ function AccInfo({
     </Box>
   );
 
-  const monthTarget = plan.find((item) => item.type === PlanType.monthTargetLock)
-    ?.value as number;
-
   return (
     <Popover content={(
       <>
+        <TargetProgress providerId={providerId} />
         {leverage ? <Text>{`Leverage 1:${leverage}`}</Text> : null}
-        {monthTarget ? <Text>{`Target (Month): ${monthTarget}`}</Text> : null}
         <BotChips
           tradeSettings={tradeSettings}
           protectSettings={protectSettings}

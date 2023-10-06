@@ -11,7 +11,7 @@ import { getDiffPips, getLotFromVolume, getMajorPairs } from '@fishprovider/util
 import type { Order } from '@fishprovider/utils/dist/types/Order.model';
 import _ from 'lodash';
 
-import EquityProgress from '~components/account/EquityProgress';
+import TargetProgress from '~components/account/EquityProgress/TargetProgress';
 import BuySellIcon from '~components/order/BuySellIcon';
 import Group from '~ui/core/Group';
 import Icon from '~ui/core/Icon';
@@ -121,7 +121,6 @@ function TradeInfo({
   return (
     <Popover content={(
       <>
-        <EquityProgress providerId={providerId} profit={profit} />
         <Text>{`Equity: ${_.round(equity, 2)} ${asset}`}</Text>
         <Text>{`Margin: ${_.round(margin, 2)} ${asset}`}</Text>
         <Text>{`Live Orders [${liveOrders.length}]`}</Text>
@@ -140,7 +139,7 @@ function TradeInfo({
             <Icon name="Info" button />
           </Indicator>
         </Group>
-        <EquityProgress providerId={providerId} profit={profit} slim />
+        <TargetProgress providerId={providerId} profit={profit} slim />
       </Stack>
     </Popover>
   );

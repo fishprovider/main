@@ -7,15 +7,14 @@ import TargetProgress from './TargetProgress';
 interface Props {
   providerId: string,
   profit: number,
-  slim?: boolean,
 }
 
-function EquityProgress({ providerId, profit, slim }: Props) {
+function EquityProgress({ providerId, profit }: Props) {
   return (
     <Group spacing={0}>
-      {slim ? null : <BddProgress providerId={providerId} profit={profit} />}
-      {slim ? null : <EddProgress providerId={providerId} profit={profit} />}
-      <TargetProgress providerId={providerId} profit={profit} slim={slim} />
+      <BddProgress providerId={providerId} profit={profit} />
+      <EddProgress providerId={providerId} profit={profit} />
+      <TargetProgress providerId={providerId} profit={profit} />
     </Group>
   );
 }

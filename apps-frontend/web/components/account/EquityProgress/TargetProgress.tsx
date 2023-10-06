@@ -18,11 +18,11 @@ const targetIcons = [
 
 interface Props {
   providerId: string,
-  profit: number,
+  profit?: number,
   slim?: boolean,
 }
 
-function TargetProgress({ providerId, profit, slim }: Props) {
+function TargetProgress({ providerId, profit = 0, slim }: Props) {
   const {
     balance = 0,
     balanceStart,
