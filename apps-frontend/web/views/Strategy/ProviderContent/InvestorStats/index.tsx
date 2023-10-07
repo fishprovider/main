@@ -21,7 +21,6 @@ function InvestorStats() {
   const {
     providerId = '',
     providerPlatform,
-    // edd = 0,
     createdAt,
     capital = 0,
     riskScore,
@@ -32,7 +31,6 @@ function InvestorStats() {
   } = storeUser.useStore((state) => ({
     providerId: state.activeProvider?._id,
     providerPlatform: state.activeProvider?.providerPlatform,
-    // edd: state.activeProvider?.edd,
     createdAt: state.activeProvider?.createdAt,
     capital: state.activeProvider?.capital,
     riskScore: state.activeProvider?.riskScore,
@@ -95,11 +93,6 @@ function InvestorStats() {
                   <Text fw={700} span c="yellow">{`${copyFund} USD`}</Text>
                 </Text>
               )}
-              {/* <Text>
-                📉 Max EDD:
-                {' '}
-                <Text fw={700} span c="red">{`${edd}%`}</Text>
-              </Text> */}
             </Box>
             <Group>
               <InvestNow providerId={providerId} />
