@@ -190,7 +190,7 @@ const deployConfigBase = {
 
 const deployConfigFishServer = {
   ...deployConfigBase,
-  host: 'fish-server.fishprovider.com',
+  host: '185.255.131.171', // fish-server.fishprovider.com
   ssh_options: 'Port=1503',
 };
 
