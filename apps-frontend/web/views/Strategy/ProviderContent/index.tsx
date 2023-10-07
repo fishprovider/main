@@ -10,8 +10,8 @@ const AccountMembers = dynamic(() => import('./AccountMembers'), { loading: () =
 function ProviderContent() {
   return (
     <>
-      <InvestorStats />
       <Description />
+      <InvestorStats />
       <AccountInvestors />
       <AccountMembers />
     </>

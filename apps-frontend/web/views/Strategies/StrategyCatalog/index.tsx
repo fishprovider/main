@@ -17,6 +17,7 @@ import Stack from '~ui/core/Stack';
 import Text from '~ui/core/Text';
 import TextInput from '~ui/core/TextInput';
 import Title from '~ui/core/Title';
+import ContentSection from '~ui/layouts/ContentSection';
 import useMobile from '~ui/styles/useMobile';
 
 import BannerStatus from './BannerStatus';
@@ -87,6 +88,12 @@ function Catalog() {
             Nature Elements
           </Title>
         </CopyButton>
+        <ContentSection>
+          <Title size="h4" ta="center">
+            These foundational and frontier strategies serve as the bedrock
+            and vanguard for all subsequent strategies
+          </Title>
+        </ContentSection>
         <ProviderCards
           favorite={favorite}
           search={search}
@@ -102,6 +109,12 @@ function Catalog() {
             Ocean Series
           </Title>
         </CopyButton>
+        <ContentSection>
+          <Title size="h4" ta="center">
+            These encapsulate a suite of innovative and adaptive strategies,
+            designed to seamlessly accommodate the diverse demands of all investors
+          </Title>
+        </ContentSection>
         <ProviderCards
           favorite={favorite}
           search={search}
