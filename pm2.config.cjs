@@ -188,6 +188,12 @@ const deployConfigBase = {
   'post-deploy': 'git rev-parse HEAD',
 };
 
+const deployConfigFishServer = {
+  ...deployConfigBase,
+  host: 'fish-server.fishprovider.com',
+  ssh_options: 'Port=1503',
+};
+
 const deploy = {
   localhost: {
     ...deployConfigBase,
@@ -195,51 +201,35 @@ const deploy = {
     path: '/Users/marco/pm2-apps/fishprovider',
   },
   fishWeb: { // web
-    ...deployConfigBase,
-    host: '185.255.131.171',
-    ssh_options: 'Port=1503',
+    ...deployConfigFishServer,
     path: '/home/marco/work/pm2-apps/fishprovider-web',
   },
   fishBack: { // back
-    ...deployConfigBase,
-    host: '185.255.131.171',
-    ssh_options: 'Port=1503',
+    ...deployConfigFishServer,
     path: '/home/marco/work/pm2-apps/fishprovider-back',
   },
   fishPrice: { // spot-*
-    ...deployConfigBase,
-    host: '185.255.131.171',
-    ssh_options: 'Port=1503',
+    ...deployConfigFishServer,
     path: '/home/marco/work/pm2-apps/fishprovider-price',
   },
   fishOrder: { // head-*
-    ...deployConfigBase,
-    host: '185.255.131.171',
-    ssh_options: 'Port=1503',
+    ...deployConfigFishServer,
     path: '/home/marco/work/pm2-apps/fishprovider-order',
   },
   fishBot: { // bot, copy
-    ...deployConfigBase,
-    host: '185.255.131.171',
-    ssh_options: 'Port=1503',
+    ...deployConfigFishServer,
     path: '/home/marco/work/pm2-apps/fishprovider-bot',
   },
   fishPay: { // pay
-    ...deployConfigBase,
-    host: '185.255.131.171',
-    ssh_options: 'Port=1503',
+    ...deployConfigFishServer,
     path: '/home/marco/work/pm2-apps/fishprovider-pay',
   },
   fishCron: { // cron, mon, gate
-    ...deployConfigBase,
-    host: '185.255.131.171',
-    ssh_options: 'Port=1503',
+    ...deployConfigFishServer,
     path: '/home/marco/work/pm2-apps/fishprovider-cron',
   },
   fishSecondary: { // web-secondary, back-secondary
-    ...deployConfigBase,
-    host: '185.255.131.171',
-    ssh_options: 'Port=1503',
+    ...deployConfigFishServer,
     path: '/home/marco/work/pm2-apps/fishprovider-secondary',
     ref: 'tags/secondary',
   },
