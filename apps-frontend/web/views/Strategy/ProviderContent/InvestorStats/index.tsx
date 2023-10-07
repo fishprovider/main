@@ -26,7 +26,7 @@ function InvestorStats() {
     capital = 0,
     riskScore,
     winRate,
-    maxYearProfit = 0,
+    monthProfit = 0,
     roi = 0,
     summary = {},
   } = storeUser.useStore((state) => ({
@@ -37,7 +37,7 @@ function InvestorStats() {
     capital: state.activeProvider?.capital,
     riskScore: state.activeProvider?.riskScore,
     winRate: state.activeProvider?.winRate,
-    maxYearProfit: state.activeProvider?.maxYearProfit,
+    monthProfit: state.activeProvider?.monthProfit,
     roi: state.activeProvider?.roi,
     summary: state.activeProvider?.summary,
   }));
@@ -67,7 +67,7 @@ function InvestorStats() {
               <Text>
                 🎯 Target:
                 {' '}
-                <Text fw={700} span c="orange">{`${maxYearProfit}%/year`}</Text>
+                <Text fw={700} span c="orange">{`${monthProfit}%/month`}</Text>
               </Text>
               <Text>
                 💰 Total Profit:

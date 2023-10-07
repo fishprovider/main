@@ -39,7 +39,7 @@ function ProviderCard({
     createdAt,
     riskScore,
     winRate,
-    maxYearProfit = 0,
+    monthProfit = 0,
     roi = 0,
     summary = {},
   } = storeAccounts.useStore((state) => ({
@@ -49,7 +49,7 @@ function ProviderCard({
     createdAt: state[providerId]?.createdAt,
     riskScore: state[providerId]?.riskScore,
     winRate: state[providerId]?.winRate,
-    maxYearProfit: state[providerId]?.maxYearProfit,
+    monthProfit: state[providerId]?.monthProfit,
     roi: state[providerId]?.roi,
     summary: state[providerId]?.summary,
   }));
@@ -79,7 +79,7 @@ function ProviderCard({
             <Text>
               Target:
               {' '}
-              <Text fw={700} span c="orange">{`${maxYearProfit}%/year`}</Text>
+              <Text fw={700} span c="orange">{`${monthProfit}%/month`}</Text>
             </Text>
             <Text>
               Total Profit:
@@ -146,7 +146,7 @@ function ProviderCard({
               <Text size="sm">
                 Target:
                 {' '}
-                <Text fw={700} span c="orange">{`${maxYearProfit}%/year`}</Text>
+                <Text fw={700} span c="orange">{`${monthProfit}%/month`}</Text>
               </Text>
               <Text size="sm">
                 Total Profit:

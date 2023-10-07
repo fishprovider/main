@@ -29,7 +29,7 @@ export default function ProviderCard({ providerId }: Props) {
     createdAt,
     // riskScore,
     // winRate,
-    maxYearProfit = 0,
+    monthProfit = 0,
     roi = 0,
     summary = {},
   } = storeAccounts.useStore((state) => ({
@@ -38,7 +38,7 @@ export default function ProviderCard({ providerId }: Props) {
     createdAt: state[providerId]?.createdAt,
     // riskScore: state[providerId]?.riskScore,
     // winRate: state[providerId]?.winRate,
-    maxYearProfit: state[providerId]?.maxYearProfit,
+    monthProfit: state[providerId]?.monthProfit,
     roi: state[providerId]?.roi,
     summary: state[providerId]?.summary,
   }));
@@ -69,7 +69,7 @@ export default function ProviderCard({ providerId }: Props) {
               <Text>
                 Target:
                 {' '}
-                <Text color="orange">{`${maxYearProfit}%/year`}</Text>
+                <Text color="orange">{`${monthProfit}%/month`}</Text>
               </Text>
               <Text>
                 Total Profit:

@@ -236,7 +236,7 @@ export interface Account {
   edd?: number;
 
   icon?: string;
-  maxYearProfit?: number;
+  monthProfit?: number;
   roi?: number;
   riskScore?: number;
   winRate?: number;

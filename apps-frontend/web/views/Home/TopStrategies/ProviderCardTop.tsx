@@ -22,7 +22,7 @@ const defaultTopProviders: Record<string, Partial<Account>> = {
     icon: '🍀',
     riskScore: 1,
     winRate: 90,
-    maxYearProfit: 24,
+    monthProfit: 2,
     roi: 15.21,
     createdAt: new Date('2022-12-01T10:00:00.000+1000'),
   },
@@ -31,7 +31,7 @@ const defaultTopProviders: Record<string, Partial<Account>> = {
     icon: '🌊',
     riskScore: 2,
     winRate: 80,
-    maxYearProfit: 48,
+    monthProfit: 4,
     roi: 37.63,
     createdAt: new Date('2022-10-01T10:00:00.000+1000'),
   },
@@ -40,7 +40,7 @@ const defaultTopProviders: Record<string, Partial<Account>> = {
     icon: '🌪️',
     riskScore: 3,
     winRate: 70,
-    maxYearProfit: 72,
+    monthProfit: 6,
     roi: 39.37,
     createdAt: new Date('2022-11-01T10:00:00.000+1000'),
   },
@@ -49,7 +49,7 @@ const defaultTopProviders: Record<string, Partial<Account>> = {
     icon: '🔥',
     riskScore: 4,
     winRate: 60,
-    maxYearProfit: 96,
+    monthProfit: 8,
     roi: 58.05,
     createdAt: new Date('2022-11-01T10:00:00.000+1000'),
   },
@@ -67,7 +67,7 @@ function ProviderCardTop({ providerId }: Props) {
     createdAt,
     riskScore,
     winRate,
-    maxYearProfit = 0,
+    monthProfit = 0,
     roi = 0,
     summary = {},
   } = account || defaultTopProviders[providerId] || {};
@@ -99,7 +99,7 @@ function ProviderCardTop({ providerId }: Props) {
             <Text>
               Target:
               {' '}
-              <Text fw={700} span c="orange">{`${maxYearProfit}%/year`}</Text>
+              <Text fw={700} span c="orange">{`${monthProfit}%/month`}</Text>
             </Text>
             <Text>
               Total Profit:
