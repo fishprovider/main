@@ -2,7 +2,7 @@ import moment from 'moment-timezone';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
-import { cacheRead } from '~libs/cache';
+import { cacheRead, cacheWrite } from '~libs/cache';
 import Select from '~ui/core/Select';
 
 const zones = moment.tz
@@ -35,13 +35,13 @@ function TimezoneSelector() {
   return (
     <Select
       defaultValue={zoneCur}
-      onChange={(value) => {
+      onChange={async (value) => {
         if (!value) return;
         let newZone = value;
         if (newZone[0] === '-') newZone = newZone.replace('-', '+');
         if (newZone[0] === '+') newZone = newZone.replace('+', '-');
         newZone = `Etc/GMT${newZone}`;
-        localStorage.setItem('timezone', newZone);
+        await cacheWrite('timezone', timezone);
         router.reload();
       }}
       data={zones.map((zone) => ({
