@@ -16,12 +16,11 @@ const zones = moment.tz
 function TimezoneSelector() {
   const router = useRouter();
 
-  const [timezone, setTimezone] = useState(moment.tz.guess(true));
+  const [timezone, setTimezone] = useState('');
 
   useEffect(() => {
     cacheRead<string>('timezone').then((cacheTimezone) => {
-      if (!cacheTimezone) return;
-      setTimezone(cacheTimezone);
+      setTimezone(cacheTimezone || moment.tz.guess(true));
     });
   }, []);
 

@@ -46,8 +46,7 @@ const initialize = () => {
     }
 
     cacheRead<string>('timezone').then((cacheTimezone) => {
-      if (!cacheTimezone) return;
-      moment.tz.setDefault(cacheTimezone);
+      moment.tz.setDefault(cacheTimezone || moment.tz.guess(true));
     });
 
     // initLiveChat();
