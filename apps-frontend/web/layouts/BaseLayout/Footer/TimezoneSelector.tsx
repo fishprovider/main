@@ -16,7 +16,7 @@ const zones = moment.tz
 function TimezoneSelector() {
   const router = useRouter();
 
-  const [timezone, setTimezone] = useState(moment.tz.guess());
+  const [timezone, setTimezone] = useState(moment.tz.guess(true));
 
   useEffect(() => {
     cacheRead<string>('timezone').then((cacheTimezone) => {
