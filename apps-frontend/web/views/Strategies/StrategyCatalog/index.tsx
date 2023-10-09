@@ -3,7 +3,6 @@ import accountGetManyUser from '@fishprovider/cross/dist/api/accounts/getManyUse
 import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
 import storeUser from '@fishprovider/cross/dist/stores/user';
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 import { CardVariant } from '~constants/account';
@@ -23,7 +22,6 @@ import BannerStatus from './BannerStatus';
 import ProviderCards from './ProviderCards';
 
 function Catalog() {
-  const router = useRouter();
   const isMobile = useMobile();
 
   const {
