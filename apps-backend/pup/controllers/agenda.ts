@@ -38,7 +38,7 @@ const startGetStrategyInfo = async () => {
     name: jobName,
   });
   if (!jobs.length) {
-    await Agenda.every('60 minutes', jobName, getJobType('get-strategy-info'), {
+    await Agenda.every('240 minutes', jobName, getJobType('get-strategy-info'), {
       skipImmediate: true,
     });
   }
