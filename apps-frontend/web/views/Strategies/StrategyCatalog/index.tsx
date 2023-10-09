@@ -9,7 +9,6 @@ import { useState } from 'react';
 import { CardVariant } from '~constants/account';
 import useToggle from '~hooks/useToggle';
 import useToggleMulti from '~hooks/useToggleMulti';
-import CopyButton from '~ui/core/CopyButton';
 import Divider from '~ui/core/Divider';
 import Group from '~ui/core/Group';
 import Icon from '~ui/core/Icon';
@@ -83,11 +82,9 @@ function Catalog() {
 
       <Divider />
       <Stack align="center" id="nature-elements">
-        <CopyButton href={`https://www.fishprovider.com${router.pathname}#nature-elements`}>
-          <Title size="h2">
-            Nature Elements
-          </Title>
-        </CopyButton>
+        <Title size="h2">
+          Nature Elements
+        </Title>
         <ContentSection>
           <Title size="h4" ta="center">
             These foundational and frontier strategies serve as the bedrock
@@ -104,11 +101,9 @@ function Catalog() {
 
       <Divider />
       <Stack align="center" id="ocean-series">
-        <CopyButton href={`https://www.fishprovider.com${router.pathname}#ocean-series`}>
-          <Title size="h2">
-            Ocean Series
-          </Title>
-        </CopyButton>
+        <Title size="h2">
+          Ocean Series
+        </Title>
         <ContentSection>
           <Title size="h4" ta="center">
             These encapsulate a suite of innovative and adaptive strategies,
