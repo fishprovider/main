@@ -184,6 +184,7 @@ const deployConfigBase = {
   user: 'marco',
   repo: 'git@gitlab.com:fishprovider/main.git',
   ref: 'origin/master',
+  'pre-deploy': 'git reset --hard; git clean -fd',
   'post-deploy': 'git rev-parse HEAD',
 };
 
@@ -231,7 +232,7 @@ const deploy = {
     ...deployConfigFishServer,
     path: '/home/marco/work/pm2-apps/fishprovider-secondary',
     ref: 'tags/secondary',
-    'pre-deploy': 'git tag -d secondary; git fetch --tags -f',
+    'pre-deploy': 'git reset --hard; git clean -fd; git tag -d secondary',
   },
 };
 
