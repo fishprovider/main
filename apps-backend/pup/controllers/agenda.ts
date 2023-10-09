@@ -30,7 +30,7 @@ const startGetStrategyInfo = async () => {
   const jobName = `${prefix}-get-strategy-info`;
   Agenda.define(
     jobName,
-    { lockLifetime: 1000 * 60 * 60 },
+    { lockLifetime: 1000 * 60 * 60 * 4 },
     getStrategyInfos,
   );
 
