@@ -8,4 +8,4 @@ APP_DIR=apps-$APP_TYPE/$APP
 APP_NAME=$APP-secondary
 
 DOPPLER_TOKEN=$(doppler configure get token --plain) pm2 deploy pm2.config.cjs $DEPLOY_ENV \
-exec "source ./pm2-preload.sh; npm run pm2-stop $APP_NAME; npm run build -w $APP_DIR; npm run pm2-start $APP_NAME"
+exec "source ./pm2-preload.sh; pm2 stop pm2.config.cjs --only $APP_NAME; npm run build -w $APP_DIR; pm2 startOrReload pm2.config.cjs --only $APP_NAME"
