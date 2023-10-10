@@ -50,14 +50,26 @@
     - NOTIF_MSG="Deploy back $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
     - !reference [.notif, script]
 
-.deploy-phone:
+.deploy-phone-android:
   script:
     - cd apps-frontend/phone
     - ./clean-deps.sh
     - npm run ci -- --cache ~/.npm
-    - npm run build-submit-local
+    - npm run npm run build-local-android
+    - npm run npm run submit-local-android
     - cp build-* ~
-    - NOTIF_MSG="Deploy phone $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
+    - NOTIF_MSG="Deploy phone android $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
+    - !reference [.notif, script]
+
+.deploy-phone-ios:
+  script:
+    - cd apps-frontend/phone
+    - ./clean-deps.sh
+    - npm run ci -- --cache ~/.npm
+    - npm run npm run build-local-ios
+    - npm run npm run submit-local-ios
+    - cp build-* ~
+    - NOTIF_MSG="Deploy phone ios $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
     - !reference [.notif, script]
 
 .deploy-phone-update:

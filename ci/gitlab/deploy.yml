@@ -122,18 +122,31 @@ deploy-back:
   script:
     - !reference [.deploy-back, script]
 
-deploy-phone:
+deploy-phone-android:
   tags:
     - local
   rules:
     - if: $CI_PIPELINE_SOURCE == "schedule"
       when: never
-    - if: $CI_COMMIT_TITLE =~ /deploy-phone/
+    - if: $CI_COMMIT_TITLE =~ /deploy-phone-android/
       when: always
   cache: !reference [.cache_npm, cache]
-  timeout: "100 minutes"
+  timeout: "30 minutes"
   script:
-    - !reference [.deploy-phone, script]
+    - !reference [.deploy-phone-android, script]
+
+deploy-phone-ios:
+  tags:
+    - local
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+      when: never
+    - if: $CI_COMMIT_TITLE =~ /deploy-phone-ios/
+      when: always
+  cache: !reference [.cache_npm, cache]
+  timeout: "30 minutes"
+  script:
+    - !reference [.deploy-phone-ios, script]
 
 deploy-phone-update:
   tags:
