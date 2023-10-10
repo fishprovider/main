@@ -24,4 +24,4 @@ runs:
       shell: bash
       run: |
         cd ${{ inputs.app-dir }}
-        npm run ci -- --cache ~/.npm
+        npm i --prefer-offline --no-audit --no-progress --legacy-peer-deps --cache ~/.npm

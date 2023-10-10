@@ -54,7 +54,7 @@
   script:
     - cd apps-frontend/phone
     - ./clean-deps.sh
-    - npm run ci -- --cache ~/.npm
+    - npm i --prefer-offline --no-audit --no-progress --legacy-peer-deps --cache ~/.npm
     - npm run npm run build-local-android
     - npm run npm run submit-local-android
     - cp build-* ~
@@ -65,7 +65,7 @@
   script:
     - cd apps-frontend/phone
     - ./clean-deps.sh
-    - npm run ci -- --cache ~/.npm
+    - npm i --prefer-offline --no-audit --no-progress --legacy-peer-deps --cache ~/.npm
     - npm run npm run build-local-ios
     - npm run npm run submit-local-ios
     - cp build-* ~
@@ -76,7 +76,7 @@
   script:
     - cd apps-frontend/phone
     - ./clean-deps.sh
-    - npm run ci -- --cache ~/.npm
+    - npm i --prefer-offline --no-audit --no-progress --legacy-peer-deps --cache ~/.npm
     - npm run deploy-update
     - NOTIF_MSG="Deploy phone update $CI_COMMIT_REF_NAME $CI_COMMIT_SHA"
     - !reference [.notif, script]
