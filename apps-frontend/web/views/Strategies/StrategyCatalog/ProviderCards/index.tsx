@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { CardVariant } from '~constants/account';
 import Flex from '~ui/core/Flex';
 import Group from '~ui/core/Group';
+import Loading from '~ui/core/Loading';
 import Pagination from '~ui/core/Pagination';
 import Select from '~ui/core/Select';
 
@@ -54,6 +55,8 @@ function ProviderCards({
   )
     .slice((page - 1) * pageSize, page * pageSize)
     .map((account) => account._id));
+
+  if (!providerIds.length && page === 1) return <Loading />;
 
   return (
     <>
