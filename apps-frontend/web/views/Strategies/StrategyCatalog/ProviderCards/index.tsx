@@ -37,7 +37,7 @@ function ProviderCards({
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(pageSizeDefault);
 
-  const providerIds = storeAccounts.useStore((state) => _.orderBy(
+  const pageProviderIds = storeAccounts.useStore((state) => _.orderBy(
     _.filter(state, (account) => {
       if (!account.strategyId) return false;
       if (account.providerGroupId && account.providerGroupId !== account._id) return false;
@@ -56,7 +56,7 @@ function ProviderCards({
     .slice((page - 1) * pageSize, page * pageSize)
     .map((account) => account._id));
 
-  if (!providerIds.length && page === 1) return <Loading />;
+  const providerIds = pageProviderIds.length ? pageProviderIds : ['loading-1', 'loading-2'];
 
   return (
     <>

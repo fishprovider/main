@@ -15,6 +15,7 @@ import Box from '~ui/core/Box';
 import Card from '~ui/core/Card';
 import Group from '~ui/core/Group';
 import Icon from '~ui/core/Icon';
+import Loader from '~ui/core/Loader';
 import Stack from '~ui/core/Stack';
 import Text from '~ui/core/Text';
 import Title from '~ui/core/Title';
@@ -34,8 +35,8 @@ function ProviderCard({
 
   const {
     providerViewType,
-    name = '-',
-    icon = '-',
+    name,
+    icon,
     createdAt,
     riskScore,
     winRate,
@@ -73,8 +74,8 @@ function ProviderCard({
               </Badge>
             )}
           </Group>
-          <Title size="h3">{name}</Title>
-          <Title size="h2">{icon}</Title>
+          <Title size="h3">{name || <Loader variant="dots" />}</Title>
+          <Title size="h2">{icon || <Loader variant="bars" size="sm" />}</Title>
           <Box>
             <Text>
               Target:
@@ -130,8 +131,8 @@ function ProviderCard({
           </Group>
           <Group position="apart">
             <Stack maw={150} spacing="xs">
-              <Title size="h4">{name}</Title>
-              <Title size="h3">{icon}</Title>
+              <Title size="h4">{name || <Loader variant="dots" size="xs" />}</Title>
+              <Title size="h3">{icon || <Loader variant="bars" size="xs" />}</Title>
               <Group position="center">
                 {providerViewType === ProviderViewType.private && (
                   <Icon
