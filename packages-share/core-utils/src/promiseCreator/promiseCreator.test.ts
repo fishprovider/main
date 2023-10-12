@@ -6,7 +6,7 @@ test('promiseCreator', async () => {
 
   setTimeout(() => {
     if (promise.resolveExec) promise.resolveExec(val);
-  }, 1000);
+  }, 100);
 
   const res = await promise;
   expect(res).toBe(val);
