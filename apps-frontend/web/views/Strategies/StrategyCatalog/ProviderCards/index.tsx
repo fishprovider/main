@@ -6,7 +6,6 @@ import { useState } from 'react';
 import { CardVariant } from '~constants/account';
 import Flex from '~ui/core/Flex';
 import Group from '~ui/core/Group';
-import Loading from '~ui/core/Loading';
 import Pagination from '~ui/core/Pagination';
 import Select from '~ui/core/Select';
 
