@@ -19,6 +19,6 @@
   "dependencies": {
     "@fishprovider/core-utils": "*",
     "@fishprovider/repositories": "*",
-    "axios": "^1.5.0"
+    "axios": "^1.5.1"
   }
 }

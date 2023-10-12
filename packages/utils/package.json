@@ -19,7 +19,7 @@
     "moment": "^2.29.4"
   },
   "devDependencies": {
-    "@tsconfig/next": "^2.0.0",
+    "@tsconfig/next": "^2.0.1",
     "@tsconfig/node-lts": "^18.12.5",
     "@tsconfig/strictest": "^2.0.2",
     "@types/lodash": "^4.14.199",

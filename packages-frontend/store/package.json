@@ -19,7 +19,7 @@
   "dependencies": {
     "@fishprovider/core-utils": "*",
     "@fishprovider/repositories": "*",
-    "zustand": "^4.4.1"
+    "zustand": "^4.4.3"
   },
   "devDependencies": {
     "socket.io-client": "^4.7.2"

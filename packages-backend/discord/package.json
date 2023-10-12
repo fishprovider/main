@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@fishprovider/core-utils": "*",
-    "axios": "^1.5.0",
+    "axios": "^1.5.1",
     "discord.js": "^14.13.0"
   }
 }
