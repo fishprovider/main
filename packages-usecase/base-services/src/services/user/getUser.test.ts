@@ -6,21 +6,20 @@ import {
 } from '../..';
 import { userServiceBaseParams } from '../../tests';
 
-test('getUser with bad request', async () => {
+test('getUser throws USER_ACCESS_DENIED', async () => {
   await expect(getUserService({
     ...userServiceBaseParams,
     context: undefined,
   })).rejects.toThrow(new BaseError(UserError.USER_ACCESS_DENIED));
 });
 
-test('getUser throws bad result', async () => {
+test('getUser throws REPOSITORY_INVALID_PROJECTION', async () => {
   const userId = 'testId';
   const badDoc = { _id: userId, pushNotif: [] };
   await expect(getUserService({
     ...userServiceBaseParams,
     repositories: {
       user: {
-        ...userServiceBaseParams.repositories.user,
         getUser: async () => ({ doc: badDoc }),
       },
     },
@@ -28,16 +27,14 @@ test('getUser throws bad result', async () => {
 });
 
 test('getUser returns a user', async () => {
-  const userId = 'testId';
-  const { doc: user } = await getUserService({
+  const user = { _id: 'userId' };
+  const { doc } = await getUserService({
     ...userServiceBaseParams,
     repositories: {
       user: {
-        ...userServiceBaseParams.repositories.user,
-        getUser: async () => ({ doc: { _id: userId } }),
+        getUser: async () => ({ doc: user }),
       },
     },
   });
-  expect(user).toBeDefined();
-  expect(user?._id).toBe(userId);
+  expect(doc?._id).toBe(user._id);
 });

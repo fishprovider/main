@@ -3,32 +3,27 @@ import { BaseError, UserError } from '@fishprovider/core';
 import { userServiceBaseParams, userSessionDefault } from '../../tests';
 import { updateUserService } from '..';
 
-test('updateUser with bad request', async () => {
+test('updateUser throws USER_ACCESS_DENIED', async () => {
   await expect(updateUserService({
     ...userServiceBaseParams,
     context: undefined,
   })).rejects.toThrow(new BaseError(UserError.USER_ACCESS_DENIED));
 });
 
-test('updateUser returns a doc', async () => {
-  const name = 'new name';
+test('updateUser returns a user', async () => {
+  const name = 'testNameNew';
+  const user = {
+    ...userSessionDefault,
+    name,
+  };
   const { doc } = await updateUserService({
     ...userServiceBaseParams,
     payload: {
       name,
     },
-    options: {
-      returnAfter: true,
-    },
     repositories: {
       user: {
-        ...userServiceBaseParams.repositories.user,
-        updateUser: async () => ({
-          doc: {
-            ...userSessionDefault,
-            name,
-          },
-        }),
+        updateUser: async () => ({ doc: user }),
       },
     },
   });
