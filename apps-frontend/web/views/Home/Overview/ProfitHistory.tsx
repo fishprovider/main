@@ -1,4 +1,5 @@
 import accountGet from '@fishprovider/cross/dist/api/accounts/get';
+import _ from 'lodash';
 import { useEffect } from 'react';
 
 import MonthProfit from '~components/account/MonthProfit';
@@ -11,16 +12,14 @@ import Stack from '~ui/core/Stack';
 import Text from '~ui/core/Text';
 import Title from '~ui/core/Title';
 import ThemeProvider from '~ui/themes/ThemeProvider';
-import { isLive, isProd } from '~utils';
 
-const providerId = isProd && isLive ? 'earth' : 'octopus';
-const strategyId = '65916';
-const ctraderUrl = `https://ct.spotware.com/copy/strategy/${strategyId}`;
+interface Props {
+  providerId: string;
+  ctraderUrl: string;
+  myFxBookUrl: string;
+}
 
-const myFxBookId = 'earth/10192142';
-const myFxBookUrl = `https://www.myfxbook.com/portfolio/${myFxBookId}`;
-
-function ProfitHistory() {
+function ProfitHistory({ providerId, ctraderUrl, myFxBookUrl }: Props) {
   useEffect(() => {
     accountGet({ providerId });
   }, []);
@@ -31,7 +30,11 @@ function ProfitHistory() {
         Historical Profit Performance
       </Title>
       <Text fz="lg">
-        This is the strategy named Earth 🍀 one of the top FishProvider
+        This is the strategy named
+        {' '}
+        {_.upperFirst(providerId)}
+        {' '}
+        one of the top FishProvider
         {' '}
         <Link href="#strategies" variant="noColor">strategies</Link>
       </Text>

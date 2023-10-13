@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 
 import Card from '~ui/core/Card';
+import Carousel from '~ui/core/Carousel';
 import Grid from '~ui/core/Grid';
 import Stack from '~ui/core/Stack';
 import Title from '~ui/core/Title';
@@ -9,6 +10,39 @@ import ContentSection from '~ui/layouts/ContentSection';
 const Offer = dynamic(() => import('./Offer'));
 const ProfitHistory = dynamic(() => import('./ProfitHistory'));
 const Welcome = dynamic(() => import('./Welcome'));
+
+const topAccounts = [
+  {
+    providerId: 'earth',
+    ctraderUrl: 'https://ct.spotware.com/copy/strategy/65916',
+    myFxBookUrl: 'https://www.myfxbook.com/members/FishProvider/earth/10192142',
+  },
+  {
+    providerId: 'water',
+    ctraderUrl: 'https://ct.spotware.com/copy/strategy/65917',
+    myFxBookUrl: 'https://www.myfxbook.com/members/FishProvider/water/10406062',
+  },
+  {
+    providerId: 'air',
+    ctraderUrl: 'https://ct.spotware.com/copy/strategy/65937',
+    myFxBookUrl: 'https://www.myfxbook.com/members/FishProvider/air/10406063',
+  },
+  {
+    providerId: 'fire',
+    ctraderUrl: 'https://ct.spotware.com/copy/strategy/65938',
+    myFxBookUrl: 'https://www.myfxbook.com/members/FishProvider/fire/10406064',
+  },
+  // {
+  //   providerId: 'whale',
+  //   ctraderUrl: '',
+  //   myFxBookUrl: '',
+  // },
+  // {
+  //   providerId: 'shark',
+  //   ctraderUrl: '',
+  //   myFxBookUrl: '',
+  // },
+];
 
 function Overview() {
   return (
@@ -39,7 +73,9 @@ function Overview() {
 
         <Grid.Col xs={12} sm={6} md={7}>
           <Card withBorder radius="lg" ta="center" shadow="xl">
-            <ProfitHistory />
+            <Carousel
+              slides={topAccounts.map((item) => <ProfitHistory key={item.providerId} {...item} />)}
+            />
           </Card>
         </Grid.Col>
       </Grid>
