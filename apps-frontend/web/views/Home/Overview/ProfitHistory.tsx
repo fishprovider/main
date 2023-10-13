@@ -22,7 +22,7 @@ interface Props {
 function ProfitHistory({ providerId, ctraderUrl, myFxBookUrl }: Props) {
   useEffect(() => {
     accountGet({ providerId });
-  }, []);
+  }, [providerId]);
 
   return (
     <Stack>

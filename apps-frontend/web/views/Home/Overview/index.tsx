@@ -13,22 +13,22 @@ const Welcome = dynamic(() => import('./Welcome'));
 
 const topAccounts = [
   {
-    providerId: 'earth',
+    providerId: 'earth 🍀',
     ctraderUrl: 'https://ct.spotware.com/copy/strategy/65916',
     myFxBookUrl: 'https://www.myfxbook.com/members/FishProvider/earth/10192142',
   },
   {
-    providerId: 'water',
+    providerId: 'water 🌊',
     ctraderUrl: 'https://ct.spotware.com/copy/strategy/65917',
     myFxBookUrl: 'https://www.myfxbook.com/members/FishProvider/water/10406062',
   },
   {
-    providerId: 'air',
+    providerId: 'air 🌪️',
     ctraderUrl: 'https://ct.spotware.com/copy/strategy/65937',
     myFxBookUrl: 'https://www.myfxbook.com/members/FishProvider/air/10406063',
   },
   {
-    providerId: 'fire',
+    providerId: 'fire 🔥',
     ctraderUrl: 'https://ct.spotware.com/copy/strategy/65938',
     myFxBookUrl: 'https://www.myfxbook.com/members/FishProvider/fire/10406064',
   },
