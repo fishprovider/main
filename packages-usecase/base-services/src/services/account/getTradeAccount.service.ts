@@ -46,9 +46,6 @@ export const getTradeAccountService: GetTradeAccountService = async ({
     throw new BaseError(AccountError.ACCOUNT_NOT_FOUND);
   }
 
-  // TODO: const assetInfo = await getAssetInfo();
-  // tradeAccount.asset = ...
-
   // non-blocking
   updateAccountService({
     filter,
