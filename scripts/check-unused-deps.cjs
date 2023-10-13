@@ -8,7 +8,35 @@ const rootPackageJson = require('../package.json');
 const ORG_NAME = '@fishprovider';
 
 const ACTIVE_DEV_DEPS = [
-
+  '@jest/globals',
+  '@testing-library/jest-dom',
+  '@testing-library/react',
+  '@tsconfig/node-lts-strictest-esm',
+  '@types/d3-format',
+  '@types/d3-time-format',
+  '@types/dotenv-flow',
+  '@types/jest',
+  '@types/lqip-modern',
+  '@types/node',
+  '@types/node-telegram-bot-api',
+  '@typescript-eslint/eslint-plugin',
+  '@typescript-eslint/parser',
+  'concurrently',
+  'eslint',
+  'eslint-config-airbnb',
+  'eslint-config-airbnb-typescript',
+  'eslint-config-next',
+  'eslint-plugin-simple-import-sort',
+  'husky',
+  'identity-obj-proxy',
+  'jest',
+  'jest-environment-jsdom',
+  'lint-staged',
+  'nodemon',
+  'ts-jest',
+  'ts-node',
+  'tsc-files',
+  'tsc-watch',
 ];
 
 const packageJsonFiles = rootPackageJson.workspaces
@@ -36,6 +64,6 @@ const unusedDeps = Object.entries(rootPackageJson.devDependencies).filter(([name
 
 if (unusedDeps.length > 0) {
   console.warn(`${unusedDeps.length} unused devDependencies found`);
-  unusedDeps.forEach(([name, version]) => console.warn(`${name}@${version}`));
+  unusedDeps.forEach(([name]) => console.warn(`'${name}',`));
   process.exit(1);
 }
