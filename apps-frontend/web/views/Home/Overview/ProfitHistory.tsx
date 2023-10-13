@@ -30,12 +30,7 @@ function ProfitHistory({ providerId, ctraderUrl, myFxBookUrl }: Props) {
         Historical Profit Performance
       </Title>
       <Text fz="lg">
-        This is the strategy named
-        {' '}
-        {_.upperFirst(providerId)}
-        {' '}
-        one of the top FishProvider
-        {' '}
+        {`This is the strategy named ${_.upperFirst(providerId)}, one of the top FishProvider `}
         <Link href="#strategies" variant="noColor">strategies</Link>
       </Text>
       <Box pt="lg">
