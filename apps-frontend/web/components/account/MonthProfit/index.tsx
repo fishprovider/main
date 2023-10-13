@@ -80,15 +80,15 @@ function MonthProfit({
     });
   });
 
-  const renderLabel = ({
-    x, y, width, value,
-  }: any) => (
-    <g>
-      <text x={x + width / 2} y={y - 5} textAnchor="middle" fontSize={isTablet ? 10 : 14}>
-        {`${value}%`}
-      </text>
-    </g>
-  );
+  // const renderLabel = ({
+  //   x, y, width, value,
+  // }: any) => (
+  //   <g>
+  //     <text x={x + width / 2} y={y - 5} textAnchor="middle" fontSize={isTablet ? 10 : 14}>
+  //       {`${value}%`}
+  //     </text>
+  //   </g>
+  // );
 
   const travellerWidth = isTablet ? 6 : 12;
 
@@ -105,7 +105,7 @@ function MonthProfit({
           yAxisId="profitMonth"
           dataKey={nameProfit}
           shape={BarProfit}
-          label={{ content: renderLabel }}
+          // label={{ content: renderLabel }}
         />
         <Line
           yAxisId="profitAcc"
