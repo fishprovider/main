@@ -32,6 +32,14 @@ const ctraderPlatforms = {
     copyUrl: 'https://ct.icmarkets.com/copy/strategy',
     rank: 19,
   },
+  roboforex: {
+    name: 'RoboForex',
+    icon: '/icons/roboforex.svg',
+    href: 'https://www.roboforex.com',
+    partnerUrl: 'https://my.roboforex.com/en/?a=vtft',
+    copyUrl: 'https://ct.roboforex.com/copy',
+    rank: 8,
+  },
   litefinance: {
     name: 'LiteFinance',
     icon: '/icons/litefinance.png',
@@ -160,7 +168,7 @@ const metatraderPlatforms = {
     icon: '/icons/roboforex.svg',
     href: 'https://www.roboforex.com',
     partnerUrl: 'https://my.roboforex.com/en/?a=vtft',
-    rank: 28,
+    rank: 8,
   },
   admiralmarkets: {
     name: 'AdmiralMarkets',
