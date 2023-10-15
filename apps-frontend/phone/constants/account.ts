@@ -62,6 +62,14 @@ const ctraderPlatforms = {
     copyUrl: 'https://ct.skilling.com/copy/strategy',
     rank: 338,
   },
+  litefinance: {
+    name: 'LiteFinance',
+    icon: '/icons/litefinance.png',
+    href: 'https://www.litefinance.org',
+    partnerUrl: 'https://litefinance.vn/?uid=847322350',
+    copyUrl: 'https://app.litefinance.org/copy/strategy',
+    rank: 339,
+  },
   tradeview: {
     name: 'TradeView',
     icon: '/icons/tradeview.png',
