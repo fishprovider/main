@@ -25,14 +25,9 @@ export const updateUserService: UpdateUserService = async ({
     const hasAccess = () => {
       if (!roles) return false;
       const {
-        adminProviders, traderProviders, protectorProviders, viewerProviders,
         adminAccounts, traderAccounts, protectorAccounts, viewerAccounts,
       } = roles;
-      if (!adminProviders?.[accountId]
-        && !traderProviders?.[accountId]
-        && !protectorProviders?.[accountId]
-        && !viewerProviders?.[accountId]
-        && !adminAccounts?.[accountId]
+      if (!adminAccounts?.[accountId]
         && !traderAccounts?.[accountId]
         && !protectorAccounts?.[accountId]
         && !viewerAccounts?.[accountId]

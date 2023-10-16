@@ -195,20 +195,6 @@ export interface Account {
   _id: string;
   name: string;
 
-  /** @deprecated use accountType instead */
-  providerType: AccountType;
-  /** @deprecated use accountPlatform instead */
-  providerPlatform: AccountPlatform;
-  /** @deprecated use accountPlatformType instead */
-  providerPlatformType?: string;
-
-  /** @deprecated use accountGroupId instead */
-  providerGroupId?: string;
-  /** @deprecated use accountViewType instead */
-  providerViewType?: AccountViewType;
-  /** @deprecated use accountTradeType instead */
-  providerTradeType?: AccountTradeType;
-
   accountType: AccountType;
   accountPlatform: AccountPlatform;
   accountPlatformType?: string;
@@ -221,10 +207,8 @@ export interface Account {
   assetId?: string;
 
   leverage?: number;
-
   balance?: number;
-  /** @deprecated use balanceStartMonth instead */
-  balanceStart?: number;
+
   balanceStartMonth?: number;
   balanceStartDay?: number;
   balanceStartDayUpdatedAt?: Date;

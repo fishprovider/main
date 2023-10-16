@@ -33,13 +33,13 @@ export const checkAccountAccess = (
 
   const { isManagerWeb } = getRoleProvider(context?.userSession?.roles);
   const {
-    providerViewType, members, deleted,
+    accountViewType, members, deleted,
   } = account;
 
   const hasAccess = () => {
     if (isManagerWeb) return true;
     if (deleted) return false;
-    if (!canWrite && providerViewType === AccountViewType.public) return true;
+    if (!canWrite && accountViewType === AccountViewType.public) return true;
 
     // for private accounts
     if (!context?.userSession?._id) return false;
