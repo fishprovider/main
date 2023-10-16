@@ -81,7 +81,6 @@ const updateUser = async (
     $set: {
       ...(name && { name }),
       ...(starAccount && {
-        [`starProviders.${starAccount.accountId}`]: starAccount.enabled,
         [`starAccounts.${starAccount.accountId}`]: starAccount.enabled,
       }),
       ...(roles && { roles }),

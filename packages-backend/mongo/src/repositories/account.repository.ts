@@ -18,7 +18,7 @@ const buildAccountFilter = (filter: {
   return {
     ...(accountId && { _id: accountId }),
     ...(accountIds && { _id: { $in: accountIds } }),
-    ...(accountViewType && { providerViewType: accountViewType }),
+    ...(accountViewType && { accountViewType }),
     ...(email && { 'members.email': email }),
     ...(member?.status === 'update' && { 'members.email': member.email }),
     deleted: { $ne: true },
