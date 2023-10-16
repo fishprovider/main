@@ -1,7 +1,5 @@
 #!/bin/bash
 
-fig up -d
-
 APP=$1
 
 APP_TYPE=backend
