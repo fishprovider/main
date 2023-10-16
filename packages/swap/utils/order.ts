@@ -8,7 +8,12 @@ const getPendingOrders = async (providerId: string) => {
 
 const getLiveOrders = async (providerId: string) => {
   const str = await Redis.get(redisKeys.liveOrders(providerId));
-  return str ? JSON.parse(str) as Order[] : [];
+  const rawLiveOrders = str ? JSON.parse(str) as Order[] : [];
+
+  // hack: filter out hack LTCUSD orders to keep CTrader Strategy active
+  const liveOrders = rawLiveOrders.filter((item) => item.symbol !== 'LTCUSD');
+
+  return liveOrders;
 };
 
 const getOrders = async (providerId: string) => {
