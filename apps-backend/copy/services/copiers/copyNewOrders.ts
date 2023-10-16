@@ -22,7 +22,7 @@ const env = {
 
 const runs = {};
 
-const symbolFullWeek = ['BTCUSD', 'ETHUSD'];
+const symbolFullWeek = ['BTCUSD', 'ETHUSD', 'LTCUSD'];
 
 const getVolume = (
   account: Account,

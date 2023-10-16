@@ -12,7 +12,7 @@ const forexPairs = [
 
 const energyPairs = ['XAUUSD', 'XAGUSD'];
 
-const cryptoSymbols = ['BTCUSD', 'ETHUSD'];
+const cryptoSymbols = ['BTCUSD', 'ETHUSD', 'LTCUSD'];
 
 export {
   cryptoSymbols,
