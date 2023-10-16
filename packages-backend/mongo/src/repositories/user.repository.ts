@@ -104,6 +104,7 @@ const updateUser = async (
   await collection.updateOne(userFilter, updateFilter);
   return {};
 };
+
 export const MongoUserRepository: UserRepository = {
   getUser,
   getUsers,
