@@ -33,8 +33,8 @@ fi
 
 if [[ $APP =~ ^spot-* ]]; then
   DEPLOY_ENV=fishPrice
-  if [[ $APP =~ ^spot-*-poll ]]; then
-    APP_DIR=apps-$APP_TYPE/${APP:0:-5}
+  if [[ $APP =~ ^spot-.*-poll ]]; then
+    APP_DIR=apps-$APP_TYPE/${APP%?????}
   fi
 fi
 
@@ -47,6 +47,16 @@ fi
 if [[ $APP == "back-secondary" ]]; then
   DEPLOY_ENV=fishSecondary
   APP_DIR=apps-$APP_TYPE/back
+fi
+
+if [[ $DRY_RUN == "true" ]]; then
+  echo $DEPLOY_ENV $APP_TYPE $APP_DIR
+  exit 0
+fi
+
+if [[ -z $DEPLOY_ENV ]]; then
+  echo "No DEPLOY_ENV found"
+  exit 1
 fi
 
 # pull
