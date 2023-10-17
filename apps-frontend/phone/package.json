@@ -63,7 +63,7 @@
     "react-native-screens": "~3.22.0",
     "react-native-web": "~0.19.6",
     "socket.io-client": "^4.7.2",
-    "tamagui": "^1.74.15"
+    "tamagui": "^1.74.17"
   },
   "devDependencies": {
     "@tsconfig/react-native": "^3.0.2"
