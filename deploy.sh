@@ -68,4 +68,4 @@ exec "source ./pm2-preload.sh; npm run ci -- -w $APP_DIR"
 
 # stop, build, and start
 DOPPLER_TOKEN=$(doppler configure get token --plain) pm2 deploy pm2.config.cjs $DEPLOY_ENV \
-exec "source ./pm2-preload.sh; pm2 stop pm2.config.cjs --only $APP; npm run build -w $APP_DIR; pm2 startOrReload pm2.config.cjs --only $APP"
+exec "source ./pm2-preload.sh; pm2 stop pm2.config.cjs --only $APP; npm run clean -w $APP_DIR; npm run build -w $APP_DIR; pm2 startOrReload pm2.config.cjs --only $APP"
