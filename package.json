@@ -174,7 +174,7 @@
     "lodash": "^4.17.21",
     "loglevel": "^1.8.1",
     "lqip-modern": "^2.0.0",
-    "metaapi.cloud-sdk": "~23.1.1",
+    "metaapi.cloud-sdk": "~23.6.8",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.43",
     "mongodb": "^6.1.0",
