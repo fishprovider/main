@@ -5,7 +5,7 @@ interface Props {
   src: string;
   height?: number | `${number}`;
   width?: number | `${number}`;
-  fill?: boolean | undefined;
+  fill?: boolean;
 }
 
 function Image({
