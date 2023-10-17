@@ -7,8 +7,6 @@ module.exports = {
     'googleapis',
     // packages/ctrader
     'protobufjs',
-    // packages/metatrader
-    'metaapi.cloud-sdk',
     // apps-frontend/phone
     "@react-native-async-storage/async-storage",
     "@react-native-firebase/app",
