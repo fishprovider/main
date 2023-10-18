@@ -23,7 +23,6 @@ export const sanitizeAccountBaseGetOptions = (
 export const checkAccountAccess = (
   account?: Partial<Account>,
   context?: ServiceContext,
-  canWrite?: boolean,
 ) => {
   if (!account) {
     throw new BaseError(AccountError.ACCOUNT_NOT_FOUND);
@@ -39,7 +38,7 @@ export const checkAccountAccess = (
   const hasAccess = () => {
     if (isManagerWeb) return true;
     if (deleted) return false;
-    if (!canWrite && accountViewType === AccountViewType.public) return true;
+    if (accountViewType === AccountViewType.public) return true;
 
     // for private accounts
     if (!context?.userSession?._id) return false;
@@ -50,7 +49,7 @@ export const checkAccountAccess = (
   };
 
   if (!hasAccess()) {
-    throw new BaseError(AccountError.ACCOUNT_ACCESS_DENIED);
+    throw new BaseError(AccountError.ACCOUNT_ACCESS_DENIED, account._id);
   }
 
   return account;
