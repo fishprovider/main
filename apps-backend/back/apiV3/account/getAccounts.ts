@@ -6,13 +6,20 @@ import { z } from 'zod';
 import { ApiHandler } from '~types/ApiHandler.model';
 
 const handler: ApiHandler<Partial<Account>[]> = async (data, userSession) => {
-  z.object({
+  const filter = z.object({
+    accountViewType: z.nativeEnum(AccountViewType).optional(),
   }).strict()
     .parse(data);
 
+  const { accountViewType } = filter;
+
   const { docs } = await getAccountsService({
     filter: {
-      accountViewType: AccountViewType.public,
+      ...(accountViewType === AccountViewType.public ? {
+        accountViewType,
+      } : {
+        email: userSession.email,
+      }),
     },
     options: {
       sort: {
