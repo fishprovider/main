@@ -1,4 +1,3 @@
-import accountGet from '@fishprovider/cross/dist/api/accounts/get';
 import { useMutate } from '@fishprovider/cross/dist/libs/query';
 import storeOrders from '@fishprovider/cross/dist/stores/orders';
 import storePrices from '@fishprovider/cross/dist/stores/prices';
@@ -59,18 +58,13 @@ function AccountBalance() {
   } = getAccountStats(balance, profit, liveOrders, marginRaw);
 
   const { mutate: reload, isLoading } = useMutate({
-    mutationFn: accountGet,
-  });
-
-  const { mutate: reloadV3, isLoading: isLoadingV3 } = useMutate({
     mutationFn: (accountId: string) => getAccountController({
-      accountId,
+      accountId, getTradeInfo: true,
     }),
   });
 
   const onReload = () => {
-    reload({ providerId, reload: true });
-    reloadV3(providerId);
+    reload(providerId);
   };
 
   return (

@@ -1,4 +1,3 @@
-import accountGet from '@fishprovider/cross/dist/api/accounts/get';
 import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
 import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
@@ -7,6 +6,7 @@ import { redisKeys } from '@fishprovider/utils/dist/constants/redis';
 import type { Account } from '@fishprovider/utils/dist/types/Account.model';
 import { useEffect, useRef } from 'react';
 
+import { getAccountController } from '~controller-services/account/getAccount.controller';
 import { subNotif, unsubNotif } from '~libs/pushNotif';
 import { refreshMS } from '~utils';
 
@@ -75,11 +75,11 @@ interface Props {
 
 function AccountWatch({ providerId }: Props) {
   useEffect(() => {
-    accountGet({ providerId, reload: true });
+    getAccountController({ accountId: providerId, getTradeInfo: true });
   }, [providerId]);
 
   useQuery({
-    queryFn: () => accountGet({ providerId }),
+    queryFn: () => getAccountController({ accountId: providerId }),
     queryKey: queryKeys.account(providerId),
     refetchInterval: refreshMS,
   });

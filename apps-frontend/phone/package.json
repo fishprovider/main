@@ -27,7 +27,9 @@
     "ci-type-check": "tsc-files --noEmit types/global.d.ts"
   },
   "dependencies": {
+    "@fishprovider/base-services": "*",
     "@fishprovider/cross": "*",
+    "@fishprovider/data-fetch": "*",
     "@fishprovider/utils": "*",
     "@react-native-async-storage/async-storage": "1.18.2",
     "@react-native-firebase/app": "^18.3.0",

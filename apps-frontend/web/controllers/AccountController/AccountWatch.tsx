@@ -1,4 +1,3 @@
-import accountGet from '@fishprovider/cross/dist/api/accounts/get';
 import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
 import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
@@ -93,7 +92,7 @@ interface Props {
 
 function AccountWatch({ providerId }: Props) {
   useEffect(() => {
-    accountGet({ providerId, reload: true });
+    getAccountController({ accountId: providerId, getTradeInfo: true });
   }, [providerId]);
 
   useQuery({
