@@ -22,6 +22,7 @@ module.exports = function (api) {
             // Note that '~': '.' does not work
             '~components': './components',
             '~constants': './constants',
+            '~controller-services': './controller-services',
             '~controllers': './controllers',
             '~hooks': './hooks',
             '~libs': './libs',
