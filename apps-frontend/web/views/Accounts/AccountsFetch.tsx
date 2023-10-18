@@ -1,9 +1,9 @@
-import accountGetManyInfo from '@fishprovider/cross/dist/api/accounts/getManyInfo';
-import accountGetManySlim from '@fishprovider/cross/dist/api/accounts/getManySlim';
-import accountGetManyUser from '@fishprovider/cross/dist/api/accounts/getManyUser';
+import { AccountViewType } from '@fishprovider/core';
 import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
 import storeUser from '@fishprovider/cross/dist/stores/user';
+
+import { getAccountsController } from '~controller-services/account/getAccounts.controller';
 
 function AccountsFetch() {
   const {
@@ -13,15 +13,11 @@ function AccountsFetch() {
   }));
 
   useQuery({
-    queryFn: accountGetManySlim,
+    queryFn: () => getAccountsController({ accountViewType: AccountViewType.public }),
     queryKey: queryKeys.slimAccounts(),
   });
   useQuery({
-    queryFn: accountGetManyInfo,
-    queryKey: queryKeys.infoAccounts(),
-  });
-  useQuery({
-    queryFn: accountGetManyUser,
+    queryFn: () => getAccountsController({}),
     queryKey: queryKeys.userAccounts(),
     enabled: !!isServerLoggedIn,
   });

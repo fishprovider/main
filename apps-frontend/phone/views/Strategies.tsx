@@ -1,4 +1,4 @@
-import accountGetManySlim from '@fishprovider/cross/dist/api/accounts/getManySlim';
+import { AccountViewType } from '@fishprovider/core';
 import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
 import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
@@ -6,6 +6,7 @@ import _ from 'lodash';
 import { useState } from 'react';
 
 import ProviderCards from '~components/ProviderCards';
+import { getAccountsController } from '~controller-services/account/getAccounts.controller';
 import ScrollView from '~ui/ScrollView';
 import Stack from '~ui/Stack';
 import { refreshMS } from '~utils';
@@ -34,7 +35,7 @@ export default function Strategies() {
     .map((account) => account._id));
 
   useQuery({
-    queryFn: accountGetManySlim,
+    queryFn: () => getAccountsController({ accountViewType: AccountViewType.public }),
     queryKey: queryKeys.slimAccounts(),
     refetchInterval: refreshMS,
   });

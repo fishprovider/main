@@ -1,5 +1,4 @@
-import accountGetManySlim from '@fishprovider/cross/dist/api/accounts/getManySlim';
-import accountGetManyUser from '@fishprovider/cross/dist/api/accounts/getManyUser';
+import { AccountViewType } from '@fishprovider/core';
 import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
 import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
@@ -7,6 +6,7 @@ import storeUser from '@fishprovider/cross/dist/stores/user';
 import _ from 'lodash';
 import { useRouter } from 'next/router';
 
+import { getAccountsController } from '~controller-services/account/getAccounts.controller';
 import Select from '~ui/core/Select';
 
 function ProviderSelect() {
@@ -34,11 +34,11 @@ function ProviderSelect() {
   ));
 
   useQuery({
-    queryFn: accountGetManySlim,
+    queryFn: () => getAccountsController({ accountViewType: AccountViewType.public }),
     queryKey: queryKeys.slimAccounts(),
   });
   useQuery({
-    queryFn: accountGetManyUser,
+    queryFn: () => getAccountsController({}),
     queryKey: queryKeys.userAccounts(),
     enabled: !!isServerLoggedIn,
   });

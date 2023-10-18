@@ -1,4 +1,4 @@
-import accountGetManySlim from '@fishprovider/cross/dist/api/accounts/getManySlim';
+import { AccountViewType } from '@fishprovider/core';
 import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
 import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
@@ -8,6 +8,7 @@ import { useRef } from 'react';
 
 import Link from '~components/base/Link';
 import { TopProviderIds } from '~constants/account';
+import { getAccountsController } from '~controller-services/account/getAccounts.controller';
 import Routes from '~libs/routes';
 import Box from '~ui/core/Box';
 import Button from '~ui/core/Button';
@@ -62,7 +63,7 @@ function TopStrategies() {
   });
 
   useQuery({
-    queryFn: accountGetManySlim,
+    queryFn: () => getAccountsController({ accountViewType: AccountViewType.public }),
     queryKey: queryKeys.slimAccounts(),
   });
 

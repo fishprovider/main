@@ -1,4 +1,3 @@
-import accountGetManyUser from '@fishprovider/cross/dist/api/accounts/getManyUser';
 import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
 import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
@@ -6,6 +5,7 @@ import storeUser from '@fishprovider/cross/dist/stores/user';
 import _ from 'lodash';
 import { useEffect, useState } from 'react';
 
+import { getAccountsController } from '~controller-services/account/getAccounts.controller';
 import AccountController from '~controllers/AccountController';
 import { cacheRead, cacheWrite } from '~libs/cache';
 import ScrollView from '~ui/ScrollView';
@@ -44,7 +44,7 @@ export default function Trade() {
   })));
 
   useQuery({
-    queryFn: accountGetManyUser,
+    queryFn: () => getAccountsController({}),
     queryKey: queryKeys.userAccounts(),
     refetchInterval: refreshMS,
   });

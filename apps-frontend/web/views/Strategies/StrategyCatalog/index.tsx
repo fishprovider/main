@@ -1,11 +1,11 @@
-import accountGetManySlim from '@fishprovider/cross/dist/api/accounts/getManySlim';
-import accountGetManyUser from '@fishprovider/cross/dist/api/accounts/getManyUser';
+import { AccountViewType } from '@fishprovider/core';
 import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
 import storeUser from '@fishprovider/cross/dist/stores/user';
 import { useState } from 'react';
 
 import { CardVariant } from '~constants/account';
+import { getAccountsController } from '~controller-services/account/getAccounts.controller';
 import useToggle from '~hooks/useToggle';
 import useToggleMulti from '~hooks/useToggleMulti';
 import Divider from '~ui/core/Divider';
@@ -35,11 +35,11 @@ function Catalog() {
   const [cardVariant, toggleCardVariant] = useToggleMulti([CardVariant.default, CardVariant.slim]);
 
   useQuery({
-    queryFn: accountGetManySlim,
+    queryFn: () => getAccountsController({ accountViewType: AccountViewType.public }),
     queryKey: queryKeys.slimAccounts(),
   });
   useQuery({
-    queryFn: accountGetManyUser,
+    queryFn: () => getAccountsController({}),
     queryKey: queryKeys.userAccounts(),
     enabled: !!isServerLoggedIn,
   });
