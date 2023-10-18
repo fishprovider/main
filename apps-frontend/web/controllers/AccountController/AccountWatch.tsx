@@ -97,15 +97,7 @@ function AccountWatch({ providerId }: Props) {
   }, [providerId]);
 
   useQuery({
-    queryFn: () => accountGet({ providerId }),
-    queryKey: queryKeys.account(providerId),
-    refetchInterval: refreshMS,
-  });
-
-  useQuery({
-    queryFn: () => getAccountController({
-      accountId: providerId,
-    }),
+    queryFn: () => getAccountController({ accountId: providerId }),
     queryKey: queryKeys.account(providerId),
     refetchInterval: refreshMS,
   });

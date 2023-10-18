@@ -1,9 +1,9 @@
-import accountGet from '@fishprovider/cross/dist/api/accounts/get';
 import _ from 'lodash';
 import { useEffect } from 'react';
 
 import MonthProfit from '~components/account/MonthProfit';
 import Link from '~components/base/Link';
+import { getAccountController } from '~controller-services/account/getAccount.controller';
 import Box from '~ui/core/Box';
 import Card from '~ui/core/Card';
 import Group from '~ui/core/Group';
@@ -24,7 +24,7 @@ function ProfitHistory({
   providerId, icon, ctraderUrl, myFxBookUrl,
 }: Props) {
   useEffect(() => {
-    accountGet({ providerId });
+    getAccountController({ accountId: providerId });
   }, [providerId]);
 
   return (

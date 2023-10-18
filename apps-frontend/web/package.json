@@ -88,6 +88,7 @@
     "react-ts-tradingview-widgets": "^1.2.0",
     "react-tweet-embed": "^2.0.0",
     "recharts": "^2.8.0",
+    "sharp": "^0.32.6",
     "socket.io-client": "^4.7.2"
   }
 }

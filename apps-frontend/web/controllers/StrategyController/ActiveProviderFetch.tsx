@@ -1,4 +1,3 @@
-import accountGet from '@fishprovider/cross/dist/api/accounts/get';
 import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
 import storeUser from '@fishprovider/cross/dist/stores/user';
 import { useEffect } from 'react';
@@ -23,17 +22,10 @@ function ActiveProviderFetch({ providerId }: Props) {
 
   // load from api on first load
   useEffect(() => {
-    accountGet({ providerId }).catch((err) => {
+    getAccountController({ accountId: providerId }).catch((err) => {
       Logger.error(err);
       storeUser.mergeState({ activeProvider: undefined });
       toastError(err.message);
-    });
-    getAccountController({
-      accountId: providerId,
-    }).catch((err) => {
-      Logger.error(err);
-      // storeUser.mergeState({ activeProvider: undefined });
-      // toastError(err.message);
     });
   }, [providerId]);
 

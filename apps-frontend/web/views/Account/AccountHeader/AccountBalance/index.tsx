@@ -61,6 +61,7 @@ function AccountBalance() {
   const { mutate: reload, isLoading } = useMutate({
     mutationFn: accountGet,
   });
+
   const { mutate: reloadV3, isLoading: isLoadingV3 } = useMutate({
     mutationFn: (accountId: string) => getAccountController({
       accountId,
