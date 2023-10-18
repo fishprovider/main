@@ -1,4 +1,4 @@
-import { PromiseCreator, promiseCreator, random } from '@fishprovider/core-utils';
+import { PromiseCreator, promiseCreator } from '@fishprovider/core-utils';
 import appRootPath from 'app-root-path';
 import path from 'path';
 import tls from 'tls';
@@ -7,7 +7,7 @@ import {
   authorizeApplication,
   CTraderCallbackPayload, CTraderCommand, CTraderConfig, CTraderConnectionState,
   CTraderDecodedMessage, CTraderSendCommand, Formatter, handleEvent,
-  ProtobufMessages, sendHeartbeat, TCTraderConnection,
+  ProtobufMessages, random, sendHeartbeat, TCTraderConnection,
 } from '..';
 
 const env = {

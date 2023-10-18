@@ -14,7 +14,6 @@
     "ci-type-check": "tsc-files --noEmit"
   },
   "dependencies": {
-    "crypto-random-string": "^5.0.0",
     "loglevel": "^1.8.1"
   }
 }
