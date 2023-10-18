@@ -77,7 +77,7 @@ function AccountBalance() {
               {' '}
               <Text fw={700} span>{`${balance} ${asset}`}</Text>
             </Text>
-            <Icon name="Sync" size="small" button onClick={onReload} loading={isLoading || isLoadingV3} />
+            <Icon name="Sync" size="small" button onClick={onReload} loading={isLoading} />
           </Group>
           {!!leverage && (
             <Text>
