@@ -1,7 +1,8 @@
 import { AccountError, BaseError } from '@fishprovider/core';
 
 import {
-  checkLogin, checkRepository, getAccountService, GetTradeAccountService, updateAccountService,
+  checkAccountAccess, checkLogin, checkRepository, getAccountService, GetTradeAccountService,
+  updateAccountService,
 } from '../..';
 
 export const getTradeAccountService: GetTradeAccountService = async ({
@@ -17,13 +18,12 @@ export const getTradeAccountService: GetTradeAccountService = async ({
   // main
   //
   // call repository directly to get account config, getAccountService sanitize config by default
-  const { doc: privateAccount } = await getAccountService({
-    filter: {
-      accountId: filter.accountId,
-    },
+  const { doc: account } = await getAccountService({
+    filter,
     options: {
       projection: {
         _id: 1,
+        members: 1,
         config: 1,
       },
     },
@@ -33,11 +33,12 @@ export const getTradeAccountService: GetTradeAccountService = async ({
       internal: true,
     },
   });
-  if (!privateAccount) {
+  if (!account) {
     throw new BaseError(AccountError.ACCOUNT_NOT_FOUND);
   }
+  checkAccountAccess(account, context);
 
-  const { config } = privateAccount;
+  const { config } = account;
   const { doc: tradeAccount } = await getTradeAccountRepo({
     ...filter,
     config,

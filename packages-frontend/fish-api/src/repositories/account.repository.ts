@@ -5,6 +5,7 @@ import { fishApiGet } from '..';
 
 const getAccount = async (filter: {
   accountId: string,
+  getTradeInfo?: boolean,
 }) => {
   const account = await fishApiGet<Partial<Account> | undefined>('/account/getAccount', filter);
   return { doc: account };

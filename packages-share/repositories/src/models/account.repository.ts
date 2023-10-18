@@ -12,6 +12,7 @@ export interface AccountRepository {
     filter: {
       accountId: string,
       // trade
+      getTradeInfo?: boolean,
       config?: AccountConfig,
     },
     options?: BaseGetOptions<Account>,

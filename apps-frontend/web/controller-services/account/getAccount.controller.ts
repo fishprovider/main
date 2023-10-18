@@ -4,6 +4,7 @@ import { DataFetchAccountRepository } from '@fishprovider/data-fetch';
 
 export const getAccountController = async (filter: {
   accountId: string,
+  getTradeInfo?: boolean,
 }) => {
   const { doc } = await getAccountService({
     filter,
