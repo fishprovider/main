@@ -46,6 +46,12 @@ export interface AccountRepository {
     options?: BaseUpdateOptions<Account>,
   ) => Promise<BaseUpdateResult<Account>>;
 
+  updateAccounts?: (
+    payload: {
+      accounts?: Partial<Account>[],
+    },
+  ) => Promise<BaseGetManyResult<Account>>;
+
   // TODO:
 
   allocateAccountConfig?: (
