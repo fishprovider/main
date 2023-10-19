@@ -1,7 +1,13 @@
+import newOrder from '@fishprovider/swap/dist/commands/newOrder';
+import removePosition from '@fishprovider/swap/dist/commands/removePosition';
+import { botUser } from '@fishprovider/swap/dist/utils/account';
 import { getDeals, getLiveOrders } from '@fishprovider/swap/dist/utils/order';
 import { getPrices } from '@fishprovider/swap/dist/utils/price';
+import { Direction } from '@fishprovider/utils/dist/constants/order';
 import { getProfit } from '@fishprovider/utils/dist/helpers/order';
 import { getMajorPairs } from '@fishprovider/utils/dist/helpers/price';
+import { Account } from '@fishprovider/utils/dist/types/Account.model';
+import type { Order } from '@fishprovider/utils/dist/types/Order.model';
 import _ from 'lodash';
 import moment from 'moment';
 
@@ -28,6 +34,28 @@ const getTodayOrders = async (providerId: string) => {
   );
 };
 
+const hackCTraderActive = async (account: Account, hackOrders: Order[]) => {
+  const lastCreatedOrder = hackOrders.reduce((acc, item) => {
+    if (!acc) return item;
+    return moment(item.createdAt) > moment(acc.createdAt) ? item : acc;
+  });
+  if (!lastCreatedOrder || moment().diff(moment(lastCreatedOrder.createdAt), 'hours') > 24) {
+    await Promise.all(hackOrders.map(async (order) => {
+      await removePosition({ order, options: { config: account.config, ...botUser } });
+    }));
+    await Promise.all([
+      newOrder({
+        order: { ...lastCreatedOrder, direction: Direction.buy },
+        options: { config: account.config, ...botUser },
+      }),
+      newOrder({
+        order: { ...lastCreatedOrder, direction: Direction.sell },
+        options: { config: account.config, ...botUser },
+      }),
+    ]);
+  }
+};
+
 // Rule of thumb: check must be fast (no DB call), action can be slow
 const checkAccount = async (providerId: string) => {
   try {
@@ -35,7 +63,11 @@ const checkAccount = async (providerId: string) => {
     if (!account) return;
 
     const todayOrders = await getTodayOrders(providerId);
-    const liveOrders = await getLiveOrders(providerId);
+    const rawLiveOrders = await getLiveOrders(providerId, true);
+
+    // hack: filter out hack LTCUSD orders to keep CTrader Strategy active
+    const [liveOrders, hackOrders] = _.partition(rawLiveOrders, (item) => item.symbol !== 'LTCUSD');
+    await hackCTraderActive(account, hackOrders);
 
     const {
       providerType,
