@@ -183,8 +183,9 @@ const apps = [...backendApps, ...frontendApps];
 const deployConfigBase = {
   user: 'marco',
   repo: 'git@gitlab.com:fishprovider/main.git',
-  ref: 'origin/master',
-  'pre-deploy': 'git reset --hard; git clean -fd; git tag -d secondary',
+  ref: 'tags/release',
+  'pre-deploy-local': 'git tag release -f; git push origin release -f',
+  'pre-deploy': 'git reset --hard; git clean -fd; git tag -d release secondary',
   'post-deploy': 'git rev-parse HEAD',
 };
 
