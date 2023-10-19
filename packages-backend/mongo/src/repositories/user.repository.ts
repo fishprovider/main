@@ -1,5 +1,5 @@
-import { User, UserRoles } from '@fishprovider/core';
-import { BaseGetOptions, BaseUpdateOptions, UserRepository } from '@fishprovider/repositories';
+import { User } from '@fishprovider/core';
+import { UserRepository } from '@fishprovider/repositories';
 import { Filter, ReturnDocument, UpdateFilter } from 'mongodb';
 
 import { getMongo } from '..';
@@ -25,12 +25,7 @@ const buildUserFilter = (filter: {
   };
 };
 
-const getUser = async (
-  filter: {
-    email?: string,
-  },
-  options?: BaseGetOptions<User>,
-) => {
+const getUser: UserRepository['getUser'] = async (filter, options) => {
   const { db } = await getMongo();
   const user = await db.collection<User>('users').findOne(
     buildUserFilter(filter),
@@ -39,13 +34,7 @@ const getUser = async (
   return { doc: user ?? undefined };
 };
 
-const getUsers = async (
-  filter: {
-    pushNotifType?: string
-    pushNotifTopic?: string
-  },
-  options?: BaseGetOptions<User>,
-) => {
+const getUsers: UserRepository['getUsers'] = async (filter, options) => {
   const { db } = await getMongo();
   const users = await db.collection<User>('users').find(
     buildUserFilter(filter),
@@ -54,20 +43,7 @@ const getUsers = async (
   return { docs: users };
 };
 
-const updateUser = async (
-  filter: {
-    email?: string,
-  },
-  payload: {
-    name?: string
-    starAccount?: {
-      accountId: string
-      enabled: boolean
-    }
-    roles?: UserRoles
-  },
-  options?: BaseUpdateOptions<User>,
-) => {
+const updateUser: UserRepository['updateUser'] = async (filter, payload, options) => {
   const userFilter = buildUserFilter(filter);
 
   const {

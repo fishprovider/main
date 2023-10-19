@@ -1,16 +1,8 @@
-import { Account, AccountViewType } from '@fishprovider/core';
 import { MongoAccountRepository } from '@fishprovider/mongo';
 import { RedisAccountRepository } from '@fishprovider/redis';
-import { AccountRepository, BaseGetOptions } from '@fishprovider/repositories';
+import { AccountRepository } from '@fishprovider/repositories';
 
-const getAccounts = async (
-  filter: {
-    accountIds?: string[],
-    accountViewType?: AccountViewType,
-    email?: string,
-  },
-  options?: BaseGetOptions<Account>,
-) => {
+const getAccounts: AccountRepository['getAccounts'] = async (filter, options) => {
   let docs;
   if (RedisAccountRepository.getAccounts) {
     const res = await RedisAccountRepository.getAccounts(filter, options);
@@ -21,7 +13,7 @@ const getAccounts = async (
     docs = res.docs;
     if (RedisAccountRepository.updateAccounts) {
       // non-blocking
-      RedisAccountRepository.updateAccounts({ accounts: docs });
+      RedisAccountRepository.updateAccounts(filter, { accounts: docs });
     }
   }
   return { docs };

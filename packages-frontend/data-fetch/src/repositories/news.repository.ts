@@ -1,17 +1,10 @@
 import { News } from '@fishprovider/core';
 import { FishApiNewsRepository } from '@fishprovider/fish-api';
 import { LocalNewsRepository } from '@fishprovider/local';
-import { BaseGetOptions, NewsRepository } from '@fishprovider/repositories';
+import { NewsRepository } from '@fishprovider/repositories';
 import { StoreNewsRepository } from '@fishprovider/store';
 
-const getNews = async (
-  filter: {
-    today?: boolean,
-    week?: string,
-    upcoming?: boolean,
-  },
-  options?: BaseGetOptions<News>,
-) => {
+const getNews: NewsRepository['getNews'] = async (filter, options) => {
   const setNewsToLocal = async (news?: Partial<News>[]) => {
     if (LocalNewsRepository.updateNews) {
       await LocalNewsRepository.updateNews(filter, { news }, options);

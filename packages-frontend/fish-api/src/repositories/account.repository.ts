@@ -1,19 +1,14 @@
-import { Account, AccountViewType } from '@fishprovider/core';
+import { Account } from '@fishprovider/core';
 import { AccountRepository } from '@fishprovider/repositories';
 
 import { fishApiGet } from '..';
 
-const getAccount = async (filter: {
-  accountId: string,
-  getTradeInfo?: boolean,
-}) => {
+const getAccount: AccountRepository['getAccount'] = async (filter) => {
   const doc = await fishApiGet<Partial<Account> | undefined>('/account/getAccount', filter);
   return { doc };
 };
 
-const getAccounts = async (filter: {
-  accountViewType?: AccountViewType,
-}) => {
+const getAccounts: AccountRepository['getAccounts'] = async (filter) => {
   const docs = await fishApiGet<Partial<Account>[] | undefined>('/account/getAccounts', filter);
   return { docs };
 };

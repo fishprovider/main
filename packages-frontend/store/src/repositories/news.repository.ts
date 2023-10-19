@@ -1,17 +1,10 @@
-import { News } from '@fishprovider/core';
-import {
-  NewsRepository,
-} from '@fishprovider/repositories';
+import { NewsRepository } from '@fishprovider/repositories';
 import _ from 'lodash';
 import moment from 'moment';
 
 import { storeNews } from '..';
 
-const getNews = async (filter: {
-  today?: boolean,
-  week?: string,
-  upcoming?: boolean,
-}) => {
+const getNews: NewsRepository['getNews'] = async (filter) => {
   const { today, week, upcoming } = filter;
 
   if (today) {
@@ -47,14 +40,7 @@ const getNews = async (filter: {
   return {};
 };
 
-const updateNews = async (
-  _filter: {
-    //
-  },
-  payload: {
-    news?: Partial<News>[],
-  },
-) => {
+const updateNews: NewsRepository['updateNews'] = async (_filter, payload) => {
   const { news } = payload;
   if (news) {
     storeNews.mergeDocs(news);
@@ -62,9 +48,7 @@ const updateNews = async (
   return { docs: news };
 };
 
-const watchNews = <T>(
-  selector: (state: Record<string, News>) => T,
-) => storeNews.useStore(selector);
+const watchNews: NewsRepository['watchNews'] = (selector) => storeNews.useStore(selector);
 
 export const StoreNewsRepository: NewsRepository = {
   getNews,

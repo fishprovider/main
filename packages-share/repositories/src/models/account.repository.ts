@@ -47,6 +47,10 @@ export interface AccountRepository {
   ) => Promise<BaseUpdateResult<Account>>;
 
   updateAccounts?: (
+    filter: {
+      accountViewType?: AccountViewType,
+      email?: string,
+    },
     payload: {
       accounts?: Partial<Account>[],
     },

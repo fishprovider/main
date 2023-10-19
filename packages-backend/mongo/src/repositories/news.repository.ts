@@ -31,11 +31,7 @@ const buildNewsFilter = (filter: {
   };
 };
 
-const getNews = async (filter: {
-  today?: boolean,
-  week?: string,
-  upcoming?: boolean,
-}) => {
+const getNews: NewsRepository['getNews'] = async (filter) => {
   const { db } = await getMongo();
   const news = await db.collection<News>('news').find(
     buildNewsFilter(filter),

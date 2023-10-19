@@ -3,26 +3,13 @@ import { NewsRepository } from '@fishprovider/repositories';
 
 import { buildNewsKeys, localGet, localSet } from '..';
 
-const getNews = async (filter: {
-  today?: boolean,
-  week?: string,
-  upcoming?: boolean,
-}) => {
+const getNews: NewsRepository['getNews'] = async (filter) => {
   const key = buildNewsKeys(filter);
   const news = await localGet<News[]>(key);
   return { docs: news };
 };
 
-const updateNews = async (
-  filter: {
-    today?: boolean,
-    week?: string,
-    upcoming?: boolean,
-  },
-  payload: {
-    news?: Partial<News>[],
-  },
-) => {
+const updateNews: NewsRepository['updateNews'] = async (filter, payload) => {
   const key = buildNewsKeys(filter);
   const { news } = payload;
   await localSet(key, news);

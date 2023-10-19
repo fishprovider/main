@@ -1,5 +1,5 @@
 import { Account, AccountMember, AccountViewType } from '@fishprovider/core';
-import { AccountRepository, BaseGetOptions, BaseUpdateOptions } from '@fishprovider/repositories';
+import { AccountRepository } from '@fishprovider/repositories';
 import { Filter, ReturnDocument, UpdateFilter } from 'mongodb';
 
 import { getMongo } from '..';
@@ -25,12 +25,7 @@ const buildAccountFilter = (filter: {
   };
 };
 
-const getAccount = async (
-  filter: {
-    accountId: string,
-  },
-  options?: BaseGetOptions<Account>,
-) => {
+const getAccount: AccountRepository['getAccount'] = async (filter, options) => {
   const { db } = await getMongo();
   const account = await db.collection<Account>('accounts').findOne(
     buildAccountFilter(filter),
@@ -39,14 +34,7 @@ const getAccount = async (
   return { doc: account ?? undefined };
 };
 
-const getAccounts = async (
-  filter: {
-    accountIds?: string[],
-    accountViewType?: AccountViewType,
-    email?: string,
-  },
-  options?: BaseGetOptions<Account>,
-) => {
+const getAccounts: AccountRepository['getAccounts'] = async (filter, options) => {
   const { db } = await getMongo();
   const accounts = await db.collection<Account>('accounts').find(
     buildAccountFilter(filter),
@@ -55,20 +43,7 @@ const getAccounts = async (
   return { docs: accounts };
 };
 
-const updateAccount = async (
-  filter: {
-    accountId: string,
-  },
-  payload: {
-    name?: string,
-    assetId?: string,
-    leverage?: number,
-    balance?: number,
-    providerData?: any,
-    member?: AccountMember,
-  },
-  options?: BaseUpdateOptions<Account>,
-) => {
+const updateAccount: AccountRepository['updateAccount'] = async (filter, payload, options) => {
   const accountFilter = buildAccountFilter(filter);
 
   const {

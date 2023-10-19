@@ -16,6 +16,7 @@
   "dependencies": {
     "@fishprovider/core-utils": "*",
     "@fishprovider/repositories": "*",
+    "object-hash": "^3.0.0",
     "redis": "^4.6.10"
   }
 }

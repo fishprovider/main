@@ -3,13 +3,7 @@ import { NewsRepository } from '@fishprovider/repositories';
 
 import { fishApiGet } from '..';
 
-const getNews = async (
-  filter: {
-    today?: boolean,
-    week?: string,
-    upcoming?: boolean,
-  },
-) => {
+const getNews: NewsRepository['getNews'] = async (filter) => {
   const news = await fishApiGet<Partial<News>[] | undefined>('/news/getNews', filter);
   return { docs: news };
 };

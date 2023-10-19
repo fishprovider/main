@@ -1,21 +1,21 @@
-import { Account } from '@fishprovider/core';
 import { AccountRepository } from '@fishprovider/repositories';
+import hash from 'object-hash';
 
 import { getRedis } from '../redis';
 
-const keyAccounts = 'accounts-info-v3';
+const prefix = 'accounts-info-v3';
 
-const getAccounts = async () => {
+const getAccounts: AccountRepository['getAccounts'] = async (filter) => {
   const { client } = await getRedis();
+  const keyAccounts = `${prefix}:${hash(filter)}`;
   const str = await client.get(keyAccounts);
   const docs = str ? JSON.parse(str) : undefined;
   return { docs };
 };
 
-const updateAccounts = async (payload: {
-  accounts?: Partial<Account>[],
-}) => {
+const updateAccounts: AccountRepository['updateAccounts'] = async (filter, payload) => {
   const { client } = await getRedis();
+  const keyAccounts = `${prefix}:${hash(filter)}`;
   await client.set(keyAccounts, JSON.stringify(payload.accounts), { EX: 60 * 60 });
   return {};
 };

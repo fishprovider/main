@@ -1,7 +1,5 @@
 import { AccountConfig, AccountTradeType, BaseError } from '@fishprovider/core';
-import {
-  AccountRepository, RepositoryError,
-} from '@fishprovider/repositories';
+import { AccountRepository, RepositoryError } from '@fishprovider/repositories';
 
 import {
   connectAndRun, getAccountInformation, getAccountList,
@@ -24,12 +22,7 @@ const checkConfig = (rawConfig?: AccountConfig) => {
   };
 };
 
-const getAccount = async (
-  filter: {
-    accountId: string,
-    config?: AccountConfig,
-  },
-) => {
+const getAccount: AccountRepository['getAccount'] = async (filter) => {
   const { config: rawConfig, accountId } = filter;
 
   const config = checkConfig(rawConfig);
@@ -49,11 +42,7 @@ const getAccount = async (
   };
 };
 
-const getAccounts = async (
-  filter: {
-    config?: AccountConfig,
-  },
-) => {
+const getAccounts: AccountRepository['getAccounts'] = async (filter) => {
   const { config: rawConfig } = filter;
 
   const config = checkConfig(rawConfig);
