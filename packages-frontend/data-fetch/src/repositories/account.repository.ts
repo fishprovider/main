@@ -3,4 +3,6 @@ import {
   AccountRepository,
 } from '@fishprovider/repositories';
 
-export const DataFetchAccountRepository: AccountRepository = FishApiAccountRepository;
+export const DataFetchAccountRepository: AccountRepository = {
+  ...FishApiAccountRepository,
+};
