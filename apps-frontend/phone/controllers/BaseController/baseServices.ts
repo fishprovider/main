@@ -7,7 +7,7 @@ import { initNotif } from '~libs/pushNotif';
 
 const initialize = () => {
   initDataFetch({
-    baseURL: `${process.env.EXPO_PUBLIC_BACKEND_URL}/api`,
+    baseURL: `${process.env.EXPO_PUBLIC_BACKEND_URL}/api/v3`,
   });
 
   initApi({
