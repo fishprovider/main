@@ -11,6 +11,9 @@ export const getAccountsController = async (filter: {
     repositories: {
       account: DataFetchAccountRepository,
     },
+    context: {
+      internal: true,
+    },
   });
 
   if (docs) {
