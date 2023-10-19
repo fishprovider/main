@@ -200,3 +200,18 @@ server {
     }
 }
 ```
+
+`ln -s /etc/nginx/sites-available/my-proxy /etc/nginx/sites-enabled/`
+
+`ls /etc/nginx/sites-enabled/`
+```
+back -> /etc/nginx/sites-available/back
+back-secondary -> /etc/nginx/sites-available/back-secondary
+default -> /etc/nginx/sites-available/default
+gate -> /etc/nginx/sites-available/gate
+mon -> /etc/nginx/sites-available/mon
+pay -> /etc/nginx/sites-available/pay
+root -> /etc/nginx/sites-available/root
+www -> /etc/nginx/sites-available/www
+www-secondary -> /etc/nginx/sites-available/www-secondary
+```
