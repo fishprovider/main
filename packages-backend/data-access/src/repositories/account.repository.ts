@@ -1,11 +1,14 @@
 import { MongoAccountRepository } from '@fishprovider/mongo';
 import { RedisAccountRepository } from '@fishprovider/redis';
 import { AccountRepository } from '@fishprovider/repositories';
+import _ from 'lodash';
 
 const getAccounts: AccountRepository['getAccounts'] = async (filter, options) => {
+  const getCacheFilter = () => _.pick(filter, ['accountViewType', 'email']);
+
   let docs;
   if (RedisAccountRepository.getAccounts) {
-    const res = await RedisAccountRepository.getAccounts(filter, options);
+    const res = await RedisAccountRepository.getAccounts(getCacheFilter(), options);
     docs = res.docs;
   }
   if (!docs && MongoAccountRepository.getAccounts) {
@@ -13,7 +16,7 @@ const getAccounts: AccountRepository['getAccounts'] = async (filter, options) =>
     docs = res.docs;
     if (RedisAccountRepository.updateAccounts) {
       // non-blocking
-      RedisAccountRepository.updateAccounts(filter, { accounts: docs });
+      RedisAccountRepository.updateAccounts(getCacheFilter(), { accounts: docs });
     }
   }
   return { docs };
