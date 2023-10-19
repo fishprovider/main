@@ -18,5 +18,8 @@
     "@fishprovider/repositories": "*",
     "object-hash": "^3.0.0",
     "redis": "^4.6.10"
+  },
+  "devDependencies": {
+    "@types/object-hash": "^3.0.5"
   }
 }
