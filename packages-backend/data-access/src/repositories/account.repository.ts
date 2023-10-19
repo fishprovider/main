@@ -8,7 +8,7 @@ const getAccounts: AccountRepository['getAccounts'] = async (filter, options) =>
 
   let docs;
   if (RedisAccountRepository.getAccounts) {
-    const res = await RedisAccountRepository.getAccounts(getCacheFilter(), options);
+    const res = await RedisAccountRepository.getAccounts(getCacheFilter());
     docs = res.docs;
   }
   if (!docs && MongoAccountRepository.getAccounts) {
