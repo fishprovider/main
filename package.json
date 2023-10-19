@@ -205,7 +205,7 @@
     "react-dom": "^18.2.0",
     "react-ga4": "^2.1.0",
     "react-i18next": "^13.2.2",
-    "react-native": "0.72.5",
+    "react-native": "0.72.6",
     "react-native-gesture-handler": "~2.12.0",
     "react-native-logs": "^5.0.1",
     "react-native-reanimated": "~3.3.0",
