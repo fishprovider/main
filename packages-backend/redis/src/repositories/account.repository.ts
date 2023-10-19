@@ -3,7 +3,7 @@ import hash from 'object-hash';
 
 import { getRedis } from '../redis';
 
-const prefix = 'accounts-info-v3';
+const prefix = 'accounts-info-v4';
 
 const getAccounts: AccountRepository['getAccounts'] = async (filter) => {
   const { client } = await getRedis();
