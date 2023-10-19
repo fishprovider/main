@@ -232,6 +232,7 @@ const deploy = {
     ...deployConfigFishServer,
     path: '/home/marco/work/pm2-apps/fishprovider-secondary',
     ref: 'tags/secondary',
+    'pre-deploy': 'git tag secondary -f; git push origin secondary -f',
   },
 };
 
