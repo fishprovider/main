@@ -1,5 +1,0 @@
-{
-  "ignoreCommand": "bash vercel-build.sh",
-  "installCommand": "bash clean-deps.sh && npm i",
-  "buildCommand": "npm run build-vercel"
-}
