@@ -31,6 +31,8 @@ export interface UserRepository {
         enabled: boolean
       }
       roles?: UserRoles
+      // local
+      doc?: Partial<User>,
     },
     options?: BaseUpdateOptions<User>,
   ) => Promise<BaseUpdateResult<User>>;

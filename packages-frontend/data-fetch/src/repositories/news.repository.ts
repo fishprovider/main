@@ -4,40 +4,20 @@ import { LocalNewsRepository } from '@fishprovider/local';
 import { NewsRepository } from '@fishprovider/repositories';
 import { StoreNewsRepository } from '@fishprovider/store';
 
+import { getDocs } from '..';
+
 const getNews: NewsRepository['getNews'] = async (filter, options) => {
-  const setNewsToLocal = async (news?: Partial<News>[]) => {
-    if (LocalNewsRepository.updateNews) {
-      await LocalNewsRepository.updateNews(filter, { news }, options);
-    }
-  };
-  const setNewsToStore = async (news?: Partial<News>[]) => {
-    if (StoreNewsRepository.updateNews) {
-      await StoreNewsRepository.updateNews(filter, { news }, options);
-    }
-  };
-  const setNews = async (news?: Partial<News>[]) => Promise.all([
-    setNewsToLocal(news),
-    setNewsToStore(news),
-  ]);
+  const getDocsLocal = LocalNewsRepository.getNews;
+  const setDocsLocal = LocalNewsRepository.updateNews;
+  const setDocsStore = StoreNewsRepository.updateNews;
+  const getDocsApi = FishApiNewsRepository.getNews;
 
-  let docs;
-
-  if (LocalNewsRepository.getNews) {
-    const res = await LocalNewsRepository.getNews(filter, options);
-    docs = res.docs;
-    setNewsToStore(docs); // non-blocking
-  }
-
-  if (FishApiNewsRepository.getNews) {
-    if (!docs) {
-      const res = await FishApiNewsRepository.getNews(filter, options);
-      docs = res.docs;
-      setNews(docs); // non-blocking
-    } else {
-      FishApiNewsRepository.getNews(filter, options) // non-blocking
-        .then((res) => setNews(res.docs));
-    }
-  }
+  const docs = await getDocs<Partial<News>>({
+    getDocsLocal: getDocsLocal && (() => getDocsLocal(filter, options).then((res) => res.docs)),
+    setDocsLocal: setDocsLocal && ((news) => setDocsLocal(filter, { news }, options)),
+    setDocsStore: setDocsStore && ((news) => setDocsStore(filter, { news }, options)),
+    getDocsApi: getDocsApi && (() => getDocsApi(filter, options).then((res) => res.docs)),
+  });
 
   return { docs };
 };

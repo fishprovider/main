@@ -1,4 +1,4 @@
-export const buildNewsKeys = (filter: {
+export const buildKeyNews = (filter: {
   today?: boolean,
   week?: string,
   upcoming?: boolean,

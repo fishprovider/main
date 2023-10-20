@@ -42,6 +42,8 @@ export interface AccountRepository {
       providerData?: any,
       // members
       member?: AccountMember,
+      // local
+      doc?: Partial<Account>,
     },
     options?: BaseUpdateOptions<Account>,
   ) => Promise<BaseUpdateResult<Account>>;
@@ -54,6 +56,7 @@ export interface AccountRepository {
     payload: {
       accounts?: Partial<Account>[],
     },
+    options?: BaseGetOptions<Account>,
   ) => Promise<BaseGetManyResult<Account>>;
 
   // TODO:
