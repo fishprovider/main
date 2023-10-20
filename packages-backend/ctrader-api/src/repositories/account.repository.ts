@@ -23,13 +23,13 @@ const checkConfig = (rawConfig?: AccountConfig) => {
 };
 
 const getAccount: AccountRepository['getAccount'] = async (filter) => {
-  const { config: rawConfig, accountId } = filter;
+  const { config: rawConfig, tradeAccountId } = filter;
 
   const config = checkConfig(rawConfig);
 
   const tradeAccount = await connectAndRun({
     config,
-    handler: (connection) => getAccountInformation(connection, accountId),
+    handler: (connection) => getAccountInformation(connection, tradeAccountId),
   });
 
   return {

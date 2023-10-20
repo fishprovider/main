@@ -30,7 +30,7 @@ export const getTradeAccountService: GetTradeAccountService = async ({
   }
   checkAccountAccess(account, context);
 
-  const { config } = account;
+  const { _id: accountId, config } = account;
   const { doc: tradeAccount } = await getTradeAccountRepo({
     ...filter,
     config,
@@ -42,5 +42,10 @@ export const getTradeAccountService: GetTradeAccountService = async ({
   // non-blocking
   updateAccountRepo(filter, tradeAccount);
 
-  return { doc: tradeAccount };
+  return {
+    doc: {
+      _id: accountId,
+      ...tradeAccount,
+    },
+  };
 };

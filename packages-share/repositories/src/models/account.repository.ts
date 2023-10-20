@@ -13,6 +13,7 @@ export interface AccountRepository {
       accountId: string,
       getTradeInfo?: boolean,
       config?: AccountConfig,
+      tradeAccountId?: string,
     },
     options?: BaseGetOptions<AccountFull>,
   ) => Promise<BaseGetResult<AccountFull>>;
