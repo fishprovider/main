@@ -4,5 +4,5 @@ export const buildKeyNews = (filter: {
   upcoming?: boolean,
 }) => {
   const keys = Object.entries(filter).map(([key, value]) => `${key}-${value}`);
-  return `news-${keys?.join('-')}`;
+  return `fp-news-${keys?.join('-')}`;
 };

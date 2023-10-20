@@ -1,16 +1,18 @@
 import { Account } from '@fishprovider/core';
 import { AccountRepository } from '@fishprovider/repositories';
 
-import { buildKeyAccounts, localGet, localSet } from '..';
+import {
+  buildKeyAccount, buildKeyAccounts, localGet, localSet,
+} from '..';
 
 const getAccount: AccountRepository['getAccount'] = async (filter) => {
-  const key = filter.accountId;
+  const key = buildKeyAccount(filter);
   const account = await localGet<Account>(key);
   return { doc: account };
 };
 
 const updateAccount: AccountRepository['updateAccount'] = async (filter, payload) => {
-  const key = filter.accountId;
+  const key = buildKeyAccount(filter);
   const { doc: account } = payload;
   await localSet(key, account);
   return { doc: account };
