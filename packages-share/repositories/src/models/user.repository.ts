@@ -25,11 +25,11 @@ export interface UserRepository {
       email?: string,
     },
     payload: {
-      name?: string
       starAccount?: {
         accountId: string
         enabled: boolean
       }
+      refreshRoles?: boolean
       roles?: UserRoles
       // local
       doc?: Partial<User>,

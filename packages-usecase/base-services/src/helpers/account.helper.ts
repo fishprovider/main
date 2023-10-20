@@ -3,9 +3,7 @@ import {
 } from '@fishprovider/core';
 import { BaseGetOptions } from '@fishprovider/repositories';
 
-import {
-  getRoleProvider, sanitizeBaseGetOptions, ServiceContext,
-} from '..';
+import { getRoleProvider, sanitizeBaseGetOptions, ServiceContext } from '..';
 
 export const sanitizeAccountBaseGetOptions = (
   options?: BaseGetOptions<AccountFull>,
@@ -27,8 +25,6 @@ export const checkAccountAccess = (
   if (!account) {
     throw new BaseError(AccountError.ACCOUNT_NOT_FOUND);
   }
-
-  if (context?.internal) return account;
 
   const { isManagerWeb } = getRoleProvider(context?.userSession?.roles);
   const {

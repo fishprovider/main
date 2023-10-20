@@ -1,8 +1,7 @@
 import { AccountError, BaseError } from '@fishprovider/core';
 
 import {
-  checkAccountAccess, checkLogin, checkRepository, getAccountService, GetTradeAccountService,
-  updateAccountService,
+  checkAccountAccess, checkLogin, checkRepository, GetTradeAccountService,
 } from '../..';
 
 export const getTradeAccountService: GetTradeAccountService = async ({
@@ -12,25 +11,18 @@ export const getTradeAccountService: GetTradeAccountService = async ({
   // pre-check
   //
   checkLogin(context?.userSession);
-  const getTradeAccountRepo = checkRepository(repositories.trade.getAccount);
+  const getAccountRepo = checkRepository(repositories.account.getAccount);
+  const getTradeAccountRepo = checkRepository(repositories.trade?.getAccount);
+  const updateAccountRepo = checkRepository(repositories.account.updateAccount);
 
   //
   // main
   //
-  // call repository directly to get account config, getAccountService sanitize config by default
-  const { doc: account } = await getAccountService({
-    filter,
-    options: {
-      projection: {
-        _id: 1,
-        members: 1,
-        config: 1,
-      },
-    },
-    repositories,
-    context: {
-      ...context,
-      internal: true,
+  const { doc: account } = await getAccountRepo(filter, {
+    projection: {
+      _id: 1,
+      members: 1,
+      config: 1,
     },
   });
   if (!account) {
@@ -48,15 +40,7 @@ export const getTradeAccountService: GetTradeAccountService = async ({
   }
 
   // non-blocking
-  updateAccountService({
-    filter,
-    payload: tradeAccount,
-    repositories,
-    context: {
-      ...context,
-      internal: true,
-    },
-  });
+  updateAccountRepo(filter, tradeAccount);
 
   return { doc: tradeAccount };
 };

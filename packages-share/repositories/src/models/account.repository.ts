@@ -1,5 +1,5 @@
 import {
-  Account, AccountConfig, AccountFull, AccountMember, AccountPlatform, AccountPrivate,
+  Account, AccountConfig, AccountFull, AccountMember, AccountPlatform,
   AccountSourceType, AccountTradeType, AccountType, AccountViewType,
 } from '@fishprovider/core';
 
@@ -11,22 +11,20 @@ export interface AccountRepository {
   getAccount?: (
     filter: {
       accountId: string,
-      // trade
       getTradeInfo?: boolean,
       config?: AccountConfig,
     },
-    options?: BaseGetOptions<Account>,
-  ) => Promise<BaseGetResult<Account>>;
+    options?: BaseGetOptions<AccountFull>,
+  ) => Promise<BaseGetResult<AccountFull>>;
 
   getAccounts?: (
     filter: {
       accountViewType?: AccountViewType,
       email?: string,
       accountIds?: string[],
-      // trade
       config?: AccountConfig,
     },
-    options?: BaseGetOptions<Account>,
+    options?: BaseGetOptions<AccountFull>,
   ) => Promise<BaseGetManyResult<AccountFull>>;
 
   updateAccount?: (
@@ -35,14 +33,11 @@ export interface AccountRepository {
     },
     payload: {
       name?: string,
-      // trade
       assetId?: string,
       leverage?: number,
       balance?: number,
       providerData?: any,
-      // members
       member?: AccountMember,
-      // local
       doc?: Partial<Account>,
     },
     options?: BaseUpdateOptions<Account>,
@@ -59,17 +54,15 @@ export interface AccountRepository {
     options?: BaseGetOptions<Account>,
   ) => Promise<BaseGetManyResult<Account>>;
 
-  // TODO:
-
-  allocateAccountConfig?: (
-    filter: {
-      accountPlatform: AccountPlatform,
-      accountType?: AccountType,
-      clientId?: string,
-      accountTradeType?: AccountTradeType,
-    },
-    options?: BaseGetOptions<Account>,
-  ) => Promise<BaseGetResult<AccountPrivate['config']>>;
+  // allocateAccountConfig?: (
+  //   filter: {
+  //     accountPlatform: AccountPlatform,
+  //     accountType?: AccountType,
+  //     clientId?: string,
+  //     accountTradeType?: AccountTradeType,
+  //   },
+  //   options?: BaseGetOptions<Account>,
+  // ) => Promise<BaseGetResult<AccountPrivate['config']>>;
 
   addAccount?: (
     filter: {

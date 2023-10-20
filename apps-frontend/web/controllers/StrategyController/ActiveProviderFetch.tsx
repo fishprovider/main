@@ -2,7 +2,7 @@ import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
 import storeUser from '@fishprovider/cross/dist/stores/user';
 import { useEffect } from 'react';
 
-import { getAccountController } from '~controller-services/account/getAccount.controller';
+import { getAccountService } from '~services/account/getAccount.service';
 import { toastError } from '~ui/toast';
 
 interface Props {
@@ -22,7 +22,7 @@ function ActiveProviderFetch({ providerId }: Props) {
 
   // load from api on first load
   useEffect(() => {
-    getAccountController({ accountId: providerId }).catch((err) => {
+    getAccountService({ accountId: providerId }).catch((err) => {
       Logger.error(err);
       storeUser.mergeState({ activeProvider: undefined });
       toastError(err.message);

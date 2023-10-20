@@ -2,22 +2,24 @@ import { AccountRoles } from '@fishprovider/core';
 import _ from 'lodash';
 
 import {
-  checkLogin, checkProjection, getAccountsService, RefreshUserRolesService,
-  sanitizeUserBaseGetOptions, updateUserService,
+  checkLogin, checkProjection, checkRepository, RefreshUserRolesService,
+  sanitizeGetUserFilter, sanitizeUserBaseGetOptions,
 } from '../..';
 
 export const refreshUserRolesService: RefreshUserRolesService = async ({
-  options: optionsRaw, repositories, context,
+  filter: filterRaw, options: optionsRaw, repositories, context,
 }) => {
   //
   // pre-check
   //
   const userSession = checkLogin(context?.userSession);
+  const getAccountsRepo = checkRepository(repositories.account.getAccounts);
+  const updateUserRepo = checkRepository(repositories.user.updateUser);
 
   //
   // main
   //
-  const { email, roles = {} } = userSession;
+  const { roles = {} } = userSession;
 
   // remove disabled
   _.forEach(roles.adminAccounts, (enabled, accountId) => {
@@ -62,25 +64,23 @@ export const refreshUserRolesService: RefreshUserRolesService = async ({
   });
 
   // clean roles
+  const { email } = sanitizeGetUserFilter(filterRaw, userSession);
+
   const accountIds = _.uniq([
     ..._.keys(roles.adminAccounts),
     ..._.keys(roles.traderAccounts),
     ..._.keys(roles.protectorAccounts),
     ..._.keys(roles.viewerAccounts),
   ]);
-  const { docs: accounts } = await getAccountsService({
-    filter: {
-      email,
-      accountIds,
+
+  const { docs: accounts } = await getAccountsRepo({
+    email,
+    accountIds,
+  }, {
+    projection: {
+      _id: 1,
+      members: 1,
     },
-    options: {
-      projection: {
-        _id: 1,
-        members: 1,
-      },
-    },
-    repositories,
-    context,
   });
 
   for (const accountId of accountIds) {
@@ -125,15 +125,16 @@ export const refreshUserRolesService: RefreshUserRolesService = async ({
 
   const options = sanitizeUserBaseGetOptions(optionsRaw);
 
-  const { doc: user } = await updateUserService({
-    filter: {
-      email,
+  const { doc: user } = await updateUserRepo({
+    email,
+  }, {
+    roles,
+  }, {
+    returnAfter: true,
+    projection: {
+      _id: 1,
+      roles: 1,
     },
-    payload: {
-      roles,
-    },
-    options,
-    repositories,
   });
 
   checkProjection(options?.projection, user);

@@ -3,14 +3,14 @@ import _ from 'lodash';
 import moment from 'moment';
 import { useEffect } from 'react';
 
-import { getNewsController } from '~controller-services/news/getNews.controller';
+import { getNewsService } from '~services/news/getNews.service';
 
 const bannerIdBigNews = 'BigNews';
 const bannerIdBigNewsNear = 'BigNewsNear';
 
 function NewsWatch() {
   const getBigNews = async () => {
-    const { docs: news } = await getNewsController({
+    const { docs: news } = await getNewsService({
       upcoming: true,
     });
     if (news?.length) {
@@ -22,7 +22,7 @@ function NewsWatch() {
       });
     }
 
-    const { docs: allNews } = await getNewsController({});
+    const { docs: allNews } = await getNewsService({});
     const hasBigNews = _.some(
       allNews,
       ({ impact, datetime }) => impact

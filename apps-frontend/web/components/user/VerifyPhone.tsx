@@ -2,7 +2,7 @@ import { useMutate } from '@fishprovider/cross/dist/libs/query';
 import storeUser from '@fishprovider/cross/dist/stores/user';
 
 import Link from '~components/base/Link';
-import { getUserController } from '~controller-services/account/getUser.controller';
+import { getUserService } from '~services/user/getUser.service';
 // import TelegramLogin from '~components/view/TeleLogin';
 import Button from '~ui/core/Button';
 import Group from '~ui/core/Group';
@@ -21,7 +21,7 @@ function VerifyPhone() {
   }));
 
   const { mutate: reload, isLoading: isLoadingReload } = useMutate({
-    mutationFn: () => getUserController({}),
+    mutationFn: () => getUserService({}),
   });
 
   return (

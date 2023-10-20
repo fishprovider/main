@@ -6,7 +6,7 @@ import _ from 'lodash';
 import { useState } from 'react';
 
 import ProviderCards from '~components/ProviderCards';
-import { getAccountsController } from '~controller-services/account/getAccounts.controller';
+import { getAccountsService } from '~services/account/getAccounts.service';
 import ScrollView from '~ui/ScrollView';
 import Stack from '~ui/Stack';
 import { refreshMS } from '~utils';
@@ -35,7 +35,7 @@ export default function Strategies() {
     .map((account) => account._id));
 
   useQuery({
-    queryFn: () => getAccountsController({ accountViewType: AccountViewType.public }),
+    queryFn: () => getAccountsService({ accountViewType: AccountViewType.public }),
     queryKey: queryKeys.slimAccounts(),
     refetchInterval: refreshMS,
   });

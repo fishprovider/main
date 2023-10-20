@@ -9,7 +9,7 @@ import { getMajorPairs } from '@fishprovider/utils/dist/helpers/price';
 import _ from 'lodash';
 
 import EquityProgress from '~components/account/EquityProgress';
-import { getAccountController } from '~controller-services/account/getAccount.controller';
+import { getAccountService } from '~services/account/getAccount.service';
 import Grid from '~ui/core/Grid';
 import Group from '~ui/core/Group';
 import Icon from '~ui/core/Icon';
@@ -58,7 +58,7 @@ function AccountBalance() {
   } = getAccountStats(balance, profit, liveOrders, marginRaw);
 
   const { mutate: reload, isLoading } = useMutate({
-    mutationFn: (accountId: string) => getAccountController({
+    mutationFn: (accountId: string) => getAccountService({
       accountId, getTradeInfo: true,
     }),
   });

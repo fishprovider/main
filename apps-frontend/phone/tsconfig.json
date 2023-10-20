@@ -5,6 +5,7 @@
   //   "@tsconfig/react-native/tsconfig.json",
   // ],
   "compilerOptions": {
+    "composite": true,
     "exactOptionalPropertyTypes": false,
     "noPropertyAccessFromIndexSignature": false,
     "baseUrl": ".",
@@ -26,5 +27,10 @@
     "**/build",
     "**/tmp",
     ".expo",
+  ],
+  "references": [
+    { "path": "../../packages/utils" },
+    { "path": "../../packages-usecase/base-services" },
+    { "path": "../../packages-frontend/data-fetch" },
   ]
 }

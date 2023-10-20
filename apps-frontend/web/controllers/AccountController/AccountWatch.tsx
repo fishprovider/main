@@ -6,9 +6,9 @@ import { redisKeys } from '@fishprovider/utils/dist/constants/redis';
 import type { Account } from '@fishprovider/utils/dist/types/Account.model';
 import { useEffect, useRef } from 'react';
 
-import { getAccountController } from '~controller-services/account/getAccount.controller';
 import { subNotif, unsubNotif } from '~libs/pushNotif';
 import { subDoc } from '~libs/sdb';
+import { getAccountService } from '~services/account/getAccount.service';
 import { refreshMS } from '~utils';
 
 function useAccountSocket(providerId: string) {
@@ -92,11 +92,11 @@ interface Props {
 
 function AccountWatch({ providerId }: Props) {
   useEffect(() => {
-    getAccountController({ accountId: providerId, getTradeInfo: true });
+    getAccountService({ accountId: providerId, getTradeInfo: true });
   }, [providerId]);
 
   useQuery({
-    queryFn: () => getAccountController({ accountId: providerId }),
+    queryFn: () => getAccountService({ accountId: providerId }),
     queryKey: queryKeys.account(providerId),
     refetchInterval: refreshMS,
   });

@@ -1,19 +1,12 @@
-import { getUserService } from '@fishprovider/base-services';
+import { checkRepository } from '@fishprovider/base-services';
 import storeUser from '@fishprovider/cross/dist/stores/user';
 import { DataFetchUserRepository } from '@fishprovider/data-fetch';
 
-export const getUserController = async (filter: {
-  email?: string,
+export const getUserService = async (filter: {
+  //
 }) => {
-  const { doc: user } = await getUserService({
-    filter,
-    repositories: {
-      user: DataFetchUserRepository,
-    },
-    context: {
-      internal: true,
-    },
-  });
+  const getUserRepo = checkRepository(DataFetchUserRepository.getUser);
+  const { doc: user } = await getUserRepo(filter);
 
   if (user) {
     // TODO: migrate to DataFetchUserRepository

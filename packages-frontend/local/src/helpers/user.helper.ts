@@ -1,3 +1,5 @@
+import hash from 'object-hash';
+
 export const buildKeyUser = (filter: {
   email?: string,
-}) => `fp-user-${filter.email || 'current'}`;
+}) => `fp-user-${hash(filter)}`;

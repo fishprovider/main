@@ -1,8 +1,6 @@
 import { News } from '@fishprovider/core';
 
-import {
-  BaseGetManyResult, BaseGetOptions, BaseUpdateOptions,
-} from '..';
+import { BaseGetManyResult, BaseGetOptions, BaseUpdateOptions } from '..';
 
 export interface NewsRepository {
   getNews?: (

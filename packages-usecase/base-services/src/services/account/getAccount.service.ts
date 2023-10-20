@@ -14,9 +14,7 @@ export const getAccountService: GetAccountService = async ({
   //
   // main
   //
-  const options = context?.internal
-    ? optionsRaw
-    : sanitizeAccountBaseGetOptions(optionsRaw);
+  const options = sanitizeAccountBaseGetOptions(optionsRaw);
 
   const { doc: account } = await getAccountRepo(filter, options);
 

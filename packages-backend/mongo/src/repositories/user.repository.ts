@@ -47,7 +47,7 @@ const updateUser: UserRepository['updateUser'] = async (filter, payload, options
   const userFilter = buildUserFilter(filter);
 
   const {
-    name, starAccount, roles,
+    starAccount, roles,
   } = payload;
   const {
     returnAfter, projection,
@@ -55,7 +55,6 @@ const updateUser: UserRepository['updateUser'] = async (filter, payload, options
 
   const updateFilter: UpdateFilter<User> = {
     $set: {
-      ...(name && { name }),
       ...(starAccount && {
         [`starAccounts.${starAccount.accountId}`]: starAccount.enabled,
       }),

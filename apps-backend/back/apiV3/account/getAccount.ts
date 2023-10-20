@@ -29,7 +29,9 @@ const handler: ApiHandler<Partial<Account>> = async (data, userSession) => {
 
   const { doc } = await getAccountService({
     filter: { accountId },
-    repositories: { account: DataAccessAccountRepository },
+    repositories: {
+      account: DataAccessAccountRepository,
+    },
     context: { userSession },
   });
   return { result: doc };

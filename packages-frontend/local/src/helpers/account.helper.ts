@@ -1,13 +1,11 @@
 import { AccountViewType } from '@fishprovider/core';
+import hash from 'object-hash';
 
 export const buildKeyAccount = (filter: {
   accountId?: string,
-}) => `fp-account-${filter.accountId}`;
+}) => `fp-account-${hash(filter)}`;
 
 export const buildKeyAccounts = (filter: {
   accountViewType?: AccountViewType,
   email?: string,
-}) => {
-  const keys = Object.entries(filter).map(([key, value]) => `${key}-${value}`);
-  return `fp-accounts-${keys?.join('-')}`;
-};
+}) => `fp-accounts-${hash(filter)}`;

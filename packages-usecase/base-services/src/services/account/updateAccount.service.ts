@@ -1,5 +1,5 @@
 import {
-  checkLogin, checkProjection, checkRepository, getAccountService,
+  checkAccountAccess, checkLogin, checkProjection, checkRepository,
   sanitizeAccountBaseGetOptions, UpdateAccountService,
 } from '../..';
 
@@ -10,28 +10,24 @@ export const updateAccountService: UpdateAccountService = async ({
   // pre-check
   //
   checkLogin(context?.userSession);
+  const getAccountRepo = checkRepository(repositories.account.getAccount);
   const updateAccountRepo = checkRepository(repositories.account.updateAccount);
 
-  const checkAccess = () => context?.internal || getAccountService({
-    filter,
-    options: {
-      projection: {
-        _id: 1,
-        members: 1,
-      },
+  const { doc: account } = await getAccountRepo(filter, {
+    projection: {
+      _id: 1,
+      members: 1,
     },
-    repositories,
-    context,
   });
-  await checkAccess();
+  checkAccountAccess(account, context);
 
   //
   // main
   //
   const options = sanitizeAccountBaseGetOptions(optionsRaw);
-  const { doc: account } = await updateAccountRepo(filter, payload, options);
+  const { doc: accountNew } = await updateAccountRepo(filter, payload, options);
 
-  checkProjection(options?.projection, account);
+  checkProjection(options?.projection, accountNew);
 
-  return { doc: account };
+  return { doc: accountNew };
 };

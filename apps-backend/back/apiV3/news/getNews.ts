@@ -7,19 +7,23 @@ import { ApiHandler } from '~types/ApiHandler.model';
 
 const handler: ApiHandler<Partial<News>[]> = async (data, userSession) => {
   const filter = z.object({
-    today: z.string().optional(),
+    today: z.boolean().optional(),
+    upcoming: z.boolean().optional(),
     week: z.string().optional(),
-    upcoming: z.string().optional(),
   }).strict()
     .parse(data);
 
+  const { today, upcoming, week } = filter;
+
   const { docs } = await getNewsService({
     filter: {
-      ...filter,
-      today: filter.today === 'true',
-      upcoming: filter.upcoming === 'true',
+      today,
+      upcoming,
+      week,
     },
-    repositories: { news: DataAccessNewsRepository },
+    repositories: {
+      news: DataAccessNewsRepository,
+    },
     context: { userSession },
   });
   return { result: docs };

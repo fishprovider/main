@@ -1,8 +1,5 @@
 import { AccountType, Asset } from '@fishprovider/core';
-import {
-  AssetRepository,
-  BaseGetManyResult,
-} from '@fishprovider/repositories';
+import { AssetRepository, BaseGetManyResult } from '@fishprovider/repositories';
 
 import { BaseGetServiceParams } from '..';
 

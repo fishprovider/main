@@ -1,6 +1,6 @@
-import { getUserService } from '@fishprovider/base-services';
+import { refreshUserRolesService } from '@fishprovider/base-services';
 import { User } from '@fishprovider/core';
-import { DataAccessUserRepository } from '@fishprovider/data-access';
+import { DataAccessAccountRepository, DataAccessUserRepository } from '@fishprovider/data-access';
 import { z } from 'zod';
 
 import { ApiHandler } from '~types/ApiHandler.model';
@@ -10,13 +10,15 @@ const handler: ApiHandler<Partial<User>> = async (data, userSession) => {
   }).strict()
     .parse(data);
 
-  const { doc } = await getUserService({
+  const { doc } = await refreshUserRolesService({
     filter: {},
     repositories: {
+      account: DataAccessAccountRepository,
       user: DataAccessUserRepository,
     },
     context: { userSession },
   });
+
   return { result: doc };
 };
 

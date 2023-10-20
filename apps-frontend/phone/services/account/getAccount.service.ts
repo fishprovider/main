@@ -1,21 +1,14 @@
-import { getAccountService } from '@fishprovider/base-services';
+import { checkRepository } from '@fishprovider/base-services';
 import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
 import { DataFetchAccountRepository } from '@fishprovider/data-fetch';
 import { Account } from '@fishprovider/utils/types/Account.model';
 
-export const getAccountController = async (filter: {
+export const getAccountService = async (filter: {
   accountId: string,
   getTradeInfo?: boolean,
 }) => {
-  const { doc } = await getAccountService({
-    filter,
-    repositories: {
-      account: DataFetchAccountRepository,
-    },
-    context: {
-      internal: true,
-    },
-  });
+  const getAccountRepo = checkRepository(DataFetchAccountRepository.getAccount);
+  const { doc } = await getAccountRepo(filter);
 
   if (doc) {
     // TODO: migrate to DataFetchAccountRepository

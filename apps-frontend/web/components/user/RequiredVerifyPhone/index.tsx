@@ -3,7 +3,7 @@ import { useQuery } from '@fishprovider/cross/dist/libs/query';
 import storeUser from '@fishprovider/cross/dist/stores/user';
 
 import VerifyPhone from '~components/user/VerifyPhone';
-import { getUserController } from '~controller-services/account/getUser.controller';
+import { getUserService } from '~services/user/getUser.service';
 import { refreshMS } from '~utils';
 
 function RequiredVerifyPhone() {
@@ -16,7 +16,7 @@ function RequiredVerifyPhone() {
   }));
 
   useQuery({
-    queryFn: () => getUserController({}),
+    queryFn: () => getUserService({}),
     queryKey: queryKeys.user(userId),
     enabled: !!userId,
     refetchInterval: refreshMS,

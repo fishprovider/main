@@ -26,7 +26,9 @@ const handler: ApiHandler<Partial<Account>[]> = async (data, userSession) => {
         order: -1,
       },
     },
-    repositories: { account: DataAccessAccountRepository },
+    repositories: {
+      account: DataAccessAccountRepository,
+    },
     context: { userSession },
   });
   return { result: docs };

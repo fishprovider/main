@@ -16,6 +16,10 @@
   "dependencies": {
     "@fishprovider/core-utils": "*",
     "@fishprovider/repositories": "*",
-    "localforage": "^1.10.0"
+    "localforage": "^1.10.0",
+    "object-hash": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/object-hash": "^3.0.5"
   }
 }

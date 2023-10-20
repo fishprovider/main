@@ -6,7 +6,7 @@ import storeUser from '@fishprovider/cross/dist/stores/user';
 import _ from 'lodash';
 import { useRouter } from 'next/router';
 
-import { getAccountsController } from '~controller-services/account/getAccounts.controller';
+import { getAccountsService } from '~services/account/getAccounts.service';
 import Select from '~ui/core/Select';
 
 function ProviderSelect() {
@@ -34,11 +34,11 @@ function ProviderSelect() {
   ));
 
   useQuery({
-    queryFn: () => getAccountsController({ accountViewType: AccountViewType.public }),
+    queryFn: () => getAccountsService({ accountViewType: AccountViewType.public }),
     queryKey: queryKeys.slimAccounts(),
   });
   useQuery({
-    queryFn: () => getAccountsController({}),
+    queryFn: () => getAccountsService({}),
     queryKey: queryKeys.userAccounts(),
     enabled: !!isServerLoggedIn,
   });

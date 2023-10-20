@@ -12,10 +12,17 @@ const getReqMsg = (req: Request) => [
 
 const wrapApiHandler = <T>(handler: ApiHandler<T>) => async (req: Request, res: Response) => {
   try {
-    let data;
+    let data: any;
     switch (req.method) {
       case 'GET': {
         data = req.query;
+        for (const prop in data) {
+          if (data[prop] === 'true') {
+            data[prop] = true;
+          } else if (data[prop] === 'false') {
+            data[prop] = false;
+          }
+        }
         break;
       }
       case 'POST': {

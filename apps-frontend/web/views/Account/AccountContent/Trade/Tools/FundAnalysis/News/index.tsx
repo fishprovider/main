@@ -3,8 +3,8 @@ import _ from 'lodash';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 
-import { getNewsController } from '~controller-services/news/getNews.controller';
-import { watchNewsController } from '~controller-services/news/watchNews.controller';
+import { getNewsService } from '~services/news/getNews.service';
+import { watchNewsService } from '~services/news/watchNews.service';
 import Button from '~ui/core/Button';
 import Group from '~ui/core/Group';
 import Stack from '~ui/core/Stack';
@@ -16,14 +16,14 @@ function NewsList() {
   const [type, setType] = useState('today'); // today, this, next
   const [showAll, setShowAll] = useState(false);
 
-  const news = watchNewsController((state) => (type === 'today'
+  const news = watchNewsService((state) => (type === 'today'
     ? _.filter(state, (item) => moment(item.datetime) >= moment()
       && moment(item.datetime) <= moment().add(1, 'day'))
     : _.filter(state, (item) => item.week === type)
   ));
 
   useEffect(() => {
-    getNewsController({
+    getNewsService({
       week: type === 'next' ? 'next' : 'this',
     });
   }, [type]);
