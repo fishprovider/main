@@ -129,15 +129,14 @@ export const refreshUserRolesService: RefreshUserRolesService = async ({
     email,
   }, {
     roles,
-  }, {
-    returnAfter: true,
-    projection: {
-      _id: 1,
-      roles: 1,
-    },
   });
 
   checkProjection(options?.projection, user);
 
-  return { doc: user };
+  return {
+    doc: {
+      ...user,
+      roles,
+    },
+  };
 };
