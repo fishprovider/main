@@ -18,9 +18,19 @@ const env = {
   api: process.env.NEXT_PUBLIC_API || '/api',
 };
 
+const getBaseHost = () => {
+  if (isLive) {
+    if (isBrowser && window.location.hostname === 'www-secondary.fishprovider.com') {
+      return 'back-secondary.fishprovider.com';
+    }
+    return env.backendUrl;
+  }
+  return env.demoBackendUrl;
+};
+
 const initialize = () => {
   initDataFetch({
-    baseURL: `${isLive ? env.backendUrl : env.demoBackendUrl}${env.api}/v3`,
+    baseURL: `${getBaseHost()}${env.api}/v3`,
   });
 
   initApi({
