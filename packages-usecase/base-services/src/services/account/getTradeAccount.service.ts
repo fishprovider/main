@@ -18,6 +18,7 @@ export const getTradeAccountService: GetTradeAccountService = async ({
   //
   // main
   //
+  const { accountId } = filter;
   const { doc: account } = await getAccountRepo(filter, {
     projection: {
       _id: 1,
@@ -30,7 +31,7 @@ export const getTradeAccountService: GetTradeAccountService = async ({
   }
   checkAccountAccess(account, context);
 
-  const { _id: accountId, config } = account;
+  const { config } = account;
   const { doc: tradeAccount } = await getTradeAccountRepo({
     ...filter,
     config,
