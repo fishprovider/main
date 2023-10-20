@@ -21,5 +21,10 @@ export const getAccountService: GetAccountService = async ({
   checkProjection(options?.projection, account);
   checkAccountAccess(account, context);
 
-  return { doc: account };
+  return {
+    doc: {
+      ...account,
+      config: undefined, // never leak config
+    },
+  };
 };

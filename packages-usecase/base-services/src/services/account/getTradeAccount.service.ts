@@ -45,8 +45,9 @@ export const getTradeAccountService: GetTradeAccountService = async ({
 
   return {
     doc: {
-      _id: accountId,
       ...tradeAccount,
+      _id: accountId,
+      config: undefined, // never leak config
     },
   };
 };
