@@ -8,6 +8,7 @@ export const prodDemoHostname = 'demo.fishprovider.com';
 
 const liveHostNames = [
   'www.fishprovider.com',
+  'www-secondary.fishprovider.com',
   'canary.fishprovider.com',
   'dev.fishprovider.com',
   ...env.liveHostNames.split(','),
