@@ -5,5 +5,5 @@ export const buildKeyAccounts = (filter: {
   email?: string,
 }) => {
   const keys = Object.entries(filter).map(([key, value]) => `${key}-${value}`);
-  return `news-${keys?.join('-')}`;
+  return `accounts-${keys?.join('-')}`;
 };
