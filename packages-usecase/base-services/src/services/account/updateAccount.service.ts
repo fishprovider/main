@@ -29,5 +29,10 @@ export const updateAccountService: UpdateAccountService = async ({
 
   checkProjection(options?.projection, accountNew);
 
-  return { doc: accountNew };
+  return {
+    doc: {
+      ...accountNew,
+      config: undefined, // never leak config
+    },
+  };
 };
