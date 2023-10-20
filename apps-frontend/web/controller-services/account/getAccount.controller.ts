@@ -1,6 +1,7 @@
 import { getAccountService } from '@fishprovider/base-services';
 import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
 import { DataFetchAccountRepository } from '@fishprovider/data-fetch';
+import { Account } from '@fishprovider/utils/types/Account.model';
 
 export const getAccountController = async (filter: {
   accountId: string,
@@ -18,7 +19,7 @@ export const getAccountController = async (filter: {
 
   if (doc) {
     // TODO: migrate to DataFetchAccountRepository
-    storeAccounts.mergeDoc(doc as any);
+    storeAccounts.mergeDoc(doc as Partial<Account>);
   }
 
   return doc;
