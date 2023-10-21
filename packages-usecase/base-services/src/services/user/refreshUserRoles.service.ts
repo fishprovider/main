@@ -19,7 +19,7 @@ export const refreshUserRolesService: RefreshUserRolesService = async ({
   //
   // main
   //
-  const { roles = {} } = userSession;
+  const { _id: userId, roles = {} } = userSession;
 
   // remove disabled
   _.forEach(roles.adminAccounts, (enabled, accountId) => {
@@ -135,9 +135,8 @@ export const refreshUserRolesService: RefreshUserRolesService = async ({
 
   return {
     doc: {
-      ...user,
+      _id: userId,
       roles,
-      pushNotif: undefined, // never leak pushNotif
     },
   };
 };

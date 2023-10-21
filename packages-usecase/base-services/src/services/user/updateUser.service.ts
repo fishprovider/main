@@ -15,11 +15,11 @@ export const updateUserService: UpdateUserService = async ({
   //
   // main
   //
+  const { _id: userId, roles } = userSession;
   const payload = { ...payloadRaw };
   const { starAccount } = payload;
 
   if (starAccount) {
-    const { roles } = userSession;
     const { accountId, enabled } = starAccount;
 
     const hasAccess = () => {
@@ -54,8 +54,8 @@ export const updateUserService: UpdateUserService = async ({
 
   return {
     doc: {
-      ...user,
-      pushNotif: undefined, // never leak pushNotif
+      _id: userId,
+      ...(user?.starAccounts && { starAccounts: user?.starAccounts }),
     },
   };
 };
