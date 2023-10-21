@@ -137,6 +137,7 @@ export const refreshUserRolesService: RefreshUserRolesService = async ({
     doc: {
       ...user,
       roles,
+      pushNotif: undefined, // never leak pushNotif
     },
   };
 };

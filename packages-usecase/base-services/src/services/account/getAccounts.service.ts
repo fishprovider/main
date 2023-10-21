@@ -23,5 +23,10 @@ export const getAccountsService: GetAccountsService = async ({
     checkAccountAccess(account, context);
   });
 
-  return { docs: accounts };
+  return {
+    docs: accounts?.map((account) => ({
+      ...account,
+      config: undefined, // never leak config
+    })),
+  };
 };

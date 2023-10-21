@@ -13,6 +13,9 @@ export const updateAccountService: UpdateAccountService = async ({
   const getAccountRepo = checkRepository(repositories.account.getAccount);
   const updateAccountRepo = checkRepository(repositories.account.updateAccount);
 
+  //
+  // main
+  //
   const { doc: account } = await getAccountRepo(filter, {
     projection: {
       _id: 1,
@@ -21,9 +24,7 @@ export const updateAccountService: UpdateAccountService = async ({
   });
   checkAccountAccess(account, context);
 
-  //
-  // main
-  //
+  const { accountId } = filter;
   const options = sanitizeAccountBaseGetOptions(optionsRaw);
   const { doc: accountNew } = await updateAccountRepo(filter, payload, options);
 
@@ -32,6 +33,7 @@ export const updateAccountService: UpdateAccountService = async ({
   return {
     doc: {
       ...accountNew,
+      _id: accountId,
       config: undefined, // never leak config
     },
   };

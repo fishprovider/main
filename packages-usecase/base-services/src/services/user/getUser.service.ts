@@ -27,5 +27,10 @@ export const getUserService: GetUserService = async ({
 
   checkProjection(options?.projection, user);
 
-  return { doc: user };
+  return {
+    doc: {
+      ...user,
+      pushNotif: undefined, // never leak pushNotif
+    },
+  };
 };

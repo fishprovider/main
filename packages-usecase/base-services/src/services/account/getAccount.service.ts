@@ -14,6 +14,7 @@ export const getAccountService: GetAccountService = async ({
   //
   // main
   //
+  const { accountId } = filter;
   const options = sanitizeAccountBaseGetOptions(optionsRaw);
 
   const { doc: account } = await getAccountRepo(filter, options);
@@ -24,6 +25,7 @@ export const getAccountService: GetAccountService = async ({
   return {
     doc: {
       ...account,
+      _id: accountId,
       config: undefined, // never leak config
     },
   };
