@@ -7,6 +7,5 @@ export const getNewsService = async (filter: {
 }) => {
   const getNewsRepo = checkRepository(DataFetchNewsRepository.getNews);
   const { docs: news } = await getNewsRepo(filter);
-
-  return { docs: news };
+  return news;
 };

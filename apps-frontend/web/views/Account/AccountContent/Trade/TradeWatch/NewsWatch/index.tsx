@@ -10,7 +10,7 @@ const bannerIdBigNewsNear = 'BigNewsNear';
 
 function NewsWatch() {
   const getBigNews = async () => {
-    const { docs: news } = await getNewsService({
+    const news = await getNewsService({
       upcoming: true,
     });
     if (news?.length) {
@@ -22,7 +22,7 @@ function NewsWatch() {
       });
     }
 
-    const { docs: allNews } = await getNewsService({});
+    const allNews = await getNewsService({});
     const hasBigNews = _.some(
       allNews,
       ({ impact, datetime }) => impact
