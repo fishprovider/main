@@ -1,10 +1,9 @@
 import {
-  checkLogin, checkProjection, checkRepository, sanitizeGetUserFilter,
-  sanitizeUserBaseGetOptions, UpdateUserService,
+  checkLogin, checkProjection, checkRepository, UpdateUserService,
 } from '../..';
 
 export const updateUserService: UpdateUserService = async ({
-  filter: filterRaw, payload: payloadRaw, options: optionsRaw, repositories, context,
+  filter, payload: payloadRaw, options, repositories, context,
 }) => {
   //
   // pre-check
@@ -41,9 +40,6 @@ export const updateUserService: UpdateUserService = async ({
     };
   }
 
-  const filter = sanitizeGetUserFilter(filterRaw, userSession);
-  const options = sanitizeUserBaseGetOptions(optionsRaw);
-
   const { doc: user } = await updateUserRepo(
     filter,
     payload,
@@ -55,7 +51,7 @@ export const updateUserService: UpdateUserService = async ({
   return {
     doc: {
       _id: userId,
-      ...(user?.starAccounts && { starAccounts: user?.starAccounts }),
+      ...(user?.starAccounts && { starAccounts: user.starAccounts }),
     },
   };
 };

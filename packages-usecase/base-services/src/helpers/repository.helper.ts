@@ -1,40 +1,5 @@
 import { BaseError } from '@fishprovider/core';
-import { BaseGetOptions, Projection, RepositoryError } from '@fishprovider/repositories';
-import _ from 'lodash';
-
-import { ServiceError } from '..';
-
-export const getProjectionBlacklist = <T extends Record<string, any>>(
-  blacklist: Projection<T>,
-  projection?: Projection<T>,
-) => {
-  if (!projection || !_.size(projection)) {
-    return blacklist;
-  }
-
-  const isBlacklist = Object.values(projection).every((value) => value === 0);
-  if (isBlacklist) {
-    return {
-      ...projection,
-      ...blacklist,
-    };
-  }
-
-  const isWhitelist = Object.values(projection).every((value) => value === 1);
-  if (isWhitelist) {
-    return _.omit(projection, _.keys(blacklist));
-  }
-
-  throw new BaseError(ServiceError.SERVICE_BAD_REQUEST);
-};
-
-export const sanitizeBaseGetOptions = <T>(
-  options: BaseGetOptions<T>,
-  blacklist: Projection<T>,
-) => ({
-    ...options,
-    projection: getProjectionBlacklist(blacklist, options.projection),
-  });
+import { Projection, RepositoryError } from '@fishprovider/repositories';
 
 export const validateProjection = <T extends Record<string, any>>(
   projection?: Projection<T>,

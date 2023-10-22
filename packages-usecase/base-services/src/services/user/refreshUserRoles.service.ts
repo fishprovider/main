@@ -3,11 +3,10 @@ import _ from 'lodash';
 
 import {
   checkLogin, checkProjection, checkRepository, RefreshUserRolesService,
-  sanitizeGetUserFilter, sanitizeUserBaseGetOptions,
 } from '../..';
 
 export const refreshUserRolesService: RefreshUserRolesService = async ({
-  filter: filterRaw, options: optionsRaw, repositories, context,
+  options, repositories, context,
 }) => {
   //
   // pre-check
@@ -19,7 +18,7 @@ export const refreshUserRolesService: RefreshUserRolesService = async ({
   //
   // main
   //
-  const { _id: userId, roles = {} } = userSession;
+  const { _id: userId, email, roles = {} } = userSession;
 
   // remove disabled
   _.forEach(roles.adminAccounts, (enabled, accountId) => {
@@ -64,8 +63,6 @@ export const refreshUserRolesService: RefreshUserRolesService = async ({
   });
 
   // clean roles
-  const { email } = sanitizeGetUserFilter(filterRaw, userSession);
-
   const accountIds = _.uniq([
     ..._.keys(roles.adminAccounts),
     ..._.keys(roles.traderAccounts),
@@ -122,8 +119,6 @@ export const refreshUserRolesService: RefreshUserRolesService = async ({
       }
     }
   }
-
-  const options = sanitizeUserBaseGetOptions(optionsRaw);
 
   const { doc: user } = await updateUserRepo({
     email,

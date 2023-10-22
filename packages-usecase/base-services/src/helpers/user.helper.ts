@@ -1,9 +1,13 @@
 import {
   BaseError, User, UserError, UserRoles,
 } from '@fishprovider/core';
-import { BaseGetOptions } from '@fishprovider/repositories';
 
-import { sanitizeBaseGetOptions, UserSession } from '..';
+import { UserSession } from '..';
+
+export const sanitizeOutputUser = (user: Partial<User>) => ({
+  ...user,
+  pushNotif: undefined,
+});
 
 export const getRoleProvider = (
   roles?: UserRoles,
@@ -37,27 +41,6 @@ export const getRoleProvider = (
     isViewerProvider,
   };
 };
-
-export const sanitizeGetUserFilter = (
-  filter: {
-    userId?: string
-    email?: string,
-  },
-  userSession: UserSession,
-) => ({
-  ...filter,
-  userId: userSession._id,
-  email: userSession.email,
-});
-
-export const sanitizeUserBaseGetOptions = (
-  options?: BaseGetOptions<User>,
-) => options && sanitizeBaseGetOptions(
-  options,
-  {
-    pushNotif: 0,
-  },
-);
 
 //
 // check functions

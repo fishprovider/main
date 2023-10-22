@@ -1,10 +1,10 @@
 import {
   checkAccountAccess, checkProjection, checkRepository, GetAccountsService,
-  sanitizeAccountBaseGetOptions,
+  sanitizeOutputAccount,
 } from '../..';
 
 export const getAccountsService: GetAccountsService = async ({
-  filter, options: optionsRaw, repositories, context,
+  filter, options, repositories, context,
 }) => {
   //
   // pre-check
@@ -14,8 +14,6 @@ export const getAccountsService: GetAccountsService = async ({
   //
   // main
   //
-  const options = sanitizeAccountBaseGetOptions(optionsRaw);
-
   const { docs: accounts } = await getAccountsRepo(filter, options);
 
   accounts?.forEach((account) => {
@@ -24,9 +22,6 @@ export const getAccountsService: GetAccountsService = async ({
   });
 
   return {
-    docs: accounts?.map((account) => ({
-      ...account,
-      config: undefined, // never leak config
-    })),
+    docs: accounts?.map(sanitizeOutputAccount),
   };
 };

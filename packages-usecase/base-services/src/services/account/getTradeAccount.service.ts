@@ -2,6 +2,7 @@ import { AccountError, BaseError } from '@fishprovider/core';
 
 import {
   checkAccountAccess, checkLogin, checkRepository, GetTradeAccountService,
+  sanitizeOutputAccount,
 } from '../..';
 
 export const getTradeAccountService: GetTradeAccountService = async ({
@@ -26,12 +27,8 @@ export const getTradeAccountService: GetTradeAccountService = async ({
       config: 1,
     },
   });
-  if (!account) {
-    throw new BaseError(AccountError.ACCOUNT_NOT_FOUND);
-  }
-  checkAccountAccess(account, context);
+  const { config } = checkAccountAccess(account, context);
 
-  const { config } = account;
   const { doc: tradeAccount } = await getTradeAccountRepo({
     ...filter,
     config,
@@ -45,9 +42,8 @@ export const getTradeAccountService: GetTradeAccountService = async ({
 
   return {
     doc: {
-      ...tradeAccount,
+      ...sanitizeOutputAccount(tradeAccount),
       _id: accountId,
-      config: undefined, // never leak config
     },
   };
 };

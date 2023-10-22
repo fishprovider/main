@@ -1,5 +1,5 @@
 import {
-  Account, AccountFull, AccountMember, AccountViewType,
+  Account, AccountMember, AccountViewType,
 } from '@fishprovider/core';
 import {
   AccountRepository, BaseGetManyResult, BaseGetResult,
@@ -7,14 +7,14 @@ import {
 
 import { BaseGetServiceParams, BaseUpdateServiceParams } from '..';
 
-export type GetAccountService = (params: BaseGetServiceParams<AccountFull> & {
+export type GetAccountService = (params: BaseGetServiceParams<Account> & {
   filter: {
     accountId: string,
   },
   repositories: {
     account: AccountRepository
   },
-}) => Promise<BaseGetResult<AccountFull>>;
+}) => Promise<BaseGetResult<Account>>;
 
 export type GetAccountsService = (params: BaseGetServiceParams<Account> & {
   filter: {

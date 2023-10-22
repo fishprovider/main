@@ -1,25 +1,20 @@
 import {
-  Account, AccountError, AccountFull, AccountViewType, BaseError,
+  AccountError, AccountFull, AccountViewType, BaseError,
 } from '@fishprovider/core';
-import { BaseGetOptions } from '@fishprovider/repositories';
 
-import { getRoleProvider, sanitizeBaseGetOptions, ServiceContext } from '..';
+import { getRoleProvider, ServiceContext } from '..';
 
-export const sanitizeAccountBaseGetOptions = (
-  options?: BaseGetOptions<AccountFull>,
-) => options && sanitizeBaseGetOptions(
-  options,
-  {
-    config: 0,
-  },
-);
+export const sanitizeOutputAccount = (account?: Partial<AccountFull>) => ({
+  ...account,
+  config: undefined,
+});
 
 //
 // check functions
 //
 
 export const checkAccountAccess = (
-  account?: Partial<Account>,
+  account?: Partial<AccountFull>,
   context?: ServiceContext,
 ) => {
   if (!account) {
@@ -27,9 +22,7 @@ export const checkAccountAccess = (
   }
 
   const { isManagerWeb } = getRoleProvider(context?.userSession?.roles);
-  const {
-    accountViewType, members, deleted,
-  } = account;
+  const { accountViewType, members, deleted } = account;
 
   const hasAccess = () => {
     if (isManagerWeb) return true;

@@ -25,8 +25,8 @@ export interface AccountRepository {
       accountIds?: string[],
       config?: AccountConfig,
     },
-    options?: BaseGetOptions<AccountFull>,
-  ) => Promise<BaseGetManyResult<AccountFull>>;
+    options?: BaseGetOptions<Account>,
+  ) => Promise<BaseGetManyResult<Account>>;
 
   updateAccount?: (
     filter: {

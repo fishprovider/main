@@ -1,4 +1,4 @@
-import { AccountFull } from '@fishprovider/core';
+import { Account } from '@fishprovider/core';
 import { FishApiAccountRepository } from '@fishprovider/fish-api';
 import { LocalAccountRepository } from '@fishprovider/local';
 import { AccountRepository } from '@fishprovider/repositories';
@@ -12,7 +12,7 @@ const getAccount: AccountRepository['getAccount'] = async (filter, options) => {
   const setDocStore = StoreAccountRepository.updateAccount;
   const getDocApi = FishApiAccountRepository.getAccount;
 
-  const account = await getDoc<Partial<AccountFull>>({
+  const account = await getDoc<Partial<Account>>({
     getDocLocal: getDocLocal && (() => getDocLocal(filter, options).then((res) => res.doc)),
     setDocLocal: setDocLocal && ((doc) => setDocLocal(filter, { doc }, options)),
     setDocStore: setDocStore && ((doc) => setDocStore(filter, { doc }, options)),
@@ -28,7 +28,7 @@ const getAccounts: AccountRepository['getAccounts'] = async (filter, options) =>
   const setDocsStore = StoreAccountRepository.updateAccounts;
   const getDocsApi = FishApiAccountRepository.getAccounts;
 
-  const accounts = await getDocs<Partial<AccountFull>>({
+  const accounts = await getDocs<Partial<Account>>({
     getDocsLocal: getDocsLocal && (() => getDocsLocal(filter, options).then((res) => res.docs)),
     setDocsLocal: setDocsLocal && ((docs) => setDocsLocal(filter, { accounts: docs }, options)),
     setDocsStore: setDocsStore && ((docs) => setDocsStore(filter, { accounts: docs }, options)),

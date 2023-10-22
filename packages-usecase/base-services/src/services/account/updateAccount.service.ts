@@ -1,10 +1,10 @@
 import {
   checkAccountAccess, checkLogin, checkProjection, checkRepository,
-  sanitizeAccountBaseGetOptions, UpdateAccountService,
+  sanitizeOutputAccount, UpdateAccountService,
 } from '../..';
 
 export const updateAccountService: UpdateAccountService = async ({
-  filter, payload, options: optionsRaw, repositories, context,
+  filter, payload, options, repositories, context,
 }) => {
   //
   // pre-check
@@ -25,16 +25,14 @@ export const updateAccountService: UpdateAccountService = async ({
   checkAccountAccess(account, context);
 
   const { accountId } = filter;
-  const options = sanitizeAccountBaseGetOptions(optionsRaw);
   const { doc: accountNew } = await updateAccountRepo(filter, payload, options);
 
   checkProjection(options?.projection, accountNew);
 
   return {
     doc: {
-      ...accountNew,
+      ...sanitizeOutputAccount(accountNew),
       _id: accountId,
-      config: undefined, // never leak config
     },
   };
 };
