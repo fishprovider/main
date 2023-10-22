@@ -1,5 +1,5 @@
 import {
-  checkLogin, checkProjection, checkRepository, UpdateUserService,
+  checkLogin, checkProjection, checkRepository, sanitizeOutputUser, UpdateUserService,
 } from '../..';
 
 export const updateUserService: UpdateUserService = async ({
@@ -50,8 +50,8 @@ export const updateUserService: UpdateUserService = async ({
 
   return {
     doc: {
+      ...sanitizeOutputUser(user),
       _id: userId,
-      ...(user?.starAccounts && { starAccounts: user.starAccounts }),
     },
   };
 };

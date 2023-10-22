@@ -4,7 +4,7 @@ import {
 
 import { UserSession } from '..';
 
-export const sanitizeOutputUser = (user: Partial<User>) => ({
+export const sanitizeOutputUser = (user?: Partial<User>) => ({
   ...user,
   pushNotif: undefined,
 });
