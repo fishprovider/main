@@ -150,7 +150,7 @@
     "expo-font": "11.4.0",
     "expo-notifications": "0.20.1",
     "expo-server-sdk": "^3.7.0",
-    "expo-status-bar": "1.6.0",
+    "expo-status-bar": "1.7.1",
     "expo-system-ui": "2.4.0",
     "expo-updates": "0.18.16",
     "expo-web-browser": "12.3.2",
