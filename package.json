@@ -130,7 +130,7 @@
     "dayjs": "^1.11.10",
     "discord.js": "^14.13.0",
     "disqus-react": "^1.1.5",
-    "dotenv-flow": "^3.3.0",
+    "dotenv-flow": "^4.0.0",
     "electron": "26.4.0",
     "electron-builder": "24.7.0",
     "electron-updater": "6.1.5",
