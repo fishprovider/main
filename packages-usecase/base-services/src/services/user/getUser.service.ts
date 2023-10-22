@@ -1,7 +1,7 @@
 import { BaseError, UserError } from '@fishprovider/core';
 
 import {
-  checkLogin, checkProjection, checkRepository, GetUserService,
+  checkLogin, checkProjection, checkRepository, GetUserService, sanitizeOutputUser,
 } from '../..';
 
 export const getUserService: GetUserService = async ({
@@ -24,9 +24,6 @@ export const getUserService: GetUserService = async ({
   checkProjection(options?.projection, user);
 
   return {
-    doc: {
-      ...user,
-      pushNotif: undefined, // never leak pushNotif
-    },
+    doc: sanitizeOutputUser(user),
   };
 };
