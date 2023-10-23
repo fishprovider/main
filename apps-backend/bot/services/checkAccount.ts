@@ -38,27 +38,37 @@ const getTodayOrders = async (providerId: string) => {
 
 const hackCTraderActive = async (account: Account, hackOrders: Order[]) => {
   if (isPausedWeekend()) return;
-  if (!hackOrders.length) return;
 
-  const lastCreatedOrder = hackOrders.reduce((acc, item) => {
-    if (!acc) return item;
-    return moment(item.createdAt) > moment(acc.createdAt) ? item : acc;
-  });
-  if (!lastCreatedOrder || moment().diff(moment(lastCreatedOrder.createdAt), 'hours') > 24) {
-    await Promise.all(hackOrders.map(async (order) => {
-      await removePosition({ order, options: { config: account.config, ...botUser } });
-    }));
-    await Promise.all([
-      newOrder({
-        order: { ...lastCreatedOrder, direction: Direction.buy },
-        options: { config: account.config, ...botUser },
-      }),
-      newOrder({
-        order: { ...lastCreatedOrder, direction: Direction.sell },
-        options: { config: account.config, ...botUser },
-      }),
-    ]);
-  }
+  const checkActive = () => {
+    if (!hackOrders.length) return false;
+
+    const lastCreatedOrder = hackOrders.reduce((acc, item) => {
+      if (!acc) return item;
+      return moment(item.createdAt) > moment(acc.createdAt) ? item : acc;
+    });
+    return moment().diff(moment(lastCreatedOrder.createdAt), 'hours') < 24;
+  };
+
+  const isActive = checkActive();
+  if (isActive) return;
+
+  const hackOrder = hackOrders[0];
+  if (!hackOrder) return;
+
+  await Promise.all(hackOrders.map(async (order) => {
+    await removePosition({ order, options: { config: account.config, ...botUser } });
+  }));
+
+  await Promise.all([
+    newOrder({
+      order: { ...hackOrder, direction: Direction.buy },
+      options: { config: account.config, ...botUser },
+    }),
+    newOrder({
+      order: { ...hackOrder, direction: Direction.sell },
+      options: { config: account.config, ...botUser },
+    }),
+  ]);
 };
 
 // Rule of thumb: check must be fast (no DB call), action can be slow
