@@ -5,9 +5,66 @@ import { Roles } from '@fishprovider/utils/dist/constants/user';
 
 import { isLive } from '~utils';
 
-const TopProviderIds = isLive
-  ? ['earth', 'water', 'air', 'fire', 'whale', 'shark']
-  : ['octopus', 'oyster', 'nemo', 'dory', 'seal', 'exne', 'robo'];
+export const TopAccounts = isLive ? [
+  {
+    _id: 'earth',
+    icon: '🍀',
+    ctraderUrl: 'https://ct.spotware.com/copy/strategy/65916',
+    myFxBookUrl: 'https://www.myfxbook.com/members/FishProvider/earth/10192142',
+  },
+  {
+    _id: 'water',
+    icon: '🌊',
+    ctraderUrl: 'https://ct.spotware.com/copy/strategy/65917',
+    myFxBookUrl: 'https://www.myfxbook.com/members/FishProvider/water/10406062',
+  },
+  {
+    _id: 'air',
+    icon: '🌪️',
+    ctraderUrl: 'https://ct.spotware.com/copy/strategy/65937',
+    myFxBookUrl: 'https://www.myfxbook.com/members/FishProvider/air/10406063',
+  },
+  {
+    _id: 'fire',
+    icon: '🔥',
+    ctraderUrl: 'https://ct.spotware.com/copy/strategy/65938',
+    myFxBookUrl: 'https://www.myfxbook.com/members/FishProvider/fire/10406064',
+  },
+  {
+    _id: 'whale',
+    icon: '🐳',
+    ctraderUrl: 'https://ct.spotware.com/copy/strategy/67617',
+    myFxBookUrl: 'https://www.myfxbook.com/members/FishProvider/whale/10406065',
+  },
+  {
+    _id: 'shark',
+    icon: '🦈',
+    ctraderUrl: 'https://ct.spotware.com/copy/strategy/70506',
+    myFxBookUrl: 'https://www.myfxbook.com/members/FishProvider/shark/10406066',
+  },
+] : [
+  {
+    _id: 'octopus',
+  },
+  {
+    _id: 'oyster',
+  },
+  {
+    _id: 'nemo',
+  },
+  {
+    _id: 'dory',
+  },
+  {
+    _id: 'seal',
+  },
+  {
+    _id: 'exne',
+  },
+  {
+    _id: 'robo',
+  },
+];
 
 enum CardVariant {
   default = 'default',
@@ -260,5 +317,4 @@ export {
   ProviderTypePrice,
   ProviderTypeText,
   ProviderViewTypeText,
-  TopProviderIds,
 };

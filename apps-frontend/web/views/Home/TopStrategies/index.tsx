@@ -7,7 +7,7 @@ import _ from 'lodash';
 import { useRef } from 'react';
 
 import Link from '~components/base/Link';
-import { TopProviderIds } from '~constants/account';
+import { TopAccounts, TopProviderIds } from '~constants/account';
 import Routes from '~libs/routes';
 import { getAccountsService } from '~services/account/getAccounts.service';
 import Box from '~ui/core/Box';
@@ -74,7 +74,7 @@ function TopStrategies() {
     }
   };
 
-  const topIds = _.uniq([...TopProviderIds, ...topProviderIds]);
+  const topIds = _.uniq([...TopAccounts.map((item) => item._id), ...topProviderIds]);
 
   return (
     <Stack id="strategies" py={50}>

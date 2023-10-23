@@ -15,9 +15,9 @@ import ThemeProvider from '~ui/themes/ThemeProvider';
 
 interface Props {
   providerId: string;
-  icon: string;
-  ctraderUrl: string;
-  myFxBookUrl: string;
+  icon?: string;
+  ctraderUrl?: string;
+  myFxBookUrl?: string;
 }
 
 function ProfitHistory({
