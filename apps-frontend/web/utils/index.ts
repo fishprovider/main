@@ -17,6 +17,7 @@ const prodHostnames = [
 const liveHostNames = [
   'www.fishprovider.com',
   'www-secondary.fishprovider.com',
+  'legacy.fishprovider.com',
   'canary.fishprovider.com',
   ...env.liveHostNames.split(','),
 ];
