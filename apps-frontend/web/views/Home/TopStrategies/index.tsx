@@ -7,7 +7,7 @@ import _ from 'lodash';
 import { useRef } from 'react';
 
 import Link from '~components/base/Link';
-import { TopAccounts, TopProviderIds } from '~constants/account';
+import { TopAccounts } from '~constants/account';
 import Routes from '~libs/routes';
 import { getAccountsService } from '~services/account/getAccounts.service';
 import Box from '~ui/core/Box';
