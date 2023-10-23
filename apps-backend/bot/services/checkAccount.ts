@@ -39,21 +39,15 @@ const getTodayOrders = async (providerId: string) => {
 const hackCTraderActive = async (account: Account, hackOrders: Order[]) => {
   if (isPausedWeekend()) return;
 
-  const checkActive = () => {
-    if (!hackOrders.length) return false;
-
-    const lastCreatedOrder = hackOrders.reduce((acc, item) => {
-      if (!acc) return item;
-      return moment(item.createdAt) > moment(acc.createdAt) ? item : acc;
-    });
-    return moment().diff(moment(lastCreatedOrder.createdAt), 'hours') < 24;
-  };
-
-  const isActive = checkActive();
-  if (isActive) return;
-
-  const hackOrder = hackOrders[0];
+  let hackOrder = hackOrders[0];
   if (!hackOrder) return;
+
+  hackOrder = hackOrders.reduce((acc, item) => {
+    if (!acc) return item;
+    return moment(item.createdAt) > moment(acc.createdAt) ? item : acc;
+  });
+  const isActive = moment().diff(moment(hackOrder.createdAt), 'hours') < 24;
+  if (isActive) return;
 
   await Promise.all(hackOrders.map(async (order) => {
     await removePosition({ order, options: { config: account.config, ...botUser } });
