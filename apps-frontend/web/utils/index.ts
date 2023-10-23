@@ -26,6 +26,8 @@ export const isBrowser = typeof document !== 'undefined';
 
 export const isLive = !isBrowser || liveHostNames.includes(window.location.hostname);
 
+export const isSecondary = isBrowser && window.location.hostname === secondaryProdHostname;
+
 const isProdHostnames = isBrowser && prodHostnames.includes(window.location.hostname);
 
 const isNoTrack = isBrowser && window.location.search.includes('notrack=true');

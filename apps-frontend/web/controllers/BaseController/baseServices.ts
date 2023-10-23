@@ -9,8 +9,8 @@ import { cacheRead } from '~libs/cache';
 // import { initLiveChat } from '~libs/liveChat';
 import { initSW } from '~libs/sw';
 import {
-  isBrowser, isLive, isProd, isTrack, secondaryBackendUrl,
-  secondaryProdHostname,
+  isBrowser, isLive, isProd, isSecondary,
+  isTrack, secondaryBackendUrl,
 } from '~utils';
 
 const env = {
@@ -21,7 +21,7 @@ const env = {
 
 const getBaseUrl = () => {
   if (isLive) {
-    if (isBrowser && window.location.hostname === secondaryProdHostname) {
+    if (isSecondary) {
       return secondaryBackendUrl;
     }
     return env.backendUrl;
