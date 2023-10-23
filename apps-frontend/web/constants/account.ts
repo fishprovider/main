@@ -3,19 +3,11 @@ import {
 } from '@fishprovider/utils/dist/constants/account';
 import { Roles } from '@fishprovider/utils/dist/constants/user';
 
-// import { isLive, isProd } from '~utils';
+import { isLive } from '~utils';
 
-// const getTopProviderIds = () => {
-//   if (isProd) {
-//     return isLive
-//       ? ['earth', 'water', 'air', 'fire', 'whale']
-//       : ['octopus', 'oyster', 'nemo', 'dory', 'seal', 'exne', 'robo'];
-//   }
-//   return ['ctra', 'exne', 'robo', 'octopus'];
-// };
-
-// const TopProviderIds = getTopProviderIds();
-const TopProviderIds = ['earth', 'water', 'air', 'fire'];
+const TopProviderIds = isLive
+  ? ['earth', 'water', 'air', 'fire', 'whale', 'shark']
+  : ['octopus', 'oyster', 'nemo', 'dory', 'seal', 'exne', 'robo'];
 
 enum CardVariant {
   default = 'default',
