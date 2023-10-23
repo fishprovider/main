@@ -38,6 +38,7 @@ const getTodayOrders = async (providerId: string) => {
 
 const hackCTraderActive = async (account: Account, hackOrders: Order[]) => {
   if (isPausedWeekend()) return;
+  if (!hackOrders.length) return;
 
   const lastCreatedOrder = hackOrders.reduce((acc, item) => {
     if (!acc) return item;
