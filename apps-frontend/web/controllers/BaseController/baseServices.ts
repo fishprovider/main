@@ -9,7 +9,8 @@ import { cacheRead } from '~libs/cache';
 // import { initLiveChat } from '~libs/liveChat';
 import { initSW } from '~libs/sw';
 import {
-  isBrowser, isLive, isProd, isTrack,
+  isBrowser, isLive, isProd, isTrack, secondaryBackendUrl,
+  secondaryProdHostname,
 } from '~utils';
 
 const env = {
@@ -20,8 +21,8 @@ const env = {
 
 const getBaseUrl = () => {
   if (isLive) {
-    if (isBrowser && window.location.hostname === 'www-secondary.fishprovider.com') {
-      return 'https://back-secondary.fishprovider.com';
+    if (isBrowser && window.location.hostname === secondaryProdHostname) {
+      return secondaryBackendUrl;
     }
     return env.backendUrl;
   }

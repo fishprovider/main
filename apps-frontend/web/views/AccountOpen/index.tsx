@@ -6,16 +6,13 @@ import Select from '~ui/core/Select';
 import Stack from '~ui/core/Stack';
 import Title from '~ui/core/Title';
 import ContentSection from '~ui/layouts/ContentSection';
-import { isLive } from '~utils';
 
 import AccountCTrader from './AccountCTrader';
 import AccountMetaTrader from './AccountMetaTrader';
 
-const supportProviderTypes = isLive ? [
+const supportProviderTypes = [
   ProviderType.icmarkets,
   ProviderType.exness,
-] : [
-  ProviderType.icmarkets,
 ];
 
 function AccountOpen() {

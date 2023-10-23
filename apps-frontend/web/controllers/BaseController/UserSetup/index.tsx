@@ -1,4 +1,4 @@
-import { isProdHostnames } from '~utils';
+import { isTrack } from '~utils';
 
 import UserAnalytics from './UserAnalytics';
 import UserAuth from './UserAuth';
@@ -13,7 +13,7 @@ function UserSetup() {
     <>
       <UserAuth />
       <UserSocket />
-      {isProdHostnames && <UserAnalytics />}
+      {isTrack && <UserAnalytics />}
       <UserNotif />
       {/* <UserTheme /> */}
       {/* <UserLiveChat /> */}

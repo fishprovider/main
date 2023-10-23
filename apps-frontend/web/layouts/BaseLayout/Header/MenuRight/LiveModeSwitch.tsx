@@ -1,7 +1,7 @@
 import Routes from '~libs/routes';
 import Switch from '~ui/core/Switch';
 import Text from '~ui/core/Text';
-import { isLive, prodDemoHostname, prodHostname } from '~utils';
+import { demoProdHostnameDefault, isLive, prodHostnameDefault } from '~utils';
 
 function LiveModeSwitch() {
   return (
@@ -12,7 +12,7 @@ function LiveModeSwitch() {
       checked={isLive}
       onChange={(event) => {
         const url = new URL(window.location.href);
-        url.hostname = event.target.checked ? prodHostname : prodDemoHostname;
+        url.hostname = event.target.checked ? prodHostnameDefault : demoProdHostnameDefault;
         url.pathname = Routes.strategies;
         window.location.href = url.href;
       }}
