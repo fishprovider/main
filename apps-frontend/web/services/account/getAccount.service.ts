@@ -8,12 +8,12 @@ export const getAccountService = async (filter: {
   getTradeInfo?: boolean,
 }) => {
   const getAccountRepo = checkRepository(DataFetchAccountRepository.getAccount);
-  const { doc } = await getAccountRepo(filter);
+  const { doc: account } = await getAccountRepo(filter);
 
-  if (doc) {
+  if (account) {
     // TODO: migrate to DataFetchAccountRepository
-    storeAccounts.mergeDoc(doc as Partial<Account>);
+    storeAccounts.mergeDoc(account as Partial<Account>);
   }
 
-  return doc;
+  return account;
 };
