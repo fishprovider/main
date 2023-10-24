@@ -3,7 +3,7 @@ import removePosition from '@fishprovider/swap/dist/commands/removePosition';
 import { botUser } from '@fishprovider/swap/dist/utils/account';
 import { getDeals, getLiveOrders } from '@fishprovider/swap/dist/utils/order';
 import { getPrices } from '@fishprovider/swap/dist/utils/price';
-import { ProviderPlatform, ProviderTradeType, ProviderType } from '@fishprovider/utils/dist/constants/account';
+import { ProviderPlatform, ProviderType } from '@fishprovider/utils/dist/constants/account';
 import { Direction } from '@fishprovider/utils/dist/constants/order';
 import { getProfit } from '@fishprovider/utils/dist/helpers/order';
 import { isPausedWeekend } from '@fishprovider/utils/dist/helpers/pause';
