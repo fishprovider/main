@@ -1,21 +1,22 @@
+import { News } from '@fishprovider/core';
 import { MongoNewsRepository } from '@fishprovider/mongo';
 import { RedisNewsRepository } from '@fishprovider/redis';
 import { NewsRepository } from '@fishprovider/repositories';
 
+import { getDocs } from '../helpers';
+
 const getNews: NewsRepository['getNews'] = async (filter, options) => {
-  let docs;
-  if (RedisNewsRepository.getNews) {
-    const res = await RedisNewsRepository.getNews(filter, options);
-    docs = res.docs;
-  }
-  if (!docs && MongoNewsRepository.getNews) {
-    const res = await MongoNewsRepository.getNews(filter, options);
-    docs = res.docs;
-    if (RedisNewsRepository.updateNews) {
-      RedisNewsRepository.updateNews(filter, { news: docs ?? undefined }, options); // non-blocking
-    }
-  }
-  return { docs };
+  const getDocsCache = RedisNewsRepository.getNews;
+  const setDocsCache = RedisNewsRepository.updateNews;
+  const getDocsDb = MongoNewsRepository.getNews;
+
+  const news = await getDocs<Partial<News>>({
+    getDocsCache: getDocsCache && (() => getDocsCache(filter, options).then((res) => res.docs)),
+    setDocsCache: setDocsCache && ((docs) => setDocsCache(filter, { news: docs }, options)),
+    getDocsDb: getDocsDb && (() => getDocsDb(filter, options).then((res) => res.docs)),
+  });
+
+  return { docs: news };
 };
 
 export const DataAccessNewsRepository: NewsRepository = {
