@@ -4,12 +4,12 @@ import { botUser } from '@fishprovider/swap/dist/utils/account';
 import { getDeals, getLiveOrders } from '@fishprovider/swap/dist/utils/order';
 import { getPrices } from '@fishprovider/swap/dist/utils/price';
 import { ProviderPlatform, ProviderType } from '@fishprovider/utils/dist/constants/account';
-import { Direction } from '@fishprovider/utils/dist/constants/order';
+import { Direction, OrderStatus, OrderType } from '@fishprovider/utils/dist/constants/order';
 import { getProfit } from '@fishprovider/utils/dist/helpers/order';
 import { isPausedWeekend } from '@fishprovider/utils/dist/helpers/pause';
 import { getMajorPairs } from '@fishprovider/utils/dist/helpers/price';
 import { Account } from '@fishprovider/utils/dist/types/Account.model';
-import type { Order } from '@fishprovider/utils/dist/types/Order.model';
+import type { Order, OrderWithoutId } from '@fishprovider/utils/dist/types/Order.model';
 import _ from 'lodash';
 import moment from 'moment';
 
@@ -36,27 +36,53 @@ const getTodayOrders = async (providerId: string) => {
   );
 };
 
-const hackCTraderActive = async (account: Account, hackOrders: Order[]) => {
+const hackCTraderActive = async (account: Account, liveOrders: Order[], hackOrders: Order[]) => {
   if (isPausedWeekend()) return;
 
-  let hackOrder = hackOrders[0];
-  if (!hackOrder) return;
-
-  hackOrder = hackOrders.reduce((acc, item) => {
-    if (!acc) return item;
-    return moment(item.createdAt) > moment(acc.createdAt) ? item : acc;
+  let lastOrderCreated: Order | undefined;
+  liveOrders.forEach((item) => {
+    if (!lastOrderCreated) {
+      lastOrderCreated = item;
+      return;
+    }
+    if (moment(item.createdAt) > moment(lastOrderCreated.createdAt)) {
+      lastOrderCreated = item;
+    }
   });
-  const isActive = moment().diff(moment(hackOrder.createdAt), 'hours') < 24;
+  hackOrders.forEach((item) => {
+    if (!lastOrderCreated) {
+      lastOrderCreated = item;
+      return;
+    }
+    if (moment(item.createdAt) > moment(lastOrderCreated.createdAt)) {
+      lastOrderCreated = item;
+    }
+  });
+
+  const isActive = lastOrderCreated && moment().diff(moment(lastOrderCreated.createdAt), 'hours') < 24;
   if (isActive) return;
+
+  const hackOrder: OrderWithoutId = hackOrders[0] || {
+    providerId: account._id,
+    providerType: ProviderType.icmarkets,
+    providerPlatform: ProviderPlatform.ctrader,
+
+    orderType: OrderType.market,
+    status: OrderStatus.idea,
+
+    symbol: 'LTCUSD',
+    direction: Direction.buy,
+    volume: 0.01,
+  };
 
   await Promise.all([
     newOrder({
-      order: { ...hackOrder, direction: Direction.buy },
-      options: { config: account.config, ...botUser },
+      order: { ...hackOrder, ...botUser, direction: Direction.buy },
+      options: { config: account.config },
     }),
     newOrder({
-      order: { ...hackOrder, direction: Direction.sell },
-      options: { config: account.config, ...botUser },
+      order: { ...hackOrder, ...botUser, direction: Direction.sell },
+      options: { config: account.config },
     }),
   ]);
 
@@ -81,7 +107,7 @@ const checkAccount = async (providerId: string) => {
     // hack: filter out hack LTCUSD orders to keep CTrader Strategy active
     const [liveOrders, hackOrders] = _.partition(rawLiveOrders, (item) => item.symbol !== 'LTCUSD');
     if (shouldHackCTraderActive) {
-      await hackCTraderActive(account, hackOrders);
+      await hackCTraderActive(account, liveOrders, hackOrders);
     }
 
     const {
