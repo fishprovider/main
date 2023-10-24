@@ -73,8 +73,7 @@ const checkAccount = async (providerId: string) => {
 
     const shouldHackCTraderActive = !!account.strategyId
       && account.providerType === ProviderType.icmarkets
-      && account.providerPlatform === ProviderPlatform.ctrader
-      && account.providerTradeType === ProviderTradeType.demo;
+      && account.providerPlatform === ProviderPlatform.ctrader;
 
     const todayOrders = await getTodayOrders(providerId);
     const rawLiveOrders = await getLiveOrders(providerId, shouldHackCTraderActive);
