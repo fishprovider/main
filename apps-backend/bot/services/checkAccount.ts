@@ -1,6 +1,5 @@
 import newOrder from '@fishprovider/swap/dist/commands/newOrder';
 import removePosition from '@fishprovider/swap/dist/commands/removePosition';
-import { botUser } from '@fishprovider/swap/dist/utils/account';
 import { getDeals, getLiveOrders } from '@fishprovider/swap/dist/utils/order';
 import { getPrices } from '@fishprovider/swap/dist/utils/price';
 import { ProviderPlatform, ProviderType } from '@fishprovider/utils/dist/constants/account';
@@ -60,7 +59,21 @@ const hackCTraderActive = async (account: Account, liveOrders: Order[], hackOrde
   });
 
   const isActive = lastOrderCreated && moment().diff(moment(lastOrderCreated.createdAt), 'hours') < 24;
-  if (isActive) return;
+  if (isActive) {
+    const removeDuplicateOrders = async (direction: Direction) => {
+      const checkOrders = hackOrders.filter((item) => item.direction === direction);
+      if (checkOrders.length > 1) {
+        await Promise.all(checkOrders.map(async (order) => {
+          await removePosition({ order, options: { config: account.config } });
+        }));
+      }
+    };
+    await Promise.all([
+      removeDuplicateOrders(Direction.buy),
+      removeDuplicateOrders(Direction.sell),
+    ]);
+    return;
+  }
 
   const baseOrder: OrderWithoutId = {
     providerId: account._id,
@@ -73,8 +86,6 @@ const hackCTraderActive = async (account: Account, liveOrders: Order[], hackOrde
     symbol: 'LTCUSD',
     direction: Direction.buy,
     volume: 0.01,
-
-    ...botUser,
   };
 
   await Promise.all([
@@ -89,7 +100,7 @@ const hackCTraderActive = async (account: Account, liveOrders: Order[], hackOrde
   ]);
 
   await Promise.all(hackOrders.map(async (order) => {
-    await removePosition({ order, options: { config: account.config, ...botUser } });
+    await removePosition({ order, options: { config: account.config } });
   }));
 };
 
