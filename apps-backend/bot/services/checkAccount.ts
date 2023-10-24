@@ -49,10 +49,6 @@ const hackCTraderActive = async (account: Account, hackOrders: Order[]) => {
   const isActive = moment().diff(moment(hackOrder.createdAt), 'hours') < 24;
   if (isActive) return;
 
-  await Promise.all(hackOrders.map(async (order) => {
-    await removePosition({ order, options: { config: account.config, ...botUser } });
-  }));
-
   await Promise.all([
     newOrder({
       order: { ...hackOrder, direction: Direction.buy },
@@ -63,6 +59,10 @@ const hackCTraderActive = async (account: Account, hackOrders: Order[]) => {
       options: { config: account.config, ...botUser },
     }),
   ]);
+
+  await Promise.all(hackOrders.map(async (order) => {
+    await removePosition({ order, options: { config: account.config, ...botUser } });
+  }));
 };
 
 // Rule of thumb: check must be fast (no DB call), action can be slow
