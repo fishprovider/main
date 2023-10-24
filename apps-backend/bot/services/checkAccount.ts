@@ -62,7 +62,7 @@ const hackCTraderActive = async (account: Account, liveOrders: Order[], hackOrde
   const isActive = lastOrderCreated && moment().diff(moment(lastOrderCreated.createdAt), 'hours') < 24;
   if (isActive) return;
 
-  const hackOrder: OrderWithoutId = hackOrders[0] || {
+  const baseOrder: OrderWithoutId = {
     providerId: account._id,
     providerType: ProviderType.icmarkets,
     providerPlatform: ProviderPlatform.ctrader,
@@ -73,15 +73,17 @@ const hackCTraderActive = async (account: Account, liveOrders: Order[], hackOrde
     symbol: 'LTCUSD',
     direction: Direction.buy,
     volume: 0.01,
+
+    ...botUser,
   };
 
   await Promise.all([
     newOrder({
-      order: { ...hackOrder, ...botUser, direction: Direction.buy },
+      order: { ...hackOrders[0], ...baseOrder, direction: Direction.buy },
       options: { config: account.config },
     }),
     newOrder({
-      order: { ...hackOrder, ...botUser, direction: Direction.sell },
+      order: { ...hackOrders[0], ...baseOrder, direction: Direction.sell },
       options: { config: account.config },
     }),
   ]);
