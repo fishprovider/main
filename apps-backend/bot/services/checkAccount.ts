@@ -58,8 +58,26 @@ const hackCTraderActive = async (account: Account, liveOrders: Order[], hackOrde
     }
   });
 
-  const isActive = lastOrderCreated && moment().diff(moment(lastOrderCreated.createdAt), 'hours') < 24;
-  if (isActive) {
+  const isActive = () => { // CTrader requirements
+    if (!lastOrderCreated) return false; // 1 position any time
+    if (moment().diff(moment(lastOrderCreated.createdAt), 'hours') > 70) return false; // 1 deal last 72 hours
+
+    const dayInWeek = moment.utc().day(); // 0: Sun, 1: Mon, ..., 5: Fri, 6: Sat
+    if (dayInWeek === 5) {
+      const hour = moment.utc().hour(); // 0-23
+      if (hour > 10) {
+        const orderCreatedDay = moment(lastOrderCreated.createdAt).utc().day();
+        if (orderCreatedDay < 5) return false; // 1 deal after Fri 10:00
+
+        const orderCreatedHour = moment(lastOrderCreated.createdAt).utc().hour();
+        if (orderCreatedDay === 5 && orderCreatedHour < 10) return false; // 1 deal after Fri 10:00
+      }
+    }
+
+    return true;
+  };
+
+  if (isActive()) {
     const removeDuplicateOrders = async (direction: Direction) => {
       const checkOrders = hackOrders.filter((item) => item.direction === direction);
       if (checkOrders.length > 1) {
