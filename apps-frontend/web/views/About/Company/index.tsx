@@ -6,6 +6,7 @@ import Stack from '~ui/core/Stack';
 
 const Story = dynamic(() => import('./Story'));
 const Goals = dynamic(() => import('./Goals'));
+const Vision = dynamic(() => import('./Vision'));
 const Divisions = dynamic(() => import('./Divisions'));
 const Locations = dynamic(() => import('./Locations'));
 
@@ -26,6 +27,9 @@ function Company() {
 
         <Grid.Col xs={12} sm={6}>
           <Stack>
+            <Card withBorder radius="lg" shadow="xl">
+              <Vision />
+            </Card>
             <Card withBorder radius="lg" shadow="xl">
               <Goals />
             </Card>
