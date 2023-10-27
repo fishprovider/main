@@ -85,7 +85,8 @@ export type AddAccountService = (params: BaseUpdateServiceParams<Account> & {
     server?: string,
   },
   repositories: {
-    account: AccountRepository
+    account: AccountRepository,
+    trade: AccountRepository,
   },
 }) => Promise<BaseGetResult<Account>>;
 

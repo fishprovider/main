@@ -17,7 +17,7 @@ export const addAccountService: AddAccountService = async ({
   const userSession = checkLogin(context?.userSession);
   const getAccountRepo = checkRepository(repositories.account.getAccount);
   const getTradeClientRepo = checkRepository(repositories.account.getTradeClient);
-  const addTradeAccountRepo = checkRepository(repositories.account.addTradeAccount);
+  const addTradeAccountRepo = checkRepository(repositories.trade.addTradeAccount);
   const addAccountRepo = checkRepository(repositories.account.addAccount);
 
   //
