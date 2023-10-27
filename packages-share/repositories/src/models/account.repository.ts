@@ -72,8 +72,8 @@ export interface AccountRepository {
 
   addAccount?: (
     payload: {
-      config: AccountConfig,
       accountId: string,
+      config: AccountConfig,
       name: string,
       accountType: AccountType,
       accountPlatform: AccountPlatform,

@@ -30,7 +30,7 @@
   ],
   "references": [
     { "path": "../../packages/utils" },
-    { "path": "../../packages-usecase/base-services" },
+    { "path": "../../packages-share/base-services" },
     { "path": "../../packages-frontend/data-fetch" },
   ]
 }

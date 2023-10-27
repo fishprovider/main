@@ -57,10 +57,12 @@ export const addAccountService: AddAccountService = async ({
     clientSecret: '',
     accountId: tradeAccountId ?? '',
     name,
+    // ct
     ...(host && { host }),
     ...(port && { port }),
     ...(accessToken && { accessToken }),
     ...(refreshToken && { refreshToken }),
+    // mt
     ...(user && { user }),
     ...(pass && { pass }),
     ...(platform && { platform }),
@@ -92,8 +94,8 @@ export const addAccountService: AddAccountService = async ({
   }
 
   const { doc: account } = await addAccountRepo({
-    config,
     accountId,
+    config,
     name,
     accountType,
     accountPlatform,
