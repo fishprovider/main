@@ -71,23 +71,15 @@ export const addAccountService: AddAccountService = async ({
     ...(server && { server }),
   };
 
-  switch (accountPlatform) {
-    case AccountPlatform.ctrader: {
-      const { doc: client } = await getTradeClientRepo({ accountType, accountPlatform });
-      if (!client) {
-        throw new BaseError(AccountError.ACCOUNT_NOT_FOUND);
-      }
-      config.clientSecret = client.clientSecret ?? '';
-      break;
-    }
-    case AccountPlatform.metatrader: {
-      const { doc: client } = await getTradeClientRepo({ accountType, accountPlatform });
-      if (!client) {
-        throw new BaseError(AccountError.ACCOUNT_NOT_FOUND);
-      }
-      config.clientId = client.clientId ?? '';
-      config.clientSecret = client.clientSecret ?? '';
+  const { doc: client } = await getTradeClientRepo({ accountType, accountPlatform });
+  if (!client) {
+    throw new BaseError(AccountError.ACCOUNT_NOT_FOUND, 'Failed to get trade client');
+  }
+  config.clientId = client.clientId ?? '';
+  config.clientSecret = client.clientSecret ?? '';
 
+  switch (accountPlatform) {
+    case AccountPlatform.metatrader: {
       const { doc: tradeConfig } = await addTradeAccountRepo({
         config,
         // ct
@@ -101,7 +93,10 @@ export const addAccountService: AddAccountService = async ({
         ...(platform && { platform }),
         ...(server && { server }),
       });
-      config.accountId = tradeConfig?.accountId;
+      if (!tradeConfig) {
+        throw new BaseError(AccountError.ACCOUNT_NOT_FOUND, 'Failed to add trade account');
+      }
+      config.accountId = tradeConfig.accountId;
       break;
     }
     default:
