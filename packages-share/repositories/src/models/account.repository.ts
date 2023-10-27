@@ -35,7 +35,7 @@ export interface AccountRepository {
 
   updateAccount?: (
     filter: {
-      accountId: string,
+      accountId?: string,
     },
     payload: {
       name?: string,
@@ -59,16 +59,6 @@ export interface AccountRepository {
     },
     options?: BaseGetOptions<Account>,
   ) => Promise<BaseGetManyResult<Account>>;
-
-  // allocateAccountConfig?: (
-  //   filter: {
-  //     accountPlatform: AccountPlatform,
-  //     accountType?: AccountType,
-  //     clientId?: string,
-  //     accountTradeType?: AccountTradeType,
-  //   },
-  //   options?: BaseGetOptions<Account>,
-  // ) => Promise<BaseGetResult<AccountPrivate['config']>>;
 
   addAccount?: (
     payload: {

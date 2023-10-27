@@ -1,6 +1,6 @@
 import {
-  AccountConfig,
-  AccountError, AccountPlatform, AccountRoles, AccountSourceType, AccountTradeType, AccountViewType, BaseError,
+  AccountConfig, AccountError, AccountPlatform, AccountRoles, AccountSourceType,
+  AccountTradeType, AccountViewType, BaseError,
 } from '@fishprovider/core';
 import _ from 'lodash';
 
