@@ -10,9 +10,14 @@ const buildAccountFilter = (filter: {
   accountViewType?: AccountViewType,
   email?: string,
   member?: AccountMember,
+  orFilter?: {
+    accountId?: string,
+    name?: string,
+    tradeAccountId?: string,
+  },
 }): Filter<Account> => {
   const {
-    accountId, accountViewType, email, accountIds, member,
+    accountId, accountViewType, email, accountIds, member, orFilter,
   } = filter;
 
   return {
@@ -21,6 +26,13 @@ const buildAccountFilter = (filter: {
     ...(accountViewType && { accountViewType }),
     ...(email && { 'members.email': email }),
     ...(member?.status === 'update' && { 'members.email': member.email }),
+    ...(orFilter && {
+      $or: [
+        ...(orFilter.accountId ? [{ _id: orFilter.accountId }] : []),
+        ...(orFilter.name ? [{ name: orFilter.name }] : []),
+        ...(orFilter.tradeAccountId ? [{ 'config.accountId': orFilter.tradeAccountId }] : []),
+      ],
+    }),
     deleted: { $ne: true },
   };
 };
