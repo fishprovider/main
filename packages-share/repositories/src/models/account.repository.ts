@@ -10,10 +10,15 @@ import {
 export interface AccountRepository {
   getAccount?: (
     filter: {
-      accountId: string,
+      accountId?: string,
       getTradeInfo?: boolean,
       config?: AccountConfig,
       tradeAccountId?: string,
+      orFilter?: {
+        accountId?: string,
+        name?: string,
+        tradeAccountId?: string,
+      },
     },
     options?: BaseGetOptions<AccountFull>,
   ) => Promise<BaseGetResult<AccountFull>>;
@@ -66,7 +71,7 @@ export interface AccountRepository {
   // ) => Promise<BaseGetResult<AccountPrivate['config']>>;
 
   addAccount?: (
-    filter: {
+    payload: {
       config: AccountConfig,
       accountId: string,
       name: string,
@@ -83,7 +88,6 @@ export interface AccountRepository {
       updatedAt: Date,
       createdAt: Date,
     },
-    options?: BaseGetOptions<Account>,
   ) => Promise<BaseGetResult<Account>>;
 
   removeAccount?: (

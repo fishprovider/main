@@ -1,5 +1,5 @@
 import {
-  Account, AccountMember, AccountViewType,
+  Account, AccountMember, AccountPlatform, AccountType, AccountViewType,
 } from '@fishprovider/core';
 import {
   AccountRepository, BaseGetManyResult, BaseGetResult,
@@ -65,3 +65,25 @@ export type UpdateAccountService = (params: BaseUpdateServiceParams<Account> & {
     account: AccountRepository
   },
 }) => Promise<BaseGetResult<Account>>;
+
+export type AddAccountService = (params: BaseUpdateServiceParams<Account> & {
+  payload: {
+    name: string,
+    accountType: AccountType,
+    accountPlatform: AccountPlatform,
+    tradeAccountId: string,
+    tradeClientId?: string,
+  },
+  repositories: {
+    account: AccountRepository
+  },
+}) => Promise<BaseGetResult<Account>>;
+
+export type RemoveAccountService = (params: BaseUpdateServiceParams<Account> & {
+  filter: {
+    accountId: string,
+  },
+  repositories: {
+    account: AccountRepository
+  },
+}) => Promise<void>;
