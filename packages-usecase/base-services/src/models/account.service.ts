@@ -71,8 +71,18 @@ export type AddAccountService = (params: BaseUpdateServiceParams<Account> & {
     name: string,
     accountType: AccountType,
     accountPlatform: AccountPlatform,
+    clientId?: string,
     tradeAccountId?: string,
-    tradeClientId?: string,
+    // ctrader
+    host?: string,
+    port?: number,
+    accessToken?: string,
+    refreshToken?: string,
+    // mt
+    user?: string,
+    pass?: string,
+    platform?: string,
+    server?: string,
   },
   repositories: {
     account: AccountRepository
