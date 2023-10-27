@@ -86,6 +86,29 @@ export interface AccountRepository {
     },
   ) => Promise<string>;
 
+  getTradeClient?: (
+    filter: {
+      accountType: AccountType,
+      accountPlatform: AccountPlatform,
+    },
+  ) => Promise<BaseGetResult<AccountConfig>>;
+
+  addTradeAccount?: (
+    payload: {
+      config: AccountConfig,
+      // ct
+      host?: string,
+      port?: number,
+      accessToken?: string,
+      refreshToken?: string,
+      // mt
+      user?: string,
+      pass?: string,
+      platform?: string,
+      server?: string,
+    },
+  ) => Promise<BaseGetResult<AccountConfig>>;
+
   // TODO: add/remove/fetch member
   // TODO: lock account/member
 }

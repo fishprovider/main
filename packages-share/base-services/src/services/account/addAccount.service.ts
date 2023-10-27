@@ -16,6 +16,8 @@ export const addAccountService: AddAccountService = async ({
   //
   const userSession = checkLogin(context?.userSession);
   const getAccountRepo = checkRepository(repositories.account.getAccount);
+  const getTradeClientRepo = checkRepository(repositories.account.getTradeClient);
+  const addTradeAccountRepo = checkRepository(repositories.account.addTradeAccount);
   const addAccountRepo = checkRepository(repositories.account.addAccount);
 
   //
@@ -71,23 +73,35 @@ export const addAccountService: AddAccountService = async ({
 
   switch (accountPlatform) {
     case AccountPlatform.ctrader: {
-      const client: any = undefined; // TODO
+      const { doc: client } = await getTradeClientRepo({ accountType, accountPlatform });
       if (!client) {
         throw new BaseError(AccountError.ACCOUNT_NOT_FOUND);
       }
-      config.clientSecret = client.clientSecret;
+      config.clientSecret = client.clientSecret ?? '';
       break;
     }
     case AccountPlatform.metatrader: {
-      const client: any = undefined; // TODO
+      const { doc: client } = await getTradeClientRepo({ accountType, accountPlatform });
       if (!client) {
         throw new BaseError(AccountError.ACCOUNT_NOT_FOUND);
       }
-      config.clientId = client.clientId;
-      config.clientSecret = client.clientSecret;
+      config.clientId = client.clientId ?? '';
+      config.clientSecret = client.clientSecret ?? '';
 
-      const { doc: tradeAccount }: any = undefined; // TODO
-      config.accountId = tradeAccount.accountId;
+      const { doc: tradeConfig } = await addTradeAccountRepo({
+        config,
+        // ct
+        ...(host && { host }),
+        ...(port && { port }),
+        ...(accessToken && { accessToken }),
+        ...(refreshToken && { refreshToken }),
+        // mt
+        ...(user && { user }),
+        ...(pass && { pass }),
+        ...(platform && { platform }),
+        ...(server && { server }),
+      });
+      config.accountId = tradeConfig?.accountId;
       break;
     }
     default:
