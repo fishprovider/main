@@ -1,7 +1,7 @@
-import { News } from '@fishprovider/core';
-import { BaseGetManyResult, NewsRepository } from '@fishprovider/repositories';
-
-import { BaseGetServiceParams, BaseUpdateServiceParams } from '..';
+import {
+  BaseGetManyResult, BaseGetServiceParams, BaseUpdateServiceParams, News,
+  NewsRepository,
+} from '..';
 
 export type GetNewsService = (params: BaseGetServiceParams<News> & {
   filter: {

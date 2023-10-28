@@ -1,7 +1,6 @@
 import {
-  Account, AccountConfig, AccountMember, AccountViewType,
+  Account, AccountConfig, AccountMember, AccountRepository, AccountViewType,
 } from '@fishprovider/core';
-import { AccountRepository } from '@fishprovider/repositories';
 import { Filter, ReturnDocument, UpdateFilter } from 'mongodb';
 
 import { getMongo } from '..';
@@ -133,11 +132,10 @@ const addAccount: AccountRepository['addAccount'] = async (payload) => {
 };
 
 const getTradeClient: AccountRepository['getTradeClient'] = async (filter) => {
-  const { accountType, accountPlatform, clientId } = filter;
+  const { accountPlatform, clientId } = filter;
 
   const { db } = await getMongo();
   const client = await db.collection<AccountConfig>('clientSecrets').findOne({
-    accountType,
     accountPlatform,
     ...(clientId && { clientId }),
   }, {

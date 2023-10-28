@@ -6,8 +6,8 @@
   },
   "include": ["**/*.ts"],
   "references": [
+    { "path": "../../packages-share/core" },
     { "path": "../../packages-share/core-utils" },
-    { "path": "../../packages-share/repositories" },
     { "path": "../../packages-frontend/local" },
     { "path": "../../packages-frontend/store" },
     { "path": "../../packages-frontend/fish-api" },

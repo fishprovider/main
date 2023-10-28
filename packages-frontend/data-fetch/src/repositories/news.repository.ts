@@ -1,7 +1,6 @@
-import { News } from '@fishprovider/core';
+import { News, NewsRepository } from '@fishprovider/core';
 import { FishApiNewsRepository } from '@fishprovider/fish-api';
 import { LocalNewsRepository } from '@fishprovider/local';
-import { NewsRepository } from '@fishprovider/repositories';
 import { StoreNewsRepository } from '@fishprovider/store';
 
 import { getDocs } from '..';

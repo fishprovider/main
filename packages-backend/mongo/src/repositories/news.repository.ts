@@ -1,5 +1,4 @@
-import { News } from '@fishprovider/core';
-import { NewsRepository } from '@fishprovider/repositories';
+import { News, NewsRepository } from '@fishprovider/core';
 import moment from 'moment';
 import { Filter } from 'mongodb';
 

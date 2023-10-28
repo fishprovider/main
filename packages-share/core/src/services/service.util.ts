@@ -1,5 +1,4 @@
-import { UserRoles } from '@fishprovider/core';
-import { BaseGetOptions, BaseUpdateOptions } from '@fishprovider/repositories';
+import { BaseGetOptions, BaseUpdateOptions, UserRoles } from '..';
 
 export interface UserSession {
   _id: string;

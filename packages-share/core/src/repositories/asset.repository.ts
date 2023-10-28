@@ -1,6 +1,6 @@
-import { AccountType, Asset } from '@fishprovider/core';
-
-import { BaseGetManyResult, BaseGetOptions } from '..';
+import {
+  AccountType, Asset, BaseGetManyResult, BaseGetOptions,
+} from '..';
 
 export interface AssetRepository {
   getAssets?: (

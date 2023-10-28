@@ -1,5 +1,4 @@
-import { User } from '@fishprovider/core';
-import { UserRepository } from '@fishprovider/repositories';
+import { User, UserRepository } from '@fishprovider/core';
 
 import { buildKeyUser, localGet } from '..';
 

@@ -1,5 +1,4 @@
-import { BaseError, UserError } from '@fishprovider/core';
-import { RepositoryError } from '@fishprovider/repositories';
+import { BaseError, RepositoryError, UserError } from '@fishprovider/core';
 
 import {
   getUserService,

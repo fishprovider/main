@@ -14,8 +14,8 @@
     "ci-type-check": "tsc-files --noEmit"
   },
   "dependencies": {
+    "@fishprovider/core": "*",
     "@fishprovider/core-utils": "*",
-    "@fishprovider/repositories": "*",
     "firebase-admin": "^11.11.0"
   }
 }

@@ -1,4 +1,4 @@
-import { AccountRepository } from '@fishprovider/repositories';
+import { AccountRepository } from '@fishprovider/core';
 
 import { Connection, newAccount } from '..';
 

@@ -1,5 +1,4 @@
-import { Account } from '@fishprovider/core';
-import { AccountRepository } from '@fishprovider/repositories';
+import { Account, AccountRepository } from '@fishprovider/core';
 
 import {
   buildKeyAccount, buildKeyAccounts, localGet, localSet,

@@ -1,5 +1,4 @@
-import { BaseError } from '@fishprovider/core';
-import { Projection, RepositoryError } from '@fishprovider/repositories';
+import { BaseError, Projection, RepositoryError } from '@fishprovider/core';
 
 export const validateProjection = <T extends Record<string, any>>(
   projection?: Projection<T>,

@@ -52,7 +52,6 @@ export const addAccountService: AddAccountService = async ({
   }
 
   const { doc: client } = await getTradeClientRepo({
-    accountType,
     accountPlatform,
     clientId: baseConfig.clientId,
   });

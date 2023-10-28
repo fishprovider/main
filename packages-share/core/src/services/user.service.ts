@@ -1,9 +1,7 @@
-import { User, UserRoles } from '@fishprovider/core';
 import {
-  AccountRepository, BaseGetManyResult, BaseGetResult, UserRepository,
-} from '@fishprovider/repositories';
-
-import { BaseGetServiceParams, BaseUpdateServiceParams } from '..';
+  AccountRepository, BaseGetManyResult, BaseGetResult, BaseGetServiceParams,
+  BaseUpdateServiceParams, User, UserRepository, UserRoles,
+} from '..';
 
 export type GetUserService = (params: BaseGetServiceParams<User> & {
   filter: {

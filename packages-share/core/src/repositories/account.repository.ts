@@ -1,9 +1,6 @@
 import {
   Account, AccountConfig, AccountFull, AccountMember, AccountPlatform,
   AccountSourceType, AccountTradeType, AccountType, AccountViewType,
-} from '@fishprovider/core';
-
-import {
   BaseGetManyResult, BaseGetOptions, BaseGetResult, BaseUpdateOptions, BaseUpdateResult,
 } from '..';
 
@@ -88,7 +85,6 @@ export interface AccountRepository {
 
   getTradeClient?: (
     filter: {
-      accountType: AccountType,
       accountPlatform: AccountPlatform,
       clientId?: string,
     },

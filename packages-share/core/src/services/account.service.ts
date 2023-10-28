@@ -1,11 +1,8 @@
 import {
-  Account, AccountConfig, AccountMember, AccountPlatform, AccountType, AccountViewType,
-} from '@fishprovider/core';
-import {
-  AccountRepository, BaseGetManyResult, BaseGetResult,
-} from '@fishprovider/repositories';
-
-import { BaseGetServiceParams, BaseUpdateServiceParams } from '..';
+  Account, AccountConfig, AccountMember, AccountPlatform, AccountRepository,
+  AccountType, AccountViewType, BaseGetManyResult, BaseGetResult,
+  BaseGetServiceParams, BaseUpdateServiceParams,
+} from '..';
 
 export type GetAccountService = (params: BaseGetServiceParams<Account> & {
   filter: {

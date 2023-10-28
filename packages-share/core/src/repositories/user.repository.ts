@@ -1,7 +1,6 @@
-import { User, UserRoles } from '@fishprovider/core';
-
 import {
   BaseGetManyResult, BaseGetOptions, BaseGetResult, BaseUpdateOptions, BaseUpdateResult,
+  User, UserRoles,
 } from '..';
 
 export interface UserRepository {

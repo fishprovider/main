@@ -1,7 +1,6 @@
-import { News } from '@fishprovider/core';
+import { News, NewsRepository } from '@fishprovider/core';
 import { MongoNewsRepository } from '@fishprovider/mongo';
 import { RedisNewsRepository } from '@fishprovider/redis';
-import { NewsRepository } from '@fishprovider/repositories';
 
 import { getDocs } from '../helpers';
 
