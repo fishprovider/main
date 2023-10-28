@@ -103,10 +103,10 @@ export const removeAccount = (
 export const newAccount = (
   connection: TMetaApiConnection,
   options: {
-    name: string,
-    platform?: string,
+    name?: string,
     login?: string,
     password?: string,
+    platform?: string,
     server?: string,
     tags?: string[],
   },

@@ -96,7 +96,6 @@ export interface AccountRepository {
 
   addTradeAccount?: (
     payload: {
-      accountType: AccountType,
       accountPlatform: AccountPlatform,
       config: AccountConfig,
     },

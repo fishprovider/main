@@ -71,11 +71,7 @@ export const addAccountService: AddAccountService = async ({
     name,
   };
 
-  const { doc: tradeConfig } = await addTradeAccountRepo({
-    accountType,
-    accountPlatform,
-    config,
-  });
+  const { doc: tradeConfig } = await addTradeAccountRepo({ accountPlatform, config });
   if (!tradeConfig) {
     throw new BaseError(AccountError.ACCOUNT_NOT_FOUND, 'Failed to add trade account');
   }
