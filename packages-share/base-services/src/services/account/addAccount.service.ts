@@ -102,6 +102,10 @@ export const addAccountService: AddAccountService = async ({
     createdAt: new Date(),
   });
 
+  // TODO: start head
+  // TODO: add user role
+  // TODO: increase clientSecrets activeAccounts
+
   return {
     doc: sanitizeOutputAccount(account),
   };
