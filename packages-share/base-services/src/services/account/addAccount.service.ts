@@ -1,5 +1,5 @@
 import {
-  AccountConfig, AccountError, AccountPlatform, AccountRoles, AccountSourceType,
+  AccountConfig, AccountError, AccountRoles, AccountSourceType,
   AccountTradeType, AccountViewType, BaseError,
 } from '@fishprovider/core';
 import _ from 'lodash';
@@ -24,13 +24,10 @@ export const addAccountService: AddAccountService = async ({
   // main
   //
   const {
-    name, accountType, accountPlatform,
-    clientId, tradeAccountId,
-    host, port, accessToken, refreshToken,
-    user, pass, platform, server,
+    name, accountType, accountPlatform, baseConfig,
   } = payload;
 
-  if (!name || !accountType || !accountPlatform) {
+  if (!name || !accountType || !accountPlatform || !baseConfig) {
     throw new BaseError(AccountError.ACCOUNT_BAD_REQUEST);
   }
 
@@ -47,60 +44,42 @@ export const addAccountService: AddAccountService = async ({
     orFilter: {
       accountId,
       name,
-      tradeAccountId,
+      tradeAccountId: baseConfig.accountId,
     },
   });
   if (accountExisted) {
     throw new BaseError(AccountError.ACCOUNT_BAD_REQUEST, 'Account name already exists');
   }
 
-  const config: AccountConfig = {
-    clientId: clientId ?? '',
-    clientSecret: '',
-    accountId: tradeAccountId ?? '',
-    name,
-    // ct
-    ...(host && { host }),
-    ...(port && { port }),
-    ...(accessToken && { accessToken }),
-    ...(refreshToken && { refreshToken }),
-    // mt
-    ...(user && { user }),
-    ...(pass && { pass }),
-    ...(platform && { platform }),
-    ...(server && { server }),
-  };
-
-  const { doc: client } = await getTradeClientRepo({ accountType, accountPlatform });
+  const { doc: client } = await getTradeClientRepo({
+    accountType,
+    accountPlatform,
+    clientId: baseConfig.clientId,
+  });
   if (!client) {
     throw new BaseError(AccountError.ACCOUNT_NOT_FOUND, 'Failed to get trade client');
   }
-  config.clientId = client.clientId ?? '';
-  config.clientSecret = client.clientSecret ?? '';
-
-  switch (accountPlatform) {
-    case AccountPlatform.metatrader: {
-      const { doc: tradeConfig } = await addTradeAccountRepo({
-        config,
-        // ct
-        ...(host && { host }),
-        ...(port && { port }),
-        ...(accessToken && { accessToken }),
-        ...(refreshToken && { refreshToken }),
-        // mt
-        ...(user && { user }),
-        ...(pass && { pass }),
-        ...(platform && { platform }),
-        ...(server && { server }),
-      });
-      if (!tradeConfig) {
-        throw new BaseError(AccountError.ACCOUNT_NOT_FOUND, 'Failed to add trade account');
-      }
-      config.accountId = tradeConfig.accountId;
-      break;
-    }
-    default:
+  const { clientId, clientSecret } = client;
+  if (!clientId || !clientSecret) {
+    throw new BaseError(AccountError.ACCOUNT_NOT_FOUND, 'Missing clientId or clientSecret');
   }
+
+  const config: AccountConfig = {
+    ...baseConfig,
+    clientId,
+    clientSecret,
+    name,
+  };
+
+  const { doc: tradeConfig } = await addTradeAccountRepo({
+    accountType,
+    accountPlatform,
+    config,
+  });
+  if (!tradeConfig) {
+    throw new BaseError(AccountError.ACCOUNT_NOT_FOUND, 'Failed to add trade account');
+  }
+  config.accountId = tradeConfig.accountId;
 
   const { doc: account } = await addAccountRepo({
     accountId,

@@ -1,5 +1,5 @@
 import {
-  Account, AccountMember, AccountPlatform, AccountType, AccountViewType,
+  Account, AccountConfig, AccountMember, AccountPlatform, AccountType, AccountViewType,
 } from '@fishprovider/core';
 import {
   AccountRepository, BaseGetManyResult, BaseGetResult,
@@ -71,18 +71,7 @@ export type AddAccountService = (params: BaseUpdateServiceParams<Account> & {
     name: string,
     accountType: AccountType,
     accountPlatform: AccountPlatform,
-    clientId?: string,
-    tradeAccountId?: string,
-    // ct
-    host?: string,
-    port?: number,
-    accessToken?: string,
-    refreshToken?: string,
-    // mt
-    user?: string,
-    pass?: string,
-    platform?: string,
-    server?: string,
+    baseConfig: Partial<AccountConfig>,
   },
   repositories: {
     account: AccountRepository,

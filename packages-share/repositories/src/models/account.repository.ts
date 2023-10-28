@@ -90,22 +90,15 @@ export interface AccountRepository {
     filter: {
       accountType: AccountType,
       accountPlatform: AccountPlatform,
+      clientId?: string,
     },
   ) => Promise<BaseGetResult<AccountConfig>>;
 
   addTradeAccount?: (
     payload: {
+      accountType: AccountType,
+      accountPlatform: AccountPlatform,
       config: AccountConfig,
-      // ct
-      host?: string,
-      port?: number,
-      accessToken?: string,
-      refreshToken?: string,
-      // mt
-      user?: string,
-      pass?: string,
-      platform?: string,
-      server?: string,
     },
   ) => Promise<BaseGetResult<AccountConfig>>;
 
