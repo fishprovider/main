@@ -133,13 +133,13 @@ const addAccount: AccountRepository['addAccount'] = async (payload) => {
 };
 
 const getTradeClient: AccountRepository['getTradeClient'] = async (filter) => {
-  const { accountType, accountPlatform, tradeClientId } = filter;
+  const { accountType, accountPlatform, clientId } = filter;
 
   const { db } = await getMongo();
   const client = await db.collection<AccountConfig>('clientSecrets').findOne({
     accountType,
     accountPlatform,
-    ...(tradeClientId && { clientId: tradeClientId }),
+    ...(clientId && { clientId }),
   }, {
     projection: {
       clientId: 1,
