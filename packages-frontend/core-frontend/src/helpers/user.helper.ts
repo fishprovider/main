@@ -1,15 +1,4 @@
-import {
-  BaseError, User, UserError, UserRoles,
-} from '@fishprovider/core';
-
-import {
-  UserSession,
-} from '..';
-
-export const sanitizeOutputUser = (user?: Partial<User>) => ({
-  ...user,
-  pushNotif: undefined,
-});
+import { UserRoles } from '@fishprovider/core';
 
 export const getRoleProvider = (
   roles?: UserRoles,
@@ -42,15 +31,4 @@ export const getRoleProvider = (
     isProtectorProvider,
     isViewerProvider,
   };
-};
-
-//
-// check functions
-//
-
-export const checkLogin = (userSession?: UserSession) => {
-  if (!userSession?._id) {
-    throw new BaseError(UserError.USER_ACCESS_DENIED);
-  }
-  return userSession;
 };
