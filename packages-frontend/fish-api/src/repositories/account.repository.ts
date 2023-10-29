@@ -1,4 +1,7 @@
-import { Account, AccountRepository } from '@fishprovider/core';
+import { Account } from '@fishprovider/core';
+import {
+  AccountRepository,
+} from '@fishprovider/core-frontend';
 
 import { fishApiGet } from '..';
 

@@ -1,4 +1,5 @@
-import { Account, AccountRepository } from '@fishprovider/core';
+import { Account } from '@fishprovider/core';
+import { AccountRepository } from '@fishprovider/core-backend';
 import { MongoAccountRepository } from '@fishprovider/mongo';
 import { RedisAccountRepository } from '@fishprovider/redis';
 import _ from 'lodash';

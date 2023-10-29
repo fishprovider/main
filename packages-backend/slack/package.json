@@ -14,7 +14,7 @@
     "ci-type-check": "tsc-files --noEmit"
   },
   "dependencies": {
-    "@fishprovider/core": "*",
+    "@fishprovider/core-backend": "*",
     "axios": "^1.5.1"
   }
 }

@@ -14,7 +14,7 @@
     "ci-type-check": "tsc-files --noEmit"
   },
   "dependencies": {
-    "@fishprovider/core": "*",
+    "@fishprovider/core-backend": "*",
     "app-root-path": "^3.1.0",
     "crypto-random-string": "^5.0.0",
     "protobufjs": "^5.0.3"

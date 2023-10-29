@@ -1,4 +1,4 @@
-import { AccountRepository } from '@fishprovider/core';
+import { AccountRepository } from '@fishprovider/core-backend';
 
 import { buildKeyAccounts, getRedis } from '..';
 

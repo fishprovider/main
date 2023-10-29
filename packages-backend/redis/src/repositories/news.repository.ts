@@ -1,4 +1,4 @@
-import { NewsRepository } from '@fishprovider/core';
+import { NewsRepository } from '@fishprovider/core-backend';
 
 const getNews: NewsRepository['getNews'] = async () => ({});
 

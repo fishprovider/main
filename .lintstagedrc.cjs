@@ -1,5 +1,5 @@
 const { globSync } = require('glob');
-const rootPackageJson = require('../package.json');
+const rootPackageJson = require('./package.json');
 
 const workSpaceDirs = rootPackageJson.workspaces.flatMap((item) => globSync(item));
 // console.log(workSpaceDirs);

@@ -1,4 +1,5 @@
-import { AccountViewType, checkRepository } from '@fishprovider/core';
+import { AccountViewType } from '@fishprovider/core';
+import { checkRepository } from '@fishprovider/core-frontend';
 import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
 import { DataFetchAccountRepository } from '@fishprovider/data-fetch';
 import { Account } from '@fishprovider/utils/types/Account.model';

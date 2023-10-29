@@ -1,0 +1,7 @@
+{
+  "extends": "./tsconfig.frontend.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "moduleResolution": "Node",
+  }
+}

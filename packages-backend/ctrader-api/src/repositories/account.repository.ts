@@ -1,6 +1,9 @@
 import {
-  AccountConfig, AccountRepository, AccountTradeType, BaseError, RepositoryError,
+  AccountConfig, AccountTradeType, BaseError,
 } from '@fishprovider/core';
+import {
+  AccountRepository, RepositoryError,
+} from '@fishprovider/core-backend';
 
 import {
   connectAndRun, getAccountInformation, getAccountList,

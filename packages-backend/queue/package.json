@@ -14,7 +14,7 @@
     "ci-type-check": "tsc-files --noEmit"
   },
   "dependencies": {
-    "@fishprovider/core": "*",
+    "@fishprovider/core-backend": "*",
     "p-queue": "^7.4.1"
   }
 }

@@ -1,4 +1,7 @@
-import { News, NewsRepository } from '@fishprovider/core';
+import { News } from '@fishprovider/core';
+import {
+  NewsRepository,
+} from '@fishprovider/core-frontend';
 import { FishApiNewsRepository } from '@fishprovider/fish-api';
 import { LocalNewsRepository } from '@fishprovider/local';
 import { StoreNewsRepository } from '@fishprovider/store';

@@ -8,6 +8,8 @@
     "**/build",
     "**/tmp",
     ".next",
+    ".expo",
+
     "**/dev",
     "**/tests",
     "**/*.test.ts",

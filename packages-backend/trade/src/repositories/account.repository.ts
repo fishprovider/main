@@ -1,4 +1,5 @@
-import { AccountPlatform, AccountRepository } from '@fishprovider/core';
+import { AccountPlatform } from '@fishprovider/core';
+import { AccountRepository } from '@fishprovider/core-backend';
 import { CTraderAccountRepository } from '@fishprovider/ctrader-api';
 import { MetaApiAccountRepository } from '@fishprovider/meta-api';
 

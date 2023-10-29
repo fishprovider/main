@@ -8,6 +8,8 @@ fi
 
 cd ..
 
+npm run build -w packages-backend/core-backend
+
 function notif() {
   npm run build -w packages-backend/slack &
   npm run build -w packages-backend/discord &

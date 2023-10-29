@@ -1,6 +1,6 @@
 import { Account } from '@fishprovider/core';
+import { getAccountService, getTradeAccountService } from '@fishprovider/core-backend';
 import { DataAccessAccountRepository } from '@fishprovider/data-access';
-import { getAccountService, getTradeAccountService } from '@fishprovider/services';
 import { TradeAccountRepository } from '@fishprovider/trade';
 import { z } from 'zod';
 

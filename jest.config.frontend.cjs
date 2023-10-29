@@ -1,17 +1,14 @@
-const baseConfig = require('./jest.config.base.cjs');
-const defaultConfig = require('./jest.config.cjs');
-
 /** @type {import('jest').Config} */
 module.exports = {
-  ...defaultConfig,
+  ...require('./jest.config.cjs'),
   testEnvironment: 'jsdom',
   transform: {
-    ...defaultConfig.transform,
-    [baseConfig.tsJestFilePattern]: [
+    '^.+\\.(ts|tsx|js|jsx)$': [
       'ts-jest',
       {
-        ...baseConfig.tsJestOptions,
-        tsconfig: '<rootDir>/../../tsconfig.frontend.test.json',
+        useESM: true,
+        isolatedModules: true,
+        tsconfig: '<rootDir>/../../tsconfig.test.frontend.json',
       },
     ],
   },

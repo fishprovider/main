@@ -1,6 +1,6 @@
 import { Account, AccountViewType } from '@fishprovider/core';
+import { getAccountsService } from '@fishprovider/core-backend';
 import { DataAccessAccountRepository } from '@fishprovider/data-access';
-import { getAccountsService } from '@fishprovider/services';
 import { z } from 'zod';
 
 import { ApiHandler } from '~types/ApiHandler.model';

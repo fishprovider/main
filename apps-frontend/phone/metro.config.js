@@ -14,6 +14,7 @@ config.watchFolders = [
 
   path.resolve(workspaceRoot, 'packages-share', 'core'),
 
+  path.resolve(workspaceRoot, 'packages-frontend', 'core-frontend'),
   path.resolve(workspaceRoot, 'packages-frontend', 'data-fetch'),
   path.resolve(workspaceRoot, 'packages-frontend', 'fish-api'),
   path.resolve(workspaceRoot, 'packages-frontend', 'local'),

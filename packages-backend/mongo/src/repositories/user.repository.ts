@@ -1,4 +1,7 @@
-import { User, UserRepository } from '@fishprovider/core';
+import { User } from '@fishprovider/core';
+import {
+  UserRepository,
+} from '@fishprovider/core-backend';
 import { Filter, ReturnDocument, UpdateFilter } from 'mongodb';
 
 import { getMongo } from '..';

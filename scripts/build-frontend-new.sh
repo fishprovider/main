@@ -8,6 +8,7 @@ fi
 
 cd ..
 
+npm run build -w packages-frontend/core-frontend
 
 npm run build -w packages-frontend/fish-api &
 npm run build -w packages-frontend/local &

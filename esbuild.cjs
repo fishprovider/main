@@ -14,7 +14,8 @@ const packageDependencies = {
   ...require('./packages/core/package.json').dependencies,
   // new
   ...require('./packages-share/core/package.json').dependencies,
-  ...require('./packages-share/services/package.json').dependencies,
+
+  ...require('./packages-backend/core-backend/package.json').dependencies,
 
   ...require('./packages-backend/queue/package.json').dependencies,
 

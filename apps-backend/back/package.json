@@ -21,9 +21,9 @@
   },
   "dependencies": {
     "@fishprovider/coin": "*",
+    "@fishprovider/core-backend": "*",
     "@fishprovider/data-access": "*",
     "@fishprovider/old-core": "*",
-    "@fishprovider/services": "*",
     "@fishprovider/swap": "*",
     "@fishprovider/trade": "*",
     "glob": "^10.3.10",

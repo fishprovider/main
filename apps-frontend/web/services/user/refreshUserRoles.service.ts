@@ -1,4 +1,4 @@
-import { checkRepository } from '@fishprovider/core';
+import { checkRepository } from '@fishprovider/core-frontend';
 import storeUser from '@fishprovider/cross/dist/stores/user';
 import { DataFetchUserRepository } from '@fishprovider/data-fetch';
 

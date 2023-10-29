@@ -19,6 +19,7 @@
   "references": [
     { "path": "../../packages/utils" },
     { "path": "../../packages-share/core" },
+    { "path": "../../packages-frontend/core-frontend" },
     { "path": "../../packages-frontend/data-fetch" },
   ]
 }

@@ -1,4 +1,4 @@
-import { NewsRepository } from '@fishprovider/core';
+import { NewsRepository } from '@fishprovider/core-frontend';
 import _ from 'lodash';
 import moment from 'moment';
 

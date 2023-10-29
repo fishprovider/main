@@ -1,6 +1,9 @@
 import {
-  Account, AccountConfig, AccountMember, AccountRepository, AccountViewType,
+  Account, AccountConfig, AccountMember, AccountViewType,
 } from '@fishprovider/core';
+import {
+  AccountRepository,
+} from '@fishprovider/core-backend';
 import { Filter, ReturnDocument, UpdateFilter } from 'mongodb';
 
 import { getMongo } from '..';

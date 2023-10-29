@@ -1,4 +1,4 @@
-import { checkRepository } from '@fishprovider/core';
+import { checkRepository } from '@fishprovider/core-frontend';
 import { DataFetchNewsRepository } from '@fishprovider/data-fetch';
 
 export const getNewsService = async (filter: {

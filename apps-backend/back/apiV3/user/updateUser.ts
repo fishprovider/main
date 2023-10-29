@@ -1,6 +1,6 @@
 import { User } from '@fishprovider/core';
+import { updateUserService } from '@fishprovider/core-backend';
 import { DataAccessUserRepository } from '@fishprovider/data-access';
-import { updateUserService } from '@fishprovider/services';
 import { z } from 'zod';
 
 import { ApiHandler } from '~types/ApiHandler.model';

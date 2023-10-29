@@ -1,4 +1,4 @@
-import { UserRepository } from '@fishprovider/core';
+import { UserRepository } from '@fishprovider/core-frontend';
 
 import { storeUser } from '..';
 
