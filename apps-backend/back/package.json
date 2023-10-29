@@ -20,10 +20,10 @@
     "ci-type-check": "tsc-files --noEmit types/global.d.ts"
   },
   "dependencies": {
-    "@fishprovider/base-services": "*",
     "@fishprovider/coin": "*",
     "@fishprovider/data-access": "*",
     "@fishprovider/old-core": "*",
+    "@fishprovider/services": "*",
     "@fishprovider/swap": "*",
     "@fishprovider/trade": "*",
     "glob": "^10.3.10",
