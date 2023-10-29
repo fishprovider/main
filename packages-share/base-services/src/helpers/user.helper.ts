@@ -1,8 +1,6 @@
 import {
-  BaseError, User, UserError, UserRoles,
+  BaseError, User, UserError, UserRoles, UserSession,
 } from '@fishprovider/core';
-
-import { UserSession } from '..';
 
 export const sanitizeOutputUser = (user?: Partial<User>) => ({
   ...user,

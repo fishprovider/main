@@ -1,7 +1,7 @@
-import { AccountError, BaseError } from '@fishprovider/core';
+import { AccountError, BaseError, GetTradeAccountService } from '@fishprovider/core';
 
 import {
-  checkAccountAccess, checkLogin, checkRepository, GetTradeAccountService,
+  checkAccountAccess, checkLogin, checkRepository,
   sanitizeOutputAccount,
 } from '../..';
 

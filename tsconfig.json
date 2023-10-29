@@ -29,6 +29,7 @@
     "**/*.cjs",
     "**/.*.js",
     "**/.*.cjs",
+    "**/*.json",
   ],
   "exclude": [
     "**/node_modules",

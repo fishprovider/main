@@ -1,11 +1,12 @@
 import {
   AccountConfig, AccountError, AccountRoles, AccountSourceType,
-  AccountTradeType, AccountViewType, BaseError,
+  AccountTradeType, AccountViewType, AddAccountService,
+  BaseError,
 } from '@fishprovider/core';
 import _ from 'lodash';
 
 import {
-  AddAccountService, checkLogin, checkRepository, sanitizeOutputAccount,
+  checkLogin, checkRepository, sanitizeOutputAccount,
 } from '../..';
 
 export const addAccountService: AddAccountService = async ({

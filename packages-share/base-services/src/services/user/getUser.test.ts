@@ -1,8 +1,6 @@
 import { BaseError, RepositoryError, UserError } from '@fishprovider/core';
 
-import {
-  getUserService,
-} from '../..';
+import { getUserService } from '../..';
 import { userServiceBaseParams } from '../../tests';
 
 test('getUser throws USER_ACCESS_DENIED', async () => {

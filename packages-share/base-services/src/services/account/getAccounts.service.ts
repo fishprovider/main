@@ -1,5 +1,7 @@
+import { GetAccountsService } from '@fishprovider/core';
+
 import {
-  checkAccountAccess, checkProjection, checkRepository, GetAccountsService,
+  checkAccountAccess, checkProjection, checkRepository,
   sanitizeOutputAccount,
 } from '../..';
 

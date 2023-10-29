@@ -1,5 +1,7 @@
+import { RemoveAccountService } from '@fishprovider/core';
+
 import {
-  checkAccountAccess, checkLogin, checkRepository, RemoveAccountService,
+  checkAccountAccess, checkLogin, checkRepository,
 } from '../..';
 
 export const removeAccountService: RemoveAccountService = async ({

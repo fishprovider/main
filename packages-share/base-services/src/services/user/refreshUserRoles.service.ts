@@ -1,9 +1,8 @@
-import { AccountRoles } from '@fishprovider/core';
+import { AccountRoles, RefreshUserRolesService } from '@fishprovider/core';
 import _ from 'lodash';
 
 import {
-  checkLogin, checkProjection, checkRepository, RefreshUserRolesService,
-  sanitizeOutputUser,
+  checkLogin, checkProjection, checkRepository, sanitizeOutputUser,
 } from '../..';
 
 export const refreshUserRolesService: RefreshUserRolesService = async ({
