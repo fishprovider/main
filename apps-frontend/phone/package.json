@@ -27,7 +27,7 @@
     "ci-type-check": "tsc-files --noEmit types/global.d.ts"
   },
   "dependencies": {
-    "@fishprovider/base-services": "*",
+    "@fishprovider/core": "*",
     "@fishprovider/cross": "*",
     "@fishprovider/data-fetch": "*",
     "@fishprovider/utils": "*",
