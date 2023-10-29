@@ -8,7 +8,7 @@
     "lint": "eslint --cache --fix .",
     "type-check": "tsc --noEmit",
     "test": "echo metatrader-api",
-    "clean": "rm -rf dist *.tsbuildinfo",
+    "clean": "rm -rf dist .eslintcache *.tsbuildinfo",
     "build": "tsc -p tsconfig.build.json",
     "ci-lint": "eslint --cache --fix",
     "ci-type-check": "tsc-files --noEmit"

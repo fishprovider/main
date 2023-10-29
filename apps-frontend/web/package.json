@@ -5,7 +5,7 @@
     "lint": "eslint --cache --fix .",
     "type-check": "tsc --noEmit",
     "test": "NODE_ENV=test DOPPLER_PROJECT=${DOPPLER_PROJECT:-web} doppler run --print-config -- jest",
-    "clean": "rm -rf dist *.tsbuildinfo .next",
+    "clean": "rm -rf dist .eslintcache *.tsbuildinfo .next",
     "prebuild": "./build-deps.sh",
     "build": "NODE_ENV=production DOPPLER_PROJECT=${DOPPLER_PROJECT:-web} DOPPLER_CONFIG=${DOPPLER_CONFIG:-prd} doppler run --print-config -- next build",
     "postbuild": "next-sitemap",
