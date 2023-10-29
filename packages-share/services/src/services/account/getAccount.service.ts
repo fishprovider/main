@@ -1,9 +1,6 @@
-import { GetAccountService } from '@fishprovider/core';
+import { checkProjection, checkRepository, GetAccountService } from '@fishprovider/core';
 
-import {
-  checkAccountAccess, checkProjection, checkRepository,
-  sanitizeOutputAccount,
-} from '../..';
+import { checkAccountAccess, sanitizeOutputAccount } from '../..';
 
 export const getAccountService: GetAccountService = async ({
   filter, options, repositories, context,

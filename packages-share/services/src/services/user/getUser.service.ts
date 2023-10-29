@@ -1,8 +1,8 @@
-import { BaseError, GetUserService, UserError } from '@fishprovider/core';
-
 import {
-  checkLogin, checkProjection, checkRepository, sanitizeOutputUser,
-} from '../..';
+  BaseError, checkProjection, checkRepository, GetUserService, UserError,
+} from '@fishprovider/core';
+
+import { checkLogin, sanitizeOutputUser } from '../..';
 
 export const getUserService: GetUserService = async ({
   filter, options, repositories, context,

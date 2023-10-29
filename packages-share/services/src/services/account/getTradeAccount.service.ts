@@ -1,8 +1,9 @@
-import { AccountError, BaseError, GetTradeAccountService } from '@fishprovider/core';
+import {
+  AccountError, BaseError, checkRepository, GetTradeAccountService,
+} from '@fishprovider/core';
 
 import {
-  checkAccountAccess, checkLogin, checkRepository,
-  sanitizeOutputAccount,
+  checkAccountAccess, checkLogin, sanitizeOutputAccount,
 } from '../..';
 
 export const getTradeAccountService: GetTradeAccountService = async ({
