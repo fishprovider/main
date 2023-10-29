@@ -1,4 +1,4 @@
-import { log } from '@fishprovider/core-utils';
+import { log } from '@fishprovider/core';
 
 export type PromiseFn<T> = () => Promise<T>;
 

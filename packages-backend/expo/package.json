@@ -14,7 +14,7 @@
     "ci-type-check": "tsc-files --noEmit"
   },
   "dependencies": {
-    "@fishprovider/core-utils": "*",
+    "@fishprovider/core": "*",
     "expo-server-sdk": "^3.7.0"
   }
 }

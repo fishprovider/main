@@ -1,4 +1,4 @@
-import { PromiseCreator } from '@fishprovider/core-utils';
+import { PromiseCreator } from '@fishprovider/core';
 import { Message, MetaMessage } from 'protobufjs';
 
 import { CTraderCommonErrorCode, CTraderErrorCode, CTraderPayloadType } from '.';

@@ -1,4 +1,4 @@
-import { log } from '@fishprovider/core-utils';
+import { log } from '@fishprovider/core';
 import {
   startFirebase, stopFirebase,
 } from '@fishprovider/firebase';

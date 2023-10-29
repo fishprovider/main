@@ -15,7 +15,6 @@
   },
   "dependencies": {
     "@fishprovider/core": "*",
-    "@fishprovider/core-utils": "*",
     "object-hash": "^3.0.0",
     "redis": "^4.6.10"
   },

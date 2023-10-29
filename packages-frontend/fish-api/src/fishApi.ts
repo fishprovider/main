@@ -1,4 +1,4 @@
-import { log, promiseCreator } from '@fishprovider/core-utils';
+import { log, promiseCreator } from '@fishprovider/core';
 import axios, { Axios, AxiosRequestConfig } from 'axios';
 
 export type ApiConfig = AxiosRequestConfig;

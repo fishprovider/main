@@ -1,4 +1,4 @@
-import { log, promiseCreator } from '@fishprovider/core-utils';
+import { log, promiseCreator } from '@fishprovider/core';
 import { createClient } from 'redis';
 
 const clientPromise = promiseCreator<ReturnType<typeof createClient>>();

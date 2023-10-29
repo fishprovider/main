@@ -15,7 +15,6 @@
   },
   "dependencies": {
     "@fishprovider/core": "*",
-    "@fishprovider/core-utils": "*",
     "mongodb": "^6.1.0"
   }
 }

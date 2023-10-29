@@ -1,4 +1,4 @@
-import { log } from '@fishprovider/core-utils';
+import { log } from '@fishprovider/core';
 import axios from 'axios';
 import {
   Client, Events, ForumChannel, GatewayIntentBits,

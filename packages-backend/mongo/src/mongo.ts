@@ -1,4 +1,4 @@
-import { log, promiseCreator } from '@fishprovider/core-utils';
+import { log, promiseCreator } from '@fishprovider/core';
 import { MongoClient } from 'mongodb';
 
 const clientPromise = promiseCreator<MongoClient>();

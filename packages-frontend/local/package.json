@@ -15,7 +15,6 @@
   },
   "dependencies": {
     "@fishprovider/core": "*",
-    "@fishprovider/core-utils": "*",
     "localforage": "^1.10.0",
     "object-hash": "^3.0.0"
   },

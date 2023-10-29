@@ -15,7 +15,6 @@
   },
   "dependencies": {
     "@fishprovider/core": "*",
-    "@fishprovider/core-utils": "*",
     "firebase-admin": "^11.11.0"
   }
 }

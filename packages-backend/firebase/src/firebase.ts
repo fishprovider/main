@@ -1,4 +1,4 @@
-import { log, promiseCreator } from '@fishprovider/core-utils';
+import { log, promiseCreator } from '@fishprovider/core';
 import admin from 'firebase-admin';
 
 const projectId = process.env.FIREBASE_PROJECT_ID;

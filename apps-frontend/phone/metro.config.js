@@ -13,7 +13,6 @@ config.watchFolders = [
   path.resolve(workspaceRoot, 'packages', 'cross'),
 
   path.resolve(workspaceRoot, 'packages-share', 'core'),
-  path.resolve(workspaceRoot, 'packages-share', 'core-utils'),
   path.resolve(workspaceRoot, 'packages-share', 'base-services'),
 
   path.resolve(workspaceRoot, 'packages-frontend', 'data-fetch'),

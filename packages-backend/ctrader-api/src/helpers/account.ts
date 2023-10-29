@@ -1,4 +1,4 @@
-import { delay } from '@fishprovider/core-utils';
+import { delay } from '@fishprovider/core';
 
 import {
   authorizeAccount, Connection, CTraderCallbackPayload, CTraderConfig, renewTokens,

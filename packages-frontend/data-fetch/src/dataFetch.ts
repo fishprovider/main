@@ -1,4 +1,4 @@
-import { log } from '@fishprovider/core-utils';
+import { log } from '@fishprovider/core';
 import { initFishApi } from '@fishprovider/fish-api';
 
 export const initDataFetch = (params: {

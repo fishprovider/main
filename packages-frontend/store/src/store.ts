@@ -1,4 +1,4 @@
-import { log } from '@fishprovider/core-utils';
+import { log } from '@fishprovider/core';
 import isEqual from 'lodash/isEqual';
 import keyBy from 'lodash/keyBy';
 import pickBy from 'lodash/pickBy';

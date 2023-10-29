@@ -15,7 +15,6 @@
   },
   "dependencies": {
     "@fishprovider/core": "*",
-    "@fishprovider/core-utils": "*",
     "zustand": "^4.4.3"
   },
   "devDependencies": {
