@@ -8,6 +8,5 @@ fi
 
 bash ./build-backend-share.sh
 
-bash ./build-backend-trade.sh &
-bash ./build-backend-pay.sh &
-wait
+bash ./build-backend-trade.sh
+bash ./build-backend-pay.sh

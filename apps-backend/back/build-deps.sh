@@ -2,10 +2,6 @@
 
 cd ../../scripts
 
-function old() {
-  bash ./build-backend-full.sh build-share
-}
+bash ./build-backend-full.sh build-share
 
-old &
-bash ./build-backend-new.sh build-share &
-wait
+bash ./build-backend-new.sh build-share

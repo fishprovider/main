@@ -1,7 +1,5 @@
 import { User } from '@fishprovider/core';
-import {
-  UserRepository,
-} from '@fishprovider/core-frontend';
+import { UserRepository } from '@fishprovider/core-frontend';
 
 import { fishApiGet, fishApiPost } from '..';
 

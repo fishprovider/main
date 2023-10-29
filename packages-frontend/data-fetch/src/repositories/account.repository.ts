@@ -1,7 +1,5 @@
 import { Account } from '@fishprovider/core';
-import {
-  AccountRepository,
-} from '@fishprovider/core-frontend';
+import { AccountRepository } from '@fishprovider/core-frontend';
 import { FishApiAccountRepository } from '@fishprovider/fish-api';
 import { LocalAccountRepository } from '@fishprovider/local';
 import { StoreAccountRepository } from '@fishprovider/store';

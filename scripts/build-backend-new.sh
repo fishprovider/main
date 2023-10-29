@@ -10,34 +10,19 @@ cd ..
 
 npm run build -w packages-backend/core-backend
 
-function notif() {
-  npm run build -w packages-backend/slack &
-  npm run build -w packages-backend/discord &
-  npm run build -w packages-backend/expo &
-  npm run build -w packages-backend/firebase &
-  wait
-  npm run build -w packages-backend/notif
-}
+npm run build -w packages-backend/queue
 
-function dataAccess() {
-  npm run build -w packages-backend/mongo &
-  npm run build -w packages-backend/redis &
-  wait
-  npm run build -w packages-backend/data-access
-}
+npm run build -w packages-backend/slack
+npm run build -w packages-backend/discord
+npm run build -w packages-backend/expo
+npm run build -w packages-backend/firebase
+npm run build -w packages-backend/notif
 
-function trade() {
-  npm run build -w packages-backend/ctrader-api &
-  npm run build -w packages-backend/metatrader-api &
-  npm run build -w packages-backend/meta-api &
-  wait
-  npm run build -w packages-backend/trade
-}
+npm run build -w packages-backend/mongo
+npm run build -w packages-backend/redis
+npm run build -w packages-backend/data-access
 
-npm run build -w packages-backend/queue &
-notif &
-wait
-
-dataAccess &
-trade &
-wait
+npm run build -w packages-backend/ctrader-api
+npm run build -w packages-backend/metatrader-api
+npm run build -w packages-backend/meta-api
+npm run build -w packages-backend/trade

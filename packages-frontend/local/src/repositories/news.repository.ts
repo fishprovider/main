@@ -1,7 +1,5 @@
 import { News } from '@fishprovider/core';
-import {
-  NewsRepository,
-} from '@fishprovider/core-frontend';
+import { NewsRepository } from '@fishprovider/core-frontend';
 
 import { buildKeyNews, localGet, localSet } from '..';
 
