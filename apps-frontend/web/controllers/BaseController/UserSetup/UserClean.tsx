@@ -7,12 +7,14 @@ import { refreshUserRolesService } from '~services/user/refreshUserRoles.service
 function UserClean() {
   const {
     isServerLoggedIn,
+    email,
   } = storeUser.useStore((state) => ({
     isServerLoggedIn: state.isServerLoggedIn,
+    email: state.info?.email,
   }));
 
   useQuery({
-    queryFn: () => refreshUserRolesService(),
+    queryFn: () => refreshUserRolesService({ email }),
     queryKey: queryKeys.clean(),
     enabled: !!isServerLoggedIn,
     refetchInterval: 1000 * 60 * 60, // 1h
