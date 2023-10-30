@@ -2,10 +2,13 @@ import newOrder from '@fishprovider/swap/dist/commands/newOrder';
 import removePosition from '@fishprovider/swap/dist/commands/removePosition';
 import { ProviderPlatform, ProviderType } from '@fishprovider/utils/dist/constants/account';
 import { Direction, OrderStatus, OrderType } from '@fishprovider/utils/dist/constants/order';
+import { isLastRunExpired } from '@fishprovider/utils/dist/helpers/lastRunChecks';
 import { isPausedWeekend } from '@fishprovider/utils/dist/helpers/pause';
 import { Account, Config } from '@fishprovider/utils/dist/types/Account.model';
 import type { Order, OrderWithoutId } from '@fishprovider/utils/dist/types/Order.model';
 import moment from 'moment';
+
+const runs = {};
 
 const getLastOrderCreated = (liveOrders: Order[], hackOrders: Order[]) => {
   let lastOrderCreated: Order | undefined;
@@ -62,7 +65,7 @@ const newHackOrders = async (baseNewOrder: OrderWithoutId, hackOrders: Order[], 
   }));
 };
 
-export const hackActiveCTrader = async (
+const hackActiveCTrader = async (
   account: Account,
   liveOrders: Order[],
   hackOrders: Order[],
@@ -111,7 +114,7 @@ export const hackActiveCTrader = async (
   await newHackOrders(baseOrder, hackOrders, account.config);
 };
 
-export const hackActiveExness = async (
+const hackActiveExness = async (
   account: Account,
   liveOrders: Order[],
   hackOrders: Order[],
@@ -145,4 +148,26 @@ export const hackActiveExness = async (
   };
 
   await newHackOrders(baseOrder, hackOrders, account.config);
+};
+
+export const hackActive = async (
+  account: Account,
+  liveOrders: Order[],
+  hackOrders: Order[],
+) => {
+  if (
+    !isLastRunExpired({
+      runs,
+      runId: account._id,
+      timeUnit: 'minutes',
+      timeAmt: 10,
+      checkIds: [account._id],
+    })
+  ) return;
+
+  if (account.providerType === ProviderType.icmarkets) {
+    await hackActiveCTrader(account, liveOrders, hackOrders);
+  } else if (account.providerType === ProviderType.exness) {
+    await hackActiveExness(account, liveOrders, hackOrders);
+  }
 };

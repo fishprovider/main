@@ -1,12 +1,11 @@
 import { getDeals, getLiveOrders } from '@fishprovider/swap/dist/utils/order';
 import { getPrices } from '@fishprovider/swap/dist/utils/price';
-import { ProviderType } from '@fishprovider/utils/dist/constants/account';
 import { getProfit } from '@fishprovider/utils/dist/helpers/order';
 import { getMajorPairs } from '@fishprovider/utils/dist/helpers/price';
 import _ from 'lodash';
 import moment from 'moment';
 
-import { hackActiveCTrader, hackActiveExness } from '~services/bots/hackActive';
+import { hackActive } from '~services/bots/hackActive';
 import { botTasks, getAccount } from '~utils/account';
 
 import closeAtTime from './bots/closeAtTime';
@@ -42,11 +41,7 @@ const checkAccount = async (providerId: string) => {
     // hack: filter out hack LTCUSD orders to keep CTrader Strategy active
     const [liveOrders, hackOrders] = _.partition(rawLiveOrders, (item) => item.symbol !== 'LTCUSD');
     if (account.strategyId) {
-      if (account.providerType === ProviderType.icmarkets) {
-        await hackActiveCTrader(account, liveOrders, hackOrders);
-      } else if (account.providerType === ProviderType.exness) {
-        await hackActiveExness(account, liveOrders, hackOrders);
-      }
+      await hackActive(account, liveOrders, hackOrders);
     }
 
     const {
