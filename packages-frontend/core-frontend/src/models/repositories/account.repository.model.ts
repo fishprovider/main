@@ -1,9 +1,9 @@
 import {
-  Account, AccountConfig, AccountFull, AccountViewType,
+  Account, AccountConfig, AccountFull, AccountMember, AccountViewType,
 } from '@fishprovider/core';
 
 import {
-  BaseGetManyResult, BaseGetOptions, BaseGetResult,
+  BaseGetManyResult, BaseGetOptions, BaseGetResult, BaseUpdateOptions, BaseUpdateResult,
 } from '..';
 
 export interface AccountRepository {
@@ -28,6 +28,33 @@ export interface AccountRepository {
       email?: string,
       accountIds?: string[],
       config?: AccountConfig,
+    },
+    options?: BaseGetOptions<Account>,
+  ) => Promise<BaseGetManyResult<Account>>;
+
+  updateAccount?: (
+    filter: {
+      accountId?: string,
+    },
+    payload: {
+      name?: string,
+      assetId?: string,
+      leverage?: number,
+      balance?: number,
+      providerData?: any,
+      member?: AccountMember,
+      doc?: Partial<Account>,
+    },
+    options?: BaseUpdateOptions<Account>,
+  ) => Promise<BaseUpdateResult<Account>>;
+
+  updateAccounts?: (
+    filter: {
+      accountViewType?: AccountViewType,
+      email?: string,
+    },
+    payload: {
+      accounts?: Partial<Account>[],
     },
     options?: BaseGetOptions<Account>,
   ) => Promise<BaseGetManyResult<Account>>;
