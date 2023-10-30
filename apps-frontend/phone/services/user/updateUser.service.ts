@@ -2,11 +2,20 @@ import { checkRepository } from '@fishprovider/core-frontend';
 import storeUser from '@fishprovider/cross/dist/stores/user';
 import { DataFetchUserRepository } from '@fishprovider/data-fetch';
 
-export const getUserService = async (filter: {
-  email?: string,
-}) => {
-  const getUserRepo = checkRepository(DataFetchUserRepository.getUser);
-  const { doc: user } = await getUserRepo(filter);
+export const updateUserService = async (
+  filter: {
+    email?: string,
+  },
+  payload: {
+    name?: string,
+    starAccount?: {
+      accountId: string
+      enabled: boolean
+    }
+  },
+) => {
+  const updateUserRepo = checkRepository(DataFetchUserRepository.updateUser);
+  const { doc: user } = await updateUserRepo(filter, payload);
 
   if (user) {
     // TODO: migrate to DataFetchUserRepository

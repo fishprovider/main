@@ -1,6 +1,6 @@
-import updateUser from '@fishprovider/cross/dist/api/user/updateUser';
 import storeUser from '@fishprovider/cross/dist/stores/user';
 
+import { updateUserService } from '~services/user/updateUser.service';
 import Icon from '~ui/core/Icon';
 
 interface Props {
@@ -12,15 +12,17 @@ function Favorite({ providerId: accountId }: Props) {
 
   const onStar = () => {
     const user = storeUser.getState().info;
-    updateUser({
-      filter: {},
-      payload: {
-        starProvider: {
+    updateUserService(
+      {
+        email: user?.email,
+      },
+      {
+        starAccount: {
           accountId,
           enabled: !user?.starProviders?.[accountId],
         },
       },
-    });
+    );
   };
 
   return (
