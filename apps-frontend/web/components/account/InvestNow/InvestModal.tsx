@@ -1,5 +1,5 @@
 import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
-import { AccountSourceType, ProviderPlatform } from '@fishprovider/utils/dist/constants/account';
+import { ProviderPlatform } from '@fishprovider/utils/dist/constants/account';
 import _ from 'lodash';
 import { useState } from 'react';
 
@@ -10,7 +10,6 @@ import Button from '~ui/core/Button';
 import Group from '~ui/core/Group';
 import Select from '~ui/core/Select';
 import Stack from '~ui/core/Stack';
-import { isLive } from '~utils';
 
 import InvestFish from './InvestFish';
 import InvestPlatforms from './InvestPlatforms';
@@ -26,10 +25,8 @@ function InvestModal({
 }: Props) {
   const {
     providerGroupId,
-    sourceType,
   } = storeAccounts.useStore((state) => ({
     providerGroupId: state[providerId]?.providerGroupId,
-    sourceType: state[providerId]?.sourceType,
   }));
 
   const groupAccounts = storeAccounts.useStore((state) => _.filter(
@@ -45,21 +42,14 @@ function InvestModal({
   const canInvestMetaTrader = groupAccounts.some(
     (item) => item.providerPlatform === ProviderPlatform.metatrader,
   );
-  const canInvestFishCT = sourceType === AccountSourceType.admin || !isLive;
 
   const platforms: { label: string, value: ProviderPlatform }[] = [
-    ...(canInvestCTrader ? [
-      { label: 'CTrader (Spotware)', value: ProviderPlatform.ctrader },
-    ] : []),
-    ...(canInvestMetaTrader ? [
-      { label: 'MetaTrader (MT4/MT5)', value: ProviderPlatform.metatrader },
-    ] : []),
-    ...(canInvestFishCT ? [
-      { label: 'FishCT (FishPlatform)', value: ProviderPlatform.fishct },
-    ] : []),
+    { label: 'CTrader (Spotware)', value: ProviderPlatform.ctrader },
+    { label: 'MetaTrader (MT4/MT5)', value: ProviderPlatform.metatrader },
+    { label: 'FishCT (FishPlatform)', value: ProviderPlatform.fishct },
   ];
 
-  const [platformInput, setPlatformInput] = useState<ProviderPlatform>();
+  const [platformInput, setPlatformInput] = useState<ProviderPlatform>(ProviderPlatform.ctrader);
 
   const getDefaultPlatform = () => {
     if (canInvestCTrader) return ProviderPlatform.ctrader;
