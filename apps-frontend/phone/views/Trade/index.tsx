@@ -22,8 +22,10 @@ import TradeWatch from './TradeWatch';
 export default function Trade() {
   const {
     userId = '',
+    email,
   } = storeUser.useStore((state) => ({
     userId: state.info?._id,
+    email: state.info?.email,
   }));
 
   const options = storeAccounts.useStore((state) => _.orderBy(
@@ -44,7 +46,7 @@ export default function Trade() {
   })));
 
   useQuery({
-    queryFn: () => getAccountsService({}),
+    queryFn: () => getAccountsService({ email }),
     queryKey: queryKeys.userAccounts(),
     refetchInterval: refreshMS,
   });

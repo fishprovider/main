@@ -12,14 +12,14 @@ const getNews: NewsRepository['getNews'] = async (filter, options) => {
   const setDocsStore = StoreNewsRepository.updateNews;
   const getDocsApi = FishApiNewsRepository.getNews;
 
-  const docs = await getDocs<Partial<News>>({
+  const news = await getDocs<Partial<News>>({
     getDocsLocal: getDocsLocal && (() => getDocsLocal(filter, options).then((res) => res.docs)),
-    setDocsLocal: setDocsLocal && ((news) => setDocsLocal(filter, { news }, options)),
-    setDocsStore: setDocsStore && ((news) => setDocsStore(filter, { news }, options)),
+    setDocsLocal: setDocsLocal && ((docs) => setDocsLocal(filter, { news: docs }, options)),
+    setDocsStore: setDocsStore && ((docs) => setDocsStore(filter, { news: docs }, options)),
     getDocsApi: getDocsApi && (() => getDocsApi(filter, options).then((res) => res.docs)),
   });
 
-  return { docs };
+  return { docs: news };
 };
 
 export const DataFetchNewsRepository: NewsRepository = {

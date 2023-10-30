@@ -1,5 +1,5 @@
 import {
-  Account, AccountConfig, AccountFull, AccountMember, AccountViewType,
+  Account, AccountViewType,
 } from '@fishprovider/core';
 
 import {
@@ -11,23 +11,14 @@ export interface AccountRepository {
     filter: {
       accountId?: string,
       getTradeInfo?: boolean,
-      config?: AccountConfig,
-      tradeAccountId?: string,
-      orFilter?: {
-        accountId?: string,
-        name?: string,
-        tradeAccountId?: string,
-      },
     },
-    options?: BaseGetOptions<AccountFull>,
-  ) => Promise<BaseGetResult<AccountFull>>;
+    options?: BaseGetOptions<Account>,
+  ) => Promise<BaseGetResult<Account>>;
 
   getAccounts?: (
     filter: {
       accountViewType?: AccountViewType,
       email?: string,
-      accountIds?: string[],
-      config?: AccountConfig,
     },
     options?: BaseGetOptions<Account>,
   ) => Promise<BaseGetManyResult<Account>>;
@@ -37,13 +28,7 @@ export interface AccountRepository {
       accountId?: string,
     },
     payload: {
-      name?: string,
-      assetId?: string,
-      leverage?: number,
-      balance?: number,
-      providerData?: any,
-      member?: AccountMember,
-      doc?: Partial<Account>,
+      account?: Partial<Account>,
     },
     options?: BaseUpdateOptions<Account>,
   ) => Promise<BaseUpdateResult<Account>>;

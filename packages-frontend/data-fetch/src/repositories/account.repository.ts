@@ -14,8 +14,8 @@ const getAccount: AccountRepository['getAccount'] = async (filter, options) => {
 
   const account = await getDoc<Partial<Account>>({
     getDocLocal: getDocLocal && (() => getDocLocal(filter, options).then((res) => res.doc)),
-    setDocLocal: setDocLocal && ((doc) => setDocLocal(filter, { doc }, options)),
-    setDocStore: setDocStore && ((doc) => setDocStore(filter, { doc }, options)),
+    setDocLocal: setDocLocal && ((doc) => setDocLocal(filter, { account: doc }, options)),
+    setDocStore: setDocStore && ((doc) => setDocStore(filter, { account: doc }, options)),
     getDocApi: getDocApi && (() => getDocApi(filter, options).then((res) => res.doc)),
   });
 

@@ -13,7 +13,7 @@ const getAccount: AccountRepository['getAccount'] = async (filter) => {
 
 const updateAccount: AccountRepository['updateAccount'] = async (filter, payload) => {
   const key = buildKeyAccount(filter);
-  const { doc: account } = payload;
+  const { account } = payload;
   await localSet(key, account);
   return { doc: account };
 };

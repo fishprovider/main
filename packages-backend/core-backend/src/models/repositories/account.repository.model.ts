@@ -1,6 +1,6 @@
 import {
-  Account, AccountConfig, AccountFull, AccountMember, AccountPlatform,
-  AccountSourceType, AccountTradeType, AccountType, AccountViewType,
+  Account, AccountConfig, AccountMember, AccountPlatform,
+  AccountTradeType, AccountType, AccountViewType,
 } from '@fishprovider/core';
 
 import {
@@ -11,17 +11,16 @@ export interface AccountRepository {
   getAccount?: (
     filter: {
       accountId?: string,
-      getTradeInfo?: boolean,
-      config?: AccountConfig,
-      tradeAccountId?: string,
       orFilter?: {
         accountId?: string,
         name?: string,
         tradeAccountId?: string,
       },
+      config?: AccountConfig,
+      tradeAccountId?: string,
     },
-    options?: BaseGetOptions<AccountFull>,
-  ) => Promise<BaseGetResult<AccountFull>>;
+    options?: BaseGetOptions<Account>,
+  ) => Promise<BaseGetResult<Account>>;
 
   getAccounts?: (
     filter: {
@@ -44,7 +43,6 @@ export interface AccountRepository {
       balance?: number,
       providerData?: any,
       member?: AccountMember,
-      doc?: Partial<Account>,
     },
     options?: BaseUpdateOptions<Account>,
   ) => Promise<BaseUpdateResult<Account>>;
@@ -63,20 +61,13 @@ export interface AccountRepository {
   addAccount?: (
     payload: {
       accountId: string,
-      config: AccountConfig,
       name: string,
+      config?: AccountConfig,
       accountType: AccountType,
       accountPlatform: AccountPlatform,
       accountViewType: AccountViewType,
       accountTradeType: AccountTradeType,
-      sourceType: AccountSourceType,
       members: AccountMember[],
-      userId: string,
-      userEmail: string,
-      userName?: string,
-      userPicture?: string,
-      updatedAt: Date,
-      createdAt: Date,
     },
   ) => Promise<BaseGetResult<Account>>;
 
@@ -92,14 +83,4 @@ export interface AccountRepository {
       clientId?: string,
     },
   ) => Promise<BaseGetResult<AccountConfig>>;
-
-  addTradeAccount?: (
-    payload: {
-      accountPlatform: AccountPlatform,
-      config: AccountConfig,
-    },
-  ) => Promise<BaseGetResult<AccountConfig>>;
-
-  // TODO: add/remove/fetch member
-  // TODO: lock account/member
 }

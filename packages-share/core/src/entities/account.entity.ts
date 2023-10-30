@@ -1,6 +1,8 @@
 export enum AccountType {
   icmarkets = 'icmarkets',
   exness = 'exness',
+  roboforex = 'roboforex',
+  alpari = 'alpari',
   myfxbook = 'myfxbook',
 }
 
@@ -25,11 +27,6 @@ export enum AccountRoles {
   protector = 'protector',
   trader = 'trader',
   viewer = 'viewer',
-}
-
-export enum AccountSourceType {
-  admin = 'admin',
-  user = 'user',
 }
 
 export enum AccountPlanType {
@@ -99,8 +96,8 @@ export interface AccountMember {
   locks?: AccountLock[];
   status?: 'add' | 'remove' | 'update' | 'done';
 
-  updatedAt?: Date;
-  createdAt?: Date;
+  updatedAt: Date;
+  createdAt: Date;
 }
 
 export interface AccountMemberInvite {
@@ -118,8 +115,8 @@ export type AccountConfig = {
   // common
   clientId: string;
   clientSecret: string;
-  accountId?: string;
-  name?: string;
+  accountId: string;
+  name: string;
   user?: string;
   pass?: string;
 
@@ -195,13 +192,15 @@ export interface Account {
   _id: string;
   name: string;
 
+  config?: AccountConfig;
+
   accountType: AccountType;
   accountPlatform: AccountPlatform;
   accountPlatformType?: string;
 
   accountGroupId?: string;
-  accountViewType?: AccountViewType;
-  accountTradeType?: AccountTradeType;
+  accountViewType: AccountViewType;
+  accountTradeType: AccountTradeType;
 
   asset?: string;
   assetId?: string;
@@ -235,8 +234,8 @@ export interface Account {
   rank?: string;
   order?: number;
 
+  members: AccountMember[];
   investors?: AccountInvestor[];
-  members?: AccountMember[];
 
   tradeSettings?: AccountTradeSettings;
   protectSettings?: AccountProtectSettings;
@@ -257,21 +256,11 @@ export interface Account {
   providerData?: Record<string, any>; // trade data
   summary?: Record<string, any>; // cron data
 
-  userId?: string;
-  userEmail?: string;
-  userName?: string;
-  userPicture?: string;
+  isSystem?: boolean;
 
-  sourceType?: AccountSourceType;
-  createdAt?: Date;
-  updatedAt?: Date;
+  createdAt: Date;
+  updatedAt: Date;
 
   deleted?: boolean;
   deletedAt?: Date;
 }
-
-export interface AccountPrivate {
-  config: AccountConfig;
-}
-
-export type AccountFull = Account & AccountPrivate;

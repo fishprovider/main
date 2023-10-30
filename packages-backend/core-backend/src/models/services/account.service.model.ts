@@ -1,6 +1,6 @@
 import {
   Account, AccountConfig, AccountMember, AccountPlatform,
-  AccountType, AccountViewType,
+  AccountTradeType, AccountType, AccountViewType,
 } from '@fishprovider/core';
 
 import {
@@ -19,9 +19,9 @@ export type GetAccountService = (params: BaseGetServiceParams<Account> & {
 
 export type GetAccountsService = (params: BaseGetServiceParams<Account> & {
   filter: {
-    accountIds?: string[],
     accountViewType?: AccountViewType,
     email?: string,
+    accountIds?: string[],
   },
   repositories: {
     account: AccountRepository
@@ -38,15 +38,15 @@ export type GetTradeAccountService = (params: BaseUpdateServiceParams<Account> &
   },
 }) => Promise<BaseGetResult<Account>>;
 
-// export type GetTradeAccountsService = (params: BaseUpdateServiceParams<Account> & {
-//   filter: {
-//     tradeCode: string,
-//   },
-//   repositories: {
-//     account: AccountRepository,
-//     trade: AccountRepository,
-//   },
-// }) => Promise<BaseGetResult<Account>>;
+export type GetTradeAccountsService = (params: BaseUpdateServiceParams<Account> & {
+  filter: {
+    tradeCode: string,
+  },
+  repositories: {
+    account: AccountRepository,
+    trade: AccountRepository,
+  },
+}) => Promise<BaseGetResult<Account>>;
 
 export type UpdateAccountService = (params: BaseUpdateServiceParams<Account> & {
   filter: {
@@ -54,12 +54,10 @@ export type UpdateAccountService = (params: BaseUpdateServiceParams<Account> & {
   },
   payload: {
     name?: string,
-    // trade
     assetId?: string,
     leverage?: number,
     balance?: number,
     providerData?: any,
-    // members
     member?: AccountMember,
   },
   repositories: {
@@ -72,6 +70,7 @@ export type AddAccountService = (params: BaseUpdateServiceParams<Account> & {
     name: string,
     accountType: AccountType,
     accountPlatform: AccountPlatform,
+    accountTradeType?: AccountTradeType,
     baseConfig: Partial<AccountConfig>,
   },
   repositories: {

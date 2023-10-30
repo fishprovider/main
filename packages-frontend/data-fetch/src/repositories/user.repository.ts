@@ -14,8 +14,8 @@ const getUser: UserRepository['getUser'] = async (filter, options) => {
 
   const user = await getDoc<Partial<User>>({
     getDocLocal: getDocLocal && (() => getDocLocal(filter, options).then((res) => res.doc)),
-    setDocLocal: setDocLocal && ((doc) => setDocLocal(filter, { doc }, options)),
-    setDocStore: setDocStore && ((doc) => setDocStore(filter, { doc }, options)),
+    setDocLocal: setDocLocal && ((doc) => setDocLocal(filter, { user: doc }, options)),
+    setDocStore: setDocStore && ((doc) => setDocStore(filter, { user: doc }, options)),
     getDocApi: getDocApi && (() => getDocApi(filter, options).then((res) => res.doc)),
   });
 

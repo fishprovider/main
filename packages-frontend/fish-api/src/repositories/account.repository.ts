@@ -4,13 +4,27 @@ import { AccountRepository } from '@fishprovider/core-frontend';
 import { fishApiGet } from '..';
 
 const getAccount: AccountRepository['getAccount'] = async (filter) => {
-  const doc = await fishApiGet<Partial<Account> | undefined>('/account/getAccount', filter);
-  return { doc };
+  const { accountId, getTradeInfo } = filter;
+
+  if (getTradeInfo) {
+    const account = await fishApiGet<Partial<Account> | undefined>('/account/getTradeAccount', {
+      accountId,
+    });
+    return { doc: account };
+  }
+
+  const account = await fishApiGet<Partial<Account> | undefined>('/account/getAccount', {
+    accountId,
+  });
+  return { doc: account };
 };
 
 const getAccounts: AccountRepository['getAccounts'] = async (filter) => {
-  const docs = await fishApiGet<Partial<Account>[] | undefined>('/account/getAccounts', filter);
-  return { docs };
+  const { accountViewType, email } = filter;
+  const accounts = await fishApiGet<Partial<Account>[] | undefined>('/account/getAccounts', {
+    accountViewType, email,
+  });
+  return { docs: accounts };
 };
 
 export const FishApiAccountRepository: AccountRepository = {

@@ -4,7 +4,10 @@ import { NewsRepository } from '@fishprovider/core-frontend';
 import { fishApiGet } from '..';
 
 const getNews: NewsRepository['getNews'] = async (filter) => {
-  const news = await fishApiGet<Partial<News>[] | undefined>('/news/getNews', filter);
+  const { today, week, upcoming } = filter;
+  const news = await fishApiGet<Partial<News>[] | undefined>('/news/getNews', {
+    today, week, upcoming,
+  });
   return { docs: news };
 };
 

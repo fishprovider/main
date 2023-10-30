@@ -1,9 +1,19 @@
-import { AccountRepository } from '@fishprovider/core-backend';
+import { AccountConfig, BaseError } from '@fishprovider/core';
+import { AccountRepository, RepositoryError } from '@fishprovider/core-backend';
 
 import { Connection, newAccount } from '..';
 
-const addTradeAccount: AccountRepository['addTradeAccount'] = async (payload) => {
-  const { config } = payload;
+const checkConfig = (config?: AccountConfig) => {
+  if (!config) {
+    throw new BaseError(RepositoryError.REPOSITORY_BAD_REQUEST, 'Missing config');
+  }
+
+  return config;
+};
+
+const addAccount: AccountRepository['addAccount'] = async (payload) => {
+  const { config: rawConfig } = payload;
+  const config = checkConfig(rawConfig);
 
   const { id } = await newAccount(
     new Connection(config),
@@ -16,12 +26,11 @@ const addTradeAccount: AccountRepository['addTradeAccount'] = async (payload) =>
 
   return {
     doc: {
-      ...config,
-      accountId: id,
+      _id: id,
     },
   };
 };
 
 export const MetaApiAccountRepository: AccountRepository = {
-  addTradeAccount,
+  addAccount,
 };

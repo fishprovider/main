@@ -63,9 +63,7 @@ const updateAccount: AccountRepository['updateAccount'] = async (filter, payload
   const accountFilter = buildAccountFilter(filter);
 
   const {
-    name,
-    assetId, leverage, balance, providerData,
-    member,
+    name, assetId, leverage, balance, providerData, member,
   } = payload;
   const {
     returnAfter, projection,
@@ -126,6 +124,8 @@ const addAccount: AccountRepository['addAccount'] = async (payload) => {
   const accountNew: Account = {
     ...rest,
     _id: accountId,
+    updatedAt: new Date(),
+    createdAt: new Date(),
   };
 
   const { db } = await getMongo();

@@ -1,5 +1,5 @@
 import {
-  AccountConfig, AccountError, AccountRoles, AccountSourceType,
+  AccountConfig, AccountError, AccountRoles,
   AccountTradeType, AccountViewType, BaseError,
 } from '@fishprovider/core';
 import _ from 'lodash';
@@ -17,14 +17,14 @@ export const addAccountService: AddAccountService = async ({
   const userSession = checkLogin(context?.userSession);
   const getAccountRepo = checkRepository(repositories.account.getAccount);
   const getTradeClientRepo = checkRepository(repositories.account.getTradeClient);
-  const addTradeAccountRepo = checkRepository(repositories.trade.addTradeAccount);
+  const addTradeAccountRepo = checkRepository(repositories.trade.addAccount);
   const addAccountRepo = checkRepository(repositories.account.addAccount);
 
   //
   // main
   //
   const {
-    name, accountType, accountPlatform, baseConfig,
+    name, accountType, accountPlatform, accountTradeType, baseConfig,
   } = payload;
 
   if (!name || !accountType || !accountPlatform || !baseConfig) {
@@ -67,14 +67,24 @@ export const addAccountService: AddAccountService = async ({
     ...baseConfig,
     clientId,
     clientSecret,
+    accountId: baseConfig.accountId || '',
     name,
   };
 
-  const { doc: tradeConfig } = await addTradeAccountRepo({ accountPlatform, config });
-  if (!tradeConfig) {
+  const { doc: tradeAccount } = await addTradeAccountRepo({
+    accountId: '',
+    name,
+    config,
+    accountType,
+    accountPlatform,
+    accountViewType: AccountViewType.private,
+    accountTradeType: accountTradeType || AccountTradeType.demo,
+    members: [],
+  });
+  if (!tradeAccount?._id) {
     throw new BaseError(AccountError.ACCOUNT_NOT_FOUND, 'Failed to add trade account');
   }
-  config.accountId = tradeConfig.accountId;
+  config.accountId = tradeAccount._id;
 
   const { doc: account } = await addAccountRepo({
     accountId,
@@ -83,8 +93,7 @@ export const addAccountService: AddAccountService = async ({
     accountType,
     accountPlatform,
     accountViewType: AccountViewType.private,
-    accountTradeType: AccountTradeType.demo,
-    sourceType: AccountSourceType.user,
+    accountTradeType: accountTradeType || AccountTradeType.demo,
     members: [{
       email: userSession.email,
       name: userSession.name,
@@ -93,12 +102,6 @@ export const addAccountService: AddAccountService = async ({
       updatedAt: new Date(),
       createdAt: new Date(),
     }],
-    userId: userSession._id,
-    userEmail: userSession.email,
-    userName: userSession.name,
-    userPicture: userSession.picture,
-    updatedAt: new Date(),
-    createdAt: new Date(),
   });
 
   // TODO: start head

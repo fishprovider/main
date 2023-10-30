@@ -9,18 +9,18 @@ import {
   connectAndRun, getAccountInformation, getAccountList,
 } from '..';
 
-const checkConfig = (rawConfig?: AccountConfig) => {
-  if (!rawConfig) {
+const checkConfig = (config?: AccountConfig) => {
+  if (!config) {
     throw new BaseError(RepositoryError.REPOSITORY_BAD_REQUEST, 'Missing config');
   }
 
-  const { host, port } = rawConfig;
+  const { host, port } = config;
   if (!host || !port) {
     throw new BaseError(RepositoryError.REPOSITORY_BAD_REQUEST, 'Missing host/port');
   }
 
   return {
-    ...rawConfig,
+    ...config,
     host,
     port,
   };
@@ -39,7 +39,7 @@ const getAccount: AccountRepository['getAccount'] = async (filter) => {
   return {
     doc: {
       assetId: tradeAccount.assetId,
-      leverage: tradeAccount.leverage || 0,
+      leverage: tradeAccount.leverage,
       balance: tradeAccount.balance,
       providerData: tradeAccount,
     },

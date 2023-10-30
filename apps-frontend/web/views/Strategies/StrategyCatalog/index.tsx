@@ -26,8 +26,10 @@ function Catalog() {
 
   const {
     isServerLoggedIn,
+    email,
   } = storeUser.useStore((state) => ({
     isServerLoggedIn: state.isServerLoggedIn,
+    email: state.info?.email,
   }));
 
   const [favorite, toggleFavorite] = useToggle();
@@ -39,7 +41,7 @@ function Catalog() {
     queryKey: queryKeys.slimAccounts(),
   });
   useQuery({
-    queryFn: () => getAccountsService({}),
+    queryFn: () => getAccountsService({ email }),
     queryKey: queryKeys.userAccounts(),
     enabled: !!isServerLoggedIn,
   });

@@ -15,10 +15,12 @@ function ProviderSelect() {
   const {
     isServerLoggedIn,
     providerId,
+    email,
     starProviders = {},
   } = storeUser.useStore((state) => ({
     isServerLoggedIn: state.isServerLoggedIn,
     providerId: state.activeProvider?._id,
+    email: state.info?.email,
     starProviders: state.info?.starProviders,
   }));
   const accounts = storeAccounts.useStore((state) => _.orderBy(
@@ -38,7 +40,7 @@ function ProviderSelect() {
     queryKey: queryKeys.slimAccounts(),
   });
   useQuery({
-    queryFn: () => getAccountsService({}),
+    queryFn: () => getAccountsService({ email }),
     queryKey: queryKeys.userAccounts(),
     enabled: !!isServerLoggedIn,
   });

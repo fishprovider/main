@@ -1,6 +1,7 @@
 import { Account } from '@fishprovider/core';
-import { getAccountService } from '@fishprovider/core-backend';
+import { getTradeAccountService } from '@fishprovider/core-backend';
 import { DataAccessAccountRepository } from '@fishprovider/data-access';
+import { TradeAccountRepository } from '@fishprovider/trade';
 import { z } from 'zod';
 
 import { ApiHandler } from '~types/ApiHandler.model';
@@ -13,10 +14,11 @@ const handler: ApiHandler<Partial<Account>> = async (data, userSession) => {
 
   const { accountId } = filter;
 
-  const { doc } = await getAccountService({
+  const { doc } = await getTradeAccountService({
     filter: { accountId },
     repositories: {
       account: DataAccessAccountRepository,
+      trade: TradeAccountRepository,
     },
     context: { userSession },
   });

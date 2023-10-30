@@ -33,6 +33,6 @@ export interface User {
 
   pushNotif?: UserPushNotif[];
 
-  updatedAt?: Date;
-  createdAt?: Date;
+  updatedAt: Date;
+  createdAt: Date;
 }

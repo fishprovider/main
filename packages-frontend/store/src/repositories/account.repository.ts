@@ -3,7 +3,7 @@ import { AccountRepository } from '@fishprovider/core-frontend';
 import { storeAccounts } from '..';
 
 const updateAccount: AccountRepository['updateAccount'] = async (_filter, payload) => {
-  const { doc: account } = payload;
+  const { account } = payload;
   if (account) {
     storeAccounts.mergeDoc(account);
   }

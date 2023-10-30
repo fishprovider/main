@@ -11,7 +11,9 @@ const handler: ApiHandler<Partial<User>> = async (data, userSession) => {
     .parse(data);
 
   const { doc } = await getUserService({
-    filter: {},
+    filter: {
+      email: userSession?.email,
+    },
     repositories: {
       user: DataAccessUserRepository,
     },

@@ -9,7 +9,7 @@ import {
 
 export type GetUserService = (params: BaseGetServiceParams<User> & {
   filter: {
-    //
+    email?: string,
   },
   repositories: {
     user: UserRepository
@@ -28,7 +28,7 @@ export type GetUsersService = (params: BaseGetServiceParams<User> & {
 
 export type UpdateUserService = (params: BaseUpdateServiceParams<User> & {
   filter: {
-    //
+    email?: string,
   },
   payload: {
     name?: string,
@@ -45,7 +45,7 @@ export type UpdateUserService = (params: BaseUpdateServiceParams<User> & {
 
 export type RefreshUserRolesService = (params: BaseUpdateServiceParams<User> & {
   filter: {
-    //
+    email?: string,
   },
   repositories: {
     account: AccountRepository

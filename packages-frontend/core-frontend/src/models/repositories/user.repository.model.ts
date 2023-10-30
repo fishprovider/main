@@ -1,6 +1,4 @@
-import {
-  User, UserRoles,
-} from '@fishprovider/core';
+import { User } from '@fishprovider/core';
 
 import {
   BaseGetOptions, BaseGetResult, BaseUpdateOptions, BaseUpdateResult,
@@ -19,14 +17,13 @@ export interface UserRepository {
       email?: string,
     },
     payload: {
+      refreshRoles?: boolean,
+      name?: string,
       starAccount?: {
         accountId: string
         enabled: boolean
       }
-      refreshRoles?: boolean
-      roles?: UserRoles
-      // local
-      doc?: Partial<User>,
+      user?: Partial<User>,
     },
     options?: BaseUpdateOptions<User>,
   ) => Promise<BaseUpdateResult<User>>;

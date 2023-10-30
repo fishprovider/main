@@ -4,7 +4,7 @@ import {
 } from '../..';
 
 export const updateUserService: UpdateUserService = async ({
-  filter, payload: payloadRaw, options, repositories, context,
+  payload: payloadRaw, options, repositories, context,
 }) => {
   //
   // pre-check
@@ -42,7 +42,9 @@ export const updateUserService: UpdateUserService = async ({
   }
 
   const { doc: user } = await updateUserRepo(
-    filter,
+    {
+      email: userSession.email,
+    },
     payload,
     options,
   );

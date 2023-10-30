@@ -8,8 +8,10 @@ import { getAccountsService } from '~services/account/getAccounts.service';
 function AccountsFetch() {
   const {
     isServerLoggedIn,
+    email,
   } = storeUser.useStore((state) => ({
     isServerLoggedIn: state.isServerLoggedIn,
+    email: state.info?.email,
   }));
 
   useQuery({
@@ -17,7 +19,7 @@ function AccountsFetch() {
     queryKey: queryKeys.slimAccounts(),
   });
   useQuery({
-    queryFn: () => getAccountsService({}),
+    queryFn: () => getAccountsService({ email }),
     queryKey: queryKeys.userAccounts(),
     enabled: !!isServerLoggedIn,
   });

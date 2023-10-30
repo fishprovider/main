@@ -8,6 +8,7 @@ import { ApiHandler } from '~types/ApiHandler.model';
 const handler: ApiHandler<Partial<Account>[]> = async (data, userSession) => {
   const filter = z.object({
     accountViewType: z.nativeEnum(AccountViewType).optional(),
+    email: z.string().optional(),
   }).strict()
     .parse(data);
 
