@@ -1,8 +1,8 @@
 import {
-  AccountConfig, AccountTradeType, BaseError,
+  AccountConfig, AccountTradeType, BaseError, RepositoryError,
 } from '@fishprovider/core';
 import {
-  AccountRepository, RepositoryError,
+  AccountRepository,
 } from '@fishprovider/core-backend';
 
 import {

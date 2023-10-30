@@ -1,6 +1,4 @@
-import { BaseError } from '@fishprovider/core';
-
-import { RepositoryError } from '..';
+import { BaseError, RepositoryError } from '..';
 
 export const checkRepository = <T>(repoFunction?: T) => {
   if (!repoFunction) {

@@ -1,4 +1,6 @@
-import { checkRepository, UpdateNewsService } from '../..';
+import { checkRepository } from '@fishprovider/core';
+
+import { UpdateNewsService } from '../..';
 
 export const updateNewsService: UpdateNewsService = async ({
   filter, payload, options, repositories,

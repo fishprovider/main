@@ -1,6 +1,6 @@
-import { BaseError } from '@fishprovider/core';
+import { BaseError, RepositoryError } from '@fishprovider/core';
 
-import { Projection, RepositoryError } from '..';
+import { Projection } from '..';
 
 export const validateProjection = <T extends Record<string, any>>(
   projection?: Projection<T>,
@@ -13,17 +13,6 @@ export const validateProjection = <T extends Record<string, any>>(
     return Object.keys(projection).every((key) => obj[key] === undefined);
   }
   return Object.keys(obj).every((key) => projection[key] === 1);
-};
-
-//
-// check functions
-//
-
-export const checkRepository = <T>(repoFunction?: T) => {
-  if (!repoFunction) {
-    throw new BaseError(RepositoryError.REPOSITORY_NOT_IMPLEMENT);
-  }
-  return repoFunction;
 };
 
 export const checkProjection = <T extends Record<string, any>>(

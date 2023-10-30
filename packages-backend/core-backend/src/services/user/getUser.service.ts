@@ -1,9 +1,9 @@
 import {
-  BaseError, UserError,
+  BaseError, checkRepository, UserError,
 } from '@fishprovider/core';
 
 import {
-  checkLogin, checkProjection, checkRepository, GetUserService,
+  checkLogin, checkProjection, GetUserService,
   sanitizeOutputUser,
 } from '../..';
 

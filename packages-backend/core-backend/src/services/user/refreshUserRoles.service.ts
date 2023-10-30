@@ -1,10 +1,10 @@
 import {
-  AccountRoles,
+  AccountRoles, checkRepository,
 } from '@fishprovider/core';
 import _ from 'lodash';
 
 import {
-  checkLogin, checkProjection, checkRepository, RefreshUserRolesService,
+  checkLogin, checkProjection, RefreshUserRolesService,
   sanitizeOutputUser,
 } from '../..';
 

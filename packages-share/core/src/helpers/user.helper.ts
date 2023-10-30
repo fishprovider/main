@@ -1,4 +1,4 @@
-import { UserRoles } from '@fishprovider/core';
+import { UserRoles } from '..';
 
 export const getRoleProvider = (
   roles?: UserRoles,

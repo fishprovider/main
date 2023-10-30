@@ -1,5 +1,4 @@
-import { News } from '@fishprovider/core';
-import { checkRepository } from '@fishprovider/core-frontend';
+import { checkRepository, News } from '@fishprovider/core';
 import { DataFetchNewsRepository } from '@fishprovider/data-fetch';
 
 export const watchNewsService = <T>(

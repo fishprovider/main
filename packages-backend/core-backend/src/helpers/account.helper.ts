@@ -1,9 +1,9 @@
 import {
-  Account, AccountError, AccountViewType, BaseError,
+  Account, AccountError, AccountViewType, BaseError, getRoleProvider,
 } from '@fishprovider/core';
 
 import {
-  getRoleProvider, ServiceContext,
+  ServiceContext,
 } from '..';
 
 export const sanitizeOutputAccount = (account?: Partial<Account>) => ({

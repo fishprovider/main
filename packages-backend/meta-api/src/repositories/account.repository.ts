@@ -1,5 +1,5 @@
-import { AccountConfig, BaseError } from '@fishprovider/core';
-import { AccountRepository, RepositoryError } from '@fishprovider/core-backend';
+import { AccountConfig, BaseError, RepositoryError } from '@fishprovider/core';
+import { AccountRepository } from '@fishprovider/core-backend';
 
 import { Connection, newAccount } from '..';
 

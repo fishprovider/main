@@ -1,4 +1,6 @@
-import { checkRepository, GetAssetsService } from '../..';
+import { checkRepository } from '@fishprovider/core';
+
+import { GetAssetsService } from '../..';
 
 export const getAssetsService: GetAssetsService = async ({
   filter, options, repositories,
