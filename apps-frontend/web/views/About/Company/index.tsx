@@ -17,17 +17,6 @@ function Company() {
         <Grid.Col xs={12} sm={6}>
           <Stack>
             <Card withBorder radius="lg" shadow="xl">
-              <Story />
-            </Card>
-            <Card withBorder radius="lg" shadow="xl">
-              <Divisions />
-            </Card>
-          </Stack>
-        </Grid.Col>
-
-        <Grid.Col xs={12} sm={6}>
-          <Stack>
-            <Card withBorder radius="lg" shadow="xl">
               <Vision />
             </Card>
             <Card withBorder radius="lg" shadow="xl">
@@ -35,6 +24,17 @@ function Company() {
             </Card>
             <Card withBorder radius="lg" shadow="xl">
               <Locations />
+            </Card>
+          </Stack>
+        </Grid.Col>
+
+        <Grid.Col xs={12} sm={6}>
+          <Stack>
+            <Card withBorder radius="lg" shadow="xl">
+              <Story />
+            </Card>
+            <Card withBorder radius="lg" shadow="xl">
+              <Divisions />
             </Card>
           </Stack>
         </Grid.Col>
