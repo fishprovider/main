@@ -37,7 +37,7 @@ const checkHackOrders = async (hackOrders: Order[]) => {
   const checkDuplicateOrders = async (direction: Direction) => {
     const checkOrders = hackOrders.filter((item) => item.direction === direction);
     if (checkOrders.length > 1) {
-      Logger.warn('Duplicated hackOrders', direction, checkOrders.length);
+      Logger.warn('Duplicated hackOrders', checkOrders[0]?.providerId, direction, checkOrders.length);
     }
   };
   await Promise.all([
