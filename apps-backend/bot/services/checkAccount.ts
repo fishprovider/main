@@ -40,9 +40,7 @@ const checkAccount = async (providerId: string) => {
 
     // hack: filter out hack LTCUSD orders to keep CTrader Strategy active
     const [liveOrders, hackOrders] = _.partition(rawLiveOrders, (item) => item.symbol !== 'LTCUSD');
-    if (account.strategyId) {
-      await hackActive(account, liveOrders, hackOrders);
-    }
+    await hackActive(account, liveOrders, hackOrders);
 
     const {
       providerType,

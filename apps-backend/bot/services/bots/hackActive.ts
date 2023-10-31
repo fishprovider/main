@@ -33,18 +33,16 @@ const getLastOrderCreated = (liveOrders: Order[], hackOrders: Order[]) => {
   return lastOrderCreated;
 };
 
-const cleanHackOrders = async (hackOrders: Order[], config: Config) => {
-  const removeDuplicateOrders = async (direction: Direction) => {
+const checkHackOrders = async (hackOrders: Order[]) => {
+  const checkDuplicateOrders = async (direction: Direction) => {
     const checkOrders = hackOrders.filter((item) => item.direction === direction);
     if (checkOrders.length > 1) {
-      await Promise.all(checkOrders.map(async (order) => {
-        await removePosition({ order, options: { config } });
-      }));
+      Logger.warn('Duplicated hackOrders', direction, checkOrders.length);
     }
   };
   await Promise.all([
-    removeDuplicateOrders(Direction.buy),
-    removeDuplicateOrders(Direction.sell),
+    checkDuplicateOrders(Direction.buy),
+    checkDuplicateOrders(Direction.sell),
   ]);
 };
 
@@ -94,9 +92,10 @@ const hackActiveCTrader = async (
   };
 
   if (isActive()) {
-    await cleanHackOrders(hackOrders, account.config);
+    await checkHackOrders(hackOrders);
     return;
   }
+  Logger.warn('hackActiveCTrader', account._id, lastOrderCreated?.createdAt);
 
   const baseOrder: OrderWithoutId = {
     providerId: account._id,
@@ -125,14 +124,15 @@ const hackActiveExness = async (
 
   const isActive = () => { // Exness requirements
     if (!lastOrderCreated) return false; // 1 position any time
-    if (moment().diff(moment(lastOrderCreated.createdAt), 'hours') > (24 * 6 + 20)) return false; // 1 deal last 7 days
+    if (moment().diff(moment(lastOrderCreated.createdAt), 'hours') > (24 * 6 + 22)) return false; // 1 deal last 7 days
     return true;
   };
 
   if (isActive()) {
-    await cleanHackOrders(hackOrders, account.config);
+    await checkHackOrders(hackOrders);
     return;
   }
+  Logger.warn('hackActiveExness', account._id, lastOrderCreated?.createdAt);
 
   const baseOrder: OrderWithoutId = {
     providerId: account._id,
@@ -155,6 +155,8 @@ export const hackActive = async (
   liveOrders: Order[],
   hackOrders: Order[],
 ) => {
+  if (!account.strategyId) return;
+
   if (
     !isLastRunExpired({
       runs,
