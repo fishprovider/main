@@ -4,7 +4,10 @@
     "rootDir": "src",
     "outDir": "dist",
   },
-  "include": ["**/*.ts"],
+  "include": [
+    "**/*.ts",
+    "**/*.*.ts",
+  ],
   "references": [
     { "path": "../../packages-share/core" },
     { "path": "../../packages-frontend/core-frontend" },
