@@ -31,3 +31,15 @@ schedule-deploy-phone-ios:
   script:
     - if [ -z $SCHEDULE_PHONE_IOS ]; then exit 0; fi
     - !reference [.deploy-phone-ios, script]
+
+schedule-build-web:
+  tags:
+    - local
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+      when: always
+  cache: !reference [.cache_npm, cache]
+  timeout: "30 minutes"
+  script:
+    - if [ -z $SCHEDULE_WEB ]; then exit 0; fi
+    - !reference [.build-web, script]
