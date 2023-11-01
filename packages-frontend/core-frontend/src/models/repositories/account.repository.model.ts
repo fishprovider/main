@@ -43,4 +43,10 @@ export interface AccountRepository {
     },
     options?: BaseGetOptions<Account>,
   ) => Promise<BaseGetManyResult<Account>>;
+
+  removeAccount?: (
+    filter: {
+      accountId: string,
+    },
+  ) => Promise<any>;
 }

@@ -4,7 +4,7 @@ import { FishApiAccountRepository } from '@fishprovider/fish-api';
 import { LocalAccountRepository } from '@fishprovider/local';
 import { StoreAccountRepository } from '@fishprovider/store';
 
-import { getDoc, getDocs } from '..';
+import { getDoc, getDocs, removeDoc } from '..';
 
 const getAccount: AccountRepository['getAccount'] = async (filter, options) => {
   const getDocLocal = LocalAccountRepository.getAccount;
@@ -38,8 +38,21 @@ const getAccounts: AccountRepository['getAccounts'] = async (filter, options) =>
   return { docs: accounts };
 };
 
+const removeAccount: AccountRepository['removeAccount'] = async (filter) => {
+  const removeDocLocal = LocalAccountRepository.removeAccount;
+  const removeDocStore = StoreAccountRepository.removeAccount;
+  const removeDocApi = FishApiAccountRepository.removeAccount;
+
+  await removeDoc({
+    removeDocLocal: removeDocLocal && (() => removeDocLocal(filter)),
+    removeDocStore: removeDocStore && (() => removeDocStore(filter)),
+    removeDocApi: removeDocApi && (() => removeDocApi(filter)),
+  });
+};
+
 export const DataFetchAccountRepository: AccountRepository = {
   ...FishApiAccountRepository,
   getAccount,
   getAccounts,
+  removeAccount,
 };

@@ -27,7 +27,16 @@ const getAccounts: AccountRepository['getAccounts'] = async (filter) => {
   return { docs: accounts };
 };
 
+const removeAccount: AccountRepository['removeAccount'] = async (filter) => {
+  const { accountId } = filter;
+  await fishApiGet<Partial<Account> | undefined>('/account/removeAccount', {
+    accountId,
+  });
+  return accountId;
+};
+
 export const FishApiAccountRepository: AccountRepository = {
   getAccount,
   getAccounts,
+  removeAccount,
 };

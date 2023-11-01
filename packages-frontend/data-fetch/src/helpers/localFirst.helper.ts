@@ -89,3 +89,22 @@ export const getDocs = async <T>(params: {
 
   return docs;
 };
+
+export const removeDoc = async (params: {
+  removeDocLocal?: () => any,
+  removeDocStore?: () => any,
+  removeDocApi?: () => any,
+}) => {
+  const {
+    removeDocLocal, removeDocStore, removeDocApi,
+  } = params;
+  if (removeDocLocal) {
+    removeDocLocal(); // non-blocking
+  }
+  if (removeDocStore) {
+    removeDocStore(); // non-blocking
+  }
+  if (removeDocApi) {
+    await removeDocApi();
+  }
+};

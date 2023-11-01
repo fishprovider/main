@@ -1,8 +1,8 @@
-import accountRemove from '@fishprovider/cross/dist/api/accounts/remove';
 import storeUser from '@fishprovider/cross/dist/stores/user';
 import { useRouter } from 'next/router';
 
 import Routes from '~libs/routes';
+import { removeAccountService } from '~services/account/removeAccount.service';
 import Button from '~ui/core/Button';
 import Group from '~ui/core/Group';
 import Icon from '~ui/core/Icon';
@@ -14,15 +14,13 @@ function AccountRemove() {
   const router = useRouter();
 
   const onRemove = async () => {
-    const providerId = storeUser.getState().activeProvider?._id || '';
+    const accountId = storeUser.getState().activeProvider?._id || '';
 
     if (!(await openConfirmModal())) return;
 
-    await accountRemove({
-      providerId,
-    }).then(() => {
-      router.push(Routes.strategies);
-    });
+    await removeAccountService({ accountId });
+
+    router.push(Routes.strategies);
   };
 
   return (
