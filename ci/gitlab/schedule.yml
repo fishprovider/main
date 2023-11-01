@@ -11,8 +11,9 @@ include:
 schedule-deploy-phone-android:
   tags:
     - local
-  rules:
-    - exists:
+  only:
+    - variables:
+      - $CI_PIPELINE_SOURCE == "schedule"
       - $SCHEDULE_PHONE_ANDROID
   cache: !reference [.cache_npm, cache]
   timeout: "30 minutes"
@@ -22,8 +23,9 @@ schedule-deploy-phone-android:
 schedule-deploy-phone-ios:
   tags:
     - local
-  rules:
-    - exists:
+  only:
+    - variables:
+      - $CI_PIPELINE_SOURCE == "schedule"
       - $SCHEDULE_PHONE_IOS
   cache: !reference [.cache_npm, cache]
   timeout: "30 minutes"
@@ -33,8 +35,9 @@ schedule-deploy-phone-ios:
 schedule-build-web:
   tags:
     - local
-  rules:
-    - exists:
+  only:
+    - variables:
+      - $CI_PIPELINE_SOURCE == "schedule"
       - $SCHEDULE_WEB
   cache: !reference [.cache_npm, cache]
   timeout: "30 minutes"
