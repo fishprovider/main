@@ -91,6 +91,7 @@ const updateUser: UserRepository['updateUser'] = async (filter, payload, options
       ...(addRole?.role === AccountRoles.viewer && {
         [`roles.viewerAccounts.${addRole.accountId}`]: true,
       }),
+      updatedAt: new Date(),
     },
     $unset: {
       ...(removeRole?.role === AccountRoles.admin && {
@@ -134,6 +135,9 @@ const updateUsers: UserRepository['updateUsers'] = async (filter, payload, optio
   } = payload;
 
   const updateFilter: UpdateFilter<User> = {
+    $set: {
+      updatedAt: new Date(),
+    },
     $unset: {
       ...(removeRoleAccountId && {
         [`roles.adminAccounts.${removeRoleAccountId}`]: '',
