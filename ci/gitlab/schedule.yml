@@ -12,34 +12,31 @@ schedule-deploy-phone-android:
   tags:
     - local
   rules:
-    - if: $CI_PIPELINE_SOURCE == "schedule"
-      when: always
+    - exists
+      - $SCHEDULE_PHONE_ANDROID
   cache: !reference [.cache_npm, cache]
   timeout: "30 minutes"
   script:
-    - if [ -z $SCHEDULE_PHONE_ANDROID ]; then exit 0; fi
     - !reference [.deploy-phone-android, script]
 
 schedule-deploy-phone-ios:
   tags:
     - local
   rules:
-    - if: $CI_PIPELINE_SOURCE == "schedule"
-      when: always
+    - exists
+      - $SCHEDULE_PHONE_IOS
   cache: !reference [.cache_npm, cache]
   timeout: "30 minutes"
   script:
-    - if [ -z $SCHEDULE_PHONE_IOS ]; then exit 0; fi
     - !reference [.deploy-phone-ios, script]
 
 schedule-build-web:
   tags:
     - local
   rules:
-    - if: $CI_PIPELINE_SOURCE == "schedule"
-      when: always
+    - exists
+      - $SCHEDULE_WEB
   cache: !reference [.cache_npm, cache]
   timeout: "30 minutes"
   script:
-    - if [ -z $SCHEDULE_WEB ]; then exit 0; fi
     - !reference [.build-web, script]
