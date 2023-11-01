@@ -17,8 +17,7 @@ schedule-deploy-phone-android:
   cache: !reference [.cache_npm, cache]
   timeout: "30 minutes"
   script:
-    - echo build-android
-    # - !reference [.deploy-phone-android, script]
+    - !reference [.deploy-phone-android, script]
 
 schedule-deploy-phone-ios:
   tags:
@@ -29,8 +28,7 @@ schedule-deploy-phone-ios:
   cache: !reference [.cache_npm, cache]
   timeout: "30 minutes"
   script:
-    - echo build-ios
-    # - !reference [.deploy-phone-ios, script]
+    - !reference [.deploy-phone-ios, script]
 
 schedule-build-web:
   tags:
@@ -41,5 +39,4 @@ schedule-build-web:
   cache: !reference [.cache_npm, cache]
   timeout: "30 minutes"
   script:
-    - echo build-web
-    # - !reference [.build-web, script]
+    - !reference [.build-web, script]
