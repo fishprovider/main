@@ -9,7 +9,7 @@ doctor:
     - if: $CI_PIPELINE_SOURCE == "schedule"
       when: never
     - if: $CI_COMMIT_TITLE =~ /skip-doctor/
-      when: always
+      when: never
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == $CI_DEFAULT_BRANCH
       when: always
   cache: !reference [.cache_npm, cache]
