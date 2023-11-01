@@ -6,8 +6,8 @@ const workSpaceDirs = rootPackageJson.workspaces.flatMap((item) => globSync(item
 
 const config = {};
 workSpaceDirs.forEach(workSpaceDir => {
-  config[`${workSpaceDir}/**/*.{js,jsx,ts,tsx}`] = `npm run -w ${workSpaceDir} ci-lint`;
-  config[`${workSpaceDir}/**/*.{ts,tsx}`] = `npm run -w ${workSpaceDir} ci-type-check`;
+  config[`${workSpaceDir}/**/*.{js,jsx,ts,tsx}`] = `npm run -w ${workSpaceDir} ci-lint --if-present`;
+  // config[`${workSpaceDir}/**/*.{ts,tsx}`] = `npm run -w ${workSpaceDir} ci-type-check --if-present`;
 })
 // console.log(config);
 

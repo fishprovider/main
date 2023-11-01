@@ -1,7 +1,7 @@
 import { checkRepository } from '@fishprovider/core';
 
 import {
-  checkAccountAccess, checkLogin, RemoveAccountService,
+  checkAccountAccess, checkLogin, RemoveAccountService, sanitizeOutputAccount,
 } from '../..';
 
 export const removeAccountService: RemoveAccountService = async ({
@@ -38,7 +38,7 @@ export const removeAccountService: RemoveAccountService = async ({
 
   await updateUsersRepo({}, { removeRoleAccountId: accountId });
 
-  const { accountPlatform, accountTradeType, config } = account;
+  const { accountPlatform, config } = account;
   if (accountPlatform && config?.clientId) {
     await updateTradeClientRepo({
       accountPlatform,
@@ -48,10 +48,6 @@ export const removeAccountService: RemoveAccountService = async ({
   }
 
   return {
-    doc: {
-      _id: accountId,
-      accountPlatform,
-      accountTradeType,
-    },
+    doc: sanitizeOutputAccount(accountRaw),
   };
 };
