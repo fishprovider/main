@@ -1,5 +1,6 @@
 .deploy-phone-android:
   script:
+    - npm run clean
     - cd apps-frontend/phone
     - ./clean-deps.sh
     - npm i --prefer-offline --no-audit --no-progress --legacy-peer-deps --cache ~/.npm
@@ -11,6 +12,7 @@
 
 .deploy-phone-ios:
   script:
+    - npm run clean
     - cd apps-frontend/phone
     - ./clean-deps.sh
     - npm i --prefer-offline --no-audit --no-progress --legacy-peer-deps --cache ~/.npm
@@ -22,6 +24,7 @@
 
 .deploy-phone-update:
   script:
+    - npm run clean
     - cd apps-frontend/phone
     - ./clean-deps.sh
     - npm i --prefer-offline --no-audit --no-progress --legacy-peer-deps --cache ~/.npm
@@ -31,7 +34,92 @@
 
 .build-web:
   script:
+    - npm run clean
     - cd apps-frontend/web
     - ./clean-deps.sh
+    - npm i --prefer-offline --no-audit --no-progress --legacy-peer-deps --cache ~/.npm
+    - npm run build
+
+.build-back:
+  script:
+    - npm run clean
+    - cd apps-backend/back
+    - npm i --prefer-offline --no-audit --no-progress --legacy-peer-deps --cache ~/.npm
+    - npm run build
+
+.build-bot:
+  script:
+    - npm run clean
+    - cd apps-backend/bot
+    - npm i --prefer-offline --no-audit --no-progress --legacy-peer-deps --cache ~/.npm
+    - npm run build
+
+.build-copy:
+  script:
+    - npm run clean
+    - cd apps-backend/copy
+    - npm i --prefer-offline --no-audit --no-progress --legacy-peer-deps --cache ~/.npm
+    - npm run build
+
+.build-cron:
+  script:
+    - npm run clean
+    - cd apps-backend/cron
+    - npm i --prefer-offline --no-audit --no-progress --legacy-peer-deps --cache ~/.npm
+    - npm run build
+
+.build-gate:
+  script:
+    - npm run clean
+    - cd apps-backend/gate
+    - npm i --prefer-offline --no-audit --no-progress --legacy-peer-deps --cache ~/.npm
+    - npm run build
+
+.build-head-ctrader:
+  script:
+    - npm run clean
+    - cd apps-backend/head-ctrader
+    - npm i --prefer-offline --no-audit --no-progress --legacy-peer-deps --cache ~/.npm
+    - npm run build
+
+.build-head-meta:
+  script:
+    - npm run clean
+    - cd apps-backend/head-meta
+    - npm i --prefer-offline --no-audit --no-progress --legacy-peer-deps --cache ~/.npm
+    - npm run build
+
+.build-mon:
+  script:
+    - npm run clean
+    - cd apps-backend/mon
+    - npm i --prefer-offline --no-audit --no-progress --legacy-peer-deps --cache ~/.npm
+    - npm run build
+
+.build-pay:
+  script:
+    - npm run clean
+    - cd apps-backend/pay
+    - npm i --prefer-offline --no-audit --no-progress --legacy-peer-deps --cache ~/.npm
+    - npm run build
+
+.build-pup:
+  script:
+    - npm run clean
+    - cd apps-backend/pup
+    - npm i --prefer-offline --no-audit --no-progress --legacy-peer-deps --cache ~/.npm
+    - npm run build
+
+.build-spot-ctrader:
+  script:
+    - npm run clean
+    - cd apps-backend/spot-ctrader
+    - npm i --prefer-offline --no-audit --no-progress --legacy-peer-deps --cache ~/.npm
+    - npm run build
+
+.build-spot-meta:
+  script:
+    - npm run clean
+    - cd apps-backend/spot-meta
     - npm i --prefer-offline --no-audit --no-progress --legacy-peer-deps --cache ~/.npm
     - npm run build

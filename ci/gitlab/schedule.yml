@@ -40,3 +40,25 @@ schedule-build-web:
   timeout: "30 minutes"
   script:
     - !reference [.build-web, script]
+
+schedule-build-backend-apps:
+  tags:
+    - local
+  only:
+    variables:
+      - $SCHEDULE_BACKEND_APPS
+  cache: !reference [.cache_npm, cache]
+  timeout: "30 minutes"
+  script:
+    - !reference [.build-back, script]
+    - !reference [.build-bot, script]
+    - !reference [.build-copy, script]
+    - !reference [.build-cron, script]
+    - !reference [.build-gate, script]
+    - !reference [.build-head-ctrader, script]
+    - !reference [.build-head-meta, script]
+    - !reference [.build-mon, script]
+    - !reference [.build-pay, script]
+    - !reference [.build-pup, script]
+    - !reference [.build-spot-ctrader, script]
+    - !reference [.build-spot-meta, script]
