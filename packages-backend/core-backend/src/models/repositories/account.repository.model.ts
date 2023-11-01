@@ -75,7 +75,7 @@ export interface AccountRepository {
     filter: {
       accountId: string,
     },
-  ) => Promise<string>;
+  ) => Promise<any>;
 
   getTradeClient?: (
     filter: {

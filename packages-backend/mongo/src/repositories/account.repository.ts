@@ -134,6 +134,14 @@ const addAccount: AccountRepository['addAccount'] = async (payload) => {
   return { doc: accountNew };
 };
 
+const removeAccount: AccountRepository['removeAccount'] = async (filter) => {
+  const { db } = await getMongo();
+  await db.collection<Account>('accounts').deleteOne(
+    buildAccountFilter(filter),
+  );
+  return {};
+};
+
 const getTradeClient: AccountRepository['getTradeClient'] = async (filter) => {
   const { accountPlatform, clientId } = filter;
 
@@ -156,5 +164,6 @@ export const MongoAccountRepository: AccountRepository = {
   getAccounts,
   updateAccount,
   addAccount,
+  removeAccount,
   getTradeClient,
 };
