@@ -13,7 +13,7 @@ schedule-deploy-phone-android:
     - local
   only:
     variables:
-      - $SCHEDULE_PHONE_ANDROID == "true"
+      - $SCHEDULE_PHONE_ANDROID
   cache: !reference [.cache_npm, cache]
   timeout: "30 minutes"
   script:
@@ -25,7 +25,7 @@ schedule-deploy-phone-ios:
     - local
   only:
     variables:
-      - $SCHEDULE_PHONE_IOS == "true"
+      - $SCHEDULE_PHONE_IOS
   cache: !reference [.cache_npm, cache]
   timeout: "30 minutes"
   script:
@@ -37,7 +37,7 @@ schedule-build-web:
     - local
   only:
     variables:
-      - $SCHEDULE_WEB == "true"
+      - $SCHEDULE_WEB
   cache: !reference [.cache_npm, cache]
   timeout: "30 minutes"
   script:
