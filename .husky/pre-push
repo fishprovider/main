@@ -2,4 +2,5 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 # npm run doctor
-npm run check-deps && npm run check-unused-deps
+npm run check-deps
+npm run check-unused-deps
