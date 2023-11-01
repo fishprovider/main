@@ -24,7 +24,7 @@ const buildAccountFilter = (filter: {
     accountId, accountViewType, email, accountIds, member, checkExist,
   } = filter;
 
-  const andFilter = [];
+  const andFilter: Filter<Account>['$and'] = [];
 
   if (checkExist) {
     const { accountId: checkAccountId, name, tradeAccountId } = checkExist;

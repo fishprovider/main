@@ -8,15 +8,16 @@ import { getMongo } from '..';
 
 const buildUserFilter = (filter: {
   email?: string,
+  emails?: string[],
   pushNotifType?: string
   pushNotifTopic?: string
   roleAccountId?: string,
 }): Filter<User> => {
   const {
-    email, pushNotifType, pushNotifTopic, roleAccountId,
+    email, emails, pushNotifType, pushNotifTopic, roleAccountId,
   } = filter;
 
-  const andFilter = [];
+  const andFilter: Filter<User>['$and'] = [];
 
   if (roleAccountId) {
     andFilter.push({
@@ -31,6 +32,7 @@ const buildUserFilter = (filter: {
 
   return {
     ...(email && { email }),
+    ...(emails && { email: { $in: emails } }),
     ...(pushNotifType && {
       pushNotif: {
         $elemMatch: {
@@ -77,7 +79,6 @@ const updateUser: UserRepository['updateUser'] = async (filter, payload, options
         [`starAccounts.${starAccount.accountId}`]: starAccount.enabled,
       }),
       ...(roles && { roles }),
-
       ...(addRole?.role === AccountRoles.admin && {
         [`roles.adminAccounts.${addRole.accountId}`]: true,
       }),
@@ -90,18 +91,19 @@ const updateUser: UserRepository['updateUser'] = async (filter, payload, options
       ...(addRole?.role === AccountRoles.viewer && {
         [`roles.viewerAccounts.${addRole.accountId}`]: true,
       }),
-
+    },
+    $unset: {
       ...(removeRole?.role === AccountRoles.admin && {
-        [`roles.adminAccounts.${removeRole.accountId}`]: false,
+        [`roles.adminAccounts.${removeRole.accountId}`]: '',
       }),
       ...(removeRole?.role === AccountRoles.protector && {
-        [`roles.protectorAccounts.${removeRole.accountId}`]: false,
+        [`roles.protectorAccounts.${removeRole.accountId}`]: '',
       }),
       ...(removeRole?.role === AccountRoles.trader && {
-        [`roles.traderAccounts.${removeRole.accountId}`]: false,
+        [`roles.traderAccounts.${removeRole.accountId}`]: '',
       }),
       ...(removeRole?.role === AccountRoles.viewer && {
-        [`roles.viewerAccounts.${removeRole.accountId}`]: false,
+        [`roles.viewerAccounts.${removeRole.accountId}`]: '',
       }),
     },
   };
@@ -128,22 +130,16 @@ const updateUsers: UserRepository['updateUsers'] = async (filter, payload, optio
   const userFilter = buildUserFilter(filter);
 
   const {
-    removeRole,
+    removeRoleAccountId,
   } = payload;
 
   const updateFilter: UpdateFilter<User> = {
-    $set: {
-      ...(removeRole?.role === AccountRoles.admin && {
-        [`roles.adminAccounts.${removeRole.accountId}`]: false,
-      }),
-      ...(removeRole?.role === AccountRoles.protector && {
-        [`roles.protectorAccounts.${removeRole.accountId}`]: false,
-      }),
-      ...(removeRole?.role === AccountRoles.trader && {
-        [`roles.traderAccounts.${removeRole.accountId}`]: false,
-      }),
-      ...(removeRole?.role === AccountRoles.viewer && {
-        [`roles.viewerAccounts.${removeRole.accountId}`]: false,
+    $unset: {
+      ...(removeRoleAccountId && {
+        [`roles.adminAccounts.${removeRoleAccountId}`]: '',
+        [`roles.protectorAccounts.${removeRoleAccountId}`]: '',
+        [`roles.traderAccounts.${removeRoleAccountId}`]: '',
+        [`roles.viewerAccounts.${removeRoleAccountId}`]: '',
       }),
     },
   };

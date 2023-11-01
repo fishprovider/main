@@ -47,13 +47,10 @@ export interface UserRepository {
 
   updateUsers?: (
     filter: {
-      roleAccountId?: string,
+      emails?: string[],
     },
     payload: {
-      removeRole?: {
-        role: AccountRoles,
-        accountId: string,
-      },
+      removeRoleAccountId?: string,
     },
     options?: BaseUpdateOptions<User>,
   ) => Promise<BaseGetManyResult<User>>;

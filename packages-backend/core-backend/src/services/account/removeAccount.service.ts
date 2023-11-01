@@ -1,4 +1,4 @@
-import { AccountRoles, checkRepository } from '@fishprovider/core';
+import { checkRepository } from '@fishprovider/core';
 
 import {
   checkAccountAccess, checkLogin, RemoveAccountService,
@@ -36,14 +36,7 @@ export const removeAccountService: RemoveAccountService = async ({
 
   await removeAccountRepo(filter);
 
-  await updateUsersRepo({
-    roleAccountId: accountId,
-  }, {
-    removeRole: {
-      role: AccountRoles.admin,
-      accountId,
-    },
-  });
+  await updateUsersRepo({}, { removeRoleAccountId: accountId });
 
   const { accountPlatform, accountTradeType, config } = account;
   if (accountPlatform && config?.clientId) {
