@@ -1,8 +1,4 @@
-#
-# Important Notes
-#
-# `rules` cannot see `variables`, only `script` can see `variables`
-#
+# Note: `rules` cannot see `variables`
 
 include:
   - local: /ci/gitlab/_base.yml
