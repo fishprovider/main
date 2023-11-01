@@ -5,8 +5,8 @@ import { DataFetchAccountRepository } from '@fishprovider/data-fetch';
 export const removeAccountService = async (filter: {
   accountId: string,
 }) => {
-  const getAccountRepo = checkRepository(DataFetchAccountRepository.removeAccount);
-  await getAccountRepo(filter);
+  const removeAccountRepo = checkRepository(DataFetchAccountRepository.removeAccount);
+  await removeAccountRepo(filter);
 
   // TODO: migrate to DataFetchAccountRepository
   storeAccounts.removeDoc(filter.accountId);
