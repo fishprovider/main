@@ -12,7 +12,7 @@ schedule-deploy-phone-android:
   tags:
     - local
   only:
-    - variables:
+    variables:
       - $CI_PIPELINE_SOURCE == "schedule"
       - $SCHEDULE_PHONE_ANDROID
   cache: !reference [.cache_npm, cache]
@@ -24,7 +24,7 @@ schedule-deploy-phone-ios:
   tags:
     - local
   only:
-    - variables:
+    variables:
       - $CI_PIPELINE_SOURCE == "schedule"
       - $SCHEDULE_PHONE_IOS
   cache: !reference [.cache_npm, cache]
@@ -36,7 +36,7 @@ schedule-build-web:
   tags:
     - local
   only:
-    - variables:
+    variables:
       - $CI_PIPELINE_SOURCE == "schedule"
       - $SCHEDULE_WEB
   cache: !reference [.cache_npm, cache]
