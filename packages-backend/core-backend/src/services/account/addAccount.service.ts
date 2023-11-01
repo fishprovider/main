@@ -17,10 +17,10 @@ export const addAccountService: AddAccountService = async ({
   //
   const userSession = checkLogin(context?.userSession);
   const getAccountRepo = checkRepository(repositories.account.getAccount);
-  const getTradeClientRepo = checkRepository(repositories.account.getTradeClient);
-  const addTradeAccountRepo = checkRepository(repositories.trade.addAccount);
   const addAccountRepo = checkRepository(repositories.account.addAccount);
+  const getTradeClientRepo = checkRepository(repositories.account.getTradeClient);
   const updateTradeClientRepo = checkRepository(repositories.account.updateTradeClient);
+  const addTradeAccountRepo = checkRepository(repositories.trade.addAccount);
   const updateUserRepo = checkRepository(repositories.user.updateUser);
 
   //
@@ -44,7 +44,7 @@ export const addAccountService: AddAccountService = async ({
   const accountId = _.replace(name, /\s+/g, '_').toLowerCase();
 
   const { doc: accountExisted } = await getAccountRepo({
-    orFilter: {
+    checkExist: {
       accountId,
       name,
       tradeAccountId: baseConfig.accountId,
@@ -121,8 +121,6 @@ export const addAccountService: AddAccountService = async ({
     clientId,
     addActiveAccounts: 1,
   });
-
-  // TODO: start head
 
   return {
     doc: sanitizeOutputAccount(account),

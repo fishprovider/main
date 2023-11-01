@@ -11,9 +11,9 @@ export interface AccountRepository {
   getAccount?: (
     filter: {
       accountId?: string,
-      orFilter?: {
-        accountId?: string,
-        name?: string,
+      checkExist?: {
+        accountId: string,
+        name: string,
         tradeAccountId?: string,
       },
       config?: AccountConfig,
@@ -76,7 +76,7 @@ export interface AccountRepository {
     filter: {
       accountId: string,
     },
-  ) => Promise<any>;
+  ) => Promise<BaseGetResult<Account>>;
 
   getTradeClient?: (
     filter: {

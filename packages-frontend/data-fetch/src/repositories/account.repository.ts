@@ -48,6 +48,7 @@ const removeAccount: AccountRepository['removeAccount'] = async (filter) => {
     removeDocStore: removeDocStore && (() => removeDocStore(filter)),
     removeDocApi: removeDocApi && (() => removeDocApi(filter)),
   });
+  return {};
 };
 
 export const DataFetchAccountRepository: AccountRepository = {

@@ -86,6 +86,7 @@ export type RemoveAccountService = (params: BaseUpdateServiceParams<Account> & {
   },
   repositories: {
     account: AccountRepository,
+    trade: AccountRepository,
     user: UserRepository,
   },
-}) => Promise<any>;
+}) => Promise<BaseGetResult<Account>>;

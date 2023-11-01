@@ -14,15 +14,28 @@ const buildAccountFilter = (filter: {
   accountViewType?: AccountViewType,
   email?: string,
   member?: AccountMember,
-  orFilter?: {
-    accountId?: string,
-    name?: string,
+  checkExist?: {
+    accountId: string,
+    name: string,
     tradeAccountId?: string,
   },
 }): Filter<Account> => {
   const {
-    accountId, accountViewType, email, accountIds, member, orFilter,
+    accountId, accountViewType, email, accountIds, member, checkExist,
   } = filter;
+
+  const andFilter = [];
+
+  if (checkExist) {
+    const { accountId: checkAccountId, name, tradeAccountId } = checkExist;
+    andFilter.push({
+      $or: [
+        { _id: checkAccountId },
+        { name },
+        ...(tradeAccountId ? [{ 'config.accountId': tradeAccountId }] : []),
+      ],
+    });
+  }
 
   return {
     ...(accountId && { _id: accountId }),
@@ -30,13 +43,7 @@ const buildAccountFilter = (filter: {
     ...(accountViewType && { accountViewType }),
     ...(email && { 'members.email': email }),
     ...(member?.status === 'update' && { 'members.email': member.email }),
-    ...(orFilter && {
-      $or: [
-        ...(orFilter.accountId ? [{ _id: orFilter.accountId }] : []),
-        ...(orFilter.name ? [{ name: orFilter.name }] : []),
-        ...(orFilter.tradeAccountId ? [{ 'config.accountId': orFilter.tradeAccountId }] : []),
-      ],
-    }),
+    ...(andFilter.length && { $and: andFilter }),
     deleted: { $ne: true },
   };
 };

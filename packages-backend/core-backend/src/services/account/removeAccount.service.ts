@@ -10,30 +10,34 @@ export const removeAccountService: RemoveAccountService = async ({
   //
   // pre-check
   //
-  const userSession = checkLogin(context?.userSession);
+  checkLogin(context?.userSession);
   const getAccountRepo = checkRepository(repositories.account.getAccount);
   const removeAccountRepo = checkRepository(repositories.account.removeAccount);
   const updateTradeClientRepo = checkRepository(repositories.account.updateTradeClient);
-  const updateUserRepo = checkRepository(repositories.user.updateUser);
+  const removeTradeAccountRepo = checkRepository(repositories.trade.removeAccount);
+  const updateUsersRepo = checkRepository(repositories.user.updateUsers);
 
   //
   // main
   //
   const { accountId } = filter;
-  const { doc: account } = await getAccountRepo(filter, {
+  const { doc: accountRaw } = await getAccountRepo(filter, {
     projection: {
       _id: 1,
       members: 1,
       accountPlatform: 1,
+      accountTradeType: 1,
       'config.clientId': 1,
     },
   });
-  const { accountPlatform, config } = checkAccountAccess(account, context);
+  const account = checkAccountAccess(accountRaw, context);
+
+  await removeTradeAccountRepo({ accountId });
 
   await removeAccountRepo(filter);
 
-  await updateUserRepo({
-    email: userSession.email,
+  await updateUsersRepo({
+    roleAccountId: accountId,
   }, {
     removeRole: {
       role: AccountRoles.admin,
@@ -41,6 +45,7 @@ export const removeAccountService: RemoveAccountService = async ({
     },
   });
 
+  const { accountPlatform, accountTradeType, config } = account;
   if (accountPlatform && config?.clientId) {
     await updateTradeClientRepo({
       accountPlatform,
@@ -49,5 +54,11 @@ export const removeAccountService: RemoveAccountService = async ({
     });
   }
 
-  // TODO: stop head
+  return {
+    doc: {
+      _id: accountId,
+      accountPlatform,
+      accountTradeType,
+    },
+  };
 };

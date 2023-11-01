@@ -1,9 +1,9 @@
 export type Projection<T> = Partial<Record<keyof T | string, 0 | 1>>;
-export type Sort<T> = Partial<Record<keyof T | string, 1 | -1>>;
+export type Sort = { [key: string]: 'asc' | 'desc' };
 
 export interface BaseGetOptions<T> {
   projection?: Projection<T>,
-  sort?: Sort<T>,
+  sort?: Sort,
 }
 
 export interface BaseUpdateOptions<T> extends BaseGetOptions<T> {

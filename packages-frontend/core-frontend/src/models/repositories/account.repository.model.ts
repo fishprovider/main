@@ -48,5 +48,5 @@ export interface AccountRepository {
     filter: {
       accountId: string,
     },
-  ) => Promise<any>;
+  ) => Promise<BaseGetResult<Account>>;
 }

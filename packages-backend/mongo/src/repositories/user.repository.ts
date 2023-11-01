@@ -10,10 +10,25 @@ const buildUserFilter = (filter: {
   email?: string,
   pushNotifType?: string
   pushNotifTopic?: string
+  roleAccountId?: string,
 }): Filter<User> => {
   const {
-    email, pushNotifType, pushNotifTopic,
+    email, pushNotifType, pushNotifTopic, roleAccountId,
   } = filter;
+
+  const andFilter = [];
+
+  if (roleAccountId) {
+    andFilter.push({
+      $or: [
+        { [`roles.adminAccounts.${roleAccountId}`]: { $exists: true } },
+        { [`roles.protectorAccounts.${roleAccountId}`]: { $exists: true } },
+        { [`roles.traderAccounts.${roleAccountId}`]: { $exists: true } },
+        { [`roles.viewerAccounts.${roleAccountId}`]: { $exists: true } },
+      ],
+    });
+  }
+
   return {
     ...(email && { email }),
     ...(pushNotifType && {
@@ -24,6 +39,7 @@ const buildUserFilter = (filter: {
         },
       },
     }),
+    ...(andFilter.length && { $and: andFilter }),
   };
 };
 
@@ -108,8 +124,50 @@ const updateUser: UserRepository['updateUser'] = async (filter, payload, options
   return {};
 };
 
+const updateUsers: UserRepository['updateUsers'] = async (filter, payload, options) => {
+  const userFilter = buildUserFilter(filter);
+
+  const {
+    removeRole,
+  } = payload;
+
+  const updateFilter: UpdateFilter<User> = {
+    $set: {
+      ...(removeRole?.role === AccountRoles.admin && {
+        [`roles.adminAccounts.${removeRole.accountId}`]: false,
+      }),
+      ...(removeRole?.role === AccountRoles.protector && {
+        [`roles.protectorAccounts.${removeRole.accountId}`]: false,
+      }),
+      ...(removeRole?.role === AccountRoles.trader && {
+        [`roles.traderAccounts.${removeRole.accountId}`]: false,
+      }),
+      ...(removeRole?.role === AccountRoles.viewer && {
+        [`roles.viewerAccounts.${removeRole.accountId}`]: false,
+      }),
+    },
+  };
+
+  const { db } = await getMongo();
+  const collection = db.collection<User>('users');
+
+  await collection.updateMany(userFilter, updateFilter);
+
+  const {
+    returnAfter, projection,
+  } = options || {};
+
+  if (returnAfter) {
+    const users = await collection.find(userFilter, { projection }).toArray();
+    return { docs: users };
+  }
+
+  return {};
+};
+
 export const MongoUserRepository: UserRepository = {
   getUser,
   getUsers,
   updateUser,
+  updateUsers,
 };

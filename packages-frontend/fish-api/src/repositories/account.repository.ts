@@ -32,7 +32,7 @@ const removeAccount: AccountRepository['removeAccount'] = async (filter) => {
   await fishApiGet<Partial<Account> | undefined>('/account/removeAccount', {
     accountId,
   });
-  return accountId;
+  return {};
 };
 
 export const FishApiAccountRepository: AccountRepository = {
