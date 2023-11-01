@@ -1,4 +1,4 @@
-import { User } from '@fishprovider/core';
+import { AccountRoles, User } from '@fishprovider/core';
 import {
   UserRepository,
 } from '@fishprovider/core-backend';
@@ -49,7 +49,7 @@ const updateUser: UserRepository['updateUser'] = async (filter, payload, options
   const userFilter = buildUserFilter(filter);
 
   const {
-    starAccount, roles,
+    starAccount, roles, addRole, removeRole,
   } = payload;
   const {
     returnAfter, projection,
@@ -61,6 +61,32 @@ const updateUser: UserRepository['updateUser'] = async (filter, payload, options
         [`starAccounts.${starAccount.accountId}`]: starAccount.enabled,
       }),
       ...(roles && { roles }),
+
+      ...(addRole?.role === AccountRoles.admin && {
+        [`roles.adminAccounts.${addRole.accountId}`]: true,
+      }),
+      ...(addRole?.role === AccountRoles.protector && {
+        [`roles.protectorAccounts.${addRole.accountId}`]: true,
+      }),
+      ...(addRole?.role === AccountRoles.trader && {
+        [`roles.traderAccounts.${addRole.accountId}`]: true,
+      }),
+      ...(addRole?.role === AccountRoles.viewer && {
+        [`roles.viewerAccounts.${addRole.accountId}`]: true,
+      }),
+
+      ...(removeRole?.role === AccountRoles.admin && {
+        [`roles.adminAccounts.${removeRole.accountId}`]: false,
+      }),
+      ...(removeRole?.role === AccountRoles.protector && {
+        [`roles.protectorAccounts.${removeRole.accountId}`]: false,
+      }),
+      ...(removeRole?.role === AccountRoles.trader && {
+        [`roles.traderAccounts.${removeRole.accountId}`]: false,
+      }),
+      ...(removeRole?.role === AccountRoles.viewer && {
+        [`roles.viewerAccounts.${removeRole.accountId}`]: false,
+      }),
     },
   };
 

@@ -1,5 +1,5 @@
 import {
-  User, UserRoles,
+  AccountRoles, User, UserRoles,
 } from '@fishprovider/core';
 
 import {
@@ -32,7 +32,15 @@ export interface UserRepository {
         accountId: string
         enabled: boolean
       }
-      roles?: UserRoles
+      roles?: UserRoles,
+      addRole?: {
+        role: AccountRoles,
+        accountId: string,
+      },
+      removeRole?: {
+        role: AccountRoles,
+        accountId: string,
+      },
     },
     options?: BaseUpdateOptions<User>,
   ) => Promise<BaseUpdateResult<User>>;

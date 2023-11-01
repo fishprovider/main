@@ -1,5 +1,5 @@
-export type Projection<T> = Partial<Record<keyof T, 0 | 1>>;
-export type Sort<T> = Partial<Record<keyof T, 1 | -1>>;
+export type Projection<T> = Partial<Record<keyof T | string, 0 | 1>>;
+export type Sort<T> = Partial<Record<keyof T | string, 1 | -1>>;
 
 export interface BaseGetOptions<T> {
   projection?: Projection<T>,

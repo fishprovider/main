@@ -20,6 +20,8 @@ export const addAccountService: AddAccountService = async ({
   const getTradeClientRepo = checkRepository(repositories.account.getTradeClient);
   const addTradeAccountRepo = checkRepository(repositories.trade.addAccount);
   const addAccountRepo = checkRepository(repositories.account.addAccount);
+  const updateTradeClientRepo = checkRepository(repositories.account.updateTradeClient);
+  const updateUserRepo = checkRepository(repositories.user.updateUser);
 
   //
   // main
@@ -105,9 +107,22 @@ export const addAccountService: AddAccountService = async ({
     }],
   });
 
+  await updateUserRepo({
+    email: userSession.email,
+  }, {
+    addRole: {
+      role: AccountRoles.admin,
+      accountId,
+    },
+  });
+
+  await updateTradeClientRepo({
+    accountPlatform,
+    clientId,
+    addActiveAccounts: 1,
+  });
+
   // TODO: start head
-  // TODO: add user role
-  // TODO: increase clientSecrets activeAccounts
 
   return {
     doc: sanitizeOutputAccount(account),

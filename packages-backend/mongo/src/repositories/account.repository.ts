@@ -159,6 +159,22 @@ const getTradeClient: AccountRepository['getTradeClient'] = async (filter) => {
   return { doc: client ?? undefined };
 };
 
+const updateTradeClient: AccountRepository['updateTradeClient'] = async (filter) => {
+  const { accountPlatform, clientId, addActiveAccounts } = filter;
+
+  const { db } = await getMongo();
+  const client = await db.collection<AccountConfig>('clientSecrets').updateOne({
+    accountPlatform,
+    clientId,
+  }, {
+    $inc: {
+      activeAccounts: addActiveAccounts,
+    },
+  });
+
+  return { doc: client ?? undefined };
+};
+
 export const MongoAccountRepository: AccountRepository = {
   getAccount,
   getAccounts,
@@ -166,4 +182,5 @@ export const MongoAccountRepository: AccountRepository = {
   addAccount,
   removeAccount,
   getTradeClient,
+  updateTradeClient,
 };

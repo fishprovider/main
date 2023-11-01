@@ -5,7 +5,7 @@ import {
 
 import {
   AccountRepository, BaseGetManyResult, BaseGetResult,
-  BaseGetServiceParams, BaseUpdateServiceParams,
+  BaseGetServiceParams, BaseUpdateServiceParams, UserRepository,
 } from '..';
 
 export type GetAccountService = (params: BaseGetServiceParams<Account> & {
@@ -76,6 +76,7 @@ export type AddAccountService = (params: BaseUpdateServiceParams<Account> & {
   repositories: {
     account: AccountRepository,
     trade: AccountRepository,
+    user: UserRepository,
   },
 }) => Promise<BaseGetResult<Account>>;
 
@@ -84,6 +85,7 @@ export type RemoveAccountService = (params: BaseUpdateServiceParams<Account> & {
     accountId: string,
   },
   repositories: {
-    account: AccountRepository
+    account: AccountRepository,
+    user: UserRepository,
   },
 }) => Promise<any>;

@@ -43,6 +43,7 @@ export interface AccountRepository {
       balance?: number,
       providerData?: any,
       member?: AccountMember,
+      account?: Partial<Account>,
     },
     options?: BaseUpdateOptions<Account>,
   ) => Promise<BaseUpdateResult<Account>>;
@@ -83,4 +84,12 @@ export interface AccountRepository {
       clientId?: string,
     },
   ) => Promise<BaseGetResult<AccountConfig>>;
+
+  updateTradeClient?: (
+    filter: {
+      accountPlatform: AccountPlatform,
+      clientId: string,
+      addActiveAccounts: number,
+    },
+  ) => Promise<any>;
 }
