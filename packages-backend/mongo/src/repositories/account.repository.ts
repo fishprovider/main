@@ -136,8 +136,14 @@ const addAccount: AccountRepository['addAccount'] = async (payload) => {
 
 const removeAccount: AccountRepository['removeAccount'] = async (filter) => {
   const { db } = await getMongo();
-  await db.collection<Account>('accounts').deleteOne(
+  await db.collection<Account>('accounts').updateOne(
     buildAccountFilter(filter),
+    {
+      $set: {
+        deleted: true,
+        deletedAt: new Date(),
+      },
+    },
   );
   return {};
 };
