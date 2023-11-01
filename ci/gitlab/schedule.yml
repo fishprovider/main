@@ -13,7 +13,6 @@ schedule-deploy-phone-android:
     - local
   only:
     variables:
-      - $CI_PIPELINE_SOURCE == "schedule"
       - $SCHEDULE_PHONE_ANDROID == "true"
   cache: !reference [.cache_npm, cache]
   timeout: "30 minutes"
@@ -26,7 +25,6 @@ schedule-deploy-phone-ios:
     - local
   only:
     variables:
-      - $CI_PIPELINE_SOURCE == "schedule"
       - $SCHEDULE_PHONE_IOS == "true"
   cache: !reference [.cache_npm, cache]
   timeout: "30 minutes"
@@ -39,7 +37,6 @@ schedule-build-web:
     - local
   only:
     variables:
-      - $CI_PIPELINE_SOURCE == "schedule"
       - $SCHEDULE_WEB == "true"
   cache: !reference [.cache_npm, cache]
   timeout: "30 minutes"
