@@ -1,13 +1,13 @@
 export const getDoc = async <T>(params: {
-  getDocCache?: () => Promise<T | undefined>,
-  setDocCache?: (doc?: T) => Promise<any>,
-  getDocDb?: () => Promise<T | undefined>,
+  getDocCache?: () => Promise<T>,
+  setDocCache?: (doc: T) => Promise<T>,
+  getDocDb?: () => Promise<T>,
 }) => {
   const {
     getDocCache, setDocCache, getDocDb,
   } = params;
 
-  const setDoc = async (doc?: T) => {
+  const setDoc = async (doc: T) => {
     if (setDocCache) {
       await setDocCache(doc);
     }
@@ -32,21 +32,21 @@ export const getDoc = async <T>(params: {
 };
 
 export const getDocs = async <T>(params: {
-  getDocsCache?: () => Promise<T[] | undefined>,
-  setDocsCache?: (docs?: T[]) => Promise<any>,
-  getDocsDb?: () => Promise<T[] | undefined>,
+  getDocsCache?: () => Promise<T>,
+  setDocsCache?: (docs: T) => Promise<T>,
+  getDocsDb?: () => Promise<T>,
 }) => {
   const {
     getDocsCache, setDocsCache, getDocsDb,
   } = params;
 
-  const setDocs = async (docs?: T[]) => {
+  const setDocs = async (docs: T) => {
     if (setDocsCache) {
       await setDocsCache(docs);
     }
   };
 
-  let docs: T[] | undefined;
+  let docs: T | undefined;
 
   if (getDocsCache) {
     docs = await getDocsCache();
@@ -62,4 +62,24 @@ export const getDocs = async <T>(params: {
   }
 
   return docs;
+};
+
+export const removeDoc = async <T>(params: {
+  removeDocCache?: () => Promise<T>,
+  removeDocDb?: () => Promise<T>,
+}) => {
+  const {
+    removeDocCache, removeDocDb,
+  } = params;
+  if (removeDocCache) {
+    removeDocCache(); // non-blocking
+  }
+
+  let doc: T | undefined;
+
+  if (removeDocDb) {
+    doc = await removeDocDb();
+  }
+
+  return doc;
 };

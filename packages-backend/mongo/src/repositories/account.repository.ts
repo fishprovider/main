@@ -123,7 +123,9 @@ const updateAccount: AccountRepository['updateAccount'] = async (filter, payload
     return { doc: account ?? undefined };
   }
   await collection.updateOne(accountFilter, updateFilter);
-  return {};
+  return {
+    doc: { _id: filter.accountId },
+  };
 };
 
 const addAccount: AccountRepository['addAccount'] = async (payload) => {
@@ -152,7 +154,13 @@ const removeAccount: AccountRepository['removeAccount'] = async (filter) => {
       },
     },
   );
-  return {};
+  return {
+    doc: {
+      _id: filter.accountId,
+      deleted: true,
+      deletedAt: new Date(),
+    },
+  };
 };
 
 const getTradeClient: AccountRepository['getTradeClient'] = async (filter) => {

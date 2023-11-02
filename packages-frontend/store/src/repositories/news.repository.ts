@@ -37,7 +37,7 @@ const getNews: NewsRepository['getNews'] = async (filter) => {
     };
   }
 
-  return {};
+  return { docs: [] };
 };
 
 const updateNews: NewsRepository['updateNews'] = async (_filter, payload) => {

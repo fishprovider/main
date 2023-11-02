@@ -1,25 +1,25 @@
 import { Account } from '@fishprovider/core';
-import { AccountRepository } from '@fishprovider/core-backend';
+import { AccountRepository, BaseGetManyResult, BaseGetResult } from '@fishprovider/core-backend';
 import { MongoAccountRepository } from '@fishprovider/mongo';
 import { RedisAccountRepository } from '@fishprovider/redis';
 
-import { getDoc, getDocs } from '..';
+import { getDoc, getDocs, removeDoc } from '..';
 
 const getAccount: AccountRepository['getAccount'] = async (filter, options) => {
   const getDocCache = RedisAccountRepository.getAccount;
   const setDocCache = RedisAccountRepository.updateAccount;
   const getDocDb = MongoAccountRepository.getAccount;
 
-  const account = await getDoc<Partial<Account>>({
+  const res = await getDoc<BaseGetResult<Account>>({
     getDocCache: getDocCache
-      && (() => getDocCache(filter, options).then((res) => res.doc)),
+      && (() => getDocCache(filter, options)),
     setDocCache: setDocCache
-      && ((doc) => setDocCache(filter, { account: doc }, options)),
+      && (({ doc }) => setDocCache(filter, { account: doc }, options)),
     getDocDb: getDocDb
-      && (() => getDocDb(filter, options).then((res) => res.doc)),
+      && (() => getDocDb(filter, options)),
   });
 
-  return { doc: account };
+  return res ?? {};
 };
 
 const getAccounts: AccountRepository['getAccounts'] = async (filter, options) => {
@@ -27,20 +27,35 @@ const getAccounts: AccountRepository['getAccounts'] = async (filter, options) =>
   const setDocsCache = RedisAccountRepository.updateAccounts;
   const getDocsDb = MongoAccountRepository.getAccounts;
 
-  const accounts = await getDocs<Partial<Account>>({
+  const res = await getDocs<BaseGetManyResult<Account>>({
     getDocsCache: getDocsCache
-      && (() => getDocsCache(filter, options).then((res) => res.docs)),
+      && (() => getDocsCache(filter, options)),
     setDocsCache: setDocsCache
-      && ((docs) => setDocsCache(filter, { accounts: docs }, options)),
+      && (({ docs }) => setDocsCache(filter, { accounts: docs }, options)),
     getDocsDb: getDocsDb
-      && (() => getDocsDb(filter, options).then((res) => res.docs)),
+      && (() => getDocsDb(filter, options)),
   });
 
-  return { docs: accounts };
+  return res ?? {};
 };
+
+const removeAccount: AccountRepository['removeAccount'] = async (filter) => {
+  const removeDocCache = RedisAccountRepository.removeAccount;
+  const removeDocDb = MongoAccountRepository.removeAccount;
+
+  const res = await removeDoc<BaseGetResult<Account>>({
+    removeDocCache: removeDocCache && (() => removeDocCache(filter)),
+    removeDocDb: removeDocDb && (() => removeDocDb(filter)),
+  });
+
+  return res ?? {};
+};
+
+// TODO: addAccount should update cache
 
 export const DataAccessAccountRepository: AccountRepository = {
   ...MongoAccountRepository,
   getAccount,
   getAccounts,
+  removeAccount,
 };

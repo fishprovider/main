@@ -34,7 +34,7 @@ export interface AccountRepository {
 
   updateAccount?: (
     filter: {
-      accountId?: string,
+      accountId: string,
     },
     payload: {
       name?: string,

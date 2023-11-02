@@ -1,5 +1,5 @@
 import { Account } from '@fishprovider/core';
-import { AccountRepository } from '@fishprovider/core-frontend';
+import { AccountRepository, BaseGetManyResult, BaseGetResult } from '@fishprovider/core-frontend';
 import { FishApiAccountRepository } from '@fishprovider/fish-api';
 import { LocalAccountRepository } from '@fishprovider/local';
 import { StoreAccountRepository } from '@fishprovider/store';
@@ -12,14 +12,18 @@ const getAccount: AccountRepository['getAccount'] = async (filter, options) => {
   const setDocStore = StoreAccountRepository.updateAccount;
   const getDocApi = FishApiAccountRepository.getAccount;
 
-  const account = await getDoc<Partial<Account>>({
-    getDocLocal: getDocLocal && (() => getDocLocal(filter, options).then((res) => res.doc)),
-    setDocLocal: setDocLocal && ((doc) => setDocLocal(filter, { account: doc }, options)),
-    setDocStore: setDocStore && ((doc) => setDocStore(filter, { account: doc }, options)),
-    getDocApi: getDocApi && (() => getDocApi(filter, options).then((res) => res.doc)),
+  const res = await getDoc<BaseGetResult<Account>>({
+    getDocLocal: getDocLocal
+      && (() => getDocLocal(filter, options)),
+    setDocLocal: setDocLocal
+      && (({ doc }) => setDocLocal(filter, { account: doc }, options)),
+    setDocStore: setDocStore
+      && (({ doc }) => setDocStore(filter, { account: doc }, options)),
+    getDocApi: getDocApi
+      && (() => getDocApi(filter, options)),
   });
 
-  return { doc: account };
+  return res ?? {};
 };
 
 const getAccounts: AccountRepository['getAccounts'] = async (filter, options) => {
@@ -28,14 +32,18 @@ const getAccounts: AccountRepository['getAccounts'] = async (filter, options) =>
   const setDocsStore = StoreAccountRepository.updateAccounts;
   const getDocsApi = FishApiAccountRepository.getAccounts;
 
-  const accounts = await getDocs<Partial<Account>>({
-    getDocsLocal: getDocsLocal && (() => getDocsLocal(filter, options).then((res) => res.docs)),
-    setDocsLocal: setDocsLocal && ((docs) => setDocsLocal(filter, { accounts: docs }, options)),
-    setDocsStore: setDocsStore && ((docs) => setDocsStore(filter, { accounts: docs }, options)),
-    getDocsApi: getDocsApi && (() => getDocsApi(filter, options).then((res) => res.docs)),
+  const res = await getDocs<BaseGetManyResult<Account>>({
+    getDocsLocal: getDocsLocal
+       && (() => getDocsLocal(filter, options)),
+    setDocsLocal: setDocsLocal
+       && (({ docs }) => setDocsLocal(filter, { accounts: docs }, options)),
+    setDocsStore: setDocsStore
+       && (({ docs }) => setDocsStore(filter, { accounts: docs }, options)),
+    getDocsApi: getDocsApi
+      && (() => getDocsApi(filter, options)),
   });
 
-  return { docs: accounts };
+  return res ?? {};
 };
 
 const removeAccount: AccountRepository['removeAccount'] = async (filter) => {
@@ -43,12 +51,13 @@ const removeAccount: AccountRepository['removeAccount'] = async (filter) => {
   const removeDocStore = StoreAccountRepository.removeAccount;
   const removeDocApi = FishApiAccountRepository.removeAccount;
 
-  await removeDoc({
+  const res = await removeDoc<BaseGetResult<Account>>({
     removeDocLocal: removeDocLocal && (() => removeDocLocal(filter)),
     removeDocStore: removeDocStore && (() => removeDocStore(filter)),
     removeDocApi: removeDocApi && (() => removeDocApi(filter)),
   });
-  return {};
+
+  return res ?? {};
 };
 
 export const DataFetchAccountRepository: AccountRepository = {

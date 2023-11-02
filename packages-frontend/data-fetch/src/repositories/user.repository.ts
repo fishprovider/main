@@ -1,5 +1,5 @@
 import { User } from '@fishprovider/core';
-import { UserRepository } from '@fishprovider/core-frontend';
+import { BaseGetResult, UserRepository } from '@fishprovider/core-frontend';
 import { FishApiUserRepository } from '@fishprovider/fish-api';
 import { LocalUserRepository } from '@fishprovider/local';
 import { StoreUserRepository } from '@fishprovider/store';
@@ -12,14 +12,14 @@ const getUser: UserRepository['getUser'] = async (filter, options) => {
   const setDocStore = StoreUserRepository.updateUser;
   const getDocApi = FishApiUserRepository.getUser;
 
-  const user = await getDoc<Partial<User>>({
-    getDocLocal: getDocLocal && (() => getDocLocal(filter, options).then((res) => res.doc)),
-    setDocLocal: setDocLocal && ((doc) => setDocLocal(filter, { user: doc }, options)),
-    setDocStore: setDocStore && ((doc) => setDocStore(filter, { user: doc }, options)),
-    getDocApi: getDocApi && (() => getDocApi(filter, options).then((res) => res.doc)),
+  const res = await getDoc<BaseGetResult<User>>({
+    getDocLocal: getDocLocal && (() => getDocLocal(filter, options)),
+    setDocLocal: setDocLocal && (({ doc }) => setDocLocal(filter, { user: doc }, options)),
+    setDocStore: setDocStore && (({ doc }) => setDocStore(filter, { user: doc }, options)),
+    getDocApi: getDocApi && (() => getDocApi(filter, options)),
   });
 
-  return { doc: user };
+  return res ?? {};
 };
 
 export const DataFetchUserRepository: UserRepository = {

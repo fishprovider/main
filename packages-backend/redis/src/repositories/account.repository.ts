@@ -1,6 +1,14 @@
 import { AccountRepository } from '@fishprovider/core-backend';
 
-import { buildKeyAccounts, getRedis } from '..';
+import { buildKeyAccount, buildKeyAccounts, getRedis } from '..';
+
+const getAccount: AccountRepository['getAccount'] = async (filter) => {
+  const { client } = await getRedis();
+  const key = buildKeyAccount(filter);
+  const str = await client.get(key);
+  const doc = str ? JSON.parse(str) : undefined;
+  return { doc };
+};
 
 const getAccounts: AccountRepository['getAccounts'] = async (filter) => {
   const { client } = await getRedis();
@@ -14,10 +22,11 @@ const updateAccounts: AccountRepository['updateAccounts'] = async (filter, paylo
   const { client } = await getRedis();
   const key = buildKeyAccounts(filter);
   await client.set(key, JSON.stringify(payload.accounts), { EX: 60 * 60 });
-  return {};
+  return { docs: payload.accounts };
 };
 
 export const RedisAccountRepository: AccountRepository = {
+  getAccount,
   getAccounts,
   updateAccounts,
 };

@@ -1,6 +1,5 @@
 import {
-  AccountConfig, AccountError, AccountRoles,
-  AccountTradeType, AccountViewType, BaseError,
+  AccountConfig, AccountError, AccountRoles, AccountViewType, BaseError,
   checkRepository,
 } from '@fishprovider/core';
 import _ from 'lodash';
@@ -80,8 +79,8 @@ export const addAccountService: AddAccountService = async ({
     config,
     accountType,
     accountPlatform,
+    accountTradeType,
     accountViewType: AccountViewType.private,
-    accountTradeType: accountTradeType || AccountTradeType.demo,
     members: [],
   });
   if (!tradeAccount?._id) {
@@ -95,8 +94,8 @@ export const addAccountService: AddAccountService = async ({
     name,
     accountType,
     accountPlatform,
+    accountTradeType,
     accountViewType: AccountViewType.private,
-    accountTradeType: accountTradeType || AccountTradeType.demo,
     members: [{
       email: userSession.email,
       name: userSession.name,

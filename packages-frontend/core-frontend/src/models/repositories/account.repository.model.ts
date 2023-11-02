@@ -25,7 +25,7 @@ export interface AccountRepository {
 
   updateAccount?: (
     filter: {
-      accountId?: string,
+      accountId: string,
     },
     payload: {
       account?: Partial<Account>,
