@@ -47,14 +47,25 @@ schedule-build-backend-apps:
   timeout: "30 minutes"
   script:
     - !reference [.build-back, script]
+    - cd ../..
     - !reference [.build-bot, script]
+    - cd ../..
     - !reference [.build-copy, script]
+    - cd ../..
     - !reference [.build-cron, script]
+    - cd ../..
     - !reference [.build-gate, script]
+    - cd ../..
     - !reference [.build-head-ctrader, script]
+    - cd ../..
     - !reference [.build-head-meta, script]
+    - cd ../..
     - !reference [.build-mon, script]
+    - cd ../..
     - !reference [.build-pay, script]
+    - cd ../..
     - !reference [.build-pup, script]
+    - cd ../..
     - !reference [.build-spot-ctrader, script]
+    - cd ../..
     - !reference [.build-spot-meta, script]
