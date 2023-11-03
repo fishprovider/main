@@ -96,8 +96,6 @@ const removeAccount: AccountRepository['removeAccount'] = async (filter) => {
   return res ?? {};
 };
 
-// TODO: addAccount should update cache
-
 export const DataFetchAccountRepository: AccountRepository = {
   ...FishApiAccountRepository,
   getAccount,

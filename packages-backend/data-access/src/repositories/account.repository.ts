@@ -77,8 +77,6 @@ const removeAccount: AccountRepository['removeAccount'] = async (filter) => {
   return res ?? {};
 };
 
-// TODO: addAccount should update cache
-
 export const DataAccessAccountRepository: AccountRepository = {
   ...MongoAccountRepository,
   getAccount,
