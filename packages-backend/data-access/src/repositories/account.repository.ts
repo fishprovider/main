@@ -3,18 +3,16 @@ import { AccountRepository, BaseGetManyResult, BaseGetResult } from '@fishprovid
 import { MongoAccountRepository } from '@fishprovider/mongo';
 import { RedisAccountRepository } from '@fishprovider/redis';
 
-import {
-  getMany, getOne, removeOne, updateMany, updateOne,
-} from '..';
+import { getCacheFirst, updateCacheFirst } from '..';
 
 const getAccount: AccountRepository['getAccount'] = async (filter, options) => {
   const getCache = RedisAccountRepository.getAccount;
   const setCache = RedisAccountRepository.updateAccount;
   const getDb = MongoAccountRepository.getAccount;
 
-  const res = await getOne<BaseGetResult<Account>>({
+  const res = await getCacheFirst<BaseGetResult<Account>>({
     getCache: getCache && (() => getCache(filter, options)),
-    setCache: setCache && (({ doc }) => setCache(filter, { account: doc }, options)),
+    setCache: setCache && (({ doc } = {}) => setCache(filter, { account: doc }, options)),
     getDb: getDb && (() => getDb(filter, options)),
   });
 
@@ -26,9 +24,9 @@ const getAccounts: AccountRepository['getAccounts'] = async (filter, options) =>
   const setCache = RedisAccountRepository.updateAccounts;
   const getDb = MongoAccountRepository.getAccounts;
 
-  const res = await getMany<BaseGetManyResult<Account>>({
+  const res = await getCacheFirst<BaseGetManyResult<Account>>({
     getCache: getCache && (() => getCache(filter, options)),
-    setCache: setCache && (({ docs }) => setCache(filter, { accounts: docs }, options)),
+    setCache: setCache && (({ docs } = {}) => setCache(filter, { accounts: docs }, options)),
     getDb: getDb && (() => getDb(filter, options)),
   });
 
@@ -39,7 +37,7 @@ const updateAccount: AccountRepository['updateAccount'] = async (filter, payload
   const updateDb = MongoAccountRepository.updateAccount;
   const updateCache = RedisAccountRepository.updateAccount;
 
-  const res = await updateOne<BaseGetResult<Account>>({
+  const res = await updateCacheFirst<BaseGetResult<Account>>({
     updateDb: updateDb && (() => updateDb(filter, payload)),
     updateCache: updateCache && (({ doc } = {}) => updateCache(filter, { account: doc })),
   });
@@ -51,7 +49,7 @@ const updateAccounts: AccountRepository['updateAccounts'] = async (filter, paylo
   const updateDb = MongoAccountRepository.updateAccounts;
   const updateCache = RedisAccountRepository.updateAccounts;
 
-  const res = await updateMany<BaseGetManyResult<Account>>({
+  const res = await updateCacheFirst<BaseGetManyResult<Account>>({
     updateDb: updateDb && (() => updateDb(filter, payload)),
     updateCache: updateCache && (({ docs } = {}) => updateCache(filter, { accounts: docs })),
   });
@@ -60,12 +58,12 @@ const updateAccounts: AccountRepository['updateAccounts'] = async (filter, paylo
 };
 
 const removeAccount: AccountRepository['removeAccount'] = async (filter) => {
-  const removeDb = MongoAccountRepository.removeAccount;
-  const removeCache = RedisAccountRepository.removeAccount;
+  const updateDb = MongoAccountRepository.removeAccount;
+  const updateCache = RedisAccountRepository.removeAccount;
 
-  const res = await removeOne<BaseGetResult<Account>>({
-    removeDb: removeDb && (() => removeDb(filter)),
-    removeCache: removeCache && (() => removeCache(filter)),
+  const res = await updateCacheFirst<BaseGetResult<Account>>({
+    updateDb: updateDb && (() => updateDb(filter)),
+    updateCache: updateCache && (() => updateCache(filter)),
   });
 
   return res ?? {};
