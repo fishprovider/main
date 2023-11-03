@@ -7,9 +7,9 @@ import { StoreUserRepository } from '@fishprovider/store';
 import { getLocalFirst, updateLocalFirst } from '..';
 
 const getUser: UserRepository['getUser'] = async (filter, options) => {
+  const setStore = StoreUserRepository.updateUser;
   const getLocal = LocalUserRepository.getUser;
   const setLocal = LocalUserRepository.updateUser;
-  const setStore = StoreUserRepository.updateUser;
   const getApi = FishApiUserRepository.getUser;
 
   const res = await getLocalFirst<BaseGetResult<User>>({

@@ -7,9 +7,9 @@ import { StoreNewsRepository } from '@fishprovider/store';
 import { getLocalFirst } from '..';
 
 const getNews: NewsRepository['getNews'] = async (filter, options) => {
+  const setStore = StoreNewsRepository.updateNews;
   const getLocal = LocalNewsRepository.getNews;
   const setLocal = LocalNewsRepository.updateNews;
-  const setStore = StoreNewsRepository.updateNews;
   const getApi = FishApiNewsRepository.getNews;
 
   const res = await getLocalFirst<BaseGetManyResult<News>>({

@@ -1,12 +1,12 @@
 export const getLocalFirst = async <T>(params: {
-  getLocal?: () => Promise<T>,
-  setLocal?: (data?: T) => Promise<T>,
   getStore?: () => Promise<T>,
   setStore?: (data?: T) => Promise<T>,
+  getLocal?: () => Promise<T>,
+  setLocal?: (data?: T) => Promise<T>,
   getApi?: () => Promise<T>,
 }) => {
   const {
-    getLocal, setLocal, getStore, setStore, getApi,
+    getStore, setStore, getLocal, setLocal, getApi,
   } = params;
 
   const setLocalAndStore = (data?: T) => {
@@ -18,7 +18,9 @@ export const getLocalFirst = async <T>(params: {
 
   if (!data) {
     data = await getLocal?.();
-    setStore?.(data); // non-blocking
+    if (data) {
+      setStore?.(data); // non-blocking
+    }
   }
 
   if (!data) {
