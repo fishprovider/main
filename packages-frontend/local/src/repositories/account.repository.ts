@@ -3,7 +3,7 @@ import { AccountRepository } from '@fishprovider/core-frontend';
 import _ from 'lodash';
 
 import {
-  buildKeyAccount, buildKeyAccounts, localGet, localSet,
+  buildKeyAccount, buildKeyAccounts, localGet, localRemove,
 } from '..';
 
 const getAccount: AccountRepository['getAccount'] = async (filter) => {
@@ -29,7 +29,7 @@ const updateAccount: AccountRepository['updateAccount'] = async (filter) => {
   if (!_.has(filter, keyFields)) return {};
 
   const key = buildKeyAccount(_.pick(filter, keyFields));
-  await localSet(key, undefined);
+  await localRemove(key);
   return {};
 };
 
@@ -38,7 +38,7 @@ const updateAccounts: AccountRepository['updateAccounts'] = async (filter) => {
   if (!_.has(filter, keyFields)) return {};
 
   const key = buildKeyAccounts(_.pick(filter, keyFields));
-  await localSet(key, undefined);
+  await localRemove(key);
   return {};
 };
 
@@ -47,7 +47,7 @@ const removeAccount: AccountRepository['removeAccount'] = async (filter) => {
   if (!_.has(filter, keyFields)) return {};
 
   const key = buildKeyAccount(_.pick(filter, keyFields));
-  await localSet(key, undefined);
+  await localRemove(key);
   return {};
 };
 

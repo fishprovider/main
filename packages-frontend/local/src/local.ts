@@ -10,4 +10,9 @@ export const localSet = async <T>(key: string, value: T) => {
   return res;
 };
 
+export const localRemove = async (key: string) => {
+  const res = localforage.removeItem(key);
+  return res;
+};
+
 export const local = localforage;

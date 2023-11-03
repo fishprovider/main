@@ -39,7 +39,7 @@ const removeAccount: AccountRepository['removeAccount'] = async (filter) => {
   const keyFields = ['accountId'];
   if (!_.has(filter, keyFields)) return {};
 
-  storeAccounts.setState((state) => _.omit(state, filter.accountId));
+  storeAccounts.removeDoc(filter.accountId);
   return {};
 };
 
