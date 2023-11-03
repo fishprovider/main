@@ -16,6 +16,8 @@ const getAccounts: AccountRepository['getAccounts'] = async (filterRaw) => {
   if (_.isEmpty(filter)) return {};
 
   const accounts = _.filter(storeAccounts.getState(), filter);
+  if (_.isEmpty(accounts)) return {};
+
   return { docs: accounts };
 };
 

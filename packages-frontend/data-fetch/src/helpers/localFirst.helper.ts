@@ -1,4 +1,9 @@
-export const getLocalFirst = async <T>(params: {
+interface Base {
+  doc?: any;
+  docs?: any;
+}
+
+export const getLocalFirst = async <T extends Base>(params: {
   getStore?: () => Promise<T>,
   setStore?: (data?: T) => Promise<T>,
   getLocal?: () => Promise<T>,
@@ -16,14 +21,12 @@ export const getLocalFirst = async <T>(params: {
 
   let data: T | undefined = await getStore?.();
 
-  if (!data) {
+  if (!data?.doc && !data?.docs) {
     data = await getLocal?.();
-    if (data) {
-      setStore?.(data); // non-blocking
-    }
+    setStore?.(data); // non-blocking
   }
 
-  if (!data) {
+  if (!data?.doc && !data?.docs) {
     data = await getApi?.();
     setLocalAndStore(data); // non-blocking
   } else {
@@ -33,7 +36,7 @@ export const getLocalFirst = async <T>(params: {
   return data;
 };
 
-export const updateLocalFirst = async <T>(params: {
+export const updateLocalFirst = async <T extends Base>(params: {
   updateApi?: () => Promise<T>,
   updateLocal?: (data?: T) => Promise<T>,
   updateStore?: (data?: T) => Promise<T>,

@@ -1,4 +1,9 @@
-export const getCacheFirst = async <T>(params: {
+interface Base {
+  doc?: any;
+  docs?: any;
+}
+
+export const getCacheFirst = async <T extends Base>(params: {
   getCache?: () => Promise<T>,
   setCache?: (data?: T) => Promise<T>,
   getDb?: () => Promise<T>,
@@ -7,7 +12,7 @@ export const getCacheFirst = async <T>(params: {
 
   let data: T | undefined = await getCache?.();
 
-  if (!data) {
+  if (!data?.doc && !data?.docs) {
     data = await getDb?.();
     setCache?.(data); // non-blocking
   }
@@ -15,7 +20,7 @@ export const getCacheFirst = async <T>(params: {
   return data;
 };
 
-export const updateCacheFirst = async <T>(params: {
+export const updateCacheFirst = async <T extends Base>(params: {
   updateDb?: () => Promise<T>,
   updateCache?: (data?: T) => Promise<T>,
 }) => {
