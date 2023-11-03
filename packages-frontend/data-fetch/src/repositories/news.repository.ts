@@ -14,8 +14,8 @@ const getNews: NewsRepository['getNews'] = async (filter, options) => {
 
   const res = await getLocalFirst<BaseGetManyResult<News>>({
     getLocal: getLocal && (() => getLocal(filter, options)),
-    setLocal: setLocal && (({ docs }) => setLocal(filter, { news: docs }, options)),
-    setStore: setStore && (({ docs }) => setStore(filter, { news: docs }, options)),
+    setLocal: setLocal && (({ docs } = {}) => setLocal(filter, { news: docs }, options)),
+    setStore: setStore && (({ docs } = {}) => setStore(filter, { news: docs }, options)),
     getApi: getApi && (() => getApi(filter, options)),
   });
 

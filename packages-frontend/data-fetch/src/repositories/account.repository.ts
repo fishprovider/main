@@ -4,7 +4,7 @@ import { FishApiAccountRepository } from '@fishprovider/fish-api';
 import { LocalAccountRepository } from '@fishprovider/local';
 import { StoreAccountRepository } from '@fishprovider/store';
 
-import { getLocalFirst, removeLocalFirst, updateLocalFirst } from '..';
+import { getLocalFirst, updateLocalFirst } from '..';
 
 const getAccount: AccountRepository['getAccount'] = async (filter, options) => {
   const getLocal = LocalAccountRepository.getAccount;
@@ -15,9 +15,9 @@ const getAccount: AccountRepository['getAccount'] = async (filter, options) => {
 
   const res = await getLocalFirst<BaseGetResult<Account>>({
     getLocal: getLocal && (() => getLocal(filter, options)),
-    setLocal: setLocal && (({ doc }) => setLocal(filter, { account: doc }, options)),
+    setLocal: setLocal && (({ doc } = {}) => setLocal(filter, { account: doc }, options)),
     getStore: getStore && (() => getStore(filter, options)),
-    setStore: setStore && (({ doc }) => setStore(filter, { account: doc }, options)),
+    setStore: setStore && (({ doc } = {}) => setStore(filter, { account: doc }, options)),
     getApi: getApi && (() => getApi(filter, options)),
   });
 
@@ -33,9 +33,9 @@ const getAccounts: AccountRepository['getAccounts'] = async (filter, options) =>
 
   const res = await getLocalFirst<BaseGetManyResult<Account>>({
     getLocal: getLocal && (() => getLocal(filter, options)),
-    setLocal: setLocal && (({ docs }) => setLocal(filter, { accounts: docs }, options)),
+    setLocal: setLocal && (({ docs } = {}) => setLocal(filter, { accounts: docs }, options)),
     getStore: getStore && (() => getStore(filter, options)),
-    setStore: setStore && (({ docs }) => setStore(filter, { accounts: docs }, options)),
+    setStore: setStore && (({ docs } = {}) => setStore(filter, { accounts: docs }, options)),
     getApi: getApi && (() => getApi(filter, options)),
   });
 
@@ -71,14 +71,14 @@ const updateAccounts: AccountRepository['updateAccounts'] = async (filter, paylo
 };
 
 const removeAccount: AccountRepository['removeAccount'] = async (filter) => {
-  const removeApi = FishApiAccountRepository.removeAccount;
-  const removeLocal = LocalAccountRepository.removeAccount;
-  const removeStore = StoreAccountRepository.removeAccount;
+  const updateApi = FishApiAccountRepository.removeAccount;
+  const updateLocal = LocalAccountRepository.removeAccount;
+  const updateStore = StoreAccountRepository.removeAccount;
 
-  const res = await removeLocalFirst<BaseGetResult<Account>>({
-    removeApi: removeApi && (() => removeApi(filter)),
-    removeLocal: removeLocal && (() => removeLocal(filter)),
-    removeStore: removeStore && (() => removeStore(filter)),
+  const res = await updateLocalFirst<BaseGetResult<Account>>({
+    updateApi: updateApi && (() => updateApi(filter)),
+    updateLocal: updateLocal && (() => updateLocal(filter)),
+    updateStore: updateStore && (() => updateStore(filter)),
   });
 
   return res ?? {};

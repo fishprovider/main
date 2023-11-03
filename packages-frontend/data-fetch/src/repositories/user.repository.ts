@@ -14,8 +14,8 @@ const getUser: UserRepository['getUser'] = async (filter, options) => {
 
   const res = await getLocalFirst<BaseGetResult<User>>({
     getLocal: getLocal && (() => getLocal(filter, options)),
-    setLocal: setLocal && (({ doc }) => setLocal(filter, { user: doc }, options)),
-    setStore: setStore && (({ doc }) => setStore(filter, { user: doc }, options)),
+    setLocal: setLocal && (({ doc } = {}) => setLocal(filter, { user: doc }, options)),
+    setStore: setStore && (({ doc } = {}) => setStore(filter, { user: doc }, options)),
     getApi: getApi && (() => getApi(filter, options)),
   });
 
