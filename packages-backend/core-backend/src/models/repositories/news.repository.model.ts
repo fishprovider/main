@@ -27,8 +27,4 @@ export interface NewsRepository {
     },
     options?: BaseUpdateOptions<News>,
   ) => Promise<BaseGetManyResult<News>>;
-
-  watchNews?: <T>(
-    selector: (state: Record<string, News>) => T,
-  ) => T;
 }

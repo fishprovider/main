@@ -3,53 +3,57 @@ import _ from 'lodash';
 
 import { buildKeyAccount, buildKeyAccounts, getRedis } from '..';
 
-const getAccount: AccountRepository['getAccount'] = async (filter) => {
-  const keyFields = ['accountId', 'tradeAccountId'];
-  if (!_.has(filter, keyFields)) return {};
+const getAccount: AccountRepository['getAccount'] = async (filterRaw) => {
+  const filter = _.pick(filterRaw, ['accountId', 'tradeAccountId']);
+  if (_.isEmpty(filter)) return {};
 
-  const key = buildKeyAccount(_.pick(filter, keyFields));
+  const key = buildKeyAccount(filter);
   const { client } = await getRedis();
   const str = await client.get(key);
-  const doc = str ? JSON.parse(str) : undefined;
-  return { doc };
+  if (!str) return {};
+
+  return { doc: JSON.parse(str) };
 };
 
-const getAccounts: AccountRepository['getAccounts'] = async (filter) => {
-  const keyFields = ['accountViewType', 'email'];
-  if (!_.has(filter, keyFields)) return {};
+const getAccounts: AccountRepository['getAccounts'] = async (filterRaw) => {
+  const filter = _.pick(filterRaw, ['accountViewType', 'email']);
+  if (_.isEmpty(filter)) return {};
 
-  const key = buildKeyAccounts(_.pick(filter, keyFields));
+  const key = buildKeyAccounts(filter);
   const { client } = await getRedis();
   const str = await client.get(key);
-  const docs = str ? JSON.parse(str) : undefined;
-  return { docs };
+  if (!str) return {};
+
+  return { docs: JSON.parse(str) };
 };
 
-const updateAccount: AccountRepository['updateAccount'] = async (filter) => {
-  const keyFields = ['accountId'];
-  if (!_.has(filter, keyFields)) return {};
+const updateAccount: AccountRepository['updateAccount'] = async (filterRaw, payload) => {
+  const filter = _.pick(filterRaw, ['accountId']);
+  if (_.isEmpty(filter)) return {};
 
-  const key = buildKeyAccount(_.pick(filter, keyFields));
+  const key = buildKeyAccount(filter);
   const { client } = await getRedis();
-  await client.del(key);
-  return {};
+  const { account } = payload;
+  await client.set(key, JSON.stringify(account), { EX: 60 * 60 });
+  return { doc: account };
 };
 
-const updateAccounts: AccountRepository['updateAccounts'] = async (filter) => {
-  const keyFields = ['accountViewType', 'email'];
-  if (!_.has(filter, keyFields)) return {};
+const updateAccounts: AccountRepository['updateAccounts'] = async (filterRaw, payload) => {
+  const filter = _.pick(filterRaw, ['accountViewType', 'email']);
+  if (_.isEmpty(filter)) return {};
 
-  const key = buildKeyAccounts(_.pick(filter, keyFields));
+  const key = buildKeyAccounts(filter);
   const { client } = await getRedis();
-  await client.del(key);
-  return {};
+  const { accounts } = payload;
+  await client.set(key, JSON.stringify(accounts), { EX: 60 * 60 });
+  return { docs: accounts };
 };
 
-const removeAccount: AccountRepository['removeAccount'] = async (filter) => {
-  const keyFields = ['accountId'];
-  if (!_.has(filter, keyFields)) return {};
+const removeAccount: AccountRepository['removeAccount'] = async (filterRaw) => {
+  const filter = _.pick(filterRaw, ['accountId']);
+  if (_.isEmpty(filter)) return {};
 
-  const key = buildKeyAccount(_.pick(filter, keyFields));
+  const key = buildKeyAccount(filter);
   const { client } = await getRedis();
   await client.del(key);
   return {};

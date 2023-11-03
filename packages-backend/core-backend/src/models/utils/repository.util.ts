@@ -12,6 +12,8 @@ export interface BaseUpdateOptions<T> extends BaseGetOptions<T> {
 
 export interface BaseGetResult<T> {
   doc?: Partial<T>;
+  // cacheCreatedAt?: Date,
+  // cacheExpiredAt?: Date,
 }
 
 export interface BaseUpdateResult<T> extends BaseGetResult<T> {
@@ -21,4 +23,6 @@ export interface BaseUpdateResult<T> extends BaseGetResult<T> {
 
 export interface BaseGetManyResult<T> {
   docs?: Partial<T>[];
+  // cacheCreatedAt?: Date,
+  // cacheExpiredAt?: Date,
 }

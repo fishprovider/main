@@ -1,125 +1,104 @@
-export const getDoc = async <T>(params: {
-  getDocCache?: () => Promise<T>,
-  setDocCache?: (doc: T) => Promise<T>,
-  getDocDb?: () => Promise<T>,
+export const getOne = async <T>(params: {
+  getCache?: () => Promise<T>,
+  setCache?: (data: T) => Promise<T>,
+  getDb?: () => Promise<T>,
 }) => {
-  const {
-    getDocCache, setDocCache, getDocDb,
-  } = params;
+  const { getCache, setCache, getDb } = params;
 
-  const setDoc = async (doc: T) => {
-    if (setDocCache) {
-      await setDocCache(doc);
-    }
-  };
+  let data: T | undefined;
 
-  let doc: T | undefined;
-
-  if (getDocCache) {
-    doc = await getDocCache();
+  if (getCache) {
+    data = await getCache();
   }
 
-  if (getDocDb) {
-    if (!doc) {
-      doc = await getDocDb();
-      setDoc(doc); // non-blocking
-    } else {
-      getDocDb().then(setDoc); // non-blocking
+  if (!data && getDb) {
+    data = await getDb();
+
+    if (setCache) {
+      setCache(data); // non-blocking
     }
   }
 
-  return doc;
+  return data;
 };
 
-export const getDocs = async <T>(params: {
-  getDocsCache?: () => Promise<T>,
-  setDocsCache?: (docs: T) => Promise<T>,
-  getDocsDb?: () => Promise<T>,
+export const getMany = async <T>(params: {
+  getCache?: () => Promise<T>,
+  setCache?: (data: T) => Promise<T>,
+  getDb?: () => Promise<T>,
 }) => {
-  const {
-    getDocsCache, setDocsCache, getDocsDb,
-  } = params;
+  const { getCache, setCache, getDb } = params;
 
-  const setDocs = async (docs: T) => {
-    if (setDocsCache) {
-      await setDocsCache(docs);
-    }
-  };
+  let data: T | undefined;
 
-  let docs: T | undefined;
-
-  if (getDocsCache) {
-    docs = await getDocsCache();
+  if (getCache) {
+    data = await getCache();
   }
 
-  if (getDocsDb) {
-    if (!docs) {
-      docs = await getDocsDb();
-      setDocs(docs); // non-blocking
-    } else {
-      getDocsDb().then(setDocs); // non-blocking
+  if (!data && getDb) {
+    data = await getDb();
+
+    if (setCache) {
+      setCache(data); // non-blocking
     }
   }
 
-  return docs;
+  return data;
 };
 
-export const updateDoc = async <T>(params: {
-  updateDocCache?: () => Promise<T>,
-  updateDocDb?: () => Promise<T>,
+export const updateOne = async <T>(params: {
+  updateDb?: () => Promise<T>,
+  updateCache?: (data?: T) => Promise<T>,
 }) => {
-  const {
-    updateDocCache, updateDocDb,
-  } = params;
-  if (updateDocCache) {
-    updateDocCache(); // non-blocking
+  const { updateDb, updateCache } = params;
+
+  let data: T | undefined;
+
+  if (updateDb) {
+    data = await updateDb();
   }
 
-  let doc: T | undefined;
-
-  if (updateDocDb) {
-    doc = await updateDocDb();
+  if (updateCache) {
+    updateCache(data); // non-blocking
   }
 
-  return doc;
+  return data;
 };
 
-export const updateDocs = async <T>(params: {
-  updateDocsCache?: () => Promise<T>,
-  updateDocsDb?: () => Promise<T>,
+export const updateMany = async <T>(params: {
+  updateDb?: () => Promise<T>,
+  updateCache?: (data?: T) => Promise<T>,
 }) => {
-  const {
-    updateDocsCache, updateDocsDb,
-  } = params;
-  if (updateDocsCache) {
-    updateDocsCache(); // non-blocking
+  const { updateDb, updateCache } = params;
+
+  let data: T | undefined;
+
+  if (updateDb) {
+    data = await updateDb();
   }
 
-  let docs: T | undefined;
-
-  if (updateDocsDb) {
-    docs = await updateDocsDb();
+  if (updateCache) {
+    updateCache(data); // non-blocking
   }
 
-  return docs;
+  return data;
 };
 
-export const removeDoc = async <T>(params: {
-  removeDocCache?: () => Promise<T>,
-  removeDocDb?: () => Promise<T>,
+export const removeOne = async <T>(params: {
+  removeDb?: () => Promise<T>,
+  removeCache?: () => Promise<T>,
 }) => {
-  const {
-    removeDocCache, removeDocDb,
-  } = params;
-  if (removeDocCache) {
-    removeDocCache(); // non-blocking
+  const { removeDb, removeCache } = params;
+
+  let data: T | undefined;
+
+  if (removeDb) {
+    data = await removeDb();
   }
 
-  let doc: T | undefined;
-
-  if (removeDocDb) {
-    doc = await removeDocDb();
+  if (removeCache) {
+    removeCache(); // non-blocking
   }
 
-  return doc;
+  return data;
 };
