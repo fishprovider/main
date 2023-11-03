@@ -6,47 +6,47 @@ import {
   buildKeyAccount, buildKeyAccounts, localGet, localRemove,
 } from '..';
 
-const getAccount: AccountRepository['getAccount'] = async (filter) => {
-  const keyFields = ['accountId', 'getTradeInfo'];
-  if (!_.has(filter, keyFields)) return {};
+const getAccount: AccountRepository['getAccount'] = async (filterRaw) => {
+  const filter = _.pick(filterRaw, ['accountId', 'getTradeInfo']);
+  if (_.isEmpty(filter)) return {};
 
-  const key = buildKeyAccount(_.pick(filter, keyFields));
+  const key = buildKeyAccount(filter);
   const account = await localGet<Account>(key);
   return { doc: account };
 };
 
-const getAccounts: AccountRepository['getAccounts'] = async (filter) => {
-  const keyFields = ['accountViewType', 'email'];
-  if (!_.has(filter, keyFields)) return {};
+const getAccounts: AccountRepository['getAccounts'] = async (filterRaw) => {
+  const filter = _.pick(filterRaw, ['accountViewType', 'email']);
+  if (_.isEmpty(filter)) return {};
 
-  const key = buildKeyAccounts(_.pick(filter, keyFields));
+  const key = buildKeyAccounts(filter);
   const accounts = await localGet<Account[]>(key);
   return { docs: accounts };
 };
 
-const updateAccount: AccountRepository['updateAccount'] = async (filter) => {
-  const keyFields = ['accountId'];
-  if (!_.has(filter, keyFields)) return {};
+const updateAccount: AccountRepository['updateAccount'] = async (filterRaw) => {
+  const filter = _.pick(filterRaw, ['accountId']);
+  if (_.isEmpty(filter)) return {};
 
-  const key = buildKeyAccount(_.pick(filter, keyFields));
+  const key = buildKeyAccount(filter);
   await localRemove(key);
   return {};
 };
 
-const updateAccounts: AccountRepository['updateAccounts'] = async (filter) => {
-  const keyFields = ['accountViewType', 'email'];
-  if (!_.has(filter, keyFields)) return {};
+const updateAccounts: AccountRepository['updateAccounts'] = async (filterRaw) => {
+  const filter = _.pick(filterRaw, ['accountViewType', 'email']);
+  if (_.isEmpty(filter)) return {};
 
-  const key = buildKeyAccounts(_.pick(filter, keyFields));
+  const key = buildKeyAccounts(filter);
   await localRemove(key);
   return {};
 };
 
-const removeAccount: AccountRepository['removeAccount'] = async (filter) => {
-  const keyFields = ['accountId'];
-  if (!_.has(filter, keyFields)) return {};
+const removeAccount: AccountRepository['removeAccount'] = async (filterRaw) => {
+  const filter = _.pick(filterRaw, ['accountId']);
+  if (_.isEmpty(filter)) return {};
 
-  const key = buildKeyAccount(_.pick(filter, keyFields));
+  const key = buildKeyAccount(filter);
   await localRemove(key);
   return {};
 };

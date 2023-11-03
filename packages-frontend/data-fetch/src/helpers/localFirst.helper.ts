@@ -1,177 +1,64 @@
-export const getDoc = async <T>(params: {
-  getDocLocal?: () => Promise<T>,
-  setDocLocal?: (doc: T) => Promise<T>,
-  getDocStore?: () => Promise<T>,
-  setDocStore?: (doc: T) => Promise<T>,
-  getDocApi?: () => Promise<T>,
+export const getLocalFirst = async <T>(params: {
+  getLocal?: () => Promise<T>,
+  setLocal?: (data: T) => Promise<T>,
+  getStore?: () => Promise<T>,
+  setStore?: (data: T) => Promise<T>,
+  getApi?: () => Promise<T>,
 }) => {
   const {
-    getDocLocal, setDocLocal, getDocStore, setDocStore, getDocApi,
+    getLocal, setLocal, getStore, setStore, getApi,
   } = params;
 
-  const setDocToLocal = async (doc: T) => {
-    if (setDocLocal) {
-      await setDocLocal(doc);
-    }
+  const setLocalAndStore = (data: T) => {
+    setLocal?.(data); // non-blocking
+    setStore?.(data); // non-blocking
   };
 
-  const setDocToStore = async (doc: T) => {
-    if (setDocStore) {
-      await setDocStore(doc);
-    }
-  };
+  let data: T | undefined = await getStore?.();
 
-  const setDoc = async (doc: T) => Promise.all([
-    setDocToLocal(doc),
-    setDocToStore(doc),
-  ]);
-
-  let doc: T | undefined;
-
-  if (getDocStore) {
-    doc = await getDocStore();
+  if (!data) {
+    data = await getLocal?.();
+    if (data) setStore?.(data); // non-blocking
   }
 
-  if (getDocLocal) {
-    if (!doc) {
-      doc = await getDocLocal();
-      setDocToStore(doc); // non-blocking
-    }
+  if (!data) {
+    data = await getApi?.();
+    if (data) setLocalAndStore(data); // non-blocking
+  } else {
+    getApi?.().then(setLocalAndStore); // non-blocking
   }
 
-  if (getDocApi) {
-    if (!doc) {
-      doc = await getDocApi();
-      setDoc(doc); // non-blocking
-    } else {
-      getDocApi().then(setDoc); // non-blocking
-    }
-  }
-
-  return doc;
+  return data;
 };
 
-export const getDocs = async <T>(params: {
-  getDocsLocal?: () => Promise<T>,
-  setDocsLocal?: (docs: T) => Promise<T>,
-  getDocsStore?: () => Promise<T>,
-  setDocsStore?: (docs: T) => Promise<T>,
-  getDocsApi?: () => Promise<T>,
+export const updateLocalFirst = async <T>(params: {
+  updateApi?: () => Promise<T>,
+  updateLocal?: (data: T) => Promise<T>,
+  updateStore?: (data: T) => Promise<T>,
 }) => {
-  const {
-    getDocsLocal, setDocsLocal, getDocsStore, setDocsStore, getDocsApi,
-  } = params;
+  const { updateLocal, updateStore, updateApi } = params;
 
-  const setDocsToLocal = async (docs: T) => {
-    if (setDocsLocal) {
-      await setDocsLocal(docs);
-    }
-  };
+  const data: T | undefined = await updateApi?.();
 
-  const setDocsToStore = async (docs: T) => {
-    if (setDocsStore) {
-      await setDocsStore(docs);
-    }
-  };
-
-  const setDocs = async (docs: T) => Promise.all([
-    setDocsToLocal(docs),
-    setDocsToStore(docs),
-  ]);
-
-  let docs: T | undefined;
-
-  if (getDocsStore) {
-    docs = await getDocsStore();
+  if (data) {
+    updateLocal?.(data); // non-blocking
+    updateStore?.(data); // non-blocking
   }
 
-  if (getDocsLocal) {
-    if (!docs) {
-      docs = await getDocsLocal();
-      setDocsToStore(docs); // non-blocking
-    }
-  }
-
-  if (getDocsApi) {
-    if (!docs) {
-      docs = await getDocsApi();
-      setDocs(docs); // non-blocking
-    } else {
-      getDocsApi().then(setDocs); // non-blocking
-    }
-  }
-
-  return docs;
+  return data;
 };
 
-export const updateDoc = async <T>(params: {
-  updateDocLocal?: () => Promise<T>,
-  updateDocStore?: () => Promise<T>,
-  updateDocApi?: () => Promise<T>,
+export const removeLocalFirst = async <T>(params: {
+  removeApi?: () => Promise<T>,
+  removeLocal?: () => Promise<T>,
+  removeStore?: () => Promise<T>,
 }) => {
-  const {
-    updateDocLocal, updateDocStore, updateDocApi,
-  } = params;
-  if (updateDocLocal) {
-    updateDocLocal(); // non-blocking
-  }
-  if (updateDocStore) {
-    updateDocStore(); // non-blocking
-  }
+  const { removeLocal, removeStore, removeApi } = params;
 
-  let doc: T | undefined;
+  const data: T | undefined = await removeApi?.();
 
-  if (updateDocApi) {
-    doc = await updateDocApi();
-  }
+  removeLocal?.(); // non-blocking
+  removeStore?.(); // non-blocking
 
-  return doc;
-};
-
-export const updateDocs = async <T>(params: {
-  updateDocsLocal?: () => Promise<T>,
-  updateDocsStore?: () => Promise<T>,
-  updateDocsApi?: () => Promise<T>,
-}) => {
-  const {
-    updateDocsLocal, updateDocsStore, updateDocsApi,
-  } = params;
-  if (updateDocsLocal) {
-    updateDocsLocal(); // non-blocking
-  }
-  if (updateDocsStore) {
-    updateDocsStore(); // non-blocking
-  }
-
-  let docs: T | undefined;
-
-  if (updateDocsApi) {
-    docs = await updateDocsApi();
-  }
-
-  return docs;
-};
-
-export const removeDoc = async <T>(params: {
-  removeDocLocal?: () => Promise<T>,
-  removeDocStore?: () => Promise<T>,
-  removeDocApi?: () => Promise<T>,
-}) => {
-  const {
-    removeDocLocal, removeDocStore, removeDocApi,
-  } = params;
-  if (removeDocLocal) {
-    removeDocLocal(); // non-blocking
-  }
-  if (removeDocStore) {
-    removeDocStore(); // non-blocking
-  }
-
-  let doc: T | undefined;
-
-  if (removeDocApi) {
-    doc = await removeDocApi();
-  }
-
-  return doc;
+  return data;
 };

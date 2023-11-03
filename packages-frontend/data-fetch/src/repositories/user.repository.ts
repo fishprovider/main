@@ -4,19 +4,33 @@ import { FishApiUserRepository } from '@fishprovider/fish-api';
 import { LocalUserRepository } from '@fishprovider/local';
 import { StoreUserRepository } from '@fishprovider/store';
 
-import { getDoc } from '..';
+import { getLocalFirst, updateLocalFirst } from '..';
 
 const getUser: UserRepository['getUser'] = async (filter, options) => {
-  const getDocLocal = LocalUserRepository.getUser;
-  const setDocLocal = LocalUserRepository.updateUser;
-  const setDocStore = StoreUserRepository.updateUser;
-  const getDocApi = FishApiUserRepository.getUser;
+  const getLocal = LocalUserRepository.getUser;
+  const setLocal = LocalUserRepository.updateUser;
+  const setStore = StoreUserRepository.updateUser;
+  const getApi = FishApiUserRepository.getUser;
 
-  const res = await getDoc<BaseGetResult<User>>({
-    getDocLocal: getDocLocal && (() => getDocLocal(filter, options)),
-    setDocLocal: setDocLocal && (({ doc }) => setDocLocal(filter, { user: doc }, options)),
-    setDocStore: setDocStore && (({ doc }) => setDocStore(filter, { user: doc }, options)),
-    getDocApi: getDocApi && (() => getDocApi(filter, options)),
+  const res = await getLocalFirst<BaseGetResult<User>>({
+    getLocal: getLocal && (() => getLocal(filter, options)),
+    setLocal: setLocal && (({ doc }) => setLocal(filter, { user: doc }, options)),
+    setStore: setStore && (({ doc }) => setStore(filter, { user: doc }, options)),
+    getApi: getApi && (() => getApi(filter, options)),
+  });
+
+  return res ?? {};
+};
+
+const updateUser: UserRepository['updateUser'] = async (filter, payload) => {
+  const updateLocal = LocalUserRepository.updateUser;
+  const updateStore = StoreUserRepository.updateUser;
+  const updateApi = FishApiUserRepository.updateUser;
+
+  const res = await updateLocalFirst<BaseGetResult<User>>({
+    updateLocal: updateLocal && (() => updateLocal(filter, payload)),
+    updateStore: updateStore && (() => updateStore(filter, payload)),
+    updateApi: updateApi && (() => updateApi(filter, payload)),
   });
 
   return res ?? {};
@@ -25,4 +39,5 @@ const getUser: UserRepository['getUser'] = async (filter, options) => {
 export const DataFetchUserRepository: UserRepository = {
   ...FishApiUserRepository,
   getUser,
+  updateUser,
 };

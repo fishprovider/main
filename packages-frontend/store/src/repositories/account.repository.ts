@@ -3,19 +3,19 @@ import _ from 'lodash';
 
 import { storeAccounts } from '..';
 
-const getAccount: AccountRepository['getAccount'] = async (filter) => {
-  const keyFields = ['accountId'];
-  if (!_.has(filter, keyFields)) return {};
+const getAccount: AccountRepository['getAccount'] = async (filterRaw) => {
+  const filter = _.pick(filterRaw, ['accountId']);
+  if (_.isEmpty(filter)) return {};
 
   const account = storeAccounts.getState()[filter.accountId as string];
   return { doc: account };
 };
 
-const getAccounts: AccountRepository['getAccounts'] = async (filter) => {
-  const keyFields = ['accountViewType', 'email'];
-  if (!_.has(filter, keyFields)) return {};
+const getAccounts: AccountRepository['getAccounts'] = async (filterRaw) => {
+  const filter = _.pick(filterRaw, ['accountViewType', 'email']);
+  if (_.isEmpty(filter)) return {};
 
-  const accounts = _.filter(storeAccounts.getState(), _.pick(filter, keyFields));
+  const accounts = _.filter(storeAccounts.getState(), filter);
   return { docs: accounts };
 };
 
@@ -36,9 +36,6 @@ const updateAccounts: AccountRepository['updateAccounts'] = async (_filter, payl
 };
 
 const removeAccount: AccountRepository['removeAccount'] = async (filter) => {
-  const keyFields = ['accountId'];
-  if (!_.has(filter, keyFields)) return {};
-
   storeAccounts.removeDoc(filter.accountId);
   return {};
 };

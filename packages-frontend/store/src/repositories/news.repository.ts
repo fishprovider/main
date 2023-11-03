@@ -18,12 +18,7 @@ const getNews: NewsRepository['getNews'] = async (filter) => {
   }
 
   if (week) {
-    return {
-      docs: _.filter(
-        storeNews.getState(),
-        (item) => item.week === week,
-      ),
-    };
+    return { docs: _.filter(storeNews.getState(), { week }) };
   }
 
   if (upcoming) {
