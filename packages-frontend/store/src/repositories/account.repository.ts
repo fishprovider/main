@@ -42,8 +42,8 @@ const removeAccount: AccountRepository['removeAccount'] = async (filter) => {
 
 export const StoreAccountRepository: AccountRepository = {
   getAccount,
-  updateAccount,
   getAccounts,
+  updateAccount,
   updateAccounts,
   removeAccount,
 };
