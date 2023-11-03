@@ -1,11 +1,12 @@
 export const getDoc = async <T>(params: {
   getDocLocal?: () => Promise<T>,
   setDocLocal?: (doc: T) => Promise<T>,
+  getDocStore?: () => Promise<T>,
   setDocStore?: (doc: T) => Promise<T>,
   getDocApi?: () => Promise<T>,
 }) => {
   const {
-    getDocLocal, setDocLocal, setDocStore, getDocApi,
+    getDocLocal, setDocLocal, getDocStore, setDocStore, getDocApi,
   } = params;
 
   const setDocToLocal = async (doc: T) => {
@@ -27,9 +28,15 @@ export const getDoc = async <T>(params: {
 
   let doc: T | undefined;
 
+  if (getDocStore) {
+    doc = await getDocStore();
+  }
+
   if (getDocLocal) {
-    doc = await getDocLocal();
-    setDocToStore(doc); // non-blocking
+    if (!doc) {
+      doc = await getDocLocal();
+      setDocToStore(doc); // non-blocking
+    }
   }
 
   if (getDocApi) {
@@ -47,11 +54,12 @@ export const getDoc = async <T>(params: {
 export const getDocs = async <T>(params: {
   getDocsLocal?: () => Promise<T>,
   setDocsLocal?: (docs: T) => Promise<T>,
+  getDocsStore?: () => Promise<T>,
   setDocsStore?: (docs: T) => Promise<T>,
   getDocsApi?: () => Promise<T>,
 }) => {
   const {
-    getDocsLocal, setDocsLocal, setDocsStore, getDocsApi,
+    getDocsLocal, setDocsLocal, getDocsStore, setDocsStore, getDocsApi,
   } = params;
 
   const setDocsToLocal = async (docs: T) => {
@@ -73,9 +81,15 @@ export const getDocs = async <T>(params: {
 
   let docs: T | undefined;
 
+  if (getDocsStore) {
+    docs = await getDocsStore();
+  }
+
   if (getDocsLocal) {
-    docs = await getDocsLocal();
-    setDocsToStore(docs); // non-blocking
+    if (!docs) {
+      docs = await getDocsLocal();
+      setDocsToStore(docs); // non-blocking
+    }
   }
 
   if (getDocsApi) {

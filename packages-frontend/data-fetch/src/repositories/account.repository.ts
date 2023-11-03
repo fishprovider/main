@@ -9,6 +9,7 @@ import { getDoc, getDocs, removeDoc } from '..';
 const getAccount: AccountRepository['getAccount'] = async (filter, options) => {
   const getDocLocal = LocalAccountRepository.getAccount;
   const setDocLocal = LocalAccountRepository.updateAccount;
+  const getDocStore = StoreAccountRepository.getAccount;
   const setDocStore = StoreAccountRepository.updateAccount;
   const getDocApi = FishApiAccountRepository.getAccount;
 
@@ -17,6 +18,8 @@ const getAccount: AccountRepository['getAccount'] = async (filter, options) => {
       && (() => getDocLocal(filter, options)),
     setDocLocal: setDocLocal
       && (({ doc }) => setDocLocal(filter, { account: doc }, options)),
+    getDocStore: getDocStore
+      && (() => getDocStore(filter, options)),
     setDocStore: setDocStore
       && (({ doc }) => setDocStore(filter, { account: doc }, options)),
     getDocApi: getDocApi
@@ -29,6 +32,7 @@ const getAccount: AccountRepository['getAccount'] = async (filter, options) => {
 const getAccounts: AccountRepository['getAccounts'] = async (filter, options) => {
   const getDocsLocal = LocalAccountRepository.getAccounts;
   const setDocsLocal = LocalAccountRepository.updateAccounts;
+  const getDocsStore = StoreAccountRepository.getAccounts;
   const setDocsStore = StoreAccountRepository.updateAccounts;
   const getDocsApi = FishApiAccountRepository.getAccounts;
 
@@ -37,6 +41,8 @@ const getAccounts: AccountRepository['getAccounts'] = async (filter, options) =>
        && (() => getDocsLocal(filter, options)),
     setDocsLocal: setDocsLocal
        && (({ docs }) => setDocsLocal(filter, { accounts: docs }, options)),
+    getDocsStore: getDocsStore
+       && (() => getDocsStore(filter, options)),
     setDocsStore: setDocsStore
        && (({ docs }) => setDocsStore(filter, { accounts: docs }, options)),
     getDocsApi: getDocsApi
