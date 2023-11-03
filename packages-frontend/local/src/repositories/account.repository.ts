@@ -3,7 +3,7 @@ import { AccountRepository } from '@fishprovider/core-frontend';
 import _ from 'lodash';
 
 import {
-  buildKeyAccount, buildKeyAccounts, localGet, localRemove,
+  buildKeyAccount, buildKeyAccounts, localGet, localRemove, localSet,
 } from '..';
 
 const getAccount: AccountRepository['getAccount'] = async (filterRaw) => {
@@ -24,21 +24,21 @@ const getAccounts: AccountRepository['getAccounts'] = async (filterRaw) => {
   return { docs: accounts };
 };
 
-const updateAccount: AccountRepository['updateAccount'] = async (filterRaw) => {
+const updateAccount: AccountRepository['updateAccount'] = async (filterRaw, payload) => {
   const filter = _.pick(filterRaw, ['accountId']);
   if (_.isEmpty(filter)) return {};
 
   const key = buildKeyAccount(filter);
-  await localRemove(key);
+  await localSet(key, payload.account);
   return {};
 };
 
-const updateAccounts: AccountRepository['updateAccounts'] = async (filterRaw) => {
+const updateAccounts: AccountRepository['updateAccounts'] = async (filterRaw, payload) => {
   const filter = _.pick(filterRaw, ['accountViewType', 'email']);
   if (_.isEmpty(filter)) return {};
 
   const key = buildKeyAccounts(filter);
-  await localRemove(key);
+  await localSet(key, payload.accounts);
   return {};
 };
 
