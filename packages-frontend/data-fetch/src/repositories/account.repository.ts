@@ -4,7 +4,9 @@ import { FishApiAccountRepository } from '@fishprovider/fish-api';
 import { LocalAccountRepository } from '@fishprovider/local';
 import { StoreAccountRepository } from '@fishprovider/store';
 
-import { getDoc, getDocs, removeDoc } from '..';
+import {
+  getDoc, getDocs, removeDoc, updateDoc, updateDocs,
+} from '..';
 
 const getAccount: AccountRepository['getAccount'] = async (filter, options) => {
   const getDocLocal = LocalAccountRepository.getAccount;
@@ -52,6 +54,34 @@ const getAccounts: AccountRepository['getAccounts'] = async (filter, options) =>
   return res ?? {};
 };
 
+const updateAccount: AccountRepository['updateAccount'] = async (filter, payload) => {
+  const updateDocLocal = LocalAccountRepository.updateAccount;
+  const updateDocStore = StoreAccountRepository.updateAccount;
+  const updateDocApi = FishApiAccountRepository.updateAccount;
+
+  const res = await updateDoc<BaseGetResult<Account>>({
+    updateDocLocal: updateDocLocal && (() => updateDocLocal(filter, payload)),
+    updateDocStore: updateDocStore && (() => updateDocStore(filter, payload)),
+    updateDocApi: updateDocApi && (() => updateDocApi(filter, payload)),
+  });
+
+  return res ?? {};
+};
+
+const updateAccounts: AccountRepository['updateAccounts'] = async (filter, payload) => {
+  const updateDocsLocal = LocalAccountRepository.updateAccounts;
+  const updateDocsStore = StoreAccountRepository.updateAccounts;
+  const updateDocsApi = FishApiAccountRepository.updateAccounts;
+
+  const res = await updateDocs<BaseGetManyResult<Account>>({
+    updateDocsLocal: updateDocsLocal && (() => updateDocsLocal(filter, payload)),
+    updateDocsStore: updateDocsStore && (() => updateDocsStore(filter, payload)),
+    updateDocsApi: updateDocsApi && (() => updateDocsApi(filter, payload)),
+  });
+
+  return res ?? {};
+};
+
 const removeAccount: AccountRepository['removeAccount'] = async (filter) => {
   const removeDocLocal = LocalAccountRepository.removeAccount;
   const removeDocStore = StoreAccountRepository.removeAccount;
@@ -66,9 +96,13 @@ const removeAccount: AccountRepository['removeAccount'] = async (filter) => {
   return res ?? {};
 };
 
+// TODO: addAccount should update cache
+
 export const DataFetchAccountRepository: AccountRepository = {
   ...FishApiAccountRepository,
   getAccount,
   getAccounts,
+  updateAccount,
+  updateAccounts,
   removeAccount,
 };

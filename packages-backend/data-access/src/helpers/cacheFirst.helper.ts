@@ -64,6 +64,46 @@ export const getDocs = async <T>(params: {
   return docs;
 };
 
+export const updateDoc = async <T>(params: {
+  updateDocCache?: () => Promise<T>,
+  updateDocDb?: () => Promise<T>,
+}) => {
+  const {
+    updateDocCache, updateDocDb,
+  } = params;
+  if (updateDocCache) {
+    updateDocCache(); // non-blocking
+  }
+
+  let doc: T | undefined;
+
+  if (updateDocDb) {
+    doc = await updateDocDb();
+  }
+
+  return doc;
+};
+
+export const updateDocs = async <T>(params: {
+  updateDocsCache?: () => Promise<T>,
+  updateDocsDb?: () => Promise<T>,
+}) => {
+  const {
+    updateDocsCache, updateDocsDb,
+  } = params;
+  if (updateDocsCache) {
+    updateDocsCache(); // non-blocking
+  }
+
+  let docs: T | undefined;
+
+  if (updateDocsDb) {
+    docs = await updateDocsDb();
+  }
+
+  return docs;
+};
+
 export const removeDoc = async <T>(params: {
   removeDocCache?: () => Promise<T>,
   removeDocDb?: () => Promise<T>,

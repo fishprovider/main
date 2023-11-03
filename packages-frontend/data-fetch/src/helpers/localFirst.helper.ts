@@ -104,6 +104,54 @@ export const getDocs = async <T>(params: {
   return docs;
 };
 
+export const updateDoc = async <T>(params: {
+  updateDocLocal?: () => Promise<T>,
+  updateDocStore?: () => Promise<T>,
+  updateDocApi?: () => Promise<T>,
+}) => {
+  const {
+    updateDocLocal, updateDocStore, updateDocApi,
+  } = params;
+  if (updateDocLocal) {
+    updateDocLocal(); // non-blocking
+  }
+  if (updateDocStore) {
+    updateDocStore(); // non-blocking
+  }
+
+  let doc: T | undefined;
+
+  if (updateDocApi) {
+    doc = await updateDocApi();
+  }
+
+  return doc;
+};
+
+export const updateDocs = async <T>(params: {
+  updateDocsLocal?: () => Promise<T>,
+  updateDocsStore?: () => Promise<T>,
+  updateDocsApi?: () => Promise<T>,
+}) => {
+  const {
+    updateDocsLocal, updateDocsStore, updateDocsApi,
+  } = params;
+  if (updateDocsLocal) {
+    updateDocsLocal(); // non-blocking
+  }
+  if (updateDocsStore) {
+    updateDocsStore(); // non-blocking
+  }
+
+  let docs: T | undefined;
+
+  if (updateDocsApi) {
+    docs = await updateDocsApi();
+  }
+
+  return docs;
+};
+
 export const removeDoc = async <T>(params: {
   removeDocLocal?: () => Promise<T>,
   removeDocStore?: () => Promise<T>,
