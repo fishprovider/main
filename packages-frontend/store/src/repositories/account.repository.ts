@@ -3,18 +3,15 @@ import _ from 'lodash';
 
 import { storeAccounts } from '..';
 
-const getAccount: AccountRepository['getAccount'] = async (filterRaw) => {
-  const filter = _.pick(filterRaw, ['accountId']);
-  if (_.isEmpty(filter)) return {};
+const getAccount: AccountRepository['getAccount'] = async (filter) => {
+  const { accountId } = filter;
+  if (!accountId) return {};
 
-  const account = storeAccounts.getState()[filter.accountId as string];
+  const account = storeAccounts.getState()[accountId];
   return { doc: account };
 };
 
-const getAccounts: AccountRepository['getAccounts'] = async (filterRaw) => {
-  const filter = _.pick(filterRaw, ['accountViewType', 'email']);
-  if (_.isEmpty(filter)) return {};
-
+const getAccounts: AccountRepository['getAccounts'] = async (filter) => {
   const accounts = _.filter(storeAccounts.getState(), filter);
   if (_.isEmpty(accounts)) return {};
 

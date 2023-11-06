@@ -1,12 +1,8 @@
 import { AccountRepository } from '@fishprovider/core-backend';
-import _ from 'lodash';
 
 import { buildKeyAccount, buildKeyAccounts, getRedis } from '..';
 
-const getAccount: AccountRepository['getAccount'] = async (filterRaw) => {
-  const filter = _.pick(filterRaw, ['accountId', 'tradeAccountId']);
-  if (_.isEmpty(filter)) return {};
-
+const getAccount: AccountRepository['getAccount'] = async (filter) => {
   const key = buildKeyAccount(filter);
   const { client } = await getRedis();
   const str = await client.get(key);
@@ -15,10 +11,7 @@ const getAccount: AccountRepository['getAccount'] = async (filterRaw) => {
   return { doc: JSON.parse(str) };
 };
 
-const getAccounts: AccountRepository['getAccounts'] = async (filterRaw) => {
-  const filter = _.pick(filterRaw, ['accountViewType', 'email']);
-  if (_.isEmpty(filter)) return {};
-
+const getAccounts: AccountRepository['getAccounts'] = async (filter) => {
   const key = buildKeyAccounts(filter);
   const { client } = await getRedis();
   const str = await client.get(key);
@@ -27,10 +20,7 @@ const getAccounts: AccountRepository['getAccounts'] = async (filterRaw) => {
   return { docs: JSON.parse(str) };
 };
 
-const updateAccount: AccountRepository['updateAccount'] = async (filterRaw, payload) => {
-  const filter = _.pick(filterRaw, ['accountId']);
-  if (_.isEmpty(filter)) return {};
-
+const updateAccount: AccountRepository['updateAccount'] = async (filter, payload) => {
   const key = buildKeyAccount(filter);
   const { client } = await getRedis();
   const { account } = payload;
@@ -38,10 +28,7 @@ const updateAccount: AccountRepository['updateAccount'] = async (filterRaw, payl
   return { doc: account };
 };
 
-const updateAccounts: AccountRepository['updateAccounts'] = async (filterRaw, payload) => {
-  const filter = _.pick(filterRaw, ['accountViewType', 'email']);
-  if (_.isEmpty(filter)) return {};
-
+const updateAccounts: AccountRepository['updateAccounts'] = async (filter, payload) => {
   const key = buildKeyAccounts(filter);
   const { client } = await getRedis();
   const { accounts } = payload;
@@ -49,10 +36,7 @@ const updateAccounts: AccountRepository['updateAccounts'] = async (filterRaw, pa
   return { docs: accounts };
 };
 
-const removeAccount: AccountRepository['removeAccount'] = async (filterRaw) => {
-  const filter = _.pick(filterRaw, ['accountId']);
-  if (_.isEmpty(filter)) return {};
-
+const removeAccount: AccountRepository['removeAccount'] = async (filter) => {
   const key = buildKeyAccount(filter);
   const { client } = await getRedis();
   await client.del(key);

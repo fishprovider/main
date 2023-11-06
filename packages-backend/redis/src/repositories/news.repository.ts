@@ -1,12 +1,8 @@
 import { NewsRepository } from '@fishprovider/core-backend';
-import _ from 'lodash';
 
 import { buildKeyNews, getRedis } from '..';
 
-const getNews: NewsRepository['getNews'] = async (filterRaw) => {
-  const filter = _.pick(filterRaw, ['today', 'week', 'upcoming']);
-  if (_.isEmpty(filter)) return {};
-
+const getNews: NewsRepository['getNews'] = async (filter) => {
   const key = buildKeyNews(filter);
   const { client } = await getRedis();
   const str = await client.get(key);
@@ -15,10 +11,7 @@ const getNews: NewsRepository['getNews'] = async (filterRaw) => {
   return { docs: JSON.parse(str) };
 };
 
-const updateNews: NewsRepository['updateNews'] = async (filterRaw, payload) => {
-  const filter = _.pick(filterRaw, ['today', 'week', 'upcoming']);
-  if (_.isEmpty(filter)) return {};
-
+const updateNews: NewsRepository['updateNews'] = async (filter, payload) => {
   const key = buildKeyNews(filter);
   const { client } = await getRedis();
   const { news } = payload;
