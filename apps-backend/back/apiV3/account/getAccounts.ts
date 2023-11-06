@@ -19,6 +19,7 @@ const handler: ApiHandler<Partial<Account>[]> = async (data, userSession) => {
       ...(accountViewType === AccountViewType.public ? {
         accountViewType,
       } : {
+        accountViewType: AccountViewType.private,
         email: userSession.email,
       }),
     },
