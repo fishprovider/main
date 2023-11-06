@@ -13,7 +13,7 @@ const getAccount: AccountRepository['getAccount'] = async (filter) => {
 
 const getAccounts: AccountRepository['getAccounts'] = async (filter) => {
   const accounts = _.filter(storeAccounts.getState(), filter);
-  if (_.isEmpty(accounts)) return {};
+  if (!accounts.length) return {};
 
   return { docs: accounts };
 };
