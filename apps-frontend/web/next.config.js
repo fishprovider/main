@@ -2,8 +2,8 @@
 // const { i18n } = require('./next-i18next.config');
 
 /** @type {import('next').NextConfig} */
-const swcConfig = {
-  swcMinify: true,
+const nextConfig = {
+  reactStrictMode: false,
   compiler: {
     reactRemoveProperties: process.env.NODE_ENV === 'production', // remove properties matching regex ^data-test
     emotion: true,
@@ -30,26 +30,6 @@ const swcConfig = {
     ],
     formats: ['image/avif', 'image/webp'],
   },
-};
-
-/** @type { import('next/dist/server/config-shared').NextJsWebpackConfig } */
-const webpack = (
-  /** @type { import('webpack').Configuration } */
-  config,
-  // context,
-) => {
-  const newConfig = { ...config };
-  if (process.env.NODE_ENV === 'development') {
-    newConfig.optimization.minimize = false;
-  }
-  return newConfig;
-};
-
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: false,
-  ...swcConfig,
-  webpack,
   eslint: {
     ignoreDuringBuilds: true,
   },
