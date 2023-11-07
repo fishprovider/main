@@ -1,6 +1,6 @@
 import { User } from '@fishprovider/core';
 import { refreshUserRolesService } from '@fishprovider/core-backend';
-import { DataAccessAccountRepository, DataAccessUserRepository } from '@fishprovider/data-access';
+import { MongoAccountRepository, MongoUserRepository } from '@fishprovider/mongo';
 import { z } from 'zod';
 
 import { ApiHandler } from '~types/ApiHandler.model';
@@ -15,8 +15,8 @@ const handler: ApiHandler<Partial<User>> = async (data, userSession) => {
       email: userSession?.email,
     },
     repositories: {
-      account: DataAccessAccountRepository,
-      user: DataAccessUserRepository,
+      account: MongoAccountRepository,
+      user: MongoUserRepository,
     },
     context: { userSession },
   });

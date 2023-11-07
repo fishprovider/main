@@ -3,7 +3,7 @@ import {
 } from '@fishprovider/core';
 import { addAccountService } from '@fishprovider/core-backend';
 import { CTraderAccountRepository } from '@fishprovider/ctrader-api';
-import { DataAccessAccountRepository, DataAccessUserRepository } from '@fishprovider/data-access';
+import { MongoAccountRepository, MongoUserRepository } from '@fishprovider/mongo';
 import { z } from 'zod';
 
 import { ApiHandler } from '~types/ApiHandler.model';
@@ -46,9 +46,9 @@ const handler: ApiHandler<Partial<Account>> = async (data, userSession) => {
       baseConfig,
     },
     repositories: {
-      account: DataAccessAccountRepository,
+      account: MongoAccountRepository,
       trade: CTraderAccountRepository,
-      user: DataAccessUserRepository,
+      user: MongoUserRepository,
     },
     context: { userSession },
   });
