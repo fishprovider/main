@@ -16,6 +16,7 @@ export interface AccountRepository {
         name: string,
         tradeAccountId?: string,
       },
+      accountPlatform?: AccountPlatform,
       config?: AccountConfig,
       tradeAccountId?: string,
     },
