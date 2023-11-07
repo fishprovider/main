@@ -1,7 +1,7 @@
 import { AccountConfig, BaseError, RepositoryError } from '@fishprovider/core';
 import { AccountRepository } from '@fishprovider/core-backend';
 
-import { Connection, newAccount } from '..';
+import { Connection, getAccountInformation, newAccount } from '..';
 
 const checkConfig = (config?: AccountConfig) => {
   if (!config) {
@@ -9,6 +9,20 @@ const checkConfig = (config?: AccountConfig) => {
   }
 
   return config;
+};
+
+const getAccount: AccountRepository['getAccount'] = async (payload) => {
+  const { config: rawConfig, accountId } = payload;
+  const config = checkConfig(rawConfig);
+
+  const doc = await getAccountInformation(
+    new Connection(config),
+    accountId,
+  );
+
+  return {
+    doc,
+  };
 };
 
 const addAccount: AccountRepository['addAccount'] = async (payload) => {
@@ -32,5 +46,6 @@ const addAccount: AccountRepository['addAccount'] = async (payload) => {
 };
 
 export const MetaApiAccountRepository: AccountRepository = {
+  getAccount,
   addAccount,
 };
