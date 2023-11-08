@@ -1,6 +1,6 @@
+import { CacheFirstNewsRepository } from '@fishprovider/cache-first';
 import { News } from '@fishprovider/core';
 import { getNewsService } from '@fishprovider/core-backend';
-import { DataAccessNewsRepository } from '@fishprovider/data-access';
 import { z } from 'zod';
 
 import { ApiHandler } from '~types/ApiHandler.model';
@@ -22,7 +22,7 @@ const handler: ApiHandler<Partial<News>[]> = async (data, userSession) => {
       week,
     },
     repositories: {
-      news: DataAccessNewsRepository,
+      news: CacheFirstNewsRepository,
     },
     context: { userSession },
   });

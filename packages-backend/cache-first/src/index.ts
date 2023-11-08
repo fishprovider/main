@@ -1,3 +1,3 @@
-export * from './dataAccess';
+export * from './cacheFirst';
 export * from './helpers';
 export * from './repositories';

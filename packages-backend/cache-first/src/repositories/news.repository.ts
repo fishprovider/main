@@ -19,6 +19,6 @@ const getNews: NewsRepository['getNews'] = async (filter, options) => {
   return res ?? {};
 };
 
-export const DataAccessNewsRepository: NewsRepository = {
+export const CacheFirstNewsRepository: NewsRepository = {
   getNews,
 };

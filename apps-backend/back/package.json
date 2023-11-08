@@ -22,7 +22,7 @@
   "dependencies": {
     "@fishprovider/coin": "*",
     "@fishprovider/core-backend": "*",
-    "@fishprovider/data-access": "*",
+    "@fishprovider/cache-first": "*",
     "@fishprovider/old-core": "*",
     "@fishprovider/swap": "*",
     "@fishprovider/trade": "*",

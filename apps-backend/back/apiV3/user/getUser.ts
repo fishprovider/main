@@ -1,6 +1,6 @@
+import { CacheFirstUserRepository } from '@fishprovider/cache-first';
 import { User } from '@fishprovider/core';
 import { getUserService } from '@fishprovider/core-backend';
-import { DataAccessUserRepository } from '@fishprovider/data-access';
 import { z } from 'zod';
 
 import { ApiHandler } from '~types/ApiHandler.model';
@@ -15,7 +15,7 @@ const handler: ApiHandler<Partial<User>> = async (data, userSession) => {
       email: userSession?.email,
     },
     repositories: {
-      user: DataAccessUserRepository,
+      user: CacheFirstUserRepository,
     },
     context: { userSession },
   });

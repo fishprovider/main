@@ -69,7 +69,7 @@ const removeAccount: AccountRepository['removeAccount'] = async (filter) => {
   return res ?? {};
 };
 
-export const DataAccessAccountRepository: AccountRepository = {
+export const CacheFirstAccountRepository: AccountRepository = {
   ...MongoAccountRepository,
   getAccount,
   getAccounts,

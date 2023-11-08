@@ -20,7 +20,7 @@ npm run build -w packages-backend/notif
 
 npm run build -w packages-backend/mongo
 npm run build -w packages-backend/redis
-npm run build -w packages-backend/data-access
+npm run build -w packages-backend/cache-first
 
 npm run build -w packages-backend/ctrader-api
 npm run build -w packages-backend/metatrader-api

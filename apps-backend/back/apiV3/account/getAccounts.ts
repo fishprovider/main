@@ -1,6 +1,6 @@
+import { CacheFirstAccountRepository } from '@fishprovider/cache-first';
 import { Account, AccountViewType } from '@fishprovider/core';
 import { getAccountsService } from '@fishprovider/core-backend';
-import { DataAccessAccountRepository } from '@fishprovider/data-access';
 import { z } from 'zod';
 
 import { ApiHandler } from '~types/ApiHandler.model';
@@ -29,7 +29,7 @@ const handler: ApiHandler<Partial<Account>[]> = async (data, userSession) => {
       },
     },
     repositories: {
-      account: DataAccessAccountRepository,
+      account: CacheFirstAccountRepository,
     },
     context: { userSession },
   });

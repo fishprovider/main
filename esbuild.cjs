@@ -27,7 +27,7 @@ const packageDependencies = {
   ...require('./packages-backend/firebase/package.json').dependencies,
   ...require('./packages-backend/mongo/package.json').dependencies,
   ...require('./packages-backend/redis/package.json').dependencies,
-  ...require('./packages-backend/data-access/package.json').dependencies,
+  ...require('./packages-backend/cache-first/package.json').dependencies,
 
   ...require('./packages-backend/ctrader-api/package.json').dependencies,
   ...require('./packages-backend/metatrader-api/package.json').dependencies,

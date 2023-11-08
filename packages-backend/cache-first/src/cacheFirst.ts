@@ -9,22 +9,22 @@ import {
   startRedis, stopRedis,
 } from '@fishprovider/redis';
 
-export const startDataAccess = async () => {
-  log.info('Starting DataAccess');
+export const startCacheFirst = async () => {
+  log.info('Starting CacheFirst');
   await Promise.all([
     startRedis(),
     startMongo(),
     startFirebase(),
   ]);
-  log.info('Started DataAccess');
+  log.info('Started CacheFirst');
 };
 
-export const stopDataAccess = async () => {
-  log.info('Stopping DataAccess');
+export const stopCacheFirst = async () => {
+  log.info('Stopping CacheFirst');
   await Promise.all([
     stopRedis(),
     stopMongo(),
     stopFirebase(),
   ]);
-  log.info('Stopped DataAccess');
+  log.info('Stopped CacheFirst');
 };

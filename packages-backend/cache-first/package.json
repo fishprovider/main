@@ -1,5 +1,5 @@
 {
-  "name": "@fishprovider/data-access",
+  "name": "@fishprovider/cache-first",
   "version": "7.0.0",
   "type": "module",
   "main": "dist/index.js",
