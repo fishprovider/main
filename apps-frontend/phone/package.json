@@ -29,7 +29,7 @@
   "dependencies": {
     "@fishprovider/core-frontend": "*",
     "@fishprovider/cross": "*",
-    "@fishprovider/store-first": "*",
+    "@fishprovider/fish-api": "*",
     "@fishprovider/utils": "*",
     "@react-native-async-storage/async-storage": "1.18.2",
     "@react-native-firebase/app": "18.3.1",
