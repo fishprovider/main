@@ -1,5 +1,5 @@
 {
-  "name": "@fishprovider/local-first",
+  "name": "@fishprovider/store-first",
   "version": "7.0.0",
   "type": "module",
   "main": "dist/index.js",
@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@fishprovider/fish-api": "*",
-    "@fishprovider/local": "*"
+    "@fishprovider/local-first": "*",
+    "@fishprovider/store": "*"
   }
 }
