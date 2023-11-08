@@ -1,12 +1,12 @@
 import { checkRepository } from '@fishprovider/core';
-import { LocalFirstNewsRepository } from '@fishprovider/local-first';
+import { StoreFirstNewsRepository } from '@fishprovider/store-first';
 
 export const getNewsService = async (filter: {
   today?: boolean,
   week?: string,
   upcoming?: boolean,
 }) => {
-  const getNewsRepo = checkRepository(LocalFirstNewsRepository.getNews);
+  const getNewsRepo = checkRepository(StoreFirstNewsRepository.getNews);
   const { docs: news } = await getNewsRepo(filter);
   return news;
 };

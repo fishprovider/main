@@ -1,6 +1,6 @@
 import { initApi } from '@fishprovider/cross/dist/libs/api';
 import { initStore } from '@fishprovider/cross/dist/libs/store';
-import { initLocalFirst } from '@fishprovider/local-first';
+import { initStoreFirst } from '@fishprovider/store-first';
 import moment from 'moment-timezone';
 
 import { initAnalytics } from '~libs/analytics';
@@ -30,7 +30,7 @@ const getBaseUrl = () => {
 };
 
 const initialize = () => {
-  initLocalFirst({
+  initStoreFirst({
     baseURL: `${getBaseUrl()}${env.api}/v3`,
   });
 

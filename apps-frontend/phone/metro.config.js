@@ -15,10 +15,11 @@ config.watchFolders = [
   path.resolve(workspaceRoot, 'packages-share', 'core'),
 
   path.resolve(workspaceRoot, 'packages-frontend', 'core-frontend'),
-  path.resolve(workspaceRoot, 'packages-frontend', 'local-first'),
   path.resolve(workspaceRoot, 'packages-frontend', 'fish-api'),
   path.resolve(workspaceRoot, 'packages-frontend', 'local'),
+  path.resolve(workspaceRoot, 'packages-frontend', 'store-first'),
   path.resolve(workspaceRoot, 'packages-frontend', 'store'),
+  path.resolve(workspaceRoot, 'packages-frontend', 'store-first'),
   path.resolve(workspaceRoot, 'packages-frontend', 'subscription'),
 ];
 

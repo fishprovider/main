@@ -1,15 +1,15 @@
 import { checkRepository } from '@fishprovider/core';
 import storeUser from '@fishprovider/cross/dist/stores/user';
-import { LocalFirstUserRepository } from '@fishprovider/local-first';
+import { StoreFirstUserRepository } from '@fishprovider/store-first';
 
 export const refreshUserRolesService = async (filter: {
   email?: string,
 }) => {
-  const updateUserRepo = checkRepository(LocalFirstUserRepository.updateUser);
+  const updateUserRepo = checkRepository(StoreFirstUserRepository.updateUser);
   const { doc: user } = await updateUserRepo(filter, { refreshRoles: true });
 
   if (user) {
-    // TODO: migrate to LocalFirstUserRepository
+    // TODO: migrate to StoreFirstUserRepository
     storeUser.mergeState({
       info: {
         ...storeUser.getState().info,

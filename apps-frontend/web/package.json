@@ -34,7 +34,7 @@
     "@fishbot/chart-utils": "^1.3.0",
     "@fishprovider/core-frontend": "*",
     "@fishprovider/cross": "*",
-    "@fishprovider/local-first": "*",
+    "@fishprovider/store-first": "*",
     "@giscus/react": "^2.3.0",
     "@mantine/carousel": "^6.0.21",
     "@mantine/core": "^6.0.21",
