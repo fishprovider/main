@@ -1,8 +1,5 @@
 import { log } from '@fishprovider/core';
 import {
-  startFirebase, stopFirebase,
-} from '@fishprovider/firebase';
-import {
   startMongo, stopMongo,
 } from '@fishprovider/mongo';
 import {
@@ -14,7 +11,6 @@ export const startCacheFirst = async () => {
   await Promise.all([
     startRedis(),
     startMongo(),
-    startFirebase(),
   ]);
   log.info('Started CacheFirst');
 };
@@ -24,7 +20,6 @@ export const stopCacheFirst = async () => {
   await Promise.all([
     stopRedis(),
     stopMongo(),
-    stopFirebase(),
   ]);
   log.info('Stopped CacheFirst');
 };

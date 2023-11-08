@@ -8,7 +8,6 @@
   "references": [
     { "path": "../../packages-share/core" },
     { "path": "../../packages-backend/core-backend" },
-    { "path": "../../packages-backend/firebase" },
     { "path": "../../packages-backend/mongo" },
     { "path": "../../packages-backend/redis" },
   ]
