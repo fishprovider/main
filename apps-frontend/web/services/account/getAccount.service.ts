@@ -1,17 +1,17 @@
 import { checkRepository } from '@fishprovider/core';
 import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
-import { DataFetchAccountRepository } from '@fishprovider/data-fetch';
+import { LocalFirstAccountRepository } from '@fishprovider/local-first';
 import { Account } from '@fishprovider/utils/types/Account.model';
 
 export const getAccountService = async (filter: {
   accountId: string,
   getTradeInfo?: boolean,
 }) => {
-  const getAccountRepo = checkRepository(DataFetchAccountRepository.getAccount);
+  const getAccountRepo = checkRepository(LocalFirstAccountRepository.getAccount);
   const { doc: account } = await getAccountRepo(filter);
 
   if (account) {
-    // TODO: migrate to DataFetchAccountRepository
+    // TODO: migrate to LocalFirstAccountRepository
     storeAccounts.mergeDoc(account as Partial<Account>);
   }
 

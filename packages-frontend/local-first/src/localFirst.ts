@@ -1,10 +1,10 @@
 import { log } from '@fishprovider/core';
 import { initFishApi } from '@fishprovider/fish-api';
 
-export const initDataFetch = (params: {
+export const initLocalFirst = (params: {
   baseURL?: string,
 }) => {
-  log.info('Starting initDataFetch');
+  log.info('Starting initLocalFirst');
   initFishApi(params);
-  log.info('Started initDataFetch');
+  log.info('Started initLocalFirst');
 };

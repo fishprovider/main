@@ -14,4 +14,4 @@ npm run build -w packages-frontend/fish-api
 npm run build -w packages-frontend/local
 npm run build -w packages-frontend/store
 
-npm run build -w packages-frontend/data-fetch
+npm run build -w packages-frontend/local-first

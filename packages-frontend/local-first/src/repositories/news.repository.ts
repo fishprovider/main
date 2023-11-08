@@ -22,7 +22,7 @@ const getNews: NewsRepository['getNews'] = async (filter, options) => {
   return res ?? {};
 };
 
-export const DataFetchNewsRepository: NewsRepository = {
+export const LocalFirstNewsRepository: NewsRepository = {
   ...FishApiNewsRepository,
   getNews,
   watchNews: StoreNewsRepository.watchNews,

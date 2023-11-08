@@ -84,7 +84,7 @@ const removeAccount: AccountRepository['removeAccount'] = async (filter) => {
   return res ?? {};
 };
 
-export const DataFetchAccountRepository: AccountRepository = {
+export const LocalFirstAccountRepository: AccountRepository = {
   ...FishApiAccountRepository,
   getAccount,
   getAccounts,

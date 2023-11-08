@@ -36,7 +36,7 @@ const updateUser: UserRepository['updateUser'] = async (filter, payload) => {
   return res ?? {};
 };
 
-export const DataFetchUserRepository: UserRepository = {
+export const LocalFirstUserRepository: UserRepository = {
   ...FishApiUserRepository,
   getUser,
   updateUser,

@@ -1,6 +1,6 @@
 import { checkRepository } from '@fishprovider/core';
 import storeUser from '@fishprovider/cross/dist/stores/user';
-import { DataFetchUserRepository } from '@fishprovider/data-fetch';
+import { LocalFirstUserRepository } from '@fishprovider/local-first';
 
 export const updateUserService = async (
   filter: {
@@ -14,11 +14,11 @@ export const updateUserService = async (
     }
   },
 ) => {
-  const updateUserRepo = checkRepository(DataFetchUserRepository.updateUser);
+  const updateUserRepo = checkRepository(LocalFirstUserRepository.updateUser);
   const { doc: user } = await updateUserRepo(filter, payload);
 
   if (user) {
-    // TODO: migrate to DataFetchUserRepository
+    // TODO: migrate to LocalFirstUserRepository
     storeUser.mergeState({
       info: {
         ...storeUser.getState().info,

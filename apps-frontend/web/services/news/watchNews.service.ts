@@ -1,9 +1,9 @@
 import { checkRepository, News } from '@fishprovider/core';
-import { DataFetchNewsRepository } from '@fishprovider/data-fetch';
+import { LocalFirstNewsRepository } from '@fishprovider/local-first';
 
 export const watchNewsService = <T>(
   selector: (state: Record<string, News>) => T,
 ) => {
-  const watchNewsRepo = checkRepository(DataFetchNewsRepository.watchNews);
+  const watchNewsRepo = checkRepository(LocalFirstNewsRepository.watchNews);
   return watchNewsRepo(selector);
 };

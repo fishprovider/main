@@ -1,12 +1,12 @@
 import { initApi } from '@fishprovider/cross/dist/libs/api';
 import { initStore } from '@fishprovider/cross/dist/libs/store';
-import { initDataFetch } from '@fishprovider/data-fetch';
+import { initLocalFirst } from '@fishprovider/local-first';
 
 import { initAuth } from '~libs/auth';
 import { initNotif } from '~libs/pushNotif';
 
 const initialize = () => {
-  initDataFetch({
+  initLocalFirst({
     baseURL: `${process.env.EXPO_PUBLIC_BACKEND_URL}/api/v3`,
   });
 
