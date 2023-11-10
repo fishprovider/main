@@ -90,7 +90,7 @@ const sendNotif = async (symbolName: string, timeFr: string) => {
   });
 
   const queueDiscord = await pQueueDiscord;
-  queueDiscord.add(() => Promise.all([sendDiscordRes, delay(1000)]));
+  queueDiscord.add(() => Promise.all([sendDiscordRes, delay(5000)]));
 
   const queueTelegram = await pQueueTelegram;
   queueTelegram.add(() => Promise.all([sendTeleRes, delay(5000)]));
