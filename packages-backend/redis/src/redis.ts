@@ -28,6 +28,7 @@ export const stopRedis = async () => {
 export const getRedis = async () => {
   const client = await clientPromise;
   return {
+    clientJson: client.json,
     client,
   };
 };

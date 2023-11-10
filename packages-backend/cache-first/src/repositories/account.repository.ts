@@ -35,27 +35,27 @@ const getAccounts: AccountRepository['getAccounts'] = async (filter, options) =>
 
 const updateAccount: AccountRepository['updateAccount'] = async (filter, payload) => {
   const updateDb = MongoAccountRepository.updateAccount;
-  const updateCache = RedisAccountRepository.updateAccount;
+  const updateCache = RedisAccountRepository.removeAccount; // TODO: merge instead of clear
 
   const res = await updateCacheFirst<BaseGetResult<Account>>({
     updateDb: updateDb && (() => updateDb(filter, payload)),
-    updateCache: updateCache && (({ doc } = {}) => updateCache(filter, { account: doc })),
+    updateCache: updateCache && (() => updateCache(filter)),
   });
 
   return res ?? {};
 };
 
-const updateAccounts: AccountRepository['updateAccounts'] = async (filter, payload) => {
-  const updateDb = MongoAccountRepository.updateAccounts;
-  const updateCache = RedisAccountRepository.updateAccounts;
+// const updateAccounts: AccountRepository['updateAccounts'] = async (filter, payload) => {
+//   const updateDb = MongoAccountRepository.updateAccounts;
+//   const updateCache = RedisAccountRepository.updateAccounts;
 
-  const res = await updateCacheFirst<BaseGetManyResult<Account>>({
-    updateDb: updateDb && (() => updateDb(filter, payload)),
-    updateCache: updateCache && (({ docs } = {}) => updateCache(filter, { accounts: docs })),
-  });
+//   const res = await updateCacheFirst<BaseGetManyResult<Account>>({
+//     updateDb: updateDb && (() => updateDb(filter, payload)),
+//     updateCache: updateCache && (({ docs } = {}) => updateCache(filter, { accounts: docs })),
+//   });
 
-  return res ?? {};
-};
+//   return res ?? {};
+// };
 
 const removeAccount: AccountRepository['removeAccount'] = async (filter) => {
   const updateDb = MongoAccountRepository.removeAccount;
@@ -74,6 +74,6 @@ export const CacheFirstAccountRepository: AccountRepository = {
   getAccount,
   getAccounts,
   updateAccount,
-  updateAccounts,
+  // updateAccounts,
   removeAccount,
 };

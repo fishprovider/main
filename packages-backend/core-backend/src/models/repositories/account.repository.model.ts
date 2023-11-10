@@ -75,7 +75,7 @@ export interface AccountRepository {
 
   removeAccount?: (
     filter: {
-      accountId: string,
+      accountId?: string,
     },
   ) => Promise<BaseGetResult<Account>>;
 
