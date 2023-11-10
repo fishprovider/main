@@ -1,6 +1,6 @@
 import { checkRepository } from '@fishprovider/core';
 import storeUser from '@fishprovider/cross/dist/stores/user';
-import { FishApiUserRepository } from '@fishprovider/fish-api';
+import { StoreFirstUserRepository } from '@fishprovider/store-first';
 
 export const updateUserService = async (
   filter: {
@@ -14,7 +14,7 @@ export const updateUserService = async (
     }
   },
 ) => {
-  const updateUserRepo = checkRepository(FishApiUserRepository.updateUser);
+  const updateUserRepo = checkRepository(StoreFirstUserRepository.updateUser);
   const { doc: user } = await updateUserRepo(filter, payload);
 
   if (user) {
