@@ -24,6 +24,22 @@
     - npm i --prefer-offline --no-audit --no-progress --legacy-peer-deps --cache ~/.npm
     - npm run deploy-update
 
+.build-phone-development-android:
+  script:
+    - npm run clean
+    - cd apps-frontend/phone
+    - ./clean-deps.sh
+    - npm i --prefer-offline --no-audit --no-progress --legacy-peer-deps --cache ~/.npm
+    - BUILD_PROFILE=development npm run build-development-ios
+
+.build-phone-development-ios:
+  script:
+    - npm run clean
+    - cd apps-frontend/phone
+    - ./clean-deps.sh
+    - npm i --prefer-offline --no-audit --no-progress --legacy-peer-deps --cache ~/.npm
+    - BUILD_PROFILE=development npm run build-development-ios
+
 .build-web:
   script:
     - npm run clean

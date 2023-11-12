@@ -26,6 +26,28 @@ schedule-deploy-phone-ios:
   script:
     - !reference [.deploy-phone-ios, script]
 
+schedule-build-phone-development-android:
+  tags:
+    - local
+  only:
+    variables:
+      - $SCHEDULE_PHONE_DEV_ANDROID
+  cache: !reference [.cache_npm, cache]
+  timeout: "30 minutes"
+  script:
+    - !reference [.build-phone-development-android, script]
+
+schedule-build-phone-development-ios:
+  tags:
+    - local
+  only:
+    variables:
+      - $SCHEDULE_PHONE_DEV_IOS
+  cache: !reference [.cache_npm, cache]
+  timeout: "30 minutes"
+  script:
+    - !reference [.build-phone-development-ios, script]
+
 schedule-build-web:
   tags:
     - local
