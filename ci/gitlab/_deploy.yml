@@ -30,7 +30,7 @@
     - cd apps-frontend/phone
     - ./clean-deps.sh
     - npm i --prefer-offline --no-audit --no-progress --legacy-peer-deps --cache ~/.npm
-    - BUILD_PROFILE=development npm run build-development-ios
+    - BUILD_PROFILE=development npm run build-local-android
 
 .build-phone-development-ios:
   script:
@@ -38,7 +38,7 @@
     - cd apps-frontend/phone
     - ./clean-deps.sh
     - npm i --prefer-offline --no-audit --no-progress --legacy-peer-deps --cache ~/.npm
-    - BUILD_PROFILE=development npm run build-development-ios
+    - BUILD_PROFILE=development npm run build-local-ios
 
 .build-web:
   script:
