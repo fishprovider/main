@@ -185,7 +185,7 @@ const deployConfigBase = {
   repo: 'git@gitlab.com:fishprovider/main.git',
   ref: 'tags/release',
   'pre-deploy-local': 'git tag release -f; git push origin release -f',
-  'pre-deploy': 'git reset --hard; git clean -fd; git tag -d release secondary',
+  'pre-deploy': 'git reset --hard; git clean -fd; git tag -d release secondary || echo 1',
   'post-deploy': 'git rev-parse HEAD',
 };
 
