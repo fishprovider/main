@@ -1,6 +1,7 @@
 image: node:lts
 
 variables:
+  GIT_DEPTH: 1
   GIT_CLEAN_FLAGS: -ffd -e ~/.npm -e ~/.cache
 
 stages:
