@@ -125,9 +125,9 @@ function Catalog() {
         </Title>
         <ContentSection>
           <Title size="h4" ta="center">
-            These strategies focus on eco-friendly investments.
-            Profits are used to support environmentally-friendly initiatives,
-            balancing good returns with sustainability for a greener future.
+            These strategies focus on eco-friendly investments where profits
+            are used to support environmentally-friendly initiatives,
+            balancing good returns with sustainability for a greener future
           </Title>
         </ContentSection>
         <ProviderCards
