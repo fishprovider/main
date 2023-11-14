@@ -117,6 +117,24 @@ function Catalog() {
           category="ocean-series"
         />
       </Stack>
+
+      <Divider />
+      <Stack align="center" id="green-series">
+        <Title size="h2">
+          Green Series
+        </Title>
+        <ContentSection>
+          <Title size="h4" ta="center">
+            New!
+          </Title>
+        </ContentSection>
+        <ProviderCards
+          favorite={favorite}
+          search={search}
+          variant={cardVariant}
+          category="green-series"
+        />
+      </Stack>
     </Stack>
   );
 }
