@@ -45,18 +45,6 @@ const updateAccount: AccountRepository['updateAccount'] = async (filter, payload
   return res ?? {};
 };
 
-// const updateAccounts: AccountRepository['updateAccounts'] = async (filter, payload) => {
-//   const updateDb = MongoAccountRepository.updateAccounts;
-//   const updateCache = RedisAccountRepository.updateAccounts;
-
-//   const res = await updateCacheFirst<BaseGetManyResult<Account>>({
-//     updateDb: updateDb && (() => updateDb(filter, payload)),
-//     updateCache: updateCache && (({ docs } = {}) => updateCache(filter, { accounts: docs })),
-//   });
-
-//   return res ?? {};
-// };
-
 const removeAccount: AccountRepository['removeAccount'] = async (filter) => {
   const updateDb = MongoAccountRepository.removeAccount;
   const updateCache = RedisAccountRepository.removeAccount;
@@ -74,6 +62,5 @@ export const CacheFirstAccountRepository: AccountRepository = {
   getAccount,
   getAccounts,
   updateAccount,
-  // updateAccounts,
   removeAccount,
 };
