@@ -7,7 +7,7 @@ export const startRedis = async () => {
   if (!process.env.REDIS_HOST) {
     throw new Error('REDIS_HOST is not defined');
   }
-  log.info('Starting Redis', process.env.REDIS_HOST, process.env.REDIS_PORT);
+  log.info('Starting Redis');
   const client = createClient({
     name: `${process.env.TYPE}-${process.env.TYPE_ID}`,
     url: `redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`,
@@ -32,3 +32,7 @@ export const getRedis = async () => {
     client,
   };
 };
+
+export const convertUndefinedToNull = (obj: Record<string, any>) => JSON.parse(
+  JSON.stringify(obj, (_key, value) => (value === undefined ? null : value)),
+);

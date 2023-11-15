@@ -1,21 +1,25 @@
+import { News } from '@fishprovider/core';
 import { NewsRepository } from '@fishprovider/core-backend';
 
 import { buildKeyNews, getRedis } from '..';
 
 const getNews: NewsRepository['getNews'] = async (filter) => {
   const key = buildKeyNews(filter);
-  const { client } = await getRedis();
-  const str = await client.get(key);
-  if (!str) return {};
+  const { clientJson } = await getRedis();
+  const docs = await clientJson.get(key);
+  if (!docs) return {};
 
-  return { docs: JSON.parse(str) };
+  return { docs: docs as Partial<News>[] };
 };
 
 const updateNews: NewsRepository['updateNews'] = async (filter, payload) => {
   const key = buildKeyNews(filter);
-  const { client } = await getRedis();
+  const { client, clientJson } = await getRedis();
   const { news } = payload;
-  await client.set(key, JSON.stringify(news), { EX: 60 * 60 });
+  if (news) {
+    await clientJson.set(key, '.', news);
+    await client.expire(key, 60 * 60 * 4);
+  }
   return { docs: news };
 };
 

@@ -1,9 +1,9 @@
+import { CacheFirstAccountRepository, CacheFirstUserRepository } from '@fishprovider/cache-first';
 import {
   Account, AccountPlatform, AccountTradeType, AccountType,
 } from '@fishprovider/core';
 import { addAccountService } from '@fishprovider/core-backend';
-import { CTraderAccountRepository } from '@fishprovider/ctrader-api';
-import { MongoAccountRepository, MongoUserRepository } from '@fishprovider/mongo';
+import { TradeAccountRepository } from '@fishprovider/trade';
 import { z } from 'zod';
 
 import { ApiHandler } from '~types/ApiHandler.model';
@@ -46,9 +46,9 @@ const handler: ApiHandler<Partial<Account>> = async (data, userSession) => {
       baseConfig,
     },
     repositories: {
-      account: MongoAccountRepository,
-      trade: CTraderAccountRepository,
-      user: MongoUserRepository,
+      account: CacheFirstAccountRepository,
+      trade: TradeAccountRepository,
+      user: CacheFirstUserRepository,
     },
     context: { userSession },
   });
