@@ -7,7 +7,7 @@ export const startRedis = async () => {
   if (!process.env.REDIS_HOST) {
     throw new Error('REDIS_HOST is not defined');
   }
-  log.info('Starting Redis');
+  log.info('Starting Redis', process.env.REDIS_HOST, process.env.REDIS_PORT);
   const client = createClient({
     name: `${process.env.TYPE}-${process.env.TYPE_ID}`,
     url: `redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`,
