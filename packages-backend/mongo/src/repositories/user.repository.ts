@@ -1,4 +1,4 @@
-import { AccountRoles, User } from '@fishprovider/core';
+import { AccountRole, User } from '@fishprovider/core';
 import {
   UserRepository,
 } from '@fishprovider/core-backend';
@@ -79,31 +79,31 @@ const updateUser: UserRepository['updateUser'] = async (filter, payload, options
         [`starAccounts.${starAccount.accountId}`]: starAccount.enabled,
       }),
       ...(roles && { roles }),
-      ...(addRole?.role === AccountRoles.admin && {
+      ...(addRole?.role === AccountRole.admin && {
         [`roles.adminAccounts.${addRole.accountId}`]: true,
       }),
-      ...(addRole?.role === AccountRoles.protector && {
+      ...(addRole?.role === AccountRole.protector && {
         [`roles.protectorAccounts.${addRole.accountId}`]: true,
       }),
-      ...(addRole?.role === AccountRoles.trader && {
+      ...(addRole?.role === AccountRole.trader && {
         [`roles.traderAccounts.${addRole.accountId}`]: true,
       }),
-      ...(addRole?.role === AccountRoles.viewer && {
+      ...(addRole?.role === AccountRole.viewer && {
         [`roles.viewerAccounts.${addRole.accountId}`]: true,
       }),
       updatedAt: new Date(),
     },
     $unset: {
-      ...(removeRole?.role === AccountRoles.admin && {
+      ...(removeRole?.role === AccountRole.admin && {
         [`roles.adminAccounts.${removeRole.accountId}`]: '',
       }),
-      ...(removeRole?.role === AccountRoles.protector && {
+      ...(removeRole?.role === AccountRole.protector && {
         [`roles.protectorAccounts.${removeRole.accountId}`]: '',
       }),
-      ...(removeRole?.role === AccountRoles.trader && {
+      ...(removeRole?.role === AccountRole.trader && {
         [`roles.traderAccounts.${removeRole.accountId}`]: '',
       }),
-      ...(removeRole?.role === AccountRoles.viewer && {
+      ...(removeRole?.role === AccountRole.viewer && {
         [`roles.viewerAccounts.${removeRole.accountId}`]: '',
       }),
     },

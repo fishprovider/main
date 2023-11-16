@@ -1,5 +1,5 @@
 import {
-  AccountRoles, User, UserRoles,
+  AccountRole, User, UserRoles,
 } from '@fishprovider/core';
 
 import {
@@ -34,11 +34,11 @@ export interface UserRepository {
       }
       roles?: UserRoles,
       addRole?: {
-        role: AccountRoles,
+        role: AccountRole,
         accountId: string,
       },
       removeRole?: {
-        role: AccountRoles,
+        role: AccountRole,
         accountId: string,
       },
     },

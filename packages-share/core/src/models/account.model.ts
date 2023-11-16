@@ -22,7 +22,7 @@ export enum AccountViewType {
   public = 'public',
 }
 
-export enum AccountRoles {
+export enum AccountRole {
   admin = 'admin',
   protector = 'protector',
   trader = 'trader',
@@ -89,7 +89,7 @@ export interface AccountInvestor {
 
 export interface AccountMember {
   email: string;
-  role: AccountRoles;
+  role: AccountRole;
   name: string;
 
   picture?: string;
@@ -102,7 +102,7 @@ export interface AccountMember {
 
 export interface AccountMemberInvite {
   email: string;
-  role: AccountRoles;
+  role: AccountRole;
   createdAt: Date;
 }
 

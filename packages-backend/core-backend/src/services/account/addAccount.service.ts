@@ -1,5 +1,5 @@
 import {
-  AccountConfig, AccountError, AccountRoles, AccountViewType, BaseError,
+  AccountConfig, AccountError, AccountRole, AccountViewType, BaseError,
   checkRepository,
 } from '@fishprovider/core';
 import _ from 'lodash';
@@ -100,7 +100,7 @@ export const addAccountService: AddAccountService = async ({
       email: userSession.email,
       name: userSession.name,
       picture: userSession.picture,
-      role: AccountRoles.admin,
+      role: AccountRole.admin,
       updatedAt: new Date(),
       createdAt: new Date(),
     }],
@@ -110,7 +110,7 @@ export const addAccountService: AddAccountService = async ({
     email: userSession.email,
   }, {
     addRole: {
-      role: AccountRoles.admin,
+      role: AccountRole.admin,
       accountId,
     },
   });

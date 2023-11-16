@@ -1,5 +1,5 @@
 import {
-  AccountRoles, checkRepository,
+  AccountRole, checkRepository,
 } from '@fishprovider/core';
 import _ from 'lodash';
 
@@ -94,25 +94,25 @@ export const refreshUserRolesService: RefreshUserRolesService = async ({
       const { members } = account;
       const member = _.find(members, (item) => item.email === email);
       switch (member?.role) {
-        case AccountRoles.admin: {
+        case AccountRole.admin: {
           _.unset(roles.traderAccounts, accountId);
           _.unset(roles.protectorAccounts, accountId);
           _.unset(roles.viewerAccounts, accountId);
           break;
         }
-        case AccountRoles.trader: {
+        case AccountRole.trader: {
           _.unset(roles.adminAccounts, accountId);
           _.unset(roles.protectorAccounts, accountId);
           _.unset(roles.viewerAccounts, accountId);
           break;
         }
-        case AccountRoles.protector: {
+        case AccountRole.protector: {
           _.unset(roles.adminAccounts, accountId);
           _.unset(roles.traderAccounts, accountId);
           _.unset(roles.viewerAccounts, accountId);
           break;
         }
-        case AccountRoles.viewer: {
+        case AccountRole.viewer: {
           _.unset(roles.adminAccounts, accountId);
           _.unset(roles.traderAccounts, accountId);
           _.unset(roles.protectorAccounts, accountId);
