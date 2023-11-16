@@ -1,11 +1,11 @@
-import { ProviderPlatform, ProviderType } from '~constants/account';
+import { AccountPlatform, ProviderType } from '~constants/account';
 import { Direction, OrderStatus, OrderType } from '~constants/order';
 import type { Order } from '~types/Order.model';
 
 const getOrderDefault: () => Order = () => ({
   _id: 'testOrderId',
   providerType: ProviderType.icmarkets,
-  providerPlatform: ProviderPlatform.ctrader,
+  accountPlatform: AccountPlatform.ctrader,
   providerId: 'testAccountId',
   orderType: OrderType.market,
   status: OrderStatus.idea,

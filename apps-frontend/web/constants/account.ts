@@ -1,6 +1,6 @@
 import {
-  AccountViewType,
-  CopyVolumeMode, LockType, ProviderTradeType, ProviderType,
+  AccountTradeType, AccountViewType,
+  CopyVolumeMode, LockType, ProviderType,
 } from '@fishprovider/utils/dist/constants/account';
 import { Roles } from '@fishprovider/utils/dist/constants/user';
 
@@ -270,9 +270,9 @@ const AccountViewTypeText: Record<string, string> = {
   [AccountViewType.public]: 'Public',
 };
 
-const ProviderTradeTypeText: Record<string, { text: string, color?: string }> = {
-  [ProviderTradeType.demo]: { text: 'Demo', color: 'gray' },
-  [ProviderTradeType.live]: { text: 'Live', color: 'green' },
+const AccountTradeTypeText: Record<string, { text: string, color?: string }> = {
+  [AccountTradeType.demo]: { text: 'Demo', color: 'gray' },
+  [AccountTradeType.live]: { text: 'Live', color: 'green' },
 };
 
 const ProviderRoleText: Record<string, { text: string, description: string, color?: string }> = {
@@ -299,6 +299,7 @@ const LockTypeText: Record<string, string> = {
 const activityFields = ['chats', 'confidences'];
 
 export {
+  AccountTradeTypeText,
   AccountViewTypeText,
   activityFields,
   CardVariant,
@@ -307,7 +308,6 @@ export {
   LockTypeText,
   metatraderPlatforms,
   ProviderRoleText,
-  ProviderTradeTypeText,
   ProviderTypePrice,
   ProviderTypeText,
 };

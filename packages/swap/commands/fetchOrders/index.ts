@@ -1,4 +1,4 @@
-import { ProviderPlatform, ProviderType } from '@fishprovider/utils/dist/constants/account';
+import { AccountPlatform, ProviderType } from '@fishprovider/utils/dist/constants/account';
 import { OrderStatus } from '@fishprovider/utils/dist/constants/order';
 import { redisKeys } from '@fishprovider/utils/dist/constants/redis';
 import type { Config } from '@fishprovider/utils/dist/types/Account.model';
@@ -22,7 +22,7 @@ interface FetchOrdersReqOptions {
 interface FetchOrdersReq {
   providerId: string,
   providerType: ProviderType,
-  providerPlatform: ProviderPlatform,
+  accountPlatform: AccountPlatform,
   options?: FetchOrdersReqOptions,
 }
 
@@ -154,21 +154,21 @@ const saveOrders = async (
 
 const fetchOrders = async (req: FetchOrdersReq) => {
   const {
-    providerId, providerPlatform, options,
+    providerId, accountPlatform, options,
   } = req;
 
   let res: FetchOrdersRes;
-  switch (providerPlatform) {
-    case ProviderPlatform.ctrader: {
+  switch (accountPlatform) {
+    case AccountPlatform.ctrader: {
       res = await getOrdersCTrader({ ...req, ...options });
       break;
     }
-    case ProviderPlatform.metatrader: {
+    case AccountPlatform.metatrader: {
       res = await getOrdersMetaTrader({ ...req, ...options });
       break;
     }
     default: {
-      throw new Error(`Unhandled providerPlatform ${providerPlatform}`);
+      throw new Error(`Unhandled accountPlatform ${accountPlatform}`);
     }
   }
 

@@ -1,5 +1,5 @@
 import storeUser from '@fishprovider/cross/dist/stores/user';
-import { ProviderPlatform } from '@fishprovider/utils/dist/constants/account';
+import { AccountPlatform } from '@fishprovider/utils/dist/constants/account';
 import _ from 'lodash';
 import moment from 'moment';
 
@@ -20,7 +20,7 @@ import MyFxBook from './MyFxBook';
 function InvestorStats() {
   const {
     providerId = '',
-    providerPlatform,
+    accountPlatform,
     createdAt,
     capital = 0,
     riskScore,
@@ -30,7 +30,7 @@ function InvestorStats() {
     summary = {},
   } = storeUser.useStore((state) => ({
     providerId: state.activeProvider?._id,
-    providerPlatform: state.activeProvider?.providerPlatform,
+    accountPlatform: state.activeProvider?.accountPlatform,
     createdAt: state.activeProvider?.createdAt,
     capital: state.activeProvider?.capital,
     riskScore: state.activeProvider?.riskScore,
@@ -106,7 +106,7 @@ function InvestorStats() {
             <MonthProfit providerId={providerId} />
             <Group position="center">
               <MyFxBook />
-              {providerPlatform === ProviderPlatform.ctrader && <CTraderStats />}
+              {accountPlatform === AccountPlatform.ctrader && <CTraderStats />}
             </Group>
           </Stack>
         </Grid.Col>

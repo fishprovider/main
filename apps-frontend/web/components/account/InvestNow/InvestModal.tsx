@@ -1,5 +1,5 @@
 import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
-import { ProviderPlatform } from '@fishprovider/utils/dist/constants/account';
+import { AccountPlatform } from '@fishprovider/utils/dist/constants/account';
 import _ from 'lodash';
 import { useState } from 'react';
 
@@ -37,46 +37,46 @@ function InvestModal({
   ));
 
   const canInvestCTrader = groupAccounts.some(
-    (item) => item.providerPlatform === ProviderPlatform.ctrader,
+    (item) => item.accountPlatform === AccountPlatform.ctrader,
   );
   const canInvestMetaTrader = groupAccounts.some(
-    (item) => item.providerPlatform === ProviderPlatform.metatrader,
+    (item) => item.accountPlatform === AccountPlatform.metatrader,
   );
 
-  const platforms: { label: string, value: ProviderPlatform }[] = [
-    { label: 'CTrader (Spotware)', value: ProviderPlatform.ctrader },
-    { label: 'MetaTrader (MT4/MT5)', value: ProviderPlatform.metatrader },
-    { label: 'FishCT (FishPlatform)', value: ProviderPlatform.fishct },
+  const platforms: { label: string, value: AccountPlatform }[] = [
+    { label: 'CTrader (Spotware)', value: AccountPlatform.ctrader },
+    { label: 'MetaTrader (MT4/MT5)', value: AccountPlatform.metatrader },
+    { label: 'FishCT (FishPlatform)', value: AccountPlatform.fishct },
   ];
 
-  const [platformInput, setPlatformInput] = useState<ProviderPlatform>(ProviderPlatform.ctrader);
+  const [platformInput, setPlatformInput] = useState<AccountPlatform>(AccountPlatform.ctrader);
 
   const getDefaultPlatform = () => {
-    if (canInvestCTrader) return ProviderPlatform.ctrader;
-    if (canInvestMetaTrader) return ProviderPlatform.metatrader;
-    return ProviderPlatform.fishct;
+    if (canInvestCTrader) return AccountPlatform.ctrader;
+    if (canInvestMetaTrader) return AccountPlatform.metatrader;
+    return AccountPlatform.fishct;
   };
   const platform = platformInput || getDefaultPlatform();
 
   const renderContent = () => {
     switch (platform) {
-      case ProviderPlatform.ctrader: return (
+      case AccountPlatform.ctrader: return (
         <InvestPlatforms
           providerId={providerId}
-          providerPlatform={platform}
-          groupAccounts={groupAccounts.filter((item) => item.providerPlatform === platform)}
+          accountPlatform={platform}
+          groupAccounts={groupAccounts.filter((item) => item.accountPlatform === platform)}
           platforms={ctraderPlatforms}
         />
       );
-      case ProviderPlatform.metatrader: return (
+      case AccountPlatform.metatrader: return (
         <InvestPlatforms
           providerId={providerId}
-          providerPlatform={platform}
-          groupAccounts={groupAccounts.filter((item) => item.providerPlatform === platform)}
+          accountPlatform={platform}
+          groupAccounts={groupAccounts.filter((item) => item.accountPlatform === platform)}
           platforms={metatraderPlatforms}
         />
       );
-      case ProviderPlatform.fishct: return (
+      case AccountPlatform.fishct: return (
         <InvestFish
           providerId={providerId}
           onClose={onClose}
@@ -93,7 +93,7 @@ function InvestModal({
         data={platforms}
         value={platform}
         onChange={(value) => {
-          if (value) setPlatformInput(value as ProviderPlatform);
+          if (value) setPlatformInput(value as AccountPlatform);
         }}
         size="md"
       />

@@ -2,7 +2,7 @@ import type { Config } from '@fishprovider/ctrader/dist/types/Config.model';
 import fetchOrders from '@fishprovider/swap/dist/commands/fetchOrders';
 import * as newOrder from '@fishprovider/swap/dist/commands/newOrder';
 import removePosition from '@fishprovider/swap/dist/commands/removePosition';
-import { ProviderPlatform, ProviderType } from '@fishprovider/utils/dist/constants/account';
+import { AccountPlatform, ProviderType } from '@fishprovider/utils/dist/constants/account';
 
 import * as provider from '~services/provider';
 import {
@@ -29,7 +29,7 @@ const closeAll = async (providerId: string) => {
   const { positions } = await fetchOrders({
     providerId,
     providerType: ProviderType.icmarkets,
-    providerPlatform: ProviderPlatform.ctrader,
+    accountPlatform: AccountPlatform.ctrader,
     options: { config },
   });
   if (positions) {
@@ -55,7 +55,7 @@ test('copyNewOrders', async () => {
     await fetchOrders({
       providerId: env.typeId,
       providerType: ProviderType.icmarkets,
-      providerPlatform: ProviderPlatform.ctrader,
+      accountPlatform: AccountPlatform.ctrader,
       options: { config },
     });
 
@@ -67,7 +67,7 @@ test('copyNewOrders', async () => {
     await fetchOrders({
       providerId: 'copyChild',
       providerType: ProviderType.icmarkets,
-      providerPlatform: ProviderPlatform.ctrader,
+      accountPlatform: AccountPlatform.ctrader,
       options: { config },
     });
 
@@ -79,7 +79,7 @@ test('copyNewOrders', async () => {
     await fetchOrders({
       providerId: 'copyChildChild',
       providerType: ProviderType.icmarkets,
-      providerPlatform: ProviderPlatform.ctrader,
+      accountPlatform: AccountPlatform.ctrader,
       options: { config },
     });
   }, config);

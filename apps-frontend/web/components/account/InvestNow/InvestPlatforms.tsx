@@ -1,5 +1,5 @@
 import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
-import { ProviderPlatform, ProviderType } from '@fishprovider/utils/dist/constants/account';
+import { AccountPlatform, ProviderType } from '@fishprovider/utils/dist/constants/account';
 import type { Account } from '@fishprovider/utils/dist/types/Account.model';
 import _ from 'lodash';
 
@@ -18,13 +18,13 @@ const defaultUrlAlpari = 'https://www.alpari.com/en/invest/pamm/548473';
 
 interface Props {
   providerId: string,
-  providerPlatform: ProviderPlatform,
+  accountPlatform: AccountPlatform,
   groupAccounts: Account[];
   platforms: Record<string, CopyPlatform>;
 }
 
 function InvestPlatforms({
-  providerId, providerPlatform, groupAccounts, platforms,
+  providerId, accountPlatform, groupAccounts, platforms,
 }: Props) {
   const {
     name,
@@ -33,7 +33,7 @@ function InvestPlatforms({
   }));
 
   const getCopyUrl = (platform: CopyPlatform, providerType: string) => {
-    if (providerPlatform === ProviderPlatform.ctrader) {
+    if (accountPlatform === AccountPlatform.ctrader) {
       const strategyId = groupAccounts[0]?.strategyId;
       const url = `${platform.copyUrl}/${strategyId}`;
       return url;

@@ -1,4 +1,4 @@
-import { ProviderPlatform, ProviderType } from '@fishprovider/utils/dist/constants/account';
+import { AccountPlatform, ProviderType } from '@fishprovider/utils/dist/constants/account';
 import { ErrorType } from '@fishprovider/utils/dist/constants/error';
 import { Direction, OrderStatus, OrderType } from '@fishprovider/utils/dist/constants/order';
 import random from '@fishprovider/utils/dist/helpers/random';
@@ -34,7 +34,7 @@ const order = {
   _id: `${env.typeId}-${random()}`,
   providerId: 'back',
   providerType: ProviderType.icmarkets,
-  providerPlatform: ProviderPlatform.ctrader,
+  accountPlatform: AccountPlatform.ctrader,
   orderType: OrderType.limit,
   status: OrderStatus.idea,
 

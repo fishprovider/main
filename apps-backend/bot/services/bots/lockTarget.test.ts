@@ -2,7 +2,7 @@ import type { Config } from '@fishprovider/ctrader/dist/types/Config.model';
 import fetchAccountInfo from '@fishprovider/swap/dist/commands/fetchAccountInfo';
 import fetchOrders from '@fishprovider/swap/dist/commands/fetchOrders';
 // import * as updatePosition from '@fishprovider/swap/dist/commands/updatePosition';
-import { ProviderPlatform, ProviderType } from '@fishprovider/utils/dist/constants/account';
+import { AccountPlatform, ProviderType } from '@fishprovider/utils/dist/constants/account';
 
 import * as provider from '~services/provider';
 import {
@@ -30,13 +30,13 @@ test('lockTarget', async () => {
     await fetchOrders({
       providerId: env.typeId,
       providerType: ProviderType.icmarkets,
-      providerPlatform: ProviderPlatform.ctrader,
+      accountPlatform: AccountPlatform.ctrader,
       options: { config },
     });
     await fetchAccountInfo({
       providerId: env.typeId,
       providerType: ProviderType.icmarkets,
-      providerPlatform: ProviderPlatform.ctrader,
+      accountPlatform: AccountPlatform.ctrader,
       options: { config },
     });
 

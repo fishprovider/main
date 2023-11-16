@@ -1,5 +1,5 @@
 import getAccounts from '@fishprovider/swap/dist/libs/ctrader/getAccounts';
-import { ProviderPlatform } from '@fishprovider/utils/dist/constants/account';
+import { AccountPlatform } from '@fishprovider/utils/dist/constants/account';
 import { ErrorType } from '@fishprovider/utils/dist/constants/error';
 import type { User } from '@fishprovider/utils/dist/types/User.model';
 import axios from 'axios';
@@ -12,7 +12,7 @@ const ctraderRegion = 'use'; // use, eu, au, sg
 
 const getClient = async (mode = 'demo') => {
   const client = await Mongo.collection<Client>('clientSecrets').findOne({
-    providerPlatform: ProviderPlatform.ctrader,
+    accountPlatform: AccountPlatform.ctrader,
     mode,
   }, {
     projection: {

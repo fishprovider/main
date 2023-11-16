@@ -1,6 +1,6 @@
 import updateSymbols from '@fishprovider/swap/dist/libs/metatrader/updateSymbols';
 import type { SymbolMetaTrader } from '@fishprovider/swap/dist/types/Symbol.model';
-import { ProviderPlatform, ProviderType } from '@fishprovider/utils/dist/constants/account';
+import { AccountPlatform, ProviderType } from '@fishprovider/utils/dist/constants/account';
 import type { Account } from '@fishprovider/utils/dist/types/Account.model';
 
 const renewProviderTypeSymbols = async (
@@ -11,7 +11,7 @@ const renewProviderTypeSymbols = async (
   providerTypeAccount = await Mongo.collection<Account>('accounts').findOne({
     isSystem: true,
     providerType,
-    providerPlatform: ProviderPlatform.metatrader,
+    accountPlatform: AccountPlatform.metatrader,
   }, {
     projection: {
       config: 1,
@@ -20,7 +20,7 @@ const renewProviderTypeSymbols = async (
   if (!providerTypeAccount) {
     providerTypeAccount = await Mongo.collection<Account>('accounts').findOne({
       providerType,
-      providerPlatform: ProviderPlatform.metatrader,
+      accountPlatform: AccountPlatform.metatrader,
     }, {
       projection: {
         config: 1,
@@ -42,7 +42,7 @@ const renewProviderTypeSymbols = async (
 const renewSymbols = async (allSymbols: SymbolMetaTrader[]) => {
   const providerTypes = await Mongo.collection<Account>('accounts').distinct(
     'providerType',
-    { providerPlatform: ProviderPlatform.metatrader },
+    { accountPlatform: AccountPlatform.metatrader },
   );
   for (const providerType of providerTypes) {
     try {

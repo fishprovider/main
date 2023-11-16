@@ -63,7 +63,6 @@ const getAccounts: AccountRepository['getAccounts'] = async (filter) => {
         accountId: tradeAccount.accountId,
         traderLogin: tradeAccount.traderLogin,
       },
-      providerTradeType: tradeAccount.isLive ? AccountTradeType.live : AccountTradeType.demo,
       accountTradeType: tradeAccount.isLive ? AccountTradeType.live : AccountTradeType.demo,
     }));
 

@@ -1,4 +1,4 @@
-import { ProviderPlatform } from '@fishprovider/utils/dist/constants/account';
+import { AccountPlatform } from '@fishprovider/utils/dist/constants/account';
 import { OrderStatus, OrderType } from '@fishprovider/utils/dist/constants/order';
 import random from '@fishprovider/utils/dist/helpers/random';
 import type { Config } from '@fishprovider/utils/dist/types/Account.model';
@@ -28,7 +28,7 @@ interface NewOrderRes {
 const preNewOrder = async (order: OrderWithoutId) => {
   const newId = random();
   const {
-    providerId, providerType, providerPlatform, copyId,
+    providerId, providerType, accountPlatform, copyId,
     symbol, direction, volume,
     orderType, limitPrice, stopPrice, stopLoss, takeProfit,
     label = 'user-create',
@@ -41,7 +41,7 @@ const preNewOrder = async (order: OrderWithoutId) => {
     ...(copyId && { copyId }),
     providerId,
     providerType,
-    providerPlatform,
+    accountPlatform,
     status: OrderStatus.idea,
 
     symbol,
@@ -101,22 +101,22 @@ const postNewOrder = async (requestOrder: Order, res: NewOrderRes) => {
 
 const newOrder = async (req: NewOrderReq) => {
   const { order, options } = req;
-  const { providerPlatform } = order;
+  const { accountPlatform } = order;
 
   const requestOrder = await preNewOrder(order);
 
   let result: NewOrderRes;
-  switch (providerPlatform) {
-    case ProviderPlatform.ctrader: {
+  switch (accountPlatform) {
+    case AccountPlatform.ctrader: {
       result = await newOrderCTrader({ ...req, ...options, requestOrder });
       break;
     }
-    case ProviderPlatform.metatrader: {
+    case AccountPlatform.metatrader: {
       result = await newOrderMetaTrader({ ...req, ...options, requestOrder });
       break;
     }
     default: {
-      throw new Error(`Unhandled providerPlatform ${providerPlatform}`);
+      throw new Error(`Unhandled accountPlatform ${accountPlatform}`);
     }
   }
 

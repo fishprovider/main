@@ -11,7 +11,7 @@ import type { SymbolMetaTrader } from '@fishprovider/swap/dist/types/Symbol.mode
 import { botUser } from '@fishprovider/swap/dist/utils/account';
 import { savePrice } from '@fishprovider/swap/dist/utils/price';
 import type { ProviderType } from '@fishprovider/utils/dist/constants/account';
-import { ProviderPlatform } from '@fishprovider/utils/dist/constants/account';
+import { AccountPlatform } from '@fishprovider/utils/dist/constants/account';
 import { Direction, OrderStatus, OrderType } from '@fishprovider/utils/dist/constants/order';
 import type { Account } from '@fishprovider/utils/dist/types/Account.model';
 
@@ -73,7 +73,7 @@ const sendHeartbeat = async () => {
     order: {
       providerId: env.typeId,
       providerType,
-      providerPlatform: ProviderPlatform.metatrader,
+      accountPlatform: AccountPlatform.metatrader,
 
       orderType: OrderType.limit,
       status: OrderStatus.idea,

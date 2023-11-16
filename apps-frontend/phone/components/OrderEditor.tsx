@@ -1,7 +1,7 @@
 import { FontAwesome } from '@expo/vector-icons';
 import storePrices from '@fishprovider/cross/dist/stores/prices';
 import storeUser from '@fishprovider/cross/dist/stores/user';
-import { PlanType, ProviderPlatform, ProviderType } from '@fishprovider/utils/dist/constants/account';
+import { AccountPlatform, PlanType, ProviderType } from '@fishprovider/utils/dist/constants/account';
 import { Direction, OrderStatus, OrderType } from '@fishprovider/utils/dist/constants/order';
 import { getPriceFromAmount, getVolumeFromLot } from '@fishprovider/utils/dist/helpers/price';
 import { OrderWithoutId } from '@fishprovider/utils/dist/types/Order.model';
@@ -31,14 +31,14 @@ export default function OrderEditor({
   const {
     symbol,
     providerType = ProviderType.icmarkets,
-    providerPlatform = ProviderPlatform.ctrader,
+    accountPlatform = AccountPlatform.ctrader,
     asset = 'USD',
     plan = [],
     balance = 0,
   } = storeUser.useStore((state) => ({
     symbol: state.activeSymbol,
     providerType: state.activeProvider?.providerType,
-    providerPlatform: state.activeProvider?.providerPlatform,
+    accountPlatform: state.activeProvider?.accountPlatform,
     asset: state.activeProvider?.asset,
     plan: state.activeProvider?.plan,
     balance: state.activeProvider?.balance,
@@ -104,7 +104,7 @@ export default function OrderEditor({
     const order = {
       providerId,
       providerType,
-      providerPlatform,
+      accountPlatform,
 
       orderType,
       status: OrderStatus.idea,

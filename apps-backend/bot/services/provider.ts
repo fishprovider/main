@@ -1,7 +1,7 @@
 import type { QueuePromise } from '@fishprovider/old-core/dist/libs/queuePromise';
 import { destroy as destroyQueue, start as startQueue } from '@fishprovider/old-core/dist/libs/queuePromise';
 import { getProviderIds } from '@fishprovider/swap/dist/utils/account';
-import { ProviderTradeType } from '@fishprovider/utils/dist/constants/account';
+import { AccountTradeType } from '@fishprovider/utils/dist/constants/account';
 import { isPausedWeekend } from '@fishprovider/utils/dist/helpers/pause';
 import _ from 'lodash';
 import moment, { Moment } from 'moment';
@@ -12,7 +12,7 @@ import checkAccount from './checkAccount';
 
 const env = {
   typeId: process.env.TYPE_ID,
-  providerTradeType: process.env.PROVIDER_TRADE_TYPE || ProviderTradeType.demo,
+  accountTradeType: process.env.PROVIDER_TRADE_TYPE || AccountTradeType.demo,
 };
 
 let isPaused = false;
@@ -46,7 +46,7 @@ const destroy = async () => {
 
 const runBots = async (onStart?: boolean) => {
   const providerIds = await getProviderIds({
-    providerTradeType: env.providerTradeType,
+    accountTradeType: env.accountTradeType,
     isSystem: { $ne: true },
     deleted: { $ne: true },
   });

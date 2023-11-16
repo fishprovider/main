@@ -122,7 +122,7 @@ const getNewOrders = (
 
       providerId,
       providerType: account.providerType,
-      providerPlatform: account.providerPlatform,
+      accountPlatform: account.accountPlatform,
       orderType: OrderType.market,
       status: OrderStatus.idea,
 

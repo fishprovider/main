@@ -1,6 +1,6 @@
 import accountAdd from '@fishprovider/cross/dist/api/accounts/add';
 import { useMutate } from '@fishprovider/cross/dist/libs/query';
-import { ProviderPlatform, ProviderType } from '@fishprovider/utils/dist/constants/account';
+import { AccountPlatform, ProviderType } from '@fishprovider/utils/dist/constants/account';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
@@ -33,7 +33,7 @@ function AccountMetaTrader({ providerType }: Props) {
     const accountToNew = {
       name,
       providerType,
-      providerPlatform: ProviderPlatform.metatrader,
+      accountPlatform: AccountPlatform.metatrader,
       config: {
         clientId: '',
         clientSecret: '',

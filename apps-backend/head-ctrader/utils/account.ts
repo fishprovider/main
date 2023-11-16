@@ -1,16 +1,16 @@
-import { ProviderPlatform, ProviderTradeType } from '@fishprovider/utils/dist/constants/account';
+import { AccountPlatform, AccountTradeType } from '@fishprovider/utils/dist/constants/account';
 
 import type { ClientAccount } from '~types/Client.model';
 
 const env = {
-  providerTradeType: process.env.PROVIDER_TRADE_TYPE || ProviderTradeType.demo,
+  accountTradeType: process.env.PROVIDER_TRADE_TYPE || AccountTradeType.demo,
 };
 
 const getAccountConfigs = async () => {
   const accounts = await Mongo.collection<ClientAccount>('accounts').find(
     {
-      providerPlatform: ProviderPlatform.ctrader,
-      providerTradeType: env.providerTradeType as ProviderTradeType,
+      accountPlatform: AccountPlatform.ctrader,
+      accountTradeType: env.accountTradeType as AccountTradeType,
       isSystem: { $ne: true },
       deleted: { $ne: true },
     },
@@ -18,7 +18,7 @@ const getAccountConfigs = async () => {
       projection: {
         config: 1,
         providerType: 1,
-        providerPlatform: 1,
+        accountPlatform: 1,
       },
       sort: {
         order: -1,
@@ -31,13 +31,13 @@ const getAccountConfigs = async () => {
 const getAccountConfig = async (providerId: string) => {
   const account = await Mongo.collection<ClientAccount>('accounts').findOne({
     _id: providerId,
-    providerPlatform: ProviderPlatform.ctrader,
-    providerTradeType: env.providerTradeType as ProviderTradeType,
+    accountPlatform: AccountPlatform.ctrader,
+    accountTradeType: env.accountTradeType as AccountTradeType,
   }, {
     projection: {
       config: 1,
       providerType: 1,
-      providerPlatform: 1,
+      accountPlatform: 1,
     },
   });
   return account;

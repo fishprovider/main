@@ -57,7 +57,7 @@ const reloadData = async (client: Client, account: ClientAccount) => {
   if (!connection) return;
 
   const {
-    _id: providerId, config, providerType, providerPlatform,
+    _id: providerId, config, providerType, accountPlatform,
   } = account;
   const { accountId } = config;
   if (!accountId) {
@@ -68,7 +68,7 @@ const reloadData = async (client: Client, account: ClientAccount) => {
   await fetchAccountInfo({
     providerId,
     providerType,
-    providerPlatform,
+    accountPlatform,
     options: {
       connection,
       accountId,
@@ -77,7 +77,7 @@ const reloadData = async (client: Client, account: ClientAccount) => {
   await fetchOrders({
     providerId,
     providerType,
-    providerPlatform,
+    accountPlatform,
     options: {
       connection,
       accountId,

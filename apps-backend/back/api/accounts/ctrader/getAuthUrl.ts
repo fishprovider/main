@@ -1,4 +1,4 @@
-import { ProviderPlatform } from '@fishprovider/utils/dist/constants/account';
+import { AccountPlatform } from '@fishprovider/utils/dist/constants/account';
 import { ErrorType } from '@fishprovider/utils/dist/constants/error';
 
 interface Client {
@@ -7,7 +7,7 @@ interface Client {
 
 const getClient = async (live?: boolean) => {
   const client = await Mongo.collection<Client>('clientSecrets').findOne({
-    providerPlatform: ProviderPlatform.ctrader,
+    accountPlatform: AccountPlatform.ctrader,
     mode: live ? 'live' : 'demo',
   }, {
     projection: {

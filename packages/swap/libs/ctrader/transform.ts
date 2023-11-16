@@ -1,5 +1,5 @@
 import { OrderType as OrderTypeCTrader, TradeSide } from '@fishprovider/ctrader/dist/constants/openApi';
-import { ProviderPlatform, type ProviderType } from '@fishprovider/utils/dist/constants/account';
+import { AccountPlatform, type ProviderType } from '@fishprovider/utils/dist/constants/account';
 import { Direction, OrderStatus, OrderType } from '@fishprovider/utils/dist/constants/order';
 import { getLotFromVolume } from '@fishprovider/utils/dist/helpers/price';
 import type { RedisSymbol } from '@fishprovider/utils/dist/types/Redis.model';
@@ -34,7 +34,7 @@ const transformPosition = (
 
     providerId,
     providerType,
-    providerPlatform: ProviderPlatform.ctrader,
+    accountPlatform: AccountPlatform.ctrader,
     orderType,
     status: OrderStatus.live,
 
@@ -81,7 +81,7 @@ const transformOrder = (
 
     providerId,
     providerType,
-    providerPlatform: ProviderPlatform.ctrader,
+    accountPlatform: AccountPlatform.ctrader,
     orderType,
     status: OrderStatus.pending,
 
@@ -141,7 +141,7 @@ const transformDeal = (
 
     providerId,
     providerType,
-    providerPlatform: ProviderPlatform.ctrader,
+    accountPlatform: AccountPlatform.ctrader,
     orderType,
     // status can be live or closed
 

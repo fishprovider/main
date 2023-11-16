@@ -1,4 +1,4 @@
-import { PlanType, ProviderPlatform } from '@fishprovider/utils/dist/constants/account';
+import { AccountPlatform, PlanType } from '@fishprovider/utils/dist/constants/account';
 import { Direction } from '@fishprovider/utils/dist/constants/order';
 import { getPriceFromAmount } from '@fishprovider/utils/dist/helpers/price';
 import type { Plan } from '@fishprovider/utils/dist/types/Account.model';
@@ -152,13 +152,13 @@ interface MarketState {
 }
 
 const getMarketState = (
-  providerPlatform?: ProviderPlatform,
+  accountPlatform?: AccountPlatform,
   providerData?: any,
 ): MarketState | null => {
-  switch (providerPlatform) {
-    case ProviderPlatform.ctrader:
+  switch (accountPlatform) {
+    case AccountPlatform.ctrader:
       return getMarketStateCTrader(providerData);
-    case ProviderPlatform.metatrader:
+    case AccountPlatform.metatrader:
       return getMarketStateMetaTrader(providerData);
     default:
       return null;

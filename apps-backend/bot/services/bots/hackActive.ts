@@ -1,6 +1,6 @@
 import newOrder from '@fishprovider/swap/dist/commands/newOrder';
 import removePosition from '@fishprovider/swap/dist/commands/removePosition';
-import { ProviderPlatform, ProviderType } from '@fishprovider/utils/dist/constants/account';
+import { AccountPlatform, ProviderType } from '@fishprovider/utils/dist/constants/account';
 import { Direction, OrderStatus, OrderType } from '@fishprovider/utils/dist/constants/order';
 import { isLastRunExpired } from '@fishprovider/utils/dist/helpers/lastRunChecks';
 import { isPausedWeekend } from '@fishprovider/utils/dist/helpers/pause';
@@ -100,7 +100,7 @@ const hackActiveCTrader = async (
   const baseOrder: OrderWithoutId = {
     providerId: account._id,
     providerType: ProviderType.icmarkets,
-    providerPlatform: ProviderPlatform.ctrader,
+    accountPlatform: AccountPlatform.ctrader,
 
     orderType: OrderType.market,
     status: OrderStatus.idea,
@@ -137,7 +137,7 @@ const hackActiveExness = async (
   const baseOrder: OrderWithoutId = {
     providerId: account._id,
     providerType: ProviderType.exness,
-    providerPlatform: ProviderPlatform.metatrader,
+    accountPlatform: AccountPlatform.metatrader,
 
     orderType: OrderType.market,
     status: OrderStatus.idea,

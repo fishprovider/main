@@ -1,7 +1,7 @@
 import type {
+  AccountPlatform, AccountTradeType,
   AccountViewType,
-  CopyVolumeMode, LockType, PlanType, ProviderPlatform, ProviderTradeType,
-  ProviderType,
+  CopyVolumeMode, LockType, PlanType, ProviderType,
 } from '~constants/account';
 import type { Roles } from '~constants/user';
 
@@ -131,12 +131,12 @@ interface Account {
   config: Config; // private
 
   providerType: ProviderType; // icmarkets, exness, roboforex
-  providerPlatform: ProviderPlatform; // ctrader, metatrader
-  providerPlatformType?: string; // standard, pro
+  accountPlatform: AccountPlatform; // ctrader, metatrader
+  accountPlatformType?: string; // standard, pro
 
   providerGroupId?: string; // earth, earth2, earth3
   accountViewType?: AccountViewType; // private, public
-  providerTradeType?: ProviderTradeType; // demo, live
+  accountTradeType?: AccountTradeType; // demo, live
 
   asset?: string;
   assetId?: string;

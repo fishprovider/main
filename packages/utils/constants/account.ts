@@ -6,13 +6,13 @@ enum ProviderType {
   alpari = 'alpari',
 }
 
-enum ProviderPlatform {
+enum AccountPlatform {
   ctrader = 'ctrader',
   metatrader = 'metatrader',
   fishct = 'fishct',
 }
 
-enum ProviderTradeType {
+enum AccountTradeType {
   demo = 'demo',
   live = 'live',
 }
@@ -62,11 +62,11 @@ enum LockType {
 }
 
 export {
+  AccountPlatform,
+  AccountTradeType,
   AccountViewType,
   CopyVolumeMode,
   LockType,
   PlanType,
-  ProviderPlatform,
-  ProviderTradeType,
   ProviderType,
 };

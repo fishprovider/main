@@ -82,13 +82,13 @@ const reloadOrdersAndAccount = async (
 ) => {
   const { accountId } = payload;
   const {
-    _id: providerId, providerType, providerPlatform,
+    _id: providerId, providerType, accountPlatform,
   } = account;
 
   await fetchOrders({
     providerId,
     providerType,
-    providerPlatform,
+    accountPlatform,
     options: {
       connection,
       accountId,
@@ -97,7 +97,7 @@ const reloadOrdersAndAccount = async (
   await fetchDeals({
     providerId,
     providerType,
-    providerPlatform,
+    accountPlatform,
     options: {
       connection,
       accountId,
@@ -107,7 +107,7 @@ const reloadOrdersAndAccount = async (
   await fetchAccountInfo({
     providerId,
     providerType,
-    providerPlatform,
+    accountPlatform,
     options: {
       connection,
       accountId,

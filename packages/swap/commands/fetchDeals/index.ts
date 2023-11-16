@@ -1,4 +1,4 @@
-import { ProviderPlatform, ProviderType } from '@fishprovider/utils/dist/constants/account';
+import { AccountPlatform, ProviderType } from '@fishprovider/utils/dist/constants/account';
 import type { Config } from '@fishprovider/utils/dist/types/Account.model';
 import type { Order, OrderWithoutId } from '@fishprovider/utils/dist/types/Order.model';
 import _ from 'lodash';
@@ -21,7 +21,7 @@ interface FetchDealsReqOptions {
 interface FetchDealsReq {
   providerId: string,
   providerType: ProviderType,
-  providerPlatform: ProviderPlatform,
+  accountPlatform: AccountPlatform,
   options?: FetchDealsReqOptions,
 }
 
@@ -70,21 +70,21 @@ const saveDeals = async (
 
 const fetchDeals = async (req: FetchDealsReq) => {
   const {
-    providerId, providerPlatform, options,
+    providerId, accountPlatform, options,
   } = req;
 
   let res: FetchDealsRes;
-  switch (providerPlatform) {
-    case ProviderPlatform.ctrader: {
+  switch (accountPlatform) {
+    case AccountPlatform.ctrader: {
       res = await getDealsCTrader({ ...req, ...options });
       break;
     }
-    case ProviderPlatform.metatrader: {
+    case AccountPlatform.metatrader: {
       res = await getDealsMetaTrader({ ...req, ...options });
       break;
     }
     default: {
-      throw new Error(`Unhandled providerPlatform ${providerPlatform}`);
+      throw new Error(`Unhandled accountPlatform ${accountPlatform}`);
     }
   }
 

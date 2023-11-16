@@ -11,11 +11,11 @@ import { getMarketState } from '~utils/price';
 function PriceView() {
   const {
     providerType = ProviderType.icmarkets,
-    providerPlatform,
+    accountPlatform,
     symbol,
   } = storeUser.useStore((state) => ({
     providerType: state.activeProvider?.providerType,
-    providerPlatform: state.activeProvider?.providerPlatform,
+    accountPlatform: state.activeProvider?.accountPlatform,
     symbol: state.activeSymbol,
   }));
   const priceDoc = storePrices.useStore((prices) => prices[`${providerType}-${symbol}`]);
@@ -36,7 +36,7 @@ function PriceView() {
     price: ask,
   }).pips;
 
-  const marketState = getMarketState(providerPlatform, providerData);
+  const marketState = getMarketState(accountPlatform, providerData);
 
   const isOutOfDate = moment().diff(moment(time), 'minutes') > 5;
 

@@ -1,4 +1,4 @@
-import { ProviderPlatform, ProviderType } from '@fishprovider/utils/dist/constants/account';
+import { AccountPlatform, ProviderType } from '@fishprovider/utils/dist/constants/account';
 
 import { afterAllSetup, beforeAllSetup, getConfig } from '~tests/utils';
 
@@ -18,7 +18,7 @@ describe('fetchOrders', () => {
     const { orders, positions } = await fetchOrders({
       providerId: 'ctrader',
       providerType: ProviderType.icmarkets,
-      providerPlatform: ProviderPlatform.ctrader,
+      accountPlatform: AccountPlatform.ctrader,
       options: { config },
     });
     Logger.info('Got orders:', orders?.length);
@@ -32,7 +32,7 @@ describe('fetchOrders', () => {
     const { orders, positions } = await fetchOrders({
       providerId: 'meta',
       providerType: ProviderType.exness,
-      providerPlatform: ProviderPlatform.ctrader,
+      accountPlatform: AccountPlatform.ctrader,
       options: { config },
     });
     Logger.info('Got orders:', orders?.length);

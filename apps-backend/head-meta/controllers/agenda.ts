@@ -1,5 +1,5 @@
 import { clean } from '@fishprovider/old-core/dist/libs/agenda';
-import { ProviderTradeType } from '@fishprovider/utils/dist/constants/account';
+import { AccountTradeType } from '@fishprovider/utils/dist/constants/account';
 import type { Job, JobAttributesData } from 'agenda';
 
 import { destroyOne, startOne } from '~services/provider';
@@ -7,7 +7,7 @@ import { destroyOne, startOne } from '~services/provider';
 const env = {
   typeId: process.env.TYPE_ID,
   typePre: process.env.TYPE_PRE,
-  providerTradeType: process.env.PROVIDER_TRADE_TYPE || ProviderTradeType.demo,
+  accountTradeType: process.env.PROVIDER_TRADE_TYPE || AccountTradeType.demo,
 };
 
 interface StartProvider extends JobAttributesData {
@@ -19,7 +19,7 @@ interface DestroyProvider extends JobAttributesData {
 }
 
 const startProvider = async () => {
-  const jobName = `${env.typePre}-${env.providerTradeType}-head-meta-start-provider`;
+  const jobName = `${env.typePre}-${env.accountTradeType}-head-meta-start-provider`;
   Agenda.define(
     jobName,
     {},
@@ -35,7 +35,7 @@ const startProvider = async () => {
 };
 
 const destroyProvider = async () => {
-  const jobName = `${env.typePre}-${env.providerTradeType}-head-meta-destroy-provider`;
+  const jobName = `${env.typePre}-${env.accountTradeType}-head-meta-destroy-provider`;
   Agenda.define(
     jobName,
     {},

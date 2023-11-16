@@ -1,4 +1,4 @@
-import { ProviderPlatform } from '@fishprovider/utils/dist/constants/account';
+import { AccountPlatform } from '@fishprovider/utils/dist/constants/account';
 import type { Config } from '@fishprovider/utils/dist/types/Account.model';
 import type { Order, OrderWithoutId } from '@fishprovider/utils/dist/types/Order.model';
 import type { Price } from '@fishprovider/utils/dist/types/Price.model';
@@ -55,22 +55,22 @@ const postUpdatePosition = async (
 
 const updatePosition = async (req: UpdatePositionReq) => {
   const { order, options } = req;
-  const { providerPlatform } = order;
+  const { accountPlatform } = order;
 
   const requestOrder = await preCommandOrder(order);
 
   let res: UpdatePositionRes;
-  switch (providerPlatform) {
-    case ProviderPlatform.ctrader: {
+  switch (accountPlatform) {
+    case AccountPlatform.ctrader: {
       res = await updatePositionCTrader({ ...req, ...options, requestOrder });
       break;
     }
-    case ProviderPlatform.metatrader: {
+    case AccountPlatform.metatrader: {
       res = await updatePositionMetaTrader({ ...req, ...options, requestOrder });
       break;
     }
     default: {
-      throw new Error(`Unhandled providerPlatform ${providerPlatform}`);
+      throw new Error(`Unhandled accountPlatform ${accountPlatform}`);
     }
   }
 

@@ -1,11 +1,11 @@
-import { ProviderPlatform, ProviderType } from '~constants/account';
+import { AccountPlatform, ProviderType } from '~constants/account';
 import type { Account, Lock, Plan } from '~types/Account.model';
 
 const getAccountDefault: () => Account = () => ({
   _id: 'testAccountId',
   name: 'Test Account',
   providerType: ProviderType.icmarkets,
-  providerPlatform: ProviderPlatform.ctrader,
+  accountPlatform: AccountPlatform.ctrader,
   config: {
     clientId: 'testClientId',
     clientSecret: 'testClientSecret',

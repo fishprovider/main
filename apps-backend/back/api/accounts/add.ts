@@ -1,8 +1,9 @@
 import newAccountMetaTrader from '@fishprovider/swap/dist/libs/metatrader/newAccount';
 import { updateCache } from '@fishprovider/swap/dist/utils/account';
 import {
+  AccountPlatform,
+  AccountTradeType,
   AccountViewType,
-  ProviderPlatform, ProviderTradeType,
 } from '@fishprovider/utils/dist/constants/account';
 import { ErrorType } from '@fishprovider/utils/dist/constants/error';
 import { Roles } from '@fishprovider/utils/dist/constants/user';
@@ -15,7 +16,7 @@ import isDemo from '~utils/isDemo';
 
 const env = {
   typePre: process.env.TYPE_PRE,
-  providerTradeType: process.env.PROVIDER_TRADE_TYPE || ProviderTradeType.demo,
+  accountTradeType: process.env.PROVIDER_TRADE_TYPE || AccountTradeType.demo,
 };
 
 const accountAdd = async ({ data, userInfo }: {
@@ -38,10 +39,10 @@ const accountAdd = async ({ data, userInfo }: {
   const {
     name,
     providerType,
-    providerPlatform,
+    accountPlatform,
     config: baseConfig,
   } = data.accountToNew;
-  if (!name || !providerType || !providerPlatform || !baseConfig) {
+  if (!name || !providerType || !accountPlatform || !baseConfig) {
     return { error: ErrorType.badRequest };
   }
 
@@ -59,7 +60,7 @@ const accountAdd = async ({ data, userInfo }: {
           name,
           deleted: { $ne: true },
         },
-        ...(providerPlatform === ProviderPlatform.ctrader ? [
+        ...(accountPlatform === AccountPlatform.ctrader ? [
           {
             'config.accountId': baseConfig.accountId,
             deleted: { $ne: true },
@@ -81,9 +82,9 @@ const accountAdd = async ({ data, userInfo }: {
     _id: providerId,
     name,
     providerType,
-    providerPlatform,
+    accountPlatform,
     accountViewType: AccountViewType.private,
-    providerTradeType: env.providerTradeType as ProviderTradeType,
+    accountTradeType: env.accountTradeType as AccountTradeType,
     members: [
       {
         userId: userInfo.uid,
@@ -107,11 +108,11 @@ const accountAdd = async ({ data, userInfo }: {
     ...baseConfig,
   };
 
-  switch (providerPlatform) {
-    case ProviderPlatform.ctrader: {
+  switch (accountPlatform) {
+    case AccountPlatform.ctrader: {
       const client = await Mongo.collection<{ clientSecret: string }>('clientSecrets').findOne({
         providerType,
-        providerPlatform,
+        accountPlatform,
         clientId: config.clientId,
       }, {
         projection: {
@@ -124,10 +125,10 @@ const accountAdd = async ({ data, userInfo }: {
       config.clientSecret = client.clientSecret;
       break;
     }
-    case ProviderPlatform.metatrader: {
+    case AccountPlatform.metatrader: {
       const client = await Mongo.collection<{ clientId: string, clientSecret: string }>('clientSecrets').findOne({
         providerType,
-        providerPlatform,
+        accountPlatform,
         activeAccounts: { $lt: 2 },
       }, {
         projection: {
@@ -169,15 +170,15 @@ const accountAdd = async ({ data, userInfo }: {
 
   await updateCache(newAccount);
 
-  switch (providerPlatform) {
-    case ProviderPlatform.ctrader: {
-      Agenda.now(`${env.typePre}-${env.providerTradeType}-head-start-provider`, {
+  switch (accountPlatform) {
+    case AccountPlatform.ctrader: {
+      Agenda.now(`${env.typePre}-${env.accountTradeType}-head-start-provider`, {
         providerId,
       });
       break;
     }
-    case ProviderPlatform.metatrader: {
-      Agenda.now(`${env.typePre}-${env.providerTradeType}-head-meta-start-provider`, {
+    case AccountPlatform.metatrader: {
+      Agenda.now(`${env.typePre}-${env.accountTradeType}-head-meta-start-provider`, {
         providerId,
       });
       break;
@@ -198,7 +199,7 @@ const accountAdd = async ({ data, userInfo }: {
   await Mongo.collection('clientSecrets').updateOne(
     {
       providerType,
-      providerPlatform,
+      accountPlatform,
       clientId: config.clientId,
     },
     {

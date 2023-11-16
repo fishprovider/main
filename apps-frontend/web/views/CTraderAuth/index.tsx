@@ -1,7 +1,7 @@
 import accountAdd from '@fishprovider/cross/dist/api/accounts/add';
 import { apiPost } from '@fishprovider/cross/dist/libs/api';
 import storeUser from '@fishprovider/cross/dist/stores/user';
-import { ProviderPlatform, ProviderType } from '@fishprovider/utils/dist/constants/account';
+import { AccountPlatform, ProviderType } from '@fishprovider/utils/dist/constants/account';
 import type { Config } from '@fishprovider/utils/dist/types/Account.model';
 import _ from 'lodash';
 import { useRouter } from 'next/router';
@@ -37,7 +37,7 @@ function ImportAccounts({ accounts }: { accounts: AccountToImport[] }) {
     const accountToNew = {
       name,
       providerType: ProviderType.icmarkets, // TODO: check and warn if broker is different
-      providerPlatform: ProviderPlatform.ctrader,
+      accountPlatform: AccountPlatform.ctrader,
       config,
     };
     accountAdd({ accountToNew }).then((account) => {

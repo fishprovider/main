@@ -1,4 +1,4 @@
-import type { ProviderPlatform, ProviderType } from '~constants/account';
+import type { AccountPlatform, ProviderType } from '~constants/account';
 import type { Direction, OrderStatus, OrderType } from '~constants/order';
 
 interface Chat {
@@ -31,8 +31,8 @@ interface Order extends OrderSettings {
 
   providerId: string;
   providerType: ProviderType;
-  providerPlatform: ProviderPlatform;
-  providerPlatformType?: string;
+  accountPlatform: AccountPlatform;
+  accountPlatformType?: string;
 
   orderType: OrderType;
   status: OrderStatus;

@@ -5,7 +5,7 @@ import * as redis from '@fishprovider/old-core/dist/libs/redis';
 import newOrder from '@fishprovider/swap/dist/commands/newOrder';
 import removeOrder from '@fishprovider/swap/dist/commands/removeOrder';
 import removePosition from '@fishprovider/swap/dist/commands/removePosition';
-import { ProviderPlatform, ProviderType } from '@fishprovider/utils/dist/constants/account';
+import { AccountPlatform, ProviderType } from '@fishprovider/utils/dist/constants/account';
 import { Direction, OrderStatus, OrderType } from '@fishprovider/utils/dist/constants/order';
 import delay from '@fishprovider/utils/dist/helpers/delay';
 import random from '@fishprovider/utils/dist/helpers/random';
@@ -46,7 +46,7 @@ const newMarketOrder = async (config: Config, orderToNewInput?: Record<string, a
     _id: `${env.typeId}-${random()}`,
     providerId: env.typeId,
     providerType: ProviderType.icmarkets,
-    providerPlatform: ProviderPlatform.ctrader,
+    accountPlatform: AccountPlatform.ctrader,
     status: OrderStatus.idea,
     symbol: 'EURUSD',
     direction: Direction.buy,
@@ -66,7 +66,7 @@ const newLimitOrder = async (config: Config, orderToNewInput?: Record<string, an
     _id: `${env.typeId}-${random()}`,
     providerId: env.typeId,
     providerType: ProviderType.icmarkets,
-    providerPlatform: ProviderPlatform.ctrader,
+    accountPlatform: AccountPlatform.ctrader,
     status: OrderStatus.idea,
     symbol: 'EURUSD',
     direction: Direction.buy,

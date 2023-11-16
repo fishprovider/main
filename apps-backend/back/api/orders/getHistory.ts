@@ -32,11 +32,11 @@ const orderGetHistory = async ({ data, userInfo }: {
   }
 
   if (reload) {
-    const { config, providerType, providerPlatform } = account;
+    const { config, providerType, accountPlatform } = account;
     const { deals } = await fetchDeals({
       providerId,
       providerType,
-      providerPlatform,
+      accountPlatform,
       options: {
         config,
         weeks,

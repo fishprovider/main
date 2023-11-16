@@ -1,5 +1,5 @@
 import { clean, getJobType } from '@fishprovider/old-core/dist/libs/agenda';
-import { ProviderTradeType } from '@fishprovider/utils/dist/constants/account';
+import { AccountTradeType } from '@fishprovider/utils/dist/constants/account';
 import type { Job, JobAttributesData } from 'agenda';
 
 import { destroyOne, renewTokens, startOne } from '~services/provider';
@@ -7,7 +7,7 @@ import { destroyOne, renewTokens, startOne } from '~services/provider';
 const env = {
   typeId: process.env.TYPE_ID,
   typePre: process.env.TYPE_PRE,
-  providerTradeType: process.env.PROVIDER_TRADE_TYPE || ProviderTradeType.demo,
+  accountTradeType: process.env.PROVIDER_TRADE_TYPE || AccountTradeType.demo,
 };
 
 interface StartProvider extends JobAttributesData {
@@ -39,7 +39,7 @@ const startRenewTokens = async () => {
 };
 
 const startProvider = async () => {
-  const jobName = `${env.typePre}-${env.providerTradeType}-head-start-provider`;
+  const jobName = `${env.typePre}-${env.accountTradeType}-head-start-provider`;
   Agenda.define(
     jobName,
     {},
@@ -55,7 +55,7 @@ const startProvider = async () => {
 };
 
 const destroyProvider = async () => {
-  const jobName = `${env.typePre}-${env.providerTradeType}-head-destroy-provider`;
+  const jobName = `${env.typePre}-${env.accountTradeType}-head-destroy-provider`;
   Agenda.define(
     jobName,
     {},

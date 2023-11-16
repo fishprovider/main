@@ -4,7 +4,7 @@ import * as agenda from '@fishprovider/old-core/dist/libs/agenda';
 import * as firebase from '@fishprovider/old-core/dist/libs/firebase';
 import * as mongo from '@fishprovider/old-core/dist/libs/mongo';
 import * as redis from '@fishprovider/old-core/dist/libs/redis';
-import { ProviderPlatform, ProviderType } from '@fishprovider/utils/dist/constants/account';
+import { AccountPlatform, ProviderType } from '@fishprovider/utils/dist/constants/account';
 import { ErrorType } from '@fishprovider/utils/dist/constants/error';
 import { Direction, OrderStatus, OrderType } from '@fishprovider/utils/dist/constants/order';
 import delay from '@fishprovider/utils/dist/helpers/delay';
@@ -102,8 +102,8 @@ const newMarketOrder = async (config: Config, providerId: string, providerType: 
     _id: `${providerId}-${random()}`,
     providerId,
     providerType,
-    providerPlatform: providerType === ProviderType.exness
-      ? ProviderPlatform.metatrader : ProviderPlatform.ctrader,
+    accountPlatform: providerType === ProviderType.exness
+      ? AccountPlatform.metatrader : AccountPlatform.ctrader,
     status: OrderStatus.idea,
     direction: Direction.buy,
     symbol: providerType === ProviderType.exness ? 'ETHUSD' : 'EURUSD',
@@ -123,8 +123,8 @@ const newLimitOrder = async (config: Config, providerId: string, providerType: P
     _id: `${providerId}-${random()}`,
     providerId,
     providerType,
-    providerPlatform: providerType === ProviderType.exness
-      ? ProviderPlatform.metatrader : ProviderPlatform.ctrader,
+    accountPlatform: providerType === ProviderType.exness
+      ? AccountPlatform.metatrader : AccountPlatform.ctrader,
     status: OrderStatus.idea,
     direction: Direction.buy,
     symbol: providerType === ProviderType.exness ? 'ETHUSD' : 'EURUSD',

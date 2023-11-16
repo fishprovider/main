@@ -1,4 +1,4 @@
-import { ProviderPlatform, ProviderType } from '@fishprovider/utils/dist/constants/account';
+import { AccountPlatform, ProviderType } from '@fishprovider/utils/dist/constants/account';
 import type { Account, Config } from '@fishprovider/utils/dist/types/Account.model';
 
 import getAccountInfoCTrader from '~libs/ctrader/commands/getAccountInfo';
@@ -15,7 +15,7 @@ interface AccountInfoReqOptions {
 interface AccountInfoReq {
   providerId: string,
   providerType: ProviderType,
-  providerPlatform: ProviderPlatform,
+  accountPlatform: AccountPlatform,
   options?: AccountInfoReqOptions,
 }
 
@@ -72,21 +72,21 @@ const saveAccountInfo = async (
 
 const fetchAccountInfo = async (req: AccountInfoReq) => {
   const {
-    providerId, providerType, providerPlatform, options,
+    providerId, providerType, accountPlatform, options,
   } = req;
 
   let res: AccountInfoRes;
-  switch (providerPlatform) {
-    case ProviderPlatform.ctrader: {
+  switch (accountPlatform) {
+    case AccountPlatform.ctrader: {
       res = await getAccountInfoCTrader({ ...req, ...options });
       break;
     }
-    case ProviderPlatform.metatrader: {
+    case AccountPlatform.metatrader: {
       res = await getAccountInfoMetaTrader({ ...req, ...options });
       break;
     }
     default: {
-      throw new Error(`Unhandled providerPlatform ${providerPlatform}`);
+      throw new Error(`Unhandled accountPlatform ${accountPlatform}`);
     }
   }
 

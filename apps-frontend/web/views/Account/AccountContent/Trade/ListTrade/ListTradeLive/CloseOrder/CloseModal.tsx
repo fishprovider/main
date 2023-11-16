@@ -49,7 +49,7 @@ function CloseModal({
   });
 
   const {
-    providerType, providerPlatform, providerId, symbol, direction, volume,
+    providerType, accountPlatform, providerId, symbol, direction, volume,
     price: entry = 0,
   } = order;
 
@@ -66,7 +66,7 @@ function CloseModal({
     const newOrder = {
       providerId,
       providerType,
-      providerPlatform,
+      accountPlatform,
       orderType: OrderType.limit,
       status: OrderStatus.idea,
 
