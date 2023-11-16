@@ -16,19 +16,18 @@ function ProviderSelect() {
     isServerLoggedIn,
     providerId,
     email,
-    // starProviders = {},
+    starProviders = {},
   } = storeUser.useStore((state) => ({
     isServerLoggedIn: state.isServerLoggedIn,
     providerId: state.activeProvider?._id,
     email: state.info?.email,
-    // starProviders: state.info?.starProviders,
+    starProviders: state.info?.starProviders,
   }));
   const accounts = storeAccounts.useStore((state) => _.orderBy(
-    // _.filter(
-    //   state,
-    //   (account) => account._id === providerId || !!starProviders[account._id],
-    // ),
-    state,
+    _.filter(
+      state,
+      (account) => account._id === providerId || !!starProviders[account._id],
+    ),
     [
       (account) => account.order || 0,
       (account) => account.name,
