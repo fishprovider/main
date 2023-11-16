@@ -1,7 +1,8 @@
 import newAccountMetaTrader from '@fishprovider/swap/dist/libs/metatrader/newAccount';
 import { updateCache } from '@fishprovider/swap/dist/utils/account';
 import {
-  ProviderPlatform, ProviderTradeType, ProviderViewType,
+  AccountViewType,
+  ProviderPlatform, ProviderTradeType,
 } from '@fishprovider/utils/dist/constants/account';
 import { ErrorType } from '@fishprovider/utils/dist/constants/error';
 import { Roles } from '@fishprovider/utils/dist/constants/user';
@@ -81,7 +82,7 @@ const accountAdd = async ({ data, userInfo }: {
     name,
     providerType,
     providerPlatform,
-    providerViewType: ProviderViewType.private,
+    accountViewType: AccountViewType.private,
     providerTradeType: env.providerTradeType as ProviderTradeType,
     members: [
       {

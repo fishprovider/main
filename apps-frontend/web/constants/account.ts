@@ -1,5 +1,6 @@
 import {
-  CopyVolumeMode, LockType, ProviderTradeType, ProviderType, ProviderViewType,
+  AccountViewType,
+  CopyVolumeMode, LockType, ProviderTradeType, ProviderType,
 } from '@fishprovider/utils/dist/constants/account';
 import { Roles } from '@fishprovider/utils/dist/constants/user';
 
@@ -265,8 +266,8 @@ const ProviderTypePrice: Record<string, string> = {
 };
 
 const ProviderViewTypeText: Record<string, string> = {
-  [ProviderViewType.private]: 'Private',
-  [ProviderViewType.public]: 'Public',
+  [AccountViewType.private]: 'Private',
+  [AccountViewType.public]: 'Public',
 };
 
 const ProviderTradeTypeText: Record<string, { text: string, color?: string }> = {

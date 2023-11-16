@@ -9,7 +9,7 @@ import storeAccounts from '~stores/accounts';
 const accountUpdate = async (
   payload: {
     providerId: string;
-    providerViewType?: string,
+    accountViewType?: string,
     name?: string,
     icon?: string,
     strategyId?: string,

@@ -17,7 +17,7 @@ enum ProviderTradeType {
   live = 'live',
 }
 
-enum ProviderViewType {
+enum AccountViewType {
   private = 'private',
   public = 'public',
 }
@@ -62,11 +62,11 @@ enum LockType {
 }
 
 export {
+  AccountViewType,
   CopyVolumeMode,
   LockType,
   PlanType,
   ProviderPlatform,
   ProviderTradeType,
   ProviderType,
-  ProviderViewType,
 };

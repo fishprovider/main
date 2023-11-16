@@ -1,6 +1,7 @@
 import type {
+  AccountViewType,
   CopyVolumeMode, LockType, PlanType, ProviderPlatform, ProviderTradeType,
-  ProviderType, ProviderViewType,
+  ProviderType,
 } from '~constants/account';
 import type { Roles } from '~constants/user';
 
@@ -134,7 +135,7 @@ interface Account {
   providerPlatformType?: string; // standard, pro
 
   providerGroupId?: string; // earth, earth2, earth3
-  providerViewType?: ProviderViewType; // private, public
+  accountViewType?: AccountViewType; // private, public
   providerTradeType?: ProviderTradeType; // demo, live
 
   asset?: string;

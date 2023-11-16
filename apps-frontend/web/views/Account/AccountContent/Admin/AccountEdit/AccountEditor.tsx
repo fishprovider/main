@@ -1,6 +1,6 @@
 import accountUpdate from '@fishprovider/cross/dist/api/accounts/update';
 import storeUser from '@fishprovider/cross/dist/stores/user';
-import { ProviderViewType } from '@fishprovider/utils/dist/constants/account';
+import { AccountViewType } from '@fishprovider/utils/dist/constants/account';
 import { useState } from 'react';
 
 import Link from '~components/base/Link';
@@ -14,7 +14,7 @@ import TextInput from '~ui/core/TextInput';
 
 interface Props {
   account: {
-    providerViewType?: ProviderViewType;
+    accountViewType?: AccountViewType;
     name?: string;
     icon?: string;
     providerGroupId?: string;
@@ -25,7 +25,7 @@ interface Props {
 }
 
 function AccountEditor({ account, onDone } : Props) {
-  const [providerViewType, setProviderViewType] = useState(account.providerViewType || '');
+  const [accountViewType, setProviderViewType] = useState(account.accountViewType || '');
   const [name, setName] = useState(account.name || '');
   const [icon, setIcon] = useState(account.icon || '');
   const [strategyId, setStrategyId] = useState(account.strategyId || '');
@@ -37,7 +37,7 @@ function AccountEditor({ account, onDone } : Props) {
 
     accountUpdate({
       providerId,
-      providerViewType,
+      accountViewType,
       name,
       icon,
       strategyId,
@@ -50,14 +50,14 @@ function AccountEditor({ account, onDone } : Props) {
     <>
       <Group>
         <Radio
-          checked={providerViewType === ProviderViewType.private}
-          onChange={() => setProviderViewType(ProviderViewType.private)}
-          label={ProviderViewTypeText[ProviderViewType.private]}
+          checked={accountViewType === AccountViewType.private}
+          onChange={() => setProviderViewType(AccountViewType.private)}
+          label={ProviderViewTypeText[AccountViewType.private]}
         />
         <Radio
-          checked={providerViewType === ProviderViewType.public}
-          onChange={() => setProviderViewType(ProviderViewType.public)}
-          label={ProviderViewTypeText[ProviderViewType.public]}
+          checked={accountViewType === AccountViewType.public}
+          onChange={() => setProviderViewType(AccountViewType.public)}
+          label={ProviderViewTypeText[AccountViewType.public]}
         />
       </Group>
       <TextInput

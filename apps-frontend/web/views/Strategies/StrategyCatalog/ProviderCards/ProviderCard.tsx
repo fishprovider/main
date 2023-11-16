@@ -1,5 +1,5 @@
 import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
-import { ProviderViewType } from '@fishprovider/utils/dist/constants/account';
+import { AccountViewType } from '@fishprovider/utils/dist/constants/account';
 import _ from 'lodash';
 import moment from 'moment';
 import type React from 'react';
@@ -34,7 +34,7 @@ function ProviderCard({
   const isMobile = useMobile();
 
   const {
-    providerViewType,
+    accountViewType,
     name,
     icon,
     createdAt,
@@ -44,7 +44,7 @@ function ProviderCard({
     roi = 0,
     summary = {},
   } = storeAccounts.useStore((state) => ({
-    providerViewType: state[providerId]?.providerViewType,
+    accountViewType: state[providerId]?.accountViewType,
     name: state[providerId]?.name,
     icon: state[providerId]?.icon,
     createdAt: state[providerId]?.createdAt,
@@ -101,10 +101,10 @@ function ProviderCard({
             </Text>
           </Box>
           <Group position="center">
-            {providerViewType === ProviderViewType.private && (
+            {accountViewType === AccountViewType.private && (
               <Icon
                 name="VisibilityOff"
-                tooltip={ProviderViewTypeText[providerViewType as ProviderViewType]}
+                tooltip={ProviderViewTypeText[accountViewType as AccountViewType]}
               />
             )}
             <InvestNow providerId={providerId} />
@@ -134,10 +134,10 @@ function ProviderCard({
               <Title size="h4">{name || <Loader variant="dots" size="xs" />}</Title>
               <Title size="h3">{icon || <Loader variant="bars" size="xs" />}</Title>
               <Group position="center">
-                {providerViewType === ProviderViewType.private && (
+                {accountViewType === AccountViewType.private && (
                   <Icon
                     name="VisibilityOff"
-                    tooltip={ProviderViewTypeText[providerViewType as ProviderViewType]}
+                    tooltip={ProviderViewTypeText[accountViewType as AccountViewType]}
                   />
                 )}
                 <InvestNow providerId={providerId} size="sm" />

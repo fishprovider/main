@@ -1,6 +1,6 @@
 import createTransfer from '@fishprovider/coin/dist/utils/transaction/createTransfer';
 import createInvest from '@fishprovider/coin/dist/utils/wallet/createInvest';
-import { ProviderViewType } from '@fishprovider/utils/dist/constants/account';
+import { AccountViewType } from '@fishprovider/utils/dist/constants/account';
 import { ErrorType } from '@fishprovider/utils/dist/constants/error';
 import { InvestStatus, SourceType, TransactionType } from '@fishprovider/utils/dist/constants/pay';
 import random from '@fishprovider/utils/dist/helpers/random';
@@ -44,7 +44,7 @@ const investAdd = async ({ data, userInfo }: {
 
   const account = await Mongo.collection<AccountPublic>('accounts').findOne({
     _id: providerId,
-    providerViewType: ProviderViewType.public,
+    accountViewType: AccountViewType.public,
     strategyId: { $exists: true },
   }, {
     projection: {

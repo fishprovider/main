@@ -1,5 +1,5 @@
 import storeUser from '@fishprovider/cross/dist/stores/user';
-import { ProviderViewType } from '@fishprovider/utils/dist/constants/account';
+import { AccountViewType } from '@fishprovider/utils/dist/constants/account';
 import { useState } from 'react';
 
 import { ProviderViewTypeText } from '~constants/account';
@@ -13,7 +13,7 @@ import AccountEditor from './AccountEditor';
 
 function AccountEdit() {
   const account = storeUser.useStore((state) => ({
-    providerViewType: state.activeProvider?.providerViewType,
+    accountViewType: state.activeProvider?.accountViewType,
     name: state.activeProvider?.name,
     icon: state.activeProvider?.icon,
     providerGroupId: state.activeProvider?.providerGroupId,
@@ -23,7 +23,7 @@ function AccountEdit() {
   const [isEdit, setIsEdit] = useState(false);
 
   const {
-    providerViewType, name, icon, strategyId,
+    accountViewType, name, icon, strategyId,
   } = account;
 
   const renderToolbar = () => (isEdit ? (
@@ -36,10 +36,10 @@ function AccountEdit() {
     <>
       <Group>
         <Icon
-          name={providerViewType === ProviderViewType.private ? 'VisibilityOff' : 'Visibility'}
-          tooltip={ProviderViewTypeText[providerViewType as ProviderViewType]}
+          name={accountViewType === AccountViewType.private ? 'VisibilityOff' : 'Visibility'}
+          tooltip={ProviderViewTypeText[accountViewType as AccountViewType]}
         />
-        <Text>{ProviderViewTypeText[providerViewType as ProviderViewType]}</Text>
+        <Text>{ProviderViewTypeText[accountViewType as AccountViewType]}</Text>
       </Group>
       <Text>{`Name: ${name || ''}`}</Text>
       <Text>{`Icon: ${icon || ''}`}</Text>

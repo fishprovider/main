@@ -1,4 +1,4 @@
-import type { ProviderViewType } from '@fishprovider/utils/dist/constants/account';
+import type { AccountViewType } from '@fishprovider/utils/dist/constants/account';
 import { ErrorType } from '@fishprovider/utils/dist/constants/error';
 import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
 import type {
@@ -12,7 +12,7 @@ import _ from 'lodash';
 const accountUpdate = async ({ data, userInfo }: {
   data: {
     providerId: string,
-    providerViewType?: ProviderViewType,
+    accountViewType?: AccountViewType,
     name?: string,
     icon?: string,
     strategyId?: string,
@@ -29,7 +29,7 @@ const accountUpdate = async ({ data, userInfo }: {
   const { uid } = userInfo;
   const {
     providerId, protectSettings, tradeSettings, settings, notes, privateNotes, bannerStatus,
-    providerViewType, name, icon, strategyId, activity,
+    accountViewType, name, icon, strategyId, activity,
   } = data;
   if (!providerId) {
     return { error: ErrorType.badRequest };
@@ -96,7 +96,7 @@ const accountUpdate = async ({ data, userInfo }: {
       }),
     }),
     ...((isTraderProvider || isProtectorProvider) && {
-      ...(providerViewType && { providerViewType }),
+      ...(accountViewType && { accountViewType }),
       ...(name && { name }),
       ...(icon && { icon }),
       ...(strategyId && { strategyId }),
