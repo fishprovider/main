@@ -1,5 +1,4 @@
 import type {
-  AccountSourceType,
   CopyVolumeMode, LockType, PlanType, ProviderPlatform, ProviderTradeType,
   ProviderType, ProviderViewType,
 } from '~constants/account';
@@ -200,7 +199,6 @@ interface Account {
   userName?: string;
   userPicture?: string;
 
-  sourceType?: AccountSourceType;
   createdAt?: Date;
   updatedAt?: Date;
 

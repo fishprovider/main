@@ -22,11 +22,6 @@ enum ProviderViewType {
   public = 'public',
 }
 
-enum AccountSourceType {
-  admin = 'admin',
-  user = 'user',
-}
-
 enum PlanType {
   pairs = 'pairs',
 
@@ -67,7 +62,6 @@ enum LockType {
 }
 
 export {
-  AccountSourceType,
   CopyVolumeMode,
   LockType,
   PlanType,
