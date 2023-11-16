@@ -3,16 +3,10 @@
 APP=$1
 
 APP_TYPE=backend
-APP_DIR=apps-$APP_TYPE/$APP
+APP_NAME=$APP
 
-if [[ $APP == "web" ]]; then
-  DEPLOY_ENV=fishWeb
-  APP_TYPE=frontend
-  APP_DIR=apps-$APP_TYPE/$APP
-fi
-
-if [[ $APP == "back" ]]; then
-  DEPLOY_ENV=fishBack
+if [[ $APP == "pup" ]]; then
+  DEPLOY_ENV=localhost
 fi
 
 if [[ $APP == "bot" ]] || [[ $APP == "copy" ]]; then
@@ -34,23 +28,35 @@ fi
 if [[ $APP =~ ^spot-* ]]; then
   DEPLOY_ENV=fishPrice
   if [[ $APP =~ ^spot-.*-poll ]]; then
-    APP_DIR=apps-$APP_TYPE/${APP%?????}
+    APP_NAME=${APP%?????}
   fi
+fi
+
+if [[ $APP == "back" ]]; then
+  DEPLOY_ENV=fishBack
+fi
+
+if [[ $APP == "back-secondary" ]]; then
+  DEPLOY_ENV=fishSecondary
+  APP_NAME=back
+fi
+
+if [[ $APP == "web" ]]; then
+  DEPLOY_ENV=fishWeb
+  APP_TYPE=frontend
+  APP_NAME=web
 fi
 
 if [[ $APP == "web-secondary" ]]; then
   DEPLOY_ENV=fishSecondary
   APP_TYPE=frontend
-  APP_DIR=apps-$APP_TYPE/web
+  APP_NAME=web
 fi
 
-if [[ $APP == "back-secondary" ]]; then
-  DEPLOY_ENV=fishSecondary
-  APP_DIR=apps-$APP_TYPE/back
-fi
+APP_DIR=apps-$APP_TYPE/$APP_NAME
 
 if [[ $DRY_RUN == "true" ]]; then
-  echo $DEPLOY_ENV $APP_TYPE $APP_DIR
+  echo $DEPLOY_ENV $APP_TYPE $APP_NAME $APP_DIR
   exit 0
 fi
 
