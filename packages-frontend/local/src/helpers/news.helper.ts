@@ -1,7 +1,4 @@
+import _ from 'lodash';
 import hash from 'object-hash';
 
-export const buildKeyNews = (filter: {
-  today?: boolean,
-  week?: string,
-  upcoming?: boolean,
-}) => `fp-news:${hash(filter)}`;
+export const buildKeyNews = (filter: any) => `fp-news:${hash(_.compact(filter))}`;

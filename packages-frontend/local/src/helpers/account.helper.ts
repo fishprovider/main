@@ -1,11 +1,6 @@
-import { AccountViewType } from '@fishprovider/core';
+import _ from 'lodash';
 import hash from 'object-hash';
 
-export const buildKeyAccount = (filter: {
-  accountId?: string,
-}) => `fp-account:${hash(filter)}`;
+export const buildKeyAccount = (filter: any) => `fp-account:${hash(_.compact(filter))}`;
 
-export const buildKeyAccounts = (filter: {
-  accountViewType?: AccountViewType,
-  email?: string,
-}) => `fp-accounts:${hash(filter)}`;
+export const buildKeyAccounts = (filter: any) => `fp-accounts:${hash(_.compact(filter))}`;
