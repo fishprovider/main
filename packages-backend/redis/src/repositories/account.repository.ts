@@ -5,10 +5,10 @@ import {
   buildKeyAccount, buildKeyAccounts, convertUndefinedToNull, getRedis,
 } from '..';
 
-const getAccount: AccountRepository['getAccount'] = async ({ accountId }) => {
-  if (!accountId) return {};
+const getAccount: AccountRepository['getAccount'] = async (filter) => {
+  if (!filter.accountId) return {};
 
-  const key = buildKeyAccount({ accountId });
+  const key = buildKeyAccount(filter);
   const { clientJson } = await getRedis();
   const doc = await clientJson.get(key);
   if (!doc) return {};
@@ -16,10 +16,10 @@ const getAccount: AccountRepository['getAccount'] = async ({ accountId }) => {
   return { doc: doc as Partial<Account> };
 };
 
-const getAccounts: AccountRepository['getAccounts'] = async ({ accountViewType, email }) => {
-  if (!accountViewType && !email) return {};
+const getAccounts: AccountRepository['getAccounts'] = async (filter) => {
+  if (!(filter.accountViewType || filter.email)) return {};
 
-  const key = buildKeyAccounts({ accountViewType, email });
+  const key = buildKeyAccounts(filter);
   const { clientJson } = await getRedis();
   const docs = await clientJson.get(key);
   if (!docs) return {};
