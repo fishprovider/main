@@ -16,18 +16,19 @@ function ProviderSelect() {
     isServerLoggedIn,
     providerId,
     email,
-    starProviders = {},
+    // starProviders = {},
   } = storeUser.useStore((state) => ({
     isServerLoggedIn: state.isServerLoggedIn,
     providerId: state.activeProvider?._id,
     email: state.info?.email,
-    starProviders: state.info?.starProviders,
+    // starProviders: state.info?.starProviders,
   }));
   const accounts = storeAccounts.useStore((state) => _.orderBy(
-    _.filter(
-      state,
-      (account) => account._id === providerId || !!starProviders[account._id],
-    ),
+    // _.filter(
+    //   state,
+    //   (account) => account._id === providerId || !!starProviders[account._id],
+    // ),
+    state,
     [
       (account) => account.order || 0,
       (account) => account.name,
@@ -45,6 +46,11 @@ function ProviderSelect() {
     enabled: !!isServerLoggedIn,
   });
 
+  const options = accounts.map(({ _id, name, icon = '' }) => ({
+    value: _id,
+    label: `${name} ${icon}`,
+  }));
+
   return (
     <Select
       value={providerId}
@@ -57,10 +63,7 @@ function ProviderSelect() {
           },
         });
       }}
-      data={accounts.map(({ _id, name, icon = '' }) => ({
-        value: _id,
-        label: `${name} ${icon}`,
-      }))}
+      data={options}
       // searchable
     />
   );
