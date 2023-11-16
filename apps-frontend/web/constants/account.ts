@@ -265,7 +265,7 @@ const ProviderTypePrice: Record<string, string> = {
   [ProviderType.exness]: '5 USFP/month',
 };
 
-const ProviderViewTypeText: Record<string, string> = {
+const AccountViewTypeText: Record<string, string> = {
   [AccountViewType.private]: 'Private',
   [AccountViewType.public]: 'Public',
 };
@@ -299,6 +299,7 @@ const LockTypeText: Record<string, string> = {
 const activityFields = ['chats', 'confidences'];
 
 export {
+  AccountViewTypeText,
   activityFields,
   CardVariant,
   CopyVolumeModeText,
@@ -309,5 +310,4 @@ export {
   ProviderTradeTypeText,
   ProviderTypePrice,
   ProviderTypeText,
-  ProviderViewTypeText,
 };

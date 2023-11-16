@@ -4,7 +4,7 @@ import { AccountViewType } from '@fishprovider/utils/dist/constants/account';
 import { useState } from 'react';
 
 import Link from '~components/base/Link';
-import { ProviderViewTypeText } from '~constants/account';
+import { AccountViewTypeText } from '~constants/account';
 import Button from '~ui/core/Button';
 import Group from '~ui/core/Group';
 import NumberInput from '~ui/core/NumberInput';
@@ -25,7 +25,7 @@ interface Props {
 }
 
 function AccountEditor({ account, onDone } : Props) {
-  const [accountViewType, setProviderViewType] = useState(account.accountViewType || '');
+  const [accountViewType, setAccountViewType] = useState(account.accountViewType || '');
   const [name, setName] = useState(account.name || '');
   const [icon, setIcon] = useState(account.icon || '');
   const [strategyId, setStrategyId] = useState(account.strategyId || '');
@@ -51,13 +51,13 @@ function AccountEditor({ account, onDone } : Props) {
       <Group>
         <Radio
           checked={accountViewType === AccountViewType.private}
-          onChange={() => setProviderViewType(AccountViewType.private)}
-          label={ProviderViewTypeText[AccountViewType.private]}
+          onChange={() => setAccountViewType(AccountViewType.private)}
+          label={AccountViewTypeText[AccountViewType.private]}
         />
         <Radio
           checked={accountViewType === AccountViewType.public}
-          onChange={() => setProviderViewType(AccountViewType.public)}
-          label={ProviderViewTypeText[AccountViewType.public]}
+          onChange={() => setAccountViewType(AccountViewType.public)}
+          label={AccountViewTypeText[AccountViewType.public]}
         />
       </Group>
       <TextInput

@@ -2,7 +2,7 @@ import storeUser from '@fishprovider/cross/dist/stores/user';
 import { AccountViewType } from '@fishprovider/utils/dist/constants/account';
 import { useState } from 'react';
 
-import { ProviderViewTypeText } from '~constants/account';
+import { AccountViewTypeText } from '~constants/account';
 import Group from '~ui/core/Group';
 import Icon from '~ui/core/Icon';
 import Stack from '~ui/core/Stack';
@@ -37,9 +37,9 @@ function AccountEdit() {
       <Group>
         <Icon
           name={accountViewType === AccountViewType.private ? 'VisibilityOff' : 'Visibility'}
-          tooltip={ProviderViewTypeText[accountViewType as AccountViewType]}
+          tooltip={AccountViewTypeText[accountViewType as AccountViewType]}
         />
-        <Text>{ProviderViewTypeText[accountViewType as AccountViewType]}</Text>
+        <Text>{AccountViewTypeText[accountViewType as AccountViewType]}</Text>
       </Group>
       <Text>{`Name: ${name || ''}`}</Text>
       <Text>{`Icon: ${icon || ''}`}</Text>

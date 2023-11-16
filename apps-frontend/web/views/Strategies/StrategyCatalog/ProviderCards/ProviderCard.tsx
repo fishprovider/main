@@ -7,7 +7,8 @@ import type React from 'react';
 import InvestNow from '~components/account/InvestNow';
 import Link from '~components/base/Link';
 import {
-  CardVariant, ProviderViewTypeText,
+  AccountViewTypeText,
+  CardVariant,
 } from '~constants/account';
 import { toStrategy } from '~libs/routes';
 import Badge from '~ui/core/Badge';
@@ -104,7 +105,7 @@ function ProviderCard({
             {accountViewType === AccountViewType.private && (
               <Icon
                 name="VisibilityOff"
-                tooltip={ProviderViewTypeText[accountViewType as AccountViewType]}
+                tooltip={AccountViewTypeText[accountViewType as AccountViewType]}
               />
             )}
             <InvestNow providerId={providerId} />
@@ -137,7 +138,7 @@ function ProviderCard({
                 {accountViewType === AccountViewType.private && (
                   <Icon
                     name="VisibilityOff"
-                    tooltip={ProviderViewTypeText[accountViewType as AccountViewType]}
+                    tooltip={AccountViewTypeText[accountViewType as AccountViewType]}
                   />
                 )}
                 <InvestNow providerId={providerId} size="sm" />
