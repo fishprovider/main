@@ -16,10 +16,10 @@ const updateNews: NewsRepository['updateNews'] = async (filter, payload) => {
   const key = buildKeyNews(filter);
   const { client, clientJson } = await getRedis();
   const { news } = payload;
-  if (news) {
-    await clientJson.set(key, '.', news);
-    await client.expire(key, 60 * 60 * 4);
-  }
+  if (!news) return {};
+
+  await clientJson.set(key, '.', news);
+  await client.expire(key, 60 * 60 * 4);
   return { docs: news };
 };
 

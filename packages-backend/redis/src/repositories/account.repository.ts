@@ -40,10 +40,10 @@ const updateAccounts: AccountRepository['updateAccounts'] = async (filter, paylo
   const key = buildKeyAccounts(filter);
   const { client, clientJson } = await getRedis();
   const { accounts } = payload;
-  if (accounts) {
-    await clientJson.set(key, '.', convertUndefinedToNull(accounts));
-    await client.expire(key, 60 * 60 * 4);
-  }
+  if (!accounts) return {};
+
+  await clientJson.set(key, '.', convertUndefinedToNull(accounts));
+  await client.expire(key, 60 * 60 * 4);
   return { docs: accounts };
 };
 
