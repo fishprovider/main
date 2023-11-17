@@ -94,7 +94,6 @@ export interface AccountMember {
 
   picture?: string;
   locks?: AccountLock[];
-  status?: 'add' | 'remove' | 'update' | 'done';
 
   updatedAt: Date;
   createdAt: Date;
