@@ -12,12 +12,12 @@ const checkConfig = (config?: AccountConfig) => {
 };
 
 const getAccount: AccountRepository['getAccount'] = async (payload) => {
-  const { config: rawConfig, accountId } = payload;
+  const { config: rawConfig } = payload;
   const config = checkConfig(rawConfig);
 
   const doc = await getAccountInformation(
     new Connection(config),
-    accountId,
+    config.accountId,
   );
 
   return {
