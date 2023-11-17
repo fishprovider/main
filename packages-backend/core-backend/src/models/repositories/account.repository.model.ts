@@ -1,5 +1,6 @@
 import {
-  Account, AccountConfig, AccountMember, AccountPlatform,
+  Account, AccountBannerStatus, AccountConfig, AccountMember, AccountPlatform,
+  AccountProtectSettings, AccountSettings, AccountTradeSettings,
   AccountTradeType, AccountType, AccountViewType,
 } from '@fishprovider/core';
 
@@ -18,7 +19,6 @@ export interface AccountRepository {
       },
       accountPlatform?: AccountPlatform,
       config?: AccountConfig,
-      tradeAccountId?: string,
     },
     options?: BaseGetOptions<Account>,
   ) => Promise<BaseGetResult<Account>>;
@@ -38,12 +38,20 @@ export interface AccountRepository {
       accountId?: string,
     },
     payload: {
+      accountViewType?: AccountViewType,
       name?: string,
+      icon?: string,
+      strategyId?: string,
       assetId?: string,
       leverage?: number,
       balance?: number,
+      tradeSettings?: AccountTradeSettings;
+      protectSettings?: AccountProtectSettings;
+      settings?: AccountSettings;
+      notes?: string,
+      privateNotes?: string,
+      bannerStatus?: AccountBannerStatus,
       providerData?: any,
-      member?: AccountMember,
       account?: Partial<Account>,
     },
     options?: BaseUpdateOptions<Account>,

@@ -1,5 +1,6 @@
 import {
-  Account, AccountConfig, AccountMember, AccountPlatform,
+  Account, AccountBannerStatus, AccountConfig, AccountPlatform,
+  AccountProtectSettings, AccountSettings, AccountTradeSettings,
   AccountTradeType, AccountType, AccountViewType,
 } from '@fishprovider/core';
 
@@ -53,12 +54,20 @@ export type UpdateAccountService = (params: BaseUpdateServiceParams<Account> & {
     accountId: string,
   },
   payload: {
+    accountViewType?: AccountViewType,
     name?: string,
+    icon?: string,
+    strategyId?: string,
     assetId?: string,
     leverage?: number,
     balance?: number,
+    tradeSettings?: AccountTradeSettings;
+    protectSettings?: AccountProtectSettings;
+    settings?: AccountSettings;
+    notes?: string,
+    privateNotes?: string,
+    bannerStatus?: AccountBannerStatus,
     providerData?: any,
-    member?: AccountMember,
   },
   repositories: {
     account: AccountRepository

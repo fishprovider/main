@@ -1,5 +1,5 @@
 import {
-  Account, AccountConfig, AccountMember, AccountViewType,
+  Account, AccountConfig, AccountViewType,
 } from '@fishprovider/core';
 import {
   AccountRepository,
@@ -13,7 +13,6 @@ const buildAccountFilter = (filter: {
   accountIds?: string[],
   accountViewType?: AccountViewType,
   email?: string,
-  member?: AccountMember,
   checkExist?: {
     accountId: string,
     name: string,
@@ -21,7 +20,7 @@ const buildAccountFilter = (filter: {
   },
 }): Filter<Account> => {
   const {
-    accountId, accountViewType, email, accountIds, member, checkExist,
+    accountId, accountViewType, email, accountIds, checkExist,
   } = filter;
 
   const andFilter: Filter<Account>['$and'] = [];
@@ -42,7 +41,6 @@ const buildAccountFilter = (filter: {
     ...(accountIds && { _id: { $in: accountIds } }),
     ...(accountViewType && { accountViewType }),
     ...(email && { 'members.email': email }),
-    ...(member?.status === 'update' && { 'members.email': member.email }),
     ...(andFilter.length && { $and: andFilter }),
     deleted: { $ne: true },
   };
@@ -70,7 +68,10 @@ const updateAccount: AccountRepository['updateAccount'] = async (filter, payload
   const accountFilter = buildAccountFilter(filter);
 
   const {
-    name, assetId, leverage, balance, providerData, member,
+    accountViewType, name, icon, strategyId, assetId, leverage, balance,
+    tradeSettings, protectSettings, settings,
+    notes, privateNotes, bannerStatus,
+    providerData,
   } = payload;
   const {
     returnAfter, projection,
@@ -78,34 +79,43 @@ const updateAccount: AccountRepository['updateAccount'] = async (filter, payload
 
   const updateFilter: UpdateFilter<Account> = {
     $set: {
+      ...(accountViewType && { accountViewType }),
       ...(name && { name }),
+      ...(icon && { icon }),
+      ...(strategyId && { strategyId }),
       ...(assetId && { assetId }),
       ...(leverage && { leverage }),
       ...(balance && { balance }),
+      ...(tradeSettings && { tradeSettings }),
+      ...(protectSettings && { protectSettings }),
+      ...(settings && { settings }),
+      ...(notes && { notes }),
+      ...(privateNotes && { privateNotes }),
+      ...(bannerStatus && { bannerStatus }),
       ...(providerData && { providerData }),
-      ...(member?.status === 'update' && {
-        'members.$': {
-          ...member,
-          status: 'done',
-        },
-      }),
+      // ...(member?.status === 'update' && {
+      //   'members.$': {
+      //     ...member,
+      //     status: 'done',
+      //   },
+      // }),
       updatedAt: new Date(),
     },
-    $push: {
-      ...(member?.status === 'add' && {
-        members: {
-          ...member,
-          status: 'done',
-        },
-      }),
-    },
-    $pull: {
-      ...(member?.status === 'remove' && {
-        members: {
-          email: member.email,
-        },
-      }),
-    },
+    // $push: {
+    //   ...(member?.status === 'add' && {
+    //     members: {
+    //       ...member,
+    //       status: 'done',
+    //     },
+    //   }),
+    // },
+    // $pull: {
+    //   ...(member?.status === 'remove' && {
+    //     members: {
+    //       email: member.email,
+    //     },
+    //   }),
+    // },
   };
 
   const { db } = await getMongo();
