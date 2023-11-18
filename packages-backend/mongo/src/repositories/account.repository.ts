@@ -93,29 +93,8 @@ const updateAccount: AccountRepository['updateAccount'] = async (filter, payload
       ...(privateNotes && { privateNotes }),
       ...(bannerStatus && { bannerStatus }),
       ...(providerData && { providerData }),
-      // ...(member?.status === 'update' && {
-      //   'members.$': {
-      //     ...member,
-      //     status: 'done',
-      //   },
-      // }),
       updatedAt: new Date(),
     },
-    // $push: {
-    //   ...(member?.status === 'add' && {
-    //     members: {
-    //       ...member,
-    //       status: 'done',
-    //     },
-    //   }),
-    // },
-    // $pull: {
-    //   ...(member?.status === 'remove' && {
-    //     members: {
-    //       email: member.email,
-    //     },
-    //   }),
-    // },
   };
 
   const { db } = await getMongo();

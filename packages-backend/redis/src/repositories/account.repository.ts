@@ -6,8 +6,6 @@ import {
 } from '..';
 
 const getAccount: AccountRepository['getAccount'] = async (filter) => {
-  if (!filter.accountId) return {};
-
   const key = buildKeyAccount(filter);
   const { clientJson } = await getRedis();
   const doc = await clientJson.get(key);
@@ -17,8 +15,6 @@ const getAccount: AccountRepository['getAccount'] = async (filter) => {
 };
 
 const getAccounts: AccountRepository['getAccounts'] = async (filter) => {
-  if (!(filter.accountViewType || filter.email)) return {};
-
   const key = buildKeyAccounts(filter);
   const { clientJson } = await getRedis();
   const docs = await clientJson.get(key);
@@ -48,8 +44,6 @@ const updateAccounts: AccountRepository['updateAccounts'] = async (filter, paylo
 };
 
 const removeAccount: AccountRepository['removeAccount'] = async ({ accountId }) => {
-  if (!accountId) return {};
-
   const key = buildKeyAccount({ accountId });
   const { client } = await getRedis();
   await client.del(key);
