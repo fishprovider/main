@@ -21,12 +21,17 @@ const getAccount: AccountRepository['getAccount'] = async (payload) => {
   );
 
   return {
-    doc,
+    doc: {
+      ...doc,
+      assetId: doc.currency,
+      asset: doc.currency,
+      providerData: doc,
+    },
   };
 };
 
 const addAccount: AccountRepository['addAccount'] = async (payload) => {
-  const { accountId, config: rawConfig } = payload;
+  const { config: rawConfig } = payload;
   const config = checkConfig(rawConfig);
 
   const { id: tradeAccountId } = await newAccount(
@@ -40,7 +45,6 @@ const addAccount: AccountRepository['addAccount'] = async (payload) => {
 
   return {
     doc: {
-      _id: accountId,
       config: {
         ...config,
         accountId: tradeAccountId,
