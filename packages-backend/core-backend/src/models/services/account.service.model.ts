@@ -58,13 +58,12 @@ export type UpdateAccountService = (params: BaseUpdateServiceParams<Account> & {
     name?: string,
     icon?: string,
     strategyId?: string,
+    notes?: string,
+    privateNotes?: string,
     tradeSettings?: AccountTradeSettings;
     protectSettings?: AccountProtectSettings;
     settings?: AccountSettings;
-    notes?: string,
-    privateNotes?: string,
     bannerStatus?: AccountBannerStatus,
-    providerData?: any,
     addActivity?: AccountActivity,
   },
   repositories: {

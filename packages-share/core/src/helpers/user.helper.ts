@@ -2,7 +2,7 @@ import { UserRoles } from '..';
 
 export const getRoleProvider = (
   roles?: UserRoles,
-  providerId?: string,
+  accountId?: string,
 ) => {
   if (!roles) return {};
 
@@ -11,15 +11,15 @@ export const getRoleProvider = (
   const isManagerWeb = isAdminWeb || roles.managerWeb;
 
   const isAdminProvider = isAdminWeb
-    || (providerId && roles.adminAccounts?.[providerId]);
+    || (accountId && roles.adminAccounts?.[accountId]);
   const isTraderProvider = isAdminProvider
-    || (providerId && roles.traderAccounts?.[providerId]);
+    || (accountId && roles.traderAccounts?.[accountId]);
   const isProtectorProvider = isAdminProvider
-    || (providerId && roles.protectorAccounts?.[providerId]);
+    || (accountId && roles.protectorAccounts?.[accountId]);
   const isViewerProvider = isManagerWeb
     || isTraderProvider
     || isProtectorProvider
-    || (providerId && roles.viewerAccounts?.[providerId]);
+    || (accountId && roles.viewerAccounts?.[accountId]);
 
   return {
     isAdmin,

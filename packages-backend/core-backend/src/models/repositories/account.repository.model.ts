@@ -51,11 +51,11 @@ export interface AccountRepository {
       margin?: number,
       freeMargin?: number,
       marginLevel?: number,
+      notes?: string,
+      privateNotes?: string,
       tradeSettings?: AccountTradeSettings;
       protectSettings?: AccountProtectSettings;
       settings?: AccountSettings;
-      notes?: string,
-      privateNotes?: string,
       bannerStatus?: AccountBannerStatus,
       providerData?: any,
       addActivity?: AccountActivity,

@@ -132,7 +132,7 @@ export type AccountConfig = {
 };
 
 export interface AccountBannerStatus {
-  enabled: boolean;
+  enabled?: boolean;
   notes?: string;
   bgColor?: string;
 }
