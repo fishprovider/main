@@ -211,12 +211,15 @@ export interface Account {
 
   leverage?: number;
   balance?: number;
+  equity?: number;
+  margin?: number;
+  freeMargin?: number;
+  marginLevel?: number;
 
   balanceStartMonth?: number;
+  balanceStartMonthUpdatedAt?: Date;
   balanceStartDay?: number;
   balanceStartDayUpdatedAt?: Date;
-
-  margin?: number;
 
   maxEquity?: number;
   maxEquityTime?: Date;

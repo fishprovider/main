@@ -68,7 +68,8 @@ const updateAccount: AccountRepository['updateAccount'] = async (filter, payload
   const accountFilter = buildAccountFilter(filter);
 
   const {
-    accountViewType, name, icon, strategyId, assetId, leverage, balance,
+    accountViewType, name, icon, strategyId, assetId, asset,
+    leverage, balance, equity, margin, freeMargin, marginLevel,
     tradeSettings, protectSettings, settings,
     notes, privateNotes, bannerStatus,
     providerData,
@@ -84,8 +85,13 @@ const updateAccount: AccountRepository['updateAccount'] = async (filter, payload
       ...(icon && { icon }),
       ...(strategyId && { strategyId }),
       ...(assetId && { assetId }),
+      ...(asset && { asset }),
       ...(leverage && { leverage }),
       ...(balance && { balance }),
+      ...(equity && { equity }),
+      ...(margin && { margin }),
+      ...(freeMargin && { freeMargin }),
+      ...(marginLevel && { marginLevel }),
       ...(tradeSettings && { tradeSettings }),
       ...(protectSettings && { protectSettings }),
       ...(settings && { settings }),

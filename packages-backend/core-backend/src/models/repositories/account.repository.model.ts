@@ -44,8 +44,13 @@ export interface AccountRepository {
       icon?: string,
       strategyId?: string,
       assetId?: string,
+      asset?: string,
       leverage?: number,
       balance?: number,
+      equity?: number,
+      margin?: number,
+      freeMargin?: number,
+      marginLevel?: number,
       tradeSettings?: AccountTradeSettings;
       protectSettings?: AccountProtectSettings;
       settings?: AccountSettings;
