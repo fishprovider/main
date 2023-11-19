@@ -83,10 +83,9 @@ export const addAccountService: AddAccountService = async ({
     accountViewType: AccountViewType.private,
     members: [],
   });
-  if (!tradeAccount?._id) {
-    throw new BaseError(AccountError.ACCOUNT_NOT_FOUND, 'Failed to add trade account');
+  if (tradeAccount?.config?.accountId) {
+    config.accountId = tradeAccount.config.accountId;
   }
-  config.accountId = tradeAccount._id;
 
   const { doc: account } = await addAccountRepo({
     accountId,

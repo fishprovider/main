@@ -21,8 +21,20 @@ const getAccount: AccountRepository['getAccount'] = async (filter) => {
   return {};
 };
 
+const getAccounts: AccountRepository['getAccounts'] = async (filter) => {
+  const { accountPlatform } = filter;
+
+  if (accountPlatform === AccountPlatform.ctrader) {
+    if (CTraderAccountRepository.getAccounts) {
+      return CTraderAccountRepository.getAccounts(filter);
+    }
+  }
+
+  return {};
+};
+
 const addAccount: AccountRepository['addAccount'] = async (payload) => {
-  const { accountPlatform, config } = payload;
+  const { accountPlatform } = payload;
 
   if (accountPlatform === AccountPlatform.metatrader) {
     if (MetaApiAccountRepository.addAccount) {
@@ -30,15 +42,11 @@ const addAccount: AccountRepository['addAccount'] = async (payload) => {
     }
   }
 
-  return {
-    doc: {
-      _id: config?.accountId || '',
-    },
-  };
+  return {};
 };
 
 export const TradeAccountRepository: AccountRepository = {
-  ...CTraderAccountRepository,
   getAccount,
+  getAccounts,
   addAccount,
 };

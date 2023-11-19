@@ -28,6 +28,7 @@ export interface AccountRepository {
       accountViewType?: AccountViewType,
       email?: string,
       accountIds?: string[],
+      accountPlatform?: AccountPlatform,
       config?: AccountConfig,
     },
     options?: BaseGetOptions<Account>,

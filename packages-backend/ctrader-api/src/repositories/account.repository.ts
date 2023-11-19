@@ -28,7 +28,6 @@ const checkConfig = (config?: AccountConfig) => {
 
 const getAccount: AccountRepository['getAccount'] = async (filter) => {
   const { config: rawConfig } = filter;
-
   const config = checkConfig(rawConfig);
 
   const tradeAccount = await connectAndRun({
@@ -48,7 +47,6 @@ const getAccount: AccountRepository['getAccount'] = async (filter) => {
 
 const getAccounts: AccountRepository['getAccounts'] = async (filter) => {
   const { config: rawConfig } = filter;
-
   const config = checkConfig(rawConfig);
 
   const { accounts: tradeAccounts } = await connectAndRun({

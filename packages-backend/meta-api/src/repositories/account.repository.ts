@@ -26,10 +26,10 @@ const getAccount: AccountRepository['getAccount'] = async (payload) => {
 };
 
 const addAccount: AccountRepository['addAccount'] = async (payload) => {
-  const { config: rawConfig } = payload;
+  const { accountId, config: rawConfig } = payload;
   const config = checkConfig(rawConfig);
 
-  const { id } = await newAccount(
+  const { id: tradeAccountId } = await newAccount(
     new Connection(config),
     {
       ...config,
@@ -40,7 +40,11 @@ const addAccount: AccountRepository['addAccount'] = async (payload) => {
 
   return {
     doc: {
-      _id: id,
+      _id: accountId,
+      config: {
+        ...config,
+        accountId: tradeAccountId,
+      },
     },
   };
 };
