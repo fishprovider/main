@@ -58,9 +58,6 @@ export type UpdateAccountService = (params: BaseUpdateServiceParams<Account> & {
     name?: string,
     icon?: string,
     strategyId?: string,
-    assetId?: string,
-    leverage?: number,
-    balance?: number,
     tradeSettings?: AccountTradeSettings;
     protectSettings?: AccountProtectSettings;
     settings?: AccountSettings;
