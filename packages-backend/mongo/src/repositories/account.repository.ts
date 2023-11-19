@@ -73,6 +73,7 @@ const updateAccount: AccountRepository['updateAccount'] = async (filter, payload
     tradeSettings, protectSettings, settings,
     notes, privateNotes, bannerStatus,
     providerData,
+    addActivity,
   } = payload;
   const {
     returnAfter, projection,
@@ -99,6 +100,9 @@ const updateAccount: AccountRepository['updateAccount'] = async (filter, payload
       ...(privateNotes && { privateNotes }),
       ...(bannerStatus && { bannerStatus }),
       ...(providerData && { providerData }),
+      ...(addActivity && {
+        [`activities.${addActivity.userId}`]: addActivity,
+      }),
       updatedAt: new Date(),
     },
   };

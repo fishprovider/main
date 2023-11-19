@@ -1,5 +1,5 @@
 import {
-  Account, AccountBannerStatus, AccountConfig, AccountPlatform,
+  Account, AccountActivity, AccountBannerStatus, AccountConfig, AccountPlatform,
   AccountProtectSettings, AccountSettings, AccountTradeSettings,
   AccountTradeType, AccountType, AccountViewType,
 } from '@fishprovider/core';
@@ -65,6 +65,7 @@ export type UpdateAccountService = (params: BaseUpdateServiceParams<Account> & {
     privateNotes?: string,
     bannerStatus?: AccountBannerStatus,
     providerData?: any,
+    addActivity?: AccountActivity,
   },
   repositories: {
     account: AccountRepository

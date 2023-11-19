@@ -180,10 +180,6 @@ export interface AccountSettings {
 }
 
 export interface AccountActivity {
-  lastView: Date;
-}
-
-export interface AccountEvent {
   userId?: string;
   lastView?: Date;
 }
@@ -259,7 +255,6 @@ export interface Account {
 
   activities?: Record<string, AccountActivity>;
   stats?: AccountStats;
-  events?: AccountEvent[];
 
   providerData?: Record<string, any>; // trade data
   summary?: Record<string, any>; // cron data

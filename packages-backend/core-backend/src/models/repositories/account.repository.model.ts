@@ -1,7 +1,7 @@
 import {
-  Account, AccountBannerStatus, AccountConfig, AccountMember, AccountPlatform,
-  AccountProtectSettings, AccountSettings, AccountTradeSettings,
-  AccountTradeType, AccountType, AccountViewType,
+  Account, AccountActivity, AccountBannerStatus, AccountConfig, AccountMember, AccountPlatform,
+  AccountProtectSettings, AccountSettings, AccountTradeSettings, AccountTradeType, AccountType,
+  AccountViewType,
 } from '@fishprovider/core';
 
 import {
@@ -58,6 +58,7 @@ export interface AccountRepository {
       privateNotes?: string,
       bannerStatus?: AccountBannerStatus,
       providerData?: any,
+      addActivity?: AccountActivity,
       account?: Partial<Account>,
     },
     options?: BaseUpdateOptions<Account>,
