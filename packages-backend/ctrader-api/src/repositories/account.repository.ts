@@ -27,7 +27,7 @@ const checkConfig = (config?: AccountConfig) => {
 };
 
 const getAccount: AccountRepository['getAccount'] = async (filter) => {
-  const { config: rawConfig } = filter;
+  const { accountId, config: rawConfig } = filter;
   const config = checkConfig(rawConfig);
 
   const tradeAccount = await connectAndRun({
@@ -37,6 +37,7 @@ const getAccount: AccountRepository['getAccount'] = async (filter) => {
 
   return {
     doc: {
+      _id: accountId,
       assetId: tradeAccount.assetId,
       leverage: tradeAccount.leverage,
       balance: tradeAccount.balance,
