@@ -45,8 +45,8 @@ const updateAccounts: AccountRepository['updateAccounts'] = async (filter, paylo
   return { docs: accounts };
 };
 
-const removeAccount: AccountRepository['removeAccount'] = async ({ accountId }) => {
-  const key = buildKeyAccount({ accountId });
+const removeAccount: AccountRepository['removeAccount'] = async (filter) => {
+  const key = buildKeyAccount(filter);
   const { client } = await getRedis();
   await client.del(key);
   return {};
