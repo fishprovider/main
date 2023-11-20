@@ -79,31 +79,35 @@ const updateAccount: AccountRepository['updateAccount'] = async (filter, payload
     returnAfter, projection,
   } = options || {};
 
+  const updatedAccount: Partial<Account> = {
+    ...(accountViewType && { accountViewType }),
+    ...(name && { name }),
+    ...(icon && { icon }),
+    ...(strategyId && { strategyId }),
+    ...(assetId && { assetId }),
+    ...(asset && { asset }),
+    ...(leverage && { leverage }),
+    ...(balance && { balance }),
+    ...(equity && { equity }),
+    ...(margin && { margin }),
+    ...(freeMargin && { freeMargin }),
+    ...(marginLevel && { marginLevel }),
+    ...(notes && { notes }),
+    ...(privateNotes && { privateNotes }),
+    ...(tradeSettings && { tradeSettings }),
+    ...(protectSettings && { protectSettings }),
+    ...(settings && { settings }),
+    ...(bannerStatus && { bannerStatus }),
+    ...(providerData && { providerData }),
+    updatedAt: new Date(),
+  };
+
   const updateFilter: UpdateFilter<Account> = {
     $set: {
-      ...(accountViewType && { accountViewType }),
-      ...(name && { name }),
-      ...(icon && { icon }),
-      ...(strategyId && { strategyId }),
-      ...(assetId && { assetId }),
-      ...(asset && { asset }),
-      ...(leverage && { leverage }),
-      ...(balance && { balance }),
-      ...(equity && { equity }),
-      ...(margin && { margin }),
-      ...(freeMargin && { freeMargin }),
-      ...(marginLevel && { marginLevel }),
-      ...(notes && { notes }),
-      ...(privateNotes && { privateNotes }),
-      ...(tradeSettings && { tradeSettings }),
-      ...(protectSettings && { protectSettings }),
-      ...(settings && { settings }),
-      ...(bannerStatus && { bannerStatus }),
-      ...(providerData && { providerData }),
+      ...updatedAccount,
       ...(addActivity && {
         [`activities.${addActivity.userId}`]: addActivity,
       }),
-      updatedAt: new Date(),
     },
   };
 
@@ -123,7 +127,7 @@ const updateAccount: AccountRepository['updateAccount'] = async (filter, payload
   }
   await collection.updateOne(accountFilter, updateFilter);
   return {
-    doc: { _id: filter.accountId },
+    doc: { _id: filter.accountId, ...updatedAccount },
   };
 };
 

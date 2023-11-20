@@ -1,9 +1,9 @@
-import accountUpdate from '@fishprovider/cross/dist/api/accounts/update';
 import storeUser from '@fishprovider/cross/dist/stores/user';
 import { useCallback, useState } from 'react';
 
 import AccountHtmlEditor from '~components/account/AccountHtmlEditor';
 import useToggle from '~hooks/useToggle';
+import { updateAccountService } from '~services/account/updateAccount.service';
 import ColorInput from '~ui/core/ColorInput';
 import Switch from '~ui/core/Switch';
 
@@ -19,10 +19,11 @@ function BannerStatusEditor() {
   };
 
   const onSave = async (content?: string) => {
-    const providerId = storeUser.getState().activeProvider?._id || '';
+    const accountId = storeUser.getState().activeProvider?._id || '';
 
-    accountUpdate({
-      providerId,
+    updateAccountService({
+      accountId,
+    }, {
       bannerStatus: {
         ...editor,
         notes: content ?? bannerStatus?.notes,

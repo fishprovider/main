@@ -1,6 +1,7 @@
 import {
   AccountError, BaseError, checkRepository, getRoleProvider,
 } from '@fishprovider/core';
+import _ from 'lodash';
 
 import {
   checkAccountAccess, checkLogin, checkProjection, sanitizeOutputAccount,
@@ -22,7 +23,11 @@ export const updateAccountService: UpdateAccountService = async ({
   //
   const { roles } = userSession;
   const { accountId } = filter;
-  const { tradeSettings, protectSettings, settings } = payload;
+  const {
+    accountViewType, name, icon, strategyId, notes, privateNotes, bannerStatus,
+    tradeSettings, protectSettings, settings,
+    ...rest
+  } = payload;
 
   const {
     isAdminProvider, isTraderProvider, isProtectorProvider, isViewerProvider,
@@ -39,6 +44,10 @@ export const updateAccountService: UpdateAccountService = async ({
   });
   checkAccountAccess(account, context);
 
+  if ((accountViewType || name || icon || strategyId || notes || privateNotes || bannerStatus)
+    && !(isTraderProvider || isProtectorProvider)) {
+    throw new BaseError(AccountError.ACCOUNT_ACCESS_DENIED, accountId);
+  }
   if (tradeSettings && !isTraderProvider) {
     throw new BaseError(AccountError.ACCOUNT_ACCESS_DENIED, accountId);
   }
@@ -48,8 +57,9 @@ export const updateAccountService: UpdateAccountService = async ({
   if (settings && !isAdminProvider) {
     throw new BaseError(AccountError.ACCOUNT_ACCESS_DENIED, accountId);
   }
-
-  // TODO: implement more if checks
+  if (_.size(_.omit(rest, ['addActivity']))) {
+    throw new BaseError(AccountError.ACCOUNT_ACCESS_DENIED, accountId);
+  }
 
   const { doc: accountNew } = await updateAccountRepo(filter, payload, options);
 

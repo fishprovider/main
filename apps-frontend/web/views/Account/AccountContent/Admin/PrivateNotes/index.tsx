@@ -1,16 +1,17 @@
-import accountUpdate from '@fishprovider/cross/dist/api/accounts/update';
 import storeUser from '@fishprovider/cross/dist/stores/user';
 
 import AccountHtmlEditor from '~components/account/AccountHtmlEditor';
+import { updateAccountService } from '~services/account/updateAccount.service';
 
 function PrivateNotes() {
   const privateNotes = storeUser.useStore((state) => state.activeProvider?.privateNotes);
 
   const onSave = async (content?: string) => {
-    const providerId = storeUser.getState().activeProvider?._id || '';
+    const accountId = storeUser.getState().activeProvider?._id || '';
 
-    accountUpdate({
-      providerId,
+    updateAccountService({
+      accountId,
+    }, {
       privateNotes: content,
     });
   };

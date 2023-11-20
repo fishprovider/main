@@ -1,5 +1,6 @@
 import {
-  Account, AccountViewType,
+  Account, AccountActivity, AccountBannerStatus, AccountProtectSettings,
+  AccountSettings, AccountTradeSettings, AccountViewType,
 } from '@fishprovider/core';
 
 import {
@@ -28,6 +29,17 @@ export interface AccountRepository {
       accountId?: string,
     },
     payload: {
+      accountViewType?: AccountViewType,
+      name?: string,
+      icon?: string,
+      strategyId?: string,
+      notes?: string,
+      privateNotes?: string,
+      bannerStatus?: AccountBannerStatus,
+      tradeSettings?: AccountTradeSettings;
+      protectSettings?: AccountProtectSettings;
+      settings?: AccountSettings;
+      addActivity?: AccountActivity,
       account?: Partial<Account>,
     },
     options?: BaseUpdateOptions<Account>,

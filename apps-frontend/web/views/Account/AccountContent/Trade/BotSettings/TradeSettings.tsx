@@ -1,10 +1,10 @@
-import accountUpdate from '@fishprovider/cross/dist/api/accounts/update';
 import storeUser from '@fishprovider/cross/dist/stores/user';
 import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
 import moment from 'moment';
 import { useState } from 'react';
 
 import useToggle from '~hooks/useToggle';
+import { updateAccountService } from '~services/account/updateAccount.service';
 import Box from '~ui/core/Box';
 import Button from '~ui/core/Button';
 import Checkbox from '~ui/core/Checkbox';
@@ -24,11 +24,11 @@ interface Props {
 
 function TradeSettings({ onClose }: Props) {
   const {
-    providerId = '',
+    accountId = '',
     roles,
     tradeSettings = {},
   } = storeUser.useStore((state) => ({
-    providerId: state.activeProvider?._id,
+    accountId: state.activeProvider?._id,
     roles: state.info?.roles,
     tradeSettings: state.activeProvider?.tradeSettings,
   }));
@@ -61,7 +61,7 @@ function TradeSettings({ onClose }: Props) {
     tradeSettings.closeTimeIfProfit || false,
   );
 
-  const { isTraderProvider } = getRoleProvider(roles, providerId);
+  const { isTraderProvider } = getRoleProvider(roles, accountId);
 
   const onSave = async () => {
     if (enabledCloseTime) {
@@ -73,8 +73,9 @@ function TradeSettings({ onClose }: Props) {
 
     if (!(await openConfirmModal())) return;
 
-    await accountUpdate({
-      providerId,
+    await updateAccountService({
+      accountId,
+    }, {
       tradeSettings: {
         ...tradeSettings,
 

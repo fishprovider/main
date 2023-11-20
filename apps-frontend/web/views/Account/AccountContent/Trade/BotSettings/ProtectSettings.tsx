@@ -1,9 +1,9 @@
-import accountUpdate from '@fishprovider/cross/dist/api/accounts/update';
 import storeUser from '@fishprovider/cross/dist/stores/user';
 import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
 import { useState } from 'react';
 
 import useToggle from '~hooks/useToggle';
+import { updateAccountService } from '~services/account/updateAccount.service';
 import Box from '~ui/core/Box';
 import Button from '~ui/core/Button';
 import Checkbox from '~ui/core/Checkbox';
@@ -21,12 +21,12 @@ interface Props {
 
 function ProtectSettings({ onClose }: Props) {
   const {
-    providerId = '',
+    accountId = '',
     roles,
     protectSettings = {},
     asset = 'USD',
   } = storeUser.useStore((state) => ({
-    providerId: state.activeProvider?._id,
+    accountId: state.activeProvider?._id,
     roles: state.info?.roles,
     protectSettings: state.activeProvider?.protectSettings,
     asset: state.activeProvider?.asset,
@@ -42,7 +42,7 @@ function ProtectSettings({ onClose }: Props) {
     protectSettings.equityLockHours || 2,
   );
 
-  const { isProtectorProvider } = getRoleProvider(roles, providerId);
+  const { isProtectorProvider } = getRoleProvider(roles, accountId);
 
   const onSave = async () => {
     if (enabledEquityLock) {
@@ -54,8 +54,9 @@ function ProtectSettings({ onClose }: Props) {
 
     if (!(await openConfirmModal())) return;
 
-    await accountUpdate({
-      providerId,
+    await updateAccountService({
+      accountId,
+    }, {
       protectSettings: {
         ...protectSettings,
 

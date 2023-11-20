@@ -1,4 +1,4 @@
-import accountUpdate from '@fishprovider/cross/dist/api/accounts/update';
+import { AccountCopySettings, AccountSettings } from '@fishprovider/core';
 import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
 import storeUser from '@fishprovider/cross/dist/stores/user';
 import { CopyVolumeMode } from '@fishprovider/utils/dist/constants/account';
@@ -9,6 +9,7 @@ import { useState } from 'react';
 
 import { CopyVolumeModeText } from '~constants/account';
 import useToggle from '~hooks/useToggle';
+import { updateAccountService } from '~services/account/updateAccount.service';
 import Box from '~ui/core/Box';
 import Button from '~ui/core/Button';
 import Checkbox from '~ui/core/Checkbox';
@@ -36,10 +37,10 @@ function ParentCopySettings({
   parentId, copySettings, isAdminProvider, onClose,
 }: ParentCopySettingsProps) {
   const {
-    providerId = '',
+    accountId = '',
     settings = {},
   } = storeUser.useStore((state) => ({
-    providerId: state.activeProvider?._id,
+    accountId: state.activeProvider?._id,
     settings: state.activeProvider?.settings,
   }));
 
@@ -96,8 +97,9 @@ function ParentCopySettings({
 
     if (!(await openConfirmModal())) return;
 
-    await accountUpdate({
-      providerId,
+    await updateAccountService({
+      accountId,
+    }, {
       settings: {
         ...settings,
         parents: {
@@ -117,7 +119,7 @@ function ParentCopySettings({
             enabledEquitySL,
             ...(equitySLRatio && { equitySLRatio: +equitySLRatio }),
           },
-        },
+        } as Record<string, AccountCopySettings>,
       },
     }).then(() => {
       if (onClose) onClose();
@@ -259,16 +261,16 @@ function ManageCopySettings({
   onClose,
 }: ManageCopySettingsProps) {
   const {
-    providerId = '',
+    accountId = '',
     settings = {},
   } = storeUser.useStore((state) => ({
-    providerId: state.activeProvider?._id,
+    accountId: state.activeProvider?._id,
     settings: state.activeProvider?.settings,
   }));
 
   const otherAccounts = storeAccounts.useStore((state) => _.pickBy(
     state,
-    (item) => item._id !== providerId,
+    (item) => item._id !== accountId,
   ));
 
   const [newParentId, setNewParentId] = useState('');
@@ -278,8 +280,9 @@ function ManageCopySettings({
   const onRemove = async (parentId: string) => {
     if (!(await openConfirmModal())) return;
 
-    await accountUpdate({
-      providerId,
+    await updateAccountService({
+      accountId,
+    }, {
       settings: {
         ...settings,
         parents: _.omit(settings.parents, parentId),
@@ -297,14 +300,15 @@ function ManageCopySettings({
 
     if (!(await openConfirmModal())) return;
 
-    await accountUpdate({
-      providerId,
+    await updateAccountService({
+      accountId,
+    }, {
       settings: {
         ...settings,
         parents: {
           ...settings.parents,
           [newParentId]: {},
-        },
+        } as Record<string, AccountCopySettings>,
       },
     }).then(() => {
       setNewParentId('');
@@ -339,11 +343,11 @@ interface Props {
 
 function AdminSettings({ onClose }: Props) {
   const {
-    providerId = '',
+    accountId = '',
     roles,
     settings = {},
   } = storeUser.useStore((state) => ({
-    providerId: state.activeProvider?._id,
+    accountId: state.activeProvider?._id,
     roles: state.info?.roles,
     settings: state.activeProvider?.settings,
   }));
@@ -357,19 +361,20 @@ function AdminSettings({ onClose }: Props) {
     (item) => settings.parents?.[item._id],
   ));
 
-  const { isAdminProvider, isManagerWeb } = getRoleProvider(roles, providerId);
+  const { isAdminProvider, isManagerWeb } = getRoleProvider(roles, accountId);
 
   const sortedParentIds = _.sortBy(_.keys(settings.parents));
 
   const onSave = async () => {
     if (!(await openConfirmModal())) return;
 
-    await accountUpdate({
-      providerId,
+    await updateAccountService({
+      accountId,
+    }, {
       settings: {
         ...settings,
         enableCopyParent,
-      },
+      } as AccountSettings,
     }).then(() => {
       if (onClose) onClose();
     });

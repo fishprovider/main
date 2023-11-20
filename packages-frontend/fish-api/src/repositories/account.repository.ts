@@ -1,42 +1,38 @@
 import { Account } from '@fishprovider/core';
 import { AccountRepository } from '@fishprovider/core-frontend';
 
-import { fishApiGet } from '..';
+import { fishApiGet, fishApiPost } from '..';
 
 const getAccount: AccountRepository['getAccount'] = async (filter) => {
-  const { accountId, getTradeInfo } = filter;
+  const { getTradeInfo, ...rest } = filter;
 
   if (getTradeInfo) {
-    const account = await fishApiGet<Partial<Account> | undefined>('/account/getTradeAccount', {
-      accountId,
-    });
+    const account = await fishApiGet<Partial<Account> | undefined>('/account/getTradeAccount', rest);
     return { doc: account };
   }
 
-  const account = await fishApiGet<Partial<Account> | undefined>('/account/getAccount', {
-    accountId,
-  });
+  const account = await fishApiGet<Partial<Account> | undefined>('/account/getAccount', rest);
   return { doc: account };
 };
 
 const getAccounts: AccountRepository['getAccounts'] = async (filter) => {
-  const { accountViewType, email } = filter;
-  const accounts = await fishApiGet<Partial<Account>[] | undefined>('/account/getAccounts', {
-    accountViewType, email,
-  });
+  const accounts = await fishApiGet<Partial<Account>[] | undefined>('/account/getAccounts', filter);
   return { docs: accounts };
 };
 
+const updateAccount: AccountRepository['updateAccount'] = async (filter, payload) => {
+  const account = await fishApiPost<Partial<Account> | undefined>('/account/updateAccount', { ...filter, payload });
+  return { doc: account };
+};
+
 const removeAccount: AccountRepository['removeAccount'] = async (filter) => {
-  const { accountId } = filter;
-  const account = await fishApiGet<Partial<Account> | undefined>('/account/removeAccount', {
-    accountId,
-  });
+  const account = await fishApiPost<Partial<Account> | undefined>('/account/removeAccount', filter);
   return { doc: account };
 };
 
 export const FishApiAccountRepository: AccountRepository = {
   getAccount,
   getAccounts,
+  updateAccount,
   removeAccount,
 };

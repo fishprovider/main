@@ -1,5 +1,5 @@
 import { CacheFirstAccountRepository } from '@fishprovider/cache-first';
-import { Account, AccountViewType } from '@fishprovider/core';
+import { Account, AccountCopyVolumeMode, AccountViewType } from '@fishprovider/core';
 import { updateAccountService } from '@fishprovider/core-backend';
 import { z } from 'zod';
 
@@ -15,17 +15,47 @@ const handler: ApiHandler<Partial<Account>> = async (data, userSession) => {
       strategyId: z.string().optional(),
       notes: z.string().optional(),
       privateNotes: z.string().optional(),
-      tradeSettings: z.object({}).optional(), // TODO: implement object details
-      protectSettings: z.object({}).optional(), // TODO: implement object details
-      settings: z.object({}).optional(), // TODO: implement object details
       bannerStatus: z.object({
         enabled: z.boolean().optional(),
         note: z.string().optional(),
         bgColor: z.string().optional(),
       }).strict().optional(),
+      tradeSettings: z.object({
+        enabledCloseProfit: z.boolean().optional(),
+        takeProfit: z.number().optional(),
+        stopLoss: z.number().optional(),
+        enabledCloseEquity: z.boolean().optional(),
+        targetEquity: z.number().optional(),
+        stopEquity: z.number().optional(),
+        enabledCloseTime: z.boolean().optional(),
+        closeTime: z.string().transform((_) => new Date(_)).optional(),
+        closeTimeIfProfit: z.boolean().optional(),
+      }).strict().optional(),
+      protectSettings: z.object({
+        enabledEquityLock: z.boolean().optional(),
+        equityLock: z.number().optional(),
+        equityLockHours: z.number().optional(),
+      }).strict().optional(),
+      settings: z.object({
+        enableCopyParent: z.boolean().optional(),
+        parents: z.record(z.object({
+          enableCopy: z.boolean().optional(),
+          enableCopyOrderClose: z.boolean().optional(),
+          enableCopyOrderSLTP: z.boolean().optional(),
+          copyVolumeMode: z.nativeEnum(AccountCopyVolumeMode).optional(),
+          copyVolumeRatioFixed: z.number().optional(),
+          copyVolumeLotFixed: z.number().optional(),
+          copyVolumeRatioAuto: z.number().optional(),
+          copyVolumeLotMin: z.number().optional(),
+          copyVolumeLotMax: z.number().optional(),
+          enabledEquitySL: z.boolean().optional(),
+          equitySLRatio: z.number().optional(),
+        }).strict()).optional(),
+        copyVolumeRatio: z.number().optional(),
+      }).strict().optional(),
       addActivity: z.object({
         userId: z.string().optional(),
-        lastView: z.date().optional(),
+        lastView: z.string().transform((_) => new Date(_)).optional(),
       }).strict().optional(),
     }).strict(),
   }).strict()

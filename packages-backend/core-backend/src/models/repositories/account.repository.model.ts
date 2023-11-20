@@ -53,10 +53,10 @@ export interface AccountRepository {
       marginLevel?: number,
       notes?: string,
       privateNotes?: string,
+      bannerStatus?: AccountBannerStatus,
       tradeSettings?: AccountTradeSettings;
       protectSettings?: AccountProtectSettings;
       settings?: AccountSettings;
-      bannerStatus?: AccountBannerStatus,
       providerData?: any,
       addActivity?: AccountActivity,
       account?: Partial<Account>,

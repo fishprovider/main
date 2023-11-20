@@ -73,12 +73,17 @@ const updateUser: UserRepository['updateUser'] = async (filter, payload, options
     returnAfter, projection,
   } = options || {};
 
+  const updatedAccount: Partial<User> = {
+    ...(roles && { roles }),
+    updatedAt: new Date(),
+  };
+
   const updateFilter: UpdateFilter<User> = {
     $set: {
+      ...updatedAccount,
       ...(starAccount && {
         [`starAccounts.${starAccount.accountId}`]: starAccount.enabled,
       }),
-      ...(roles && { roles }),
       ...(addRole?.role === AccountRole.admin && {
         [`roles.adminAccounts.${addRole.accountId}`]: true,
       }),
@@ -91,7 +96,6 @@ const updateUser: UserRepository['updateUser'] = async (filter, payload, options
       ...(addRole?.role === AccountRole.viewer && {
         [`roles.viewerAccounts.${addRole.accountId}`]: true,
       }),
-      updatedAt: new Date(),
     },
     $unset: {
       ...(removeRole?.role === AccountRole.admin && {

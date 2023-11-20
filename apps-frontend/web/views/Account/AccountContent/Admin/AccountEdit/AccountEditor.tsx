@@ -1,10 +1,10 @@
-import accountUpdate from '@fishprovider/cross/dist/api/accounts/update';
 import storeUser from '@fishprovider/cross/dist/stores/user';
 import { AccountViewType } from '@fishprovider/utils/dist/constants/account';
 import { useState } from 'react';
 
 import Link from '~components/base/Link';
 import { AccountViewTypeText } from '~constants/account';
+import { updateAccountService } from '~services/account/updateAccount.service';
 import Button from '~ui/core/Button';
 import Group from '~ui/core/Group';
 import NumberInput from '~ui/core/NumberInput';
@@ -25,7 +25,7 @@ interface Props {
 }
 
 function AccountEditor({ account, onDone } : Props) {
-  const [accountViewType, setAccountViewType] = useState(account.accountViewType || '');
+  const [accountViewType, setAccountViewType] = useState<AccountViewType>(account.accountViewType || '');
   const [name, setName] = useState(account.name || '');
   const [icon, setIcon] = useState(account.icon || '');
   const [strategyId, setStrategyId] = useState(account.strategyId || '');
@@ -33,10 +33,11 @@ function AccountEditor({ account, onDone } : Props) {
   const [minInvest, setMinInvest] = useState(account.minInvest || 0);
 
   const onSave = () => {
-    const providerId = storeUser.getState().activeProvider?._id || '';
+    const accountId = storeUser.getState().activeProvider?._id || '';
 
-    accountUpdate({
-      providerId,
+    updateAccountService({
+      accountId,
+    }, {
       accountViewType,
       name,
       icon,
