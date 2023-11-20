@@ -1,3 +1,5 @@
+import { CacheFirstOptions } from '@fishprovider/core-backend';
+
 interface Base {
   doc?: any;
   docs?: any;
@@ -9,10 +11,7 @@ export const getCacheFirst = async <T extends Base>(
     setCache?: (data?: T) => Promise<T>,
     getDb?: () => Promise<T>,
   },
-  options?: {
-    initializeCache?: boolean,
-    revalidateCache?: boolean,
-  },
+  options?: CacheFirstOptions,
 ) => {
   const { getCache, setCache, getDb } = params;
   const { initializeCache, revalidateCache } = options || {};
