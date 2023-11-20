@@ -26,22 +26,23 @@ export const checkAccountAccess = (
   const { isManagerWeb } = getRoleProvider(context?.userSession?.roles);
   const { accountViewType, members, deleted } = account;
 
-  const hasAccess = () => {
+  const check = () => {
     if (isManagerWeb) return true;
-    if (deleted) return false;
+    if (deleted) {
+      throw new BaseError(AccountError.ACCOUNT_ACCESS_DENIED, account._id, 'deleted');
+    }
     if (accountViewType === AccountViewType.public) return true;
 
     // for private accounts
-    if (!context?.userSession?._id) return false;
+    if (!context?.userSession?._id) {
+      throw new BaseError(AccountError.ACCOUNT_ACCESS_DENIED, account._id, 'private');
+    }
     const { userSession } = context;
     if (members?.some((item) => item.email === userSession.email)) return true;
 
-    return false;
-  };
-
-  if (!hasAccess()) {
     throw new BaseError(AccountError.ACCOUNT_ACCESS_DENIED, account._id);
-  }
+  };
+  check();
 
   return account;
 };
