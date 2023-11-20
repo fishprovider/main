@@ -25,7 +25,7 @@ interface Props {
 }
 
 function AccountEditor({ account, onDone } : Props) {
-  const [accountViewType, setAccountViewType] = useState<AccountViewType>(account.accountViewType || '');
+  const [accountViewType, setAccountViewType] = useState(account.accountViewType);
   const [name, setName] = useState(account.name || '');
   const [icon, setIcon] = useState(account.icon || '');
   const [strategyId, setStrategyId] = useState(account.strategyId || '');
