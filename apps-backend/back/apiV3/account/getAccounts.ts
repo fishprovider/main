@@ -24,6 +24,7 @@ const handler: ApiHandler<Partial<Account>[]> = async (data, userSession) => {
       }),
     },
     options: {
+      initializeCache: true,
       sort: {
         order: -1,
       },

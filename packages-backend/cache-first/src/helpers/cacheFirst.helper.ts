@@ -3,16 +3,24 @@ interface Base {
   docs?: any;
 }
 
-export const getCacheFirst = async <T extends Base>(params: {
-  getCache?: () => Promise<T>,
-  setCache?: (data?: T) => Promise<T>,
-  getDb?: () => Promise<T>,
-}) => {
+export const getCacheFirst = async <T extends Base>(
+  params: {
+    getCache?: () => Promise<T>,
+    setCache?: (data?: T) => Promise<T>,
+    getDb?: () => Promise<T>,
+  },
+  options?: {
+    initializeCache?: boolean,
+    revalidateCache?: boolean,
+  },
+) => {
   const { getCache, setCache, getDb } = params;
+  const { initializeCache, revalidateCache } = options || {};
 
   let data: T | undefined = await getCache?.();
 
-  if (!data?.doc && !data?.docs) {
+  const isCacheEmpty = !data?.doc && !data?.docs;
+  if ((initializeCache && isCacheEmpty) || revalidateCache) {
     data = await getDb?.();
     setCache?.(data); // non-blocking
   }

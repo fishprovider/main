@@ -18,6 +18,9 @@ const handler: ApiHandler<Partial<Account>> = async (data, userSession) => {
     repositories: {
       account: CacheFirstAccountRepository,
     },
+    options: {
+      initializeCache: true,
+    },
     context: { userSession },
   });
 
