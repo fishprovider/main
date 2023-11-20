@@ -26,8 +26,10 @@ const getAccounts: AccountRepository['getAccounts'] = async (filter) => {
 const updateAccount: AccountRepository['updateAccount'] = async (filter, payload) => {
   const key = buildKeyAccount(filter);
   const { client, clientJson } = await getRedis();
-  const { account, ...rest } = payload;
-  await clientJson.merge(key, '.', convertUndefinedToNull({ ...account, ...rest }));
+  const { account } = payload;
+  if (!account) return {};
+
+  await clientJson.merge(key, '.', convertUndefinedToNull(account));
   await client.expire(key, 60 * 60 * 4);
   return { doc: account };
 };
