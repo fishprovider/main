@@ -4,10 +4,13 @@ import {
 import {
   AccountRepository,
 } from '@fishprovider/core-backend';
+import axios from 'axios';
 
 import {
   connectAndRun, getAccountInformation, getAccountList,
 } from '..';
+
+const ctraderRegion = 'use'; // use, eu, au, sg
 
 const checkConfig = (config?: AccountConfig) => {
   if (!config) {
@@ -47,7 +50,24 @@ const getAccount: AccountRepository['getAccount'] = async (filter) => {
 };
 
 const getAccounts: AccountRepository['getAccounts'] = async (filter) => {
-  const { config: rawConfig } = filter;
+  const { config: rawConfig, tradeRequest } = filter;
+
+  if (rawConfig && tradeRequest) {
+    const { clientId, clientSecret, isLive } = rawConfig;
+    const { redirectUrl, code } = tradeRequest;
+    const url = `https://openapi.ctrader.com/apps/token?grant_type=authorization_code&code=${code}&redirect_uri=${redirectUrl}&client_id=${clientId}&client_secret=${clientSecret}`;
+    const { data } = await axios.get(url);
+    const { errorCode, accessToken, refreshToken } = data;
+    if (errorCode) {
+      throw new BaseError(RepositoryError.REPOSITORY_BAD_REQUEST, errorCode);
+    } else if (accessToken && refreshToken) {
+      rawConfig.accessToken = accessToken;
+      rawConfig.refreshToken = refreshToken;
+      rawConfig.host = `${isLive ? 'live' : 'demo'}-${ctraderRegion}-ctraderapi.com`;
+      rawConfig.port = 5035;
+    }
+  }
+
   const config = checkConfig(rawConfig);
 
   const { accounts: tradeAccounts } = await connectAndRun({

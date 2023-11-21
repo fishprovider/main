@@ -177,6 +177,7 @@ const getTradeClient: AccountRepository['getTradeClient'] = async (filter) => {
     projection: {
       clientId: 1,
       clientSecret: 1,
+      isLive: 1,
     },
   });
 
