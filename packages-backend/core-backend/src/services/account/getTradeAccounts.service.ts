@@ -1,7 +1,7 @@
 import { AccountError, BaseError, checkRepository } from '@fishprovider/core';
 
 import {
-  GetTradeAccountsService, sanitizeOutputAccount,
+  GetTradeAccountsService,
 } from '../..';
 
 export const getTradeAccountsService: GetTradeAccountsService = async ({
@@ -45,10 +45,12 @@ export const getTradeAccountsService: GetTradeAccountsService = async ({
   return {
     docs: accounts?.map((account) => ({
       ...account,
-      config: {
-        ...account.config,
-        clientSecret: undefined,
-      },
+      ...(account.config && {
+        config: {
+          ...account.config,
+          clientSecret: '',
+        },
+      }),
     })),
   };
 };
