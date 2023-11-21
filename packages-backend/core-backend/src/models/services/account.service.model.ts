@@ -41,13 +41,18 @@ export type GetTradeAccountService = (params: BaseUpdateServiceParams<Account> &
 
 export type GetTradeAccountsService = (params: BaseUpdateServiceParams<Account> & {
   filter: {
-    tradeCode: string,
+    accountPlatform: AccountPlatform,
+    baseConfig: Partial<AccountConfig>,
+    tradeRequest?: {
+      redirectUrl?: string,
+      code?: string,
+    },
   },
   repositories: {
     account: AccountRepository,
     trade: AccountRepository,
   },
-}) => Promise<BaseGetResult<Account>>;
+}) => Promise<BaseGetManyResult<Account>>;
 
 export type UpdateAccountService = (params: BaseUpdateServiceParams<Account> & {
   filter: {

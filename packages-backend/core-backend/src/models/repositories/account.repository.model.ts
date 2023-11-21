@@ -30,6 +30,10 @@ export interface AccountRepository {
       accountIds?: string[],
       accountPlatform?: AccountPlatform,
       config?: AccountConfig,
+      tradeRequest?: {
+        redirectUrl?: string,
+        code?: string,
+      },
     },
     options?: BaseGetOptions<Account>,
   ) => Promise<BaseGetManyResult<Account>>;
