@@ -1,5 +1,6 @@
 import {
-  AccountConfig, AccountTradeType, BaseError, RepositoryError,
+  AccountConfig, AccountTradeType, BaseError, log,
+  RepositoryError,
 } from '@fishprovider/core';
 import {
   AccountRepository,
@@ -56,7 +57,9 @@ const getAccounts: AccountRepository['getAccounts'] = async (filter) => {
     const { clientId, clientSecret, isLive } = rawConfig;
     const { redirectUrl, code } = tradeRequest;
     const url = `https://openapi.ctrader.com/apps/token?grant_type=authorization_code&code=${code}&redirect_uri=${redirectUrl}&client_id=${clientId}&client_secret=${clientSecret}`;
+    log.info('Start getAccounts', url);
     const { data } = await axios.get(url);
+    log.info('Done getAccounts', data);
     const { errorCode, accessToken, refreshToken } = data;
     if (errorCode) {
       throw new BaseError(RepositoryError.REPOSITORY_BAD_REQUEST, errorCode);
