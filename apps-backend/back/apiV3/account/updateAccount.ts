@@ -69,6 +69,9 @@ const handler: ApiHandler<Partial<Account>> = async (data, userSession) => {
     repositories: {
       account: CacheFirstAccountRepository,
     },
+    options: {
+      returnAfter: !!payload.addActivity,
+    },
     context: { userSession },
   });
 
