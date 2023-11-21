@@ -69,7 +69,6 @@ export const addAccountService: AddAccountService = async ({
     ...baseConfig,
     clientId,
     clientSecret,
-    accountId: baseConfig.accountId || '',
     name,
   };
 

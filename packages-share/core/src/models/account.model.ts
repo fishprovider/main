@@ -114,10 +114,11 @@ export type AccountConfig = {
   // common
   clientId: string;
   clientSecret: string;
-  accountId: string;
-  name: string;
+  accountId?: string;
+  name?: string;
   user?: string;
   pass?: string;
+  isLive?: boolean;
 
   // ctrader
   host?: string;

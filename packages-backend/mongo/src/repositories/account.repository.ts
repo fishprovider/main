@@ -205,7 +205,6 @@ export const MongoAccountRepository: AccountRepository = {
   updateAccount,
   addAccount,
   removeAccount,
-  // TODO: move to TradeClientRepository
   getTradeClient,
   updateTradeClient,
 };
