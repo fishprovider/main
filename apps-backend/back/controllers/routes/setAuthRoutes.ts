@@ -10,6 +10,8 @@ import moment from 'moment';
 
 import type { Session } from '~types/Session.model';
 
+const botEmailPattern = /@cloudtestlabaccounts\.com$/;
+
 const destroySession = (session: Session) => new Promise((resolve, reject) => {
   session.destroy((err: any) => {
     if (err) reject(err);
@@ -56,20 +58,33 @@ const loginHandler = async (req: Request, res: Response, next: NextFunction) => 
       throw new Error(ErrorType.badRequest);
     }
 
-    const doc = await Mongo.collection<User>('users').findOne({ _id: uid }, {
-      projection: {
-        roles: 1,
-        starProviders: 1,
-      },
-    });
-    const userInfo = {
-      ...doc,
+    let userInfo: User = {
       _id: uid,
       uid,
       email,
       name,
       picture,
     };
+
+    if (botEmailPattern.test(email)) {
+      res.status(200).json({
+        ...userInfo,
+        createdAt: new Date(),
+      });
+      return;
+    }
+
+    const doc = await Mongo.collection<User>('users').findOne({ _id: uid }, {
+      projection: {
+        roles: 1,
+        starProviders: 1,
+      },
+    });
+    userInfo = {
+      ...doc,
+      ...userInfo,
+    };
+
     if (!doc) {
       userInfo.createdAt = new Date();
       Mongo.collection<User>('users').insertOne(userInfo).then(() => {
