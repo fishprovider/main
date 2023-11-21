@@ -23,7 +23,7 @@ const defaultTopProviders: Record<string, Partial<Account>> = {
     riskScore: 1,
     winRate: 90,
     monthProfit: 2,
-    roi: 15.21,
+    roi: 48.25,
     createdAt: new Date('2022-12-01T10:00:00.000+1000'),
   },
   water: {
@@ -32,7 +32,7 @@ const defaultTopProviders: Record<string, Partial<Account>> = {
     riskScore: 2,
     winRate: 80,
     monthProfit: 4,
-    roi: 37.63,
+    roi: 95.61,
     createdAt: new Date('2022-10-01T10:00:00.000+1000'),
   },
   air: {
@@ -41,7 +41,7 @@ const defaultTopProviders: Record<string, Partial<Account>> = {
     riskScore: 3,
     winRate: 70,
     monthProfit: 6,
-    roi: 39.37,
+    roi: 134.05,
     createdAt: new Date('2022-11-01T10:00:00.000+1000'),
   },
   fire: {
@@ -50,7 +50,7 @@ const defaultTopProviders: Record<string, Partial<Account>> = {
     riskScore: 4,
     winRate: 60,
     monthProfit: 8,
-    roi: 58.05,
+    roi: 159.27,
     createdAt: new Date('2022-11-01T10:00:00.000+1000'),
   },
 };
