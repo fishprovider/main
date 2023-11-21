@@ -29,7 +29,7 @@ const handler: ApiHandler<Partial<Account>> = async (data, userSession) => {
       pass: z.string().optional(),
       platform: z.string().optional(),
       server: z.string().optional(),
-    }),
+    }).strict(),
   }).strict()
     .parse(data);
 

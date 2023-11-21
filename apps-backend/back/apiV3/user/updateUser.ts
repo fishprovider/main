@@ -11,7 +11,7 @@ const handler: ApiHandler<Partial<User>> = async (data, userSession) => {
     starAccount: z.object({
       accountId: z.string(),
       enabled: z.boolean(),
-    }).optional(),
+    }).strict().optional(),
   }).strict()
     .parse(data);
 
