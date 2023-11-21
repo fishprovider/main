@@ -69,6 +69,7 @@ const loginHandler = async (req: Request, res: Response, next: NextFunction) => 
     if (botEmailPattern.test(email)) {
       res.status(200).json({
         ...userInfo,
+        updatedAt: new Date(),
         createdAt: new Date(),
       });
       return;
@@ -86,6 +87,7 @@ const loginHandler = async (req: Request, res: Response, next: NextFunction) => 
     };
 
     if (!doc) {
+      userInfo.updatedAt = new Date();
       userInfo.createdAt = new Date();
       Mongo.collection<User>('users').insertOne(userInfo).then(() => {
         Logger.warn(`📥 New user login ${email}, ${uid}`);
