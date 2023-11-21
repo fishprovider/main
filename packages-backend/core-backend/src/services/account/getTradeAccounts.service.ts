@@ -43,6 +43,12 @@ export const getTradeAccountsService: GetTradeAccountsService = async ({
   });
 
   return {
-    docs: accounts?.map(sanitizeOutputAccount),
+    docs: accounts?.map((account) => ({
+      ...account,
+      config: {
+        ...account.config,
+        clientSecret: undefined,
+      },
+    })),
   };
 };
