@@ -3,7 +3,7 @@ import useMaxWidth from '~ui/styles/useMaxWidth';
 import MenuItems from './MenuItems';
 
 function MenuLeft() {
-  const isDropdownOnly = useMaxWidth('450px');
+  const isDropdownOnly = useMaxWidth('450px', true);
   const isTiny = useMaxWidth('550px');
   const isMini = useMaxWidth('650px');
   const isSmall = useMaxWidth('750px');
