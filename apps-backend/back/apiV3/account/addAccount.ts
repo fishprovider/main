@@ -13,7 +13,7 @@ const env = {
 };
 
 const handler: ApiHandler<Partial<Account>> = async (data, userSession) => {
-  const filter = z.object({
+  const payload = z.object({
     name: z.string(),
     accountType: z.nativeEnum(AccountType),
     accountPlatform: z.nativeEnum(AccountPlatform),
@@ -35,7 +35,7 @@ const handler: ApiHandler<Partial<Account>> = async (data, userSession) => {
 
   const {
     name, accountType, accountPlatform, accountTradeType, baseConfig,
-  } = filter;
+  } = payload;
 
   const { doc: account = {} } = await addAccountService({
     payload: {

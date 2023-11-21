@@ -1,6 +1,7 @@
 import {
-  Account, AccountActivity, AccountBannerStatus, AccountProtectSettings,
-  AccountSettings, AccountTradeSettings, AccountViewType,
+  Account, AccountActivity, AccountBannerStatus, AccountConfig, AccountPlatform,
+  AccountProtectSettings, AccountSettings, AccountTradeSettings, AccountTradeType,
+  AccountType, AccountViewType,
 } from '@fishprovider/core';
 
 import {
@@ -20,6 +21,14 @@ export interface AccountRepository {
     filter: {
       accountViewType?: AccountViewType,
       email?: string,
+      getTradeAccounts?: {
+        accountPlatform: AccountPlatform,
+        baseConfig: Partial<AccountConfig>,
+        tradeRequest: {
+          redirectUrl: string,
+          code: string,
+        },
+      },
     },
     options?: BaseGetOptions<Account>,
   ) => Promise<BaseGetManyResult<Account>>;
@@ -55,6 +64,16 @@ export interface AccountRepository {
     },
     options?: BaseGetOptions<Account>,
   ) => Promise<BaseGetManyResult<Account>>;
+
+  addAccount?: (
+    payload: {
+      name: string,
+      accountType: AccountType,
+      accountPlatform: AccountPlatform,
+      accountTradeType: AccountTradeType,
+      baseConfig: Partial<AccountConfig>,
+    },
+  ) => Promise<BaseGetResult<Account>>;
 
   removeAccount?: (
     filter: {

@@ -80,7 +80,7 @@ const getAccounts: AccountRepository['getAccounts'] = async (filter) => {
       config: {
         ...config,
         accountId: tradeAccount.accountId,
-        traderLogin: tradeAccount.traderLogin,
+        accountNumber: tradeAccount.traderLogin,
       },
       accountTradeType: tradeAccount.isLive ? AccountTradeType.live : AccountTradeType.demo,
     }));

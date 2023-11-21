@@ -115,6 +115,7 @@ export type AccountConfig = {
   clientId: string;
   clientSecret: string;
   accountId?: string;
+  accountNumber?: string;
   name?: string;
   user?: string;
   pass?: string;

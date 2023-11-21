@@ -16,7 +16,14 @@ const getAccount: AccountRepository['getAccount'] = async (filter) => {
 };
 
 const getAccounts: AccountRepository['getAccounts'] = async (filter) => {
-  const accounts = await fishApiGet<Partial<Account>[] | undefined>('/account/getAccounts', filter);
+  const { getTradeAccounts, ...rest } = filter;
+
+  if (getTradeAccounts) {
+    const accounts = await fishApiGet<Partial<Account>[] | undefined>('/account/getTradeAccounts', getTradeAccounts);
+    return { docs: accounts };
+  }
+
+  const accounts = await fishApiGet<Partial<Account>[] | undefined>('/account/getAccounts', rest);
   return { docs: accounts };
 };
 

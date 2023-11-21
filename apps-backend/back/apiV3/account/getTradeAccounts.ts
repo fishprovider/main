@@ -10,12 +10,12 @@ const handler: ApiHandler<Partial<Account>[]> = async (data, userSession) => {
   const filter = z.object({
     accountPlatform: z.nativeEnum(AccountPlatform),
     baseConfig: z.object({
-      clientId: z.string().optional(),
+      clientId: z.string(),
     }).strict(),
     tradeRequest: z.object({
-      redirectUrl: z.string().optional(),
-      code: z.string().optional(),
-    }).strict().optional(),
+      redirectUrl: z.string(),
+      code: z.string(),
+    }).strict(),
   }).strict()
     .parse(data);
 
