@@ -30,7 +30,7 @@ const updateAccount: AccountRepository['updateAccount'] = async (filter, payload
   if (!account) return {};
 
   await clientJson.merge(key, '.', convertUndefinedToNull(account));
-  await client.expire(key, 60 * 60 * 4);
+  await client.expire(key, 60 * 5); // 5 mins
   return { doc: account };
 };
 
@@ -41,7 +41,7 @@ const updateAccounts: AccountRepository['updateAccounts'] = async (filter, paylo
   if (!accounts) return {};
 
   await clientJson.set(key, '.', convertUndefinedToNull(accounts));
-  await client.expire(key, 60 * 60 * 4);
+  await client.expire(key, 60 * 5); // 5 mins
   return { docs: accounts };
 };
 

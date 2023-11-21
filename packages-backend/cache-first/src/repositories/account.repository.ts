@@ -58,9 +58,9 @@ const removeAccount: AccountRepository['removeAccount'] = async (filter) => {
 };
 
 export const CacheFirstAccountRepository: AccountRepository = {
+  ...MongoAccountRepository,
   getAccount,
   getAccounts,
-  ...MongoAccountRepository, // TODO: move to top to enable cache
   updateAccount,
   removeAccount,
 };
