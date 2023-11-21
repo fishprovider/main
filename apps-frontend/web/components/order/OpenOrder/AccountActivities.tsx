@@ -1,4 +1,3 @@
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import { Roles } from '@fishprovider/utils/dist/constants/user';
 import type { Activity, Member } from '@fishprovider/utils/dist/types/Account.model';
 import _ from 'lodash';
@@ -20,12 +19,6 @@ function AccountActivities({
   activities = {},
   members = [],
 }: Props) {
-  const {
-    userId: userIdCurr,
-  } = storeUser.useStore((state) => ({
-    userId: state.info?._id,
-  }));
-
   const userActivities = _.sortBy(
     _.map(activities, (activity, userId) => {
       const member = members.find((item) => item.userId === userId) || {
@@ -58,7 +51,7 @@ function AccountActivities({
       {userActivities.map(({
         userId, picture, lastSeenMinutes, lastSeenColor, tooltip,
       }) => {
-        if (userId === userIdCurr || !lastSeenColor) return null;
+        if (!lastSeenColor) return null;
         return (
           <Tooltip key={userId} label={tooltip}>
             <Indicator
