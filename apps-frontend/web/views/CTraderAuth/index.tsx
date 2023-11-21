@@ -1,14 +1,15 @@
-import accountAdd from '@fishprovider/cross/dist/api/accounts/add';
-import { apiPost } from '@fishprovider/cross/dist/libs/api';
+import {
+  Account, AccountPlatform, AccountTradeType, AccountType,
+} from '@fishprovider/core';
 import storeUser from '@fishprovider/cross/dist/stores/user';
-import { AccountPlatform, ProviderType } from '@fishprovider/utils/dist/constants/account';
-import type { Config } from '@fishprovider/utils/dist/types/Account.model';
 import _ from 'lodash';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import Link from '~components/base/Link';
 import Routes, { toAccount } from '~libs/routes';
+import { addAccountService } from '~services/account/addAccount.service';
+import { getTradeAccountsService } from '~services/account/getTradeAccounts.service';
 import Button from '~ui/core/Button';
 import Icon from '~ui/core/Icon';
 import Loading from '~ui/core/Loading';
@@ -19,31 +20,33 @@ import Title from '~ui/core/Title';
 import ContentSection from '~ui/layouts/ContentSection';
 import { toastError, toastSuccess } from '~ui/toast';
 
-interface AccountToImport {
-  accountId: string;
-  traderLogin: string,
-  isLive: boolean;
-  config: Config,
-}
+const getDefaultName = (tradeAccountNumber?: string, isLive?: boolean) => `${isLive ? 'Live' : 'Demo'}${tradeAccountNumber}`;
 
-const getDefaultName = (traderLogin: string, isLive: boolean) => `${isLive ? 'Live' : 'Demo'}${traderLogin}`;
-
-function ImportAccounts({ accounts }: { accounts: AccountToImport[] }) {
+function ImportAccounts({ accounts }: { accounts: Partial<Account>[] }) {
   const [names, setNames] = useState<Record<string, string>>({});
-  const [providerIds, setProviderIds] = useState<Record<string, string>>({});
+  const [tradeAccountIds, setTradeAccountIds] = useState<Record<string, string>>({});
 
-  const onImport = (id: string, name: string) => {
-    const { config } = accounts.find(({ accountId }) => accountId === id) as AccountToImport;
-    const accountToNew = {
+  const onImport = (tradeAccountId: string, name: string) => {
+    const account = accounts.find(({ config }) => config?.accountId === tradeAccountId);
+    if (!account?.config) {
+      toastError('Account not found');
+      return;
+    }
+    addAccountService({
       name,
-      providerType: ProviderType.icmarkets, // TODO: check and warn if broker is different
+      accountType: AccountType.icmarkets,
       accountPlatform: AccountPlatform.ctrader,
-      config,
-    };
-    accountAdd({ accountToNew }).then((account) => {
-      setProviderIds((prev) => ({
+      accountTradeType: account?.config?.isLive ? AccountTradeType.live : AccountTradeType.demo,
+      baseConfig: account.config,
+    }).then((item) => {
+      const accountId = item?._id;
+      if (!accountId) {
+        toastError('Failed to add account');
+        return;
+      }
+      setTradeAccountIds((prev) => ({
         ...prev,
-        [id]: account._id,
+        [tradeAccountId]: accountId,
       }));
       toastSuccess('Done');
     }).catch((err) => {
@@ -51,37 +54,46 @@ function ImportAccounts({ accounts }: { accounts: AccountToImport[] }) {
     });
   };
 
-  const rows = _.sortBy(accounts, 'traderLogin').map(({ accountId, traderLogin, isLive }) => ({
-    id: accountId,
-    number: traderLogin,
-    name: names[accountId] || getDefaultName(traderLogin, isLive),
-    providerId: providerIds[accountId],
-  }));
+  const rows = _.sortBy(accounts, (account) => account.config?.accountNumber)
+    .map(({ config }) => {
+      const { accountId: tradeAccountId = '', accountNumber: tradeAccountNumber = '', isLive } = config || {};
+      return {
+        tradeAccountId,
+        tradeAccountNumber,
+        name: names[tradeAccountId] || getDefaultName(tradeAccountNumber, isLive),
+        accountId: tradeAccountIds[tradeAccountId],
+      };
+    });
 
-  const renderRow = (row: { id: string; number: string; name: string, providerId?: string }) => {
+  const renderRow = (row: {
+    tradeAccountId: string,
+    tradeAccountNumber: string,
+    name: string,
+    accountId?: string,
+  }) => {
     const {
-      id, number, name, providerId,
+      tradeAccountId, tradeAccountNumber, name, accountId,
     } = row;
     return (
-      <Table.Row key={id}>
-        <Table.Cell>{id}</Table.Cell>
-        <Table.Cell>{number}</Table.Cell>
+      <Table.Row key={tradeAccountId}>
+        <Table.Cell>{tradeAccountId}</Table.Cell>
+        <Table.Cell>{tradeAccountNumber}</Table.Cell>
         <Table.Cell>
           <TextInput
             value={name}
             onChange={(event) => setNames((prev) => ({
               ...prev,
-              [id]: event.target.value,
+              [tradeAccountId]: event.target.value,
             }))}
           />
         </Table.Cell>
         <Table.Cell>
-          {providerId ? (
-            <Link href={toAccount(providerId)}>
+          {accountId ? (
+            <Link href={toAccount(accountId)}>
               <Button>Trade Now ➜ 📈</Button>
             </Link>
           ) : (
-            <Button onClick={() => onImport(id, name)} rightIcon={<Icon name="SystemUpdateAlt" />}>
+            <Button onClick={() => onImport(tradeAccountId, name)} rightIcon={<Icon name="SystemUpdateAlt" />}>
               Import now
             </Button>
           )}
@@ -113,14 +125,22 @@ function CTraderAuth() {
 
   const isServerLoggedIn = storeUser.useStore((state) => state.isServerLoggedIn);
 
-  const [accounts, setAccounts] = useState<AccountToImport[]>();
+  const [accounts, setAccounts] = useState<Partial<Account>[]>();
 
   useEffect(() => {
     if (isServerLoggedIn && code) {
-      apiPost<AccountToImport[]>('/accounts/ctrader/getAccounts', {
-        origin: window.location.origin,
-        path: window.location.pathname,
-        code,
+      const [_1, _2, _3, clientId] = window.location.pathname.split('/');
+      const redirectUrl = `${window.location.origin}${window.location.pathname}`;
+
+      getTradeAccountsService({
+        accountPlatform: AccountPlatform.ctrader,
+        baseConfig: {
+          clientId,
+        },
+        tradeRequest: {
+          redirectUrl,
+          code: code as string,
+        },
       }).then((res) => {
         toastSuccess('Connected');
         setAccounts(res);
