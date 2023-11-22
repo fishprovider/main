@@ -90,7 +90,7 @@ function ImportAccounts({ accounts }: { accounts: Partial<Account>[] }) {
         <Table.Cell>
           {accountId ? (
             <Link href={toAccount(accountId)}>
-              <Button>Trade Now ➜ 📈</Button>
+              <Button color="green">Trade Now ➜ 📈</Button>
             </Link>
           ) : (
             <Button onClick={() => onImport(tradeAccountId, name)} rightIcon={<Icon name="SystemUpdateAlt" />}>

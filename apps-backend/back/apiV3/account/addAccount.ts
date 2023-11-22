@@ -19,14 +19,20 @@ const handler: ApiHandler<Partial<Account>> = async (data, userSession) => {
     accountPlatform: z.nativeEnum(AccountPlatform),
     accountTradeType: z.nativeEnum(AccountTradeType),
     baseConfig: z.object({
-      // ct
       clientId: z.string().optional(),
+      clientSecret: z.string().optional(),
       accountId: z.string().optional(),
+      accountNumber: z.string().optional(),
+      name: z.string().optional(),
+      user: z.string().optional(),
+      pass: z.string().optional(),
+      isLive: z.boolean().optional(),
+      // ct
+      host: z.string().optional(),
+      port: z.number().optional(),
       accessToken: z.string().optional(),
       refreshToken: z.string().optional(),
       // mt
-      user: z.string().optional(),
-      pass: z.string().optional(),
       platform: z.string().optional(),
       server: z.string().optional(),
     }).strict(),
@@ -69,7 +75,7 @@ const handler: ApiHandler<Partial<Account>> = async (data, userSession) => {
     default:
   }
 
-  return {};
+  return { result: account };
 };
 
 export default handler;
