@@ -11,8 +11,6 @@ import {
   connectAndRun, getAccountInformation, getAccountList,
 } from '..';
 
-const ctraderRegion = 'use'; // use, eu, au, sg
-
 const checkConfig = (config?: AccountConfig) => {
   if (!config) {
     throw new BaseError(RepositoryError.REPOSITORY_BAD_REQUEST, 'Missing config');
@@ -66,7 +64,7 @@ const getAccounts: AccountRepository['getAccounts'] = async (filter) => {
     } else if (accessToken && refreshToken) {
       rawConfig.accessToken = accessToken;
       rawConfig.refreshToken = refreshToken;
-      rawConfig.host = `${isLive ? 'live' : 'demo'}-${ctraderRegion}-ctraderapi.com`;
+      rawConfig.host = `${isLive ? 'live' : 'demo'}.ctraderapi.com`;
       rawConfig.port = 5035;
     }
   }
