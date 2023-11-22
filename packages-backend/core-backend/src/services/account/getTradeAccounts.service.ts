@@ -33,6 +33,7 @@ export const getTradeAccountsService: GetTradeAccountsService = async ({
   }
 
   const { docs: accounts } = await getTradeAccountsRepo({
+    accountPlatform,
     config: {
       ...baseConfig,
       clientId,
