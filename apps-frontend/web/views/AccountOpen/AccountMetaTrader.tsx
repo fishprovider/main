@@ -1,22 +1,24 @@
-import accountAdd from '@fishprovider/cross/dist/api/accounts/add';
+import { AccountTradeType, AccountType } from '@fishprovider/core';
 import { useMutate } from '@fishprovider/cross/dist/libs/query';
 import { AccountPlatform, ProviderType } from '@fishprovider/utils/dist/constants/account';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 import Routes from '~libs/routes';
+import { addAccountService } from '~services/account/addAccount.service';
 import Button from '~ui/core/Button';
 import Group from '~ui/core/Group';
 import Radio from '~ui/core/Radio';
 import Stack from '~ui/core/Stack';
 import TextInput from '~ui/core/TextInput';
 import { toastError, toastSuccess } from '~ui/toast';
+import { isLive } from '~utils';
 
 interface Props {
   providerType: ProviderType,
 }
 
-function AccountMetaTrader({ providerType }: Props) {
+function AccountMetaTrader({ providerType: accountType }: Props) {
   const router = useRouter();
 
   const [name, setName] = useState('');
@@ -26,25 +28,22 @@ function AccountMetaTrader({ providerType }: Props) {
   const [server, setServer] = useState('');
 
   const { mutate: add, isLoading } = useMutate({
-    mutationFn: accountAdd,
+    mutationFn: addAccountService,
   });
 
   const onNew = () => {
-    const accountToNew = {
+    add({
       name,
-      providerType,
+      accountType: accountType as any as AccountType,
       accountPlatform: AccountPlatform.metatrader,
-      config: {
-        clientId: '',
-        clientSecret: '',
+      accountTradeType: isLive ? AccountTradeType.live : AccountTradeType.demo,
+      baseConfig: {
         user,
         pass,
         platform,
         server,
       },
-    };
-
-    add({ accountToNew }, {
+    }, {
       onSuccess: () => {
         toastSuccess('Done');
         router.push(Routes.accounts);
