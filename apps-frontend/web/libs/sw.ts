@@ -65,20 +65,18 @@ const initSW = () => {
       // Found new version => execute optional actions as below
       //
 
-      showBanner();
-
-      // const swUpdateMode = localStorage.getItem('swUpdateMode');
-      // switch (swUpdateMode) {
-      //   case 'lazy':
-      //     // Do nothing, keep using old version for this session,
-      //     // new version will be automatically load when user open the app next time
-      //     break;
-      //   case 'manual':
-      //     showBanner();
-      //     break;
-      //   default:
-      //     activateNewSW();
-      // }
+      const swUpdateMode: string = 'lazy';
+      switch (swUpdateMode) {
+        case 'lazy':
+          // Do nothing, keep using old version for this session,
+          // new version will be automatically load when user open the app next time
+          break;
+        case 'manual':
+          showBanner();
+          break;
+        default:
+          activateNewSW();
+      }
     });
 
     // ISSUE - this is not working as expected, why?
