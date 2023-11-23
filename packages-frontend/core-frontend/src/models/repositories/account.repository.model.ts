@@ -80,4 +80,8 @@ export interface AccountRepository {
       accountId: string,
     },
   ) => Promise<BaseGetResult<Account>>;
+
+  watchAccount?: <T>(
+    selector: (state: Record<string, Account>) => T,
+  ) => T;
 }

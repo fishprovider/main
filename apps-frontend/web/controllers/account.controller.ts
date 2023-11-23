@@ -1,11 +1,12 @@
 import {
+  Account,
   AccountActivity, AccountBannerStatus, AccountConfig, AccountPlatform, AccountProtectSettings,
   AccountSettings, AccountTradeSettings, AccountTradeType, AccountType, AccountViewType,
   checkRepository,
 } from '@fishprovider/core';
 import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
 import { StoreFirstAccountRepository } from '@fishprovider/store-first';
-import { Account } from '@fishprovider/utils/types/Account.model';
+import { Account as AccountOld } from '@fishprovider/utils/types/Account.model';
 
 const repo = StoreFirstAccountRepository;
 
@@ -16,7 +17,7 @@ export const getAccountController = async (filter: {
   const getAccountRepo = checkRepository(repo.getAccount);
   const { doc: account } = await getAccountRepo(filter);
   if (account) { // TODO: remove
-    storeAccounts.mergeDoc(account as Partial<Account>);
+    storeAccounts.mergeDoc(account as Partial<AccountOld>);
   }
   return account;
 };
@@ -28,7 +29,7 @@ export const getAccountsController = async (filter: {
   const getAccountsRepo = checkRepository(repo.getAccounts);
   const { docs: accounts } = await getAccountsRepo(filter);
   if (accounts) { // TODO: remove
-    storeAccounts.mergeDocs(accounts as Partial<Account>[]);
+    storeAccounts.mergeDocs(accounts as Partial<AccountOld>[]);
   }
   return accounts;
 };
@@ -69,7 +70,7 @@ export const updateAccountController = async (
   const updateAccountRepo = checkRepository(repo.updateAccount);
   const { doc: account } = await updateAccountRepo(filter, payload);
   if (account) { // TODO: remove
-    storeAccounts.mergeDoc(account as Partial<Account>);
+    storeAccounts.mergeDoc(account as Partial<AccountOld>);
   }
 };
 
@@ -85,7 +86,7 @@ export const addAccountController = async (
   const addAccountRepo = checkRepository(repo.addAccount);
   const { doc: account } = await addAccountRepo(payload);
   if (account) { // TODO: remove
-    storeAccounts.mergeDoc(account as Partial<Account>);
+    storeAccounts.mergeDoc(account as Partial<AccountOld>);
   }
   return account;
 };
@@ -96,4 +97,11 @@ export const removeAccountController = async (filter: {
   const removeAccountRepo = checkRepository(repo.removeAccount);
   await removeAccountRepo(filter);
   storeAccounts.removeDoc(filter.accountId); // TODO: remove
+};
+
+export const watchAccountController = <T>(
+  selector: (state: Record<string, Account>) => T,
+) => {
+  const watchAccountRepo = checkRepository(repo.watchAccount);
+  return watchAccountRepo(selector);
 };

@@ -1,4 +1,5 @@
-import { checkRepository } from '@fishprovider/core';
+import { checkRepository, User } from '@fishprovider/core';
+import { UserInfo } from '@fishprovider/core-frontend';
 import storeUser from '@fishprovider/cross/dist/stores/user';
 import { StoreFirstUserRepository } from '@fishprovider/store-first';
 
@@ -59,4 +60,18 @@ export const refreshUserRolesController = async (filter: {
     });
   }
   return user;
+};
+
+export const watchUserController = <T>(
+  selector: (state: Record<string, User>) => T,
+) => {
+  const watchUserRepo = checkRepository(repo.watchUser);
+  return watchUserRepo(selector);
+};
+
+export const watchUserInfoController = <T>(
+  selector: (state: Record<string, UserInfo>) => T,
+) => {
+  const watchUserInfoRepo = checkRepository(repo.watchUserInfo);
+  return watchUserInfoRepo(selector);
 };

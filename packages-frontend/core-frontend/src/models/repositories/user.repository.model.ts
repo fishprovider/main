@@ -1,8 +1,12 @@
-import { User } from '@fishprovider/core';
+import { Account, User } from '@fishprovider/core';
 
 import {
   BaseGetOptions, BaseGetResult, BaseUpdateOptions, BaseUpdateResult,
 } from '..';
+
+export interface UserInfo {
+  activeAccount?: Account,
+}
 
 export interface UserRepository {
   getUser?: (
@@ -27,4 +31,12 @@ export interface UserRepository {
     },
     options?: BaseUpdateOptions<User>,
   ) => Promise<BaseUpdateResult<User>>;
+
+  watchUser?: <T>(
+    selector: (state: Record<string, User>) => T,
+  ) => T;
+
+  watchUserInfo?: <T>(
+    selector: (state: Record<string, UserInfo>) => T,
+  ) => T;
 }
