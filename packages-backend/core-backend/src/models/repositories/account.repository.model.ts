@@ -63,6 +63,8 @@ export interface AccountRepository {
       settings?: AccountSettings;
       providerData?: any,
       addActivity?: AccountActivity,
+      addMember?: AccountMember,
+      removeMemberEmail?: string,
       account?: Partial<Account>,
     },
     options?: BaseUpdateOptions<Account>,

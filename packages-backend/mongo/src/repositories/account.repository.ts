@@ -73,7 +73,7 @@ const updateAccount: AccountRepository['updateAccount'] = async (filter, payload
     notes, privateNotes,
     tradeSettings, protectSettings, settings, bannerStatus,
     providerData,
-    addActivity,
+    addActivity, addMember, removeMemberEmail,
   } = payload;
   const {
     returnAfter, projection,
@@ -107,6 +107,16 @@ const updateAccount: AccountRepository['updateAccount'] = async (filter, payload
       ...updatedAccount,
       ...(addActivity && {
         [`activities.${addActivity.userId}`]: addActivity,
+      }),
+    },
+    $push: {
+      ...(addMember && {
+        members: addMember,
+      }),
+    },
+    $pull: {
+      ...(removeMemberEmail && {
+        members: { email: removeMemberEmail },
       }),
     },
   };

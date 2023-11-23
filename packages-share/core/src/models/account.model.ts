@@ -99,12 +99,6 @@ export interface AccountMember {
   createdAt: Date;
 }
 
-export interface AccountMemberInvite {
-  email: string;
-  role: AccountRole;
-  createdAt: Date;
-}
-
 export interface AccountPlan {
   type: AccountPlanType,
   value: any;

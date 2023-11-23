@@ -1,5 +1,7 @@
 import { CacheFirstAccountRepository } from '@fishprovider/cache-first';
-import { Account, AccountCopyVolumeMode, AccountViewType } from '@fishprovider/core';
+import {
+  Account, AccountCopyVolumeMode, AccountRole, AccountViewType,
+} from '@fishprovider/core';
 import { updateAccountService } from '@fishprovider/core-backend';
 import { z } from 'zod';
 
@@ -57,11 +59,17 @@ const handler: ApiHandler<Partial<Account>> = async (data, userSession) => {
         userId: z.string().optional(),
         lastView: z.string().transform((_) => new Date(_)).optional(),
       }).strict().optional(),
+      addMember: z.object({
+        email: z.string().optional(),
+        role: z.nativeEnum(AccountRole).optional(),
+      }).strict().optional(),
+      removeMemberEmail: z.string().optional(),
     }).strict(),
   }).strict()
     .parse(data);
 
   const { accountId, payload } = filter;
+  const { addActivity } = payload;
 
   const { doc } = await updateAccountService({
     filter: { accountId },
@@ -70,7 +78,7 @@ const handler: ApiHandler<Partial<Account>> = async (data, userSession) => {
       account: CacheFirstAccountRepository,
     },
     options: {
-      returnAfter: !!payload.addActivity,
+      returnAfter: !addActivity,
     },
     context: { userSession },
   });
