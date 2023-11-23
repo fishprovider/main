@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import Link from '~components/base/Link';
 import { AccountViewTypeText } from '~constants/account';
-import { updateAccountService } from '~services/account/updateAccount.service';
+import { updateAccountService } from '~controllers/account.controller';
 import Button from '~ui/core/Button';
 import Group from '~ui/core/Group';
 import NumberInput from '~ui/core/NumberInput';

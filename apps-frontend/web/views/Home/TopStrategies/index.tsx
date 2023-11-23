@@ -8,8 +8,8 @@ import { useRef } from 'react';
 
 import Link from '~components/base/Link';
 import { TopAccounts } from '~constants/account';
+import { getAccountsController } from '~controllers/account.controller';
 import Routes from '~libs/routes';
-import { getAccountsService } from '~services/account/getAccounts.service';
 import Box from '~ui/core/Box';
 import Button from '~ui/core/Button';
 import Flex from '~ui/core/Flex';
@@ -63,7 +63,7 @@ function TopStrategies() {
   });
 
   useQuery({
-    queryFn: () => getAccountsService({ accountViewType: AccountViewType.public }),
+    queryFn: () => getAccountsController({ accountViewType: AccountViewType.public }),
     queryKey: queryKeys.slimAccounts(),
   });
 

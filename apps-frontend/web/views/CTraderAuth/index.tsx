@@ -7,9 +7,8 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import Link from '~components/base/Link';
+import { addAccountController, getTradeAccountsService } from '~controllers/account.controller';
 import Routes, { toAccount } from '~libs/routes';
-import { addAccountService } from '~services/account/addAccount.service';
-import { getTradeAccountsService } from '~services/account/getTradeAccounts.service';
 import Button from '~ui/core/Button';
 import Icon from '~ui/core/Icon';
 import Loading from '~ui/core/Loading';
@@ -32,7 +31,7 @@ function ImportAccounts({ accounts }: { accounts: Partial<Account>[] }) {
       toastError('Account not found');
       return;
     }
-    addAccountService({
+    addAccountController({
       name,
       accountType: AccountType.icmarkets,
       accountPlatform: AccountPlatform.ctrader,

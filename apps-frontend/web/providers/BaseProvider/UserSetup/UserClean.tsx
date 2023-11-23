@@ -2,7 +2,7 @@ import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
 import storeUser from '@fishprovider/cross/dist/stores/user';
 
-import { refreshUserRolesService } from '~services/user/refreshUserRoles.service';
+import { refreshUserRolesController } from '~controllers/user.controller';
 
 function UserClean() {
   const {
@@ -14,7 +14,7 @@ function UserClean() {
   }));
 
   useQuery({
-    queryFn: () => refreshUserRolesService({ email }),
+    queryFn: () => refreshUserRolesController({ email }),
     queryKey: queryKeys.clean(),
     enabled: !!isServerLoggedIn,
     refetchInterval: 1000 * 60 * 60, // 1h

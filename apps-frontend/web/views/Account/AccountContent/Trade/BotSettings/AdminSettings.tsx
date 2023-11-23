@@ -8,8 +8,8 @@ import _ from 'lodash';
 import { useState } from 'react';
 
 import { CopyVolumeModeText } from '~constants/account';
+import { updateAccountService } from '~controllers/account.controller';
 import useToggle from '~hooks/useToggle';
-import { updateAccountService } from '~services/account/updateAccount.service';
 import Box from '~ui/core/Box';
 import Button from '~ui/core/Button';
 import Checkbox from '~ui/core/Checkbox';

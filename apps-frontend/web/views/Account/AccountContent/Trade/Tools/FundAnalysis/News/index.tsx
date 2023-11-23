@@ -3,8 +3,7 @@ import _ from 'lodash';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 
-import { getNewsService } from '~services/news/getNews.service';
-import { watchNewsService } from '~services/news/watchNews.service';
+import { getNewsController, watchNewsService } from '~controllers/news.controller';
 import Button from '~ui/core/Button';
 import Group from '~ui/core/Group';
 import Stack from '~ui/core/Stack';
@@ -23,7 +22,7 @@ function NewsList() {
   ));
 
   useEffect(() => {
-    getNewsService({
+    getNewsController({
       week: type === 'next' ? 'next' : 'this',
     });
   }, [type]);

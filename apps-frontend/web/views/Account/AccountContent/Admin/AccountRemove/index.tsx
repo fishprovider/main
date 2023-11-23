@@ -1,8 +1,8 @@
 import storeUser from '@fishprovider/cross/dist/stores/user';
 import { useRouter } from 'next/router';
 
+import { removeAccountController } from '~controllers/account.controller';
 import Routes from '~libs/routes';
-import { removeAccountService } from '~services/account/removeAccount.service';
 import Button from '~ui/core/Button';
 import Group from '~ui/core/Group';
 import Icon from '~ui/core/Icon';
@@ -18,7 +18,7 @@ function AccountRemove() {
 
     if (!(await openConfirmModal())) return;
 
-    await removeAccountService({ accountId });
+    await removeAccountController({ accountId });
 
     router.push(Routes.strategies);
   };

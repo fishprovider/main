@@ -1,7 +1,7 @@
 import storeUser from '@fishprovider/cross/dist/stores/user';
 
 import AccountHtmlEditor from '~components/account/AccountHtmlEditor';
-import { updateAccountService } from '~services/account/updateAccount.service';
+import { updateAccountService } from '~controllers/account.controller';
 
 function PrivateNotes() {
   const privateNotes = storeUser.useStore((state) => state.activeProvider?.privateNotes);

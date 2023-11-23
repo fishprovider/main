@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 
 import MonthProfit from '~components/account/MonthProfit';
 import Link from '~components/base/Link';
-import { getAccountService } from '~services/account/getAccount.service';
+import { getAccountController } from '~controllers/account.controller';
 import Box from '~ui/core/Box';
 import Card from '~ui/core/Card';
 import Group from '~ui/core/Group';
@@ -24,7 +24,7 @@ function ProfitHistory({
   providerId, icon, ctraderUrl, myFxBookUrl,
 }: Props) {
   useEffect(() => {
-    getAccountService({ accountId: providerId });
+    getAccountController({ accountId: providerId });
   }, [providerId]);
 
   return (

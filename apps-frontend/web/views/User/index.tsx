@@ -4,8 +4,8 @@ import storeUser from '@fishprovider/cross/dist/stores/user';
 import { useState } from 'react';
 
 import VerifyPhone from '~components/user/VerifyPhone';
+import { getUserService } from '~controllers/user.controller';
 import { changePassword, changeProfile, resetPassword } from '~libs/auth';
-import { getUserService } from '~services/user/getUser.service';
 import Avatar from '~ui/core/Avatar';
 import Button from '~ui/core/Button';
 import Group from '~ui/core/Group';

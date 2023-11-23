@@ -3,8 +3,8 @@ import userLogout from '@fishprovider/cross/dist/api/user/logout';
 import storeUser from '@fishprovider/cross/dist/stores/user';
 import type { User } from '@fishprovider/utils/dist/types/User.model';
 
+import { updateUserController } from '~controllers/user.controller';
 import { cacheWrite } from '~libs/cache';
-import { updateUserService } from '~services/user/updateUser.service';
 
 const preLoginPageKey = 'preLoginPage';
 const cacheKeyUser = 'fp-user';
@@ -37,7 +37,7 @@ const onClientLoggedIn = async (
   storeUser.mergeState({ isClientLoggedIn: true });
   await userLogin({ token });
   cacheWrite(cacheKeyUser, userInfo);
-  updateUserService({ email: userInfo.email }, {});
+  updateUserController({ email: userInfo.email }, {});
   redirectPreLoginPage();
 };
 

@@ -3,7 +3,7 @@ import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
 import storeUser from '@fishprovider/cross/dist/stores/user';
 
-import { getAccountsService } from '~services/account/getAccounts.service';
+import { getAccountsController } from '~controllers/account.controller';
 
 function AccountsFetch() {
   const {
@@ -15,11 +15,11 @@ function AccountsFetch() {
   }));
 
   useQuery({
-    queryFn: () => getAccountsService({ accountViewType: AccountViewType.public }),
+    queryFn: () => getAccountsController({ accountViewType: AccountViewType.public }),
     queryKey: queryKeys.slimAccounts(),
   });
   useQuery({
-    queryFn: () => getAccountsService({ email }),
+    queryFn: () => getAccountsController({ email }),
     queryKey: queryKeys.userAccounts(),
     enabled: !!isServerLoggedIn,
   });

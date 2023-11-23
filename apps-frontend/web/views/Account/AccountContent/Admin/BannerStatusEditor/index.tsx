@@ -2,8 +2,8 @@ import storeUser from '@fishprovider/cross/dist/stores/user';
 import { useCallback, useState } from 'react';
 
 import AccountHtmlEditor from '~components/account/AccountHtmlEditor';
+import { updateAccountService } from '~controllers/account.controller';
 import useToggle from '~hooks/useToggle';
-import { updateAccountService } from '~services/account/updateAccount.service';
 import ColorInput from '~ui/core/ColorInput';
 import Switch from '~ui/core/Switch';
 

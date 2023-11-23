@@ -5,9 +5,9 @@ import storeUser from '@fishprovider/cross/dist/stores/user';
 import { useState } from 'react';
 
 import { CardVariant } from '~constants/account';
+import { getAccountsController } from '~controllers/account.controller';
 import useToggle from '~hooks/useToggle';
 import useToggleMulti from '~hooks/useToggleMulti';
-import { getAccountsService } from '~services/account/getAccounts.service';
 import Divider from '~ui/core/Divider';
 import Group from '~ui/core/Group';
 import Icon from '~ui/core/Icon';
@@ -37,11 +37,11 @@ function Catalog() {
   const [cardVariant, toggleCardVariant] = useToggleMulti([CardVariant.default, CardVariant.slim]);
 
   useQuery({
-    queryFn: () => getAccountsService({ accountViewType: AccountViewType.public }),
+    queryFn: () => getAccountsController({ accountViewType: AccountViewType.public }),
     queryKey: queryKeys.slimAccounts(),
   });
   useQuery({
-    queryFn: () => getAccountsService({ email }),
+    queryFn: () => getAccountsController({ email }),
     queryKey: queryKeys.userAccounts(),
     enabled: !!isServerLoggedIn,
   });

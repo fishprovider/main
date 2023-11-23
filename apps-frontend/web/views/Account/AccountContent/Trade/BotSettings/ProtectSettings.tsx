@@ -2,8 +2,8 @@ import storeUser from '@fishprovider/cross/dist/stores/user';
 import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
 import { useState } from 'react';
 
+import { updateAccountService } from '~controllers/account.controller';
 import useToggle from '~hooks/useToggle';
-import { updateAccountService } from '~services/account/updateAccount.service';
 import Box from '~ui/core/Box';
 import Button from '~ui/core/Button';
 import Checkbox from '~ui/core/Checkbox';

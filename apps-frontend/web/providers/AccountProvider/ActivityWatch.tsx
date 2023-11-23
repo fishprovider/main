@@ -2,7 +2,7 @@ import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
 import storeUser from '@fishprovider/cross/dist/stores/user';
 
-import { updateAccountService } from '~services/account/updateAccount.service';
+import { updateAccountService } from '~controllers/account.controller';
 
 function ActivityWatch() {
   const {

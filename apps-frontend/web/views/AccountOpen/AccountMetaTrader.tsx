@@ -4,8 +4,8 @@ import { AccountPlatform, ProviderType } from '@fishprovider/utils/dist/constant
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
+import { addAccountController } from '~controllers/account.controller';
 import Routes from '~libs/routes';
-import { addAccountService } from '~services/account/addAccount.service';
 import Button from '~ui/core/Button';
 import Group from '~ui/core/Group';
 import Radio from '~ui/core/Radio';
@@ -28,7 +28,7 @@ function AccountMetaTrader({ providerType: accountType }: Props) {
   const [server, setServer] = useState('');
 
   const { mutate: add, isLoading } = useMutate({
-    mutationFn: addAccountService,
+    mutationFn: addAccountController,
   });
 
   const onNew = () => {
