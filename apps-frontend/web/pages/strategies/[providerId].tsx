@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 
 import Loading from '~ui/core/Loading';
 
-const StrategyController = dynamic(() => import('~providers/StrategyController'), {
+const StrategyProvider = dynamic(() => import('~providers/StrategyProvider'), {
   loading: () => <Loading />,
 });
 const Strategy = dynamic(() => import('~views/Strategy'), {
@@ -28,9 +28,9 @@ function StrategyPage() {
           content={`FishProvider Strategy ${providerId}`}
         />
       </Head>
-      <StrategyController providerId={providerId}>
+      <StrategyProvider providerId={providerId}>
         <Strategy />
-      </StrategyController>
+      </StrategyProvider>
     </>
   );
 }

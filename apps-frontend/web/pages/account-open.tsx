@@ -3,7 +3,7 @@ import Head from 'next/head';
 
 import Loading from '~ui/core/Loading';
 
-const UserController = dynamic(() => import('~providers/UserController'), {
+const UserProvider = dynamic(() => import('~providers/UserProvider'), {
   loading: () => <Loading />,
 });
 const AccountOpen = dynamic(() => import('~views/AccountOpen'), {
@@ -17,9 +17,9 @@ function AccountOpenPage() {
         <title>Account Open</title>
         <meta name="description" content="FishProvider Account Open" />
       </Head>
-      <UserController title="Open Account">
+      <UserProvider title="Open Account">
         <AccountOpen />
-      </UserController>
+      </UserProvider>
     </>
   );
 }

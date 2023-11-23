@@ -16,8 +16,8 @@ interface Props {
   children: React.ReactNode;
 }
 
-function BaseController({ children }: Props) {
-  Logger.debug('[render] BaseController');
+function BaseProvider({ children }: Props) {
+  Logger.debug('[render] BaseProvider');
   return (
     <ErrorBoundary>
       <QueryProvider>
@@ -35,4 +35,4 @@ function BaseController({ children }: Props) {
   );
 }
 
-export default BaseController;
+export default BaseProvider;

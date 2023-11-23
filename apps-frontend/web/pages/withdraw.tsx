@@ -3,7 +3,7 @@ import Head from 'next/head';
 
 import Loading from '~ui/core/Loading';
 
-const UserController = dynamic(() => import('~providers/UserController'), {
+const UserProvider = dynamic(() => import('~providers/UserProvider'), {
   loading: () => <Loading />,
 });
 const WalletLayout = dynamic(() => import('~layouts/WalletLayout'), {
@@ -20,11 +20,11 @@ function WithdrawPage() {
         <title>Withdraw</title>
         <meta name="description" content="FishProvider Withdraw" />
       </Head>
-      <UserController title="Withdraw">
+      <UserProvider title="Withdraw">
         <WalletLayout>
           <Withdraw />
         </WalletLayout>
-      </UserController>
+      </UserProvider>
     </>
   );
 }

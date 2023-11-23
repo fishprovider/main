@@ -10,10 +10,10 @@ interface Props {
   children: React.ReactNode;
 }
 
-function UserController({ title, children }: Props) {
+function UserProvider({ title, children }: Props) {
   const isServerLoggedIn = storeUser.useStore((state) => state.isServerLoggedIn);
 
-  Logger.debug('[render] UserController', isServerLoggedIn);
+  Logger.debug('[render] UserProvider', isServerLoggedIn);
 
   if (!isServerLoggedIn) {
     return (
@@ -33,4 +33,4 @@ function UserController({ title, children }: Props) {
   );
 }
 
-export default UserController;
+export default UserProvider;

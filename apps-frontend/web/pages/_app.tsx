@@ -25,7 +25,7 @@ import { isBrowser } from '~utils';
 
 // import nextI18nConfig from '../../next-i18next.config';
 
-const BaseController = dynamic(() => import('~providers/BaseController'));
+const BaseProvider = dynamic(() => import('~providers/BaseProvider'));
 
 function MyApp({ Component, pageProps }: AppProps) {
   const pathName = isBrowser ? window.location.pathname : '/';
@@ -39,9 +39,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         />
         <link rel="canonical" href={`https://www.fishprovider.com${pathName}`} />
       </Head>
-      <BaseController>
+      <BaseProvider>
         <Component {...pageProps} />
-      </BaseController>
+      </BaseProvider>
     </>
   );
 }

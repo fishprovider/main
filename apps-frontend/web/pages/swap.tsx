@@ -3,7 +3,7 @@ import Head from 'next/head';
 
 import Loading from '~ui/core/Loading';
 
-const UserController = dynamic(() => import('~providers/UserController'), {
+const UserProvider = dynamic(() => import('~providers/UserProvider'), {
   loading: () => <Loading />,
 });
 const WalletLayout = dynamic(() => import('~layouts/WalletLayout'), {
@@ -20,11 +20,11 @@ function SwapPage() {
         <title>Swap</title>
         <meta name="description" content="FishProvider Swap" />
       </Head>
-      <UserController title="Swap">
+      <UserProvider title="Swap">
         <WalletLayout>
           <Swap />
         </WalletLayout>
-      </UserController>
+      </UserProvider>
     </>
   );
 }

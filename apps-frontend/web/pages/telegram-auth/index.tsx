@@ -3,7 +3,7 @@ import Head from 'next/head';
 
 import Loading from '~ui/core/Loading';
 
-const UserController = dynamic(() => import('~providers/UserController'), {
+const UserProvider = dynamic(() => import('~providers/UserProvider'), {
   loading: () => <Loading />,
 });
 const TelegramAuth = dynamic(() => import('~views/TelegramAuth'), {
@@ -17,9 +17,9 @@ function TelegramAuthPage() {
         <title>Telegram Auth</title>
         <meta name="description" content="FishProvider Telegram Auth" />
       </Head>
-      <UserController title="Telegram Auth">
+      <UserProvider title="Telegram Auth">
         <TelegramAuth />
-      </UserController>
+      </UserProvider>
     </>
   );
 }

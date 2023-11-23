@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 
 import Loading from '~ui/core/Loading';
 
-const AccountController = dynamic(() => import('~providers/AccountController'), {
+const AccountProvider = dynamic(() => import('~providers/AccountProvider'), {
   loading: () => <Loading />,
 });
 const Account = dynamic(() => import('~views/Account'), {
@@ -28,9 +28,9 @@ function AccountPage() {
           content={`FishProvider Account ${providerId}`}
         />
       </Head>
-      <AccountController providerId={providerId}>
+      <AccountProvider providerId={providerId}>
         <Account />
-      </AccountController>
+      </AccountProvider>
     </>
   );
 }

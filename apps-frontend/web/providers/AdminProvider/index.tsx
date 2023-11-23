@@ -6,12 +6,12 @@ interface Props {
   children: React.ReactNode;
 }
 
-function AdminController({ children }: Props) {
+function AdminProvider({ children }: Props) {
   const roles = storeUser.useStore((state) => state.info?.roles);
 
   const { isManagerWeb } = getRoleProvider(roles);
 
-  Logger.debug('[render] AdminController', isManagerWeb);
+  Logger.debug('[render] AdminProvider', isManagerWeb);
 
   useEffect(() => {
     if (isManagerWeb) {
@@ -28,4 +28,4 @@ function AdminController({ children }: Props) {
   );
 }
 
-export default AdminController;
+export default AdminProvider;

@@ -3,7 +3,7 @@ import Head from 'next/head';
 
 import Loading from '~ui/core/Loading';
 
-const UserController = dynamic(() => import('~providers/UserController'), {
+const UserProvider = dynamic(() => import('~providers/UserProvider'), {
   loading: () => <Loading />,
 });
 const CTraderAuth = dynamic(() => import('~views/CTraderAuth'), {
@@ -17,9 +17,9 @@ function CTraderAuthPage() {
         <title>CTrader Auth</title>
         <meta name="description" content="FishProvider CTrader Auth" />
       </Head>
-      <UserController title="Import CTrader Accounts">
+      <UserProvider title="Import CTrader Accounts">
         <CTraderAuth />
-      </UserController>
+      </UserProvider>
     </>
   );
 }

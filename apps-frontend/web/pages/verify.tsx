@@ -3,7 +3,7 @@ import Head from 'next/head';
 
 import Loading from '~ui/core/Loading';
 
-const UserController = dynamic(() => import('~providers/UserController'), {
+const UserProvider = dynamic(() => import('~providers/UserProvider'), {
   loading: () => <Loading />,
 });
 const WalletLayout = dynamic(() => import('~layouts/WalletLayout'), {
@@ -20,11 +20,11 @@ function VerifyPage() {
         <title>Verify</title>
         <meta name="description" content="FishProvider Verify" />
       </Head>
-      <UserController title="Verify">
+      <UserProvider title="Verify">
         <WalletLayout>
           <Verify />
         </WalletLayout>
-      </UserController>
+      </UserProvider>
     </>
   );
 }

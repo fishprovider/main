@@ -3,7 +3,7 @@ import Head from 'next/head';
 
 import Loading from '~ui/core/Loading';
 
-const AdminController = dynamic(() => import('~providers/AdminController'), {
+const AdminProvider = dynamic(() => import('~providers/AdminProvider'), {
   loading: () => <Loading />,
 });
 const Admin = dynamic(() => import('~views/Admin'), {
@@ -17,9 +17,9 @@ function AdminPage() {
         <title>Admin</title>
         <meta name="description" content="FishProvider Admin" />
       </Head>
-      <AdminController>
+      <AdminProvider>
         <Admin />
-      </AdminController>
+      </AdminProvider>
     </>
   );
 }
