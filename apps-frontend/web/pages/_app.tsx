@@ -25,7 +25,7 @@ import { isBrowser } from '~utils';
 
 // import nextI18nConfig from '../../next-i18next.config';
 
-const BaseController = dynamic(() => import('~controllers/BaseController'));
+const BaseController = dynamic(() => import('~providers/BaseController'));
 
 function MyApp({ Component, pageProps }: AppProps) {
   const pathName = isBrowser ? window.location.pathname : '/';

@@ -1,8 +1,8 @@
 import storeUser from '@fishprovider/cross/dist/stores/user';
 import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
 
-import StrategyController from '~controllers/StrategyController';
-import UserController from '~controllers/UserController';
+import StrategyController from '~providers/StrategyController';
+import UserController from '~providers/UserController';
 
 import AccountWatch from './AccountWatch';
 import ActivityWatch from './ActivityWatch';

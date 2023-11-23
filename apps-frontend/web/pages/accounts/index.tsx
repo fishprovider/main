@@ -3,7 +3,7 @@ import Head from 'next/head';
 
 import Loading from '~ui/core/Loading';
 
-const UserController = dynamic(() => import('~controllers/UserController'), {
+const UserController = dynamic(() => import('~providers/UserController'), {
   loading: () => <Loading />,
 });
 const Accounts = dynamic(() => import('~views/Accounts'), {

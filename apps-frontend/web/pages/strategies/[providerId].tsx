@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 
 import Loading from '~ui/core/Loading';
 
-const StrategyController = dynamic(() => import('~controllers/StrategyController'), {
+const StrategyController = dynamic(() => import('~providers/StrategyController'), {
   loading: () => <Loading />,
 });
 const Strategy = dynamic(() => import('~views/Strategy'), {

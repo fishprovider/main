@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 
 import Loading from '~ui/core/Loading';
 
-const AccountController = dynamic(() => import('~controllers/AccountController'), {
+const AccountController = dynamic(() => import('~providers/AccountController'), {
   loading: () => <Loading />,
 });
 const Account = dynamic(() => import('~views/Account'), {

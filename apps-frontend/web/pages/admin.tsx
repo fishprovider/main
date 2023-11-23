@@ -3,7 +3,7 @@ import Head from 'next/head';
 
 import Loading from '~ui/core/Loading';
 
-const AdminController = dynamic(() => import('~controllers/AdminController'), {
+const AdminController = dynamic(() => import('~providers/AdminController'), {
   loading: () => <Loading />,
 });
 const Admin = dynamic(() => import('~views/Admin'), {
