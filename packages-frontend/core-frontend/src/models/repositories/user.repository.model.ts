@@ -1,11 +1,23 @@
 import { Account, User } from '@fishprovider/core';
+import { Socket } from 'socket.io-client';
 
 import {
   BaseGetOptions, BaseGetResult, BaseUpdateOptions, BaseUpdateResult,
 } from '..';
 
 export interface UserInfo {
-  activeAccount?: Account,
+  theme?: string;
+  lang?: string;
+
+  isClientLoggedIn?: boolean;
+  isServerLoggedIn?: boolean,
+
+  activeUser?: Partial<User>,
+  activeAccount?: Partial<Account>,
+  activeSymbol?: string,
+
+  banners?: Record<string, boolean>;
+  socket?: Socket;
 }
 
 export interface UserRepository {
@@ -37,6 +49,10 @@ export interface UserRepository {
   ) => T;
 
   watchUserInfo?: <T>(
-    selector: (state: Record<string, UserInfo>) => T,
+    selector: (state: UserInfo) => T,
   ) => T;
+
+  getUserInfo?: () => UserInfo;
+
+  updateUserInfo?: (payload: Partial<UserInfo>) => void;
 }

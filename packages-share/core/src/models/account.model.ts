@@ -92,6 +92,7 @@ export interface AccountMember {
   role: AccountRole;
   name: string;
 
+  userId?: string;
   picture?: string;
   locks?: AccountLock[];
 
@@ -232,6 +233,8 @@ export interface Account {
   capital?: number;
   rank?: string;
   order?: number;
+  category?: string;
+  categories?: string[];
 
   members: AccountMember[];
   investors?: AccountInvestor[];

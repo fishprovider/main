@@ -1,25 +1,8 @@
-import { Account, User } from '@fishprovider/core';
-import { Socket } from 'socket.io-client';
+import { User } from '@fishprovider/core';
+import { UserInfo } from '@fishprovider/core-frontend';
 
-import { buildStoreObj } from '../store';
+import { buildStoreObj, buildStoreSet } from '../store';
 
-export interface UserStore extends Record<string, any> {
-  isClientLoggedIn?: boolean;
-  isServerLoggedIn?: boolean;
-  info?: Partial<User> | null;
-  socket?: Socket;
+export const storeUsers = buildStoreSet<User>({}, 'users');
 
-  theme: string;
-  lang: string;
-
-  activeProvider?: Account,
-  activeSymbol: string;
-  banners: Record<string, boolean>;
-}
-
-export const storeUser = buildStoreObj<UserStore>({
-  theme: 'light',
-  lang: 'en',
-  activeSymbol: 'EURUSD',
-  banners: {},
-}, 'user');
+export const storeUserInfo = buildStoreObj<UserInfo>({}, 'userInfo');
