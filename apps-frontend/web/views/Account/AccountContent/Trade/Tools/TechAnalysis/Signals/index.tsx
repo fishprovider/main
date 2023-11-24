@@ -1,4 +1,4 @@
-import { AccountType } from '@fishprovider/core';
+import { ProviderType } from '@fishprovider/core';
 import signalGetMany from '@fishprovider/cross/dist/api/signals/getMany';
 import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
@@ -16,10 +16,10 @@ import SignalTradingView from './SignalTradingView';
 
 function Signals() {
   const {
-    accountType = AccountType.icmarkets,
+    providerType = ProviderType.icmarkets,
     symbol = 'AUDUSD',
   } = watchUserInfoController((state) => ({
-    accountType: state.activeAccount?.accountType,
+    providerType: state.activeAccount?.providerType,
     symbol: state.activeSymbol,
   }));
 
@@ -28,7 +28,7 @@ function Signals() {
 
   useQuery({
     queryFn: () => signalGetMany({ symbol }),
-    queryKey: queryKeys.signals(accountType as any, symbol),
+    queryKey: queryKeys.signals(providerType, symbol),
     refetchInterval: 1000 * 60 * 30, // 30m
   });
 

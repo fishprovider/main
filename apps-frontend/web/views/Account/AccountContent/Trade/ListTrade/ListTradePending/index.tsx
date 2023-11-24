@@ -1,4 +1,4 @@
-import { AccountType, getMajorPairs } from '@fishprovider/core';
+import { getMajorPairs, ProviderType } from '@fishprovider/core';
 import orderGetMany from '@fishprovider/cross/dist/api/orders/getMany';
 import orderGetManyInfo from '@fishprovider/cross/dist/api/orders/getManyInfo';
 import orderRemove from '@fishprovider/cross/dist/api/orders/remove';
@@ -33,23 +33,23 @@ interface Props {
 function ListTradePending({ orders }: Props) {
   const {
     accountId = '',
-    accountType = AccountType.icmarkets,
+    providerType = ProviderType.icmarkets,
     roles,
   } = watchUserInfoController((state) => ({
     accountId: state.activeAccount?._id,
-    accountType: state.activeAccount?.accountType,
+    providerType: state.activeAccount?.providerType,
     roles: state.activeUser?.roles,
   }));
 
   const symbols = _.uniq([
-    ...getMajorPairs(accountType),
+    ...getMajorPairs(providerType),
     ...orders.map((item) => item.symbol),
   ]);
 
   const prices = storePrices.useStore((state) => (
     _.pickBy(
       state,
-      (item) => item.providerType === accountType as any && symbols.includes(item.symbol),
+      (item) => item.providerType === providerType && symbols.includes(item.symbol),
     )
   ));
 
@@ -103,13 +103,13 @@ function ListTradePending({ orders }: Props) {
 
     viewOrders = viewOrders.map((item) => {
       const { symbol } = item;
-      const priceDoc = prices[`${accountType}-${symbol}`];
+      const priceDoc = prices[`${providerType}-${symbol}`];
       const entry = getEntry(item);
 
       if (!priceDoc || !entry) return item;
 
       const distance = Math.abs(getDiffPips({
-        providerType: accountType as any,
+        providerType,
         symbol,
         prices,
         entry,

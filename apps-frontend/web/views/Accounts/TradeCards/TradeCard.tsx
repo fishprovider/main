@@ -1,4 +1,4 @@
-import { AccountType } from '@fishprovider/core';
+import { ProviderType } from '@fishprovider/core';
 import _ from 'lodash';
 
 import Link from '~components/base/Link';
@@ -28,7 +28,7 @@ function TradeCard({
   providerId,
 }: Props) {
   const {
-    accountType = AccountType.icmarkets,
+    providerType = ProviderType.icmarkets,
     name = '-',
     icon = '-',
     members = [],
@@ -38,7 +38,7 @@ function TradeCard({
     settings = {},
     activities = {},
   } = watchAccountController((state) => ({
-    accountType: state[providerId]?.accountType,
+    providerType: state[providerId]?.providerType,
     name: state[providerId]?.name,
     icon: state[providerId]?.icon,
     members: state[providerId]?.members,
@@ -64,7 +64,7 @@ function TradeCard({
         <Text>{icon}</Text>
       </Group>
       <Group spacing="xs">
-        <Badge variant="filled">{ProviderTypeText[accountType] || accountType}</Badge>
+        <Badge variant="filled">{ProviderTypeText[providerType] || providerType}</Badge>
         {hasCopy && <CopyStatus providerId={providerId} />}
         {hasLock && <Icon name="Lock" button tooltip="Locked" color="red" onClick={skipClick} />}
         {hasTarget && <Tooltip label="Target Passed">🎉</Tooltip>}

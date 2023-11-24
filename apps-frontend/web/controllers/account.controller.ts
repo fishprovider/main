@@ -1,7 +1,7 @@
 import {
   Account, AccountActivity, AccountBannerStatus, AccountConfig, AccountPlatform,
   AccountProtectSettings, AccountSettings, AccountTradeSettings, AccountTradeType,
-  AccountType, AccountViewType, checkRepository,
+  AccountViewType, checkRepository, ProviderType,
 } from '@fishprovider/core';
 import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
 import { StoreFirstAccountRepository } from '@fishprovider/store-first';
@@ -77,7 +77,7 @@ export const updateAccountController = async (
 export const addAccountController = async (
   payload: {
     name: string,
-    accountType: AccountType,
+    providerType: ProviderType,
     accountPlatform: AccountPlatform,
     accountTradeType: AccountTradeType,
     baseConfig: Partial<AccountConfig>,

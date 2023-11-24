@@ -1,4 +1,4 @@
-export enum AccountType {
+export enum ProviderType {
   myfxbook = 'myfxbook',
   icmarkets = 'icmarkets',
   exness = 'exness',
@@ -82,8 +82,10 @@ export interface AccountInvestor {
   name: string;
   picture?: string;
 
-  percent: number;
+  shares?: number;
+  percent?: number;
 
+  updatedAt: Date;
   createdAt: Date;
 }
 
@@ -187,17 +189,16 @@ export interface AccountStats extends Record<string, any> {
 
 export interface Account {
   _id: string;
+  groupId?: string;
+
   name: string;
+  config: AccountConfig;
 
-  config?: AccountConfig;
-
-  accountType: AccountType;
-  accountPlatform: AccountPlatform;
-  accountPlatformType?: string;
-
-  accountGroupId?: string;
-  accountViewType: AccountViewType;
-  accountTradeType: AccountTradeType;
+  providerType: ProviderType;
+  platform: AccountPlatform;
+  tradeType: AccountTradeType;
+  viewType: AccountViewType;
+  brokerType?: string; // standard, pro, ecn
 
   asset?: string;
   assetId?: string;
@@ -218,23 +219,22 @@ export interface Account {
   maxEquityTime?: Date;
   edd?: number;
 
-  icon?: string;
   monthProfit?: number;
-  roi?: number;
   riskScore?: number;
   winRate?: number;
 
   strategyId?: string;
   strategyLinks?: {
-    type: AccountType;
+    type: ProviderType;
     url: string;
   }[];
   minInvest?: number;
-  capital?: number;
-  rank?: string;
-  order?: number;
+
+  icon?: string;
   category?: string;
   categories?: string[];
+  rank?: string;
+  order?: number;
 
   members: AccountMember[];
   investors?: AccountInvestor[];
@@ -257,6 +257,8 @@ export interface Account {
 
   providerData?: Record<string, any>; // trade data
   summary?: Record<string, any>; // cron data
+  roi?: number;
+  capital?: number;
 
   isSystem?: boolean;
 

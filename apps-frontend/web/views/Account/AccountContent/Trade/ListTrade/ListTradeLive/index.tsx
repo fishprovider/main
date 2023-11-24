@@ -1,4 +1,4 @@
-import { AccountType, getMajorPairs } from '@fishprovider/core';
+import { getMajorPairs, ProviderType } from '@fishprovider/core';
 import orderGetMany from '@fishprovider/cross/dist/api/orders/getMany';
 import orderGetManyInfo from '@fishprovider/cross/dist/api/orders/getManyInfo';
 import orderRemove from '@fishprovider/cross/dist/api/orders/remove';
@@ -33,25 +33,25 @@ const orderRemoveAll = (orders: Order[]) => Promise.all(
 function ListTradeLive({ orders }: Props) {
   const {
     accountId = '',
-    accountType = AccountType.icmarkets,
+    providerType = ProviderType.icmarkets,
     asset = 'USD',
     roles,
   } = watchUserInfoController((state) => ({
     accountId: state.activeAccount?._id,
-    accountType: state.activeAccount?.accountType,
+    providerType: state.activeAccount?.providerType,
     asset: state.activeAccount?.asset,
     roles: state.activeUser?.roles,
   }));
 
   const symbols = _.uniq([
-    ...getMajorPairs(accountType),
+    ...getMajorPairs(providerType),
     ...orders.map((item) => item.symbol),
   ]);
 
   const prices = storePrices.useStore((state) => (
     _.pickBy(
       state,
-      (item) => item.providerType === accountType as any && symbols.includes(item.symbol),
+      (item) => item.providerType === providerType && symbols.includes(item.symbol),
     )
   ));
 
@@ -131,7 +131,7 @@ function ListTradeLive({ orders }: Props) {
     if (mergedView) {
       const groupSymbolOrders = _.groupBy(orders, (item) => item.symbol);
       const mergedOrders = _.flatMap(groupSymbolOrders, (symbolOrders, symbol) => {
-        const digits = storePrices.getState()[`${accountType}-${symbol}`]?.digits;
+        const digits = storePrices.getState()[`${providerType}-${symbol}`]?.digits;
         const directionOrders = _.groupBy(symbolOrders, (item) => item.direction);
         return _.map(directionOrders, (items) => {
           let entry: number | undefined;

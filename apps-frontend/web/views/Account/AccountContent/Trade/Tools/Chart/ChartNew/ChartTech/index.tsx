@@ -1,4 +1,4 @@
-import { AccountType, getMajorPairs } from '@fishprovider/core';
+import { getMajorPairs, ProviderType } from '@fishprovider/core';
 import barGetMany from '@fishprovider/cross/dist/api/bars/getMany';
 import orderRemove from '@fishprovider/cross/dist/api/orders/remove';
 import orderUpdate from '@fishprovider/cross/dist/api/orders/update';
@@ -44,11 +44,11 @@ function ChartTech({ fullscreenAction }: Props) {
   const {
     providerId,
     symbol = 'AUDUSD',
-    accountType = AccountType.icmarkets,
+    providerType = ProviderType.icmarkets,
     asset = 'USD',
   } = watchUserInfoController((state) => ({
     providerId: state.activeAccount?._id,
-    accountType: state.activeAccount?.accountType,
+    providerType: state.activeAccount?.providerType,
     symbol: state.activeSymbol,
     asset: state.activeAccount?.asset,
   }));
@@ -59,15 +59,15 @@ function ChartTech({ fullscreenAction }: Props) {
   ));
 
   const symbols = _.uniq([
-    ...getMajorPairs(accountType),
+    ...getMajorPairs(providerType),
     ...orders.map((item) => item.symbol),
   ]);
 
   const prices = storePrices.useStore((state) => _.pickBy(
     state,
-    (item) => item.providerType === accountType as any && symbols.includes(item.symbol),
+    (item) => item.providerType === providerType && symbols.includes(item.symbol),
   ));
-  const priceDoc = prices[`${accountType}-${symbol}`];
+  const priceDoc = prices[`${providerType}-${symbol}`];
 
   const rate = useConversionRate(symbol);
 
@@ -76,19 +76,19 @@ function ChartTech({ fullscreenAction }: Props) {
 
   const bars = storeBars.useStore((state) => _.filter(
     state,
-    (item) => item.providerType === accountType as any
+    (item) => item.providerType === providerType
       && item.symbol === symbol && item.period === period,
   ));
 
   useEffect(() => {
     setScale(1);
-  }, [accountType, symbol, period]);
+  }, [providerType, symbol, period]);
 
   useQuery({
     queryFn: () => barGetMany({
-      providerType: accountType as any, symbol, period, scale,
+      providerType, symbol, period, scale,
     }),
-    queryKey: queryKeys.bars(accountType as any, symbol, period, scale),
+    queryKey: queryKeys.bars(providerType, symbol, period, scale),
   });
 
   if (!priceDoc) return <Skeleton height={400} />;
@@ -228,7 +228,7 @@ function ChartTech({ fullscreenAction }: Props) {
           data={data}
           srTimeFrs={[]}
           asset={asset}
-          providerType={accountType}
+          providerType={providerType}
           priceDoc={priceDoc}
           prices={prices}
           rate={rate}

@@ -24,7 +24,7 @@ function ListTradeIdea() {
     roles,
   } = watchUserInfoController((state) => ({
     providerId: state.activeAccount?._id,
-    providerType: state.activeAccount?.accountType,
+    providerType: state.activeAccount?.providerType,
     asset: state.activeAccount?.asset,
     roles: state.activeUser?.roles,
   }));
@@ -38,7 +38,7 @@ function ListTradeIdea() {
   ));
 
   const symbols = _.uniq([
-    ...getMajorPairs(providerType as any),
+    ...getMajorPairs(providerType),
     ...orders.map((item) => item.symbol),
   ]);
 

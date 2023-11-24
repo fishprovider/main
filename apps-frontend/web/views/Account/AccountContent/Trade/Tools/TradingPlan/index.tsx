@@ -1,4 +1,4 @@
-import { AccountPlan, AccountPlanType, AccountType } from '@fishprovider/core';
+import { AccountPlan, AccountPlanType, ProviderType } from '@fishprovider/core';
 import priceGetMany from '@fishprovider/cross/dist/api/prices/getMany';
 import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
@@ -17,11 +17,11 @@ function TradingPlan() {
   const {
     plans = [],
     asset = 'USD',
-    accountType = AccountType.icmarkets,
+    providerType = ProviderType.icmarkets,
   } = watchUserInfoController((state) => ({
     plans: state.activeAccount?.plan,
     asset: state.activeAccount?.asset,
-    accountType: state.activeAccount?.accountType,
+    providerType: state.activeAccount?.providerType,
   }));
 
   const symbols = _.sortBy(
@@ -30,12 +30,12 @@ function TradingPlan() {
 
   const prices = storePrices.useStore((state) => _.filter(
     state,
-    (item) => item.providerType === accountType as any && symbols.includes(item.symbol),
+    (item) => item.providerType === providerType && symbols.includes(item.symbol),
   ));
 
   useQuery({
-    queryFn: () => priceGetMany({ providerType: accountType as any, symbols, reload: true }),
-    queryKey: queryKeys.prices(accountType as any, ...symbols),
+    queryFn: () => priceGetMany({ providerType, symbols, reload: true }),
+    queryKey: queryKeys.prices(providerType, ...symbols),
     enabled: !!symbols.length,
   });
 

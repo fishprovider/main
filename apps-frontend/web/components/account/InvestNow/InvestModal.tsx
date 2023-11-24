@@ -24,23 +24,23 @@ function InvestModal({
   onClose = () => undefined,
 }: Props) {
   const {
-    accountGroupId,
+    groupId,
   } = watchAccountController((state) => ({
-    accountGroupId: state[providerId]?.accountGroupId,
+    groupId: state[providerId]?.groupId,
   }));
 
   const groupAccounts = watchAccountController((state) => _.filter(
     state,
-    (item) => (accountGroupId
-      ? item.accountGroupId === accountGroupId
+    (item) => (groupId
+      ? item.groupId === groupId
       : item._id === providerId),
   ));
 
   const canInvestCTrader = groupAccounts.some(
-    (item) => item.accountPlatform === AccountPlatform.ctrader,
+    (item) => item.platform === AccountPlatform.ctrader,
   );
   const canInvestMetaTrader = groupAccounts.some(
-    (item) => item.accountPlatform === AccountPlatform.metatrader,
+    (item) => item.platform === AccountPlatform.metatrader,
   );
 
   const platforms: { label: string, value: AccountPlatform }[] = [
@@ -64,7 +64,7 @@ function InvestModal({
         <InvestPlatforms
           providerId={providerId}
           accountPlatform={platform}
-          groupAccounts={groupAccounts.filter((item) => item.accountPlatform === platform)}
+          groupAccounts={groupAccounts.filter((item) => item.platform === platform)}
           platforms={ctraderPlatforms}
         />
       );
@@ -72,7 +72,7 @@ function InvestModal({
         <InvestPlatforms
           providerId={providerId}
           accountPlatform={platform}
-          groupAccounts={groupAccounts.filter((item) => item.accountPlatform === platform)}
+          groupAccounts={groupAccounts.filter((item) => item.platform === platform)}
           platforms={metatraderPlatforms}
         />
       );

@@ -1,6 +1,4 @@
-import {
-  AccountType, Asset,
-} from '@fishprovider/core';
+import { Asset, ProviderType } from '@fishprovider/core';
 
 import {
   BaseGetManyResult, BaseGetOptions,
@@ -9,7 +7,7 @@ import {
 export interface AssetRepository {
   getAssets?: (
     filter: {
-      accountType: AccountType,
+      providerType: ProviderType,
     },
     options?: BaseGetOptions<Asset>,
   ) => Promise<BaseGetManyResult<Asset>>;

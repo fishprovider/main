@@ -1,4 +1,4 @@
-import { AccountType } from '@fishprovider/core';
+import { ProviderType } from '@fishprovider/core';
 import statsGetManyKeyLevels from '@fishprovider/cross/dist/api/stats/getManyKeyLevels';
 import storePrices from '@fishprovider/cross/dist/stores/prices';
 import storeStats from '@fishprovider/cross/dist/stores/stats';
@@ -18,11 +18,11 @@ interface Props {
 
 function KeyLevelTimeFr({ symbol, timeFr }: Props) {
   const {
-    accountType = AccountType.icmarkets,
+    providerType = ProviderType.icmarkets,
   } = watchUserInfoController((state) => ({
-    accountType: state.activeAccount?.accountType,
+    providerType: state.activeAccount?.providerType,
   }));
-  const priceDoc = storePrices.useStore((prices) => prices[`${accountType}-${symbol}`]);
+  const priceDoc = storePrices.useStore((prices) => prices[`${providerType}-${symbol}`]);
   const srTimeFr = storeStats.useStore((state) => _.find(
     state,
     (item) => item.type === 'keyLevels' && item.symbol === symbol && item.timeFr === timeFr,
@@ -65,7 +65,7 @@ function KeyLevelTimeFr({ symbol, timeFr }: Props) {
           if (priceDoc && keyLevels[topIndex]) {
             currentSR.pips = _.round(
               getDiffPips({
-                providerType: accountType as any,
+                providerType,
                 symbol,
                 prices: { [priceDoc._id]: priceDoc },
                 entry: keyLevels[topIndex] as number,
@@ -81,7 +81,7 @@ function KeyLevelTimeFr({ symbol, timeFr }: Props) {
           if (priceDoc && keyLevels[topIndex]) {
             currentSR.pips = _.round(
               getDiffPips({
-                providerType: accountType as any,
+                providerType,
                 symbol,
                 prices: { [priceDoc._id]: priceDoc },
                 entry: priceDoc?.last,

@@ -1,4 +1,4 @@
-import { AccountType, forexMajorPairs } from '@fishprovider/core';
+import { forexMajorPairs, ProviderType } from '@fishprovider/core';
 import orderGetMany from '@fishprovider/cross/dist/api/orders/getMany';
 import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
@@ -30,12 +30,12 @@ function TradeInfo({
   providerId,
 }: Props) {
   const {
-    accountType = AccountType.icmarkets,
+    providerType = ProviderType.icmarkets,
     balance = 0,
     marginRaw = 0,
     asset = 'USD',
   } = watchAccountController((state) => ({
-    accountType: state[providerId]?.accountType,
+    providerType: state[providerId]?.providerType,
     balance: state[providerId]?.balance,
     marginRaw: state[providerId]?.margin,
     asset: state[providerId]?.asset,
@@ -54,7 +54,7 @@ function TradeInfo({
 
   const prices = storePrices.useStore((state) => _.pickBy(
     state,
-    (item) => item.providerType === accountType as any && symbols.includes(item.symbol),
+    (item) => item.providerType === providerType && symbols.includes(item.symbol),
   ));
 
   useQuery({

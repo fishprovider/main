@@ -1,5 +1,5 @@
 import {
-  Account, AccountPlatform, AccountTradeType, AccountType,
+  Account, AccountPlatform, AccountTradeType, ProviderType,
 } from '@fishprovider/core';
 import _ from 'lodash';
 import { useRouter } from 'next/router';
@@ -33,7 +33,7 @@ function ImportAccounts({ accounts }: { accounts: Partial<Account>[] }) {
     }
     addAccountController({
       name,
-      accountType: AccountType.icmarkets,
+      providerType: ProviderType.icmarkets,
       accountPlatform: AccountPlatform.ctrader,
       accountTradeType: account?.config?.isLive ? AccountTradeType.live : AccountTradeType.demo,
       baseConfig: account.config,

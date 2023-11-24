@@ -1,4 +1,4 @@
-import { AccountType } from '@fishprovider/core';
+import { ProviderType } from '@fishprovider/core';
 import { Direction, OrderStatus, OrderType } from '@fishprovider/utils/dist/constants/order';
 import { getEntry, getProfit } from '@fishprovider/utils/dist/helpers/order';
 import { getDiffPips, getLotFromVolume } from '@fishprovider/utils/dist/helpers/price';
@@ -55,7 +55,7 @@ interface Props {
     timeFr: string,
   }[],
   asset: string,
-  providerType: AccountType,
+  providerType: ProviderType,
   priceDoc: Price,
   prices: Record<string, Price>,
   rate: number,
@@ -225,13 +225,13 @@ function FinChart({
     };
     const label = getLabel();
     const lot = getLotFromVolume({
-      providerType: providerType as any,
+      providerType,
       symbol: order.symbol,
       prices,
       volume,
     }).lot || 0;
     const pips = Math.abs(getDiffPips({
-      providerType: providerType as any,
+      providerType,
       symbol: order.symbol,
       prices,
       entry: priceDoc.last,

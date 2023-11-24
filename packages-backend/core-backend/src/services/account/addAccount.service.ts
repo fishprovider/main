@@ -1,6 +1,5 @@
 import {
-  AccountConfig, AccountError, AccountRole, AccountViewType, BaseError,
-  checkRepository,
+  AccountConfig, AccountError, AccountRole, AccountViewType, BaseError, checkRepository,
 } from '@fishprovider/core';
 import _ from 'lodash';
 
@@ -26,10 +25,10 @@ export const addAccountService: AddAccountService = async ({
   // main
   //
   const {
-    name, accountType, accountPlatform, accountTradeType, baseConfig,
+    name, providerType, accountPlatform, accountTradeType, baseConfig,
   } = payload;
 
-  if (!name || !accountType || !accountPlatform || !baseConfig) {
+  if (!name || !providerType || !accountPlatform || !baseConfig) {
     throw new BaseError(AccountError.ACCOUNT_BAD_REQUEST);
   }
 
@@ -76,7 +75,7 @@ export const addAccountService: AddAccountService = async ({
     accountId: '',
     name,
     config,
-    accountType,
+    providerType,
     accountPlatform,
     accountTradeType,
     accountViewType: AccountViewType.private,
@@ -90,7 +89,7 @@ export const addAccountService: AddAccountService = async ({
     accountId,
     config,
     name,
-    accountType,
+    providerType,
     accountPlatform,
     accountTradeType,
     accountViewType: AccountViewType.private,

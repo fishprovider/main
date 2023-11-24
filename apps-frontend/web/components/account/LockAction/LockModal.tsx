@@ -48,7 +48,7 @@ function LockModal({
   const {
     providerType = ProviderType.icmarkets,
   } = watchUserInfoController((state) => ({
-    providerType: state.activeAccount?.accountType,
+    providerType: state.activeAccount?.providerType,
   }));
 
   const allSymbols = storePrices.useStore((state) => _.filter(
@@ -64,8 +64,8 @@ function LockModal({
   const [lockMessage, setLockMessage] = useState('Have some rest 💤');
 
   useQuery({
-    queryFn: () => priceGetNames({ providerType: providerType as any }),
-    queryKey: queryKeys.symbols(providerType as any),
+    queryFn: () => priceGetNames({ providerType }),
+    queryKey: queryKeys.symbols(providerType),
   });
 
   const validate = () => {

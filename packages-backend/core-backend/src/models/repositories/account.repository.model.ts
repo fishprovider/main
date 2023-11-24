@@ -1,7 +1,7 @@
 import {
   Account, AccountActivity, AccountBannerStatus, AccountConfig, AccountMember, AccountPlatform,
-  AccountProtectSettings, AccountSettings, AccountTradeSettings, AccountTradeType, AccountType,
-  AccountViewType,
+  AccountProtectSettings, AccountSettings, AccountTradeSettings, AccountTradeType, AccountViewType,
+  ProviderType,
 } from '@fishprovider/core';
 
 import {
@@ -86,7 +86,7 @@ export interface AccountRepository {
       accountId: string,
       name: string,
       config?: AccountConfig,
-      accountType: AccountType,
+      providerType: ProviderType,
       accountPlatform: AccountPlatform,
       accountViewType: AccountViewType,
       accountTradeType: AccountTradeType,

@@ -1,4 +1,4 @@
-import { AccountPlanType, AccountType } from '@fishprovider/core';
+import { AccountPlanType, ProviderType } from '@fishprovider/core';
 import priceGetDetail from '@fishprovider/cross/dist/api/prices/getDetail';
 import priceGetMany from '@fishprovider/cross/dist/api/prices/getMany';
 import priceGetNames from '@fishprovider/cross/dist/api/prices/getNames';
@@ -20,32 +20,32 @@ interface Props {
 function SymbolsSelect({ hidePriceView }: Props) {
   const {
     symbol = 'AUDUSD',
-    accountType = AccountType.icmarkets,
+    providerType = ProviderType.icmarkets,
     plans = [],
   } = watchUserInfoController((state) => ({
     symbol: state.activeSymbol,
-    accountType: state.activeAccount?.accountType,
+    providerType: state.activeAccount?.providerType,
     plans: state.activeAccount?.plan,
   }));
 
   const allSymbols = storePrices.useStore((state) => _.filter(
     state,
-    (item) => item.providerType === accountType as any,
+    (item) => item.providerType === providerType,
   ).map((item) => item.symbol));
 
   useQuery({
-    queryFn: () => priceGetNames({ providerType: accountType as any }),
-    queryKey: queryKeys.symbols(accountType as any),
+    queryFn: () => priceGetNames({ providerType }),
+    queryKey: queryKeys.symbols(providerType),
   });
 
   useQuery({
-    queryFn: () => priceGetMany({ providerType: accountType as any, symbols: [symbol], reload: true }),
-    queryKey: queryKeys.prices(accountType as any, symbol),
+    queryFn: () => priceGetMany({ providerType, symbols: [symbol], reload: true }),
+    queryKey: queryKeys.prices(providerType, symbol),
   });
 
   useQuery({
-    queryFn: () => priceGetDetail({ providerType: accountType as any, symbol }),
-    queryKey: queryKeys.detail(accountType as any, symbol),
+    queryFn: () => priceGetDetail({ providerType, symbol }),
+    queryKey: queryKeys.detail(providerType, symbol),
   });
 
   const symbolsPlan = (plans.find((plan) => (plan.type === AccountPlanType.pairs))

@@ -1,6 +1,6 @@
 import { CacheFirstAccountRepository, CacheFirstUserRepository } from '@fishprovider/cache-first';
 import {
-  Account, AccountPlatform, AccountTradeType, AccountType,
+  Account, AccountPlatform, AccountTradeType, ProviderType,
 } from '@fishprovider/core';
 import { addAccountService } from '@fishprovider/core-backend';
 import { TradeAccountRepository } from '@fishprovider/trade';
@@ -15,7 +15,7 @@ const env = {
 const handler: ApiHandler<Partial<Account>> = async (data, userSession) => {
   const payload = z.object({
     name: z.string(),
-    accountType: z.nativeEnum(AccountType),
+    providerType: z.nativeEnum(ProviderType),
     accountPlatform: z.nativeEnum(AccountPlatform),
     accountTradeType: z.nativeEnum(AccountTradeType),
     baseConfig: z.object({
@@ -40,13 +40,13 @@ const handler: ApiHandler<Partial<Account>> = async (data, userSession) => {
     .parse(data);
 
   const {
-    name, accountType, accountPlatform, accountTradeType, baseConfig,
+    name, providerType, accountPlatform, accountTradeType, baseConfig,
   } = payload;
 
   const { doc: account = {} } = await addAccountService({
     payload: {
       name,
-      accountType,
+      providerType,
       accountPlatform,
       accountTradeType,
       baseConfig,

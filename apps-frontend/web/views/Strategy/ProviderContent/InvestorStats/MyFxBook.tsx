@@ -1,4 +1,4 @@
-import { AccountType } from '@fishprovider/core';
+import { ProviderType } from '@fishprovider/core';
 
 import Link from '~components/base/Link';
 import { watchUserInfoController } from '~controllers/user.controller';
@@ -8,7 +8,9 @@ import ThemeProvider from '~ui/themes/ThemeProvider';
 
 function MyFxBook() {
   const myfxbookUrl = watchUserInfoController(
-    (state) => state.activeAccount?.strategyLinks?.find((item) => item.type === AccountType.myfxbook)?.url,
+    (state) => state.activeAccount?.strategyLinks?.find(
+      (item) => item.type === ProviderType.myfxbook,
+    )?.url,
   );
 
   if (!myfxbookUrl) return null;

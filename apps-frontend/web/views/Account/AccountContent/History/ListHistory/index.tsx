@@ -34,7 +34,7 @@ function History() {
     asset = 'USD',
   } = watchUserInfoController((state) => ({
     providerId: state.activeAccount?._id,
-    providerType: state.activeAccount?.accountType,
+    providerType: state.activeAccount?.providerType,
     asset: state.activeAccount?.asset,
   }));
   const deals = storeOrders.useStore((state) => (
@@ -52,7 +52,7 @@ function History() {
   const orders = _.orderBy(deals, ['createdAt'], ['desc'])
     .slice(rowRange[0], rowRange[1]);
   const symbols = _.sortBy(_.uniq([
-    ...getMajorPairs(providerType as any),
+    ...getMajorPairs(providerType),
     ...orders.map((order) => order.symbol),
   ]));
 
@@ -61,8 +61,8 @@ function History() {
   }, [providerId]);
 
   useQuery({
-    queryFn: () => priceGetMany({ providerType: providerType as any, symbols, reload: true }),
-    queryKey: queryKeys.prices(providerType as any, ...symbols),
+    queryFn: () => priceGetMany({ providerType, symbols, reload: true }),
+    queryKey: queryKeys.prices(providerType, ...symbols),
     enabled: !!symbols.length,
   });
 

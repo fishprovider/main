@@ -1,4 +1,4 @@
-import { AccountType } from '@fishprovider/core';
+import { ProviderType } from '@fishprovider/core';
 import storePrices from '@fishprovider/cross/dist/stores/prices';
 import { getDiffPips } from '@fishprovider/utils/dist/helpers/price';
 import _ from 'lodash';
@@ -10,15 +10,15 @@ import { getMarketState } from '~utils/price';
 
 function PriceView() {
   const {
-    accountType = AccountType.icmarkets,
+    providerType = ProviderType.icmarkets,
     accountPlatform,
     symbol = 'AUDUSD',
   } = watchUserInfoController((state) => ({
-    accountType: state.activeAccount?.accountType,
-    accountPlatform: state.activeAccount?.accountPlatform,
+    providerType: state.activeAccount?.providerType,
+    accountPlatform: state.activeAccount?.platform,
     symbol: state.activeSymbol,
   }));
-  const priceDoc = storePrices.useStore((prices) => prices[`${accountType}-${symbol}`]);
+  const priceDoc = storePrices.useStore((prices) => prices[`${providerType}-${symbol}`]);
 
   if (!priceDoc) return null;
 
@@ -29,7 +29,7 @@ function PriceView() {
   } = priceDoc;
 
   const spread = bid && ask && getDiffPips({
-    providerType: accountType as any,
+    providerType,
     symbol,
     prices: { [priceDoc._id]: priceDoc },
     entry: bid,

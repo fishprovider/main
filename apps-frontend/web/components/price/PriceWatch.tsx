@@ -1,4 +1,4 @@
-import { AccountType, getMajorPairs } from '@fishprovider/core';
+import { getMajorPairs, ProviderType } from '@fishprovider/core';
 import priceGetMany from '@fishprovider/cross/dist/api/prices/getMany';
 import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
@@ -13,7 +13,7 @@ import { useEffect, useRef, useState } from 'react';
 import { watchUserInfoController } from '~controllers/user.controller';
 import { refreshMS } from '~utils';
 
-const usePricesSocket = (accountType: AccountType, watchSymbols: string[]) => {
+const usePricesSocket = (providerType: ProviderType, watchSymbols: string[]) => {
   const socket = watchUserInfoController((state) => state.socket);
 
   const [symbols, setSymbols] = useState(watchSymbols);
@@ -26,7 +26,7 @@ const usePricesSocket = (accountType: AccountType, watchSymbols: string[]) => {
 
   const prevChannels = useRef<string[]>();
   useEffect(() => {
-    prevChannels.current = symbols.map(((symbol) => redisKeys.price(accountType as any, symbol)));
+    prevChannels.current = symbols.map(((symbol) => redisKeys.price(providerType, symbol)));
   });
 
   useEffect(() => {
@@ -40,7 +40,7 @@ const usePricesSocket = (accountType: AccountType, watchSymbols: string[]) => {
       }
 
       symbols.forEach((symbol) => {
-        const channel = redisKeys.price(accountType as any, symbol);
+        const channel = redisKeys.price(providerType, symbol);
         Logger.debug('[socket] sub', channel);
         socket.emit('join', channel);
         socket.on(channel, (doc: Price) => {
@@ -54,25 +54,25 @@ const usePricesSocket = (accountType: AccountType, watchSymbols: string[]) => {
     return () => {
       if (socket) {
         symbols.forEach((symbol) => {
-          const channel = redisKeys.price(accountType as any, symbol);
+          const channel = redisKeys.price(providerType, symbol);
           Logger.debug('[socket] unsub from unmount', channel);
           socket.off(channel);
           socket.emit('leave', channel);
         });
       }
     };
-  }, [socket, accountType, symbols]);
+  }, [socket, providerType, symbols]);
 };
 
 interface PriceWatchProps {
   accountId: string;
-  accountType: AccountType;
+  providerType: ProviderType;
   activeSymbol: string;
   orderStatuses: OrderStatus[];
 }
 
 function PriceWatch({
-  accountId, accountType, activeSymbol, orderStatuses,
+  accountId, providerType, activeSymbol, orderStatuses,
 }: PriceWatchProps) {
   const orders = storeOrders.useStore((state) => _.filter(
     state,
@@ -80,24 +80,24 @@ function PriceWatch({
   ));
 
   const symbols = _.sortBy(_.uniq([
-    ...getMajorPairs(accountType),
+    ...getMajorPairs(providerType),
     ...orders.map((item) => item.symbol),
     activeSymbol,
   ]));
 
   useEffect(() => {
-    priceGetMany({ providerType: accountType as any, symbols, reload: true });
+    priceGetMany({ providerType, symbols, reload: true });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [symbols.length]);
 
   useQuery({
-    queryFn: () => priceGetMany({ providerType: accountType as any, symbols }),
-    queryKey: queryKeys.prices(accountType as any, ...symbols),
+    queryFn: () => priceGetMany({ providerType, symbols }),
+    queryKey: queryKeys.prices(providerType, ...symbols),
     enabled: !!symbols.length,
     refetchInterval: refreshMS,
   });
 
-  usePricesSocket(accountType, symbols);
+  usePricesSocket(providerType, symbols);
 
   return null;
 }

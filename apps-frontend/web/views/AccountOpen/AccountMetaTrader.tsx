@@ -1,6 +1,5 @@
-import { AccountTradeType, AccountType } from '@fishprovider/core';
+import { AccountPlatform, AccountTradeType, ProviderType } from '@fishprovider/core';
 import { useMutate } from '@fishprovider/cross/dist/libs/query';
-import { AccountPlatform, ProviderType } from '@fishprovider/utils/dist/constants/account';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
@@ -18,7 +17,7 @@ interface Props {
   providerType: ProviderType,
 }
 
-function AccountMetaTrader({ providerType: accountType }: Props) {
+function AccountMetaTrader({ providerType }: Props) {
   const router = useRouter();
 
   const [name, setName] = useState('');
@@ -34,7 +33,7 @@ function AccountMetaTrader({ providerType: accountType }: Props) {
   const onNew = () => {
     add({
       name,
-      accountType: accountType as any as AccountType,
+      providerType,
       accountPlatform: AccountPlatform.metatrader,
       accountTradeType: isLive ? AccountTradeType.live : AccountTradeType.demo,
       baseConfig: {

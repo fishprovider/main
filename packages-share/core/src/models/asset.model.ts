@@ -1,8 +1,8 @@
-import { AccountType } from '..';
+import { ProviderType } from '..';
 
 export interface Asset {
   _id: string
-  accountType: AccountType;
+  providerType: ProviderType;
 
   asset: string;
   assetId: string;

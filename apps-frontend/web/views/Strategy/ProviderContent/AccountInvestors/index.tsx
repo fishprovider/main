@@ -1,4 +1,4 @@
-import type { Investor } from '@fishprovider/utils/dist/types/Account.model';
+import { AccountInvestor } from '@fishprovider/core';
 import _ from 'lodash';
 
 import { watchUserInfoController } from '~controllers/user.controller';
@@ -18,7 +18,7 @@ function AccountInvestors() {
 
   if (!investors?.length) return null;
 
-  const renderRow = (investor: Investor, rowIndex: number) => (
+  const renderRow = (investor: AccountInvestor, rowIndex: number) => (
     <Table.Row key={rowIndex}>
       <Table.Cell>
         <Group>

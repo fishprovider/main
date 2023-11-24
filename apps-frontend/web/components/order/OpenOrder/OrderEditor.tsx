@@ -1,4 +1,4 @@
-import { AccountPlanType, AccountPlatform, AccountType } from '@fishprovider/core';
+import { AccountPlanType, AccountPlatform, ProviderType } from '@fishprovider/core';
 import storePrices from '@fishprovider/cross/dist/stores/prices';
 import { Direction, OrderStatus, OrderType } from '@fishprovider/utils/dist/constants/order';
 import { getPriceFromAmount, getVolumeFromLot } from '@fishprovider/utils/dist/helpers/price';
@@ -29,7 +29,7 @@ function OrderEditor({
   onSubmit, loading,
 }: Props) {
   const {
-    accountType = AccountType.icmarkets,
+    providerType = ProviderType.icmarkets,
     accountPlatform = AccountPlatform.ctrader,
     asset = 'USD',
     plan = [],
@@ -37,8 +37,8 @@ function OrderEditor({
     symbol = 'AUDUSD',
     orderLast,
   } = watchUserInfoController((state) => ({
-    accountType: state.activeAccount?.accountType,
-    accountPlatform: state.activeAccount?.accountPlatform,
+    providerType: state.activeAccount?.providerType,
+    accountPlatform: state.activeAccount?.platform,
     asset: state.activeAccount?.asset,
     plan: state.activeAccount?.plan,
     balance: state.activeAccount?.balance,
@@ -46,7 +46,7 @@ function OrderEditor({
     orderLast: state[getSessionKey('orderLast')] as OrderWithoutId | undefined,
   }));
 
-  const priceDoc = storePrices.useStore((prices) => prices[`${accountType}-${symbol}`]);
+  const priceDoc = storePrices.useStore((prices) => prices[`${providerType}-${symbol}`]);
   const rate = useConversionRate(symbol);
 
   const [orderType, setOrderType] = useState<OrderType>(orderLast?.orderType || OrderType.market);
@@ -91,7 +91,7 @@ function OrderEditor({
     if (!priceDoc) return 0;
 
     return getVolumeFromLot({
-      providerType: accountType as any,
+      providerType,
       symbol,
       prices: { [priceDoc._id]: priceDoc },
       lot: 0.01,
@@ -133,7 +133,7 @@ function OrderEditor({
 
     const order = {
       providerId,
-      providerType: accountType,
+      providerType,
       accountPlatform,
 
       orderType,
@@ -205,7 +205,7 @@ function OrderEditor({
 
   const renderVolumeLots = () => (
     <VolumeLots
-      providerType={accountType as any}
+      providerType={providerType}
       symbol={symbol}
       volume={volume}
       onChange={setVolumeInput}
@@ -219,7 +219,7 @@ function OrderEditor({
       return (
         <PricePips
           label="Limit price"
-          providerType={accountType as any}
+          providerType={providerType}
           symbol={symbol}
           entry={priceDoc.last}
           newPrice={+limitPrice}
@@ -253,7 +253,7 @@ function OrderEditor({
       return (
         <PricePips
           label="Stop price"
-          providerType={accountType as any}
+          providerType={providerType}
           symbol={symbol}
           entry={priceDoc.last}
           newPrice={+limitPrice}
@@ -310,7 +310,7 @@ function OrderEditor({
         {hasStopLoss && (
           <PricePips
             label="Stop Loss"
-            providerType={accountType as any}
+            providerType={providerType}
             symbol={symbol}
             entry={entry}
             newPrice={+stopLoss}
@@ -343,7 +343,7 @@ function OrderEditor({
         {hasTakeProfit && (
           <PricePips
             label="Take Profit"
-            providerType={accountType as any}
+            providerType={providerType}
             symbol={symbol}
             entry={entry}
             newPrice={+takeProfit}

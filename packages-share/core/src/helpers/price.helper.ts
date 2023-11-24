@@ -1,7 +1,7 @@
-import { AccountType, forexMajorPairs } from '..';
+import { forexMajorPairs, ProviderType } from '..';
 
-export const getMajorPairs = (accountType: AccountType) => {
-  switch (accountType) {
+export const getMajorPairs = (providerType: ProviderType) => {
+  switch (providerType) {
     // TODO: handle account types
     default:
       return forexMajorPairs;

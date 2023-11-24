@@ -1,6 +1,4 @@
-import {
-  AccountType, Asset,
-} from '@fishprovider/core';
+import { Asset, ProviderType } from '@fishprovider/core';
 
 import {
   AssetRepository, BaseGetManyResult, BaseGetServiceParams,
@@ -8,7 +6,7 @@ import {
 
 export type GetAssetsService = (params: BaseGetServiceParams<Asset> & {
   filter: {
-    accountType: AccountType,
+    providerType: ProviderType,
   },
   repositories: {
     asset: AssetRepository

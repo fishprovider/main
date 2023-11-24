@@ -1,4 +1,4 @@
-import { AccountType } from '@fishprovider/core';
+import { ProviderType } from '@fishprovider/core';
 import { OrderStatus } from '@fishprovider/utils/dist/constants/order';
 
 import PriceWatch from '~components/price/PriceWatch';
@@ -12,10 +12,10 @@ function TradeWatch() {
   const {
     accountId,
     activeSymbol = 'AUDUSD',
-    accountType = AccountType.icmarkets,
+    providerType = ProviderType.icmarkets,
   } = watchUserInfoController((state) => ({
     accountId: state.activeAccount?._id,
-    accountType: state.activeAccount?.accountType,
+    providerType: state.activeAccount?.providerType,
     activeSymbol: state.activeSymbol,
   }));
 
@@ -26,7 +26,7 @@ function TradeWatch() {
       {accountId && (
         <PriceWatch
           accountId={accountId}
-          accountType={accountType}
+          providerType={providerType}
           activeSymbol={activeSymbol}
           orderStatuses={[OrderStatus.live, OrderStatus.pending]}
         />

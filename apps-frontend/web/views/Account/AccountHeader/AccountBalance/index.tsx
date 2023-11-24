@@ -1,4 +1,4 @@
-import { AccountType, getMajorPairs } from '@fishprovider/core';
+import { getMajorPairs, ProviderType } from '@fishprovider/core';
 import { useMutate } from '@fishprovider/cross/dist/libs/query';
 import storeOrders from '@fishprovider/cross/dist/stores/orders';
 import storePrices from '@fishprovider/cross/dist/stores/prices';
@@ -19,14 +19,14 @@ import { getAccountStats } from '~utils/account';
 function AccountBalance() {
   const {
     providerId = '',
-    accountType = AccountType.icmarkets,
+    providerType = ProviderType.icmarkets,
     balance = 0,
     leverage,
     marginRaw = 0,
     asset = 'USD',
   } = watchUserInfoController((state) => ({
     providerId: state.activeAccount?._id,
-    accountType: state.activeAccount?.accountType,
+    providerType: state.activeAccount?.providerType,
     balance: state.activeAccount?.balance,
     leverage: state.activeAccount?.leverage,
     marginRaw: state.activeAccount?.margin,
@@ -37,13 +37,13 @@ function AccountBalance() {
     (order) => order.providerId === providerId && order.status === OrderStatus.live,
   ));
   const symbols = _.uniq([
-    ...getMajorPairs(accountType),
+    ...getMajorPairs(providerType),
     ...liveOrders.map((order) => order.symbol),
   ]);
 
   const prices = storePrices.useStore((state) => _.pickBy(
     state,
-    (item) => item.providerType === accountType as any && symbols.includes(item.symbol),
+    (item) => item.providerType === providerType && symbols.includes(item.symbol),
   ));
 
   const profit = getProfit(liveOrders, prices, asset);

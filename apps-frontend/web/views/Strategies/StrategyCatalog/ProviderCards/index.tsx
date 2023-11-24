@@ -39,7 +39,7 @@ function ProviderCards({
   const pageProviderIds = watchAccountController((state) => _.orderBy(
     _.filter(state, (account) => {
       if (!account.strategyId) return false;
-      if (account.accountGroupId && account.accountGroupId !== account._id) return false;
+      if (account.groupId && account.groupId !== account._id) return false;
       if (favorite && !starProviders[account._id]) return false;
       if (search && !account.name.toLowerCase().includes(search.toLowerCase())) return false;
       if (category && !(account.category === category || account.categories?.includes(category)

@@ -30,7 +30,7 @@ function InvestorStats() {
     summary = {},
   } = watchUserInfoController((state) => ({
     providerId: state.activeAccount?._id,
-    accountPlatform: state.activeAccount?.accountPlatform,
+    accountPlatform: state.activeAccount?.platform,
     createdAt: state.activeAccount?.createdAt,
     capital: state.activeAccount?.capital,
     riskScore: state.activeAccount?.riskScore,

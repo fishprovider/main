@@ -13,7 +13,7 @@ import AccountEditor from './AccountEditor';
 
 function AccountEdit() {
   const account = watchUserInfoController((state) => ({
-    accountViewType: state.activeAccount?.accountViewType,
+    viewType: state.activeAccount?.viewType,
     name: state.activeAccount?.name,
     icon: state.activeAccount?.icon,
     strategyId: state.activeAccount?.strategyId,
@@ -22,7 +22,7 @@ function AccountEdit() {
   const [isEdit, setIsEdit] = useState(false);
 
   const {
-    accountViewType, name, icon, strategyId,
+    viewType, name, icon, strategyId,
   } = account;
 
   const renderToolbar = () => (isEdit ? (
@@ -35,10 +35,10 @@ function AccountEdit() {
     <>
       <Group>
         <Icon
-          name={accountViewType === AccountViewType.private ? 'VisibilityOff' : 'Visibility'}
-          tooltip={AccountViewTypeText[accountViewType as AccountViewType]}
+          name={viewType === AccountViewType.private ? 'VisibilityOff' : 'Visibility'}
+          tooltip={AccountViewTypeText[viewType || '']}
         />
-        <Text>{AccountViewTypeText[accountViewType as AccountViewType]}</Text>
+        <Text>{AccountViewTypeText[viewType || '']}</Text>
       </Group>
       <Text>{`Name: ${name || ''}`}</Text>
       <Text>{`Icon: ${icon || ''}`}</Text>

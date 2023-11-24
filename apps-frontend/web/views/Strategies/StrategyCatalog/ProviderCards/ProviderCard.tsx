@@ -45,7 +45,7 @@ function ProviderCard({
     roi = 0,
     summary = {},
   } = watchAccountController((state) => ({
-    accountViewType: state[providerId]?.accountViewType,
+    accountViewType: state[providerId]?.viewType,
     name: state[providerId]?.name,
     icon: state[providerId]?.icon,
     createdAt: state[providerId]?.createdAt,
