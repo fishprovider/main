@@ -3,4 +3,10 @@
     "./tsconfig.json",
     "../../tsconfig.build.json",
   ],
+  "references": [
+    { "path": "../../packages-backend/discord" },
+    { "path": "../../packages-backend/expo" },
+    { "path": "../../packages-backend/firebase" },
+    { "path": "../../packages-backend/slack" },
+  ]
 }

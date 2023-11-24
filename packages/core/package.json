@@ -9,7 +9,7 @@
     "test-unit": "NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules npx jest",
     "test-int": "NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules doppler run --print-config -- npx jest --runInBand",
     "clean": "rm -rf dist .eslintcache *.tsbuildinfo",
-    "build": "tsc -p tsconfig.build.json && tsc-alias -p tsconfig.build.json",
+    "build": "tsc -b tsconfig.build.json && tsc-alias -p tsconfig.build.json",
     "ci-lint": "eslint --cache --fix",
     "ci-type-check": "tsc-files --noEmit types/global.d.ts"
   },

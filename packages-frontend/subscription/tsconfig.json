@@ -5,4 +5,7 @@
     "outDir": "dist",
   },
   "include": ["**/*.ts"],
+  "references": [
+    { "path": "../../packages-share/core" },
+  ]
 }

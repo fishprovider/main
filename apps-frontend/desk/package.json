@@ -8,9 +8,9 @@
   "type": "module",
   "scripts": {
     "lint": "eslint --cache --fix --ignore-pattern vite.config.js .",
-    "type-check:main": "tsc -p packages/main/tsconfig.json",
-    "type-check:preload": "tsc -p packages/preload/tsconfig.json",
-    "type-check:renderer": "tsc -p packages/renderer/tsconfig.json",
+    "type-check:main": "tsc -b packages/main/tsconfig.json",
+    "type-check:preload": "tsc -b packages/preload/tsconfig.json",
+    "type-check:renderer": "tsc -b packages/renderer/tsconfig.json",
     "type-check": "npm run type-check:main && npm run type-check:preload && npm run type-check:renderer",
     "update-vendors": "ELECTRON_RUN_AS_NODE=1 electron scripts/update-electron-vendors.js",
     "clean": "rm -rf dist .eslintcache *.tsbuildinfo ./packages/*/dist",

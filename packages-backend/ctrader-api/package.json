@@ -9,7 +9,7 @@
     "type-check": "tsc --noEmit",
     "test": "jest --passWithNoTests",
     "clean": "rm -rf dist .eslintcache *.tsbuildinfo",
-    "build": "tsc -p tsconfig.build.json",
+    "build": "tsc -b tsconfig.build.json",
     "ci-lint": "eslint --cache --fix",
     "ci-type-check": "tsc-files --noEmit"
   },

@@ -3,4 +3,9 @@
     "./tsconfig.json",
     "../../tsconfig.build.json",
   ],
+  "references": [
+    { "path": "../../packages-backend/ctrader-api" },
+    { "path": "../../packages-backend/meta-api" },
+    { "path": "../../packages-backend/metatrader-api" },
+  ]
 }

@@ -192,7 +192,7 @@ export interface Account {
   groupId?: string;
 
   name: string;
-  config: AccountConfig;
+  config?: AccountConfig;
 
   providerType: ProviderType;
   platform: AccountPlatform;
