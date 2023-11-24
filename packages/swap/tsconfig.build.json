@@ -3,4 +3,10 @@
     "./tsconfig.json",
     "../../tsconfig.build.json",
   ],
+  "references": [
+    { "path": "../../packages/utils" },
+    { "path": "../../packages/binance" },
+    { "path": "../../packages/ctrader" },
+    { "path": "../../packages/metatrader" },
+  ]
 }

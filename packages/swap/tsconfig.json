@@ -9,4 +9,10 @@
     "outDir": "dist",
   },
   "include": ["**/*.ts"],
+  "references": [
+    { "path": "../../packages/utils" },
+    { "path": "../../packages/binance" },
+    { "path": "../../packages/ctrader" },
+    { "path": "../../packages/metatrader" },
+  ]
 }

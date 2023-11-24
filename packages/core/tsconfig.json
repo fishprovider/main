@@ -9,4 +9,7 @@
     "outDir": "dist",
   },
   "include": ["**/*.ts"],
+  "references": [
+    { "path": "../../packages/utils" },
+  ]
 }
