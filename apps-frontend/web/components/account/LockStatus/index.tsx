@@ -1,23 +1,23 @@
-import storeUser from '@fishprovider/cross/dist/stores/user';
+import { AccountLock } from '@fishprovider/core';
 import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
-import type { Lock } from '@fishprovider/utils/dist/types/Account.model';
 import moment from 'moment';
 
 import LockTypeInfo from '~components/account/LockTypeInfo';
+import { watchUserInfoController } from '~controllers/user.controller';
 import Box from '~ui/core/Box';
 import Button from '~ui/core/Button';
 import Stack from '~ui/core/Stack';
 import Text from '~ui/core/Text';
 
 interface Props {
-  lock?: Lock;
+  lock?: AccountLock;
   unlock: () => void;
 }
 
 function LockStatus({ lock, unlock }: Props) {
-  const { roles, providerId } = storeUser.useStore((state) => ({
-    roles: state.info?.roles,
-    providerId: state.activeProvider?._id,
+  const { roles, providerId } = watchUserInfoController((state) => ({
+    roles: state.activeUser?.roles,
+    providerId: state.activeAccount?._id,
   }));
 
   if (!lock) return null;

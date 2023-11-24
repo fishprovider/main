@@ -1,7 +1,7 @@
-import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
-import { PlanType } from '@fishprovider/utils/dist/constants/account';
+import { AccountPlanType } from '@fishprovider/core';
 import _ from 'lodash';
 
+import { watchAccountController } from '~controllers/account.controller';
 import Box from '~ui/core/Box';
 import Text from '~ui/core/Text';
 
@@ -25,13 +25,13 @@ function EddProgress({ providerId, profit }: Props) {
     balance = 0,
     maxEquity = balance as number,
     plans,
-  } = storeAccounts.useStore((state) => ({
+  } = watchAccountController((state) => ({
     balance: state[providerId]?.balance,
     maxEquity: state[providerId]?.maxEquity,
     plans: state[providerId]?.plan,
   }));
 
-  const dayMaxEdd = plans?.find((plan) => plan.type === PlanType.dayMaxEddLock)
+  const dayMaxEdd = plans?.find((plan) => plan.type === AccountPlanType.dayMaxEddLock)
     ?.value as number | undefined;
 
   if (!dayMaxEdd) return null;

@@ -1,4 +1,3 @@
-import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
 import _ from 'lodash';
 import moment from 'moment';
 import {
@@ -15,6 +14,7 @@ import {
   YAxis,
 } from 'recharts';
 
+import { watchAccountController } from '~controllers/account.controller';
 import useTablet from '~ui/styles/useTablet';
 
 const defaultProfitMonths: Record<number, number[]> = {
@@ -50,7 +50,7 @@ function MonthProfit({
 
   const {
     profitMonths = defaultProfitMonths,
-  } = storeAccounts.useStore((state) => ({
+  } = watchAccountController((state) => ({
     profitMonths: state[providerId]?.stats?.profitMonths,
   }));
 

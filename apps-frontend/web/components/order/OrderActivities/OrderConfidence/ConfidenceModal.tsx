@@ -2,11 +2,11 @@ import orderGetManyInfo from '@fishprovider/cross/dist/api/orders/getManyInfo';
 import orderUpdateSettings from '@fishprovider/cross/dist/api/orders/updateSettings';
 import { useMutate } from '@fishprovider/cross/dist/libs/query';
 import storeOrders from '@fishprovider/cross/dist/stores/orders';
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import { OrderStatus } from '@fishprovider/utils/dist/constants/order';
 import _ from 'lodash';
 import { useState } from 'react';
 
+import { watchUserInfoController } from '~controllers/user.controller';
 import Avatar from '~ui/core/Avatar';
 import Button from '~ui/core/Button';
 import Group from '~ui/core/Group';
@@ -45,9 +45,9 @@ function OrderConfidence({ orderId, onClose }: Props) {
   const {
     userId,
     members = [],
-  } = storeUser.useStore((state) => ({
-    userId: state.info?._id,
-    members: state.activeProvider?.members,
+  } = watchUserInfoController((state) => ({
+    userId: state.activeUser?._id,
+    members: state.activeAccount?.members,
   }));
   const order = storeOrders.useStore((state) => state[orderId]);
 
@@ -61,7 +61,7 @@ function OrderConfidence({ orderId, onClose }: Props) {
 
   const memberPoints = members.map((member) => ({
     ...member,
-    point: confidences[member.userId] ?? 0,
+    point: confidences[member.userId || ''] ?? 0,
   }));
   const userPoint = memberPoints.find((item) => item.userId === userId);
   const point = pointInput ?? userPoint?.point ?? 0;

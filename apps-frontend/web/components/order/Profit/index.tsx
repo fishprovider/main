@@ -1,4 +1,3 @@
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import { Direction, OrderStatus } from '@fishprovider/utils/dist/constants/order';
 import { getProfitIcon } from '@fishprovider/utils/dist/helpers/order';
 import { getDiffPips } from '@fishprovider/utils/dist/helpers/price';
@@ -8,6 +7,7 @@ import _ from 'lodash';
 import moment from 'moment';
 
 import ProfitColor from '~components/price/ProfitColor';
+import { watchUserInfoController } from '~controllers/user.controller';
 import Text from '~ui/core/Text';
 import Tooltip from '~ui/core/Tooltip';
 
@@ -22,9 +22,9 @@ function Profit({ order, prices }: Props) {
   const {
     balance = 0,
     asset = 'USD',
-  } = storeUser.useStore((state) => ({
-    balance: state.activeProvider?.balance,
-    asset: state.activeProvider?.asset,
+  } = watchUserInfoController((state) => ({
+    balance: state.activeAccount?.balance,
+    asset: state.activeAccount?.asset,
   }));
 
   const priceDoc = prices[`${providerType}-${symbol}`];

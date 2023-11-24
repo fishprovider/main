@@ -1,13 +1,12 @@
-import storeUser from '@fishprovider/cross/dist/stores/user';
-
 import { langs } from '~constants/translation';
+import { updateUserInfoController, watchUserInfoController } from '~controllers/user.controller';
 import { useTranslation } from '~libs/translation';
 import Select from '~ui/core/Select';
 
 function LangSelector() {
   const { i18n } = useTranslation();
 
-  const userLang = storeUser.useStore((state) => state.lang);
+  const userLang = watchUserInfoController((state) => state.lang);
 
   return (
     <Select
@@ -17,7 +16,7 @@ function LangSelector() {
         const newLang = value;
         Logger.info('newLang', newLang);
         i18n.changeLanguage(newLang);
-        storeUser.mergeState({ lang: newLang });
+        updateUserInfoController({ lang: newLang });
       }}
       data={langs.map((lang) => ({
         value: lang.key,

@@ -1,7 +1,7 @@
-import { CopyVolumeMode } from '@fishprovider/utils/dist/constants/account';
-import type {
-  CopySettings, ProtectSettings, Settings, TradeSettings,
-} from '@fishprovider/utils/dist/types/Account.model';
+import {
+  AccountCopySettings, AccountCopyVolumeMode, AccountProtectSettings,
+  AccountSettings, AccountTradeSettings,
+} from '@fishprovider/core';
 import _ from 'lodash';
 import moment from 'moment';
 
@@ -14,7 +14,7 @@ import Tooltip from '~ui/core/Tooltip';
 
 interface CopyChipsProps {
   parentId: string;
-  copySettings: CopySettings;
+  copySettings: AccountCopySettings;
   copyVolumeRatio?: number;
 }
 
@@ -30,7 +30,7 @@ function CopyChips({
     enabledEquitySL,
     equitySLRatio,
 
-    copyVolumeMode = CopyVolumeMode.auto,
+    copyVolumeMode = AccountCopyVolumeMode.auto,
     copyVolumeRatioFixed,
     copyVolumeLotFixed,
     copyVolumeRatioAuto,
@@ -64,39 +64,39 @@ function CopyChips({
               </Badge>
             </Tooltip>
           )}
-          {copyVolumeMode === CopyVolumeMode.auto && copyVolumeRatio && (
-            <Tooltip label={CopyVolumeModeText[CopyVolumeMode.auto]?.description as string}>
+          {copyVolumeMode === AccountCopyVolumeMode.auto && copyVolumeRatio && (
+            <Tooltip label={CopyVolumeModeText[AccountCopyVolumeMode.auto]?.description}>
               <Badge color="orange">
                 {`CP-Ratio ${copyVolumeRatio}`}
               </Badge>
             </Tooltip>
           )}
-          {copyVolumeMode === CopyVolumeMode.fixedRatio && (
-            <Tooltip label={CopyVolumeModeText[CopyVolumeMode.fixedRatio]?.description as string}>
+          {copyVolumeMode === AccountCopyVolumeMode.fixedRatio && (
+            <Tooltip label={CopyVolumeModeText[AccountCopyVolumeMode.fixedRatio]?.description}>
               <Badge color="orange">
                 {`CP-Ratio ${copyVolumeRatioFixed}`}
               </Badge>
             </Tooltip>
           )}
-          {copyVolumeMode === CopyVolumeMode.fixedLot && (
-            <Tooltip label={CopyVolumeModeText[CopyVolumeMode.fixedLot]?.description as string}>
+          {copyVolumeMode === AccountCopyVolumeMode.fixedLot && (
+            <Tooltip label={CopyVolumeModeText[AccountCopyVolumeMode.fixedLot]?.description}>
               <Badge color="orange">
                 {`CP-Lot ${copyVolumeLotFixed}`}
               </Badge>
             </Tooltip>
           )}
-          {copyVolumeMode === CopyVolumeMode.autoWithRatio && copyVolumeRatio && (
+          {copyVolumeMode === AccountCopyVolumeMode.autoWithRatio && copyVolumeRatio && (
             <Tooltip
-              label={CopyVolumeModeText[CopyVolumeMode.autoWithRatio]?.description as string}
+              label={CopyVolumeModeText[AccountCopyVolumeMode.autoWithRatio]?.description}
             >
               <Badge color="orange">
                 {`CP-Ratio ${copyVolumeRatioAuto}`}
               </Badge>
             </Tooltip>
           )}
-          {[CopyVolumeMode.auto,
-            CopyVolumeMode.autoWithRatio,
-            CopyVolumeMode.fixedRatio,
+          {[AccountCopyVolumeMode.auto,
+            AccountCopyVolumeMode.autoWithRatio,
+            AccountCopyVolumeMode.fixedRatio,
           ].includes(copyVolumeMode) && (
             <>
               {copyVolumeLotMin && (
@@ -122,9 +122,9 @@ function CopyChips({
 }
 
 interface Props {
-  tradeSettings?: TradeSettings,
-  protectSettings?: ProtectSettings,
-  settings?: Settings,
+  tradeSettings?: AccountTradeSettings,
+  protectSettings?: AccountProtectSettings,
+  settings?: AccountSettings,
 }
 
 function BotChips({

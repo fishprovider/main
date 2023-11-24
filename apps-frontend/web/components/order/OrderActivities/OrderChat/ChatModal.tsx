@@ -2,12 +2,12 @@ import orderGetManyInfo from '@fishprovider/cross/dist/api/orders/getManyInfo';
 import orderUpdateSettings from '@fishprovider/cross/dist/api/orders/updateSettings';
 import { useMutate } from '@fishprovider/cross/dist/libs/query';
 import storeOrders from '@fishprovider/cross/dist/stores/orders';
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import type { Chat } from '@fishprovider/utils/dist/types/Order.model';
 import _ from 'lodash';
 import moment from 'moment';
 import { useState } from 'react';
 
+import { watchUserInfoController } from '~controllers/user.controller';
 import Avatar from '~ui/core/Avatar';
 import Box from '~ui/core/Box';
 import Button from '~ui/core/Button';
@@ -26,7 +26,7 @@ interface Props {
 }
 
 function ChatModal({ orderId, onClose }: Props) {
-  const userId = storeUser.useStore((state) => state.info?._id);
+  const userId = watchUserInfoController((state) => state.activeUser?._id);
   const order = storeOrders.useStore((state) => state[orderId]);
 
   const [chatInput, setChatInput] = useState('');

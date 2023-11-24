@@ -1,8 +1,8 @@
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import { useRouter } from 'next/router';
 
 import Link from '~components/base/Link';
 import LoadingSteps from '~components/base/LoadingSteps';
+import { watchUserInfoController } from '~controllers/user.controller';
 import Routes from '~libs/routes';
 import Button from '~ui/core/Button';
 import Group from '~ui/core/Group';
@@ -17,7 +17,7 @@ interface Props {
 function RequiredLoginView({ title, useLoadingSteps }: Props) {
   const router = useRouter();
 
-  const isClientLoggedIn = storeUser.useStore((state) => state.isClientLoggedIn);
+  const isClientLoggedIn = watchUserInfoController((state) => state.isClientLoggedIn);
 
   if (isClientLoggedIn === undefined) {
     return useLoadingSteps ? <LoadingSteps /> : <Loading inline />;

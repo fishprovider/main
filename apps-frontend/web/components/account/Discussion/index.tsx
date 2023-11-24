@@ -1,6 +1,6 @@
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import { useRouter } from 'next/router';
 
+import { watchUserInfoController } from '~controllers/user.controller';
 import Stack from '~ui/core/Stack';
 import Tabs from '~ui/core/Tabs';
 import Title from '~ui/core/Title';
@@ -14,9 +14,9 @@ function Discussion() {
   const {
     providerId = '',
     name = '',
-  } = storeUser.useStore((state) => ({
-    providerId: state.activeProvider?._id,
-    name: state.activeProvider?.name,
+  } = watchUserInfoController((state) => ({
+    providerId: state.activeAccount?._id,
+    name: state.activeAccount?.name,
   }));
 
   return (

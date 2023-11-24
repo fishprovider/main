@@ -1,4 +1,3 @@
-import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
 import { AccountPlatform } from '@fishprovider/utils/dist/constants/account';
 import _ from 'lodash';
 import { useState } from 'react';
@@ -6,6 +5,7 @@ import { useState } from 'react';
 import {
   ctraderPlatforms, metatraderPlatforms,
 } from '~constants/account';
+import { watchAccountController } from '~controllers/account.controller';
 import Button from '~ui/core/Button';
 import Group from '~ui/core/Group';
 import Select from '~ui/core/Select';
@@ -24,15 +24,15 @@ function InvestModal({
   onClose = () => undefined,
 }: Props) {
   const {
-    providerGroupId,
-  } = storeAccounts.useStore((state) => ({
-    providerGroupId: state[providerId]?.providerGroupId,
+    accountGroupId,
+  } = watchAccountController((state) => ({
+    accountGroupId: state[providerId]?.accountGroupId,
   }));
 
-  const groupAccounts = storeAccounts.useStore((state) => _.filter(
+  const groupAccounts = watchAccountController((state) => _.filter(
     state,
-    (item) => (providerGroupId
-      ? item.providerGroupId === providerGroupId
+    (item) => (accountGroupId
+      ? item.accountGroupId === accountGroupId
       : item._id === providerId),
   ));
 

@@ -1,11 +1,11 @@
 import storeOrders from '@fishprovider/cross/dist/stores/orders';
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import { OrderStatus } from '@fishprovider/utils/dist/constants/order';
 import { getProfit } from '@fishprovider/utils/dist/helpers/order';
 import type { Order } from '@fishprovider/utils/dist/types/Order.model';
 import _ from 'lodash';
 import moment from 'moment';
 
+import { watchUserInfoController } from '~controllers/user.controller';
 import Group from '~ui/core/Group';
 import Icon from '~ui/core/Icon';
 
@@ -13,9 +13,9 @@ function TodayOrders() {
   const {
     providerId,
     asset = 'USD',
-  } = storeUser.useStore((state) => ({
-    providerId: state.activeProvider?._id,
-    asset: state.activeProvider?.asset,
+  } = watchUserInfoController((state) => ({
+    providerId: state.activeAccount?._id,
+    asset: state.activeAccount?.asset,
   }));
   const startOfDay = moment.utc().startOf('d');
   const todayOrders = storeOrders.useStore((state) => (

@@ -1,9 +1,9 @@
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
 import type { OrderWithoutId } from '@fishprovider/utils/dist/types/Order.model';
 import { useEffect } from 'react';
 
 import SymbolsSelect from '~components/price/SymbolsSelect';
+import { updateUserInfoController, watchUserInfoController } from '~controllers/user.controller';
 import { sessionRead } from '~libs/cache';
 import Button from '~ui/core/Button';
 import Group from '~ui/core/Group';
@@ -21,17 +21,17 @@ function OpenOrder() {
     members = [],
     roles,
     providerId,
-  } = storeUser.useStore((state) => ({
-    activities: state.activeProvider?.activities,
-    members: state.activeProvider?.members,
-    providerId: state.activeProvider?._id,
-    roles: state.info?.roles,
+  } = watchUserInfoController((state) => ({
+    activities: state.activeAccount?.activities,
+    members: state.activeAccount?.members,
+    providerId: state.activeAccount?._id,
+    roles: state.activeUser?.roles,
   }));
 
   useEffect(() => {
     sessionRead<OrderWithoutId>('orderLast').then((orderLast) => {
       if (orderLast) {
-        storeUser.mergeState({ activeSymbol: orderLast.symbol });
+        updateUserInfoController({ activeSymbol: orderLast.symbol });
       }
     });
   }, []);
@@ -55,7 +55,7 @@ function OpenOrder() {
           </Button>
         )}
         <TodayOrders />
-        <AccountActivities activities={activities} members={members} />
+        <AccountActivities activities={activities} members={members as any} />
       </Group>
     </>
   );

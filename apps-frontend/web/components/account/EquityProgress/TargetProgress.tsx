@@ -1,7 +1,7 @@
-import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
-import { PlanType } from '@fishprovider/utils/dist/constants/account';
+import { AccountPlanType } from '@fishprovider/core';
 import _ from 'lodash';
 
+import { watchAccountController } from '~controllers/account.controller';
 import Box from '~ui/core/Box';
 import Text from '~ui/core/Text';
 
@@ -25,22 +25,22 @@ interface Props {
 function TargetProgress({ providerId, profit = 0, slim }: Props) {
   const {
     balance = 0,
-    balanceStart,
+    balanceStartMonth,
     plans,
-  } = storeAccounts.useStore((state) => ({
+  } = watchAccountController((state) => ({
     balance: state[providerId]?.balance,
-    balanceStart: state[providerId]?.balanceStart,
+    balanceStartMonth: state[providerId]?.balanceStartMonth,
     plans: state[providerId]?.plan,
   }));
 
-  const target = plans?.find((plan) => plan.type === PlanType.monthTargetLock)
+  const targetMonth = plans?.find((plan) => plan.type === AccountPlanType.monthTargetLock)
     ?.value as number | undefined;
 
-  if (!balanceStart || !target) return null;
+  if (!balanceStartMonth || !targetMonth) return null;
 
-  const targetAmt = target - balanceStart;
+  const targetAmt = targetMonth - balanceStartMonth;
   const equity = balance + profit;
-  const progressAmt = Math.max(0, equity - balanceStart);
+  const progressAmt = Math.max(0, equity - balanceStartMonth);
   const progress = (100 * progressAmt) / targetAmt;
 
   const offset = slim ? 20 : 0;
@@ -60,7 +60,7 @@ function TargetProgress({ providerId, profit = 0, slim }: Props) {
       </Box>
       {slim ? null : (
         <Box pos="absolute" top={40 - offset} right={0}>
-          <Text size="sm" color="green">{_.round(target, 2)}</Text>
+          <Text size="sm" color="green">{_.round(targetMonth, 2)}</Text>
         </Box>
       )}
     </Box>

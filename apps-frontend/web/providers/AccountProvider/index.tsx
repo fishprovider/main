@@ -1,6 +1,6 @@
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
 
+import { watchUserInfoController } from '~controllers/user.controller';
 import StrategyProvider from '~providers/StrategyProvider';
 import UserProvider from '~providers/UserProvider';
 
@@ -13,7 +13,7 @@ interface Props {
 }
 
 function AccountProvider({ providerId, children }: Props) {
-  const roles = storeUser.useStore((state) => state.info?.roles);
+  const roles = watchUserInfoController((state) => state.activeUser?.roles);
 
   const { isViewerProvider } = getRoleProvider(roles, providerId);
 

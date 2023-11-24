@@ -1,8 +1,7 @@
 import { useMutate } from '@fishprovider/cross/dist/libs/query';
-import storeUser from '@fishprovider/cross/dist/stores/user';
 
 import Link from '~components/base/Link';
-import { getUserController } from '~controllers/user.controller';
+import { getUserController, watchUserInfoController } from '~controllers/user.controller';
 // import TelegramLogin from '~components/view/TeleLogin';
 import Button from '~ui/core/Button';
 import Group from '~ui/core/Group';
@@ -16,8 +15,8 @@ const botName = 'fishprovider_verify_bot';
 function VerifyPhone() {
   const {
     phoneNumber,
-  } = storeUser.useStore((state) => ({
-    phoneNumber: state.info?.telegram?.phoneNumber,
+  } = watchUserInfoController((state) => ({
+    phoneNumber: state.activeUser?.telegram?.phoneNumber,
   }));
 
   const { mutate: reload, isLoading: isLoadingReload } = useMutate({

@@ -2,7 +2,6 @@ import investAdd from '@fishprovider/cross/dist/api/invest/add';
 import walletGetMany from '@fishprovider/cross/dist/api/wallet/getMany';
 import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useMutate, useQuery } from '@fishprovider/cross/dist/libs/query';
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import storeWallets from '@fishprovider/cross/dist/stores/wallets';
 import { WalletType } from '@fishprovider/utils/dist/constants/pay';
 import { useRouter } from 'next/router';
@@ -10,6 +9,7 @@ import { useState } from 'react';
 
 import Link from '~components/base/Link/Link';
 import RequiredLoginView from '~components/user/RequiredLoginView';
+import { watchUserInfoController } from '~controllers/user.controller';
 import Routes from '~libs/routes';
 import Box from '~ui/core/Box';
 import Button from '~ui/core/Button';
@@ -39,10 +39,10 @@ function InvestFish({
     isServerLoggedIn,
     userId,
     userEmail,
-  } = storeUser.useStore((state) => ({
+  } = watchUserInfoController((state) => ({
     isServerLoggedIn: state.isServerLoggedIn,
-    userId: state.info?._id,
-    userEmail: state.info?.email,
+    userId: state.activeUser?._id,
+    userEmail: state.activeUser?.email,
   }));
 
   const currency = 'USD';

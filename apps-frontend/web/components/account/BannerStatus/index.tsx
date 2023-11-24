@@ -1,12 +1,12 @@
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import { useState } from 'react';
 
+import { watchUserInfoController } from '~controllers/user.controller';
 import Group from '~ui/core/Group';
 import HtmlEditor from '~ui/core/HtmlEditor';
 import Icon from '~ui/core/Icon';
 
 function BannerStatus() {
-  const bannerStatus = storeUser.useStore((state) => state.activeProvider?.bannerStatus);
+  const bannerStatus = watchUserInfoController((state) => state.activeAccount?.bannerStatus);
 
   const [showBanner, setShowBanner] = useState(true);
 

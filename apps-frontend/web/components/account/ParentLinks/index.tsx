@@ -1,7 +1,7 @@
-import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
 import _ from 'lodash';
 
 import Link from '~components/base/Link';
+import { watchAccountController } from '~controllers/account.controller';
 import { toStrategy } from '~libs/routes';
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
 }
 
 function ParentLinks({ parentIds = [] }: Props) {
-  const accounts = storeAccounts.useStore((state) => _.pick(state, parentIds));
+  const accounts = watchAccountController((state) => _.pick(state, parentIds));
 
   if (!parentIds?.length) return null;
 

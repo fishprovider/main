@@ -1,9 +1,9 @@
-import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
+import { Account } from '@fishprovider/core';
 import { AccountPlatform, ProviderType } from '@fishprovider/utils/dist/constants/account';
-import type { Account } from '@fishprovider/utils/dist/types/Account.model';
 import _ from 'lodash';
 
 import Link from '~components/base/Link';
+import { watchAccountController } from '~controllers/account.controller';
 import type { CopyPlatform } from '~types/CopyPlatform.model';
 import Group from '~ui/core/Group';
 import Image from '~ui/core/Image';
@@ -28,7 +28,7 @@ function InvestPlatforms({
 }: Props) {
   const {
     name,
-  } = storeAccounts.useStore((state) => ({
+  } = watchAccountController((state) => ({
     name: state[providerId]?.name,
   }));
 

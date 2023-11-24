@@ -1,11 +1,11 @@
-import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
+import { AccountPlanType } from '@fishprovider/core';
 import storeOrders from '@fishprovider/cross/dist/stores/orders';
-import { PlanType } from '@fishprovider/utils/dist/constants/account';
 import { OrderStatus } from '@fishprovider/utils/dist/constants/order';
 import { getProfit } from '@fishprovider/utils/dist/helpers/order';
 import _ from 'lodash';
 import moment from 'moment';
 
+import { watchAccountController } from '~controllers/account.controller';
 import Box from '~ui/core/Box';
 import Text from '~ui/core/Text';
 
@@ -29,7 +29,7 @@ function BddProgress({ providerId, profit }: Props) {
     balanceStartDay = 0,
     plans = [],
     asset = 'USD',
-  } = storeAccounts.useStore((state) => ({
+  } = watchAccountController((state) => ({
     balanceStartDay: state[providerId]?.balanceStartDay,
     plans: state[providerId]?.plan,
     asset: state[providerId]?.asset,
@@ -42,7 +42,7 @@ function BddProgress({ providerId, profit }: Props) {
       && moment(order.createdAt) >= startOfDay)
   ));
 
-  const dayMaxBdd = plans.find((plan) => plan.type === PlanType.dayMaxBddLock)
+  const dayMaxBdd = plans.find((plan) => plan.type === AccountPlanType.dayMaxBddLock)
     ?.value as number | undefined;
 
   if (!dayMaxBdd) return null;

@@ -1,5 +1,4 @@
-import { Roles } from '@fishprovider/utils/dist/constants/user';
-import type { Activity, Member } from '@fishprovider/utils/dist/types/Account.model';
+import { AccountActivity, AccountMember } from '@fishprovider/core';
 import _ from 'lodash';
 import moment from 'moment';
 
@@ -11,8 +10,8 @@ import Tooltip from '~ui/core/Tooltip';
 import { getActivityColor } from '~utils/account';
 
 interface Props {
-  activities?: Record<string, Activity>,
-  members?: Member[],
+  activities?: Record<string, AccountActivity>,
+  members?: AccountMember[],
 }
 
 function AccountActivities({
@@ -21,17 +20,12 @@ function AccountActivities({
 }: Props) {
   const userActivities = _.sortBy(
     _.map(activities, (activity, userId) => {
-      const member = members.find((item) => item.userId === userId) || {
-        userId,
-        name: userId,
-        role: Roles.viewer,
-        picture: '',
-      };
+      const member = members.find((item) => item.userId === userId);
       const lastSeen = moment(activity.lastView).fromNow();
       const lastSeenMinutes = moment().diff(moment(activity.lastView), 'minutes');
       const lastSeenColor = getActivityColor(lastSeenMinutes);
       const tooltip = [
-        `[${ProviderRoleText[member.role]?.text}] ${member.name}`,
+        ...(member ? [`[${ProviderRoleText[member.role]?.text}] ${member.name}`] : []),
         ...(lastSeen ? [`last seen ${lastSeen}`] : []),
       ].join(', ');
       return {

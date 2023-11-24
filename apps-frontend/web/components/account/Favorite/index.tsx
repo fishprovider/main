@@ -1,6 +1,4 @@
-import storeUser from '@fishprovider/cross/dist/stores/user';
-
-import { updateUserController } from '~controllers/user.controller';
+import { getUserInfoController, updateUserController, watchUserInfoController } from '~controllers/user.controller';
 import Icon from '~ui/core/Icon';
 
 interface Props {
@@ -8,10 +6,10 @@ interface Props {
 }
 
 function Favorite({ providerId: accountId }: Props) {
-  const star = storeUser.useStore((state) => state.info?.starProviders?.[accountId]);
+  const isStar = watchUserInfoController((state) => state.activeUser?.starAccounts?.[accountId]);
 
   const onStar = () => {
-    const user = storeUser.getState().info;
+    const user = getUserInfoController().activeUser;
     updateUserController(
       {
         email: user?.email,
@@ -19,7 +17,7 @@ function Favorite({ providerId: accountId }: Props) {
       {
         starAccount: {
           accountId,
-          enabled: !user?.starProviders?.[accountId],
+          enabled: !user?.starAccounts?.[accountId],
         },
       },
     );
@@ -27,8 +25,8 @@ function Favorite({ providerId: accountId }: Props) {
 
   return (
     <Icon
-      name={star ? 'Star' : 'StarOutline'}
-      color={star ? 'orange' : undefined}
+      name={isStar ? 'Star' : 'StarOutline'}
+      color={isStar ? 'orange' : undefined}
       size="small"
       button
       onClick={onStar}

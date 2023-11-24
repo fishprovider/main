@@ -1,5 +1,4 @@
 import { apiPost } from '@fishprovider/cross/dist/libs/api';
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -15,6 +14,7 @@ import { Breadcrumbs, NotionRenderer, Search } from 'react-notion-x';
 // import TweetEmbed from 'react-tweet-embed';
 import Link from '~components/base/Link';
 import LoadingSteps from '~components/base/LoadingSteps';
+import { watchUserInfoController } from '~controllers/user.controller';
 import Stack from '~ui/core/Stack';
 import Text from '~ui/core/Text';
 import Title from '~ui/core/Title';
@@ -71,7 +71,7 @@ export function NotionPage({
 }: NotionPageProps) {
   const {
     theme,
-  } = storeUser.useStore((state) => ({
+  } = watchUserInfoController((state) => ({
     theme: state.theme,
   }));
 

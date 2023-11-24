@@ -1,19 +1,18 @@
-import { LockType } from '@fishprovider/utils/dist/constants/account';
-import type { Lock } from '@fishprovider/utils/dist/types/Account.model';
+import { AccountLock, AccountLockType } from '@fishprovider/core';
 
 import Title from '~ui/core/Title';
 
 interface Props {
-  lock: Lock;
+  lock: AccountLock;
 }
 
 function LockTypeInfo({ lock }: Props) {
   const { type, value } = lock;
   switch (type) {
-    case LockType.open: return <Title size="h4">❌ Open Order</Title>;
-    case LockType.update: return <Title size="h4">❌ Update Order</Title>;
-    case LockType.close: return <Title size="h4">❌ Close Order</Title>;
-    case LockType.pairs: {
+    case AccountLockType.open: return <Title size="h4">❌ Open Order</Title>;
+    case AccountLockType.update: return <Title size="h4">❌ Update Order</Title>;
+    case AccountLockType.close: return <Title size="h4">❌ Close Order</Title>;
+    case AccountLockType.pairs: {
       const pairs = (value as string[] | undefined)?.join(', ');
       return <Title size="h4">{`❌ Pairs ${pairs}`}</Title>;
     }

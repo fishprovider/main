@@ -1,18 +1,17 @@
 import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
-import storeUser from '@fishprovider/cross/dist/stores/user';
 
 import VerifyPhone from '~components/user/VerifyPhone';
-import { getUserController } from '~controllers/user.controller';
+import { getUserController, watchUserInfoController } from '~controllers/user.controller';
 import { refreshMS } from '~utils';
 
 function RequiredVerifyPhone() {
   const {
     userId,
     phoneNumber,
-  } = storeUser.useStore((state) => ({
-    userId: state.info?._id,
-    phoneNumber: state.info?.telegram?.phoneNumber,
+  } = watchUserInfoController((state) => ({
+    userId: state.activeUser?._id,
+    phoneNumber: state.activeUser?.telegram?.phoneNumber,
   }));
 
   useQuery({

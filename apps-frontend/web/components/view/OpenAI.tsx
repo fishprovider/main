@@ -1,8 +1,8 @@
 import { apiPost } from '@fishprovider/cross/dist/libs/api';
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import parse from 'html-react-parser';
 import { useState } from 'react';
 
+import { watchUserInfoController } from '~controllers/user.controller';
 import type { AskResult, ChatMessage } from '~types/OpenAI.model';
 import Avatar from '~ui/core/Avatar';
 import Button from '~ui/core/Button';
@@ -31,8 +31,8 @@ function OpenAI() {
   const {
     userPicture,
     isServerLoggedIn,
-  } = storeUser.useStore((state) => ({
-    userPicture: state.info?.picture,
+  } = watchUserInfoController((state) => ({
+    userPicture: state.activeUser?.picture,
     isServerLoggedIn: state.isServerLoggedIn,
   }));
 

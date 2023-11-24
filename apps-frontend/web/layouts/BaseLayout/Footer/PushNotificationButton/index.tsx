@@ -1,13 +1,13 @@
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import { useEffect, useState } from 'react';
 
+import { watchUserInfoController } from '~controllers/user.controller';
 import { requestNotif } from '~libs/pushNotif';
 import Box from '~ui/core/Box';
 import Icon from '~ui/core/Icon';
 import openConfirmModal from '~ui/modals/openConfirmModal';
 
 function PushNotificationButton() {
-  const isClientLoggedIn = storeUser.useStore((state) => state.isClientLoggedIn);
+  const isClientLoggedIn = watchUserInfoController((state) => state.isClientLoggedIn);
 
   const [status, setStatus] = useState('');
 

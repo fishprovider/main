@@ -1,6 +1,4 @@
-import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
 import storePrices from '@fishprovider/cross/dist/stores/prices';
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import { OrderStatus } from '@fishprovider/utils/dist/constants/order';
 import { getEntry, parseCopyId } from '@fishprovider/utils/dist/helpers/order';
 import { getDiffPips, getLotFromVolume } from '@fishprovider/utils/dist/helpers/price';
@@ -9,6 +7,8 @@ import _ from 'lodash';
 import moment from 'moment';
 
 import BuySellIcon from '~components/order/BuySellIcon';
+import { watchAccountController } from '~controllers/account.controller';
+import { updateUserInfoController, watchUserInfoController } from '~controllers/user.controller';
 import useConversionRate from '~hooks/useConversionRate';
 import Accordion from '~ui/core/Accordion';
 import Box from '~ui/core/Box';
@@ -25,14 +25,14 @@ interface Props {
 function OrderInfo({ order, mergedView }: Props) {
   const {
     asset = 'USD',
-  } = storeUser.useStore((state) => ({
-    asset: state.activeProvider?.asset,
+  } = watchUserInfoController((state) => ({
+    asset: state.activeAccount?.asset,
   }));
   const priceDoc = storePrices.useStore((prices) => prices[`${order.providerType}-${order.symbol}`]);
 
   const { parentId = '' } = order.copyId ? parseCopyId(order.copyId) : {};
 
-  const { parentIcon } = storeAccounts.useStore((state) => ({
+  const { parentIcon } = watchAccountController((state) => ({
     parentIcon: state[parentId]?.icon,
   }));
 
@@ -127,7 +127,7 @@ function OrderInfo({ order, mergedView }: Props) {
     <Group
       spacing={0}
       onClick={() => {
-        storeUser.mergeState({ activeSymbol: order.symbol });
+        updateUserInfoController({ activeSymbol: order.symbol });
       }}
     >
       {getParentIcon()}

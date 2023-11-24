@@ -1,7 +1,7 @@
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import type { ReactNode } from 'react';
 import { useEffect, useState } from 'react';
 
+import { watchUserInfoController } from '~controllers/user.controller';
 import Box from '~ui/core/Box';
 import Group from '~ui/core/Group';
 import HtmlEditor from '~ui/core/HtmlEditor';
@@ -27,7 +27,7 @@ function AccountHtmlEditor({
   onSave = async () => undefined,
   bgColor,
 }: Props) {
-  const providerId = storeUser.useStore((state) => state.activeProvider?._id);
+  const accountId = watchUserInfoController((state) => state.activeAccount?._id);
 
   const [isEdit, setIsEdit] = useState(false);
   const [inputContent, setInputContent] = useState('');
@@ -35,7 +35,7 @@ function AccountHtmlEditor({
   useEffect(() => {
     setIsEdit(false);
     setInputContent('');
-  }, [providerId]);
+  }, [accountId]);
 
   const onSubmit = async () => {
     if (!(await openConfirmModal())) return;

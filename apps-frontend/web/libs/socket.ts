@@ -1,6 +1,6 @@
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import io from 'socket.io-client';
 
+import { getUserInfoController, updateUserInfoController } from '~controllers/user.controller';
 import { isLive } from '~utils';
 
 const env = {
@@ -11,7 +11,7 @@ const env = {
 };
 
 const connectSocket = async () => {
-  const { socket: socketCheck } = storeUser.getState();
+  const { socket: socketCheck } = getUserInfoController();
   if (socketCheck) {
     Logger.warn('[socket] Already connected');
     return;
@@ -21,12 +21,12 @@ const connectSocket = async () => {
   const socket = io(isLive ? env.socketUrl : env.demoSocketUrl, {
     transports: env.socketTransports.split(','),
   });
-  storeUser.mergeState({ socket });
+  updateUserInfoController({ socket });
 
   socket.on('error', (error: any) => {
     console.error('[socket] Error', error);
     Logger.error('[socket] Error', error);
-    storeUser.mergeState({ socket: undefined });
+    updateUserInfoController({ socket: undefined });
   });
 
   if (env.socketHeartbeat) {
@@ -36,11 +36,11 @@ const connectSocket = async () => {
 };
 
 const disconnectSocket = () => {
-  const { socket } = storeUser.getState();
+  const { socket } = getUserInfoController();
   if (!socket) return;
 
   Logger.debug('[socket] Disconnecting...');
-  storeUser.mergeState({ socket: undefined });
+  updateUserInfoController({ socket: undefined });
   socket.disconnect();
 };
 
