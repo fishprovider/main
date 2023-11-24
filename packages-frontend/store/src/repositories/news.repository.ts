@@ -43,7 +43,7 @@ const updateNews: NewsRepository['updateNews'] = async (_filter, payload) => {
   return { docs: news };
 };
 
-const watchNews: NewsRepository['watchNews'] = (selector) => storeNews.useStore(selector);
+const watchNews: NewsRepository['watchNews'] = storeNews.useStore;
 
 export const StoreNewsRepository: NewsRepository = {
   getNews,
