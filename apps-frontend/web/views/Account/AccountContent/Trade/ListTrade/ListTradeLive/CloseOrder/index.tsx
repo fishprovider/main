@@ -1,10 +1,8 @@
 import storePrices from '@fishprovider/cross/dist/stores/prices';
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import { validateOrderRemove } from '@fishprovider/utils/dist/helpers/validateOrder';
-import type { Account } from '@fishprovider/utils/dist/types/Account.model';
 import type { Order } from '@fishprovider/utils/dist/types/Order.model';
-import type { User } from '@fishprovider/utils/dist/types/User.model';
 
+import { getUserInfoController } from '~controllers/user.controller';
 import Icon from '~ui/core/Icon';
 import Title from '~ui/core/Title';
 import openModal from '~ui/modals/openModal';
@@ -24,16 +22,13 @@ function CloseOrder({ order }: Props) {
 
   const validateClose = () => {
     const {
-      info: user,
-      activeProvider: account,
-    } = storeUser.getState() as {
-      info: User,
-      activeProvider: Account,
-    };
+      activeUser: user,
+      activeAccount: account,
+    } = getUserInfoController();
 
     return validateOrderRemove({
-      user,
-      account,
+      user: user as any,
+      account: account as any,
       orderToRemove: order,
       prices: storePrices.getState(),
     });

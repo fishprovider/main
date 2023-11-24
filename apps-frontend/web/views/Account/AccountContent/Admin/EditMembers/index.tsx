@@ -1,9 +1,9 @@
-import storeUser from '@fishprovider/cross/dist/stores/user';
-import type { Member, MemberInvite } from '@fishprovider/utils/dist/types/Account.model';
+import { AccountMember } from '@fishprovider/core';
 import _ from 'lodash';
 import moment from 'moment';
 
 import { ProviderRoleText } from '~constants/account';
+import { watchUserInfoController } from '~controllers/user.controller';
 import Avatar from '~ui/core/Avatar';
 import Group from '~ui/core/Group';
 import Stack from '~ui/core/Stack';
@@ -19,16 +19,14 @@ import RemoveMember from './RemoveMember';
 function EditMembers() {
   const {
     members = [],
-    memberInvites = [],
     activities = {},
-  } = storeUser.useStore((state) => ({
-    members: state.activeProvider?.members,
-    memberInvites: state.activeProvider?.memberInvites,
-    activities: state.activeProvider?.activities,
+  } = watchUserInfoController((state) => ({
+    members: state.activeAccount?.members,
+    activities: state.activeAccount?.activities,
   }));
 
-  const renderMember = (member: Member) => {
-    const activity = activities[member.userId];
+  const renderMember = (member: AccountMember) => {
+    const activity = activities[member.userId || ''];
     return (
       <Table.Row key={member.userId}>
         <Table.Cell>
@@ -47,18 +45,6 @@ function EditMembers() {
       </Table.Row>
     );
   };
-
-  const renderMemberInvite = (memberInvite: MemberInvite) => (
-    <Table.Row key={memberInvite.email}>
-      <Table.Cell />
-      <Table.Cell>{ProviderRoleText[memberInvite.role]?.text}</Table.Cell>
-      <Table.Cell>{memberInvite.email}</Table.Cell>
-      <Table.Cell />
-      <Table.Cell>
-        <RemoveMember email={memberInvite.email} />
-      </Table.Cell>
-    </Table.Row>
-  );
 
   return (
     <Stack>
@@ -79,7 +65,6 @@ function EditMembers() {
         </Table.THead>
         <Table.TBody>
           {_.sortBy(members, (item) => moment(item.createdAt)).map(renderMember)}
-          {_.sortBy(memberInvites, (item) => moment(item.createdAt)).map(renderMemberInvite)}
         </Table.TBody>
       </Table>
     </Stack>

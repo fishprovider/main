@@ -1,13 +1,13 @@
 import orderAdd from '@fishprovider/cross/dist/api/orders/add';
 import { useMutate } from '@fishprovider/cross/dist/libs/query';
 import storePrices from '@fishprovider/cross/dist/stores/prices';
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import { Direction, OrderStatus, OrderType } from '@fishprovider/utils/dist/constants/order';
 import { getPriceFromAmount } from '@fishprovider/utils/dist/helpers/price';
 import type { Order } from '@fishprovider/utils/dist/types/Order.model';
 import _ from 'lodash';
 import { useState } from 'react';
 
+import { getUserInfoController, watchUserInfoController } from '~controllers/user.controller';
 import useConversionRate from '~hooks/useConversionRate';
 import Button from '~ui/core/Button';
 import Group from '~ui/core/Group';
@@ -28,8 +28,8 @@ function AverageOrderModal({
 }: Props) {
   const {
     asset = 'USD',
-  } = storeUser.useStore((state) => ({
-    asset: state.activeProvider?.asset,
+  } = watchUserInfoController((state) => ({
+    asset: state.activeAccount?.asset,
   }));
 
   const {
@@ -50,7 +50,7 @@ function AverageOrderModal({
     const {
       balance = 0,
       plan = [],
-    } = storeUser.getState().activeProvider || {};
+    } = getUserInfoController().activeAccount || {};
 
     const {
       defaultSL, defaultTP, planSLAmt, planTPAmt,

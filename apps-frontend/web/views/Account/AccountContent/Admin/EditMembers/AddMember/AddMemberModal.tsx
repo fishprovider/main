@@ -1,9 +1,9 @@
 import membersAdd from '@fishprovider/cross/dist/api/accounts/members/add';
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import { Roles } from '@fishprovider/utils/dist/constants/user';
 import { useState } from 'react';
 
 import { ProviderRoleText } from '~constants/account';
+import { watchUserInfoController } from '~controllers/user.controller';
 import Button from '~ui/core/Button';
 import Group from '~ui/core/Group';
 import Select from '~ui/core/Select';
@@ -18,8 +18,8 @@ interface Props {
 function AddMemberModal({ onClose }: Props) {
   const {
     providerId = '',
-  } = storeUser.useStore((state) => ({
-    providerId: state.activeProvider?._id,
+  } = watchUserInfoController((state) => ({
+    providerId: state.activeAccount?._id,
   }));
 
   const [email, setEmail] = useState('');

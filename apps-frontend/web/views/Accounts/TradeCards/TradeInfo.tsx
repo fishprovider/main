@@ -1,18 +1,18 @@
+import { AccountType, forexMajorPairs } from '@fishprovider/core';
 import orderGetMany from '@fishprovider/cross/dist/api/orders/getMany';
 import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
-import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
 import storeOrders from '@fishprovider/cross/dist/stores/orders';
 import storePrices from '@fishprovider/cross/dist/stores/prices';
-import { ProviderType } from '@fishprovider/utils/dist/constants/account';
 import { OrderStatus } from '@fishprovider/utils/dist/constants/order';
 import { getEntry, getProfit, getProfitIcon } from '@fishprovider/utils/dist/helpers/order';
-import { getDiffPips, getLotFromVolume, getMajorPairs } from '@fishprovider/utils/dist/helpers/price';
+import { getDiffPips, getLotFromVolume } from '@fishprovider/utils/dist/helpers/price';
 import type { Order } from '@fishprovider/utils/dist/types/Order.model';
 import _ from 'lodash';
 
 import TargetProgress from '~components/account/EquityProgress/TargetProgress';
 import BuySellIcon from '~components/order/BuySellIcon';
+import { watchAccountController } from '~controllers/account.controller';
 import Group from '~ui/core/Group';
 import Icon from '~ui/core/Icon';
 import Indicator from '~ui/core/Indicator';
@@ -30,12 +30,12 @@ function TradeInfo({
   providerId,
 }: Props) {
   const {
-    providerType = ProviderType.icmarkets,
+    accountType = AccountType.icmarkets,
     balance = 0,
     marginRaw = 0,
     asset = 'USD',
-  } = storeAccounts.useStore((state) => ({
-    providerType: state[providerId]?.providerType,
+  } = watchAccountController((state) => ({
+    accountType: state[providerId]?.accountType,
     balance: state[providerId]?.balance,
     marginRaw: state[providerId]?.margin,
     asset: state[providerId]?.asset,
@@ -48,13 +48,13 @@ function TradeInfo({
   ));
 
   const symbols = _.uniq([
-    ...getMajorPairs(providerType),
+    ...forexMajorPairs,
     ...orders.map((order) => order.symbol),
   ]);
 
   const prices = storePrices.useStore((state) => _.pickBy(
     state,
-    (item) => item.providerType === providerType && symbols.includes(item.symbol),
+    (item) => item.providerType === accountType as any && symbols.includes(item.symbol),
   ));
 
   useQuery({

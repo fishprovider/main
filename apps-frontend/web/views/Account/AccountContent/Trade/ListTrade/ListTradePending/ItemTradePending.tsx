@@ -1,6 +1,5 @@
 import orderRemove from '@fishprovider/cross/dist/api/orders/remove';
 import { useMutate } from '@fishprovider/cross/dist/libs/query';
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
 import type { Order } from '@fishprovider/utils/dist/types/Order.model';
 import type { Price } from '@fishprovider/utils/dist/types/Price.model';
@@ -9,6 +8,7 @@ import _ from 'lodash';
 import OrderActivities from '~components/order/OrderActivities';
 import OrderInfo from '~components/order/OrderInfo';
 import OrderSettings from '~components/order/OrderSettings';
+import { watchUserInfoController } from '~controllers/user.controller';
 import Group from '~ui/core/Group';
 import Icon from '~ui/core/Icon';
 import Table from '~ui/core/Table';
@@ -26,9 +26,9 @@ function ItemTradePending({ order, prices }: Props) {
   const {
     providerId = '',
     roles,
-  } = storeUser.useStore((state) => ({
-    providerId: state.activeProvider?._id,
-    roles: state.info?.roles,
+  } = watchUserInfoController((state) => ({
+    providerId: state.activeAccount?._id,
+    roles: state.activeUser?.roles,
   }));
   const { isTraderProvider, isProtectorProvider } = getRoleProvider(roles, providerId);
 

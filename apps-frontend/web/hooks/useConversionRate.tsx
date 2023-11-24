@@ -1,29 +1,30 @@
+import { AccountType, getMajorPairs } from '@fishprovider/core';
 import storePrices from '@fishprovider/cross/dist/stores/prices';
-import storeUser from '@fishprovider/cross/dist/stores/user';
-import { ProviderType } from '@fishprovider/utils/dist/constants/account';
-import { getConversionRate, getMajorPairs } from '@fishprovider/utils/dist/helpers/price';
+import { getConversionRate } from '@fishprovider/utils/dist/helpers/price';
 import _ from 'lodash';
+
+import { watchUserInfoController } from '~controllers/user.controller';
 
 const useConversionRate = (symbol: string) => {
   const {
-    providerType = ProviderType.icmarkets,
+    accountType = AccountType.icmarkets,
     asset = 'USD',
-  } = storeUser.useStore((state) => ({
-    providerType: state.activeProvider?.providerType,
-    asset: state.activeProvider?.asset,
+  } = watchUserInfoController((state) => ({
+    accountType: state.activeAccount?.accountType,
+    asset: state.activeAccount?.asset,
   }));
 
-  const symbols = _.uniq([...getMajorPairs(providerType), symbol]);
+  const symbols = _.uniq([...getMajorPairs(accountType), symbol]);
 
   const prices = storePrices.useStore((state) => _.pickBy(
     state,
-    (item) => item.providerType === providerType && symbols.includes(item.symbol),
+    (item) => item.providerType === accountType as any && symbols.includes(item.symbol),
   ));
 
   let rate = 0;
 
   const { conversionRate, error } = getConversionRate(
-    providerType,
+    accountType as any,
     symbol,
     asset,
     prices,

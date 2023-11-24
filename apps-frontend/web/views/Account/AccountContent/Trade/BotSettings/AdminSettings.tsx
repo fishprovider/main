@@ -1,14 +1,11 @@
-import { AccountCopySettings, AccountSettings } from '@fishprovider/core';
-import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
-import storeUser from '@fishprovider/cross/dist/stores/user';
-import { CopyVolumeMode } from '@fishprovider/utils/dist/constants/account';
+import { AccountCopySettings, AccountCopyVolumeMode, AccountSettings } from '@fishprovider/core';
 import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
-import type { CopySettings } from '@fishprovider/utils/dist/types/Account.model';
 import _ from 'lodash';
 import { useState } from 'react';
 
 import { CopyVolumeModeText } from '~constants/account';
-import { updateAccountController } from '~controllers/account.controller';
+import { updateAccountController, watchAccountController } from '~controllers/account.controller';
+import { watchUserInfoController } from '~controllers/user.controller';
 import useToggle from '~hooks/useToggle';
 import Box from '~ui/core/Box';
 import Button from '~ui/core/Button';
@@ -28,7 +25,7 @@ import { toastError } from '~ui/toast';
 
 interface ParentCopySettingsProps {
   parentId: string;
-  copySettings: CopySettings;
+  copySettings: AccountCopySettings;
   isAdminProvider?: boolean;
   onClose?: () => void;
 }
@@ -39,14 +36,14 @@ function ParentCopySettings({
   const {
     accountId = '',
     settings = {},
-  } = storeUser.useStore((state) => ({
-    accountId: state.activeProvider?._id,
-    settings: state.activeProvider?.settings,
+  } = watchUserInfoController((state) => ({
+    accountId: state.activeAccount?._id,
+    settings: state.activeAccount?.settings,
   }));
 
   const {
     parentName,
-  } = storeAccounts.useStore((state) => ({
+  } = watchAccountController((state) => ({
     parentName: state[parentId]?.name,
   }));
 
@@ -175,20 +172,20 @@ function ParentCopySettings({
     <>
       <Group>
         Copy Volume Mode
-        <Icon name="HelpOutline" size="small" tooltip={CopyVolumeModeText[copyVolumeMode || CopyVolumeMode.auto]?.description} />
+        <Icon name="HelpOutline" size="small" tooltip={CopyVolumeModeText[copyVolumeMode || AccountCopyVolumeMode.auto]?.description} />
         <Select
-          data={Object.keys(CopyVolumeMode).map((item) => ({
+          data={Object.keys(AccountCopyVolumeMode).map((item) => ({
             value: item,
             label: CopyVolumeModeText[item]?.text,
           }))}
           value={copyVolumeMode}
           onChange={(value) => {
             if (!value) return;
-            setCopyVolumeMode(value as CopyVolumeMode);
+            setCopyVolumeMode(value as AccountCopyVolumeMode);
           }}
         />
       </Group>
-      {copyVolumeMode === CopyVolumeMode.fixedRatio && (
+      {copyVolumeMode === AccountCopyVolumeMode.fixedRatio && (
         <Group>
           Fixed Ratio
           <NumberInput
@@ -197,7 +194,7 @@ function ParentCopySettings({
           />
         </Group>
       )}
-      {copyVolumeMode === CopyVolumeMode.fixedLot && (
+      {copyVolumeMode === AccountCopyVolumeMode.fixedLot && (
         <Group>
           Fixed Lot
           <NumberInput
@@ -207,7 +204,7 @@ function ParentCopySettings({
           />
         </Group>
       )}
-      {copyVolumeMode === CopyVolumeMode.autoWithRatio && (
+      {copyVolumeMode === AccountCopyVolumeMode.autoWithRatio && (
         <Group>
           Auto with Ratio
           <NumberInput
@@ -216,7 +213,7 @@ function ParentCopySettings({
           />
         </Group>
       )}
-      {copyVolumeMode !== CopyVolumeMode.fixedLot && (
+      {copyVolumeMode !== AccountCopyVolumeMode.fixedLot && (
         <>
           <Group>
             Min Lot
@@ -263,12 +260,12 @@ function ManageCopySettings({
   const {
     accountId = '',
     settings = {},
-  } = storeUser.useStore((state) => ({
-    accountId: state.activeProvider?._id,
-    settings: state.activeProvider?.settings,
+  } = watchUserInfoController((state) => ({
+    accountId: state.activeAccount?._id,
+    settings: state.activeAccount?.settings,
   }));
 
-  const otherAccounts = storeAccounts.useStore((state) => _.pickBy(
+  const otherAccounts = watchAccountController((state) => _.pickBy(
     state,
     (item) => item._id !== accountId,
   ));
@@ -346,17 +343,17 @@ function AdminSettings({ onClose }: Props) {
     accountId = '',
     roles,
     settings = {},
-  } = storeUser.useStore((state) => ({
-    accountId: state.activeProvider?._id,
-    roles: state.info?.roles,
-    settings: state.activeProvider?.settings,
+  } = watchUserInfoController((state) => ({
+    accountId: state.activeAccount?._id,
+    roles: state.activeUser?.roles,
+    settings: state.activeAccount?.settings,
   }));
 
   const [enableCopyParent, toggleEnableCopyParent] = useToggle(
     settings.enableCopyParent,
   );
 
-  const accounts = storeAccounts.useStore((state) => _.pickBy(
+  const accounts = watchAccountController((state) => _.pickBy(
     state,
     (item) => settings.parents?.[item._id],
   ));

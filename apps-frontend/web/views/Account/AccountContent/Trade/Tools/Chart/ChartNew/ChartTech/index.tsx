@@ -1,3 +1,4 @@
+import { AccountType, getMajorPairs } from '@fishprovider/core';
 import barGetMany from '@fishprovider/cross/dist/api/bars/getMany';
 import orderRemove from '@fishprovider/cross/dist/api/orders/remove';
 import orderUpdate from '@fishprovider/cross/dist/api/orders/update';
@@ -6,20 +7,16 @@ import { useQuery } from '@fishprovider/cross/dist/libs/query';
 import storeBars from '@fishprovider/cross/dist/stores/bars';
 import storeOrders from '@fishprovider/cross/dist/stores/orders';
 import storePrices from '@fishprovider/cross/dist/stores/prices';
-import storeUser from '@fishprovider/cross/dist/stores/user';
-import { ProviderType } from '@fishprovider/utils/dist/constants/account';
 import { OrderStatus } from '@fishprovider/utils/dist/constants/order';
-import { getMajorPairs } from '@fishprovider/utils/dist/helpers/price';
 import { validateOrderRemove, validateOrderUpdate } from '@fishprovider/utils/dist/helpers/validateOrder';
-import type { Account } from '@fishprovider/utils/dist/types/Account.model';
 import type { Order } from '@fishprovider/utils/dist/types/Order.model';
-import type { User } from '@fishprovider/utils/dist/types/User.model';
 import _ from 'lodash';
 import dynamic from 'next/dynamic';
 import React, { useEffect, useState } from 'react';
 
 import OrderModal from '~components/order/OpenOrder/OrderModal';
 import SymbolsSelect from '~components/price/SymbolsSelect';
+import { getUserInfoController, watchUserInfoController } from '~controllers/user.controller';
 import useConversionRate from '~hooks/useConversionRate';
 import Box from '~ui/core/Box';
 import Button from '~ui/core/Button';
@@ -46,14 +43,14 @@ interface Props {
 function ChartTech({ fullscreenAction }: Props) {
   const {
     providerId,
-    symbol,
-    providerType = ProviderType.icmarkets,
+    symbol = 'AUDUSD',
+    accountType = AccountType.icmarkets,
     asset = 'USD',
-  } = storeUser.useStore((state) => ({
-    providerId: state.activeProvider?._id,
-    providerType: state.activeProvider?.providerType,
+  } = watchUserInfoController((state) => ({
+    providerId: state.activeAccount?._id,
+    accountType: state.activeAccount?.accountType,
     symbol: state.activeSymbol,
-    asset: state.activeProvider?.asset,
+    asset: state.activeAccount?.asset,
   }));
   const orders = storeOrders.useStore((state) => _.filter(
     state,
@@ -62,15 +59,15 @@ function ChartTech({ fullscreenAction }: Props) {
   ));
 
   const symbols = _.uniq([
-    ...getMajorPairs(providerType),
+    ...getMajorPairs(accountType),
     ...orders.map((item) => item.symbol),
   ]);
 
   const prices = storePrices.useStore((state) => _.pickBy(
     state,
-    (item) => item.providerType === providerType && symbols.includes(item.symbol),
+    (item) => item.providerType === accountType as any && symbols.includes(item.symbol),
   ));
-  const priceDoc = prices[`${providerType}-${symbol}`];
+  const priceDoc = prices[`${accountType}-${symbol}`];
 
   const rate = useConversionRate(symbol);
 
@@ -79,19 +76,19 @@ function ChartTech({ fullscreenAction }: Props) {
 
   const bars = storeBars.useStore((state) => _.filter(
     state,
-    (item) => item.providerType === providerType
+    (item) => item.providerType === accountType as any
       && item.symbol === symbol && item.period === period,
   ));
 
   useEffect(() => {
     setScale(1);
-  }, [providerType, symbol, period]);
+  }, [accountType, symbol, period]);
 
   useQuery({
     queryFn: () => barGetMany({
-      providerType, symbol, period, scale,
+      providerType: accountType as any, symbol, period, scale,
     }),
-    queryKey: queryKeys.bars(providerType, symbol, period, scale),
+    queryKey: queryKeys.bars(accountType as any, symbol, period, scale),
   });
 
   if (!priceDoc) return <Skeleton height={400} />;
@@ -119,25 +116,22 @@ function ChartTech({ fullscreenAction }: Props) {
 
   const validateUpdate = (orderToUpdate: Order) => {
     const {
-      info: user,
-      activeProvider: account,
-    } = storeUser.getState() as {
-      info: User,
-      activeProvider: Account,
-    };
+      activeUser: user,
+      activeAccount: account,
+    } = getUserInfoController();
 
     const liveOrders = _.filter(
       storeOrders.getState(),
-      (item) => item.providerId === account._id && item.status === OrderStatus.live,
+      (item) => item.providerId === account?._id && item.status === OrderStatus.live,
     );
     const pendingOrders = _.filter(
       storeOrders.getState(),
-      (item) => item.providerId === account._id && item.status === OrderStatus.pending,
+      (item) => item.providerId === account?._id && item.status === OrderStatus.pending,
     );
 
     return validateOrderUpdate({
-      user,
-      account,
+      user: user as any,
+      account: account as any,
       liveOrders,
       pendingOrders,
       orderToUpdate,
@@ -176,16 +170,13 @@ function ChartTech({ fullscreenAction }: Props) {
 
   const validateRemove = (orderToRemove: Order) => {
     const {
-      info: user,
-      activeProvider: account,
-    } = storeUser.getState() as {
-      info: User,
-      activeProvider: Account,
-    };
+      activeUser: user,
+      activeAccount: account,
+    } = getUserInfoController();
 
     return validateOrderRemove({
-      user,
-      account,
+      user: user as any,
+      account: account as any,
       orderToRemove,
       prices: storePrices.getState(),
     });
@@ -237,7 +228,7 @@ function ChartTech({ fullscreenAction }: Props) {
           data={data}
           srTimeFrs={[]}
           asset={asset}
-          providerType={providerType}
+          providerType={accountType}
           priceDoc={priceDoc}
           prices={prices}
           rate={rate}

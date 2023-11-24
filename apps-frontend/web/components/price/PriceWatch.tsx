@@ -1,21 +1,20 @@
+import { AccountType, getMajorPairs } from '@fishprovider/core';
 import priceGetMany from '@fishprovider/cross/dist/api/prices/getMany';
 import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
 import storeOrders from '@fishprovider/cross/dist/stores/orders';
 import storePrices from '@fishprovider/cross/dist/stores/prices';
-import storeUser from '@fishprovider/cross/dist/stores/user';
-import type { ProviderType } from '@fishprovider/utils/dist/constants/account';
 import type { OrderStatus } from '@fishprovider/utils/dist/constants/order';
 import { redisKeys } from '@fishprovider/utils/dist/constants/redis';
-import { getMajorPairs } from '@fishprovider/utils/dist/helpers/price';
 import type { Price } from '@fishprovider/utils/dist/types/Price.model';
 import _ from 'lodash';
 import { useEffect, useRef, useState } from 'react';
 
+import { watchUserInfoController } from '~controllers/user.controller';
 import { refreshMS } from '~utils';
 
-const usePricesSocket = (providerType: ProviderType, watchSymbols: string[]) => {
-  const socket = storeUser.useStore((state) => state.socket);
+const usePricesSocket = (accountType: AccountType, watchSymbols: string[]) => {
+  const socket = watchUserInfoController((state) => state.socket);
 
   const [symbols, setSymbols] = useState(watchSymbols);
 
@@ -27,7 +26,7 @@ const usePricesSocket = (providerType: ProviderType, watchSymbols: string[]) => 
 
   const prevChannels = useRef<string[]>();
   useEffect(() => {
-    prevChannels.current = symbols.map(((symbol) => redisKeys.price(providerType, symbol)));
+    prevChannels.current = symbols.map(((symbol) => redisKeys.price(accountType as any, symbol)));
   });
 
   useEffect(() => {
@@ -41,7 +40,7 @@ const usePricesSocket = (providerType: ProviderType, watchSymbols: string[]) => 
       }
 
       symbols.forEach((symbol) => {
-        const channel = redisKeys.price(providerType, symbol);
+        const channel = redisKeys.price(accountType as any, symbol);
         Logger.debug('[socket] sub', channel);
         socket.emit('join', channel);
         socket.on(channel, (doc: Price) => {
@@ -55,50 +54,50 @@ const usePricesSocket = (providerType: ProviderType, watchSymbols: string[]) => 
     return () => {
       if (socket) {
         symbols.forEach((symbol) => {
-          const channel = redisKeys.price(providerType, symbol);
+          const channel = redisKeys.price(accountType as any, symbol);
           Logger.debug('[socket] unsub from unmount', channel);
           socket.off(channel);
           socket.emit('leave', channel);
         });
       }
     };
-  }, [socket, providerType, symbols]);
+  }, [socket, accountType, symbols]);
 };
 
 interface PriceWatchProps {
-  providerId: string;
-  providerType: ProviderType;
+  accountId: string;
+  accountType: AccountType;
   activeSymbol: string;
   orderStatuses: OrderStatus[];
 }
 
 function PriceWatch({
-  providerId, providerType, activeSymbol, orderStatuses,
+  accountId, accountType, activeSymbol, orderStatuses,
 }: PriceWatchProps) {
   const orders = storeOrders.useStore((state) => _.filter(
     state,
-    (item) => item.providerId === providerId && orderStatuses.includes(item.status),
+    (item) => item.providerId === accountId && orderStatuses.includes(item.status),
   ));
 
   const symbols = _.sortBy(_.uniq([
-    ...getMajorPairs(providerType),
+    ...getMajorPairs(accountType),
     ...orders.map((item) => item.symbol),
     activeSymbol,
   ]));
 
   useEffect(() => {
-    priceGetMany({ providerType, symbols, reload: true });
+    priceGetMany({ providerType: accountType as any, symbols, reload: true });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [symbols.length]);
 
   useQuery({
-    queryFn: () => priceGetMany({ providerType, symbols }),
-    queryKey: queryKeys.prices(providerType, ...symbols),
+    queryFn: () => priceGetMany({ providerType: accountType as any, symbols }),
+    queryKey: queryKeys.prices(accountType as any, ...symbols),
     enabled: !!symbols.length,
     refetchInterval: refreshMS,
   });
 
-  usePricesSocket(providerType, symbols);
+  usePricesSocket(accountType, symbols);
 
   return null;
 }

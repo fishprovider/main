@@ -1,22 +1,19 @@
+import { AccountType, getMajorPairs } from '@fishprovider/core';
 import orderGetMany from '@fishprovider/cross/dist/api/orders/getMany';
 import orderGetManyInfo from '@fishprovider/cross/dist/api/orders/getManyInfo';
 import orderRemove from '@fishprovider/cross/dist/api/orders/remove';
 import { useMutate } from '@fishprovider/cross/dist/libs/query';
 import storePrices from '@fishprovider/cross/dist/stores/prices';
-import storeUser from '@fishprovider/cross/dist/stores/user';
-import { ProviderType } from '@fishprovider/utils/dist/constants/account';
 import { OrderStatus } from '@fishprovider/utils/dist/constants/order';
 import { getProfit } from '@fishprovider/utils/dist/helpers/order';
-import { getMajorPairs } from '@fishprovider/utils/dist/helpers/price';
 import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
 import { validateOrderRemove } from '@fishprovider/utils/dist/helpers/validateOrder';
-import type { Account } from '@fishprovider/utils/dist/types/Account.model';
 import type { Order } from '@fishprovider/utils/dist/types/Order.model';
-import type { User } from '@fishprovider/utils/dist/types/User.model';
 import _ from 'lodash';
 import { useState } from 'react';
 
 import { activityFields } from '~constants/account';
+import { getUserInfoController, watchUserInfoController } from '~controllers/user.controller';
 import Group from '~ui/core/Group';
 import Icon from '~ui/core/Icon';
 import Table from '~ui/core/Table';
@@ -35,30 +32,30 @@ const orderRemoveAll = (orders: Order[]) => Promise.all(
 
 function ListTradeLive({ orders }: Props) {
   const {
-    providerId = '',
-    providerType = ProviderType.icmarkets,
+    accountId = '',
+    accountType = AccountType.icmarkets,
     asset = 'USD',
     roles,
-  } = storeUser.useStore((state) => ({
-    providerId: state.activeProvider?._id,
-    providerType: state.activeProvider?.providerType,
-    asset: state.activeProvider?.asset,
-    roles: state.info?.roles,
+  } = watchUserInfoController((state) => ({
+    accountId: state.activeAccount?._id,
+    accountType: state.activeAccount?.accountType,
+    asset: state.activeAccount?.asset,
+    roles: state.activeUser?.roles,
   }));
 
   const symbols = _.uniq([
-    ...getMajorPairs(providerType),
+    ...getMajorPairs(accountType),
     ...orders.map((item) => item.symbol),
   ]);
 
   const prices = storePrices.useStore((state) => (
     _.pickBy(
       state,
-      (item) => item.providerType === providerType && symbols.includes(item.symbol),
+      (item) => item.providerType === accountType as any && symbols.includes(item.symbol),
     )
   ));
 
-  const { isTraderProvider, isProtectorProvider } = getRoleProvider(roles, providerId);
+  const { isTraderProvider, isProtectorProvider } = getRoleProvider(roles, accountId);
 
   const nonLockedOrders = orders.filter((order) => !order.lock);
 
@@ -77,30 +74,27 @@ function ListTradeLive({ orders }: Props) {
 
   const onReload = () => {
     reload({
-      providerId,
+      providerId: accountId,
       orderStatus: OrderStatus.live,
       reload: true,
     }, {
       onSuccess: (res) => {
         const orderIds = res.positions.map((item) => item._id);
         if (!orderIds.length) return;
-        orderGetManyInfo({ providerId, orderIds, fields: activityFields });
+        orderGetManyInfo({ providerId: accountId, orderIds, fields: activityFields });
       },
     });
   };
 
   const validate = (orderToRemove: Order) => {
     const {
-      info: user,
-      activeProvider: account,
-    } = storeUser.getState() as {
-      info: User,
-      activeProvider: Account,
-    };
+      activeUser: user,
+      activeAccount: account,
+    } = getUserInfoController();
 
     return validateOrderRemove({
-      user,
-      account,
+      user: user as any,
+      account: account as any,
       orderToRemove,
       prices: storePrices.getState(),
     });
@@ -137,7 +131,7 @@ function ListTradeLive({ orders }: Props) {
     if (mergedView) {
       const groupSymbolOrders = _.groupBy(orders, (item) => item.symbol);
       const mergedOrders = _.flatMap(groupSymbolOrders, (symbolOrders, symbol) => {
-        const digits = storePrices.getState()[`${providerType}-${symbol}`]?.digits;
+        const digits = storePrices.getState()[`${accountType}-${symbol}`]?.digits;
         const directionOrders = _.groupBy(symbolOrders, (item) => item.direction);
         return _.map(directionOrders, (items) => {
           let entry: number | undefined;

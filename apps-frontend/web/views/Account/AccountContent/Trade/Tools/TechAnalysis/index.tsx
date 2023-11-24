@@ -1,6 +1,5 @@
-import storeUser from '@fishprovider/cross/dist/stores/user';
-
 import SymbolsSelect from '~components/price/SymbolsSelect';
+import { watchUserInfoController } from '~controllers/user.controller';
 import Group from '~ui/core/Group';
 import Stack from '~ui/core/Stack';
 import Title from '~ui/core/Title';
@@ -11,7 +10,7 @@ import Signals from './Signals';
 import Trend from './Trend';
 
 function TechAnalysis() {
-  const activeSymbol = storeUser.useStore((state) => state.activeSymbol);
+  const activeSymbol = watchUserInfoController((state) => state.activeSymbol);
 
   return (
     <Stack>
@@ -20,8 +19,8 @@ function TechAnalysis() {
         <SymbolsSelect hidePriceView />
       </Group>
       <Signals />
-      <Trend symbol={activeSymbol} />
-      <KeyLevel symbol={activeSymbol} />
+      {activeSymbol && <Trend symbol={activeSymbol} />}
+      {activeSymbol && <KeyLevel symbol={activeSymbol} />}
       <Depth />
     </Stack>
   );

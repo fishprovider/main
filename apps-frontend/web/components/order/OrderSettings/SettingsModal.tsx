@@ -2,18 +2,16 @@ import orderUpdate from '@fishprovider/cross/dist/api/orders/update';
 import { useMutate } from '@fishprovider/cross/dist/libs/query';
 import storeOrders from '@fishprovider/cross/dist/stores/orders';
 import storePrices from '@fishprovider/cross/dist/stores/prices';
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import { Direction, OrderStatus, OrderType } from '@fishprovider/utils/dist/constants/order';
 import { getEntry } from '@fishprovider/utils/dist/helpers/order';
 import { validateOrderUpdate } from '@fishprovider/utils/dist/helpers/validateOrder';
-import type { Account } from '@fishprovider/utils/dist/types/Account.model';
 import type { Order } from '@fishprovider/utils/dist/types/Order.model';
-import type { User } from '@fishprovider/utils/dist/types/User.model';
 import _ from 'lodash';
 import { useState } from 'react';
 
 import PricePips from '~components/price/PricePips';
 import VolumeLots from '~components/price/VolumeLots';
+import { getUserInfoController, watchUserInfoController } from '~controllers/user.controller';
 import useConversionRate from '~hooks/useConversionRate';
 import Button from '~ui/core/Button';
 import Group from '~ui/core/Group';
@@ -33,9 +31,9 @@ export default function SettingsModal({
   const {
     asset = 'USD',
     balance = 0,
-  } = storeUser.useStore((state) => ({
-    asset: state.activeProvider?.asset,
-    balance: state.activeProvider?.balance,
+  } = watchUserInfoController((state) => ({
+    asset: state.activeAccount?.asset,
+    balance: state.activeAccount?.balance,
   }));
 
   const priceDoc = storePrices.useStore((prices) => prices[`${order.providerType}-${order.symbol}`]);
@@ -68,25 +66,22 @@ export default function SettingsModal({
 
   const validate = () => {
     const {
-      info: user,
-      activeProvider: account,
-    } = storeUser.getState() as {
-      info: User,
-      activeProvider: Account,
-    };
+      activeUser: user,
+      activeAccount: account,
+    } = getUserInfoController();
 
     const liveOrders = _.filter(
       storeOrders.getState(),
-      (item) => item.providerId === account._id && item.status === OrderStatus.live,
+      (item) => item.providerId === account?._id && item.status === OrderStatus.live,
     );
     const pendingOrders = _.filter(
       storeOrders.getState(),
-      (item) => item.providerId === account._id && item.status === OrderStatus.pending,
+      (item) => item.providerId === account?._id && item.status === OrderStatus.pending,
     );
 
     return validateOrderUpdate({
-      user,
-      account,
+      user: user as any,
+      account: account as any,
       liveOrders,
       pendingOrders,
       orderToUpdate: { ...order, ...options },

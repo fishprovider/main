@@ -2,15 +2,14 @@ import lockAccount from '@fishprovider/cross/dist/api/accounts/lock/account';
 import orderAdd from '@fishprovider/cross/dist/api/orders/add';
 import orderRemove from '@fishprovider/cross/dist/api/orders/remove';
 import { useMutate } from '@fishprovider/cross/dist/libs/query';
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import { LockType } from '@fishprovider/utils/dist/constants/account';
 import { OrderStatus, OrderType } from '@fishprovider/utils/dist/constants/order';
 import type { Order } from '@fishprovider/utils/dist/types/Order.model';
-import type { User } from '@fishprovider/utils/dist/types/User.model';
 import _ from 'lodash';
 import moment from 'moment';
 import { useState } from 'react';
 
+import { getUserInfoController } from '~controllers/user.controller';
 import useConversionRate from '~hooks/useConversionRate';
 import Button from '~ui/core/Button';
 import Checkbox from '~ui/core/Checkbox';
@@ -57,7 +56,7 @@ function CloseModal({
     const {
       balance = 0,
       plan = [],
-    } = storeUser.getState().activeProvider || {};
+    } = getUserInfoController().activeAccount || {};
 
     const {
       defaultSL, defaultTP, planSLAmt, planTPAmt,
@@ -90,15 +89,15 @@ function CloseModal({
   };
 
   const onLock = async () => {
-    const user = storeUser.getState().info as User;
+    const user = getUserInfoController().activeUser;
 
     const lockNew = {
       type: LockType.open,
       lockFrom: new Date(),
       lockUntil: moment().add(+lockHours, 'hours').toDate(),
       lockMessage: 'Short break after closing order',
-      lockByUserId: user._id,
-      lockByUserName: user.name,
+      lockByUserId: user?._id || '',
+      lockByUserName: user?.name || '',
     };
     await new Promise((resolve) => {
       lockAcc({ providerId: order.providerId, lock: lockNew }, {
