@@ -1,4 +1,4 @@
-import { AccountCopySettings, AccountCopyVolumeMode, AccountSettings } from '@fishprovider/core';
+import { AccountCopySettings, AccountCopyVolumeMode } from '@fishprovider/core';
 import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
 import _ from 'lodash';
 import { useState } from 'react';

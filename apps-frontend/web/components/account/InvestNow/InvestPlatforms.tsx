@@ -32,10 +32,10 @@ function InvestPlatforms({
     name: state[providerId]?.name,
   }));
 
-  const getCopyUrl = (platform: CopyPlatform, providerType: string) => {
+  const getCopyUrl = (copyPlatform: CopyPlatform, providerType: string) => {
     if (platform === AccountPlatform.ctrader) {
       const strategyId = groupAccounts[0]?.strategyId;
-      const url = `${platform.copyUrl}/${strategyId}`;
+      const url = `${copyPlatform.copyUrl}/${strategyId}`;
       return url;
     }
 
