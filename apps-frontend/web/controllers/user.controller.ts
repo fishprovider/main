@@ -70,8 +70,18 @@ export const watchUserController = <T>(
 };
 
 export const watchUserInfoController = <T>(
-  selector: (state: Record<string, UserInfo>) => T,
+  selector: (state: UserInfo) => T,
 ) => {
   const watchUserInfoRepo = checkRepository(repo.watchUserInfo);
   return watchUserInfoRepo(selector);
+};
+
+export const getUserInfoController = () => {
+  const getUserInfoRepo = checkRepository(repo.getUserInfo);
+  return getUserInfoRepo();
+};
+
+export const updateUserInfoController = (payload: Partial<UserInfo>) => {
+  const updateUserInfoRepo = checkRepository(repo.updateUserInfo);
+  updateUserInfoRepo(payload);
 };

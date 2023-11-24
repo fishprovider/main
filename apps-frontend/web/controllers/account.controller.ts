@@ -1,8 +1,7 @@
 import {
-  Account,
-  AccountActivity, AccountBannerStatus, AccountConfig, AccountPlatform, AccountProtectSettings,
-  AccountSettings, AccountTradeSettings, AccountTradeType, AccountType, AccountViewType,
-  checkRepository,
+  Account, AccountActivity, AccountBannerStatus, AccountConfig, AccountPlatform,
+  AccountProtectSettings, AccountSettings, AccountTradeSettings, AccountTradeType,
+  AccountType, AccountViewType, checkRepository,
 } from '@fishprovider/core';
 import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
 import { StoreFirstAccountRepository } from '@fishprovider/store-first';
@@ -72,6 +71,7 @@ export const updateAccountController = async (
   if (account) { // TODO: remove
     storeAccounts.mergeDoc(account as Partial<AccountOld>);
   }
+  return account;
 };
 
 export const addAccountController = async (
@@ -95,8 +95,9 @@ export const removeAccountController = async (filter: {
   accountId: string,
 }) => {
   const removeAccountRepo = checkRepository(repo.removeAccount);
-  await removeAccountRepo(filter);
+  const { doc: account } = await removeAccountRepo(filter);
   storeAccounts.removeDoc(filter.accountId); // TODO: remove
+  return account;
 };
 
 export const watchAccountController = <T>(
