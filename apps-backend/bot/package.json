@@ -9,7 +9,7 @@
     "test-unit": "NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules npx jest",
     "test-int": "NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules doppler run --print-config -- npx jest --runInBand",
     "clean": "rm -rf dist .eslintcache *.tsbuildinfo",
-    "prebuild": "./build-deps.sh",
+    "prebuild": "tsc -b tsconfig.build.json",
     "build": "node esbuild.cjs",
     "postbuild": "../../scripts/build-check.sh",
     "build-watch": "WATCH_MODE=true node esbuild.cjs",

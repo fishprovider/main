@@ -9,4 +9,8 @@
     "outDir": "dist",
   },
   "include": ["**/*.ts"],
+  "references": [
+    { "path": "../../packages/core" },
+    { "path": "../../packages/coin" },
+  ]
 }

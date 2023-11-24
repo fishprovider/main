@@ -208,7 +208,7 @@ const closeAndLock = async (
 };
 
 const lockTarget = async (account: Account, liveOrders: Order[], profit: number) => {
-  const { _id: providerId, providerGroupId } = account;
+  const { _id: providerId, groupId } = account;
   try {
     const { monthTarget, levelTarget, equityLock } = checkTargetReach(account, liveOrders, profit);
     if (!(monthTarget || levelTarget || equityLock)) return;
@@ -241,10 +241,10 @@ const lockTarget = async (account: Account, liveOrders: Order[], profit: number)
       equityLock,
     );
 
-    if (providerGroupId) {
+    if (groupId) {
       const groupAccConfigs = await Mongo.collection<Account>('accounts').find({
         _id: { $ne: providerId },
-        providerGroupId,
+        groupId,
       }, {
         projection: {
           config: 1,

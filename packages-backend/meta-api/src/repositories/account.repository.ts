@@ -1,4 +1,6 @@
-import { AccountConfig, BaseError, RepositoryError } from '@fishprovider/core';
+import {
+  AccountConfig, AccountPlatform, BaseError, RepositoryError,
+} from '@fishprovider/core';
 import { AccountRepository } from '@fishprovider/core-backend';
 
 import { Connection, getAccountInformation, newAccount } from '..';
@@ -24,7 +26,8 @@ const getAccount: AccountRepository['getAccount'] = async (payload) => {
     doc: {
       ...doc,
       _id: accountId,
-      platformType: doc.platform,
+      platform: AccountPlatform.metatrader,
+      brokerType: doc.platform,
       assetId: doc.currency,
       asset: doc.currency,
       providerData: doc,

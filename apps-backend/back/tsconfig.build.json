@@ -1,14 +1,11 @@
 {
-  "extends": "../../tsconfig.json",
+  "extends": [
+    "./tsconfig.json",
+    "../../tsconfig.build.json",
+  ],
   "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "~*": ["./*"],
-    },
-    "rootDir": ".",
-    "outDir": "dist",
+    "noEmit": true
   },
-  "include": ["**/*.ts"],
   "references": [
     { "path": "../../packages/core" },
     { "path": "../../packages/swap" },
