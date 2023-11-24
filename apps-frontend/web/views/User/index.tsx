@@ -4,7 +4,7 @@ import storeUser from '@fishprovider/cross/dist/stores/user';
 import { useState } from 'react';
 
 import VerifyPhone from '~components/user/VerifyPhone';
-import { getUserService } from '~controllers/user.controller';
+import { getUserController } from '~controllers/user.controller';
 import { changePassword, changeProfile, resetPassword } from '~libs/auth';
 import Avatar from '~ui/core/Avatar';
 import Button from '~ui/core/Button';
@@ -37,7 +37,7 @@ function User() {
   const [passConfirm, setPassConfirm] = useState('');
 
   useQuery({
-    queryFn: () => getUserService({}),
+    queryFn: () => getUserController({}),
     queryKey: queryKeys.user(userId),
     enabled: !!userId,
     refetchInterval: refreshMS,

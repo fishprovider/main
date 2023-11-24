@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import Link from '~components/base/Link';
-import { addAccountController, getTradeAccountsService } from '~controllers/account.controller';
+import { addAccountController, getTradeAccountsController } from '~controllers/account.controller';
 import Routes, { toAccount } from '~libs/routes';
 import Button from '~ui/core/Button';
 import Icon from '~ui/core/Icon';
@@ -131,7 +131,7 @@ function CTraderAuth() {
       const [_1, _2, _3, clientId] = window.location.pathname.split('/');
       const redirectUrl = `${window.location.origin}${window.location.pathname}`;
 
-      getTradeAccountsService({
+      getTradeAccountsController({
         accountPlatform: AccountPlatform.ctrader,
         baseConfig: {
           clientId,

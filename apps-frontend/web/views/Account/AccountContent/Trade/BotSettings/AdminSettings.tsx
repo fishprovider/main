@@ -8,7 +8,7 @@ import _ from 'lodash';
 import { useState } from 'react';
 
 import { CopyVolumeModeText } from '~constants/account';
-import { updateAccountService } from '~controllers/account.controller';
+import { updateAccountController } from '~controllers/account.controller';
 import useToggle from '~hooks/useToggle';
 import Box from '~ui/core/Box';
 import Button from '~ui/core/Button';
@@ -97,7 +97,7 @@ function ParentCopySettings({
 
     if (!(await openConfirmModal())) return;
 
-    await updateAccountService({
+    await updateAccountController({
       accountId,
     }, {
       settings: {
@@ -280,7 +280,7 @@ function ManageCopySettings({
   const onRemove = async (parentId: string) => {
     if (!(await openConfirmModal())) return;
 
-    await updateAccountService({
+    await updateAccountController({
       accountId,
     }, {
       settings: {
@@ -300,7 +300,7 @@ function ManageCopySettings({
 
     if (!(await openConfirmModal())) return;
 
-    await updateAccountService({
+    await updateAccountController({
       accountId,
     }, {
       settings: {
@@ -368,7 +368,7 @@ function AdminSettings({ onClose }: Props) {
   const onSave = async () => {
     if (!(await openConfirmModal())) return;
 
-    await updateAccountService({
+    await updateAccountController({
       accountId,
     }, {
       settings: {

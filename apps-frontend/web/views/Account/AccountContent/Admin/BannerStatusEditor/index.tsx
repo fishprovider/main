@@ -2,7 +2,7 @@ import storeUser from '@fishprovider/cross/dist/stores/user';
 import { useCallback, useState } from 'react';
 
 import AccountHtmlEditor from '~components/account/AccountHtmlEditor';
-import { updateAccountService } from '~controllers/account.controller';
+import { updateAccountController } from '~controllers/account.controller';
 import useToggle from '~hooks/useToggle';
 import ColorInput from '~ui/core/ColorInput';
 import Switch from '~ui/core/Switch';
@@ -21,7 +21,7 @@ function BannerStatusEditor() {
   const onSave = async (content?: string) => {
     const accountId = storeUser.getState().activeProvider?._id || '';
 
-    updateAccountService({
+    updateAccountController({
       accountId,
     }, {
       bannerStatus: {

@@ -1,7 +1,7 @@
 import storeUser from '@fishprovider/cross/dist/stores/user';
 
 import AccountHtmlEditor from '~components/account/AccountHtmlEditor';
-import { updateAccountService } from '~controllers/account.controller';
+import { updateAccountController } from '~controllers/account.controller';
 
 function PublicNotes() {
   const notes = storeUser.useStore((state) => state.activeProvider?.notes);
@@ -9,7 +9,7 @@ function PublicNotes() {
   const onSave = async (content?: string) => {
     const accountId = storeUser.getState().activeProvider?._id || '';
 
-    updateAccountService({
+    updateAccountController({
       accountId,
     }, {
       notes: content,

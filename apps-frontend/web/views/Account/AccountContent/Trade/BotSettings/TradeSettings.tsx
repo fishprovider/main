@@ -3,7 +3,7 @@ import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
 import moment from 'moment';
 import { useState } from 'react';
 
-import { updateAccountService } from '~controllers/account.controller';
+import { updateAccountController } from '~controllers/account.controller';
 import useToggle from '~hooks/useToggle';
 import Box from '~ui/core/Box';
 import Button from '~ui/core/Button';
@@ -73,7 +73,7 @@ function TradeSettings({ onClose }: Props) {
 
     if (!(await openConfirmModal())) return;
 
-    await updateAccountService({
+    await updateAccountController({
       accountId,
     }, {
       tradeSettings: {

@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import Link from '~components/base/Link';
 import { AccountViewTypeText } from '~constants/account';
-import { updateAccountService } from '~controllers/account.controller';
+import { updateAccountController } from '~controllers/account.controller';
 import Button from '~ui/core/Button';
 import Group from '~ui/core/Group';
 import NumberInput from '~ui/core/NumberInput';
@@ -35,7 +35,7 @@ function AccountEditor({ account, onDone } : Props) {
   const onSave = () => {
     const accountId = storeUser.getState().activeProvider?._id || '';
 
-    updateAccountService({
+    updateAccountController({
       accountId,
     }, {
       accountViewType,
