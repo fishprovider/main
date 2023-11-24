@@ -123,7 +123,7 @@ function OrderEditor({
 
   const {
     defaultSL, defaultTP, planSLAmt, planTPAmt,
-  } = getDefaultSLTP(balance, plan, direction, volume, entry, rate);
+  } = getDefaultSLTP(balance, plan as any, direction, volume, entry, rate);
   const stopLoss = stopLossInput ?? defaultSL;
   const takeProfit = takeProfitInput ?? defaultTP;
 

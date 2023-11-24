@@ -5,26 +5,11 @@ import { StoreFirstUserRepository } from '@fishprovider/store-first';
 
 const repo = StoreFirstUserRepository;
 
-const updateUserInfoActiveUser = (user?: Partial<User>) => {
-  if (!user) return;
-
-  const updateUserInfoRepo = checkRepository(repo.updateUserInfo);
-  const getUserInfoRepo = checkRepository(repo.getUserInfo);
-  updateUserInfoRepo({
-    activeUser: {
-      ...getUserInfoRepo().activeUser,
-      ...user,
-    },
-  });
-};
-
 export const getUserController = async (filter: {
   email?: string,
 }) => {
   const getUserRepo = checkRepository(repo.getUser);
   const { doc: user } = await getUserRepo(filter);
-
-  updateUserInfoActiveUser(user);
 
   if (user) { // TODO: remove
     storeUser.mergeState({
@@ -52,8 +37,6 @@ export const updateUserController = async (
   const updateUserRepo = checkRepository(repo.updateUser);
   const { doc: user } = await updateUserRepo(filter, payload);
 
-  updateUserInfoActiveUser(user);
-
   if (user) { // TODO: remove
     storeUser.mergeState({
       info: {
@@ -70,8 +53,6 @@ export const refreshUserRolesController = async (filter: {
 }) => {
   const updateUserRepo = checkRepository(repo.updateUser);
   const { doc: user } = await updateUserRepo(filter, { refreshRoles: true });
-
-  updateUserInfoActiveUser(user);
 
   if (user) { // TODO: remove
     storeUser.mergeState({
@@ -110,5 +91,7 @@ export const getUserInfoController = () => {
 export const updateUserInfoController = (payload: Partial<UserInfo>) => {
   const updateUserInfoRepo = checkRepository(repo.updateUserInfo);
   updateUserInfoRepo(payload);
+
+  // TODO: remove
   storeUser.mergeState(payload);
 };

@@ -9,7 +9,7 @@ function UserLiveChat() {
     user,
   } = watchUserInfoController((state) => ({
     isClientLoggedIn: state.isClientLoggedIn,
-    user: state.info,
+    user: state.activeUser,
   }));
 
   useEffect(() => {
