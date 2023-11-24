@@ -1,12 +1,11 @@
-import storeUser from '@fishprovider/cross/dist/stores/user';
-
 import Link from '~components/base/Link';
+import { watchUserInfoController } from '~controllers/user.controller';
 import Card from '~ui/core/Card';
 import Image from '~ui/core/Image';
 import ThemeProvider from '~ui/themes/ThemeProvider';
 
 function CTraderStats() {
-  const strategyId = storeUser.useStore((state) => state.activeProvider?.strategyId);
+  const strategyId = watchUserInfoController((state) => state.activeAccount?.strategyId);
 
   if (!strategyId) return null;
 

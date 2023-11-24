@@ -1,10 +1,10 @@
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import {
   completeNavigationProgress, NavigationProgress, startNavigationProgress,
 } from '@mantine/nprogress';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
+import { getUserInfoController } from '~controllers/user.controller';
 import { pageView } from '~libs/analytics';
 
 function PageProgress() {
@@ -16,7 +16,7 @@ function PageProgress() {
     };
 
     const handleRouteChangeEnd = (url: string) => {
-      const user = storeUser.getState().info;
+      const user = getUserInfoController().activeUser;
       pageView(url, user);
       completeNavigationProgress();
     };

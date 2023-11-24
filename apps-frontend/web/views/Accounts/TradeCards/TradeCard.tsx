@@ -1,10 +1,10 @@
-import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
-import { ProviderType } from '@fishprovider/utils/dist/constants/account';
+import { AccountType } from '@fishprovider/core';
 import _ from 'lodash';
 
 import Link from '~components/base/Link';
 import AccountActivities from '~components/order/OpenOrder/AccountActivities';
 import { ProviderTypeText } from '~constants/account';
+import { watchAccountController } from '~controllers/account.controller';
 import { toAccount } from '~libs/routes';
 import Badge from '~ui/core/Badge';
 import Box from '~ui/core/Box';
@@ -28,7 +28,7 @@ function TradeCard({
   providerId,
 }: Props) {
   const {
-    providerType = ProviderType.icmarkets,
+    accountType = AccountType.icmarkets,
     name = '-',
     icon = '-',
     members = [],
@@ -37,8 +37,8 @@ function TradeCard({
     protectSettings = {},
     settings = {},
     activities = {},
-  } = storeAccounts.useStore((state) => ({
-    providerType: state[providerId]?.providerType,
+  } = watchAccountController((state) => ({
+    accountType: state[providerId]?.accountType,
     name: state[providerId]?.name,
     icon: state[providerId]?.icon,
     members: state[providerId]?.members,
@@ -64,7 +64,7 @@ function TradeCard({
         <Text>{icon}</Text>
       </Group>
       <Group spacing="xs">
-        <Badge variant="filled">{ProviderTypeText[providerType] || providerType}</Badge>
+        <Badge variant="filled">{ProviderTypeText[accountType] || accountType}</Badge>
         {hasCopy && <CopyStatus providerId={providerId} />}
         {hasLock && <Icon name="Lock" button tooltip="Locked" color="red" onClick={skipClick} />}
         {hasTarget && <Tooltip label="Target Passed">🎉</Tooltip>}

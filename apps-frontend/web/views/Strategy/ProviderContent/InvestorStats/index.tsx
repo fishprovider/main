@@ -1,4 +1,3 @@
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import { AccountPlatform } from '@fishprovider/utils/dist/constants/account';
 import _ from 'lodash';
 import moment from 'moment';
@@ -6,6 +5,7 @@ import moment from 'moment';
 import InvestNow from '~components/account/InvestNow';
 import MonthProfit from '~components/account/MonthProfit';
 import TradeNow from '~components/account/TradeNow';
+import { watchUserInfoController } from '~controllers/user.controller';
 import Badge from '~ui/core/Badge';
 import Box from '~ui/core/Box';
 import Grid from '~ui/core/Grid';
@@ -28,16 +28,16 @@ function InvestorStats() {
     monthProfit = 0,
     roi = 0,
     summary = {},
-  } = storeUser.useStore((state) => ({
-    providerId: state.activeProvider?._id,
-    accountPlatform: state.activeProvider?.accountPlatform,
-    createdAt: state.activeProvider?.createdAt,
-    capital: state.activeProvider?.capital,
-    riskScore: state.activeProvider?.riskScore,
-    winRate: state.activeProvider?.winRate,
-    monthProfit: state.activeProvider?.monthProfit,
-    roi: state.activeProvider?.roi,
-    summary: state.activeProvider?.summary,
+  } = watchUserInfoController((state) => ({
+    providerId: state.activeAccount?._id,
+    accountPlatform: state.activeAccount?.accountPlatform,
+    createdAt: state.activeAccount?.createdAt,
+    capital: state.activeAccount?.capital,
+    riskScore: state.activeAccount?.riskScore,
+    winRate: state.activeAccount?.winRate,
+    monthProfit: state.activeAccount?.monthProfit,
+    roi: state.activeAccount?.roi,
+    summary: state.activeAccount?.summary,
   }));
 
   const totalProfit = summary?.roi || roi || 0;

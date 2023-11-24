@@ -1,9 +1,9 @@
-import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
 import storeOrders from '@fishprovider/cross/dist/stores/orders';
 import { OrderStatus } from '@fishprovider/utils/dist/constants/order';
 import { parseCopyId } from '@fishprovider/utils/dist/helpers/order';
 import _ from 'lodash';
 
+import { watchAccountController } from '~controllers/account.controller';
 import Icon from '~ui/core/Icon';
 
 interface Props {
@@ -15,7 +15,7 @@ function CopyStatus({
 }: Props) {
   const {
     parents = {},
-  } = storeAccounts.useStore((state) => ({
+  } = watchAccountController((state) => ({
     parents: state[providerId]?.settings?.parents,
   }));
   const parentIds = Object.keys(parents).reduce<Record<string, boolean>>(

@@ -1,7 +1,7 @@
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import { useRouter } from 'next/router';
 
 import { removeAccountController } from '~controllers/account.controller';
+import { getUserInfoController } from '~controllers/user.controller';
 import Routes from '~libs/routes';
 import Button from '~ui/core/Button';
 import Group from '~ui/core/Group';
@@ -14,7 +14,7 @@ function AccountRemove() {
   const router = useRouter();
 
   const onRemove = async () => {
-    const accountId = storeUser.getState().activeProvider?._id || '';
+    const accountId = getUserInfoController().activeAccount?._id || '';
 
     if (!(await openConfirmModal())) return;
 

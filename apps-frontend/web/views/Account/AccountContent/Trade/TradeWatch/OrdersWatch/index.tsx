@@ -4,18 +4,18 @@ import orderGetManyInfo from '@fishprovider/cross/dist/api/orders/getManyInfo';
 import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
 import storeOrders from '@fishprovider/cross/dist/stores/orders';
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import { OrderStatus } from '@fishprovider/utils/dist/constants/order';
 import { redisKeys } from '@fishprovider/utils/dist/constants/redis';
 import type { Order } from '@fishprovider/utils/dist/types/Order.model';
 import { useEffect, useRef } from 'react';
 
 import { activityFields } from '~constants/account';
+import { watchUserInfoController } from '~controllers/user.controller';
 import { subDoc } from '~libs/sdb';
 import { refreshMS } from '~utils';
 
 function useLiveOrdersSocket(providerId: string) {
-  const socket = storeUser.useStore((state) => state.socket);
+  const socket = watchUserInfoController((state) => state.socket);
 
   const prevChannel = useRef<string>();
   useEffect(() => {
@@ -51,7 +51,7 @@ function useLiveOrdersSocket(providerId: string) {
 }
 
 function useLiveOrdersSdb(providerId: string) {
-  const isClientLoggedIn = storeUser.useStore((state) => state.isClientLoggedIn);
+  const isClientLoggedIn = watchUserInfoController((state) => state.isClientLoggedIn);
 
   useEffect(() => {
     if (isClientLoggedIn) {
@@ -69,7 +69,7 @@ function useLiveOrdersSdb(providerId: string) {
 }
 
 function usePendingOrdersSocket(providerId: string) {
-  const socket = storeUser.useStore((state) => state.socket);
+  const socket = watchUserInfoController((state) => state.socket);
 
   const prevChannel = useRef<string>();
   useEffect(() => {
@@ -105,7 +105,7 @@ function usePendingOrdersSocket(providerId: string) {
 }
 
 function usePendingOrdersSdb(providerId: string) {
-  const isClientLoggedIn = storeUser.useStore((state) => state.isClientLoggedIn);
+  const isClientLoggedIn = watchUserInfoController((state) => state.isClientLoggedIn);
 
   useEffect(() => {
     if (isClientLoggedIn) {
@@ -123,44 +123,44 @@ function usePendingOrdersSdb(providerId: string) {
 }
 
 interface OrdersWatchProps {
-  providerId: string;
+  accountId: string;
 }
 
-function OrdersWatch({ providerId }: OrdersWatchProps) {
+function OrdersWatch({ accountId }: OrdersWatchProps) {
   useEffect(() => {
-    orderGetMany({ providerId, reload: true }).then((res) => {
+    orderGetMany({ providerId: accountId, reload: true }).then((res) => {
       const orderIds = [...res.orders, ...res.positions].map((item) => item._id);
       if (!orderIds.length) return;
-      orderGetManyInfo({ providerId, orderIds, fields: activityFields });
+      orderGetManyInfo({ providerId: accountId, orderIds, fields: activityFields });
     });
-    orderGetIdea({ providerId, reload: true });
-  }, [providerId]);
+    orderGetIdea({ providerId: accountId, reload: true });
+  }, [accountId]);
 
   useQuery({
-    queryFn: () => orderGetMany({ providerId, orderStatus: OrderStatus.live }).then((res) => {
+    queryFn: () => orderGetMany({ providerId: accountId, orderStatus: OrderStatus.live }).then((res) => {
       const orderIds = res.positions.map((item) => item._id);
       if (!orderIds.length) return [];
-      return orderGetManyInfo({ providerId, orderIds, fields: activityFields });
+      return orderGetManyInfo({ providerId: accountId, orderIds, fields: activityFields });
     }),
-    queryKey: queryKeys.orders(`${providerId}-${OrderStatus.live}`),
+    queryKey: queryKeys.orders(`${accountId}-${OrderStatus.live}`),
     refetchInterval: refreshMS,
   });
 
   useQuery({
-    queryFn: () => orderGetMany({ providerId, orderStatus: OrderStatus.pending }).then((res) => {
+    queryFn: () => orderGetMany({ providerId: accountId, orderStatus: OrderStatus.pending }).then((res) => {
       const orderIds = res.orders.map((item) => item._id);
       if (!orderIds.length) return [];
-      return orderGetManyInfo({ providerId, orderIds, fields: activityFields });
+      return orderGetManyInfo({ providerId: accountId, orderIds, fields: activityFields });
     }),
-    queryKey: queryKeys.orders(`${providerId}-${OrderStatus.pending}`),
+    queryKey: queryKeys.orders(`${accountId}-${OrderStatus.pending}`),
     refetchInterval: refreshMS,
   });
 
-  useLiveOrdersSocket(providerId);
-  useLiveOrdersSdb(providerId);
+  useLiveOrdersSocket(accountId);
+  useLiveOrdersSdb(accountId);
 
-  usePendingOrdersSocket(providerId);
-  usePendingOrdersSdb(providerId);
+  usePendingOrdersSocket(accountId);
+  usePendingOrdersSdb(accountId);
 
   return null;
 }

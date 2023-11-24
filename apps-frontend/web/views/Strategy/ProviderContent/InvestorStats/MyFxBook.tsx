@@ -1,15 +1,14 @@
-import storeUser from '@fishprovider/cross/dist/stores/user';
-import { ProviderType } from '@fishprovider/utils/dist/constants/account';
+import { AccountType } from '@fishprovider/core';
 
 import Link from '~components/base/Link';
+import { watchUserInfoController } from '~controllers/user.controller';
 import Card from '~ui/core/Card';
 import Image from '~ui/core/Image';
 import ThemeProvider from '~ui/themes/ThemeProvider';
 
 function MyFxBook() {
-  const myfxbookUrl = storeUser.useStore(
-    (state) => state.activeProvider?.strategyLinks
-      ?.find((item) => item.type === ProviderType.myfxbook)?.url,
+  const myfxbookUrl = watchUserInfoController(
+    (state) => state.activeAccount?.strategyLinks?.find((item) => item.type === AccountType.myfxbook)?.url,
   );
 
   if (!myfxbookUrl) return null;

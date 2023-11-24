@@ -1,14 +1,12 @@
-import { AccountViewType } from '@fishprovider/core';
+import { Account, AccountViewType } from '@fishprovider/core';
 import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
-import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
-import type { Account } from '@fishprovider/utils/dist/types/Account.model';
 import _ from 'lodash';
 import { useRef } from 'react';
 
 import Link from '~components/base/Link';
 import { TopAccounts } from '~constants/account';
-import { getAccountsController } from '~controllers/account.controller';
+import { getAccountsController, watchAccountController } from '~controllers/account.controller';
 import Routes from '~libs/routes';
 import Box from '~ui/core/Box';
 import Button from '~ui/core/Button';
@@ -25,7 +23,7 @@ import ProviderCardTop from './ProviderCardTop';
 function TopStrategies() {
   const sliderScroll = useRef<HTMLDivElement>(null);
 
-  const topProviderIds = storeAccounts.useStore((state) => {
+  const topProviderIds = watchAccountController((state) => {
     const topAccounts = _.orderBy(
       _.reduce(
         state,

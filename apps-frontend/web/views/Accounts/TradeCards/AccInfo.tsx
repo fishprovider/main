@@ -1,9 +1,9 @@
-import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
-import type { Lock } from '@fishprovider/utils/dist/types/Account.model';
+import { AccountLock } from '@fishprovider/core';
 
 import BotChips from '~components/account/BotChips';
 import TargetProgress from '~components/account/EquityProgress/TargetProgress';
 import LockTypeInfo from '~components/account/LockTypeInfo';
+import { watchAccountController } from '~controllers/account.controller';
 import Box from '~ui/core/Box';
 import Group from '~ui/core/Group';
 import Icon from '~ui/core/Icon';
@@ -25,7 +25,7 @@ function AccInfo({
     tradeSettings,
     protectSettings,
     settings,
-  } = storeAccounts.useStore((state) => ({
+  } = watchAccountController((state) => ({
     balance: state[providerId]?.balance,
     leverage: state[providerId]?.leverage,
     asset: state[providerId]?.asset,
@@ -37,7 +37,7 @@ function AccInfo({
 
   const skipClick = (e: React.SyntheticEvent) => e.preventDefault();
 
-  const renderLock = (lock: Lock, index: number) => (
+  const renderLock = (lock: AccountLock, index: number) => (
     <Box key={index}>
       <LockTypeInfo lock={lock} />
     </Box>

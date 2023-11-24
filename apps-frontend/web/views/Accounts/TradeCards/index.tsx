@@ -1,19 +1,18 @@
+import { Account, AccountRole } from '@fishprovider/core';
 import priceGetMany from '@fishprovider/cross/dist/api/prices/getMany';
 import priceGetNames from '@fishprovider/cross/dist/api/prices/getNames';
 import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
-import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
 import storeOrders from '@fishprovider/cross/dist/stores/orders';
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import type { ProviderType } from '@fishprovider/utils/dist/constants/account';
 import { OrderStatus } from '@fishprovider/utils/dist/constants/order';
-import { Roles } from '@fishprovider/utils/dist/constants/user';
 import { getMajorPairs } from '@fishprovider/utils/dist/helpers/price';
-import type { Account } from '@fishprovider/utils/dist/types/Account.model';
 import type { Order } from '@fishprovider/utils/dist/types/Order.model';
 import _ from 'lodash';
 import { useEffect, useState } from 'react';
 
+import { watchAccountController } from '~controllers/account.controller';
+import { watchUserInfoController } from '~controllers/user.controller';
 import Group from '~ui/core/Group';
 import Pagination from '~ui/core/Pagination';
 import Select from '~ui/core/Select';
@@ -69,9 +68,9 @@ function TradeCards({
   const {
     userId = '',
     starProviders = {},
-  } = storeUser.useStore((state) => ({
-    userId: state.info?._id,
-    starProviders: state.info?.starProviders,
+  } = watchUserInfoController((state) => ({
+    userId: state.activeUser?._id,
+    starProviders: state.activeUser?.starAccounts,
   }));
 
   const [page, setPage] = useState(1);
@@ -83,22 +82,22 @@ function TradeCards({
 
   const sortByLastView = (account: Account) => {
     const activity = account.activities?.[userId];
-    if (!activity) return 0;
+    if (!activity?.lastView) return 0;
     return new Date(activity.lastView).getTime();
   };
 
   const sortByLastActive = (account: Account) => _.last(
     _.sortBy(
-      _.map(account.activities, (item) => new Date(item.lastView).getTime()),
+      _.map(account.activities, (item) => (item.lastView ? new Date(item.lastView).getTime() : 0)),
     ),
   );
 
   const sortByRole = (account: Account) => {
     const role = account.members?.find((item) => item.userId === userId)?.role;
-    if (role === Roles.admin) return 0;
-    if (role === Roles.trader) return 1;
-    if (role === Roles.protector) return 2;
-    if (role === Roles.viewer) return 3;
+    if (role === AccountRole.admin) return 0;
+    if (role === AccountRole.trader) return 1;
+    if (role === AccountRole.protector) return 2;
+    if (role === AccountRole.viewer) return 3;
     return 4;
   };
 
@@ -127,7 +126,7 @@ function TradeCards({
     };
   };
 
-  const accounts = storeAccounts.useStore((state) => {
+  const accounts = watchAccountController((state) => {
     const filteredAccounts = _.filter(state, (account) => {
       if (favorite && !starProviders[account._id]) return false;
 
@@ -151,7 +150,7 @@ function TradeCards({
       filteredAccounts,
       sortOptions.funcs,
       sortOptions.sides as ('asc' | 'desc')[],
-    ) as Account[];
+    );
 
     const pageAccounts = sortedAccounts.slice((page - 1) * pageSize, page * pageSize);
     return pageAccounts;

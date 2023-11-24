@@ -1,10 +1,10 @@
-import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
 import type { Account } from '@fishprovider/utils/dist/types/Account.model';
 import _ from 'lodash';
 import moment from 'moment';
 
 import InvestNow from '~components/account/InvestNow';
 import Link from '~components/base/Link';
+import { watchAccountController } from '~controllers/account.controller';
 import { toStrategy } from '~libs/routes';
 import Badge from '~ui/core/Badge';
 import Box from '~ui/core/Box';
@@ -60,7 +60,7 @@ interface Props {
 }
 
 function ProviderCardTop({ providerId }: Props) {
-  const account = storeAccounts.useStore((state) => state[providerId]);
+  const account = watchAccountController((state) => state[providerId]);
   const {
     name,
     icon,

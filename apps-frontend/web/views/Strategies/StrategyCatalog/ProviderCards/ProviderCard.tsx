@@ -1,4 +1,3 @@
-import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
 import { AccountViewType } from '@fishprovider/utils/dist/constants/account';
 import _ from 'lodash';
 import moment from 'moment';
@@ -10,6 +9,7 @@ import {
   AccountViewTypeText,
   CardVariant,
 } from '~constants/account';
+import { watchAccountController } from '~controllers/account.controller';
 import { toStrategy } from '~libs/routes';
 import Badge from '~ui/core/Badge';
 import Box from '~ui/core/Box';
@@ -44,7 +44,7 @@ function ProviderCard({
     monthProfit = 0,
     roi = 0,
     summary = {},
-  } = storeAccounts.useStore((state) => ({
+  } = watchAccountController((state) => ({
     accountViewType: state[providerId]?.accountViewType,
     name: state[providerId]?.name,
     icon: state[providerId]?.icon,

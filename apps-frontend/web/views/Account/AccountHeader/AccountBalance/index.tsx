@@ -1,15 +1,14 @@
+import { AccountType, getMajorPairs } from '@fishprovider/core';
 import { useMutate } from '@fishprovider/cross/dist/libs/query';
 import storeOrders from '@fishprovider/cross/dist/stores/orders';
 import storePrices from '@fishprovider/cross/dist/stores/prices';
-import storeUser from '@fishprovider/cross/dist/stores/user';
-import { ProviderType } from '@fishprovider/utils/dist/constants/account';
 import { OrderStatus } from '@fishprovider/utils/dist/constants/order';
 import { getProfit, getProfitIcon } from '@fishprovider/utils/dist/helpers/order';
-import { getMajorPairs } from '@fishprovider/utils/dist/helpers/price';
 import _ from 'lodash';
 
 import EquityProgress from '~components/account/EquityProgress';
 import { getAccountController } from '~controllers/account.controller';
+import { watchUserInfoController } from '~controllers/user.controller';
 import Grid from '~ui/core/Grid';
 import Group from '~ui/core/Group';
 import Icon from '~ui/core/Icon';
@@ -20,31 +19,31 @@ import { getAccountStats } from '~utils/account';
 function AccountBalance() {
   const {
     providerId = '',
-    providerType = ProviderType.icmarkets,
+    accountType = AccountType.icmarkets,
     balance = 0,
     leverage,
     marginRaw = 0,
     asset = 'USD',
-  } = storeUser.useStore((state) => ({
-    providerId: state.activeProvider?._id,
-    providerType: state.activeProvider?.providerType,
-    balance: state.activeProvider?.balance,
-    leverage: state.activeProvider?.leverage,
-    marginRaw: state.activeProvider?.margin,
-    asset: state.activeProvider?.asset,
+  } = watchUserInfoController((state) => ({
+    providerId: state.activeAccount?._id,
+    accountType: state.activeAccount?.accountType,
+    balance: state.activeAccount?.balance,
+    leverage: state.activeAccount?.leverage,
+    marginRaw: state.activeAccount?.margin,
+    asset: state.activeAccount?.asset,
   }));
   const liveOrders = storeOrders.useStore((state) => _.filter(
     state,
     (order) => order.providerId === providerId && order.status === OrderStatus.live,
   ));
   const symbols = _.uniq([
-    ...getMajorPairs(providerType),
+    ...getMajorPairs(accountType),
     ...liveOrders.map((order) => order.symbol),
   ]);
 
   const prices = storePrices.useStore((state) => _.pickBy(
     state,
-    (item) => item.providerType === providerType && symbols.includes(item.symbol),
+    (item) => item.providerType === accountType as any && symbols.includes(item.symbol),
   ));
 
   const profit = getProfit(liveOrders, prices, asset);

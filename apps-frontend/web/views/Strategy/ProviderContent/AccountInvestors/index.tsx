@@ -1,7 +1,7 @@
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import type { Investor } from '@fishprovider/utils/dist/types/Account.model';
 import _ from 'lodash';
 
+import { watchUserInfoController } from '~controllers/user.controller';
 import Avatar from '~ui/core/Avatar';
 import Group from '~ui/core/Group';
 import Stack from '~ui/core/Stack';
@@ -12,8 +12,8 @@ import Title from '~ui/core/Title';
 function AccountInvestors() {
   const {
     investors = [],
-  } = storeUser.useStore((state) => ({
-    investors: state.activeProvider?.investors,
+  } = watchUserInfoController((state) => ({
+    investors: state.activeAccount?.investors,
   }));
 
   if (!investors?.length) return null;

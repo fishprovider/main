@@ -1,8 +1,8 @@
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
 import { useState } from 'react';
 
 import { updateAccountController } from '~controllers/account.controller';
+import { watchUserInfoController } from '~controllers/user.controller';
 import useToggle from '~hooks/useToggle';
 import Box from '~ui/core/Box';
 import Button from '~ui/core/Button';
@@ -25,11 +25,11 @@ function ProtectSettings({ onClose }: Props) {
     roles,
     protectSettings = {},
     asset = 'USD',
-  } = storeUser.useStore((state) => ({
-    accountId: state.activeProvider?._id,
-    roles: state.info?.roles,
-    protectSettings: state.activeProvider?.protectSettings,
-    asset: state.activeProvider?.asset,
+  } = watchUserInfoController((state) => ({
+    accountId: state.activeAccount?._id,
+    roles: state.activeUser?.roles,
+    protectSettings: state.activeAccount?.protectSettings,
+    asset: state.activeAccount?.asset,
   }));
 
   const [enabledEquityLock, toggleEnabledEquityLock] = useToggle(

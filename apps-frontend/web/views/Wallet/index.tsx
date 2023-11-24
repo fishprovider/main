@@ -1,13 +1,13 @@
 import walletGetMany from '@fishprovider/cross/dist/api/wallet/getMany';
 import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import storeWallets from '@fishprovider/cross/dist/stores/wallets';
 import { WalletType } from '@fishprovider/utils/dist/constants/pay';
 import type { Wallet as WalletModel } from '@fishprovider/utils/dist/types/Pay.model';
 import _ from 'lodash';
 
 import Link from '~components/base/Link';
+import { watchUserInfoController } from '~controllers/user.controller';
 import { toWallet } from '~libs/routes';
 import Card from '~ui/core/Card';
 import Group from '~ui/core/Group';
@@ -21,10 +21,10 @@ function Wallet() {
     userId = '',
     userEmail = '',
     userName = '',
-  } = storeUser.useStore((state) => ({
-    userId: state.info?._id,
-    userEmail: state.info?.email,
-    userName: state.info?.name,
+  } = watchUserInfoController((state) => ({
+    userId: state.activeUser?._id,
+    userEmail: state.activeUser?.email,
+    userName: state.activeUser?.name,
   }));
 
   const wallets = storeWallets.useStore((state) => _.filter(

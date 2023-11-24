@@ -1,15 +1,15 @@
 import storeOrders from '@fishprovider/cross/dist/stores/orders';
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import { OrderStatus } from '@fishprovider/utils/dist/constants/order';
 import _ from 'lodash';
 
+import { watchUserInfoController } from '~controllers/user.controller';
 import Stack from '~ui/core/Stack';
 
 import ListTradeLive from './ListTradeLive';
 import ListTradePending from './ListTradePending';
 
 function ListTrade() {
-  const providerId = storeUser.useStore((state) => state.activeProvider?._id);
+  const providerId = watchUserInfoController((state) => state.activeAccount?._id);
   const trades = storeOrders.useStore((state) => _.filter(
     state,
     (item) => item.providerId === providerId

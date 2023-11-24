@@ -1,9 +1,9 @@
-import storeUser from '@fishprovider/cross/dist/stores/user';
-import type { Member } from '@fishprovider/utils/dist/types/Account.model';
+import { AccountMember } from '@fishprovider/core';
 import _ from 'lodash';
 import moment from 'moment';
 
 import { ProviderRoleText } from '~constants/account';
+import { watchUserInfoController } from '~controllers/user.controller';
 import Avatar from '~ui/core/Avatar';
 import Group from '~ui/core/Group';
 import Stack from '~ui/core/Stack';
@@ -15,18 +15,18 @@ function AccountMembers() {
   const {
     members = [],
     activities = {},
-  } = storeUser.useStore((state) => ({
-    members: state.activeProvider?.members,
-    activities: state.activeProvider?.activities,
+  } = watchUserInfoController((state) => ({
+    members: state.activeAccount?.members,
+    activities: state.activeAccount?.activities,
   }));
 
-  const renderRow = (member: Member) => {
-    const activity = activities[member.userId];
+  const renderRow = (member: AccountMember) => {
+    const activity = activities[member.userId || ''];
     return (
-      <Table.Row key={member.userId}>
+      <Table.Row key={member.email}>
         <Table.Cell>
           <Group>
-            <Avatar src={member.picture} alt={member.userId} />
+            <Avatar src={member.picture} alt={member.email} />
             <Text>{(member.name || '').split(' ').map((word) => `${word[0]}.`).join(' ')}</Text>
           </Group>
         </Table.Cell>

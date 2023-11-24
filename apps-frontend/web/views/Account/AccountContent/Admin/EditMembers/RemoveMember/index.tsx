@@ -1,7 +1,7 @@
 import memberRemove from '@fishprovider/cross/dist/api/accounts/members/remove';
 import { useMutate } from '@fishprovider/cross/dist/libs/query';
-import storeUser from '@fishprovider/cross/dist/stores/user';
 
+import { watchUserInfoController } from '~controllers/user.controller';
 import Icon from '~ui/core/Icon';
 import openConfirmModal from '~ui/modals/openConfirmModal';
 
@@ -12,8 +12,8 @@ interface Props {
 function RemoveMember({ email }: Props) {
   const {
     providerId = '',
-  } = storeUser.useStore((state) => ({
-    providerId: state.activeProvider?._id,
+  } = watchUserInfoController((state) => ({
+    providerId: state.activeAccount?._id,
   }));
 
   const { mutate: remove, isLoading: isLoadingRemove } = useMutate({

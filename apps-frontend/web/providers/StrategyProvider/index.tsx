@@ -1,4 +1,4 @@
-import storeUser from '@fishprovider/cross/dist/stores/user';
+import { watchUserInfoController } from '~controllers/user.controller';
 
 import ActiveProviderFetch from './ActiveProviderFetch';
 
@@ -8,7 +8,7 @@ interface Props {
 }
 
 function StrategyProvider({ providerId, children }: Props) {
-  const activeProviderId = storeUser.useStore((state) => state.activeProvider?._id);
+  const activeProviderId = watchUserInfoController((state) => state.activeAccount?._id);
 
   Logger.debug('[render] StrategyProvider', providerId, activeProviderId);
   return (

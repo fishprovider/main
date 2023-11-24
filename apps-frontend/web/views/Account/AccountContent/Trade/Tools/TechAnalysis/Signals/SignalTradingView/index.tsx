@@ -1,6 +1,6 @@
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import dynamic from 'next/dynamic';
 
+import { watchUserInfoController } from '~controllers/user.controller';
 import useToggle from '~hooks/useToggle';
 import Group from '~ui/core/Group';
 import Switch from '~ui/core/Switch';
@@ -15,7 +15,7 @@ function SignalTradingView() {
   const {
     symbol,
     theme,
-  } = storeUser.useStore((state) => ({
+  } = watchUserInfoController((state) => ({
     symbol: state.activeSymbol,
     theme: state.theme,
   }));

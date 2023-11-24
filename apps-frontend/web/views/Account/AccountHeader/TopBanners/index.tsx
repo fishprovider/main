@@ -1,6 +1,6 @@
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import _ from 'lodash';
 
+import { updateUserInfoController, watchUserInfoController } from '~controllers/user.controller';
 import Box from '~ui/core/Box';
 import Stack from '~ui/core/Stack';
 
@@ -8,10 +8,10 @@ import BigNews from './BigNews';
 import BigNewsNear from './BigNewsNear';
 
 function TopBanners() {
-  const banners = storeUser.useStore((state) => state.banners);
+  const banners = watchUserInfoController((state) => state.banners);
 
   const onClose = (bannerId: string) => {
-    storeUser.mergeState({ banners: _.omit(banners, bannerId) });
+    updateUserInfoController({ banners: _.omit(banners, bannerId) });
   };
 
   const renderBanner = (bannerId: string) => {

@@ -1,10 +1,10 @@
 import statsGetManyTrends from '@fishprovider/cross/dist/api/stats/getManyTrends';
 import statsUpdate from '@fishprovider/cross/dist/api/stats/update';
 import storeStats from '@fishprovider/cross/dist/stores/stats';
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
 
+import { watchUserInfoController } from '~controllers/user.controller';
 import Group from '~ui/core/Group';
 import Icon from '~ui/core/Icon';
 import Select from '~ui/core/Select';
@@ -16,7 +16,7 @@ import openConfirmModal from '~ui/modals/openConfirmModal';
 function TrendEditor() {
   const {
     symbol,
-  } = storeUser.useStore((state) => ({
+  } = watchUserInfoController((state) => ({
     symbol: state.activeSymbol,
   }));
 

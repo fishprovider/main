@@ -1,13 +1,13 @@
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import { useEffect } from 'react';
 
+import { watchUserInfoController } from '~controllers/user.controller';
 import { identifyLiveChat } from '~libs/liveChat';
 
 function UserLiveChat() {
   const {
     isClientLoggedIn,
     user,
-  } = storeUser.useStore((state) => ({
+  } = watchUserInfoController((state) => ({
     isClientLoggedIn: state.isClientLoggedIn,
     user: state.info,
   }));

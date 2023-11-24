@@ -1,9 +1,9 @@
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
 import moment from 'moment';
 import { useState } from 'react';
 
 import { updateAccountController } from '~controllers/account.controller';
+import { watchUserInfoController } from '~controllers/user.controller';
 import useToggle from '~hooks/useToggle';
 import Box from '~ui/core/Box';
 import Button from '~ui/core/Button';
@@ -27,10 +27,10 @@ function TradeSettings({ onClose }: Props) {
     accountId = '',
     roles,
     tradeSettings = {},
-  } = storeUser.useStore((state) => ({
-    accountId: state.activeProvider?._id,
-    roles: state.info?.roles,
-    tradeSettings: state.activeProvider?.tradeSettings,
+  } = watchUserInfoController((state) => ({
+    accountId: state.activeAccount?._id,
+    roles: state.activeUser?.roles,
+    tradeSettings: state.activeAccount?.tradeSettings,
   }));
 
   const [enabledCloseProfit, toggleEnabledCloseProfit] = useToggle(

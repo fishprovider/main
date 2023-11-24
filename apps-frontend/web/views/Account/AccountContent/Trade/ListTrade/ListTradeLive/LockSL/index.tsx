@@ -1,7 +1,6 @@
+import { AccountPlanType } from '@fishprovider/core';
 import orderUpdate from '@fishprovider/cross/dist/api/orders/update';
 import { useMutate } from '@fishprovider/cross/dist/libs/query';
-import storeUser from '@fishprovider/cross/dist/stores/user';
-import { PlanType } from '@fishprovider/utils/dist/constants/account';
 import { Direction } from '@fishprovider/utils/dist/constants/order';
 import { getProfit } from '@fishprovider/utils/dist/helpers/order';
 import { getPriceFromAmount } from '@fishprovider/utils/dist/helpers/price';
@@ -9,6 +8,7 @@ import type { Order } from '@fishprovider/utils/dist/types/Order.model';
 import type { Price } from '@fishprovider/utils/dist/types/Price.model';
 import _ from 'lodash';
 
+import { watchUserInfoController } from '~controllers/user.controller';
 import useConversionRate from '~hooks/useConversionRate';
 import Group from '~ui/core/Group';
 import Icon from '~ui/core/Icon';
@@ -29,12 +29,12 @@ function LockSL({ order, prices }: Props) {
     stepTakeProfit = 0,
     profitOffset = 0,
     asset = 'USD',
-  } = storeUser.useStore((state) => ({
-    stepTakeProfit: state.activeProvider?.plan
-      ?.find((item) => item.type === PlanType.stepTakeProfit)?.value as number,
-    profitOffset: state.activeProvider?.plan
-      ?.find((item) => item.type === PlanType.profitOffset)?.value as number,
-    asset: state.activeProvider?.asset,
+  } = watchUserInfoController((state) => ({
+    stepTakeProfit: state.activeAccount?.plan
+      ?.find((item) => item.type === AccountPlanType.stepTakeProfit)?.value as number,
+    profitOffset: state.activeAccount?.plan
+      ?.find((item) => item.type === AccountPlanType.profitOffset)?.value as number,
+    asset: state.activeAccount?.asset,
   }));
 
   const priceDoc = prices[`${providerType}-${symbol}`];

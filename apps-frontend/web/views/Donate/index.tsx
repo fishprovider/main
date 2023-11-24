@@ -1,6 +1,6 @@
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import { useEffect, useState } from 'react';
 
+import { watchUserInfoController } from '~controllers/user.controller';
 import useOnMount from '~hooks/useOnMount';
 import useScript from '~hooks/useScript';
 import Stack from '~ui/core/Stack';
@@ -27,7 +27,7 @@ const scriptUrl = 'https://commerce.coinbase.com/v1/checkout.js';
 const checkoutUrl = 'https://commerce.coinbase.com/checkout/9eeb1718-a966-4327-8ab8-92cdcbbe2c0d';
 
 function Donate() {
-  const userId = storeUser.useStore((state) => state.info?._id);
+  const userId = watchUserInfoController((state) => state.activeUser?._id);
 
   useScript(scriptId, scriptUrl);
 

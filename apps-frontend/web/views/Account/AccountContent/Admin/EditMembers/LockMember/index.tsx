@@ -1,9 +1,9 @@
 import lockMember from '@fishprovider/cross/dist/api/accounts/lock/member';
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import type { Lock, Member } from '@fishprovider/utils/dist/types/Account.model';
 
 import LockAction from '~components/account/LockAction';
 import LockStatus from '~components/account/LockStatus';
+import { watchUserInfoController } from '~controllers/user.controller';
 import { toastError } from '~ui/toast';
 
 interface Props {
@@ -13,8 +13,8 @@ interface Props {
 function LockMember({ member }: Props) {
   const {
     providerId = '',
-  } = storeUser.useStore((state) => ({
-    providerId: state.activeProvider?._id,
+  } = watchUserInfoController((state) => ({
+    providerId: state.activeAccount?._id,
   }));
 
   const onUnlock = (lock: Lock) => {

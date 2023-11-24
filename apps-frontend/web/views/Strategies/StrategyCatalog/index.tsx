@@ -1,11 +1,11 @@
 import { AccountViewType } from '@fishprovider/core';
 import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import { useState } from 'react';
 
 import { CardVariant } from '~constants/account';
 import { getAccountsController } from '~controllers/account.controller';
+import { watchUserInfoController } from '~controllers/user.controller';
 import useToggle from '~hooks/useToggle';
 import useToggleMulti from '~hooks/useToggleMulti';
 import Divider from '~ui/core/Divider';
@@ -27,9 +27,9 @@ function Catalog() {
   const {
     isServerLoggedIn,
     email,
-  } = storeUser.useStore((state) => ({
+  } = watchUserInfoController((state) => ({
     isServerLoggedIn: state.isServerLoggedIn,
-    email: state.info?.email,
+    email: state.activeUser?.email,
   }));
 
   const [favorite, toggleFavorite] = useToggle();

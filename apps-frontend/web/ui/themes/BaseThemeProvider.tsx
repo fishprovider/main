@@ -1,12 +1,13 @@
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import { MantineProvider } from '@mantine/core';
+
+import { watchUserInfoController } from '~controllers/user.controller';
 
 interface Props {
   children: React.ReactNode;
 }
 
 function BaseThemeProvider({ children }: Props) {
-  const { userTheme } = storeUser.useStore((state) => ({
+  const { userTheme } = watchUserInfoController((state) => ({
     userTheme: state.theme,
   }));
 

@@ -1,8 +1,8 @@
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import { AccountViewType } from '@fishprovider/utils/dist/constants/account';
 import { useState } from 'react';
 
 import { AccountViewTypeText } from '~constants/account';
+import { watchUserInfoController } from '~controllers/user.controller';
 import Group from '~ui/core/Group';
 import Icon from '~ui/core/Icon';
 import Stack from '~ui/core/Stack';
@@ -12,12 +12,11 @@ import Title from '~ui/core/Title';
 import AccountEditor from './AccountEditor';
 
 function AccountEdit() {
-  const account = storeUser.useStore((state) => ({
-    accountViewType: state.activeProvider?.accountViewType,
-    name: state.activeProvider?.name,
-    icon: state.activeProvider?.icon,
-    providerGroupId: state.activeProvider?.providerGroupId,
-    strategyId: state.activeProvider?.strategyId,
+  const account = watchUserInfoController((state) => ({
+    accountViewType: state.activeAccount?.accountViewType,
+    name: state.activeAccount?.name,
+    icon: state.activeAccount?.icon,
+    strategyId: state.activeAccount?.strategyId,
   }));
 
   const [isEdit, setIsEdit] = useState(false);

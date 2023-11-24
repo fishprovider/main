@@ -1,16 +1,15 @@
 import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
-import storeUser from '@fishprovider/cross/dist/stores/user';
 
-import { refreshUserRolesController } from '~controllers/user.controller';
+import { refreshUserRolesController, watchUserInfoController } from '~controllers/user.controller';
 
 function UserClean() {
   const {
     isServerLoggedIn,
     email,
-  } = storeUser.useStore((state) => ({
+  } = watchUserInfoController((state) => ({
     isServerLoggedIn: state.isServerLoggedIn,
-    email: state.info?.email,
+    email: state.activeUser?.email,
   }));
 
   useQuery({

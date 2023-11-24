@@ -1,19 +1,19 @@
+import { AccountType, getMajorPairs } from '@fishprovider/core';
 import orderGetMany from '@fishprovider/cross/dist/api/orders/getMany';
 import orderGetManyInfo from '@fishprovider/cross/dist/api/orders/getManyInfo';
 import orderRemove from '@fishprovider/cross/dist/api/orders/remove';
 import { useMutate } from '@fishprovider/cross/dist/libs/query';
 import storePrices from '@fishprovider/cross/dist/stores/prices';
-import storeUser from '@fishprovider/cross/dist/stores/user';
-import { ProviderType } from '@fishprovider/utils/dist/constants/account';
 import { OrderStatus } from '@fishprovider/utils/dist/constants/order';
 import { getEntry } from '@fishprovider/utils/dist/helpers/order';
-import { getDiffPips, getMajorPairs } from '@fishprovider/utils/dist/helpers/price';
+import { getDiffPips } from '@fishprovider/utils/dist/helpers/price';
 import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
 import type { Order } from '@fishprovider/utils/dist/types/Order.model';
 import _ from 'lodash';
 import { useState } from 'react';
 
 import { activityFields } from '~constants/account';
+import { watchUserInfoController } from '~controllers/user.controller';
 import Group from '~ui/core/Group';
 import Icon from '~ui/core/Icon';
 import Table from '~ui/core/Table';
@@ -32,28 +32,28 @@ interface Props {
 
 function ListTradePending({ orders }: Props) {
   const {
-    providerId = '',
-    providerType = ProviderType.icmarkets,
+    accountId = '',
+    accountType = AccountType.icmarkets,
     roles,
-  } = storeUser.useStore((state) => ({
-    providerId: state.activeProvider?._id,
-    providerType: state.activeProvider?.providerType,
-    roles: state.info?.roles,
+  } = watchUserInfoController((state) => ({
+    accountId: state.activeAccount?._id,
+    accountType: state.activeAccount?.accountType,
+    roles: state.activeUser?.roles,
   }));
 
   const symbols = _.uniq([
-    ...getMajorPairs(providerType),
+    ...getMajorPairs(accountType),
     ...orders.map((item) => item.symbol),
   ]);
 
   const prices = storePrices.useStore((state) => (
     _.pickBy(
       state,
-      (item) => item.providerType === providerType && symbols.includes(item.symbol),
+      (item) => item.providerType === accountType as any && symbols.includes(item.symbol),
     )
   ));
 
-  const { isTraderProvider, isProtectorProvider } = getRoleProvider(roles, providerId);
+  const { isTraderProvider, isProtectorProvider } = getRoleProvider(roles, accountId);
 
   const { mutate: reload, isLoading: isLoadingReload } = useMutate({
     mutationFn: orderGetMany,
@@ -67,14 +67,14 @@ function ListTradePending({ orders }: Props) {
 
   const onReload = () => {
     reload({
-      providerId,
+      providerId: accountId,
       orderStatus: OrderStatus.pending,
       reload: true,
     }, {
       onSuccess: (res) => {
         const orderIds = res.orders.map((item) => item._id);
         if (!orderIds.length) return;
-        orderGetManyInfo({ providerId, orderIds, fields: activityFields });
+        orderGetManyInfo({ providerId: accountId, orderIds, fields: activityFields });
       },
     });
   };
@@ -103,13 +103,13 @@ function ListTradePending({ orders }: Props) {
 
     viewOrders = viewOrders.map((item) => {
       const { symbol } = item;
-      const priceDoc = prices[`${providerType}-${symbol}`];
+      const priceDoc = prices[`${accountType}-${symbol}`];
       const entry = getEntry(item);
 
       if (!priceDoc || !entry) return item;
 
       const distance = Math.abs(getDiffPips({
-        providerType,
+        providerType: accountType as any,
         symbol,
         prices,
         entry,

@@ -1,7 +1,7 @@
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import { useRouter } from 'next/router';
 
 import Link from '~components/base/Link';
+import { watchUserInfoController } from '~controllers/user.controller';
 import { logout } from '~libs/auth';
 import Routes from '~libs/routes';
 import Button from '~ui/core/Button';
@@ -23,7 +23,7 @@ function Login() {
     redirectUrl?: string
   };
 
-  const userId = storeUser.useStore((state) => state.info?._id);
+  const userId = watchUserInfoController((state) => state.activeUser?._id);
 
   if (redirectUrl) {
     setPreLoginPage(redirectUrl);

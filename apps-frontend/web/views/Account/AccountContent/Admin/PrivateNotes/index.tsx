@@ -1,13 +1,12 @@
-import storeUser from '@fishprovider/cross/dist/stores/user';
-
 import AccountHtmlEditor from '~components/account/AccountHtmlEditor';
 import { updateAccountController } from '~controllers/account.controller';
+import { getUserInfoController, watchUserInfoController } from '~controllers/user.controller';
 
 function PrivateNotes() {
-  const privateNotes = storeUser.useStore((state) => state.activeProvider?.privateNotes);
+  const privateNotes = watchUserInfoController((state) => state.activeAccount?.privateNotes);
 
   const onSave = async (content?: string) => {
-    const accountId = storeUser.getState().activeProvider?._id || '';
+    const accountId = getUserInfoController().activeAccount?._id || '';
 
     updateAccountController({
       accountId,

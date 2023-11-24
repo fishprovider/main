@@ -1,9 +1,9 @@
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import _ from 'lodash';
 import moment from 'moment';
 import { useEffect } from 'react';
 
 import { getNewsController } from '~controllers/news.controller';
+import { getUserInfoController, updateUserInfoController } from '~controllers/user.controller';
 
 const bannerIdBigNews = 'BigNews';
 const bannerIdBigNewsNear = 'BigNewsNear';
@@ -14,9 +14,9 @@ function NewsWatch() {
       upcoming: true,
     });
     if (news?.length) {
-      storeUser.mergeState({
+      updateUserInfoController({
         banners: {
-          ...storeUser.getState().banners,
+          ...getUserInfoController().banners,
           [bannerIdBigNews]: true,
         },
       });
@@ -31,9 +31,9 @@ function NewsWatch() {
         && moment(datetime) < moment().add(1, 'hour'),
     );
     if (hasBigNews) {
-      storeUser.mergeState({
+      updateUserInfoController({
         banners: {
-          ...storeUser.getState().banners,
+          ...getUserInfoController().banners,
           [bannerIdBigNewsNear]: true,
         },
       });

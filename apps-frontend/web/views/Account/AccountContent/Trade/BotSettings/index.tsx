@@ -1,7 +1,7 @@
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
 
 import BotChips from '~components/account/BotChips';
+import { watchUserInfoController } from '~controllers/user.controller';
 import Group from '~ui/core/Group';
 import Icon from '~ui/core/Icon';
 import Stack from '~ui/core/Stack';
@@ -17,12 +17,12 @@ function BotSettings() {
     settings,
     roles,
     providerId,
-  } = storeUser.useStore((state) => ({
-    tradeSettings: state.activeProvider?.tradeSettings,
-    protectSettings: state.activeProvider?.protectSettings,
-    settings: state.activeProvider?.settings,
-    providerId: state.activeProvider?._id,
-    roles: state.info?.roles,
+  } = watchUserInfoController((state) => ({
+    tradeSettings: state.activeAccount?.tradeSettings,
+    protectSettings: state.activeAccount?.protectSettings,
+    settings: state.activeAccount?.settings,
+    providerId: state.activeAccount?._id,
+    roles: state.activeUser?.roles,
   }));
   const { isTraderProvider, isProtectorProvider } = getRoleProvider(roles, providerId);
 

@@ -4,7 +4,6 @@ import drawGetMany from '@fishprovider/cross/dist/api/withdraw/getMany';
 import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useMutate, useQuery } from '@fishprovider/cross/dist/libs/query';
 import storeTransactions from '@fishprovider/cross/dist/stores/transactions';
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import storeWallets from '@fishprovider/cross/dist/stores/wallets';
 import { TransactionType, WalletType } from '@fishprovider/utils/dist/constants/pay';
 import _ from 'lodash';
@@ -12,6 +11,7 @@ import { useState } from 'react';
 
 import Link from '~components/base/Link';
 import RequiredVerifyPhone from '~components/user/RequiredVerifyPhone';
+import { getUserInfoController } from '~controllers/user.controller';
 import Button from '~ui/core/Button';
 import NumberInput from '~ui/core/NumberInput';
 import Select from '~ui/core/Select';
@@ -68,7 +68,7 @@ function Withdraw() {
       toastError('Please select a trust wallet to withdraw');
       return;
     }
-    if (!storeUser.getState().info?.telegram?.phoneNumber) {
+    if (!getUserInfoController().activeUser?.telegram?.phoneNumber) {
       toastError('Please verify your phone number first');
       return;
     }

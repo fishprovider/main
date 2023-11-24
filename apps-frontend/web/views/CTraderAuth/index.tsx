@@ -1,13 +1,13 @@
 import {
   Account, AccountPlatform, AccountTradeType, AccountType,
 } from '@fishprovider/core';
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import _ from 'lodash';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import Link from '~components/base/Link';
 import { addAccountController, getTradeAccountsController } from '~controllers/account.controller';
+import { watchUserInfoController } from '~controllers/user.controller';
 import Routes, { toAccount } from '~libs/routes';
 import Button from '~ui/core/Button';
 import Icon from '~ui/core/Icon';
@@ -122,7 +122,7 @@ function CTraderAuth() {
   const router = useRouter();
   const { code } = router.query;
 
-  const isServerLoggedIn = storeUser.useStore((state) => state.isServerLoggedIn);
+  const isServerLoggedIn = watchUserInfoController((state) => state.isServerLoggedIn);
 
   const [accounts, setAccounts] = useState<Partial<Account>[]>();
 

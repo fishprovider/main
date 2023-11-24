@@ -1,7 +1,7 @@
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import moment from 'moment';
 import dynamic from 'next/dynamic';
 
+import { watchUserInfoController } from '~controllers/user.controller';
 import Icon from '~ui/core/Icon';
 import Indicator from '~ui/core/Indicator';
 import Skeleton from '~ui/core/Skeleton';
@@ -14,7 +14,7 @@ const TradingPlan = dynamic(() => import('./TradingPlan'), { loading: () => <Ske
 const Chart = dynamic(() => import('./Chart'), { loading: () => <Skeleton height={400} /> });
 
 function AccountTools() {
-  const planUpdatedAt = storeUser.useStore((state) => state.activeProvider?.planUpdatedAt);
+  const planUpdatedAt = watchUserInfoController((state) => state.activeAccount?.planUpdatedAt);
 
   const tabs = [
     {

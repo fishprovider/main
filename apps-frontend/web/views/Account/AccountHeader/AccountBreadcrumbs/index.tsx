@@ -1,15 +1,14 @@
-import storeUser from '@fishprovider/cross/dist/stores/user';
-
 import Favorite from '~components/account/Favorite';
 import LockAction from '~components/account/LockAction';
 import ProviderSelect from '~components/account/ProviderSelect';
+import { watchUserInfoController } from '~controllers/user.controller';
 import Group from '~ui/core/Group';
 
 function AccountBreadcrumbs() {
   const {
     providerId = '',
-  } = storeUser.useStore((state) => ({
-    providerId: state.activeProvider?._id,
+  } = watchUserInfoController((state) => ({
+    providerId: state.activeAccount?._id,
   }));
 
   return (

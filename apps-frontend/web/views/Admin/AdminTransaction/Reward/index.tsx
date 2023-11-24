@@ -1,8 +1,8 @@
 import { apiPost } from '@fishprovider/cross/dist/libs/api';
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
 import React, { useState } from 'react';
 
+import { watchUserInfoController } from '~controllers/user.controller';
 import Button from '~ui/core/Button';
 import NumberInput from '~ui/core/NumberInput';
 import Stack from '~ui/core/Stack';
@@ -13,8 +13,8 @@ import { toastError, toastSuccess } from '~ui/toast';
 function Reward() {
   const {
     roles,
-  } = storeUser.useStore((state) => ({
-    roles: state.info?.roles,
+  } = watchUserInfoController((state) => ({
+    roles: state.activeUser?.roles,
   }));
   const { isAdmin } = getRoleProvider(roles);
 

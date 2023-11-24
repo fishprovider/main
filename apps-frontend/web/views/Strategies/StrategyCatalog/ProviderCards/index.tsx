@@ -1,9 +1,9 @@
-import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import _ from 'lodash';
 import { useState } from 'react';
 
 import { CardVariant } from '~constants/account';
+import { watchAccountController } from '~controllers/account.controller';
+import { watchUserInfoController } from '~controllers/user.controller';
 import Flex from '~ui/core/Flex';
 import Group from '~ui/core/Group';
 import Pagination from '~ui/core/Pagination';
@@ -29,17 +29,17 @@ function ProviderCards({
 }: Props) {
   const {
     starProviders = {},
-  } = storeUser.useStore((state) => ({
-    starProviders: state.info?.starProviders,
+  } = watchUserInfoController((state) => ({
+    starProviders: state.activeUser?.starAccounts,
   }));
 
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(pageSizeDefault);
 
-  const pageProviderIds = storeAccounts.useStore((state) => _.orderBy(
+  const pageProviderIds = watchAccountController((state) => _.orderBy(
     _.filter(state, (account) => {
       if (!account.strategyId) return false;
-      if (account.providerGroupId && account.providerGroupId !== account._id) return false;
+      if (account.accountGroupId && account.accountGroupId !== account._id) return false;
       if (favorite && !starProviders[account._id]) return false;
       if (search && !account.name.toLowerCase().includes(search.toLowerCase())) return false;
       if (category && !(account.category === category || account.categories?.includes(category)

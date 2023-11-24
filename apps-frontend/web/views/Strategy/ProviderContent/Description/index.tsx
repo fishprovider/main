@@ -1,9 +1,8 @@
-import storeUser from '@fishprovider/cross/dist/stores/user';
-
+import { watchUserInfoController } from '~controllers/user.controller';
 import HtmlEditor from '~ui/core/HtmlEditor';
 
 function Description() {
-  const notes = storeUser.useStore((state) => state.activeProvider?.notes);
+  const notes = watchUserInfoController((state) => state.activeAccount?.notes);
   return <HtmlEditor readOnly readOnlyValue={notes} />;
 }
 

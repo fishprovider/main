@@ -1,10 +1,10 @@
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import { AccountViewType } from '@fishprovider/utils/dist/constants/account';
 import { useState } from 'react';
 
 import Link from '~components/base/Link';
 import { AccountViewTypeText } from '~constants/account';
 import { updateAccountController } from '~controllers/account.controller';
+import { getUserInfoController } from '~controllers/user.controller';
 import Button from '~ui/core/Button';
 import Group from '~ui/core/Group';
 import NumberInput from '~ui/core/NumberInput';
@@ -33,7 +33,7 @@ function AccountEditor({ account, onDone } : Props) {
   const [minInvest, setMinInvest] = useState(account.minInvest || 0);
 
   const onSave = () => {
-    const accountId = storeUser.getState().activeProvider?._id || '';
+    const accountId = getUserInfoController().activeAccount?._id || '';
 
     updateAccountController({
       accountId,

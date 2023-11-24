@@ -1,13 +1,13 @@
+import { AccountType } from '@fishprovider/core';
 import statsGetManyKeyLevels from '@fishprovider/cross/dist/api/stats/getManyKeyLevels';
 import storePrices from '@fishprovider/cross/dist/stores/prices';
 import storeStats from '@fishprovider/cross/dist/stores/stats';
-import storeUser from '@fishprovider/cross/dist/stores/user';
-import { ProviderType } from '@fishprovider/utils/dist/constants/account';
 import { getDiffPips } from '@fishprovider/utils/dist/helpers/price';
 import _ from 'lodash';
 import moment from 'moment';
 import { useEffect } from 'react';
 
+import { watchUserInfoController } from '~controllers/user.controller';
 import Box from '~ui/core/Box';
 import Text from '~ui/core/Text';
 
@@ -18,11 +18,11 @@ interface Props {
 
 function KeyLevelTimeFr({ symbol, timeFr }: Props) {
   const {
-    providerType = ProviderType.icmarkets,
-  } = storeUser.useStore((state) => ({
-    providerType: state.activeProvider?.providerType,
+    accountType = AccountType.icmarkets,
+  } = watchUserInfoController((state) => ({
+    accountType: state.activeAccount?.accountType,
   }));
-  const priceDoc = storePrices.useStore((prices) => prices[`${providerType}-${symbol}`]);
+  const priceDoc = storePrices.useStore((prices) => prices[`${accountType}-${symbol}`]);
   const srTimeFr = storeStats.useStore((state) => _.find(
     state,
     (item) => item.type === 'keyLevels' && item.symbol === symbol && item.timeFr === timeFr,
@@ -65,7 +65,7 @@ function KeyLevelTimeFr({ symbol, timeFr }: Props) {
           if (priceDoc && keyLevels[topIndex]) {
             currentSR.pips = _.round(
               getDiffPips({
-                providerType,
+                providerType: accountType as any,
                 symbol,
                 prices: { [priceDoc._id]: priceDoc },
                 entry: keyLevels[topIndex] as number,
@@ -81,7 +81,7 @@ function KeyLevelTimeFr({ symbol, timeFr }: Props) {
           if (priceDoc && keyLevels[topIndex]) {
             currentSR.pips = _.round(
               getDiffPips({
-                providerType,
+                providerType: accountType as any,
                 symbol,
                 prices: { [priceDoc._id]: priceDoc },
                 entry: priceDoc?.last,

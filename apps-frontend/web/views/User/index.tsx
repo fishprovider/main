@@ -1,10 +1,9 @@
 import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import { useState } from 'react';
 
 import VerifyPhone from '~components/user/VerifyPhone';
-import { getUserController } from '~controllers/user.controller';
+import { getUserController, watchUserInfoController } from '~controllers/user.controller';
 import { changePassword, changeProfile, resetPassword } from '~libs/auth';
 import Avatar from '~ui/core/Avatar';
 import Button from '~ui/core/Button';
@@ -24,11 +23,11 @@ function User() {
     email,
     name,
     picture,
-  } = storeUser.useStore((state) => ({
-    userId: state.info?._id,
-    email: state.info?.email,
-    name: state.info?.name,
-    picture: state.info?.picture,
+  } = watchUserInfoController((state) => ({
+    userId: state.activeUser?._id,
+    email: state.activeUser?.email,
+    name: state.activeUser?.name,
+    picture: state.activeUser?.picture,
   }));
 
   const [nameInput, setNameInput] = useState('');

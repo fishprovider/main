@@ -1,8 +1,8 @@
 import { apiPost } from '@fishprovider/cross/dist/libs/api';
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
+import { watchUserInfoController } from '~controllers/user.controller';
 import Routes from '~libs/routes';
 import Loading from '~ui/core/Loading';
 import Stack from '~ui/core/Stack';
@@ -14,7 +14,7 @@ function TelegramAuth() {
   const router = useRouter();
   const { query } = router;
 
-  const isServerLoggedIn = storeUser.useStore((state) => state.isServerLoggedIn);
+  const isServerLoggedIn = watchUserInfoController((state) => state.isServerLoggedIn);
 
   useEffect(() => {
     if (isServerLoggedIn && query) {

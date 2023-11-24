@@ -1,7 +1,7 @@
 import statsGetManyKeyLevels from '@fishprovider/cross/dist/api/stats/getManyKeyLevels';
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import { useEffect } from 'react';
 
+import { watchUserInfoController } from '~controllers/user.controller';
 import Group from '~ui/core/Group';
 import Stack from '~ui/core/Stack';
 import Title from '~ui/core/Title';
@@ -10,8 +10,8 @@ import KeyLevelTimeFrEditor from './KeyLevelTimeFrEditor';
 
 function KeyLevelEditor() {
   const {
-    symbol,
-  } = storeUser.useStore((state) => ({
+    symbol = '',
+  } = watchUserInfoController((state) => ({
     symbol: state.activeSymbol,
   }));
 

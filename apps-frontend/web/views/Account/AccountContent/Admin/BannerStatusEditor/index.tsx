@@ -1,14 +1,14 @@
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import { useCallback, useState } from 'react';
 
 import AccountHtmlEditor from '~components/account/AccountHtmlEditor';
 import { updateAccountController } from '~controllers/account.controller';
+import { getUserInfoController, watchUserInfoController } from '~controllers/user.controller';
 import useToggle from '~hooks/useToggle';
 import ColorInput from '~ui/core/ColorInput';
 import Switch from '~ui/core/Switch';
 
 function BannerStatusEditor() {
-  const bannerStatus = storeUser.useStore((state) => state.activeProvider?.bannerStatus);
+  const bannerStatus = watchUserInfoController((state) => state.activeAccount?.bannerStatus);
 
   const [enabled, toggleEnabled] = useToggle(undefined);
   const [bgColor, setBgColor] = useState<string>();
@@ -19,7 +19,7 @@ function BannerStatusEditor() {
   };
 
   const onSave = async (content?: string) => {
-    const accountId = storeUser.getState().activeProvider?._id || '';
+    const accountId = getUserInfoController().activeAccount?._id || '';
 
     updateAccountController({
       accountId,

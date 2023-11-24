@@ -1,6 +1,6 @@
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import { useEffect } from 'react';
 
+import { watchUserInfoController } from '~controllers/user.controller';
 import { handleNotif, initNotif, subNotif } from '~libs/pushNotif';
 import { toastInfo } from '~ui/toast';
 
@@ -8,7 +8,7 @@ function UserNotif() {
   const {
     isClientLoggedIn,
     isServerLoggedIn,
-  } = storeUser.useStore((state) => ({
+  } = watchUserInfoController((state) => ({
     isClientLoggedIn: state.isClientLoggedIn,
     isServerLoggedIn: state.isServerLoggedIn,
   }));

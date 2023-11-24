@@ -1,6 +1,5 @@
 import orderRemoveIdea from '@fishprovider/cross/dist/api/orders/removeIdea';
 import { useMutate } from '@fishprovider/cross/dist/libs/query';
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
 import type { Order } from '@fishprovider/utils/dist/types/Order.model';
 import type { Price } from '@fishprovider/utils/dist/types/Price.model';
@@ -8,6 +7,7 @@ import _ from 'lodash';
 
 import OrderInfo from '~components/order/OrderInfo';
 import Profit from '~components/order/Profit';
+import { watchUserInfoController } from '~controllers/user.controller';
 import Button from '~ui/core/Button';
 import Group from '~ui/core/Group';
 import Icon from '~ui/core/Icon';
@@ -24,9 +24,9 @@ function ItemTradeIdea({ order, prices }: Props) {
   const {
     providerId = '',
     roles,
-  } = storeUser.useStore((state) => ({
-    providerId: state.activeProvider?._id,
-    roles: state.info?.roles,
+  } = watchUserInfoController((state) => ({
+    providerId: state.activeAccount?._id,
+    roles: state.activeUser?.roles,
   }));
   const { isTraderProvider, isProtectorProvider } = getRoleProvider(roles, providerId);
 
