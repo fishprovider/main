@@ -4,7 +4,6 @@ import priceGetNames from '@fishprovider/cross/dist/api/prices/getNames';
 import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
 import storePrices from '@fishprovider/cross/dist/stores/prices';
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import { LockType, ProviderType } from '@fishprovider/utils/dist/constants/account';
 import type { User } from '@fishprovider/utils/dist/types/User.model';
 import _ from 'lodash';
@@ -12,6 +11,7 @@ import moment from 'moment';
 import { useState } from 'react';
 
 import { LockTypeText } from '~constants/account';
+import { getUserInfoController, watchUserInfoController } from '~controllers/user.controller';
 import Box from '~ui/core/Box';
 import Button from '~ui/core/Button';
 import Group from '~ui/core/Group';
@@ -47,8 +47,8 @@ function LockModal({
 }: Props) {
   const {
     providerType = ProviderType.icmarkets,
-  } = storeUser.useStore((state) => ({
-    providerType: state.activeProvider?.providerType,
+  } = watchUserInfoController((state) => ({
+    providerType: state.activeAccount?.accountType,
   }));
 
   const allSymbols = storePrices.useStore((state) => _.filter(
@@ -64,8 +64,8 @@ function LockModal({
   const [lockMessage, setLockMessage] = useState('Have some rest 💤');
 
   useQuery({
-    queryFn: () => priceGetNames({ providerType }),
-    queryKey: queryKeys.symbols(providerType),
+    queryFn: () => priceGetNames({ providerType: providerType as any }),
+    queryKey: queryKeys.symbols(providerType as any),
   });
 
   const validate = () => {
@@ -82,7 +82,7 @@ function LockModal({
       return;
     }
 
-    const activeUser = storeUser.getState().info as User;
+    const activeUser = getUserInfoController().activeUser as User;
 
     const lock = {
       type: lockType,

@@ -5,7 +5,6 @@ import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useMutate, useQuery } from '@fishprovider/cross/dist/libs/query';
 import storeOrders from '@fishprovider/cross/dist/stores/orders';
 import storePrices from '@fishprovider/cross/dist/stores/prices';
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import { ProviderType } from '@fishprovider/utils/dist/constants/account';
 import { OrderStatus } from '@fishprovider/utils/dist/constants/order';
 import { getProfitIcon } from '@fishprovider/utils/dist/helpers/order';
@@ -15,6 +14,7 @@ import { useEffect, useState } from 'react';
 
 import ProfitColor from '~components/price/ProfitColor';
 import { activityFields } from '~constants/account';
+import { watchUserInfoController } from '~controllers/user.controller';
 import useToggle from '~hooks/useToggle';
 import Group from '~ui/core/Group';
 import Icon from '~ui/core/Icon';
@@ -32,10 +32,10 @@ function History() {
     providerId = '',
     providerType = ProviderType.icmarkets,
     asset = 'USD',
-  } = storeUser.useStore((state) => ({
-    providerId: state.activeProvider?._id,
-    providerType: state.activeProvider?.providerType,
-    asset: state.activeProvider?.asset,
+  } = watchUserInfoController((state) => ({
+    providerId: state.activeAccount?._id,
+    providerType: state.activeAccount?.accountType,
+    asset: state.activeAccount?.asset,
   }));
   const deals = storeOrders.useStore((state) => (
     _.filter(
@@ -52,7 +52,7 @@ function History() {
   const orders = _.orderBy(deals, ['createdAt'], ['desc'])
     .slice(rowRange[0], rowRange[1]);
   const symbols = _.sortBy(_.uniq([
-    ...getMajorPairs(providerType),
+    ...getMajorPairs(providerType as any),
     ...orders.map((order) => order.symbol),
   ]));
 
@@ -61,8 +61,8 @@ function History() {
   }, [providerId]);
 
   useQuery({
-    queryFn: () => priceGetMany({ providerType, symbols, reload: true }),
-    queryKey: queryKeys.prices(providerType, ...symbols),
+    queryFn: () => priceGetMany({ providerType: providerType as any, symbols, reload: true }),
+    queryKey: queryKeys.prices(providerType as any, ...symbols),
     enabled: !!symbols.length,
   });
 

@@ -1,8 +1,8 @@
 import lockAccount from '@fishprovider/cross/dist/api/accounts/lock/account';
 import lockMember from '@fishprovider/cross/dist/api/accounts/lock/member';
-import storeUser from '@fishprovider/cross/dist/stores/user';
 
 import LockStatus from '~components/account/LockStatus';
+import { watchUserInfoController } from '~controllers/user.controller';
 import Box from '~ui/core/Box';
 import Stack from '~ui/core/Stack';
 import { toastError } from '~ui/toast';
@@ -10,14 +10,14 @@ import { toastError } from '~ui/toast';
 function LockBanner() {
   const {
     userId = '',
-    providerId = '',
+    accountId = '',
     members = [],
     locks = [],
-  } = storeUser.useStore((state) => ({
-    userId: state.info?._id,
-    providerId: state.activeProvider?._id,
-    members: state.activeProvider?.members,
-    locks: state.activeProvider?.locks,
+  } = watchUserInfoController((state) => ({
+    userId: state.activeUser?._id,
+    accountId: state.activeAccount?._id,
+    members: state.activeAccount?.members,
+    locks: state.activeAccount?.locks,
   }));
 
   const renderAccountLocks = () => locks.map((lock, index) => (
@@ -26,8 +26,8 @@ function LockBanner() {
         lock={lock}
         unlock={() => {
           lockAccount({
-            providerId,
-            lock,
+            providerId: accountId,
+            lock: lock as any,
             unlock: true,
           }).catch((err) => {
             toastError(`Failed to unlock: ${err.message}`);
@@ -44,9 +44,9 @@ function LockBanner() {
           lock={lock}
           unlock={() => {
             lockMember({
-              providerId,
+              providerId: accountId,
               userId,
-              lock,
+              lock: lock as any,
               unlock: true,
             }).catch((err) => {
               toastError(`Failed to unlock: ${err.message}`);

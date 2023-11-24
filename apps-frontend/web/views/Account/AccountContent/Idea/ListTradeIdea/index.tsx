@@ -2,7 +2,6 @@ import orderGetIdea from '@fishprovider/cross/dist/api/orders/getIdea';
 import { useMutate } from '@fishprovider/cross/dist/libs/query';
 import storeOrders from '@fishprovider/cross/dist/stores/orders';
 import storePrices from '@fishprovider/cross/dist/stores/prices';
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import { ProviderType } from '@fishprovider/utils/dist/constants/account';
 import { OrderStatus } from '@fishprovider/utils/dist/constants/order';
 import { getProfit } from '@fishprovider/utils/dist/helpers/order';
@@ -10,6 +9,7 @@ import { getMajorPairs } from '@fishprovider/utils/dist/helpers/price';
 import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
 import _ from 'lodash';
 
+import { watchUserInfoController } from '~controllers/user.controller';
 import Group from '~ui/core/Group';
 import Icon from '~ui/core/Icon';
 import Table from '~ui/core/Table';
@@ -22,11 +22,11 @@ function ListTradeIdea() {
     providerType = ProviderType.icmarkets,
     asset = 'USD',
     roles,
-  } = storeUser.useStore((state) => ({
-    providerId: state.activeProvider?._id,
-    providerType: state.activeProvider?.providerType,
-    asset: state.activeProvider?.asset,
-    roles: state.info?.roles,
+  } = watchUserInfoController((state) => ({
+    providerId: state.activeAccount?._id,
+    providerType: state.activeAccount?.accountType,
+    asset: state.activeAccount?.asset,
+    roles: state.activeUser?.roles,
   }));
 
   const orders = storeOrders.useStore((state) => (
@@ -38,7 +38,7 @@ function ListTradeIdea() {
   ));
 
   const symbols = _.uniq([
-    ...getMajorPairs(providerType),
+    ...getMajorPairs(providerType as any),
     ...orders.map((item) => item.symbol),
   ]);
 

@@ -1,5 +1,5 @@
+import { AccountLock, AccountMember } from '@fishprovider/core';
 import lockMember from '@fishprovider/cross/dist/api/accounts/lock/member';
-import type { Lock, Member } from '@fishprovider/utils/dist/types/Account.model';
 
 import LockAction from '~components/account/LockAction';
 import LockStatus from '~components/account/LockStatus';
@@ -7,7 +7,7 @@ import { watchUserInfoController } from '~controllers/user.controller';
 import { toastError } from '~ui/toast';
 
 interface Props {
-  member: Member
+  member: AccountMember
 }
 
 function LockMember({ member }: Props) {
@@ -17,11 +17,11 @@ function LockMember({ member }: Props) {
     providerId: state.activeAccount?._id,
   }));
 
-  const onUnlock = (lock: Lock) => {
+  const onUnlock = (lock: AccountLock) => {
     lockMember({
       providerId,
-      userId: member.userId,
-      lock,
+      userId: member.userId || '',
+      lock: lock as any,
       unlock: true,
     }).catch((err) => {
       toastError(`Failed to unlock: ${err.message}`);

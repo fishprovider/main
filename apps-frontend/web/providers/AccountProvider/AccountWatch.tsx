@@ -1,18 +1,18 @@
 import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
 import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import { redisKeys } from '@fishprovider/utils/dist/constants/redis';
 import type { Account } from '@fishprovider/utils/dist/types/Account.model';
 import { useEffect, useRef } from 'react';
 
 import { getAccountController } from '~controllers/account.controller';
+import { watchUserInfoController } from '~controllers/user.controller';
 import { subNotif, unsubNotif } from '~libs/pushNotif';
 import { subDoc } from '~libs/sdb';
 import { refreshMS } from '~utils';
 
 function useAccountSocket(providerId: string) {
-  const socket = storeUser.useStore((state) => state.socket);
+  const socket = watchUserInfoController((state) => state.socket);
 
   const prevChannel = useRef<string>();
   useEffect(() => {
@@ -48,7 +48,7 @@ function useAccountSocket(providerId: string) {
 }
 
 function useAccountSdb(providerId: string) {
-  const isClientLoggedIn = storeUser.useStore((state) => state.isClientLoggedIn);
+  const isClientLoggedIn = watchUserInfoController((state) => state.isClientLoggedIn);
 
   useEffect(() => {
     if (isClientLoggedIn) {
@@ -67,9 +67,9 @@ function useAccountNotif(providerId: string) {
   const {
     isServerLoggedIn,
     isStar,
-  } = storeUser.useStore((state) => ({
+  } = watchUserInfoController((state) => ({
     isServerLoggedIn: state.isServerLoggedIn,
-    isStar: state.info?.starProviders?.[providerId],
+    isStar: state.activeUser?.starAccounts?.[providerId],
   }));
 
   useEffect(() => {
