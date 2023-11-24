@@ -19,10 +19,10 @@ export interface AccountRepository {
 
   getAccounts?: (
     filter: {
-      accountViewType?: AccountViewType,
+      viewType?: AccountViewType,
       email?: string,
       getTradeAccounts?: {
-        accountPlatform: AccountPlatform,
+        platform: AccountPlatform,
         baseConfig: Partial<AccountConfig>,
         tradeRequest: {
           redirectUrl: string,
@@ -38,7 +38,7 @@ export interface AccountRepository {
       accountId?: string,
     },
     payload: {
-      accountViewType?: AccountViewType,
+      viewType?: AccountViewType,
       name?: string,
       icon?: string,
       strategyId?: string,
@@ -56,7 +56,7 @@ export interface AccountRepository {
 
   updateAccounts?: (
     filter: {
-      accountViewType?: AccountViewType,
+      viewType?: AccountViewType,
       email?: string,
     },
     payload: {
@@ -69,8 +69,8 @@ export interface AccountRepository {
     payload: {
       name: string,
       providerType: ProviderType,
-      accountPlatform: AccountPlatform,
-      accountTradeType: AccountTradeType,
+      platform: AccountPlatform,
+      tradeType: AccountTradeType,
       baseConfig: Partial<AccountConfig>,
     },
   ) => Promise<BaseGetResult<Account>>;

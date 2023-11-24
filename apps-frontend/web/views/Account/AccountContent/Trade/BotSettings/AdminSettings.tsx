@@ -371,7 +371,7 @@ function AdminSettings({ onClose }: Props) {
       settings: {
         ...settings,
         enableCopyParent,
-      } as AccountSettings,
+      },
     }).then(() => {
       if (onClose) onClose();
     });

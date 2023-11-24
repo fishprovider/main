@@ -34,7 +34,7 @@ const order = {
   _id: `${env.typeId}-${random()}`,
   providerId: 'back',
   providerType: ProviderType.icmarkets,
-  accountPlatform: AccountPlatform.ctrader,
+  platform: AccountPlatform.ctrader,
   orderType: OrderType.limit,
   status: OrderStatus.idea,
 

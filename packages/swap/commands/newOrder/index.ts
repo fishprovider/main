@@ -28,7 +28,7 @@ interface NewOrderRes {
 const preNewOrder = async (order: OrderWithoutId) => {
   const newId = random();
   const {
-    providerId, providerType, accountPlatform, copyId,
+    providerId, providerType, platform, copyId,
     symbol, direction, volume,
     orderType, limitPrice, stopPrice, stopLoss, takeProfit,
     label = 'user-create',
@@ -41,7 +41,7 @@ const preNewOrder = async (order: OrderWithoutId) => {
     ...(copyId && { copyId }),
     providerId,
     providerType,
-    accountPlatform,
+    platform,
     status: OrderStatus.idea,
 
     symbol,
@@ -101,12 +101,12 @@ const postNewOrder = async (requestOrder: Order, res: NewOrderRes) => {
 
 const newOrder = async (req: NewOrderReq) => {
   const { order, options } = req;
-  const { accountPlatform } = order;
+  const { platform } = order;
 
   const requestOrder = await preNewOrder(order);
 
   let result: NewOrderRes;
-  switch (accountPlatform) {
+  switch (platform) {
     case AccountPlatform.ctrader: {
       result = await newOrderCTrader({ ...req, ...options, requestOrder });
       break;
@@ -116,7 +116,7 @@ const newOrder = async (req: NewOrderReq) => {
       break;
     }
     default: {
-      throw new Error(`Unhandled accountPlatform ${accountPlatform}`);
+      throw new Error(`Unhandled platform ${platform}`);
     }
   }
 

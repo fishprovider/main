@@ -29,7 +29,7 @@ const closeAll = async (providerId: string) => {
   const { positions } = await fetchOrders({
     providerId,
     providerType: ProviderType.icmarkets,
-    accountPlatform: AccountPlatform.ctrader,
+    platform: AccountPlatform.ctrader,
     options: { config },
   });
   if (positions) {
@@ -55,7 +55,7 @@ test('copyNewOrders', async () => {
     await fetchOrders({
       providerId: env.typeId,
       providerType: ProviderType.icmarkets,
-      accountPlatform: AccountPlatform.ctrader,
+      platform: AccountPlatform.ctrader,
       options: { config },
     });
 
@@ -67,7 +67,7 @@ test('copyNewOrders', async () => {
     await fetchOrders({
       providerId: 'copyChild',
       providerType: ProviderType.icmarkets,
-      accountPlatform: AccountPlatform.ctrader,
+      platform: AccountPlatform.ctrader,
       options: { config },
     });
 
@@ -79,7 +79,7 @@ test('copyNewOrders', async () => {
     await fetchOrders({
       providerId: 'copyChildChild',
       providerType: ProviderType.icmarkets,
-      accountPlatform: AccountPlatform.ctrader,
+      platform: AccountPlatform.ctrader,
       options: { config },
     });
   }, config);

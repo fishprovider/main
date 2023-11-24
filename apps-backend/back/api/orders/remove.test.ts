@@ -31,7 +31,7 @@ const order = {
   _id: `${providerId}-${random()}`,
   providerId,
   providerType: ProviderType.icmarkets,
-  accountPlatform: AccountPlatform.ctrader,
+  platform: AccountPlatform.ctrader,
   orderType: OrderType.limit,
   status: OrderStatus.pending,
 

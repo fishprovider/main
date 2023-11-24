@@ -33,7 +33,7 @@ function AverageOrderModal({
   }));
 
   const {
-    providerType, accountPlatform, providerId, symbol, direction, volume,
+    providerType, platform, providerId, symbol, direction, volume,
     price: entry = 0,
   } = order;
 
@@ -59,7 +59,7 @@ function AverageOrderModal({
     const newOrder = {
       providerId,
       providerType,
-      accountPlatform,
+      platform,
 
       orderType: OrderType.limit,
       status: OrderStatus.idea,

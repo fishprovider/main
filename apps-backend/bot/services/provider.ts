@@ -12,7 +12,7 @@ import checkAccount from './checkAccount';
 
 const env = {
   typeId: process.env.TYPE_ID,
-  accountTradeType: process.env.PROVIDER_TRADE_TYPE || AccountTradeType.demo,
+  tradeType: process.env.PROVIDER_TRADE_TYPE || AccountTradeType.demo,
 };
 
 let isPaused = false;
@@ -46,7 +46,7 @@ const destroy = async () => {
 
 const runBots = async (onStart?: boolean) => {
   const providerIds = await getProviderIds({
-    accountTradeType: env.accountTradeType,
+    tradeType: env.tradeType,
     isSystem: { $ne: true },
     deleted: { $ne: true },
   });

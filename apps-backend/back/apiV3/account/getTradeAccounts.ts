@@ -8,7 +8,7 @@ import { ApiHandler } from '~types/ApiHandler.model';
 
 const handler: ApiHandler<Partial<Account>[]> = async (data, userSession) => {
   const filter = z.object({
-    accountPlatform: z.nativeEnum(AccountPlatform),
+    platform: z.nativeEnum(AccountPlatform),
     baseConfig: z.object({
       clientId: z.string(),
     }).strict(),
@@ -19,11 +19,11 @@ const handler: ApiHandler<Partial<Account>[]> = async (data, userSession) => {
   }).strict()
     .parse(data);
 
-  const { accountPlatform, baseConfig, tradeRequest } = filter;
+  const { platform, baseConfig, tradeRequest } = filter;
 
   const { docs } = await getTradeAccountsService({
     filter: {
-      accountPlatform,
+      platform,
       baseConfig,
       tradeRequest,
     },

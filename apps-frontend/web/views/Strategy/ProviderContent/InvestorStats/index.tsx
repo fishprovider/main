@@ -20,7 +20,7 @@ import MyFxBook from './MyFxBook';
 function InvestorStats() {
   const {
     providerId = '',
-    accountPlatform,
+    platform,
     createdAt,
     capital = 0,
     riskScore,
@@ -30,7 +30,7 @@ function InvestorStats() {
     summary = {},
   } = watchUserInfoController((state) => ({
     providerId: state.activeAccount?._id,
-    accountPlatform: state.activeAccount?.platform,
+    platform: state.activeAccount?.platform,
     createdAt: state.activeAccount?.createdAt,
     capital: state.activeAccount?.capital,
     riskScore: state.activeAccount?.riskScore,
@@ -106,7 +106,7 @@ function InvestorStats() {
             <MonthProfit providerId={providerId} />
             <Group position="center">
               <MyFxBook />
-              {accountPlatform === AccountPlatform.ctrader && <CTraderStats />}
+              {platform === AccountPlatform.ctrader && <CTraderStats />}
             </Group>
           </Stack>
         </Grid.Col>

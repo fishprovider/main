@@ -25,10 +25,10 @@ export const addAccountService: AddAccountService = async ({
   // main
   //
   const {
-    name, providerType, accountPlatform, accountTradeType, baseConfig,
+    name, providerType, platform, tradeType, baseConfig,
   } = payload;
 
-  if (!name || !providerType || !accountPlatform || !baseConfig) {
+  if (!name || !providerType || !platform || !baseConfig) {
     throw new BaseError(AccountError.ACCOUNT_BAD_REQUEST);
   }
 
@@ -53,7 +53,7 @@ export const addAccountService: AddAccountService = async ({
   }
 
   const { doc: client } = await getTradeClientRepo({
-    accountPlatform,
+    platform,
     clientId: baseConfig.clientId,
   });
   if (!client) {
@@ -76,9 +76,9 @@ export const addAccountService: AddAccountService = async ({
     name,
     config,
     providerType,
-    accountPlatform,
-    accountTradeType,
-    accountViewType: AccountViewType.private,
+    platform,
+    tradeType,
+    viewType: AccountViewType.private,
     members: [],
   });
   if (tradeAccount?.config?.accountId) {
@@ -90,9 +90,9 @@ export const addAccountService: AddAccountService = async ({
     config,
     name,
     providerType,
-    accountPlatform,
-    accountTradeType,
-    accountViewType: AccountViewType.private,
+    platform,
+    tradeType,
+    viewType: AccountViewType.private,
     members: [{
       email: userSession.email,
       name: userSession.name,
@@ -113,7 +113,7 @@ export const addAccountService: AddAccountService = async ({
   });
 
   await updateTradeClientRepo({
-    accountPlatform,
+    platform,
     clientId,
     addActiveAccounts: 1,
   });

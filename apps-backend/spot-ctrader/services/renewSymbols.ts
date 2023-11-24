@@ -11,7 +11,7 @@ const renewProviderTypeSymbols = async (
   providerTypeAccount = await Mongo.collection<Account>('accounts').findOne({
     isSystem: true,
     providerType,
-    accountPlatform: AccountPlatform.ctrader,
+    platform: AccountPlatform.ctrader,
   }, {
     projection: {
       config: 1,
@@ -20,7 +20,7 @@ const renewProviderTypeSymbols = async (
   if (!providerTypeAccount) {
     providerTypeAccount = await Mongo.collection<Account>('accounts').findOne({
       providerType,
-      accountPlatform: AccountPlatform.ctrader,
+      platform: AccountPlatform.ctrader,
     }, {
       projection: {
         config: 1,
@@ -42,7 +42,7 @@ const renewProviderTypeSymbols = async (
 const renewSymbols = async (allSymbols: SymbolCTrader[]) => {
   const providerTypes = await Mongo.collection<Account>('accounts').distinct(
     'providerType',
-    { accountPlatform: AccountPlatform.ctrader },
+    { platform: AccountPlatform.ctrader },
   );
   for (const providerType of providerTypes) {
     try {

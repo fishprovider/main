@@ -24,7 +24,7 @@ export const updateAccountService: UpdateAccountService = async ({
   const { roles } = userSession;
   const { accountId } = filter;
   const {
-    accountViewType, name, icon, strategyId, notes, privateNotes, bannerStatus,
+    viewType, name, icon, strategyId, notes, privateNotes, bannerStatus,
     tradeSettings, protectSettings, settings,
     ...rest
   } = payload;
@@ -44,7 +44,7 @@ export const updateAccountService: UpdateAccountService = async ({
   });
   checkAccountAccess(account, context);
 
-  if ((accountViewType || name || icon || strategyId || notes || privateNotes || bannerStatus)
+  if ((viewType || name || icon || strategyId || notes || privateNotes || bannerStatus)
     && !(isTraderProvider || isProtectorProvider)) {
     throw new BaseError(AccountError.ACCOUNT_ACCESS_DENIED, accountId);
   }

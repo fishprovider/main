@@ -30,7 +30,7 @@ function OrderEditor({
 }: Props) {
   const {
     providerType = ProviderType.icmarkets,
-    accountPlatform = AccountPlatform.ctrader,
+    platform = AccountPlatform.ctrader,
     asset = 'USD',
     plan = [],
     balance = 0,
@@ -38,7 +38,7 @@ function OrderEditor({
     orderLast,
   } = watchUserInfoController((state) => ({
     providerType: state.activeAccount?.providerType,
-    accountPlatform: state.activeAccount?.platform,
+    platform: state.activeAccount?.platform,
     asset: state.activeAccount?.asset,
     plan: state.activeAccount?.plan,
     balance: state.activeAccount?.balance,
@@ -134,7 +134,7 @@ function OrderEditor({
     const order = {
       providerId,
       providerType,
-      accountPlatform,
+      platform,
 
       orderType,
       status: OrderStatus.idea,

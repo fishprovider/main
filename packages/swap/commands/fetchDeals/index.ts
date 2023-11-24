@@ -21,7 +21,7 @@ interface FetchDealsReqOptions {
 interface FetchDealsReq {
   providerId: string,
   providerType: ProviderType,
-  accountPlatform: AccountPlatform,
+  platform: AccountPlatform,
   options?: FetchDealsReqOptions,
 }
 
@@ -70,11 +70,11 @@ const saveDeals = async (
 
 const fetchDeals = async (req: FetchDealsReq) => {
   const {
-    providerId, accountPlatform, options,
+    providerId, platform, options,
   } = req;
 
   let res: FetchDealsRes;
-  switch (accountPlatform) {
+  switch (platform) {
     case AccountPlatform.ctrader: {
       res = await getDealsCTrader({ ...req, ...options });
       break;
@@ -84,7 +84,7 @@ const fetchDeals = async (req: FetchDealsReq) => {
       break;
     }
     default: {
-      throw new Error(`Unhandled accountPlatform ${accountPlatform}`);
+      throw new Error(`Unhandled platform ${platform}`);
     }
   }
 

@@ -16,8 +16,8 @@ const handler: ApiHandler<Partial<Account>> = async (data, userSession) => {
   const payload = z.object({
     name: z.string(),
     providerType: z.nativeEnum(ProviderType),
-    accountPlatform: z.nativeEnum(AccountPlatform),
-    accountTradeType: z.nativeEnum(AccountTradeType),
+    platform: z.nativeEnum(AccountPlatform),
+    tradeType: z.nativeEnum(AccountTradeType),
     baseConfig: z.object({
       clientId: z.string().optional(),
       clientSecret: z.string().optional(),
@@ -40,15 +40,15 @@ const handler: ApiHandler<Partial<Account>> = async (data, userSession) => {
     .parse(data);
 
   const {
-    name, providerType, accountPlatform, accountTradeType, baseConfig,
+    name, providerType, platform, tradeType, baseConfig,
   } = payload;
 
   const { doc: account = {} } = await addAccountService({
     payload: {
       name,
       providerType,
-      accountPlatform,
-      accountTradeType,
+      platform,
+      tradeType,
       baseConfig,
     },
     repositories: {
@@ -59,15 +59,15 @@ const handler: ApiHandler<Partial<Account>> = async (data, userSession) => {
     context: { userSession },
   });
 
-  switch (accountPlatform) {
+  switch (platform) {
     case AccountPlatform.ctrader: {
-      Agenda.now(`${env.typePre}-${accountTradeType}-head-start-provider`, {
+      Agenda.now(`${env.typePre}-${tradeType}-head-start-provider`, {
         providerId: account._id,
       });
       break;
     }
     case AccountPlatform.metatrader: {
-      Agenda.now(`${env.typePre}-${accountTradeType}-head-meta-start-provider`, {
+      Agenda.now(`${env.typePre}-${tradeType}-head-meta-start-provider`, {
         providerId: account._id,
       });
       break;

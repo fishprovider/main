@@ -14,7 +14,7 @@ import TextInput from '~ui/core/TextInput';
 
 interface Props {
   account: {
-    accountViewType?: AccountViewType;
+    viewType?: AccountViewType;
     name?: string;
     icon?: string;
     providerGroupId?: string;
@@ -25,7 +25,7 @@ interface Props {
 }
 
 function AccountEditor({ account, onDone } : Props) {
-  const [accountViewType, setAccountViewType] = useState(account.accountViewType);
+  const [viewType, setViewType] = useState(account.viewType);
   const [name, setName] = useState(account.name || '');
   const [icon, setIcon] = useState(account.icon || '');
   const [strategyId, setStrategyId] = useState(account.strategyId || '');
@@ -38,7 +38,7 @@ function AccountEditor({ account, onDone } : Props) {
     updateAccountController({
       accountId,
     }, {
-      accountViewType,
+      viewType,
       name,
       icon,
       strategyId,
@@ -51,13 +51,13 @@ function AccountEditor({ account, onDone } : Props) {
     <>
       <Group>
         <Radio
-          checked={accountViewType === AccountViewType.private}
-          onChange={() => setAccountViewType(AccountViewType.private)}
+          checked={viewType === AccountViewType.private}
+          onChange={() => setViewType(AccountViewType.private)}
           label={AccountViewTypeText[AccountViewType.private]}
         />
         <Radio
-          checked={accountViewType === AccountViewType.public}
-          onChange={() => setAccountViewType(AccountViewType.public)}
+          checked={viewType === AccountViewType.public}
+          onChange={() => setViewType(AccountViewType.public)}
           label={AccountViewTypeText[AccountViewType.public]}
         />
       </Group>

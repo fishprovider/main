@@ -58,12 +58,12 @@ const postUpdateOrder = async (
 
 const updateOrder = async (req: UpdateOrderReq) => {
   const { order, options } = req;
-  const { accountPlatform } = order;
+  const { platform } = order;
 
   const requestOrder = await preCommandOrder(order);
 
   let res: UpdateOrderRes;
-  switch (accountPlatform) {
+  switch (platform) {
     case AccountPlatform.ctrader: {
       res = await updateOrderCTrader({ ...req, ...options, requestOrder });
       break;
@@ -73,7 +73,7 @@ const updateOrder = async (req: UpdateOrderReq) => {
       break;
     }
     default: {
-      throw new Error(`Unhandled accountPlatform ${accountPlatform}`);
+      throw new Error(`Unhandled platform ${platform}`);
     }
   }
 

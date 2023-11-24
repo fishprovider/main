@@ -22,7 +22,7 @@ interface FetchOrdersReqOptions {
 interface FetchOrdersReq {
   providerId: string,
   providerType: ProviderType,
-  accountPlatform: AccountPlatform,
+  platform: AccountPlatform,
   options?: FetchOrdersReqOptions,
 }
 
@@ -154,11 +154,11 @@ const saveOrders = async (
 
 const fetchOrders = async (req: FetchOrdersReq) => {
   const {
-    providerId, accountPlatform, options,
+    providerId, platform, options,
   } = req;
 
   let res: FetchOrdersRes;
-  switch (accountPlatform) {
+  switch (platform) {
     case AccountPlatform.ctrader: {
       res = await getOrdersCTrader({ ...req, ...options });
       break;
@@ -168,7 +168,7 @@ const fetchOrders = async (req: FetchOrdersReq) => {
       break;
     }
     default: {
-      throw new Error(`Unhandled accountPlatform ${accountPlatform}`);
+      throw new Error(`Unhandled platform ${platform}`);
     }
   }
 

@@ -4,15 +4,15 @@ import { CTraderAccountRepository } from '@fishprovider/ctrader-api';
 import { MetaApiAccountRepository } from '@fishprovider/meta-api';
 
 const getAccount: AccountRepository['getAccount'] = async (filter) => {
-  const { accountPlatform } = filter;
+  const { platform } = filter;
 
-  if (accountPlatform === AccountPlatform.ctrader) {
+  if (platform === AccountPlatform.ctrader) {
     if (CTraderAccountRepository.getAccount) {
       return CTraderAccountRepository.getAccount(filter);
     }
   }
 
-  if (accountPlatform === AccountPlatform.metatrader) {
+  if (platform === AccountPlatform.metatrader) {
     if (MetaApiAccountRepository.getAccount) {
       return MetaApiAccountRepository.getAccount(filter);
     }
@@ -22,9 +22,9 @@ const getAccount: AccountRepository['getAccount'] = async (filter) => {
 };
 
 const getAccounts: AccountRepository['getAccounts'] = async (filter) => {
-  const { accountPlatform } = filter;
+  const { platform } = filter;
 
-  if (accountPlatform === AccountPlatform.ctrader) {
+  if (platform === AccountPlatform.ctrader) {
     if (CTraderAccountRepository.getAccounts) {
       return CTraderAccountRepository.getAccounts(filter);
     }
@@ -34,9 +34,9 @@ const getAccounts: AccountRepository['getAccounts'] = async (filter) => {
 };
 
 const addAccount: AccountRepository['addAccount'] = async (payload) => {
-  const { accountPlatform } = payload;
+  const { platform } = payload;
 
-  if (accountPlatform === AccountPlatform.metatrader) {
+  if (platform === AccountPlatform.metatrader) {
     if (MetaApiAccountRepository.addAccount) {
       return MetaApiAccountRepository.addAccount(payload);
     }

@@ -6,7 +6,7 @@ interface ClientAccount {
   _id: string;
   config: Config;
   providerType: ProviderType;
-  accountPlatform: AccountPlatform;
+  platform: AccountPlatform;
 }
 
 interface Client {

@@ -31,8 +31,7 @@ interface Order extends OrderSettings {
 
   providerId: string;
   providerType: ProviderType;
-  accountPlatform: AccountPlatform;
-  accountPlatformType?: string;
+  platform: AccountPlatform;
 
   orderType: OrderType;
   status: OrderStatus;

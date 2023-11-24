@@ -34,8 +34,8 @@ function AccountMetaTrader({ providerType }: Props) {
     add({
       name,
       providerType,
-      accountPlatform: AccountPlatform.metatrader,
-      accountTradeType: isLive ? AccountTradeType.live : AccountTradeType.demo,
+      platform: AccountPlatform.metatrader,
+      tradeType: isLive ? AccountTradeType.live : AccountTradeType.demo,
       baseConfig: {
         user,
         pass,

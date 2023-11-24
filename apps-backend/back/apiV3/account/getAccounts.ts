@@ -7,19 +7,19 @@ import { ApiHandler } from '~types/ApiHandler.model';
 
 const handler: ApiHandler<Partial<Account>[]> = async (data, userSession) => {
   const filter = z.object({
-    accountViewType: z.nativeEnum(AccountViewType).optional(),
+    viewType: z.nativeEnum(AccountViewType).optional(),
     email: z.string().optional(),
   }).strict()
     .parse(data);
 
-  const { accountViewType } = filter;
+  const { viewType } = filter;
 
   const { docs } = await getAccountsService({
     filter: {
-      ...(accountViewType === AccountViewType.public ? {
-        accountViewType,
+      ...(viewType === AccountViewType.public ? {
+        viewType,
       } : {
-        accountViewType: AccountViewType.private,
+        viewType: AccountViewType.private,
         email: userSession.email,
       }),
     },

@@ -30,13 +30,13 @@ test('lockTarget', async () => {
     await fetchOrders({
       providerId: env.typeId,
       providerType: ProviderType.icmarkets,
-      accountPlatform: AccountPlatform.ctrader,
+      platform: AccountPlatform.ctrader,
       options: { config },
     });
     await fetchAccountInfo({
       providerId: env.typeId,
       providerType: ProviderType.icmarkets,
-      accountPlatform: AccountPlatform.ctrader,
+      platform: AccountPlatform.ctrader,
       options: { config },
     });
 

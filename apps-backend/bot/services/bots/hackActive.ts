@@ -100,7 +100,7 @@ const hackActiveCTrader = async (
   const baseOrder: OrderWithoutId = {
     providerId: account._id,
     providerType: ProviderType.icmarkets,
-    accountPlatform: AccountPlatform.ctrader,
+    platform: AccountPlatform.ctrader,
 
     orderType: OrderType.market,
     status: OrderStatus.idea,
@@ -137,7 +137,7 @@ const hackActiveExness = async (
   const baseOrder: OrderWithoutId = {
     providerId: account._id,
     providerType: ProviderType.exness,
-    accountPlatform: AccountPlatform.metatrader,
+    platform: AccountPlatform.metatrader,
 
     orderType: OrderType.market,
     status: OrderStatus.idea,

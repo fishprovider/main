@@ -11,7 +11,7 @@ import { getMongo } from '..';
 const buildAccountFilter = (filter: {
   accountId?: string,
   accountIds?: string[],
-  accountViewType?: AccountViewType,
+  viewType?: AccountViewType,
   email?: string,
   checkExist?: {
     accountId: string,
@@ -20,7 +20,7 @@ const buildAccountFilter = (filter: {
   },
 }): Filter<Account> => {
   const {
-    accountId, accountViewType, email, accountIds, checkExist,
+    accountId, viewType, email, accountIds, checkExist,
   } = filter;
 
   const andFilter: Filter<Account>['$and'] = [];
@@ -39,7 +39,7 @@ const buildAccountFilter = (filter: {
   return {
     ...(accountId && { _id: accountId }),
     ...(accountIds && { _id: { $in: accountIds } }),
-    ...(accountViewType && { accountViewType }),
+    ...(viewType && { viewType }),
     ...(email && { 'members.email': email }),
     ...(andFilter.length && { $and: andFilter }),
     deleted: { $ne: true },
@@ -68,7 +68,7 @@ const updateAccount: AccountRepository['updateAccount'] = async (filter, payload
   const accountFilter = buildAccountFilter(filter);
 
   const {
-    accountViewType, name, icon, strategyId, assetId, asset,
+    viewType, name, icon, strategyId, assetId, asset,
     leverage, balance, equity, margin, freeMargin, marginLevel,
     notes, privateNotes,
     tradeSettings, protectSettings, settings, bannerStatus,
@@ -80,7 +80,7 @@ const updateAccount: AccountRepository['updateAccount'] = async (filter, payload
   } = options || {};
 
   const updatedAccount: Partial<Account> = {
-    ...(accountViewType && { accountViewType }),
+    ...(viewType && { viewType }),
     ...(name && { name }),
     ...(icon && { icon }),
     ...(strategyId && { strategyId }),
@@ -177,11 +177,11 @@ const removeAccount: AccountRepository['removeAccount'] = async (filter) => {
 };
 
 const getTradeClient: AccountRepository['getTradeClient'] = async (filter) => {
-  const { accountPlatform, clientId } = filter;
+  const { platform, clientId } = filter;
 
   const { db } = await getMongo();
   const client = await db.collection<AccountConfig>('clientSecrets').findOne({
-    accountPlatform,
+    platform,
     ...(clientId && { clientId }),
   }, {
     projection: {
@@ -195,11 +195,11 @@ const getTradeClient: AccountRepository['getTradeClient'] = async (filter) => {
 };
 
 const updateTradeClient: AccountRepository['updateTradeClient'] = async (filter) => {
-  const { accountPlatform, clientId, addActiveAccounts } = filter;
+  const { platform, clientId, addActiveAccounts } = filter;
 
   const { db } = await getMongo();
   const client = await db.collection<AccountConfig>('clientSecrets').updateOne({
-    accountPlatform,
+    platform,
     clientId,
   }, {
     $inc: {

@@ -5,7 +5,7 @@ const getAccountDefault: () => Account = () => ({
   _id: 'testAccountId',
   name: 'Test Account',
   providerType: ProviderType.icmarkets,
-  accountPlatform: AccountPlatform.ctrader,
+  platform: AccountPlatform.ctrader,
   config: {
     clientId: 'testClientId',
     clientSecret: 'testClientSecret',

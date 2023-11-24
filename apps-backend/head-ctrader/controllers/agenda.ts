@@ -7,7 +7,7 @@ import { destroyOne, renewTokens, startOne } from '~services/provider';
 const env = {
   typeId: process.env.TYPE_ID,
   typePre: process.env.TYPE_PRE,
-  accountTradeType: process.env.PROVIDER_TRADE_TYPE || AccountTradeType.demo,
+  tradeType: process.env.PROVIDER_TRADE_TYPE || AccountTradeType.demo,
 };
 
 interface StartProvider extends JobAttributesData {
@@ -39,7 +39,7 @@ const startRenewTokens = async () => {
 };
 
 const startProvider = async () => {
-  const jobName = `${env.typePre}-${env.accountTradeType}-head-start-provider`;
+  const jobName = `${env.typePre}-${env.tradeType}-head-start-provider`;
   Agenda.define(
     jobName,
     {},
@@ -55,7 +55,7 @@ const startProvider = async () => {
 };
 
 const destroyProvider = async () => {
-  const jobName = `${env.typePre}-${env.accountTradeType}-head-destroy-provider`;
+  const jobName = `${env.typePre}-${env.tradeType}-head-destroy-provider`;
   Agenda.define(
     jobName,
     {},

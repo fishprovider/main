@@ -18,7 +18,7 @@ describe('fetchOrders', () => {
     const { orders, positions } = await fetchOrders({
       providerId: 'ctrader',
       providerType: ProviderType.icmarkets,
-      accountPlatform: AccountPlatform.ctrader,
+      platform: AccountPlatform.ctrader,
       options: { config },
     });
     Logger.info('Got orders:', orders?.length);
@@ -32,7 +32,7 @@ describe('fetchOrders', () => {
     const { orders, positions } = await fetchOrders({
       providerId: 'meta',
       providerType: ProviderType.exness,
-      accountPlatform: AccountPlatform.ctrader,
+      platform: AccountPlatform.ctrader,
       options: { config },
     });
     Logger.info('Got orders:', orders?.length);

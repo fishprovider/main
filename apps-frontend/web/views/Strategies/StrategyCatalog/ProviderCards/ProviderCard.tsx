@@ -35,7 +35,7 @@ function ProviderCard({
   const isMobile = useMobile();
 
   const {
-    accountViewType,
+    viewType,
     name,
     icon,
     createdAt,
@@ -45,7 +45,7 @@ function ProviderCard({
     roi = 0,
     summary = {},
   } = watchAccountController((state) => ({
-    accountViewType: state[providerId]?.viewType,
+    viewType: state[providerId]?.viewType,
     name: state[providerId]?.name,
     icon: state[providerId]?.icon,
     createdAt: state[providerId]?.createdAt,
@@ -102,10 +102,10 @@ function ProviderCard({
             </Text>
           </Box>
           <Group position="center">
-            {accountViewType === AccountViewType.private && (
+            {viewType === AccountViewType.private && (
               <Icon
                 name="VisibilityOff"
-                tooltip={AccountViewTypeText[accountViewType as AccountViewType]}
+                tooltip={AccountViewTypeText[viewType]}
               />
             )}
             <InvestNow providerId={providerId} />
@@ -135,10 +135,10 @@ function ProviderCard({
               <Title size="h4">{name || <Loader variant="dots" size="xs" />}</Title>
               <Title size="h3">{icon || <Loader variant="bars" size="xs" />}</Title>
               <Group position="center">
-                {accountViewType === AccountViewType.private && (
+                {viewType === AccountViewType.private && (
                   <Icon
                     name="VisibilityOff"
-                    tooltip={AccountViewTypeText[accountViewType as AccountViewType]}
+                    tooltip={AccountViewTypeText[viewType]}
                   />
                 )}
                 <InvestNow providerId={providerId} size="sm" />

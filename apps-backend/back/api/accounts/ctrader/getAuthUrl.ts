@@ -7,7 +7,7 @@ interface Client {
 
 const getClient = async (live?: boolean) => {
   const client = await Mongo.collection<Client>('clientSecrets').findOne({
-    accountPlatform: AccountPlatform.ctrader,
+    platform: AccountPlatform.ctrader,
     mode: live ? 'live' : 'demo',
   }, {
     projection: {

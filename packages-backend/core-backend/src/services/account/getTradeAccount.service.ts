@@ -26,15 +26,15 @@ export const getTradeAccountService: GetTradeAccountService = async ({
     projection: {
       _id: 1,
       members: 1,
-      accountPlatform: 1,
+      platform: 1,
       config: 1,
     },
   });
-  const { accountPlatform, config } = checkAccountAccess(account, context);
+  const { platform, config } = checkAccountAccess(account, context);
 
   const { doc: tradeAccount } = await getTradeAccountRepo({
     ...filter,
-    accountPlatform,
+    platform,
     config,
   });
   if (!tradeAccount) {

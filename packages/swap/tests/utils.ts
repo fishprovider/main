@@ -102,7 +102,7 @@ const newMarketOrder = async (config: Config, providerId: string, providerType: 
     _id: `${providerId}-${random()}`,
     providerId,
     providerType,
-    accountPlatform: providerType === ProviderType.exness
+    platform: providerType === ProviderType.exness
       ? AccountPlatform.metatrader : AccountPlatform.ctrader,
     status: OrderStatus.idea,
     direction: Direction.buy,
@@ -123,7 +123,7 @@ const newLimitOrder = async (config: Config, providerId: string, providerType: P
     _id: `${providerId}-${random()}`,
     providerId,
     providerType,
-    accountPlatform: providerType === ProviderType.exness
+    platform: providerType === ProviderType.exness
       ? AccountPlatform.metatrader : AccountPlatform.ctrader,
     status: OrderStatus.idea,
     direction: Direction.buy,

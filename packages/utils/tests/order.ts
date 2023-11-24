@@ -5,7 +5,7 @@ import type { Order } from '~types/Order.model';
 const getOrderDefault: () => Order = () => ({
   _id: 'testOrderId',
   providerType: ProviderType.icmarkets,
-  accountPlatform: AccountPlatform.ctrader,
+  platform: AccountPlatform.ctrader,
   providerId: 'testAccountId',
   orderType: OrderType.market,
   status: OrderStatus.idea,

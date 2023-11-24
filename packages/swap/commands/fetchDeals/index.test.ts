@@ -18,7 +18,7 @@ describe('fetchDeals', () => {
     const { deals } = await fetchDeals({
       providerId: 'ctrader',
       providerType: ProviderType.icmarkets,
-      accountPlatform: AccountPlatform.ctrader,
+      platform: AccountPlatform.ctrader,
       options: {
         config,
         days: 1,
@@ -32,7 +32,7 @@ describe('fetchDeals', () => {
     const { deals } = await fetchDeals({
       providerId: 'ctrader',
       providerType: ProviderType.icmarkets,
-      accountPlatform: AccountPlatform.ctrader,
+      platform: AccountPlatform.ctrader,
       options: {
         config,
         weeks: 1,
@@ -46,7 +46,7 @@ describe('fetchDeals', () => {
     const { deals } = await fetchDeals({
       providerId: 'meta',
       providerType: ProviderType.exness,
-      accountPlatform: AccountPlatform.ctrader,
+      platform: AccountPlatform.ctrader,
       options: {
         config,
         days: 1,
@@ -60,7 +60,7 @@ describe('fetchDeals', () => {
     const { deals } = await fetchDeals({
       providerId: 'meta',
       providerType: ProviderType.exness,
-      accountPlatform: AccountPlatform.ctrader,
+      platform: AccountPlatform.ctrader,
       options: {
         config,
         weeks: 1,

@@ -3,14 +3,14 @@ import { AccountPlatform, AccountTradeType } from '@fishprovider/utils/dist/cons
 import type { ClientAccount } from '~types/Client.model';
 
 const env = {
-  accountTradeType: process.env.PROVIDER_TRADE_TYPE || AccountTradeType.demo,
+  tradeType: process.env.PROVIDER_TRADE_TYPE || AccountTradeType.demo,
 };
 
 const getAccountConfigs = async () => {
   const accounts = await Mongo.collection<ClientAccount>('accounts').find(
     {
-      accountPlatform: AccountPlatform.ctrader,
-      accountTradeType: env.accountTradeType as AccountTradeType,
+      platform: AccountPlatform.ctrader,
+      tradeType: env.tradeType as AccountTradeType,
       isSystem: { $ne: true },
       deleted: { $ne: true },
     },
@@ -18,7 +18,7 @@ const getAccountConfigs = async () => {
       projection: {
         config: 1,
         providerType: 1,
-        accountPlatform: 1,
+        platform: 1,
       },
       sort: {
         order: -1,
@@ -31,13 +31,13 @@ const getAccountConfigs = async () => {
 const getAccountConfig = async (providerId: string) => {
   const account = await Mongo.collection<ClientAccount>('accounts').findOne({
     _id: providerId,
-    accountPlatform: AccountPlatform.ctrader,
-    accountTradeType: env.accountTradeType as AccountTradeType,
+    platform: AccountPlatform.ctrader,
+    tradeType: env.tradeType as AccountTradeType,
   }, {
     projection: {
       config: 1,
       providerType: 1,
-      accountPlatform: 1,
+      platform: 1,
     },
   });
   return account;

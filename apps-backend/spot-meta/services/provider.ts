@@ -73,7 +73,7 @@ const sendHeartbeat = async () => {
     order: {
       providerId: env.typeId,
       providerType,
-      accountPlatform: AccountPlatform.metatrader,
+      platform: AccountPlatform.metatrader,
 
       orderType: OrderType.limit,
       status: OrderStatus.idea,

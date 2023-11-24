@@ -63,7 +63,7 @@ function InvestModal({
       case AccountPlatform.ctrader: return (
         <InvestPlatforms
           providerId={providerId}
-          accountPlatform={platform}
+          platform={platform}
           groupAccounts={groupAccounts.filter((item) => item.platform === platform)}
           platforms={ctraderPlatforms}
         />
@@ -71,7 +71,7 @@ function InvestModal({
       case AccountPlatform.metatrader: return (
         <InvestPlatforms
           providerId={providerId}
-          accountPlatform={platform}
+          platform={platform}
           groupAccounts={groupAccounts.filter((item) => item.platform === platform)}
           platforms={metatraderPlatforms}
         />

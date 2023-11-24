@@ -1,9 +1,9 @@
 import { AccountTradeType } from '@fishprovider/utils/dist/constants/account';
 
 const env = {
-  accountTradeType: process.env.PROVIDER_TRADE_TYPE || AccountTradeType.demo,
+  tradeType: process.env.PROVIDER_TRADE_TYPE || AccountTradeType.demo,
 };
 
-const isDemo = env.accountTradeType === AccountTradeType.demo;
+const isDemo = env.tradeType === AccountTradeType.demo;
 
 export default isDemo;

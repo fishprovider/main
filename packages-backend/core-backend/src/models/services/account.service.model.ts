@@ -20,7 +20,7 @@ export type GetAccountService = (params: BaseGetServiceParams<Account> & {
 
 export type GetAccountsService = (params: BaseGetServiceParams<Account> & {
   filter: {
-    accountViewType?: AccountViewType,
+    viewType?: AccountViewType,
     email?: string,
     accountIds?: string[],
   },
@@ -41,7 +41,7 @@ export type GetTradeAccountService = (params: BaseUpdateServiceParams<Account> &
 
 export type GetTradeAccountsService = (params: BaseUpdateServiceParams<Account> & {
   filter: {
-    accountPlatform: AccountPlatform,
+    platform: AccountPlatform,
     baseConfig: Partial<AccountConfig>,
     tradeRequest?: {
       redirectUrl?: string,
@@ -59,7 +59,7 @@ export type UpdateAccountService = (params: BaseUpdateServiceParams<Account> & {
     accountId: string,
   },
   payload: {
-    accountViewType?: AccountViewType,
+    viewType?: AccountViewType,
     name?: string,
     icon?: string,
     strategyId?: string,
@@ -80,8 +80,8 @@ export type AddAccountService = (params: BaseUpdateServiceParams<Account> & {
   payload: {
     name: string,
     providerType: ProviderType,
-    accountPlatform: AccountPlatform,
-    accountTradeType: AccountTradeType,
+    platform: AccountPlatform,
+    tradeType: AccountTradeType,
     baseConfig: Partial<AccountConfig>,
   },
   repositories: {

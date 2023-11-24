@@ -131,12 +131,11 @@ interface Account {
   config: Config; // private
 
   providerType: ProviderType; // icmarkets, exness, roboforex
-  accountPlatform: AccountPlatform; // ctrader, metatrader
-  accountPlatformType?: string; // standard, pro
+  platform: AccountPlatform; // ctrader, metatrader
 
-  providerGroupId?: string; // earth, earth2, earth3
-  accountViewType?: AccountViewType; // private, public
-  accountTradeType?: AccountTradeType; // demo, live
+  groupId?: string; // earth, earth2, earth3
+  viewType?: AccountViewType; // private, public
+  tradeType?: AccountTradeType; // demo, live
 
   asset?: string;
   assetId?: string;

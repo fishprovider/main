@@ -34,7 +34,7 @@ const transformPosition = (
 
     providerId,
     providerType,
-    accountPlatform: AccountPlatform.ctrader,
+    platform: AccountPlatform.ctrader,
     orderType,
     status: OrderStatus.live,
 
@@ -81,7 +81,7 @@ const transformOrder = (
 
     providerId,
     providerType,
-    accountPlatform: AccountPlatform.ctrader,
+    platform: AccountPlatform.ctrader,
     orderType,
     status: OrderStatus.pending,
 
@@ -141,7 +141,7 @@ const transformDeal = (
 
     providerId,
     providerType,
-    accountPlatform: AccountPlatform.ctrader,
+    platform: AccountPlatform.ctrader,
     orderType,
     // status can be live or closed
 

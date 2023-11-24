@@ -17,11 +17,11 @@ export const getTradeAccountsService: GetTradeAccountsService = async ({
   // main
   //
   const {
-    accountPlatform, baseConfig, tradeRequest,
+    platform, baseConfig, tradeRequest,
   } = filter;
 
   const { doc: client } = await getTradeClientRepo({
-    accountPlatform,
+    platform,
     clientId: baseConfig.clientId,
   });
   if (!client) {
@@ -33,7 +33,7 @@ export const getTradeAccountsService: GetTradeAccountsService = async ({
   }
 
   const { docs: accounts } = await getTradeAccountsRepo({
-    accountPlatform,
+    platform,
     config: {
       ...baseConfig,
       clientId,

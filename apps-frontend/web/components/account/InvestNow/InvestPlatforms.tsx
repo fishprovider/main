@@ -18,13 +18,13 @@ const defaultUrlAlpari = 'https://www.alpari.com/en/invest/pamm/548473';
 
 interface Props {
   providerId: string,
-  accountPlatform: AccountPlatform,
+  platform: AccountPlatform,
   groupAccounts: Account[];
   platforms: Record<string, CopyPlatform>;
 }
 
 function InvestPlatforms({
-  providerId, accountPlatform, groupAccounts, platforms,
+  providerId, platform, groupAccounts, platforms,
 }: Props) {
   const {
     name,
@@ -33,7 +33,7 @@ function InvestPlatforms({
   }));
 
   const getCopyUrl = (platform: CopyPlatform, providerType: string) => {
-    if (accountPlatform === AccountPlatform.ctrader) {
+    if (platform === AccountPlatform.ctrader) {
       const strategyId = groupAccounts[0]?.strategyId;
       const url = `${platform.copyUrl}/${strategyId}`;
       return url;

@@ -25,8 +25,8 @@ export const removeAccountService: RemoveAccountService = async ({
     projection: {
       _id: 1,
       members: 1,
-      accountPlatform: 1,
-      accountTradeType: 1,
+      platform: 1,
+      tradeType: 1,
       'config.clientId': 1,
     },
   });
@@ -38,10 +38,10 @@ export const removeAccountService: RemoveAccountService = async ({
 
   await updateUsersRepo({}, { removeRoleAccountId: accountId });
 
-  const { accountPlatform, config } = account;
-  if (accountPlatform && config?.clientId) {
+  const { platform, config } = account;
+  if (platform && config?.clientId) {
     await updateTradeClientRepo({
-      accountPlatform,
+      platform,
       clientId: config.clientId,
       addActiveAccounts: -1,
     });

@@ -44,7 +44,7 @@ const investAdd = async ({ data, userInfo }: {
 
   const account = await Mongo.collection<AccountPublic>('accounts').findOne({
     _id: providerId,
-    accountViewType: AccountViewType.public,
+    viewType: AccountViewType.public,
     strategyId: { $exists: true },
   }, {
     projection: {

@@ -28,11 +28,11 @@ const orderGetMany = async ({ data, userInfo }: {
   }
 
   if (reload) {
-    const { config, providerType, accountPlatform } = account;
+    const { config, providerType, platform } = account;
     const result = await fetchOrders({
       providerId,
       providerType,
-      accountPlatform,
+      platform,
       options: { config },
     });
     return { result };

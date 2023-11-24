@@ -11,7 +11,7 @@ export const updateAccountService = async (
     accountId: string,
   },
   payload: {
-    accountViewType?: AccountViewType,
+    viewType?: AccountViewType,
     name?: string,
     icon?: string,
     strategyId?: string,

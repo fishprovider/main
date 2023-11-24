@@ -63,12 +63,12 @@ const postRemovePosition = async (
 
 const removePosition = async (req: RemovePositionReq) => {
   const { order, options } = req;
-  const { accountPlatform } = order;
+  const { platform } = order;
 
   const requestOrder = await preCommandOrder(order);
 
   let res: RemovePositionRes;
-  switch (accountPlatform) {
+  switch (platform) {
     case AccountPlatform.ctrader: {
       res = await removePositionCTrader({ ...req, ...options, requestOrder });
       break;
@@ -78,7 +78,7 @@ const removePosition = async (req: RemovePositionReq) => {
       break;
     }
     default: {
-      throw new Error(`Unhandled accountPlatform ${accountPlatform}`);
+      throw new Error(`Unhandled platform ${platform}`);
     }
   }
 

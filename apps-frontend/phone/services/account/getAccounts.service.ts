@@ -4,7 +4,7 @@ import { FishApiAccountRepository } from '@fishprovider/fish-api';
 import { Account } from '@fishprovider/utils/types/Account.model';
 
 export const getAccountsService = async (filter: {
-  accountViewType?: AccountViewType,
+  viewType?: AccountViewType,
   email?: string,
 }) => {
   const getAccountsRepo = checkRepository(FishApiAccountRepository.getAccounts);

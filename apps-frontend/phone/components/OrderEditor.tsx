@@ -31,14 +31,14 @@ export default function OrderEditor({
   const {
     symbol,
     providerType = ProviderType.icmarkets,
-    accountPlatform = AccountPlatform.ctrader,
+    platform = AccountPlatform.ctrader,
     asset = 'USD',
     plan = [],
     balance = 0,
   } = storeUser.useStore((state) => ({
     symbol: state.activeSymbol,
     providerType: state.activeProvider?.providerType,
-    accountPlatform: state.activeProvider?.accountPlatform,
+    platform: state.activeProvider?.platform,
     asset: state.activeProvider?.asset,
     plan: state.activeProvider?.plan,
     balance: state.activeProvider?.balance,
@@ -104,7 +104,7 @@ export default function OrderEditor({
     const order = {
       providerId,
       providerType,
-      accountPlatform,
+      platform,
 
       orderType,
       status: OrderStatus.idea,

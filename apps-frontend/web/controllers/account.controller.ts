@@ -22,7 +22,7 @@ export const getAccountController = async (filter: {
 };
 
 export const getAccountsController = async (filter: {
-  accountViewType?: AccountViewType,
+  viewType?: AccountViewType,
   email?: string,
 }) => {
   const getAccountsRepo = checkRepository(repo.getAccounts);
@@ -34,7 +34,7 @@ export const getAccountsController = async (filter: {
 };
 
 export const getTradeAccountsController = async (filter: {
-  accountPlatform: AccountPlatform,
+  platform: AccountPlatform,
   baseConfig: Partial<AccountConfig>,
   tradeRequest: {
     redirectUrl: string,
@@ -53,7 +53,7 @@ export const updateAccountController = async (
     accountId: string,
   },
   payload: {
-    accountViewType?: AccountViewType,
+    viewType?: AccountViewType,
     name?: string,
     icon?: string,
     strategyId?: string,
@@ -78,8 +78,8 @@ export const addAccountController = async (
   payload: {
     name: string,
     providerType: ProviderType,
-    accountPlatform: AccountPlatform,
-    accountTradeType: AccountTradeType,
+    platform: AccountPlatform,
+    tradeType: AccountTradeType,
     baseConfig: Partial<AccountConfig>,
   },
 ) => {

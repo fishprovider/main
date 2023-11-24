@@ -24,14 +24,14 @@ export const checkAccountAccess = (
   }
 
   const { isManagerWeb } = getRoleProvider(context?.userSession?.roles);
-  const { accountViewType, members, deleted } = account;
+  const { viewType, members, deleted } = account;
 
   const check = () => {
     if (isManagerWeb) return true;
     if (deleted) {
       throw new BaseError(AccountError.ACCOUNT_ACCESS_DENIED, account._id, 'deleted');
     }
-    if (accountViewType === AccountViewType.public) return true;
+    if (viewType === AccountViewType.public) return true;
 
     // for private accounts
     if (!context?.userSession?._id) {

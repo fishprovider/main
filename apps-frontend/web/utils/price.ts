@@ -151,10 +151,10 @@ interface MarketState {
 }
 
 const getMarketState = (
-  accountPlatform?: AccountPlatform,
+  platform?: AccountPlatform,
   providerData?: any,
 ): MarketState | null => {
-  switch (accountPlatform) {
+  switch (platform) {
     case AccountPlatform.ctrader:
       return getMarketStateCTrader(providerData);
     case AccountPlatform.metatrader:

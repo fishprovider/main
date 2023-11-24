@@ -11,7 +11,7 @@ const handler: ApiHandler<Partial<Account>> = async (data, userSession) => {
   const filter = z.object({
     accountId: z.string(),
     payload: z.object({
-      accountViewType: z.nativeEnum(AccountViewType).optional(),
+      viewType: z.nativeEnum(AccountViewType).optional(),
       name: z.string().optional(),
       icon: z.string().optional(),
       strategyId: z.string().optional(),

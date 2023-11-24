@@ -35,7 +35,7 @@ function ProviderSelect() {
   ));
 
   useQuery({
-    queryFn: () => getAccountsController({ accountViewType: AccountViewType.public }),
+    queryFn: () => getAccountsController({ viewType: AccountViewType.public }),
     queryKey: queryKeys.slimAccounts(),
   });
   useQuery({

@@ -37,7 +37,7 @@ function Catalog() {
   const [cardVariant, toggleCardVariant] = useToggleMulti([CardVariant.default, CardVariant.slim]);
 
   useQuery({
-    queryFn: () => getAccountsController({ accountViewType: AccountViewType.public }),
+    queryFn: () => getAccountsController({ viewType: AccountViewType.public }),
     queryKey: queryKeys.slimAccounts(),
   });
   useQuery({

@@ -28,16 +28,16 @@ const handler: ApiHandler<Partial<Account>> = async (data, userSession) => {
     context: { userSession },
   });
 
-  const { accountPlatform, accountTradeType } = account;
-  switch (accountPlatform) {
+  const { platform, tradeType } = account;
+  switch (platform) {
     case AccountPlatform.ctrader: {
-      Agenda.now(`${env.typePre}-${accountTradeType}-head-destroy-provider`, {
+      Agenda.now(`${env.typePre}-${tradeType}-head-destroy-provider`, {
         providerId: accountId,
       });
       break;
     }
     case AccountPlatform.metatrader: {
-      Agenda.now(`${env.typePre}-${accountTradeType}-head-meta-destroy-provider`, {
+      Agenda.now(`${env.typePre}-${tradeType}-head-meta-destroy-provider`, {
         providerId: accountId,
       });
       break;

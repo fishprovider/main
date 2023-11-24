@@ -24,7 +24,7 @@ const getAccount: AccountRepository['getAccount'] = async (payload) => {
     doc: {
       ...doc,
       _id: accountId,
-      accountPlatformType: doc.platform,
+      platformType: doc.platform,
       assetId: doc.currency,
       asset: doc.currency,
       providerData: doc,

@@ -34,8 +34,8 @@ function ImportAccounts({ accounts }: { accounts: Partial<Account>[] }) {
     addAccountController({
       name,
       providerType: ProviderType.icmarkets,
-      accountPlatform: AccountPlatform.ctrader,
-      accountTradeType: account?.config?.isLive ? AccountTradeType.live : AccountTradeType.demo,
+      platform: AccountPlatform.ctrader,
+      tradeType: account?.config?.isLive ? AccountTradeType.live : AccountTradeType.demo,
       baseConfig: account.config,
     }).then((item) => {
       const accountId = item?._id;
@@ -132,7 +132,7 @@ function CTraderAuth() {
       const redirectUrl = `${window.location.origin}${window.location.pathname}`;
 
       getTradeAccountsController({
-        accountPlatform: AccountPlatform.ctrader,
+        platform: AccountPlatform.ctrader,
         baseConfig: {
           clientId,
         },

@@ -18,7 +18,7 @@ describe('fetchAccountInfo', () => {
     const { balance, providerData } = await fetchAccountInfo({
       providerId: 'ctrader',
       providerType: ProviderType.icmarkets,
-      accountPlatform: AccountPlatform.ctrader,
+      platform: AccountPlatform.ctrader,
       options: { config },
     });
     Logger.info('Got balance:', balance);
@@ -36,7 +36,7 @@ describe('fetchAccountInfo', () => {
     const { balance, providerData } = await fetchAccountInfo({
       providerId: 'meta',
       providerType: ProviderType.exness,
-      accountPlatform: AccountPlatform.ctrader,
+      platform: AccountPlatform.ctrader,
       options: { config },
     });
     Logger.info('Got balance:', balance);

@@ -15,7 +15,7 @@ interface AccountInfoReqOptions {
 interface AccountInfoReq {
   providerId: string,
   providerType: ProviderType,
-  accountPlatform: AccountPlatform,
+  platform: AccountPlatform,
   options?: AccountInfoReqOptions,
 }
 
@@ -72,11 +72,11 @@ const saveAccountInfo = async (
 
 const fetchAccountInfo = async (req: AccountInfoReq) => {
   const {
-    providerId, providerType, accountPlatform, options,
+    providerId, providerType, platform, options,
   } = req;
 
   let res: AccountInfoRes;
-  switch (accountPlatform) {
+  switch (platform) {
     case AccountPlatform.ctrader: {
       res = await getAccountInfoCTrader({ ...req, ...options });
       break;
@@ -86,7 +86,7 @@ const fetchAccountInfo = async (req: AccountInfoReq) => {
       break;
     }
     default: {
-      throw new Error(`Unhandled accountPlatform ${accountPlatform}`);
+      throw new Error(`Unhandled platform ${platform}`);
     }
   }
 

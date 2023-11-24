@@ -35,7 +35,7 @@ export default function Strategies() {
     .map((account) => account._id));
 
   useQuery({
-    queryFn: () => getAccountsService({ accountViewType: AccountViewType.public }),
+    queryFn: () => getAccountsService({ viewType: AccountViewType.public }),
     queryKey: queryKeys.slimAccounts(),
     refetchInterval: refreshMS,
   });

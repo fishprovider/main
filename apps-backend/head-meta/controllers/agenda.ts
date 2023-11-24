@@ -7,7 +7,7 @@ import { destroyOne, startOne } from '~services/provider';
 const env = {
   typeId: process.env.TYPE_ID,
   typePre: process.env.TYPE_PRE,
-  accountTradeType: process.env.PROVIDER_TRADE_TYPE || AccountTradeType.demo,
+  tradeType: process.env.PROVIDER_TRADE_TYPE || AccountTradeType.demo,
 };
 
 interface StartProvider extends JobAttributesData {
@@ -19,7 +19,7 @@ interface DestroyProvider extends JobAttributesData {
 }
 
 const startProvider = async () => {
-  const jobName = `${env.typePre}-${env.accountTradeType}-head-meta-start-provider`;
+  const jobName = `${env.typePre}-${env.tradeType}-head-meta-start-provider`;
   Agenda.define(
     jobName,
     {},
@@ -35,7 +35,7 @@ const startProvider = async () => {
 };
 
 const destroyProvider = async () => {
-  const jobName = `${env.typePre}-${env.accountTradeType}-head-meta-destroy-provider`;
+  const jobName = `${env.typePre}-${env.tradeType}-head-meta-destroy-provider`;
   Agenda.define(
     jobName,
     {},
