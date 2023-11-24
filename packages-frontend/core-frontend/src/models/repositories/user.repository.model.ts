@@ -5,7 +5,7 @@ import {
   BaseGetOptions, BaseGetResult, BaseUpdateOptions, BaseUpdateResult,
 } from '..';
 
-export interface UserInfo {
+export interface UserInfo extends Record<string, any> {
   theme?: string;
   lang?: string;
 

@@ -1,6 +1,5 @@
 import { checkRepository, User } from '@fishprovider/core';
 import { UserInfo } from '@fishprovider/core-frontend';
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import { StoreFirstUserRepository } from '@fishprovider/store-first';
 
 const repo = StoreFirstUserRepository;
@@ -25,15 +24,6 @@ export const getUserController = async (filter: {
   const { doc: user } = await getUserRepo(filter);
 
   mergeUserInfoActiveUser(user);
-
-  if (user) { // TODO: remove
-    storeUser.mergeState({
-      info: {
-        ...storeUser.getState().info,
-        ...user,
-      },
-    });
-  }
   return user;
 };
 
@@ -53,15 +43,6 @@ export const updateUserController = async (
   const { doc: user } = await updateUserRepo(filter, payload);
 
   mergeUserInfoActiveUser(user);
-
-  if (user) { // TODO: remove
-    storeUser.mergeState({
-      info: {
-        ...storeUser.getState().info,
-        ...user,
-      },
-    });
-  }
   return user;
 };
 
@@ -72,15 +53,6 @@ export const refreshUserRolesController = async (filter: {
   const { doc: user } = await updateUserRepo(filter, { refreshRoles: true });
 
   mergeUserInfoActiveUser(user);
-
-  if (user) { // TODO: remove
-    storeUser.mergeState({
-      info: {
-        ...storeUser.getState().info,
-        ...user,
-      },
-    });
-  }
   return user;
 };
 
@@ -110,7 +82,4 @@ export const getUserInfoController = () => {
 export const updateUserInfoController = (payload: Partial<UserInfo>) => {
   const updateUserInfoRepo = checkRepository(repo.updateUserInfo);
   updateUserInfoRepo(payload);
-
-  // TODO: remove
-  storeUser.mergeState(payload);
 };

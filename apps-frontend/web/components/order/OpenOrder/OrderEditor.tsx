@@ -1,6 +1,5 @@
+import { AccountPlanType, AccountPlatform, AccountType } from '@fishprovider/core';
 import storePrices from '@fishprovider/cross/dist/stores/prices';
-import storeUser from '@fishprovider/cross/dist/stores/user';
-import { AccountPlatform, PlanType, ProviderType } from '@fishprovider/utils/dist/constants/account';
 import { Direction, OrderStatus, OrderType } from '@fishprovider/utils/dist/constants/order';
 import { getPriceFromAmount, getVolumeFromLot } from '@fishprovider/utils/dist/helpers/price';
 import type { OrderWithoutId } from '@fishprovider/utils/dist/types/Order.model';
@@ -11,6 +10,7 @@ import BuySellIcon from '~components/order/BuySellIcon';
 import PricePips from '~components/price/PricePips';
 import SymbolsSelect from '~components/price/SymbolsSelect';
 import VolumeLots from '~components/price/VolumeLots';
+import { getUserInfoController, watchUserInfoController } from '~controllers/user.controller';
 import useConversionRate from '~hooks/useConversionRate';
 import { getSessionKey, sessionWrite } from '~libs/cache';
 import Button from '~ui/core/Button';
@@ -29,24 +29,24 @@ function OrderEditor({
   onSubmit, loading,
 }: Props) {
   const {
-    providerType = ProviderType.icmarkets,
+    accountType = AccountType.icmarkets,
     accountPlatform = AccountPlatform.ctrader,
     asset = 'USD',
     plan = [],
     balance = 0,
-    symbol,
+    symbol = 'AUDUSD',
     orderLast,
-  } = storeUser.useStore((state) => ({
-    providerType: state.activeProvider?.providerType,
-    accountPlatform: state.activeProvider?.accountPlatform,
-    asset: state.activeProvider?.asset,
-    plan: state.activeProvider?.plan,
-    balance: state.activeProvider?.balance,
+  } = watchUserInfoController((state) => ({
+    accountType: state.activeAccount?.accountType,
+    accountPlatform: state.activeAccount?.accountPlatform,
+    asset: state.activeAccount?.asset,
+    plan: state.activeAccount?.plan,
+    balance: state.activeAccount?.balance,
     symbol: state.activeSymbol,
     orderLast: state[getSessionKey('orderLast')] as OrderWithoutId | undefined,
   }));
 
-  const priceDoc = storePrices.useStore((prices) => prices[`${providerType}-${symbol}`]);
+  const priceDoc = storePrices.useStore((prices) => prices[`${accountType}-${symbol}`]);
   const rate = useConversionRate(symbol);
 
   const [orderType, setOrderType] = useState<OrderType>(orderLast?.orderType || OrderType.market);
@@ -91,7 +91,7 @@ function OrderEditor({
     if (!priceDoc) return 0;
 
     return getVolumeFromLot({
-      providerType,
+      providerType: accountType as any,
       symbol,
       prices: { [priceDoc._id]: priceDoc },
       lot: 0.01,
@@ -103,7 +103,7 @@ function OrderEditor({
     if (!priceDoc || !volume) return '';
 
     const defaultAmt = Math.max(balance / 100, 10); // 1% of balance or $10
-    const maxSLAmt = (plan.find((item) => item.type === PlanType.stopLoss)
+    const maxSLAmt = (plan.find((item) => item.type === AccountPlanType.stopLoss)
       ?.value || -defaultAmt) as number;
 
     return Math.max(0, getPriceFromAmount({
@@ -128,12 +128,12 @@ function OrderEditor({
   const takeProfit = takeProfitInput ?? defaultTP;
 
   const onOpen = async () => {
-    const providerId = storeUser.getState().activeProvider?._id || '';
+    const providerId = getUserInfoController().activeAccount?._id || '';
     const digits = priceDoc?.digits || 0;
 
     const order = {
       providerId,
-      providerType,
+      providerType: accountType,
       accountPlatform,
 
       orderType,
@@ -155,7 +155,7 @@ function OrderEditor({
     };
 
     sessionWrite('orderLast', order);
-    onSubmit(order);
+    onSubmit(order as any);
   };
 
   const renderBuySell = () => (
@@ -205,7 +205,7 @@ function OrderEditor({
 
   const renderVolumeLots = () => (
     <VolumeLots
-      providerType={providerType}
+      providerType={accountType as any}
       symbol={symbol}
       volume={volume}
       onChange={setVolumeInput}
@@ -219,7 +219,7 @@ function OrderEditor({
       return (
         <PricePips
           label="Limit price"
-          providerType={providerType}
+          providerType={accountType as any}
           symbol={symbol}
           entry={priceDoc.last}
           newPrice={+limitPrice}
@@ -253,7 +253,7 @@ function OrderEditor({
       return (
         <PricePips
           label="Stop price"
-          providerType={providerType}
+          providerType={accountType as any}
           symbol={symbol}
           entry={priceDoc.last}
           newPrice={+limitPrice}
@@ -310,7 +310,7 @@ function OrderEditor({
         {hasStopLoss && (
           <PricePips
             label="Stop Loss"
-            providerType={providerType}
+            providerType={accountType as any}
             symbol={symbol}
             entry={entry}
             newPrice={+stopLoss}
@@ -343,7 +343,7 @@ function OrderEditor({
         {hasTakeProfit && (
           <PricePips
             label="Take Profit"
-            providerType={providerType}
+            providerType={accountType as any}
             symbol={symbol}
             entry={entry}
             newPrice={+takeProfit}

@@ -12,7 +12,7 @@ function PriceView() {
   const {
     providerType = ProviderType.icmarkets,
     accountPlatform,
-    symbol = '',
+    symbol = 'AUDUSD',
   } = watchUserInfoController((state) => ({
     providerType: state.activeAccount?.accountType,
     accountPlatform: state.activeAccount?.accountPlatform,

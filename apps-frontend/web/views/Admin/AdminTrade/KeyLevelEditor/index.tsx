@@ -10,7 +10,7 @@ import KeyLevelTimeFrEditor from './KeyLevelTimeFrEditor';
 
 function KeyLevelEditor() {
   const {
-    symbol = '',
+    symbol = 'AUDUSD',
   } = watchUserInfoController((state) => ({
     symbol: state.activeSymbol,
   }));
