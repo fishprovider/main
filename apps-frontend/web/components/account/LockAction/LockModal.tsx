@@ -5,7 +5,6 @@ import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
 import storePrices from '@fishprovider/cross/dist/stores/prices';
 import { LockType, ProviderType } from '@fishprovider/utils/dist/constants/account';
-import type { User } from '@fishprovider/utils/dist/types/User.model';
 import _ from 'lodash';
 import moment from 'moment';
 import { useState } from 'react';
@@ -82,7 +81,7 @@ function LockModal({
       return;
     }
 
-    const activeUser = getUserInfoController().activeUser as User;
+    const { activeUser } = getUserInfoController();
 
     const lock = {
       type: lockType,
@@ -94,8 +93,8 @@ function LockModal({
         ? moment().add(+lockHours, 'hours').toDate()
         : moment().add(+lockDays, 'days').toDate(),
       lockMessage,
-      lockByUserId: activeUser._id,
-      lockByUserName: activeUser.name,
+      lockByUserId: activeUser?._id,
+      lockByUserName: activeUser?.name,
     };
 
     if (!(await openConfirmModal())) return;
@@ -104,7 +103,7 @@ function LockModal({
       await lockMember({
         providerId,
         userId,
-        lock,
+        lock: lock as any,
       }).then(() => {
         onClose();
       }).catch((err) => {
@@ -113,7 +112,7 @@ function LockModal({
     } else {
       await lockAccount({
         providerId,
-        lock,
+        lock: lock as any,
       }).then(() => {
         onClose();
       }).catch((err) => {
