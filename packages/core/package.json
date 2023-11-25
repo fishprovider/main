@@ -43,6 +43,7 @@
   "devDependencies": {
     "@types/amqplib": "^0.10.2",
     "@types/compression": "^1.7.3",
+    "@types/dotenv-flow": "^3.3.3",
     "@types/express-session": "^1.17.8",
     "@types/pg": "^8.10.5",
     "esbuild": "^0.19.4"
