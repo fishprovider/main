@@ -38,8 +38,8 @@ const addAccount: AccountRepository['addAccount'] = async (payload) => {
 };
 
 const removeAccount: AccountRepository['removeAccount'] = async (filter) => {
-  const account = await fishApiPost<Partial<Account> | undefined>('/account/removeAccount', filter);
-  return { doc: account };
+  await fishApiPost<Partial<Account> | undefined>('/account/removeAccount', filter);
+  return {};
 };
 
 export const FishApiAccountRepository: AccountRepository = {
