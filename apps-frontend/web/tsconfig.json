@@ -17,7 +17,7 @@
     "next-env.d.ts",
   ],
   "references": [
-    { "path": "../../packages/cross" },
-    { "path": "../../packages-frontend/store-first" },
+    { "path": "../../packages/cross/tsconfig.json" },
+    { "path": "../../packages-frontend/store-first/tsconfig.json" },
   ]
 }

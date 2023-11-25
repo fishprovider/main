@@ -25,7 +25,6 @@
     "ci-type-check": "tsc-files --noEmit"
   },
   "dependencies": {
-    "@fishprovider/cross": "*",
     "electron-updater": "6.1.5"
   },
   "devDependencies": {
