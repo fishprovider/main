@@ -1,11 +1,10 @@
+import { Account } from '@fishprovider/core';
 import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
-import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
 import { redisKeys } from '@fishprovider/utils/dist/constants/redis';
-import type { Account } from '@fishprovider/utils/dist/types/Account.model';
 import { useEffect, useRef } from 'react';
 
-import { getAccountController } from '~controllers/account.controller';
+import { getAccountController, updateAccountController } from '~controllers/account.controller';
 import { watchUserInfoController } from '~controllers/user.controller';
 import { subNotif, unsubNotif } from '~libs/pushNotif';
 import { subDoc } from '~libs/sdb';
@@ -30,8 +29,8 @@ function useAccountSocket(providerId: string) {
       const channel = redisKeys.account(providerId);
       Logger.debug('[socket] sub', channel);
       socket.emit('join', channel);
-      socket.on(channel, (doc: Account) => {
-        storeAccounts.mergeDoc(doc);
+      socket.on(channel, (doc: Partial<Account>) => {
+        updateAccountController({ accountId: providerId }, { account: doc });
       });
     } else {
       Logger.debug('Skipped useAccountSocket', providerId);
@@ -55,7 +54,7 @@ function useAccountSdb(providerId: string) {
       Logger.debug('[firestore] sub', `account/${providerId}`);
       const unsub = subDoc<Account>({
         doc: `account/${providerId}`,
-        onSnapshot: storeAccounts.mergeDoc,
+        onSnapshot: (account) => updateAccountController({ accountId: providerId }, { account }),
       });
       return unsub;
     }

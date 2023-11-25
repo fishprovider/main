@@ -14,19 +14,21 @@ const getAccount: AccountRepository['getAccount'] = async (filter) => {
 const getAccounts: AccountRepository['getAccounts'] = async (filter) => {
   const key = buildKeyAccounts(filter);
   const accounts = await localGet<Account[]>(key);
+  if (!accounts?.length) return {};
+
   return { docs: accounts };
 };
 
 const updateAccount: AccountRepository['updateAccount'] = async (filter, payload) => {
   const key = buildKeyAccount(filter);
   await localSet(key, payload.account);
-  return {};
+  return { doc: payload.account };
 };
 
 const updateAccounts: AccountRepository['updateAccounts'] = async (filter, payload) => {
   const key = buildKeyAccounts(filter);
   await localSet(key, payload.accounts);
-  return {};
+  return { docs: payload.accounts };
 };
 
 const removeAccount: AccountRepository['removeAccount'] = async (filter) => {
