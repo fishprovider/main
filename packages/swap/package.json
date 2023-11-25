@@ -22,6 +22,7 @@
     "moment": "^2.29.4"
   },
   "devDependencies": {
+    "@fishprovider/core": "*",
     "type-fest": "^4.4.0"
   }
 }

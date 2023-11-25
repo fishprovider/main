@@ -6,7 +6,7 @@
     "type-check": "tsc --noEmit",
     "test": "NODE_ENV=test DOPPLER_PROJECT=${DOPPLER_PROJECT:-web} doppler run --print-config -- jest",
     "clean": "rm -rf dist .eslintcache *.tsbuildinfo .next",
-    "prebuild": "./build-deps.sh",
+    "prebuild": "tsc -b tsconfig.build.json",
     "build": "NODE_ENV=production DOPPLER_PROJECT=${DOPPLER_PROJECT:-web} DOPPLER_CONFIG=${DOPPLER_CONFIG:-prd} doppler run --print-config -- next build",
     "postbuild": "next-sitemap",
     "build-vercel": "NODE_ENV=production && npm run prebuild && next build && npm run postbuild",

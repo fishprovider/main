@@ -9,7 +9,7 @@
     "**/*.*.ts",
   ],
   "references": [
-    { "path": "../../packages-frontend/local-first" },
-    { "path": "../../packages-frontend/store" },
+    { "path": "../../packages-frontend/local-first/tsconfig.json" },
+    { "path": "../../packages-frontend/store/tsconfig.json" },
   ]
 }

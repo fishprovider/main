@@ -9,7 +9,7 @@
     "**/*.*.ts",
   ],
   "references": [
-    { "path": "../../packages-frontend/fish-api" },
-    { "path": "../../packages-frontend/local" },
+    { "path": "../../packages-frontend/fish-api/tsconfig.json" },
+    { "path": "../../packages-frontend/local/tsconfig.json" },
   ]
 }

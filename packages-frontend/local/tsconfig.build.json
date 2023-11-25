@@ -4,6 +4,6 @@
     "../../tsconfig.build.json",
   ],
   "references": [
-    { "path": "../../packages-frontend/core-frontend" },
+    { "path": "../../packages-frontend/core-frontend/tsconfig.build.json" },
   ]
 }

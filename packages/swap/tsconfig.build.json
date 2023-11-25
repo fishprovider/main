@@ -4,9 +4,8 @@
     "../../tsconfig.build.json",
   ],
   "references": [
-    { "path": "../../packages/utils" },
-    { "path": "../../packages/binance" },
-    { "path": "../../packages/ctrader" },
-    { "path": "../../packages/metatrader" },
+    { "path": "../../packages/binance/tsconfig.build.json" },
+    { "path": "../../packages/ctrader/tsconfig.build.json" },
+    { "path": "../../packages/metatrader/tsconfig.build.json" },
   ]
 }

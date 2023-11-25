@@ -4,7 +4,7 @@
     "../../tsconfig.build.json",
   ],
   "references": [
-    { "path": "../../packages-frontend/local-first" },
-    { "path": "../../packages-frontend/store" },
+    { "path": "../../packages-frontend/local-first/tsconfig.build.json" },
+    { "path": "../../packages-frontend/store/tsconfig.build.json" },
   ]
 }

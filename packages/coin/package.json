@@ -15,5 +15,8 @@
     "@fishprovider/utils": "*",
     "axios": "^1.5.1",
     "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "@fishprovider/core": "*"
   }
 }

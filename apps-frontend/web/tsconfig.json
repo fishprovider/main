@@ -17,13 +17,7 @@
     "next-env.d.ts",
   ],
   "references": [
-    { "path": "../../packages/utils" },
-    { "path": "../../packages-share/core" },
-    { "path": "../../packages-frontend/core-frontend" },
-    { "path": "../../packages-frontend/fish-api" },
-    { "path": "../../packages-frontend/local" },
-    { "path": "../../packages-frontend/local-first" },
-    { "path": "../../packages-frontend/store" },
+    { "path": "../../packages/cross" },
     { "path": "../../packages-frontend/store-first" },
   ]
 }

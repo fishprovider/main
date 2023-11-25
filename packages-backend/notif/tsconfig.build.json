@@ -4,9 +4,9 @@
     "../../tsconfig.build.json",
   ],
   "references": [
-    { "path": "../../packages-backend/discord" },
-    { "path": "../../packages-backend/expo" },
-    { "path": "../../packages-backend/firebase" },
-    { "path": "../../packages-backend/slack" },
+    { "path": "../../packages-backend/discord/tsconfig.build.json" },
+    { "path": "../../packages-backend/expo/tsconfig.build.json" },
+    { "path": "../../packages-backend/firebase/tsconfig.build.json" },
+    { "path": "../../packages-backend/slack/tsconfig.build.json" },
   ]
 }

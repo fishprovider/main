@@ -4,7 +4,7 @@
     "../../tsconfig.build.json",
   ],
   "references": [
-    { "path": "../../packages-backend/mongo" },
-    { "path": "../../packages-backend/redis" },
+    { "path": "../../packages-backend/mongo/tsconfig.build.json" },
+    { "path": "../../packages-backend/redis/tsconfig.build.json" },
   ]
 }

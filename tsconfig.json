@@ -3,8 +3,8 @@
   // "extends": "@tsconfig/strictest/tsconfig.json",
   // "extends": "@tsconfig/node-lts/tsconfig.json",
   "extends": [
-    "@tsconfig/strictest/tsconfig",
-    "@tsconfig/node-lts/tsconfig"
+    "@tsconfig/strictest/tsconfig.json",
+    "@tsconfig/node-lts/tsconfig.json"
   ],
   "compilerOptions": {
     "composite": true,

@@ -4,8 +4,8 @@
     "../../tsconfig.build.json",
   ],
   "references": [
-    { "path": "../../packages-backend/ctrader-api" },
-    { "path": "../../packages-backend/meta-api" },
-    { "path": "../../packages-backend/metatrader-api" },
+    { "path": "../../packages-backend/ctrader-api/tsconfig.build.json" },
+    { "path": "../../packages-backend/meta-api/tsconfig.build.json" },
+    { "path": "../../packages-backend/metatrader-api/tsconfig.build.json" },
   ]
 }

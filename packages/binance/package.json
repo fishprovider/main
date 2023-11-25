@@ -18,6 +18,7 @@
     "ws": "^8.14.2"
   },
   "devDependencies": {
+    "@fishprovider/core": "*",
     "@types/crypto-js": "^4.1.2"
   }
 }

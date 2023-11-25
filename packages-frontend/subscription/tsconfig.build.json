@@ -4,6 +4,6 @@
     "../../tsconfig.build.json",
   ],
   "references": [
-    { "path": "../../packages-share/core" },
+    { "path": "../../packages-share/core/tsconfig.build.json" },
   ]
 }
