@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "lint": "eslint --cache --fix --ignore-pattern immortal-*.js .",
-    "type-check": "tsc --noEmit",
+    "type-check": "tsc -b",
     "test": "npm run test-unit",
     "test-unit": "NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules npx jest",
     "test-int": "NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules doppler run --print-config -- npx jest --runInBand",

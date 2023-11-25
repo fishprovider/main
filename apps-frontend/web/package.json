@@ -3,7 +3,7 @@
   "version": "5.0.0",
   "scripts": {
     "lint": "eslint --cache --fix .",
-    "type-check": "tsc --noEmit",
+    "type-check": "tsc -b",
     "test": "NODE_ENV=test DOPPLER_PROJECT=${DOPPLER_PROJECT:-web} doppler run --print-config -- jest",
     "clean": "rm -rf dist .eslintcache *.tsbuildinfo .next",
     "prebuild": "tsc -b tsconfig.build.json",

@@ -87,7 +87,7 @@
   "scripts": {
     "doctor": "npx expo-doctor",
     "lint": "eslint --cache --fix .",
-    "type-check": "tsc --noEmit",
+    "type-check": "tsc -b",
     "eas-build-post-install": "tsc -b tsconfig.build.json",
     "start": "NODE_ENV=development doppler run --print-config -- expo start",
     "dev": "NODE_ENV=development expo start --dev-client",

@@ -1,13 +1,16 @@
 #!/bin/bash
 
-bash ./build-deps.sh
-
 cd ..
 
-ls -1 apps-backend | while read app; do
-  npm run type-check -w apps-backend/$app
-done
+DIRS='packages
+packages-share
+packages-backend
+packages-frontend
+apps-backend
+apps-frontend'
 
-ls -1 apps-frontend | while read app; do
-  npm run type-check -w apps-frontend/$app
+for DIR in $DIRS; do
+  ls -1 $DIR | while read PROJECT; do
+    npm run type-check -w $DIR/$PROJECT
+  done
 done

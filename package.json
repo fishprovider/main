@@ -30,7 +30,6 @@
     "pm2-deploy-setup": "pm2 deploy pm2.config.cjs ${DEPLOY_ENV:-localhost} setup",
     "pm2-deploy": "pm2 deploy pm2.config.cjs ${DEPLOY_ENV:-localhost}",
     "pm2-deploy-ci": "pm2 deploy pm2.config.cjs ${DEPLOY_ENV:-localhost} exec 'source ./pm2-preload.sh; npm run ci'",
-    "pm2-deploy-build-deps": "pm2 deploy pm2.config.cjs ${DEPLOY_ENV:-localhost} exec 'source ./pm2-preload.sh; ./build-deps.sh'",
     "pm2-deploy-build": "pm2 deploy pm2.config.cjs ${DEPLOY_ENV:-localhost} exec 'source ./pm2-preload.sh; npm run build -w'",
     "pm2-deploy-start": "DOPPLER_TOKEN=$(doppler configure get token --plain) pm2 deploy pm2.config.cjs ${DEPLOY_ENV:-localhost} exec 'source ./pm2-preload.sh; npm run pm2-start'",
     "pm2-deploy-stop": "pm2 deploy pm2.config.cjs ${DEPLOY_ENV:-localhost} exec 'source ./pm2-preload.sh; npm run pm2-stop'",

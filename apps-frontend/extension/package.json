@@ -6,7 +6,7 @@
   "author": "FishProvider <admin@fishprovider.com>",
   "scripts": {
     "lint": "eslint --cache --fix .",
-    "type-check": "tsc --noEmit",
+    "type-check": "tsc -b",
     "test": "plasmo test",
     "clean": "rm -rf dist .eslintcache *.tsbuildinfo",
     "build": "plasmo build",
