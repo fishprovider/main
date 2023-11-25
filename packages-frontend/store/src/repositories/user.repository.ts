@@ -10,11 +10,11 @@ const updateUser: UserRepository['updateUser'] = async (_filter, payload) => {
   return { doc: user };
 };
 
-const watchUser: UserRepository['watchUser'] = storeUsers.useStore;
+const watchUser: UserRepository['watchUser'] = (selector) => storeUsers.useStore(selector);
 
-const watchUserInfo: UserRepository['watchUserInfo'] = storeUserInfo.useStore;
-const getUserInfo: UserRepository['getUserInfo'] = storeUserInfo.getState;
-const updateUserInfo: UserRepository['updateUserInfo'] = storeUserInfo.mergeState;
+const watchUserInfo: UserRepository['watchUserInfo'] = (selector) => storeUserInfo.useStore(selector);
+const getUserInfo: UserRepository['getUserInfo'] = () => storeUserInfo.getState();
+const updateUserInfo: UserRepository['updateUserInfo'] = (payload) => storeUserInfo.mergeState(payload);
 
 export const StoreUserRepository: UserRepository = {
   updateUser,
