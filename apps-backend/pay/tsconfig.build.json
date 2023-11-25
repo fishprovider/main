@@ -7,7 +7,7 @@
     "noEmit": true
   },
   "references": [
-    { "path": "../../packages/core" },
-    { "path": "../../packages/coin" },
+    { "path": "../../packages/core/tsconfig.build.json" },
+    { "path": "../../packages/coin/tsconfig.build.json" },
   ]
 }

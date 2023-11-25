@@ -10,10 +10,9 @@
   },
   "include": ["**/*.ts"],
   "references": [
-    { "path": "../../packages/core" },
-    { "path": "../../packages/swap" },
-    { "path": "../../packages/coin" },
-    { "path": "../../packages-backend/cache-first" },
-    { "path": "../../packages-backend/trade" },
+    { "path": "../../packages/swap/tsconfig.json" },
+    { "path": "../../packages/coin/tsconfig.json" },
+    { "path": "../../packages-backend/cache-first/tsconfig.json" },
+    { "path": "../../packages-backend/trade/tsconfig.json" },
   ]
 }

@@ -7,6 +7,6 @@
     "noEmit": true
   },
   "references": [
-    { "path": "../../packages/core" },
+    { "path": "../../packages/core/tsconfig.build.json" },
   ]
 }

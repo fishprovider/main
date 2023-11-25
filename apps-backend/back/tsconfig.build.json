@@ -7,10 +7,10 @@
     "noEmit": true
   },
   "references": [
-    { "path": "../../packages/core" },
-    { "path": "../../packages/swap" },
-    { "path": "../../packages/coin" },
-    { "path": "../../packages-backend/cache-first" },
-    { "path": "../../packages-backend/trade" },
+    { "path": "../../packages/core/tsconfig.build.json" },
+    { "path": "../../packages/swap/tsconfig.build.json" },
+    { "path": "../../packages/coin/tsconfig.build.json" },
+    { "path": "../../packages-backend/cache-first/tsconfig.build.json" },
+    { "path": "../../packages-backend/trade/tsconfig.build.json" },
   ]
 }
