@@ -6,9 +6,9 @@
     "type-check": "tsc -b",
     "test": "NODE_ENV=test DOPPLER_PROJECT=${DOPPLER_PROJECT:-web} doppler run --print-config -- jest",
     "clean": "rm -rf dist .eslintcache *.tsbuildinfo .next",
-    "prebuild": "tsc -b tsconfig.build.json",
+    "prebuild": "tsc -b tsconfig.build.json && ../../scripts/pre-build.sh",
     "build": "NODE_ENV=production DOPPLER_PROJECT=${DOPPLER_PROJECT:-web} DOPPLER_CONFIG=${DOPPLER_CONFIG:-prd} doppler run --print-config -- next build",
-    "postbuild": "../../scripts/post-build.sh && next-sitemap",
+    "postbuild": "next-sitemap",
     "build-vercel": "NODE_ENV=production && npm run prebuild && next build && npm run postbuild",
     "start": "NODE_ENV=production DOPPLER_PROJECT=${DOPPLER_PROJECT:-web} DOPPLER_CONFIG=${DOPPLER_CONFIG:-prd} doppler run --print-config -- next start",
     "export": "NODE_ENV=production DOPPLER_PROJECT=${DOPPLER_PROJECT:-web} DOPPLER_CONFIG=${DOPPLER_CONFIG:-prd} doppler run --print-config -- next export",
@@ -89,5 +89,10 @@
     "recharts": "^2.8.0",
     "sharp": "^0.32.6",
     "socket.io-client": "^4.7.2"
+  },
+  "devDependencies": {
+    "@types/d3-format": "^3.0.4",
+    "@types/d3-time-format": "^4.0.3",
+    "@types/lqip-modern": "^1.1.7"
   }
 }

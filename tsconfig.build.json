@@ -13,5 +13,6 @@
     "**/dev",
     "**/tests",
     "**/*.test.ts",
+    "**/*.test.tsx",
   ]
 }

@@ -11,7 +11,6 @@
     "native-android": "expo run:android",
     "native-ios": "expo run:ios",
     "build": "tsc -b tsconfig.build.json",
-    "postbuild": "../../scripts/post-build.sh",
     "eas-build-pre-install": "./clean-deps.sh",
     "eas-build-post-install": "npm run build",
     "prebuild-local-android": "rm -rf *.aab",
