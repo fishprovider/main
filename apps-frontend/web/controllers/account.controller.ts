@@ -1,10 +1,9 @@
+import { ClientOnlyAccountRepository } from '@fishprovider/client-only';
 import {
   Account, AccountActivity, AccountBannerStatus, AccountConfig, AccountPlatform,
   AccountProtectSettings, AccountSettings, AccountTradeSettings, AccountTradeType,
   AccountViewType, checkRepository, ProviderType,
 } from '@fishprovider/core';
-import { LocalAccountRepository } from '@fishprovider/local';
-import { StoreAccountRepository } from '@fishprovider/store';
 import { StoreFirstAccountRepository } from '@fishprovider/store-first';
 
 const repo = StoreFirstAccountRepository;
@@ -63,11 +62,9 @@ export const updateAccountController = async (
 ) => {
   const { account: accountUpdate, ...rest } = payload;
   if (accountUpdate) {
-    const updateAccountLocalRepo = checkRepository(LocalAccountRepository.updateAccount);
-    const updateAccountStoreRepo = checkRepository(StoreAccountRepository.updateAccount);
-    const { doc: accountLocal } = await updateAccountLocalRepo(filter, { account: accountUpdate });
-    const { doc: accountStore } = await updateAccountStoreRepo(filter, { account: accountUpdate });
-    return accountLocal || accountStore;
+    const updateAccountRepo = checkRepository(ClientOnlyAccountRepository.updateAccount);
+    const { doc: account } = await updateAccountRepo(filter, { account: accountUpdate });
+    return account;
   }
 
   const updateAccountRepo = checkRepository(repo.updateAccount);
