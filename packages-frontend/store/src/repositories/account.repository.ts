@@ -39,10 +39,13 @@ const removeAccount: AccountRepository['removeAccount'] = async (filter) => {
   return {};
 };
 
+const watchAccount: AccountRepository['watchAccount'] = (selector) => storeAccounts.useStore(selector);
+
 export const StoreAccountRepository: AccountRepository = {
   getAccount,
   getAccounts,
   updateAccount,
   updateAccounts,
   removeAccount,
+  watchAccount,
 };
