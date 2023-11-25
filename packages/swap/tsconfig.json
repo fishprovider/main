@@ -10,8 +10,8 @@
   },
   "include": ["**/*.ts"],
   "references": [
-    { "path": "../../packages/binance/tsconfig.json" },
-    { "path": "../../packages/ctrader/tsconfig.json" },
-    { "path": "../../packages/metatrader/tsconfig.json" },
+    { "path": "../../packages/binance/tsconfig.build.json" },
+    { "path": "../../packages/ctrader/tsconfig.build.json" },
+    { "path": "../../packages/metatrader/tsconfig.build.json" },
   ]
 }

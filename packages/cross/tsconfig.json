@@ -13,6 +13,6 @@
   },
   "include": ["**/*.ts", "**/*.tsx"],
   "references": [
-    { "path": "../../packages/utils/tsconfig.json" },
+    { "path": "../../packages/utils/tsconfig.build.json" },
   ]
 }

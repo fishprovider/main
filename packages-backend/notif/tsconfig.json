@@ -6,9 +6,9 @@
   },
   "include": ["**/*.ts"],
   "references": [
-    { "path": "../../packages-backend/discord/tsconfig.json" },
-    { "path": "../../packages-backend/expo/tsconfig.json" },
-    { "path": "../../packages-backend/firebase/tsconfig.json" },
-    { "path": "../../packages-backend/slack/tsconfig.json" },
+    { "path": "../../packages-backend/discord/tsconfig.build.json" },
+    { "path": "../../packages-backend/expo/tsconfig.build.json" },
+    { "path": "../../packages-backend/firebase/tsconfig.build.json" },
+    { "path": "../../packages-backend/slack/tsconfig.build.json" },
   ]
 }

@@ -21,7 +21,7 @@ export default function Strategies() {
   const providerIds = storeAccounts.useStore((state) => _.orderBy(
     _.filter(state, (account) => {
       if (!account.strategyId) return false;
-      if (account.providerGroupId && account.providerGroupId !== account._id) return false;
+      if (account.groupId && account.groupId !== account._id) return false;
       // if (favorite && !starProviders[account._id]) return false;
       // if (search && !account.name.toLowerCase().includes(search.toLowerCase())) return false;
       return true;
