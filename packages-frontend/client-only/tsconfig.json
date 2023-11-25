@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist",
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.*.ts",
+  ],
+  "references": [
+    { "path": "../../packages-frontend/local/tsconfig.build.json" },
+    { "path": "../../packages-frontend/store/tsconfig.build.json" },
+  ]
+}

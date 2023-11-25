@@ -1,0 +1,20 @@
+{
+  "name": "@fishprovider/client-only",
+  "version": "7.0.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "lint": "eslint --cache --fix .",
+    "type-check": "tsc -b",
+    "test": "jest --passWithNoTests",
+    "clean": "rm -rf dist .eslintcache *.tsbuildinfo",
+    "build": "tsc -b tsconfig.build.json",
+    "ci-lint": "eslint --cache --fix",
+    "ci-type-check": "tsc-files --noEmit"
+  },
+  "dependencies": {
+    "@fishprovider/local": "*",
+    "@fishprovider/store": "*"
+  }
+}
