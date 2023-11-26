@@ -10,6 +10,7 @@
   },
   "include": ["**/*.ts"],
   "references": [
+    { "path": "../../packages/core/tsconfig.build.json" },
     { "path": "../../packages/coin/tsconfig.build.json" },
   ]
 }
