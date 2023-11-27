@@ -18,7 +18,6 @@ config.watchFolders = [
   path.resolve(workspaceRoot, 'packages-frontend', 'local-first'),
   path.resolve(workspaceRoot, 'packages-frontend', 'store'),
   path.resolve(workspaceRoot, 'packages-frontend', 'store-first'),
-  path.resolve(workspaceRoot, 'packages-frontend', 'client-only'),
 ];
 
 config.resolver.nodeModulesPaths = [
