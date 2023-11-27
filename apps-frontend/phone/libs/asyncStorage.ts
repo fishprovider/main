@@ -18,7 +18,7 @@ export const localForageDriver: LocalForageDriver = {
   length: () => AsyncStorage.getAllKeys().then((keys) => keys.length),
   key: async (keyIndex: number) => {
     const keys = await AsyncStorage.getAllKeys();
-    return keys[keyIndex];
+    return keys[keyIndex] || '';
   },
   keys: async () => {
     const allKeys = await AsyncStorage.getAllKeys();
