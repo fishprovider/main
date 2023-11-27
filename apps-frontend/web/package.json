@@ -7,7 +7,7 @@
     "test": "NODE_ENV=test DOPPLER_PROJECT=${DOPPLER_PROJECT:-web} doppler run --print-config -- jest",
     "clean": "rm -rf dist .eslintcache *.tsbuildinfo .next",
     "prebuild": "tsc -b tsconfig.build.json && ../../scripts/pre-build.sh",
-    "build": "DOPPLER_PROJECT=${DOPPLER_PROJECT:-web} DOPPLER_CONFIG=${DOPPLER_CONFIG:-prd} doppler run --print-config -- npm run build",
+    "build": "DOPPLER_PROJECT=${DOPPLER_PROJECT:-web} DOPPLER_CONFIG=${DOPPLER_CONFIG:-prd} doppler run --print-config -- next build",
     "postbuild": "next-sitemap",
     "build-pre-install": "./clean-deps.sh",
     "vercel-ignore": "bash vercel-build.sh",
