@@ -13,7 +13,7 @@
     "build-pre-install": "./clean-deps.sh",
     "prebuild": "tsc -b tsconfig.build.json && ../../scripts/pre-build.sh",
     "eas-build-pre-install": "if [ $CI != 'true' ]; then npm run build-pre-install; else echo 'Skipped eas-build-pre-install'; fi",
-    "eas-build-post-install": "if [ $CI != 'true' ]; then npm run build; else echo 'Skipped eas-build-post-install'; fi",
+    "eas-build-post-install": "if [ $CI != 'true' ]; then npm run prebuild; else echo 'Skipped eas-build-post-install'; fi",
     "prebuild-local-android": "rm -rf *.aab",
     "build-local-android": "npx eas-cli@latest build --local --non-interactive --profile ${BUILD_PROFILE:-production} -p android",
     "prebuild-local-ios": "rm -rf *.ipa",
