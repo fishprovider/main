@@ -12,7 +12,7 @@
     "build-pre-install": "./clean-deps.sh",
     "vercel-ignore": "bash vercel-build.sh",
     "vercel-install": "npm run build-pre-install && npm i",
-    "vercel-build": "NODE_ENV=production next build",
+    "vercel-build": "npm run prebuild && NODE_ENV=production next build",
     "start": "NODE_ENV=production DOPPLER_PROJECT=${DOPPLER_PROJECT:-web} DOPPLER_CONFIG=${DOPPLER_CONFIG:-prd} doppler run --print-config -- next start",
     "export": "NODE_ENV=production DOPPLER_PROJECT=${DOPPLER_PROJECT:-web} DOPPLER_CONFIG=${DOPPLER_CONFIG:-prd} doppler run --print-config -- next export",
     "dev": "NODE_ENV=development DOPPLER_PROJECT=${DOPPLER_PROJECT:-web} doppler run --print-config -- next dev",
