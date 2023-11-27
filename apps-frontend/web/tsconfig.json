@@ -2,6 +2,7 @@
   "extends": "../../tsconfig.frontend.json",
   "compilerOptions": {
     "incremental": true,
+
     "baseUrl": ".",
     "paths": {
       "~*": ["./*"],
