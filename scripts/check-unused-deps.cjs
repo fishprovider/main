@@ -14,7 +14,6 @@ const ACTIVE_DEV_DEPS = [
   '@tsconfig/node-lts-strictest-esm',
   '@types/jest',
   '@types/node',
-  '@types/node-telegram-bot-api',
   '@typescript-eslint/eslint-plugin',
   '@typescript-eslint/parser',
   'concurrently',
