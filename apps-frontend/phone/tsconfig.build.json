@@ -3,9 +3,6 @@
     "./tsconfig.json",
     "../../tsconfig.build.json",
   ],
-  "compilerOptions": {
-    "noEmit": true
-  },
   "references": [
     { "path": "../../packages/cross/tsconfig.build.json" },
     { "path": "../../packages-frontend/store-first/tsconfig.build.json" },
