@@ -5,7 +5,7 @@
     - cd apps-frontend/phone
     - npm run build-pre-install
     - npm i --prefer-offline --no-audit --no-progress --legacy-peer-deps --cache ~/.npm
-    - npm run build
+    - npm run prebuild
     - npm run build-local-android
     - npm run submit-local-android
 
@@ -16,7 +16,7 @@
     - cd apps-frontend/phone
     - npm run build-pre-install
     - npm i --prefer-offline --no-audit --no-progress --legacy-peer-deps --cache ~/.npm
-    - npm run build
+    - npm run prebuild
     - npm run build-local-ios
     - npm run submit-local-ios
 
@@ -27,7 +27,7 @@
     - cd apps-frontend/phone
     - npm run build-pre-install
     - npm i --prefer-offline --no-audit --no-progress --legacy-peer-deps --cache ~/.npm
-    - npm run build
+    - npm run prebuild
     - npm run deploy-update
 
 .build-phone-development-android:
@@ -37,7 +37,7 @@
     - cd apps-frontend/phone
     - npm run build-pre-install
     - npm i --prefer-offline --no-audit --no-progress --legacy-peer-deps --cache ~/.npm
-    - npm run build
+    - npm run prebuild
     - EAS_LOCAL_BUILD_ARTIFACTS_DIR=~/work/fish/artifacts BUILD_PROFILE=development npm run build-local-android
 
 .build-phone-development-ios:
@@ -47,7 +47,7 @@
     - cd apps-frontend/phone
     - npm run build-pre-install
     - npm i --prefer-offline --no-audit --no-progress --legacy-peer-deps --cache ~/.npm
-    - npm run build
+    - npm run prebuild
     - EAS_LOCAL_BUILD_ARTIFACTS_DIR=~/work/fish/artifacts BUILD_PROFILE=development npm run build-local-ios
 
 .build-web:
