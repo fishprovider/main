@@ -1,14 +1,14 @@
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import UserNav from '~components/UserNav';
-import UserController from '~controllers/UserController';
+import UserProvider from '~providers/UserProvider';
 import DemoDrawer from '~views/DemoDrawer';
 
 const Drawer = createDrawerNavigator();
 
 export default function WalletNavigator() {
   return (
-    <UserController>
+    <UserProvider>
       <Drawer.Navigator screenOptions={{
         headerRight: UserNav,
         sceneContainerStyle: {
@@ -37,6 +37,6 @@ export default function WalletNavigator() {
           component={DemoDrawer}
         />
       </Drawer.Navigator>
-    </UserController>
+    </UserProvider>
   );
 }

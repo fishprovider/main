@@ -6,7 +6,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-function UserController({ children }: Props) {
+function UserProvider({ children }: Props) {
   const isServerLoggedIn = storeUser.useStore((state) => state.isServerLoggedIn);
 
   if (!isServerLoggedIn) {
@@ -21,4 +21,4 @@ function UserController({ children }: Props) {
   );
 }
 
-export default UserController;
+export default UserProvider;

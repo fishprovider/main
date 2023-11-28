@@ -17,7 +17,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-export default function BaseController({ children }: Props) {
+export default function BaseProvider({ children }: Props) {
   const [loaded, error] = useFonts({
     FontAwesome: require('../../assets/fonts/FontAwesome.ttf'),
     Inter: require('../../assets/fonts/Inter-Medium.otf'),

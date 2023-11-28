@@ -1,6 +1,6 @@
 import { createStackNavigator } from '@react-navigation/stack';
 
-import BaseController from '~controllers/BaseController';
+import BaseProvider from '~providers/BaseProvider';
 import User from '~views/User';
 
 import BottomTabsNavigator from './BottomTabsNavigator';
@@ -9,7 +9,7 @@ const Stack = createStackNavigator();
 
 export default function RootNavigator() {
   return (
-    <BaseController>
+    <BaseProvider>
       <Stack.Navigator>
         <Stack.Screen
           name="Home"
@@ -27,6 +27,6 @@ export default function RootNavigator() {
           }}
         />
       </Stack.Navigator>
-    </BaseController>
+    </BaseProvider>
   );
 }

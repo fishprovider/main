@@ -7,7 +7,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-function StrategyController({ providerId, children }: Props) {
+function StrategyProvider({ providerId, children }: Props) {
   const activeProviderId = storeUser.useStore((state) => state.activeProvider?._id);
   return (
     <>
@@ -17,4 +17,4 @@ function StrategyController({ providerId, children }: Props) {
   );
 }
 
-export default StrategyController;
+export default StrategyProvider;
