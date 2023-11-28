@@ -3,28 +3,33 @@
 .deploy-phone-android:
   script:
     - cd apps-frontend/phone
+    - npm i --prefer-offline --no-audit --no-progress --legacy-peer-deps --cache ~/.npm
     - npm run build-local-android
     - npm run submit-local-android
 
 .deploy-phone-ios:
   script:
     - cd apps-frontend/phone
+    - npm i --prefer-offline --no-audit --no-progress --legacy-peer-deps --cache ~/.npm
     - npm run build-local-ios
     - npm run submit-local-ios
 
 .build-phone-development-android:
   script:
     - cd apps-frontend/phone
+    - npm i --prefer-offline --no-audit --no-progress --legacy-peer-deps --cache ~/.npm
     - EAS_LOCAL_BUILD_ARTIFACTS_DIR=~/work/fish/artifacts BUILD_PROFILE=development npm run build-local-android
 
 .build-phone-development-ios:
   script:
     - cd apps-frontend/phone
+    - npm i --prefer-offline --no-audit --no-progress --legacy-peer-deps --cache ~/.npm
     - EAS_LOCAL_BUILD_ARTIFACTS_DIR=~/work/fish/artifacts BUILD_PROFILE=development npm run build-local-ios
 
 .deploy-phone-update:
   script:
     - cd apps-frontend/phone
+    - npm i --prefer-offline --no-audit --no-progress --legacy-peer-deps --cache ~/.npm
     - npm run deploy-update
 
 # --- web ---
