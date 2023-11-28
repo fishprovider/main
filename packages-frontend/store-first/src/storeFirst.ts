@@ -1,13 +1,12 @@
 import { log } from '@fishprovider/core';
-import { initFishApi } from '@fishprovider/fish-api';
-import { initLocal, LocalForageDriver } from '@fishprovider/local';
+import { LocalForageDriver } from '@fishprovider/local';
+import { initLocalFirst } from '@fishprovider/local-first';
 
-export const initStoreFirst = (params: {
+export const initStoreFirst = async (params: {
   baseURL?: string,
   driver?: LocalForageDriver,
 }) => {
   log.info('Starting initStoreFirst');
-  initFishApi(params);
-  initLocal(params);
+  await initLocalFirst(params);
   log.info('Started initStoreFirst');
 };

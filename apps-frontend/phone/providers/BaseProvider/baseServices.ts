@@ -6,11 +6,10 @@ import { initStoreFirst } from '@fishprovider/store-first';
 import { initAuth } from '~libs/auth';
 import { initNotif } from '~libs/pushNotif';
 
-const initialize = () => {
-  const driver = driverWithDefaultSerialization();
-  initStoreFirst({
+const initialize = async () => {
+  await initStoreFirst({
     baseURL: `${process.env.EXPO_PUBLIC_BACKEND_URL}/api/v3`,
-    driver,
+    driver: driverWithDefaultSerialization(),
   });
 
   initApi({
