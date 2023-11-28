@@ -7,9 +7,10 @@ import { initAuth } from '~libs/auth';
 import { initNotif } from '~libs/pushNotif';
 
 const initialize = () => {
+  const driver = driverWithDefaultSerialization();
   initStoreFirst({
     baseURL: `${process.env.EXPO_PUBLIC_BACKEND_URL}/api/v3`,
-    driver: driverWithDefaultSerialization(),
+    driver,
   });
 
   initApi({
