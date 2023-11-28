@@ -1,4 +1,4 @@
-import { getMajorPairs, ProviderType } from '@fishprovider/core';
+import { getMajorPairs, getRoleProvider, ProviderType } from '@fishprovider/core';
 import orderGetMany from '@fishprovider/cross/dist/api/orders/getMany';
 import orderGetManyInfo from '@fishprovider/cross/dist/api/orders/getManyInfo';
 import orderRemove from '@fishprovider/cross/dist/api/orders/remove';
@@ -7,7 +7,6 @@ import storePrices from '@fishprovider/cross/dist/stores/prices';
 import { OrderStatus } from '@fishprovider/utils/dist/constants/order';
 import { getEntry } from '@fishprovider/utils/dist/helpers/order';
 import { getDiffPips } from '@fishprovider/utils/dist/helpers/price';
-import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
 import type { Order } from '@fishprovider/utils/dist/types/Order.model';
 import _ from 'lodash';
 import { useState } from 'react';

@@ -1,6 +1,6 @@
+import { getRoleProvider } from '@fishprovider/core';
 import orderRemove from '@fishprovider/cross/dist/api/orders/remove';
 import { useMutate } from '@fishprovider/cross/dist/libs/query';
-import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
 import type { Order } from '@fishprovider/utils/dist/types/Order.model';
 import type { Price } from '@fishprovider/utils/dist/types/Price.model';
 import _ from 'lodash';

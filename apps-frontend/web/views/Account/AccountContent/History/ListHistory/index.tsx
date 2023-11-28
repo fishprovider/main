@@ -1,3 +1,4 @@
+import { ProviderType } from '@fishprovider/core';
 import orderGetHistory from '@fishprovider/cross/dist/api/orders/getHistory';
 import orderGetManyInfo from '@fishprovider/cross/dist/api/orders/getManyInfo';
 import priceGetMany from '@fishprovider/cross/dist/api/prices/getMany';
@@ -5,7 +6,6 @@ import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useMutate, useQuery } from '@fishprovider/cross/dist/libs/query';
 import storeOrders from '@fishprovider/cross/dist/stores/orders';
 import storePrices from '@fishprovider/cross/dist/stores/prices';
-import { ProviderType } from '@fishprovider/utils/dist/constants/account';
 import { OrderStatus } from '@fishprovider/utils/dist/constants/order';
 import { getProfitIcon } from '@fishprovider/utils/dist/helpers/order';
 import { getLotFromVolume, getMajorPairs } from '@fishprovider/utils/dist/helpers/price';

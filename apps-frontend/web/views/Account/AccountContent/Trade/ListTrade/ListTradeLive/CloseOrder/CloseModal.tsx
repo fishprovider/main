@@ -1,8 +1,8 @@
+import { AccountLockType } from '@fishprovider/core';
 import lockAccount from '@fishprovider/cross/dist/api/accounts/lock/account';
 import orderAdd from '@fishprovider/cross/dist/api/orders/add';
 import orderRemove from '@fishprovider/cross/dist/api/orders/remove';
 import { useMutate } from '@fishprovider/cross/dist/libs/query';
-import { LockType } from '@fishprovider/utils/dist/constants/account';
 import { OrderStatus, OrderType } from '@fishprovider/utils/dist/constants/order';
 import type { Order } from '@fishprovider/utils/dist/types/Order.model';
 import _ from 'lodash';
@@ -92,7 +92,7 @@ function CloseModal({
     const user = getUserInfoController().activeUser;
 
     const lockNew = {
-      type: LockType.open,
+      type: AccountLockType.open,
       lockFrom: new Date(),
       lockUntil: moment().add(+lockHours, 'hours').toDate(),
       lockMessage: 'Short break after closing order',
@@ -100,7 +100,7 @@ function CloseModal({
       lockByUserName: user?.name || '',
     };
     await new Promise((resolve) => {
-      lockAcc({ providerId: order.providerId, lock: lockNew }, {
+      lockAcc({ providerId: order.providerId, lock: lockNew as any }, {
         onSuccess: () => resolve(true),
         onError: (err) => {
           toastError(`${err}`);

@@ -1,5 +1,4 @@
-import { Account } from '@fishprovider/core';
-import { AccountPlatform, ProviderType } from '@fishprovider/utils/dist/constants/account';
+import { Account, AccountPlatform, ProviderType } from '@fishprovider/core';
 import _ from 'lodash';
 
 import Link from '~components/base/Link';

@@ -1,4 +1,4 @@
-import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
+import { getRoleProvider } from '@fishprovider/core';
 import { useState } from 'react';
 
 import { updateAccountController } from '~controllers/account.controller';

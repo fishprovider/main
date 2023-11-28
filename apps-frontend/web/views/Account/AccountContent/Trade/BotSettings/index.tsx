@@ -1,4 +1,4 @@
-import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
+import { getRoleProvider } from '@fishprovider/core';
 
 import BotChips from '~components/account/BotChips';
 import { watchUserInfoController } from '~controllers/user.controller';

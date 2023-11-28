@@ -1,4 +1,4 @@
-import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
+import { getRoleProvider } from '@fishprovider/core';
 import moment from 'moment';
 import { useState } from 'react';
 

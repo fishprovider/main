@@ -1,4 +1,4 @@
-import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
+import { getRoleProvider } from '@fishprovider/core';
 
 import { watchUserInfoController } from '~controllers/user.controller';
 import StrategyProvider from '~providers/StrategyProvider';

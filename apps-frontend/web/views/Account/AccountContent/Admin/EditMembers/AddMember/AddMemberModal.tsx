@@ -1,5 +1,5 @@
+import { AccountRole } from '@fishprovider/core';
 import membersAdd from '@fishprovider/cross/dist/api/accounts/members/add';
-import { Roles } from '@fishprovider/utils/dist/constants/user';
 import { useState } from 'react';
 
 import { ProviderRoleText } from '~constants/account';
@@ -23,7 +23,7 @@ function AddMemberModal({ onClose }: Props) {
   }));
 
   const [email, setEmail] = useState('');
-  const [role, setRole] = useState(Roles.viewer);
+  const [role, setRole] = useState(AccountRole.viewer);
 
   const onSave = async () => {
     if (!(await openConfirmModal())) return;
@@ -31,7 +31,7 @@ function AddMemberModal({ onClose }: Props) {
     await membersAdd({
       providerId,
       email,
-      role,
+      role: role as any,
     }).then(() => {
       if (onClose) onClose();
     });
@@ -48,10 +48,10 @@ function AddMemberModal({ onClose }: Props) {
         value={role}
         onChange={(value) => {
           if (!value) return;
-          setRole(value as Roles);
+          setRole(value as AccountRole);
         }}
         label="Role"
-        data={Object.keys(Roles).map((item) => ({
+        data={Object.keys(AccountRole).map((item) => ({
           value: item,
           label: ProviderRoleText[item]?.text,
         }))}

@@ -1,4 +1,4 @@
-import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
+import { getRoleProvider } from '@fishprovider/core';
 import { useRouter } from 'next/router';
 
 import Link from '~components/base/Link';

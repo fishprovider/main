@@ -1,4 +1,4 @@
-import { AccountViewType } from '@fishprovider/utils/dist/constants/account';
+import { AccountViewType } from '@fishprovider/core';
 import _ from 'lodash';
 import moment from 'moment';
 import type React from 'react';

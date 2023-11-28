@@ -1,5 +1,4 @@
-import { AccountLock } from '@fishprovider/core';
-import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
+import { AccountLock, getRoleProvider } from '@fishprovider/core';
 import moment from 'moment';
 
 import LockTypeInfo from '~components/account/LockTypeInfo';

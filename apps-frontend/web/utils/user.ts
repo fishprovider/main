@@ -1,6 +1,6 @@
+import { User } from '@fishprovider/core';
 import userLogin from '@fishprovider/cross/dist/api/user/login';
 import userLogout from '@fishprovider/cross/dist/api/user/logout';
-import type { User } from '@fishprovider/utils/dist/types/User.model';
 
 import { updateUserController, updateUserInfoController } from '~controllers/user.controller';
 import { cacheWrite } from '~libs/cache';

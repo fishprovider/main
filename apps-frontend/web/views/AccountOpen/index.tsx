@@ -1,4 +1,4 @@
-import { ProviderType } from '@fishprovider/utils/dist/constants/account';
+import { ProviderType } from '@fishprovider/core';
 import { useState } from 'react';
 
 import { ProviderTypePrice, ProviderTypeText } from '~constants/account';

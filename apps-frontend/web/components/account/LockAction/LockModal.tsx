@@ -1,10 +1,10 @@
+import { AccountLockType, ProviderType } from '@fishprovider/core';
 import lockAccount from '@fishprovider/cross/dist/api/accounts/lock/account';
 import lockMember from '@fishprovider/cross/dist/api/accounts/lock/member';
 import priceGetNames from '@fishprovider/cross/dist/api/prices/getNames';
 import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
 import storePrices from '@fishprovider/cross/dist/stores/prices';
-import { LockType, ProviderType } from '@fishprovider/utils/dist/constants/account';
 import _ from 'lodash';
 import moment from 'moment';
 import { useState } from 'react';
@@ -55,7 +55,7 @@ function LockModal({
     (item) => item.providerType === providerType,
   ).map((item) => item.symbol).sort());
 
-  const [lockType, setLockType] = useState(LockType.open);
+  const [lockType, setLockType] = useState(AccountLockType.open);
   const [lockPairs, setLockPairs] = useState<string[]>([]);
   const [lockPeriod, setLockPeriod] = useState('hours');
   const [lockHours, setLockHours] = useState<number | string>(8);
@@ -85,7 +85,7 @@ function LockModal({
 
     const lock = {
       type: lockType,
-      ...(lockType === LockType.pairs && {
+      ...(lockType === AccountLockType.pairs && {
         value: lockPairs,
       }),
       lockFrom: new Date(),
@@ -126,16 +126,16 @@ function LockModal({
       <Select
         label="Type"
         value={lockType}
-        onChange={(value: LockType) => {
+        onChange={(value: AccountLockType) => {
           if (!value) return;
           setLockType(value);
         }}
-        data={Object.values(LockType).map((item) => ({
+        data={Object.values(AccountLockType).map((item) => ({
           value: item,
           label: LockTypeText[item],
         }))}
       />
-      {lockType === LockType.pairs && (
+      {lockType === AccountLockType.pairs && (
         <MultiSelect
           label="Pairs"
           data={allSymbols}

@@ -1,6 +1,6 @@
+import { getRoleProvider } from '@fishprovider/core';
 import storeOrders from '@fishprovider/cross/dist/stores/orders';
 import { OrderStatus } from '@fishprovider/utils/dist/constants/order';
-import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
 import _ from 'lodash';
 import dynamic from 'next/dynamic';
 

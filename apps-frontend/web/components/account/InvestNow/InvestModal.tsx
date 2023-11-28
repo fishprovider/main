@@ -1,4 +1,4 @@
-import { AccountPlatform } from '@fishprovider/utils/dist/constants/account';
+import { AccountPlatform } from '@fishprovider/core';
 import _ from 'lodash';
 import { useState } from 'react';
 

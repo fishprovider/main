@@ -1,4 +1,4 @@
-import type { User } from '@fishprovider/utils/dist/types/User.model';
+import { User } from '@fishprovider/core';
 import type { FirebaseError } from 'firebase/app';
 import { initializeApp } from 'firebase/app';
 import {

@@ -1,12 +1,11 @@
+import { getRoleProvider, ProviderType } from '@fishprovider/core';
 import orderGetIdea from '@fishprovider/cross/dist/api/orders/getIdea';
 import { useMutate } from '@fishprovider/cross/dist/libs/query';
 import storeOrders from '@fishprovider/cross/dist/stores/orders';
 import storePrices from '@fishprovider/cross/dist/stores/prices';
-import { ProviderType } from '@fishprovider/utils/dist/constants/account';
 import { OrderStatus } from '@fishprovider/utils/dist/constants/order';
 import { getProfit } from '@fishprovider/utils/dist/helpers/order';
 import { getMajorPairs } from '@fishprovider/utils/dist/helpers/price';
-import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
 import _ from 'lodash';
 
 import { watchUserInfoController } from '~controllers/user.controller';

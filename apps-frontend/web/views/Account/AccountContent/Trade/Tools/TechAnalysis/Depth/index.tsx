@@ -69,8 +69,8 @@ import Title from '~ui/core/Title';
 // };
 
 // function Depth({ symbol }) {
-//   const activeProvider = useStore((states) => states.user.activeProvider);
-//   const { providerType } = activeProvider;
+//   const activeAccount = useStore((states) => states.user.activeAccount);
+//   const { providerType } = activeAccount;
 //   const depth = useStore((states) => states.depths[symbol]);
 //   const { bids, asks } = useQuotes(depth);
 

@@ -1,4 +1,4 @@
-import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
+import { getRoleProvider } from '@fishprovider/core';
 import type { Order } from '@fishprovider/utils/dist/types/Order.model';
 import type { Price } from '@fishprovider/utils/dist/types/Price.model';
 

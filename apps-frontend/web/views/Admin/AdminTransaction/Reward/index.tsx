@@ -1,5 +1,5 @@
+import { getRoleProvider } from '@fishprovider/core';
 import { apiPost } from '@fishprovider/cross/dist/libs/api';
-import { getRoleProvider } from '@fishprovider/utils/dist/helpers/user';
 import React, { useState } from 'react';
 
 import { watchUserInfoController } from '~controllers/user.controller';

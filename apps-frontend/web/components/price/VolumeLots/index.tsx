@@ -1,5 +1,5 @@
+import type { ProviderType } from '@fishprovider/core';
 import storePrices from '@fishprovider/cross/dist/stores/prices';
-import type { ProviderType } from '@fishprovider/utils/dist/constants/account';
 import { getLotFromVolume, getVolumeFromLot } from '@fishprovider/utils/dist/helpers/price';
 import { useEffect, useState } from 'react';
 

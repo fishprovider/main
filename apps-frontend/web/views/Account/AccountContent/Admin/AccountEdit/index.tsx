@@ -1,4 +1,4 @@
-import { AccountViewType } from '@fishprovider/utils/dist/constants/account';
+import { AccountViewType } from '@fishprovider/core';
 import { useState } from 'react';
 
 import { AccountViewTypeText } from '~constants/account';

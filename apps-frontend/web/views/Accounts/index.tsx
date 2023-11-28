@@ -1,4 +1,4 @@
-import { Roles } from '@fishprovider/utils/dist/constants/user';
+import { AccountRole } from '@fishprovider/core';
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
 
@@ -16,10 +16,10 @@ const AccountsFetch = dynamic(() => import('./AccountsFetch'));
 const TradeCards = dynamic(() => import('./TradeCards'));
 
 const filterItems = [
-  { key: `role-${Roles.admin}`, label: 'Role Admin' },
-  { key: `role-${Roles.trader}`, label: 'Role Trader' },
-  { key: `role-${Roles.protector}`, label: 'Role Protector' },
-  { key: `role-${Roles.viewer}`, label: 'Role Viewer' },
+  { key: `role-${AccountRole.admin}`, label: 'Role Admin' },
+  { key: `role-${AccountRole.trader}`, label: 'Role Trader' },
+  { key: `role-${AccountRole.protector}`, label: 'Role Protector' },
+  { key: `role-${AccountRole.viewer}`, label: 'Role Viewer' },
   { key: 'locked', label: 'Locked' },
   { key: 'nolock', label: 'No Lock' },
 ];

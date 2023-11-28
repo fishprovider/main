@@ -1,4 +1,4 @@
-import type { Account } from '@fishprovider/utils/dist/types/Account.model';
+import { Account } from '@fishprovider/core';
 import _ from 'lodash';
 import moment from 'moment';
 

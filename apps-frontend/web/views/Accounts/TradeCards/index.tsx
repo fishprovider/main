@@ -1,10 +1,10 @@
+import type { ProviderType } from '@fishprovider/core';
 import { Account, AccountRole } from '@fishprovider/core';
 import priceGetMany from '@fishprovider/cross/dist/api/prices/getMany';
 import priceGetNames from '@fishprovider/cross/dist/api/prices/getNames';
 import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
 import storeOrders from '@fishprovider/cross/dist/stores/orders';
-import type { ProviderType } from '@fishprovider/utils/dist/constants/account';
 import { OrderStatus } from '@fishprovider/utils/dist/constants/order';
 import { getMajorPairs } from '@fishprovider/utils/dist/helpers/price';
 import type { Order } from '@fishprovider/utils/dist/types/Order.model';
