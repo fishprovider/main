@@ -262,8 +262,8 @@ export interface Account {
 
   isSystem?: boolean;
 
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 
   deleted?: boolean;
   deletedAt?: Date;
