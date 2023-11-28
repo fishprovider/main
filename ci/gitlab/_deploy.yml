@@ -1,62 +1,37 @@
+# --- phone ---
+
 .deploy-phone-android:
   script:
-    - export CI=true
-    - npm run clean
     - cd apps-frontend/phone
-    - npm run build-pre-install
-    - npm i --prefer-offline --no-audit --no-progress --legacy-peer-deps --cache ~/.npm
-    - npm run prebuild
     - npm run build-local-android
     - npm run submit-local-android
 
 .deploy-phone-ios:
   script:
-    - export CI=true
-    - npm run clean
     - cd apps-frontend/phone
-    - npm run build-pre-install
-    - npm i --prefer-offline --no-audit --no-progress --legacy-peer-deps --cache ~/.npm
-    - npm run prebuild
     - npm run build-local-ios
     - npm run submit-local-ios
 
-.deploy-phone-update:
-  script:
-    - export CI=true
-    - npm run clean
-    - cd apps-frontend/phone
-    - npm run build-pre-install
-    - npm i --prefer-offline --no-audit --no-progress --legacy-peer-deps --cache ~/.npm
-    - npm run prebuild
-    - npm run deploy-update
-
 .build-phone-development-android:
   script:
-    - export CI=true
-    - npm run clean
     - cd apps-frontend/phone
-    - npm run build-pre-install
-    - npm i --prefer-offline --no-audit --no-progress --legacy-peer-deps --cache ~/.npm
-    - npm run prebuild
     - EAS_LOCAL_BUILD_ARTIFACTS_DIR=~/work/fish/artifacts BUILD_PROFILE=development npm run build-local-android
 
 .build-phone-development-ios:
   script:
-    - export CI=true
-    - npm run clean
     - cd apps-frontend/phone
-    - npm run build-pre-install
-    - npm i --prefer-offline --no-audit --no-progress --legacy-peer-deps --cache ~/.npm
-    - npm run prebuild
     - EAS_LOCAL_BUILD_ARTIFACTS_DIR=~/work/fish/artifacts BUILD_PROFILE=development npm run build-local-ios
+
+# --- web ---
 
 .build-web:
   script:
     - npm run clean
     - cd apps-frontend/web
-    - npm run build-pre-install
     - npm i --prefer-offline --no-audit --no-progress --legacy-peer-deps --cache ~/.npm
     - npm run build
+
+# --- backend ---
 
 .build-back:
   script:
