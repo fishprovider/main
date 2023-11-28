@@ -2,7 +2,6 @@ import type { Roles } from '@fishprovider/utils/dist/constants/user';
 import type { Account } from '@fishprovider/utils/dist/types/Account.model';
 
 import { ApiConfig, apiPost } from '~libs/api';
-import storeAccounts from '~stores/accounts';
 
 const memberAdd = async (
   payload: {
@@ -13,7 +12,6 @@ const memberAdd = async (
   options?: ApiConfig,
 ) => {
   const doc = await apiPost<Account>('/accounts/members/add', payload, options);
-  storeAccounts.mergeDoc(doc);
   return doc;
 };
 

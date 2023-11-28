@@ -1,7 +1,6 @@
 import type { User } from '@fishprovider/utils/dist/types/User.model';
 
 import { ApiConfig, apiPost } from '~libs/api';
-import storeUser from '~stores/user';
 
 const userLogin = async (
   payload: {
@@ -10,10 +9,6 @@ const userLogin = async (
   options?: ApiConfig,
 ) => {
   const info = await apiPost<User>('/auth/login', payload, options);
-  storeUser.mergeState({
-    isServerLoggedIn: true,
-    info,
-  });
   return info;
 };
 

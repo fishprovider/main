@@ -1,7 +1,6 @@
 import type { Account } from '@fishprovider/utils/dist/types/Account.model';
 
 import { ApiConfig, apiPost } from '~libs/api';
-import storeAccounts from '~stores/accounts';
 
 const memberRemove = async (
   payload: {
@@ -11,7 +10,6 @@ const memberRemove = async (
   options?: ApiConfig,
 ) => {
   const doc = await apiPost<Account>('/accounts/members/remove', payload, options);
-  storeAccounts.mergeDoc(doc);
   return doc;
 };
 

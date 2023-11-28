@@ -1,7 +1,6 @@
 import type { Account } from '@fishprovider/utils/dist/types/Account.model';
 
 import { ApiConfig, apiPost } from '~libs/api';
-import storeAccounts from '~stores/accounts';
 
 const memberFetch = async (
   payload: {
@@ -10,7 +9,6 @@ const memberFetch = async (
   options?: ApiConfig,
 ) => {
   const doc = await apiPost<Account>('/accounts/members/fetch', payload, options);
-  storeAccounts.mergeDoc(doc);
   return doc;
 };
 
