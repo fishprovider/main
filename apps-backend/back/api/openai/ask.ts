@@ -1,7 +1,7 @@
 import { ErrorType } from '@fishprovider/utils/dist/constants/error';
 import type { User } from '@fishprovider/utils/dist/types/User.model';
 import OpenAI from 'openai';
-import { CreateChatCompletionRequestMessage } from 'openai/resources/chat';
+import { ChatCompletionMessageParam } from 'openai/resources/chat';
 
 import type { AskParams, AskResult, ChatMessage } from '~types/OpenAI.model';
 
@@ -14,7 +14,7 @@ const openai = new OpenAI({
 });
 
 async function ask({ input, tag, history }: AskParams): Promise<AskResult> {
-  const chatMessages = (history ?? []).reduce<CreateChatCompletionRequestMessage[]>((acc, item) => {
+  const chatMessages = (history ?? []).reduce<ChatCompletionMessageParam[]>((acc, item) => {
     const { input: itemInput, completion: itemCompletion } = item;
 
     acc.push({ role: 'user', content: itemInput });
@@ -26,7 +26,7 @@ async function ask({ input, tag, history }: AskParams): Promise<AskResult> {
   chatMessages.push({ role: 'user', content: input });
 
   const completion = await openai.chat.completions.create({
-    model: 'gpt-4',
+    model: 'gpt-4-32k',
     messages: chatMessages,
   });
 
