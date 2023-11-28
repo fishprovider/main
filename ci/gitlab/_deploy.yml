@@ -22,6 +22,11 @@
     - cd apps-frontend/phone
     - EAS_LOCAL_BUILD_ARTIFACTS_DIR=~/work/fish/artifacts BUILD_PROFILE=development npm run build-local-ios
 
+.deploy-phone-update:
+  script:
+    - cd apps-frontend/phone
+    - npm run deploy-update
+
 # --- web ---
 
 .build-web:
