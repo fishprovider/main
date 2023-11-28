@@ -24,6 +24,7 @@ export const initLocal = async (params: {
   if (driver) {
     await localforage.defineDriver(driver);
     await localforage.setDriver(driver._driver);
+    await localforage.ready().catch(console.error);
   }
 };
 

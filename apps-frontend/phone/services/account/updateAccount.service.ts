@@ -3,7 +3,7 @@ import {
   AccountTradeSettings, AccountViewType, checkRepository,
 } from '@fishprovider/core';
 import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
-import { FishApiAccountRepository } from '@fishprovider/fish-api';
+import { StoreFirstAccountRepository } from '@fishprovider/store-first';
 import { Account } from '@fishprovider/utils/types/Account.model';
 
 export const updateAccountService = async (
@@ -24,7 +24,7 @@ export const updateAccountService = async (
     addActivity?: AccountActivity,
   },
 ) => {
-  const updateAccountRepo = checkRepository(FishApiAccountRepository.updateAccount);
+  const updateAccountRepo = checkRepository(StoreFirstAccountRepository.updateAccount);
   const { doc: account } = await updateAccountRepo(filter, payload);
 
   if (account) {
