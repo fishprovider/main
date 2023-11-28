@@ -14,8 +14,8 @@ const onClientLoggedOut = async () => {
 const onClientLoggedIn = async (userInfo: User, token: string) => {
   Logger.info('[user] onClientLoggedIn', userInfo);
   updateUserInfoController({ isClientLoggedIn: true });
-  await userLogin({ token });
-  updateUserInfoController({ isServerLoggedIn: true });
+  const activeUser = await userLogin({ token });
+  updateUserInfoController({ isServerLoggedIn: true, activeUser });
   updateUserController({ email: userInfo.email }, {});
 };
 

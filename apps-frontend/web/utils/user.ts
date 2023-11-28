@@ -35,8 +35,8 @@ const onClientLoggedIn = async (
 ) => {
   Logger.info('[user] onClientLoggedIn', userInfo);
   updateUserInfoController({ isClientLoggedIn: true });
-  await userLogin({ token });
-  updateUserInfoController({ isServerLoggedIn: true });
+  const activeUser = await userLogin({ token });
+  updateUserInfoController({ isServerLoggedIn: true, activeUser });
   cacheWrite(cacheKeyUser, userInfo);
   updateUserController({ email: userInfo.email }, {});
   redirectPreLoginPage();
