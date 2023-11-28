@@ -1,5 +1,4 @@
-import { PlanType } from '@fishprovider/utils/dist/constants/account';
-import type { Account, Plan } from '@fishprovider/utils/dist/types/Account.model';
+import { Account, AccountPlan, AccountPlanType } from '@fishprovider/core';
 import type { Order } from '@fishprovider/utils/dist/types/Order.model';
 import _ from 'lodash';
 
@@ -35,7 +34,7 @@ const scaleMaxLotPairs = (account: Account, scale: number) => {
   const { plan } = account;
   if (!plan) return account;
 
-  const planIndex = plan.findIndex((item) => item.type === PlanType.maxLotPairs);
+  const planIndex = plan.findIndex((item) => item.type === AccountPlanType.maxLotPairs);
   if (planIndex === -1) return account;
 
   const maxLotPairs = plan[planIndex]?.value as Record<string, number>;
@@ -46,7 +45,7 @@ const scaleMaxLotPairs = (account: Account, scale: number) => {
   });
 
   const planNew = [...plan];
-  (planNew[planIndex] as Plan).value = maxLotPairsNew;
+  (planNew[planIndex] as AccountPlan).value = maxLotPairsNew;
 
   const accountNew = { ...account, plan: planNew };
   return accountNew;

@@ -2,15 +2,13 @@ import orderAdd from '@fishprovider/cross/dist/api/orders/add';
 import { useMutate } from '@fishprovider/cross/dist/libs/query';
 import storeOrders from '@fishprovider/cross/dist/stores/orders';
 import storePrices from '@fishprovider/cross/dist/stores/prices';
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import { OrderStatus } from '@fishprovider/utils/dist/constants/order';
 import { validateOrderAdd } from '@fishprovider/utils/dist/helpers/validateOrder';
-import { Account } from '@fishprovider/utils/dist/types/Account.model';
 import { OrderWithoutId } from '@fishprovider/utils/dist/types/Order.model';
-import { User } from '@fishprovider/utils/dist/types/User.model';
 import _ from 'lodash';
 
 import OrderEditor from '~components/OrderEditor';
+import { getUserInfoController } from '~controllers/user.controller';
 import Alert from '~ui/Alert';
 import ScrollView from '~ui/ScrollView';
 import Stack from '~ui/Stack';
@@ -25,25 +23,22 @@ export default function OpenOrder() {
 
   const validate = (orderToNew: OrderWithoutId) => {
     const {
-      info: user,
-      activeProvider: account,
-    } = storeUser.getState() as {
-      info: User,
-      activeProvider: Account,
-    };
+      activeUser: user,
+      activeAccount: account,
+    } = getUserInfoController();
 
     const liveOrders = _.filter(
       storeOrders.getState(),
-      (item) => item.providerId === account._id && item.status === OrderStatus.live,
+      (item) => item.providerId === account?._id && item.status === OrderStatus.live,
     );
     const pendingOrders = _.filter(
       storeOrders.getState(),
-      (item) => item.providerId === account._id && item.status === OrderStatus.pending,
+      (item) => item.providerId === account?._id && item.status === OrderStatus.pending,
     );
 
     return validateOrderAdd({
-      user,
-      account,
+      user: user as any,
+      account: account as any,
       liveOrders,
       pendingOrders,
       orderToNew,

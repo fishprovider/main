@@ -1,8 +1,8 @@
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import type { Order } from '@fishprovider/utils/dist/types/Order.model';
 import type { Price } from '@fishprovider/utils/dist/types/Price.model';
 import _ from 'lodash';
 
+import { watchUserInfoController } from '~controllers/user.controller';
 import Text from '~ui/Text';
 
 interface Props {
@@ -15,8 +15,8 @@ function Profit({ order, prices }: Props) {
 
   const {
     asset = 'USD',
-  } = storeUser.useStore((state) => ({
-    asset: state.activeProvider?.asset,
+  } = watchUserInfoController((state) => ({
+    asset: state.activeAccount?.asset,
   }));
 
   const priceDoc = prices[`${providerType}-${symbol}`];

@@ -1,11 +1,10 @@
 import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
-import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import _ from 'lodash';
 import { useEffect, useState } from 'react';
 
-import { getAccountsController } from '~controllers/account.controller';
+import { getAccountsController, watchAccountController } from '~controllers/account.controller';
+import { watchUserInfoController } from '~controllers/user.controller';
 import { cacheRead, cacheWrite } from '~libs/cache';
 import AccountProvider from '~providers/AccountProvider';
 import ScrollView from '~ui/ScrollView';
@@ -23,20 +22,19 @@ export default function Trade() {
   const {
     userId = '',
     email,
-  } = storeUser.useStore((state) => ({
-    userId: state.info?._id,
-    email: state.info?.email,
+  } = watchUserInfoController((state) => ({
+    userId: state.activeUser?._id,
+    email: state.activeUser?.email,
   }));
 
-  const options = storeAccounts.useStore((state) => _.orderBy(
+  const options = watchAccountController((state) => _.orderBy(
     _.filter(state, (item) => {
-      if (item.userId && item.userId === userId) return true;
       if (item.members?.some((itemMember) => itemMember.userId === userId)) return true;
       return false;
     }),
     (item) => {
       const activity = item.activities?.[userId];
-      if (!activity) return 0;
+      if (!activity?.lastView) return 0;
       return new Date(activity.lastView).getTime();
     },
     ['desc'],

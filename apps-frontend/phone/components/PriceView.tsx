@@ -1,18 +1,18 @@
+import { ProviderType } from '@fishprovider/core';
 import storePrices from '@fishprovider/cross/dist/stores/prices';
-import storeUser from '@fishprovider/cross/dist/stores/user';
-import { ProviderType } from '@fishprovider/utils/dist/constants/account';
 import { getDiffPips } from '@fishprovider/utils/dist/helpers/price';
 import _ from 'lodash';
 import moment from 'moment';
 
+import { watchUserInfoController } from '~controllers/user.controller';
 import Text from '~ui/Text';
 
 function PriceView() {
   const {
     providerType = ProviderType.icmarkets,
-    symbol,
-  } = storeUser.useStore((state) => ({
-    providerType: state.activeProvider?.providerType,
+    symbol = 'AUDUSD',
+  } = watchUserInfoController((state) => ({
+    providerType: state.activeAccount?.providerType,
     symbol: state.activeSymbol,
   }));
   const priceDoc = storePrices.useStore((prices) => prices[`${providerType}-${symbol}`]);

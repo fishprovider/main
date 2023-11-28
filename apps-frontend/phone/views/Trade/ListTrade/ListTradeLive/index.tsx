@@ -1,10 +1,9 @@
 import { FontAwesome } from '@expo/vector-icons';
+import { ProviderType } from '@fishprovider/core';
 import orderGetMany from '@fishprovider/cross/dist/api/orders/getMany';
 import orderGetManyInfo from '@fishprovider/cross/dist/api/orders/getManyInfo';
 import { useMutate } from '@fishprovider/cross/dist/libs/query';
 import storePrices from '@fishprovider/cross/dist/stores/prices';
-import storeUser from '@fishprovider/cross/dist/stores/user';
-import { ProviderType } from '@fishprovider/utils/dist/constants/account';
 import { OrderStatus } from '@fishprovider/utils/dist/constants/order';
 import { getProfit } from '@fishprovider/utils/dist/helpers/order';
 import { getMajorPairs } from '@fishprovider/utils/dist/helpers/price';
@@ -12,6 +11,7 @@ import type { Order } from '@fishprovider/utils/dist/types/Order.model';
 import _ from 'lodash';
 import { useState } from 'react';
 
+import { watchUserInfoController } from '~controllers/user.controller';
 import Group from '~ui/Group';
 import H4 from '~ui/H4';
 import Stack from '~ui/Stack';
@@ -28,10 +28,10 @@ function ListTradeLive({ orders }: Props) {
     providerId = '',
     providerType = ProviderType.icmarkets,
     asset = 'USD',
-  } = storeUser.useStore((state) => ({
-    providerId: state.activeProvider?._id,
-    providerType: state.activeProvider?.providerType,
-    asset: state.activeProvider?.asset,
+  } = watchUserInfoController((state) => ({
+    providerId: state.activeAccount?._id,
+    providerType: state.activeAccount?.providerType,
+    asset: state.activeAccount?.asset,
   }));
 
   const symbols = _.uniq([

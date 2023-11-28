@@ -1,5 +1,5 @@
+import { ProviderType } from '@fishprovider/core';
 import storePrices from '@fishprovider/cross/dist/stores/prices';
-import type { ProviderType } from '@fishprovider/utils/dist/constants/account';
 import type { Direction } from '@fishprovider/utils/dist/constants/order';
 import {
   getDiffPips, getGrossProfit, getPriceFromAmount,

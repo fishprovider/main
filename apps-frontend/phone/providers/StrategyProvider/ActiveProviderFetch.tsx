@@ -1,21 +1,20 @@
-import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import { useEffect } from 'react';
 
-import { getAccountController } from '~controllers/account.controller';
+import { getAccountController, watchAccountController } from '~controllers/account.controller';
+import { updateUserInfoController } from '~controllers/user.controller';
 
 interface Props {
   providerId: string;
 }
 
 function ActiveProviderFetch({ providerId }: Props) {
-  const account = storeAccounts.useStore((state) => state[providerId]);
+  const account = watchAccountController((state) => state[providerId]);
 
   // load from memory on going back
   useEffect(() => {
-    storeUser.mergeState({ activeProvider: account });
+    updateUserInfoController({ activeAccount: account });
     return () => {
-      storeUser.mergeState({ activeProvider: undefined });
+      updateUserInfoController({ activeAccount: undefined });
     };
   }, [account]);
 
@@ -23,7 +22,7 @@ function ActiveProviderFetch({ providerId }: Props) {
   useEffect(() => {
     getAccountController({ accountId: providerId }).catch((err) => {
       Logger.error(err);
-      storeUser.mergeState({ activeProvider: undefined });
+      updateUserInfoController({ activeAccount: undefined });
     });
   }, [providerId]);
 

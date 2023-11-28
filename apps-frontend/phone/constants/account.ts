@@ -1,8 +1,7 @@
 import {
-  AccountTradeType, AccountViewType,
-  CopyVolumeMode, LockType, ProviderType,
-} from '@fishprovider/utils/dist/constants/account';
-import { Roles } from '@fishprovider/utils/dist/constants/user';
+  AccountCopyVolumeMode, AccountLockType,
+  AccountRole, AccountTradeType, AccountViewType, ProviderType,
+} from '@fishprovider/core';
 
 const getTopProviderIds = () => ['earth', 'water', 'air', 'fire', 'whale'];
 
@@ -209,24 +208,24 @@ const AccountTradeTypeText: Record<string, { text: string, color?: string }> = {
 };
 
 const ProviderRoleText: Record<string, { text: string, description: string, color?: string }> = {
-  [Roles.admin]: { text: 'Admin', description: 'Full rights', color: 'red' },
-  [Roles.trader]: { text: 'Trader', description: 'Can trade', color: 'green' },
-  [Roles.protector]: { text: 'Protector', description: 'Can close orders and lock users', color: 'purple' },
-  [Roles.viewer]: { text: 'Viewer', description: 'View only' },
+  [AccountRole.admin]: { text: 'Admin', description: 'Full rights', color: 'red' },
+  [AccountRole.trader]: { text: 'Trader', description: 'Can trade', color: 'green' },
+  [AccountRole.protector]: { text: 'Protector', description: 'Can close orders and lock users', color: 'purple' },
+  [AccountRole.viewer]: { text: 'Viewer', description: 'View only' },
 };
 
 const CopyVolumeModeText: Record<string, { text: string, description: string }> = {
-  [CopyVolumeMode.auto]: { text: 'Auto', description: 'Scale Volume based on Balance ratio between Parent and Child' },
-  [CopyVolumeMode.fixedRatio]: { text: 'Fixed Ratio', description: 'Set Volume Ratio to a fixed number (not auto scale)' },
-  [CopyVolumeMode.fixedLot]: { text: 'Fixed Lot', description: 'Set Lot to a fixed number (not auto scale)' },
-  [CopyVolumeMode.autoWithRatio]: { text: 'Auto with Ratio', description: 'Scale Volume based on Balance ratio with additional Ratio' },
+  [AccountCopyVolumeMode.auto]: { text: 'Auto', description: 'Scale Volume based on Balance ratio between Parent and Child' },
+  [AccountCopyVolumeMode.fixedRatio]: { text: 'Fixed Ratio', description: 'Set Volume Ratio to a fixed number (not auto scale)' },
+  [AccountCopyVolumeMode.fixedLot]: { text: 'Fixed Lot', description: 'Set Lot to a fixed number (not auto scale)' },
+  [AccountCopyVolumeMode.autoWithRatio]: { text: 'Auto with Ratio', description: 'Scale Volume based on Balance ratio with additional Ratio' },
 };
 
 const LockTypeText: Record<string, string> = {
-  [LockType.open]: 'Lock Open Order',
-  [LockType.update]: 'Lock Update Order',
-  [LockType.close]: 'Lock Close Order',
-  [LockType.pairs]: 'Lock Pairs',
+  [AccountLockType.open]: 'Lock Open Order',
+  [AccountLockType.update]: 'Lock Update Order',
+  [AccountLockType.close]: 'Lock Close Order',
+  [AccountLockType.pairs]: 'Lock Pairs',
 };
 
 const activityFields = ['chats', 'confidences'];

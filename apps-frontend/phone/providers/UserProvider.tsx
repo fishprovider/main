@@ -1,5 +1,4 @@
-import storeUser from '@fishprovider/cross/dist/stores/user';
-
+import { watchUserInfoController } from '~controllers/user.controller';
 import Login from '~views/Login';
 
 interface Props {
@@ -7,7 +6,7 @@ interface Props {
 }
 
 function UserProvider({ children }: Props) {
-  const isServerLoggedIn = storeUser.useStore((state) => state.isServerLoggedIn);
+  const isServerLoggedIn = watchUserInfoController((state) => state.isServerLoggedIn);
 
   if (!isServerLoggedIn) {
     return <Login />;

@@ -1,17 +1,15 @@
 import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
-import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import { redisKeys } from '@fishprovider/utils/dist/constants/redis';
-import type { Account } from '@fishprovider/utils/dist/types/Account.model';
 import { useEffect, useRef } from 'react';
 
-import { getAccountController } from '~controllers/account.controller';
+import { getAccountController, updateAccountController } from '~controllers/account.controller';
+import { watchUserInfoController } from '~controllers/user.controller';
 import { subNotif, unsubNotif } from '~libs/pushNotif';
 import { refreshMS } from '~utils';
 
 function useAccountSocket(providerId: string) {
-  const socket = storeUser.useStore((state) => state.socket);
+  const socket = watchUserInfoController((state) => state.socket);
 
   const prevChannel = useRef<string>();
   useEffect(() => {
@@ -29,8 +27,8 @@ function useAccountSocket(providerId: string) {
       const channel = redisKeys.account(providerId);
       Logger.debug('[socket] sub', channel);
       socket.emit('join', channel);
-      socket.on(channel, (doc: Account) => {
-        storeAccounts.mergeDoc(doc);
+      socket.on(channel, (doc) => {
+        updateAccountController({ accountId: doc._id }, { account: doc });
       });
     } else {
       Logger.debug('Skipped useAccountSocket', providerId);
@@ -50,9 +48,9 @@ function useAccountNotif(providerId: string) {
   const {
     isServerLoggedIn,
     isStar,
-  } = storeUser.useStore((state) => ({
+  } = watchUserInfoController((state) => ({
     isServerLoggedIn: state.isServerLoggedIn,
-    isStar: state.info?.starProviders?.[providerId],
+    isStar: state.activeUser?.starAccounts?.[providerId],
   }));
 
   useEffect(() => {

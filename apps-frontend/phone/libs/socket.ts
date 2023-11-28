@@ -1,5 +1,6 @@
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import io from 'socket.io-client';
+
+import { getUserInfoController, updateUserInfoController } from '~controllers/user.controller';
 
 let socketUrl = process.env.EXPO_PUBLIC_SOCKET_URL || '';
 
@@ -8,7 +9,7 @@ const updateSocketUrl = (url = '') => {
 };
 
 const connectSocket = async () => {
-  const { socket: socketCheck } = storeUser.getState();
+  const { socket: socketCheck } = getUserInfoController();
   if (socketCheck) {
     return;
   }
@@ -16,11 +17,11 @@ const connectSocket = async () => {
   const socket = io(socketUrl, {
     transports: (process.env.EXPO_PUBLIC_SOCKET_TRANSPORTS || 'websocket,polling,webtransport').split(','),
   });
-  storeUser.mergeState({ socket });
+  updateUserInfoController({ socket });
 
   socket.on('error', (error: any) => {
     Logger.error('[socket] Error', error);
-    storeUser.mergeState({ socket: undefined });
+    updateUserInfoController({ socket: undefined });
   });
 
   if (process.env.EXPO_PUBLIC_SOCKET_HEARTBEAT) {
@@ -29,10 +30,10 @@ const connectSocket = async () => {
 };
 
 const disconnectSocket = () => {
-  const { socket } = storeUser.getState();
+  const { socket } = getUserInfoController();
   if (!socket) return;
 
-  storeUser.mergeState({ socket: undefined });
+  updateUserInfoController({ socket: undefined });
   socket.disconnect();
 };
 

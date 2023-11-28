@@ -1,7 +1,7 @@
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import { useNavigation } from '@react-navigation/native';
 
 import LiveModeSwitch from '~components/LiveModeSwitch';
+import { watchUserInfoController } from '~controllers/user.controller';
 import { logout } from '~libs/auth';
 import Button from '~ui/Button';
 import Stack from '~ui/Stack';
@@ -12,8 +12,8 @@ export default function User() {
 
   const {
     email,
-  } = storeUser.useStore((state) => ({
-    email: state.info?.email,
+  } = watchUserInfoController((state) => ({
+    email: state.activeUser?.email,
   }));
 
   const onLogout = () => {

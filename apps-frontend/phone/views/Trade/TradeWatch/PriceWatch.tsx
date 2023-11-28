@@ -1,10 +1,9 @@
+import type { ProviderType } from '@fishprovider/core';
 import priceGetMany from '@fishprovider/cross/dist/api/prices/getMany';
 import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
 import storeOrders from '@fishprovider/cross/dist/stores/orders';
 import storePrices from '@fishprovider/cross/dist/stores/prices';
-import storeUser from '@fishprovider/cross/dist/stores/user';
-import type { ProviderType } from '@fishprovider/utils/dist/constants/account';
 import type { OrderStatus } from '@fishprovider/utils/dist/constants/order';
 import { redisKeys } from '@fishprovider/utils/dist/constants/redis';
 import { getMajorPairs } from '@fishprovider/utils/dist/helpers/price';
@@ -12,10 +11,11 @@ import type { Price } from '@fishprovider/utils/dist/types/Price.model';
 import _ from 'lodash';
 import { useEffect, useRef, useState } from 'react';
 
+import { watchUserInfoController } from '~controllers/user.controller';
 import { refreshMS } from '~utils';
 
 const usePricesSocket = (providerType: ProviderType, watchSymbols: string[]) => {
-  const socket = storeUser.useStore((state) => state.socket);
+  const socket = watchUserInfoController((state) => state.socket);
 
   const [symbols, setSymbols] = useState(watchSymbols);
 

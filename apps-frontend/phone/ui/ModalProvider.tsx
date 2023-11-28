@@ -1,4 +1,4 @@
-import storeUser from '@fishprovider/cross/dist/stores/user';
+import { updateUserInfoController, watchUserInfoController } from '~controllers/user.controller';
 
 import Sheet from './Sheet';
 
@@ -6,13 +6,13 @@ export default function ModalProvider() {
   const {
     modalOpen,
     modalContent,
-  } = storeUser.useStore((state) => ({
+  } = watchUserInfoController((state) => ({
     modalOpen: state.modalOpen,
     modalContent: state.modalContent,
   }));
 
   const onClose = () => {
-    storeUser.mergeState({ modalOpen: false, modalContent: null });
+    updateUserInfoController({ modalOpen: false, modalContent: null });
   };
 
   return (
@@ -30,5 +30,5 @@ export default function ModalProvider() {
 }
 
 export const showModal = (content: React.ReactNode) => {
-  storeUser.mergeState({ modalOpen: true, modalContent: content });
+  updateUserInfoController({ modalOpen: true, modalContent: content });
 };

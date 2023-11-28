@@ -1,5 +1,6 @@
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import { getUserInfoController, updateUserInfoController } from '~controllers/user.controller';
 
 async function cacheRead<T>(key: string) {
   try {
@@ -25,7 +26,7 @@ function getSessionKey(key: string) {
 
 async function sessionRead<T>(key: string) {
   const sessionKey = getSessionKey(key);
-  const { [sessionKey]: val } = storeUser.getState() as {
+  const { [sessionKey]: val } = getUserInfoController() as {
     [key: string]: T | undefined;
   };
   if (val) return val;
@@ -33,13 +34,13 @@ async function sessionRead<T>(key: string) {
   const cache = await cacheRead<T>(`fp-${sessionKey}`);
   if (!cache) return null;
 
-  storeUser.mergeState({ [sessionKey]: cache });
+  updateUserInfoController({ [sessionKey]: cache });
   return cache;
 }
 
 function sessionWrite<T>(key: string, val: T) {
   const sessionKey = getSessionKey(key);
-  storeUser.mergeState({ [sessionKey]: val });
+  updateUserInfoController({ [sessionKey]: val });
   cacheWrite(`fp-${sessionKey}`, val);
 }
 

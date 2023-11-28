@@ -1,16 +1,17 @@
+import { ProviderType } from '@fishprovider/core';
 import storePrices from '@fishprovider/cross/dist/stores/prices';
-import storeUser from '@fishprovider/cross/dist/stores/user';
-import { ProviderType } from '@fishprovider/utils/dist/constants/account';
 import { getConversionRate, getMajorPairs } from '@fishprovider/utils/dist/helpers/price';
 import _ from 'lodash';
+
+import { watchUserInfoController } from '~controllers/user.controller';
 
 const useConversionRate = (symbol: string) => {
   const {
     providerType = ProviderType.icmarkets,
     asset = 'USD',
-  } = storeUser.useStore((state) => ({
-    providerType: state.activeProvider?.providerType,
-    asset: state.activeProvider?.asset,
+  } = watchUserInfoController((state) => ({
+    providerType: state.activeAccount?.providerType,
+    asset: state.activeAccount?.asset,
   }));
 
   const symbols = _.uniq([...getMajorPairs(providerType), symbol]);

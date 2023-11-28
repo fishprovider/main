@@ -1,7 +1,6 @@
 import { FontAwesome } from '@expo/vector-icons';
+import { AccountPlanType, AccountPlatform, ProviderType } from '@fishprovider/core';
 import storePrices from '@fishprovider/cross/dist/stores/prices';
-import storeUser from '@fishprovider/cross/dist/stores/user';
-import { AccountPlatform, PlanType, ProviderType } from '@fishprovider/utils/dist/constants/account';
 import { Direction, OrderStatus, OrderType } from '@fishprovider/utils/dist/constants/order';
 import { getPriceFromAmount, getVolumeFromLot } from '@fishprovider/utils/dist/helpers/price';
 import { OrderWithoutId } from '@fishprovider/utils/dist/types/Order.model';
@@ -12,6 +11,7 @@ import PricePips from '~components/PricePips';
 import PriceView from '~components/PriceView';
 import SymbolsSelect from '~components/SymbolsSelect';
 import VolumeLots from '~components/VolumeLots';
+import { getUserInfoController, watchUserInfoController } from '~controllers/user.controller';
 import useConversionRate from '~hooks/useConversionRate';
 import Button from '~ui/Button';
 import Checkbox from '~ui/Checkbox';
@@ -29,19 +29,19 @@ export default function OrderEditor({
   onSubmit, loading,
 }: Props) {
   const {
-    symbol,
+    symbol = 'AUDUSD',
     providerType = ProviderType.icmarkets,
     platform = AccountPlatform.ctrader,
     asset = 'USD',
     plan = [],
     balance = 0,
-  } = storeUser.useStore((state) => ({
+  } = watchUserInfoController((state) => ({
     symbol: state.activeSymbol,
-    providerType: state.activeProvider?.providerType,
-    platform: state.activeProvider?.platform,
-    asset: state.activeProvider?.asset,
-    plan: state.activeProvider?.plan,
-    balance: state.activeProvider?.balance,
+    providerType: state.activeAccount?.providerType,
+    platform: state.activeAccount?.platform,
+    asset: state.activeAccount?.asset,
+    plan: state.activeAccount?.plan,
+    balance: state.activeAccount?.balance,
   }));
 
   const priceDoc = storePrices.useStore((prices) => prices[`${providerType}-${symbol}`]);
@@ -73,7 +73,7 @@ export default function OrderEditor({
     if (!priceDoc || !volume) return '';
 
     const defaultAmt = Math.max(balance / 100, 10); // 1% of balance or $10
-    const maxSLAmt = (plan.find((item) => item.type === PlanType.stopLoss)
+    const maxSLAmt = (plan.find((item) => item.type === AccountPlanType.stopLoss)
       ?.value || -defaultAmt) as number;
 
     return Math.max(0, getPriceFromAmount({
@@ -98,7 +98,7 @@ export default function OrderEditor({
   const takeProfit = takeProfitInput ?? defaultTP;
 
   const onOpen = () => {
-    const providerId = storeUser.getState().activeProvider?._id || '';
+    const providerId = getUserInfoController().activeAccount?._id || '';
     const digits = priceDoc?.digits || 0;
 
     const order = {

@@ -1,11 +1,11 @@
 import storePrices from '@fishprovider/cross/dist/stores/prices';
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import { OrderStatus } from '@fishprovider/utils/dist/constants/order';
 import { getEntry } from '@fishprovider/utils/dist/helpers/order';
 import { getDiffPips, getLotFromVolume } from '@fishprovider/utils/dist/helpers/price';
 import type { Order } from '@fishprovider/utils/dist/types/Order.model';
 import _ from 'lodash';
 
+import { watchUserInfoController } from '~controllers/user.controller';
 import useConversionRate from '~hooks/useConversionRate';
 import Stack from '~ui/Stack';
 import Text from '~ui/Text';
@@ -19,8 +19,8 @@ interface Props {
 function OrderInfo({ order, mergedView }: Props) {
   const {
     asset = 'USD',
-  } = storeUser.useStore((state) => ({
-    asset: state.activeProvider?.asset,
+  } = watchUserInfoController((state) => ({
+    asset: state.activeAccount?.asset,
   }));
   const priceDoc = storePrices.useStore((prices) => prices[`${order.providerType}-${order.symbol}`]);
 

@@ -1,26 +1,26 @@
+import { AccountPlanType, ProviderType } from '@fishprovider/core';
 import priceGetDetail from '@fishprovider/cross/dist/api/prices/getDetail';
 import priceGetMany from '@fishprovider/cross/dist/api/prices/getMany';
 import priceGetNames from '@fishprovider/cross/dist/api/prices/getNames';
 import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
 import storePrices from '@fishprovider/cross/dist/stores/prices';
-import storeUser from '@fishprovider/cross/dist/stores/user';
-import { PlanType, ProviderType } from '@fishprovider/utils/dist/constants/account';
 import _ from 'lodash';
 import { useEffect } from 'react';
 
+import { updateUserInfoController, watchUserInfoController } from '~controllers/user.controller';
 import Group from '~ui/Group';
 import Select from '~ui/Select';
 
 function SymbolsSelect() {
   const {
-    symbol,
+    symbol = 'AUDUSD',
     providerType = ProviderType.icmarkets,
     plans = [],
-  } = storeUser.useStore((state) => ({
+  } = watchUserInfoController((state) => ({
     symbol: state.activeSymbol,
-    providerType: state.activeProvider?.providerType,
-    plans: state.activeProvider?.plan,
+    providerType: state.activeAccount?.providerType,
+    plans: state.activeAccount?.plan,
   }));
 
   const allSymbols = storePrices.useStore((state) => _.filter(
@@ -43,7 +43,7 @@ function SymbolsSelect() {
     queryKey: queryKeys.detail(providerType, symbol),
   });
 
-  const symbolsPlan = (plans.find((plan) => (plan.type === PlanType.pairs))
+  const symbolsPlan = (plans.find((plan) => (plan.type === AccountPlanType.pairs))
     ?.value || []) as string[];
   const hasPlan = symbolsPlan.length > 0;
   const symbolDefault = hasPlan ? symbolsPlan[0] : symbol;
@@ -51,7 +51,7 @@ function SymbolsSelect() {
 
   useEffect(() => {
     if (isInvalidSymbolDefault) {
-      storeUser.mergeState({ activeSymbol: symbolDefault });
+      updateUserInfoController({ activeSymbol: symbolDefault });
     }
   }, [isInvalidSymbolDefault, symbolDefault]);
 
@@ -68,7 +68,7 @@ function SymbolsSelect() {
         value={symbol}
         onChange={(value) => {
           if (!value) return;
-          storeUser.mergeState({ activeSymbol: value });
+          updateUserInfoController({ activeSymbol: value });
         }}
       />
     </Group>

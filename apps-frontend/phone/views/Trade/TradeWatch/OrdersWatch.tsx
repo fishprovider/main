@@ -4,16 +4,16 @@ import orderGetManyInfo from '@fishprovider/cross/dist/api/orders/getManyInfo';
 import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
 import storeOrders from '@fishprovider/cross/dist/stores/orders';
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import { OrderStatus } from '@fishprovider/utils/dist/constants/order';
 import { redisKeys } from '@fishprovider/utils/dist/constants/redis';
 import type { Order } from '@fishprovider/utils/dist/types/Order.model';
 import { useEffect, useRef } from 'react';
 
+import { watchUserInfoController } from '~controllers/user.controller';
 import { refreshMS } from '~utils';
 
 function useLiveOrdersSocket(providerId: string) {
-  const socket = storeUser.useStore((state) => state.socket);
+  const socket = watchUserInfoController((state) => state.socket);
 
   const prevChannel = useRef<string>();
   useEffect(() => {
@@ -49,7 +49,7 @@ function useLiveOrdersSocket(providerId: string) {
 }
 
 function usePendingOrdersSocket(providerId: string) {
-  const socket = storeUser.useStore((state) => state.socket);
+  const socket = watchUserInfoController((state) => state.socket);
 
   const prevChannel = useRef<string>();
   useEffect(() => {

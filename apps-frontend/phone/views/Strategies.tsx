@@ -1,12 +1,11 @@
 import { AccountViewType } from '@fishprovider/core';
 import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
-import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
 import _ from 'lodash';
 import { useState } from 'react';
 
 import ProviderCards from '~components/ProviderCards';
-import { getAccountsController } from '~controllers/account.controller';
+import { getAccountsController, watchAccountController } from '~controllers/account.controller';
 import ScrollView from '~ui/ScrollView';
 import Stack from '~ui/Stack';
 import { refreshMS } from '~utils';
@@ -18,7 +17,7 @@ export default function Strategies() {
   const [page, _setPage] = useState(1);
   const [pageSize, _setPageSize] = useState(pageSizeDefault);
 
-  const providerIds = storeAccounts.useStore((state) => _.orderBy(
+  const providerIds = watchAccountController((state) => _.orderBy(
     _.filter(state, (account) => {
       if (!account.strategyId) return false;
       if (account.groupId && account.groupId !== account._id) return false;

@@ -1,20 +1,21 @@
+import { User } from '@fishprovider/core';
 import userLogin from '@fishprovider/cross/dist/api/user/login';
 import userLogout from '@fishprovider/cross/dist/api/user/logout';
-import storeUser from '@fishprovider/cross/dist/stores/user';
-import type { User } from '@fishprovider/utils/dist/types/User.model';
 
-import { updateUserController } from '~controllers/user.controller';
+import { updateUserController, updateUserInfoController } from '~controllers/user.controller';
 
 const onClientLoggedOut = async () => {
   Logger.info('[user] onClientLoggedOut');
-  storeUser.mergeState({ isClientLoggedIn: false });
+  updateUserInfoController({ isClientLoggedIn: false });
   await userLogout();
+  updateUserInfoController({ isServerLoggedIn: false, activeUser: {} });
 };
 
 const onClientLoggedIn = async (userInfo: User, token: string) => {
   Logger.info('[user] onClientLoggedIn', userInfo);
-  storeUser.mergeState({ isClientLoggedIn: true });
+  updateUserInfoController({ isClientLoggedIn: true });
   await userLogin({ token });
+  updateUserInfoController({ isServerLoggedIn: true });
   updateUserController({ email: userInfo.email }, {});
 };
 

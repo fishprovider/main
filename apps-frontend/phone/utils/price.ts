@@ -1,7 +1,6 @@
-import { AccountPlatform, PlanType } from '@fishprovider/utils/dist/constants/account';
+import { AccountPlan, AccountPlanType, AccountPlatform } from '@fishprovider/core';
 import { Direction } from '@fishprovider/utils/dist/constants/order';
 import { getPriceFromAmount } from '@fishprovider/utils/dist/helpers/price';
-import type { Plan } from '@fishprovider/utils/dist/types/Account.model';
 import _ from 'lodash';
 import type { Moment } from 'moment';
 import moment from 'moment';
@@ -45,7 +44,7 @@ const getSLTPAmt = ({
 
 const getDefaultSLTP = (
   balance: number,
-  plan: Plan[],
+  plan: AccountPlan[],
   direction: Direction,
   volume: number,
   entry: number,
@@ -54,9 +53,9 @@ const getDefaultSLTP = (
   const scale = 0.99;
   const defaultAmt = Math.max(balance / 100, 10); // 1% of balance or $10
 
-  const planSLAmt = (plan.find((item) => item.type === PlanType.stopLoss)
+  const planSLAmt = (plan.find((item) => item.type === AccountPlanType.stopLoss)
     ?.value) as number | undefined;
-  const planTPAmt = (plan.find((item) => item.type === PlanType.takeProfit)
+  const planTPAmt = (plan.find((item) => item.type === AccountPlanType.takeProfit)
     ?.value) as number | undefined;
 
   const defaultSL = Math.max(0, getPriceFromAmount({

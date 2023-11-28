@@ -1,12 +1,12 @@
+import { ProviderType } from '@fishprovider/core';
 import storeOrders from '@fishprovider/cross/dist/stores/orders';
 import storePrices from '@fishprovider/cross/dist/stores/prices';
-import storeUser from '@fishprovider/cross/dist/stores/user';
-import { ProviderType } from '@fishprovider/utils/dist/constants/account';
 import { OrderStatus } from '@fishprovider/utils/dist/constants/order';
 import { getProfit, getProfitIcon } from '@fishprovider/utils/dist/helpers/order';
 import { getMajorPairs } from '@fishprovider/utils/dist/helpers/price';
 import _ from 'lodash';
 
+import { watchUserInfoController } from '~controllers/user.controller';
 import Stack from '~ui/Stack';
 import Text from '~ui/Text';
 import { getAccountStats } from '~utils/account';
@@ -19,13 +19,13 @@ export default function TradeHeader() {
     leverage,
     marginRaw = 0,
     asset = 'USD',
-  } = storeUser.useStore((state) => ({
-    providerId: state.activeProvider?._id,
-    providerType: state.activeProvider?.providerType,
-    balance: state.activeProvider?.balance,
-    leverage: state.activeProvider?.leverage,
-    marginRaw: state.activeProvider?.margin,
-    asset: state.activeProvider?.asset,
+  } = watchUserInfoController((state) => ({
+    providerId: state.activeAccount?._id,
+    providerType: state.activeAccount?.providerType,
+    balance: state.activeAccount?.balance,
+    leverage: state.activeAccount?.leverage,
+    marginRaw: state.activeAccount?.margin,
+    asset: state.activeAccount?.asset,
   }));
 
   const liveOrders = storeOrders.useStore((state) => _.filter(

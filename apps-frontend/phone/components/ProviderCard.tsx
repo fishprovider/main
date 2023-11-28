@@ -1,9 +1,9 @@
-import storeAccounts from '@fishprovider/cross/dist/stores/accounts';
-import storeUser from '@fishprovider/cross/dist/stores/user';
 import * as WebBrowser from 'expo-web-browser';
 import _ from 'lodash';
 import moment from 'moment';
 
+import { watchAccountController } from '~controllers/account.controller';
+import { watchUserController } from '~controllers/user.controller';
 import Button from '~ui/Button';
 import Card from '~ui/Card';
 import Group from '~ui/Group';
@@ -19,7 +19,7 @@ interface Props {
 export default function ProviderCard({ providerId }: Props) {
   const {
     mode = 'live',
-  } = storeUser.useStore((state) => ({
+  } = watchUserController((state) => ({
     mode: state.mode,
   }));
 
@@ -32,7 +32,7 @@ export default function ProviderCard({ providerId }: Props) {
     monthProfit = 0,
     roi = 0,
     summary = {},
-  } = storeAccounts.useStore((state) => ({
+  } = watchAccountController((state) => ({
     name: state[providerId]?.name,
     icon: state[providerId]?.icon,
     createdAt: state[providerId]?.createdAt,
