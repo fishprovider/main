@@ -34,7 +34,7 @@ deploy-phone-update:
   rules:
     - if: $CI_PIPELINE_SOURCE == "schedule"
       when: never
-    - if: $CI_COMMIT_BRANCH =~ /deploy-phone-update/
+    - if: $CI_COMMIT_BRANCH =~ /phone-update-production/
       when: always
   cache: !reference [.cache_npm, cache]
   script:
