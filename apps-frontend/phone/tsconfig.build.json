@@ -6,5 +6,6 @@
   "references": [
     { "path": "../../packages/cross/tsconfig.build.json" },
     { "path": "../../packages-frontend/store-first/tsconfig.build.json" },
+    { "path": "../../packages-frontend/client-only/tsconfig.build.json" },
   ],
 }

@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "@aveq-research/localforage-asyncstorage-driver": "^3.0.1",
+    "@fishprovider/client-only": "*",
     "@fishprovider/cross": "*",
     "@fishprovider/store-first": "*",
     "@react-native-async-storage/async-storage": "1.18.2",

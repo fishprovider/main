@@ -3,7 +3,7 @@ import userLogout from '@fishprovider/cross/dist/api/user/logout';
 import storeUser from '@fishprovider/cross/dist/stores/user';
 import type { User } from '@fishprovider/utils/dist/types/User.model';
 
-import { updateUserService } from '~services/user/updateUser.service';
+import { updateUserController } from '~controllers/user.controller';
 
 const onClientLoggedOut = async () => {
   Logger.info('[user] onClientLoggedOut');
@@ -15,7 +15,7 @@ const onClientLoggedIn = async (userInfo: User, token: string) => {
   Logger.info('[user] onClientLoggedIn', userInfo);
   storeUser.mergeState({ isClientLoggedIn: true });
   await userLogin({ token });
-  updateUserService({ email: userInfo.email }, {});
+  updateUserController({ email: userInfo.email }, {});
 };
 
 export {

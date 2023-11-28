@@ -5,9 +5,9 @@ import storeUser from '@fishprovider/cross/dist/stores/user';
 import _ from 'lodash';
 import { useEffect, useState } from 'react';
 
+import { getAccountsController } from '~controllers/account.controller';
 import { cacheRead, cacheWrite } from '~libs/cache';
 import AccountProvider from '~providers/AccountProvider';
-import { getAccountsService } from '~services/account/getAccounts.service';
 import ScrollView from '~ui/ScrollView';
 import Select from '~ui/Select';
 import Stack from '~ui/Stack';
@@ -46,7 +46,7 @@ export default function Trade() {
   })));
 
   useQuery({
-    queryFn: () => getAccountsService({ email }),
+    queryFn: () => getAccountsController({ email }),
     queryKey: queryKeys.userAccounts(),
     refetchInterval: refreshMS,
   });
