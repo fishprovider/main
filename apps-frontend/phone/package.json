@@ -27,7 +27,7 @@
     "build-cloud-ios": "npx eas-cli@latest build --non-interactive --no-wait --profile ${BUILD_PROFILE:-production} -p ios",
     "build-submit-cloud-android": "npx eas-cli@latest build --non-interactive --no-wait --profile ${BUILD_PROFILE:-production} --auto-submit -p android",
     "build-submit-cloud-ios": "npx eas-cli@latest build --non-interactive --no-wait --profile ${BUILD_PROFILE:-production} --auto-submit -p ios",
-    "deploy-update": "npx eas-cli@latest update --auto --channel production",
+    "deploy-update": "npx eas-cli@latest update --auto --channel ${BUILD_PROFILE:-production}",
     "ci-lint": "eslint --cache --fix",
     "ci-type-check": "tsc-files --noEmit types/global.d.ts"
   },
