@@ -2,18 +2,24 @@ import { ClientOnlyAccountRepository } from '@fishprovider/client-only';
 import {
   Account, AccountActivity, AccountBannerStatus, AccountConfig, AccountPlatform,
   AccountProtectSettings, AccountSettings, AccountTradeSettings, AccountTradeType,
-  AccountViewType, checkRepository, ProviderType,
+  AccountViewType, ProviderType,
 } from '@fishprovider/core';
+import {
+  addAccountService, getAccountService, getAccountsService, getTradeAccountsService,
+  removeAccountService, updateAccountService, watchAccountService,
+} from '@fishprovider/core-frontend';
 import { StoreFirstAccountRepository } from '@fishprovider/store-first';
 
-const repo = StoreFirstAccountRepository;
+const defaultRepo = StoreFirstAccountRepository;
 
 export const getAccountController = async (filter: {
   accountId: string,
   getTradeInfo?: boolean,
 }) => {
-  const getAccountRepo = checkRepository(repo.getAccount);
-  const { doc: account } = await getAccountRepo(filter);
+  const { doc: account } = await getAccountService({
+    filter,
+    repositories: { account: defaultRepo },
+  });
   return account;
 };
 
@@ -21,8 +27,10 @@ export const getAccountsController = async (filter: {
   viewType?: AccountViewType,
   email?: string,
 }) => {
-  const getAccountsRepo = checkRepository(repo.getAccounts);
-  const { docs: accounts } = await getAccountsRepo(filter);
+  const { docs: accounts } = await getAccountsService({
+    filter,
+    repositories: { account: defaultRepo },
+  });
   return accounts;
 };
 
@@ -34,9 +42,9 @@ export const getTradeAccountsController = async (filter: {
     code: string,
   },
 }) => {
-  const getTradeAccountsRepo = checkRepository(repo.getAccounts);
-  const { docs: tradeAccounts } = await getTradeAccountsRepo({
-    getTradeAccounts: filter,
+  const { docs: tradeAccounts } = await getTradeAccountsService({
+    filter,
+    repositories: { account: defaultRepo },
   });
   return tradeAccounts;
 };
@@ -62,13 +70,19 @@ export const updateAccountController = async (
 ) => {
   const { account: accountUpdate, ...rest } = payload;
   if (accountUpdate) {
-    const updateAccountRepo = checkRepository(ClientOnlyAccountRepository.updateAccount);
-    const { doc: account } = await updateAccountRepo(filter, { account: accountUpdate });
+    const { doc: account } = await updateAccountService({
+      filter,
+      payload: { account: accountUpdate },
+      repositories: { account: ClientOnlyAccountRepository },
+    });
     return account;
   }
 
-  const updateAccountRepo = checkRepository(repo.updateAccount);
-  const { doc: account } = await updateAccountRepo(filter, rest);
+  const { doc: account } = await updateAccountService({
+    filter,
+    payload: rest,
+    repositories: { account: defaultRepo },
+  });
   return account;
 };
 
@@ -81,22 +95,26 @@ export const addAccountController = async (
     baseConfig: Partial<AccountConfig>,
   },
 ) => {
-  const addAccountRepo = checkRepository(repo.addAccount);
-  const { doc: account } = await addAccountRepo(payload);
+  const { doc: account } = await addAccountService({
+    payload,
+    repositories: { account: defaultRepo },
+  });
   return account;
 };
 
 export const removeAccountController = async (filter: {
   accountId: string,
 }) => {
-  const removeAccountRepo = checkRepository(repo.removeAccount);
-  const { doc: account } = await removeAccountRepo(filter);
+  const { doc: account } = await removeAccountService({
+    filter,
+    repositories: { account: defaultRepo },
+  });
   return account;
 };
 
 export const watchAccountController = <T>(
   selector: (state: Record<string, Account>) => T,
-) => {
-  const watchAccountRepo = checkRepository(repo.watchAccount);
-  return watchAccountRepo(selector);
-};
+) => watchAccountService({
+    selector,
+    repositories: { account: defaultRepo },
+  });
