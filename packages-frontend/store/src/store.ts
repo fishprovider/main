@@ -1,10 +1,9 @@
 import { log } from '@fishprovider/core';
-import isEqual from 'lodash/isEqual';
 import keyBy from 'lodash/keyBy';
 import pickBy from 'lodash/pickBy';
+import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
-import { shallow } from 'zustand/shallow';
-import { createWithEqualityFn } from 'zustand/traditional';
+import { useShallow } from 'zustand/react/shallow';
 import { StateCreator } from 'zustand/vanilla';
 
 interface DocWithId extends Record<string, any> {
@@ -42,12 +41,6 @@ export interface StoreObj<State, Transform> {
   mergeState: (data: Partial<State>, options?: Options) => void;
   removeKey: (key: string, options?: Options) => void;
 }
-
-export const Comparator = {
-  strictEqual: (a: any, b: any) => a === b,
-  shallowEqual: shallow,
-  deepEqual: isEqual,
-};
 
 export const buildStoreSet = <Doc extends DocWithId>(
   initState: StateSet<Doc>, name: string,
@@ -131,17 +124,16 @@ export const buildStoreSet = <Doc extends DocWithId>(
     },
   });
 
-  const store = createWithEqualityFn<Store>()(devtools(stateCreator, {
+  const store = create(devtools(stateCreator, {
     enabled: false,
     store: name,
-  }), shallow);
+  }));
 
   const getState = () => store.getState().state;
 
-  const useStore = <Val>(
-    selector: (state: State) => Val,
-    comparator?: (a: Val, b: Val) => boolean,
-  ) => store(({ state }) => selector(state), comparator);
+  const useStore = <Val>(selector: (state: State) => Val) => store(
+    useShallow(({ state }) => selector(state)),
+  );
 
   return {
     ...store.getState(), getState, useStore,
@@ -185,17 +177,16 @@ export const buildStoreObj = <State extends Record<string, any>>(
     },
   });
 
-  const store = createWithEqualityFn<Store>()(devtools(stateCreator, {
+  const store = create(devtools(stateCreator, {
     enabled: false,
     store: name,
-  }), Comparator.shallowEqual);
+  }));
 
   const getState = () => store.getState().state;
 
-  const useStore = <Val>(
-    selector: (state: State) => Val,
-    comparator?: (a: Val, b: Val) => boolean,
-  ) => store(({ state }) => selector(state), comparator);
+  const useStore = <Val>(selector: (state: State) => Val) => store(
+    useShallow(({ state }) => selector(state)),
+  );
 
   return {
     ...store.getState(), getState, useStore,
