@@ -5,13 +5,6 @@ import {
   UpdateUserService, WatchUserInfoService, WatchUserService,
 } from '..';
 
-export const watchUserInfoService: WatchUserInfoService = ({
-  selector, repositories,
-}) => {
-  const watchUserInfoRepo = checkRepository(repositories.user.watchUserInfo);
-  return watchUserInfoRepo(selector);
-};
-
 export const getUserInfoService: GetUserInfoService = ({
   repositories,
 }) => {
@@ -24,6 +17,13 @@ export const updateUserInfoService: UpdateUserInfoService = ({
 }) => {
   const updateUserInfoRepo = checkRepository(repositories.user.updateUserInfo);
   updateUserInfoRepo(payload);
+};
+
+export const watchUserInfoService: WatchUserInfoService = ({
+  selector, repositories,
+}) => {
+  const watchUserInfoRepo = checkRepository(repositories.user.watchUserInfo);
+  return watchUserInfoRepo(selector);
 };
 
 //

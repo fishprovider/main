@@ -51,13 +51,6 @@ export type WatchUserService = <T>(params: {
 // UserInfo
 //
 
-export type WatchUserInfoService = <T>(params: {
-  selector: (state: Record<string, UserInfo>) => T,
-  repositories: {
-    user: UserRepository,
-  },
-}) => T;
-
 export type GetUserInfoService = (params: {
   repositories: {
     user: UserRepository,
@@ -70,3 +63,10 @@ export type UpdateUserInfoService = (params: {
     user: UserRepository,
   },
 }) => void;
+
+export type WatchUserInfoService = <T>(params: {
+  selector: (state: Record<string, UserInfo>) => T,
+  repositories: {
+    user: UserRepository,
+  },
+}) => T;
