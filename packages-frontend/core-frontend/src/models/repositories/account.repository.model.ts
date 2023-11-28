@@ -24,7 +24,7 @@ export interface AccountRepository {
       getTradeAccounts?: {
         platform: AccountPlatform,
         baseConfig: Partial<AccountConfig>,
-        tradeRequest: {
+        tradeRequest?: {
           redirectUrl: string,
           code: string,
         },

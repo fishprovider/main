@@ -15,7 +15,7 @@ const handler: ApiHandler<Partial<Account>[]> = async (data, userSession) => {
     tradeRequest: z.object({
       redirectUrl: z.string(),
       code: z.string(),
-    }).strict(),
+    }).strict().optional(),
   }).strict()
     .parse(data);
 

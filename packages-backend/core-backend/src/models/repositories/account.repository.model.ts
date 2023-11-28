@@ -31,8 +31,8 @@ export interface AccountRepository {
       platform?: AccountPlatform,
       config?: AccountConfig,
       tradeRequest?: {
-        redirectUrl?: string,
-        code?: string,
+        redirectUrl: string,
+        code: string,
       },
     },
     options?: BaseGetOptions<Account>,

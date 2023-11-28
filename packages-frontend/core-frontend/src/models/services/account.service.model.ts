@@ -1,45 +1,32 @@
 import {
   Account, AccountActivity, AccountBannerStatus, AccountConfig, AccountPlatform,
-  AccountProtectSettings, AccountSettings, AccountTradeSettings,
-  AccountTradeType, AccountViewType, ProviderType,
+  AccountProtectSettings, AccountSettings, AccountTradeSettings, AccountTradeType,
+  AccountViewType, ProviderType,
 } from '@fishprovider/core';
 
-import {
-  AccountRepository, BaseGetManyResult, BaseGetResult,
-  BaseGetServiceParams, BaseUpdateServiceParams, UserRepository,
-} from '..';
+import { AccountRepository, BaseGetManyResult, BaseGetResult } from '..';
 
-export type GetAccountService = (params: BaseGetServiceParams<Account> & {
+export type GetAccountService = (params: {
   filter: {
     accountId: string,
+    getTradeInfo?: boolean,
   },
   repositories: {
     account: AccountRepository
   },
 }) => Promise<BaseGetResult<Account>>;
 
-export type GetAccountsService = (params: BaseGetServiceParams<Account> & {
+export type GetAccountsService = (params: {
   filter: {
     viewType?: AccountViewType,
     email?: string,
-    accountIds?: string[],
   },
   repositories: {
     account: AccountRepository
   },
 }) => Promise<BaseGetManyResult<Account>>;
 
-export type GetTradeAccountService = (params: BaseUpdateServiceParams<Account> & {
-  filter: {
-    accountId: string,
-  },
-  repositories: {
-    account: AccountRepository,
-    trade: AccountRepository,
-  },
-}) => Promise<BaseGetResult<Account>>;
-
-export type GetTradeAccountsService = (params: BaseUpdateServiceParams<Account> & {
+export type GetTradeAccountsService = (params: {
   filter: {
     platform: AccountPlatform,
     baseConfig: Partial<AccountConfig>,
@@ -50,11 +37,10 @@ export type GetTradeAccountsService = (params: BaseUpdateServiceParams<Account> 
   },
   repositories: {
     account: AccountRepository,
-    trade: AccountRepository,
   },
 }) => Promise<BaseGetManyResult<Account>>;
 
-export type UpdateAccountService = (params: BaseUpdateServiceParams<Account> & {
+export type UpdateAccountService = (params: {
   filter: {
     accountId: string,
   },
@@ -70,13 +56,14 @@ export type UpdateAccountService = (params: BaseUpdateServiceParams<Account> & {
     protectSettings?: AccountProtectSettings;
     settings?: AccountSettings;
     addActivity?: AccountActivity,
+    account?: Partial<Account>,
   },
   repositories: {
     account: AccountRepository
   },
 }) => Promise<BaseGetResult<Account>>;
 
-export type AddAccountService = (params: BaseUpdateServiceParams<Account> & {
+export type AddAccountService = (params: {
   payload: {
     name: string,
     providerType: ProviderType,
@@ -86,18 +73,21 @@ export type AddAccountService = (params: BaseUpdateServiceParams<Account> & {
   },
   repositories: {
     account: AccountRepository,
-    trade: AccountRepository,
-    user: UserRepository,
   },
 }) => Promise<BaseGetResult<Account>>;
 
-export type RemoveAccountService = (params: BaseUpdateServiceParams<Account> & {
+export type RemoveAccountService = (params: {
   filter: {
     accountId: string,
   },
   repositories: {
     account: AccountRepository,
-    trade: AccountRepository,
-    user: UserRepository,
   },
 }) => Promise<BaseGetResult<Account>>;
+
+export type WatchAccountService = <T>(params: {
+  selector: (state: Record<string, Account>) => T,
+  repositories: {
+    account: AccountRepository,
+  },
+}) => T;
