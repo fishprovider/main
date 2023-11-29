@@ -58,6 +58,7 @@ const removeAccount: AccountRepository['removeAccount'] = async (filter) => {
 };
 
 export const CacheFirstAccountRepository: AccountRepository = {
+  ...RedisAccountRepository,
   ...MongoAccountRepository,
   getAccount,
   getAccounts,

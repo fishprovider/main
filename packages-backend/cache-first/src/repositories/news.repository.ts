@@ -20,5 +20,7 @@ const getNews: NewsRepository['getNews'] = async (filter, options) => {
 };
 
 export const CacheFirstNewsRepository: NewsRepository = {
+  ...RedisNewsRepository,
+  ...MongoNewsRepository,
   getNews,
 };
