@@ -24,25 +24,13 @@ export const updateUserController = async (
     starAccount?: {
       accountId: string
       enabled: boolean
-    }
+    },
+    refreshRoles?: boolean
   },
 ) => {
   const { doc: user } = await updateUserService({
     filter,
     payload,
-    repositories: { user: StoreFirstUserRepository },
-  });
-  return user;
-};
-
-export const refreshUserRolesController = async (filter: {
-  email?: string,
-}) => {
-  const { doc: user } = await updateUserService({
-    filter,
-    payload: {
-      refreshRoles: true,
-    },
     repositories: { user: StoreFirstUserRepository },
   });
   return user;
