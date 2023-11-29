@@ -1,8 +1,8 @@
 import { AccountRole } from '@fishprovider/core';
-import membersAdd from '@fishprovider/cross/dist/api/accounts/members/add';
 import { useState } from 'react';
 
 import { ProviderRoleText } from '~constants/account';
+import { updateAccountController } from '~controllers/account.controller';
 import { watchUserInfoController } from '~controllers/user.controller';
 import Button from '~ui/core/Button';
 import Group from '~ui/core/Group';
@@ -17,9 +17,11 @@ interface Props {
 
 function AddMemberModal({ onClose }: Props) {
   const {
-    providerId = '',
+    accountId = '',
+    name = '',
   } = watchUserInfoController((state) => ({
-    providerId: state.activeAccount?._id,
+    accountId: state.activeAccount?._id,
+    name: state.activeUser?.name,
   }));
 
   const [email, setEmail] = useState('');
@@ -28,10 +30,14 @@ function AddMemberModal({ onClose }: Props) {
   const onSave = async () => {
     if (!(await openConfirmModal())) return;
 
-    await membersAdd({
-      providerId,
-      email,
-      role: role as any,
+    await updateAccountController({
+      accountId,
+    }, {
+      addMember: {
+        email,
+        role,
+        name,
+      },
     }).then(() => {
       if (onClose) onClose();
     });

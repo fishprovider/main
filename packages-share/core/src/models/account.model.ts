@@ -85,8 +85,8 @@ export interface AccountInvestor {
   shares?: number;
   percent?: number;
 
-  updatedAt: Date;
-  createdAt: Date;
+  updatedAt?: Date;
+  createdAt?: Date;
 }
 
 export interface AccountMember {
@@ -98,8 +98,8 @@ export interface AccountMember {
   picture?: string;
   locks?: AccountLock[];
 
-  updatedAt: Date;
-  createdAt: Date;
+  updatedAt?: Date;
+  createdAt?: Date;
 }
 
 export interface AccountPlan {

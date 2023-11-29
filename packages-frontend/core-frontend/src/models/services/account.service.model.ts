@@ -1,5 +1,5 @@
 import {
-  Account, AccountActivity, AccountBannerStatus, AccountConfig, AccountPlatform,
+  Account, AccountActivity, AccountBannerStatus, AccountConfig, AccountMember, AccountPlatform,
   AccountProtectSettings, AccountSettings, AccountTradeSettings, AccountTradeType,
   AccountViewType, ProviderType,
 } from '@fishprovider/core';
@@ -50,6 +50,8 @@ export type UpdateAccountService = (params: {
     protectSettings?: AccountProtectSettings;
     settings?: AccountSettings;
     addActivity?: AccountActivity,
+    addMember?: AccountMember,
+    removeMemberEmail?: string,
     account?: Partial<Account>,
   },
   repositories: {
