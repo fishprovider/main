@@ -28,6 +28,9 @@ const getAccounts: AccountRepository['getAccounts'] = async (filter) => {
 };
 
 const updateAccount: AccountRepository['updateAccount'] = async (filter, payload) => {
+  // TODO: addMember
+  // TODO: removeMemberEmail
+
   const account = await fishApiPost<Partial<Account> | undefined>('/account/updateAccount', { ...filter, payload });
   return { doc: account };
 };
