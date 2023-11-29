@@ -14,12 +14,12 @@ export const getCacheFirst = async <T extends Base>(
   options?: CacheFirstOptions,
 ) => {
   const { getCache, setCache, getDb } = params;
-  const { initializeCache, revalidateCache } = options || {};
+  const { initializeCache } = options || {};
 
   let data: T | undefined = await getCache?.();
 
   const isCacheEmpty = !data?.doc && !data?.docs;
-  if ((initializeCache && isCacheEmpty) || revalidateCache) {
+  if (initializeCache && isCacheEmpty) {
     data = await getDb?.();
     setCache?.(data); // non-blocking
   }

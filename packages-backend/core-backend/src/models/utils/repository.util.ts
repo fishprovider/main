@@ -3,7 +3,6 @@ export type Sort = { [key: string]: 1 | -1 | 'asc' | 'desc' };
 
 export interface CacheFirstOptions {
   initializeCache?: boolean,
-  revalidateCache?: boolean,
 }
 
 export interface BaseGetOptions<T> extends CacheFirstOptions {
