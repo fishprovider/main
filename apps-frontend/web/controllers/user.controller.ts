@@ -1,6 +1,6 @@
 import { User } from '@fishprovider/core';
 import {
-  getUserInfoService, getUserService, refreshUserRolesService, updateUserInfoService,
+  getUserInfoService, getUserService, updateUserInfoService,
   updateUserService, UserInfo, watchUserInfoService, watchUserService,
 } from '@fishprovider/core-frontend';
 import { StoreFirstUserRepository } from '@fishprovider/store-first';
@@ -40,8 +40,11 @@ export const updateUserController = async (
 export const refreshUserRolesController = async (filter: {
   email?: string,
 }) => {
-  const { doc: user } = await refreshUserRolesService({
+  const { doc: user } = await updateUserService({
     filter,
+    payload: {
+      refreshRoles: true,
+    },
     repositories: { user: defaultRepo },
   });
   return user;

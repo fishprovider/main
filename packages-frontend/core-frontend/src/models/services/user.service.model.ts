@@ -25,15 +25,7 @@ export type UpdateUserService = (params: {
       accountId: string,
       enabled: boolean,
     },
-  },
-  repositories: {
-    user: UserRepository
-  },
-}) => Promise<BaseGetResult<User>>;
-
-export type RefreshUserRolesService = (params: {
-  filter: {
-    email?: string,
+    refreshRoles?: boolean,
   },
   repositories: {
     user: UserRepository

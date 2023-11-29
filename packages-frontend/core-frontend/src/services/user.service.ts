@@ -1,7 +1,7 @@
 import { checkRepository } from '@fishprovider/core';
 
 import {
-  GetUserInfoService, GetUserService, RefreshUserRolesService, UpdateUserInfoService,
+  GetUserInfoService, GetUserService, UpdateUserInfoService,
   UpdateUserService, WatchUserInfoService, WatchUserService,
 } from '..';
 
@@ -53,25 +53,6 @@ export const updateUserService: UpdateUserService = async ({
 }) => {
   const updateUserRepo = checkRepository(repositories.user.updateUser);
   const res = await updateUserRepo(filter, payload);
-
-  updateUserInfoService({
-    payload: {
-      activeUser: {
-        ...getUserInfoService({ repositories }).activeUser,
-        ...res.doc,
-      },
-    },
-    repositories,
-  });
-
-  return res;
-};
-
-export const refreshUserRolesService: RefreshUserRolesService = async ({
-  filter, repositories,
-}) => {
-  const updateUserRepo = checkRepository(repositories.user.updateUser);
-  const res = await updateUserRepo(filter, { refreshRoles: true });
 
   updateUserInfoService({
     payload: {
