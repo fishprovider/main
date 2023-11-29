@@ -58,7 +58,7 @@ function AccountBalance() {
 
   const { mutate: reload, isLoading } = useMutate({
     mutationFn: (accountId: string) => getAccountController({
-      accountId, getTradeInfo: true,
+      accountId, getTradeAccount: true,
     }),
   });
 

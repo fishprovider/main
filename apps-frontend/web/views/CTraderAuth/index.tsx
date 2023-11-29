@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import Link from '~components/base/Link';
-import { addAccountController, getTradeAccountsController } from '~controllers/account.controller';
+import { addAccountController, getAccountsController } from '~controllers/account.controller';
 import { watchUserInfoController } from '~controllers/user.controller';
 import Routes, { toAccount } from '~libs/routes';
 import Button from '~ui/core/Button';
@@ -131,14 +131,16 @@ function CTraderAuth() {
       const [_1, _2, _3, clientId] = window.location.pathname.split('/');
       const redirectUrl = `${window.location.origin}${window.location.pathname}`;
 
-      getTradeAccountsController({
-        platform: AccountPlatform.ctrader,
-        baseConfig: {
-          clientId,
-        },
-        tradeRequest: {
-          redirectUrl,
-          code: code as string,
+      getAccountsController({
+        getTradeAccounts: {
+          platform: AccountPlatform.ctrader,
+          baseConfig: {
+            clientId,
+          },
+          tradeRequest: {
+            redirectUrl,
+            code: code as string,
+          },
         },
       }).then((res) => {
         toastSuccess('Connected');

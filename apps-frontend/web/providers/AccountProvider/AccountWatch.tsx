@@ -91,7 +91,7 @@ interface Props {
 
 function AccountWatch({ providerId }: Props) {
   useEffect(() => {
-    getAccountController({ accountId: providerId, getTradeInfo: true });
+    getAccountController({ accountId: providerId, getTradeAccount: true });
   }, [providerId]);
 
   useQuery({

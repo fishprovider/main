@@ -4,9 +4,9 @@ import { AccountRepository } from '@fishprovider/core-frontend';
 import { fishApiGet, fishApiPost } from '..';
 
 const getAccount: AccountRepository['getAccount'] = async (filter) => {
-  const { getTradeInfo, ...rest } = filter;
+  const { getTradeAccount, ...rest } = filter;
 
-  if (getTradeInfo) {
+  if (getTradeAccount) {
     const account = await fishApiGet<Partial<Account> | undefined>('/account/getTradeAccount', rest);
     return { doc: account };
   }

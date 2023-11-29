@@ -1,7 +1,7 @@
 import { checkRepository } from '@fishprovider/core';
 
 import {
-  AddAccountService, GetAccountService, GetAccountsService, GetTradeAccountsService,
+  AddAccountService, GetAccountService, GetAccountsService,
   RemoveAccountService, UpdateAccountService, WatchAccountService,
 } from '..';
 
@@ -17,15 +17,6 @@ export const getAccountsService: GetAccountsService = async ({
 }) => {
   const getAccountsRepo = checkRepository(repositories.account.getAccounts);
   return getAccountsRepo(filter);
-};
-
-export const getTradeAccountsService: GetTradeAccountsService = async ({
-  filter, repositories,
-}) => {
-  const getTradeAccountsRepo = checkRepository(repositories.account.getAccounts);
-  return getTradeAccountsRepo({
-    getTradeAccounts: filter,
-  });
 };
 
 export const updateAccountService: UpdateAccountService = async ({

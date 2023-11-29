@@ -9,7 +9,7 @@ import { AccountRepository, BaseGetManyResult, BaseGetResult } from '..';
 export type GetAccountService = (params: {
   filter: {
     accountId: string,
-    getTradeInfo?: boolean,
+    getTradeAccount?: boolean,
   },
   repositories: {
     account: AccountRepository
@@ -20,19 +20,13 @@ export type GetAccountsService = (params: {
   filter: {
     viewType?: AccountViewType,
     email?: string,
-  },
-  repositories: {
-    account: AccountRepository
-  },
-}) => Promise<BaseGetManyResult<Account>>;
-
-export type GetTradeAccountsService = (params: {
-  filter: {
-    platform: AccountPlatform,
-    baseConfig: Partial<AccountConfig>,
-    tradeRequest?: {
-      redirectUrl: string,
-      code: string,
+    getTradeAccounts?: {
+      platform: AccountPlatform,
+      baseConfig: Partial<AccountConfig>,
+      tradeRequest?: {
+        redirectUrl: string,
+        code: string,
+      },
     },
   },
   repositories: {

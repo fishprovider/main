@@ -5,7 +5,7 @@ import {
   AccountViewType, ProviderType,
 } from '@fishprovider/core';
 import {
-  addAccountService, getAccountService, getAccountsService, getTradeAccountsService,
+  addAccountService, getAccountService, getAccountsService,
   removeAccountService, updateAccountService, watchAccountService,
 } from '@fishprovider/core-frontend';
 import { StoreFirstAccountRepository } from '@fishprovider/store-first';
@@ -14,7 +14,7 @@ const defaultRepo = StoreFirstAccountRepository;
 
 export const getAccountController = async (filter: {
   accountId: string,
-  getTradeInfo?: boolean,
+  getTradeAccount?: boolean,
 }) => {
   const { doc: account } = await getAccountService({
     filter,
@@ -26,27 +26,20 @@ export const getAccountController = async (filter: {
 export const getAccountsController = async (filter: {
   viewType?: AccountViewType,
   email?: string,
+  getTradeAccounts?: {
+    platform: AccountPlatform,
+    baseConfig: Partial<AccountConfig>,
+    tradeRequest?: {
+      redirectUrl: string,
+      code: string,
+    },
+  },
 }) => {
   const { docs: accounts } = await getAccountsService({
     filter,
     repositories: { account: defaultRepo },
   });
   return accounts;
-};
-
-export const getTradeAccountsController = async (filter: {
-  platform: AccountPlatform,
-  baseConfig: Partial<AccountConfig>,
-  tradeRequest: {
-    redirectUrl: string,
-    code: string,
-  },
-}) => {
-  const { docs: tradeAccounts } = await getTradeAccountsService({
-    filter,
-    repositories: { account: defaultRepo },
-  });
-  return tradeAccounts;
 };
 
 export const updateAccountController = async (

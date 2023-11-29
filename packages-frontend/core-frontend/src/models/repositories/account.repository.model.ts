@@ -12,7 +12,7 @@ export interface AccountRepository {
   getAccount?: (
     filter: {
       accountId?: string,
-      getTradeInfo?: boolean,
+      getTradeAccount?: boolean,
     },
     options?: BaseGetOptions<Account>,
   ) => Promise<BaseGetResult<Account>>;
