@@ -61,20 +61,13 @@ export const updateAccountController = async (
     account?: Partial<Account>,
   },
 ) => {
-  const { account: accountUpdate, ...rest } = payload;
-  if (accountUpdate) {
-    const { doc: account } = await updateAccountService({
-      filter,
-      payload: { account: accountUpdate },
-      repositories: { account: ClientOnlyAccountRepository },
-    });
-    return account;
-  }
-
   const { doc: account } = await updateAccountService({
     filter,
-    payload: rest,
-    repositories: { account: StoreFirstAccountRepository },
+    payload,
+    repositories: {
+      account: StoreFirstAccountRepository,
+      clientOnly: ClientOnlyAccountRepository,
+    },
   });
   return account;
 };

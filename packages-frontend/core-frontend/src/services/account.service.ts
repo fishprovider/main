@@ -22,8 +22,15 @@ export const getAccountsService: GetAccountsService = async ({
 export const updateAccountService: UpdateAccountService = async ({
   filter, payload, repositories,
 }) => {
+  const { account: accountUpdate, ...rest } = payload;
+
+  if (accountUpdate) {
+    const updateAccountRepo = checkRepository(repositories.clientOnly.updateAccount);
+    return updateAccountRepo(filter, payload);
+  }
+
   const updateAccountRepo = checkRepository(repositories.account.updateAccount);
-  return updateAccountRepo(filter, payload);
+  return updateAccountRepo(filter, rest);
 };
 
 export const addAccountService: AddAccountService = async ({

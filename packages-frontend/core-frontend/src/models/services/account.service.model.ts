@@ -55,7 +55,8 @@ export type UpdateAccountService = (params: {
     account?: Partial<Account>,
   },
   repositories: {
-    account: AccountRepository
+    account: AccountRepository,
+    clientOnly: AccountRepository,
   },
 }) => Promise<BaseGetResult<Account>>;
 
