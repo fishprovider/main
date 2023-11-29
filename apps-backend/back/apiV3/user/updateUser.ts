@@ -5,7 +5,7 @@ import { z } from 'zod';
 
 import { ApiHandler } from '~types/ApiHandler.model';
 
-const handler: ApiHandler<Partial<User>> = async (data, userSession) => {
+const updateUser: ApiHandler<Partial<User>> = async (data, userSession) => {
   const payload = z.object({
     name: z.string().optional(),
     starAccount: z.object({
@@ -29,4 +29,4 @@ const handler: ApiHandler<Partial<User>> = async (data, userSession) => {
   return { result: doc };
 };
 
-export default handler;
+export default updateUser;

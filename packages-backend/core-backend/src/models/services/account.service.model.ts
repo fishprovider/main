@@ -1,7 +1,7 @@
 import {
   Account, AccountActivity, AccountBannerStatus, AccountConfig, AccountMember, AccountPlatform,
-  AccountProtectSettings, AccountSettings, AccountTradeSettings,
-  AccountTradeType, AccountViewType, ProviderType,
+  AccountProtectSettings, AccountSettings, AccountTradeSettings, AccountTradeType, AccountViewType,
+  ProviderType,
 } from '@fishprovider/core';
 
 import {

@@ -6,7 +6,7 @@ import { z } from 'zod';
 
 import { ApiHandler } from '~types/ApiHandler.model';
 
-const handler: ApiHandler<Partial<Account>> = async (data, userSession) => {
+const getTradeAccount: ApiHandler<Partial<Account>> = async (data, userSession) => {
   const filter = z.object({
     accountId: z.string(),
   }).strict()
@@ -26,4 +26,4 @@ const handler: ApiHandler<Partial<Account>> = async (data, userSession) => {
   return { result: doc };
 };
 
-export default handler;
+export default getTradeAccount;

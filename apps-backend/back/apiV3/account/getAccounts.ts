@@ -5,7 +5,7 @@ import { z } from 'zod';
 
 import { ApiHandler } from '~types/ApiHandler.model';
 
-const handler: ApiHandler<Partial<Account>[]> = async (data, userSession) => {
+const getAccounts: ApiHandler<Partial<Account>[]> = async (data, userSession) => {
   const filter = z.object({
     viewType: z.nativeEnum(AccountViewType).optional(),
     email: z.string().optional(),
@@ -37,4 +37,4 @@ const handler: ApiHandler<Partial<Account>[]> = async (data, userSession) => {
   return { result: docs };
 };
 
-export default handler;
+export default getAccounts;

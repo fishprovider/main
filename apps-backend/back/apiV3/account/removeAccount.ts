@@ -10,7 +10,7 @@ const env = {
   typePre: process.env.TYPE_PRE,
 };
 
-const handler: ApiHandler<Partial<Account>> = async (data, userSession) => {
+const removeAccount: ApiHandler<Partial<Account>> = async (data, userSession) => {
   const filter = z.object({
     accountId: z.string(),
   }).strict()
@@ -48,4 +48,4 @@ const handler: ApiHandler<Partial<Account>> = async (data, userSession) => {
   return {};
 };
 
-export default handler;
+export default removeAccount;

@@ -1,4 +1,6 @@
-import { Asset, ProviderType } from '@fishprovider/core';
+import {
+  Asset, ProviderType,
+} from '@fishprovider/core';
 
 import {
   BaseGetManyResult, BaseGetOptions,

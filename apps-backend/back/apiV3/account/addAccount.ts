@@ -12,7 +12,7 @@ const env = {
   typePre: process.env.TYPE_PRE,
 };
 
-const handler: ApiHandler<Partial<Account>> = async (data, userSession) => {
+const addAccount: ApiHandler<Partial<Account>> = async (data, userSession) => {
   const payload = z.object({
     name: z.string(),
     providerType: z.nativeEnum(ProviderType),
@@ -78,4 +78,4 @@ const handler: ApiHandler<Partial<Account>> = async (data, userSession) => {
   return { result: account };
 };
 
-export default handler;
+export default addAccount;
