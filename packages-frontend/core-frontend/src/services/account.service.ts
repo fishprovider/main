@@ -31,14 +31,8 @@ export const getTradeAccountsService: GetTradeAccountsService = async ({
 export const updateAccountService: UpdateAccountService = async ({
   filter, payload, repositories,
 }) => {
-  const { account: accountUpdate, ...rest } = payload;
-  if (accountUpdate) {
-    const updateAccountRepo = checkRepository(repositories.account.updateAccount);
-    return updateAccountRepo(filter, { account: accountUpdate });
-  }
-
   const updateAccountRepo = checkRepository(repositories.account.updateAccount);
-  return updateAccountRepo(filter, rest);
+  return updateAccountRepo(filter, payload);
 };
 
 export const addAccountService: AddAccountService = async ({
