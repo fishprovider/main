@@ -7,8 +7,8 @@ const getUser: UserRepository['getUser'] = async (filter) => {
   const { email } = filter;
   if (!email) return {};
 
-  const account = _.find(storeUsers.getState(), (user) => user.email === email);
-  return { doc: account };
+  const user = _.find(storeUsers.getState(), (item) => item.email === email);
+  return { doc: user };
 };
 
 const updateUser: UserRepository['updateUser'] = async (_filter, payload) => {
