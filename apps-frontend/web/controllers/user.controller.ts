@@ -5,14 +5,12 @@ import {
 } from '@fishprovider/core-frontend';
 import { StoreFirstUserRepository } from '@fishprovider/store-first';
 
-const defaultRepo = StoreFirstUserRepository;
-
 export const getUserController = async (filter: {
   email?: string,
 }) => {
   const { doc: user } = await getUserService({
     filter,
-    repositories: { user: defaultRepo },
+    repositories: { user: StoreFirstUserRepository },
   });
   return user;
 };
@@ -32,7 +30,7 @@ export const updateUserController = async (
   const { doc: user } = await updateUserService({
     filter,
     payload,
-    repositories: { user: defaultRepo },
+    repositories: { user: StoreFirstUserRepository },
   });
   return user;
 };
@@ -45,7 +43,7 @@ export const refreshUserRolesController = async (filter: {
     payload: {
       refreshRoles: true,
     },
-    repositories: { user: defaultRepo },
+    repositories: { user: StoreFirstUserRepository },
   });
   return user;
 };
@@ -54,7 +52,7 @@ export const watchUserController = <T>(
   selector: (state: Record<string, User>) => T,
 ) => watchUserService({
     selector,
-    repositories: { user: defaultRepo },
+    repositories: { user: StoreFirstUserRepository },
   });
 
 //
@@ -62,13 +60,13 @@ export const watchUserController = <T>(
 //
 
 export const getUserInfoController = () => getUserInfoService({
-  repositories: { user: defaultRepo },
+  repositories: { user: StoreFirstUserRepository },
 });
 
 export const updateUserInfoController = (payload: Partial<UserInfo>) => {
   updateUserInfoService({
     payload,
-    repositories: { user: defaultRepo },
+    repositories: { user: StoreFirstUserRepository },
   });
 };
 
@@ -76,5 +74,5 @@ export const watchUserInfoController = <T>(
   selector: (state: UserInfo) => T,
 ) => watchUserInfoService({
     selector,
-    repositories: { user: defaultRepo },
+    repositories: { user: StoreFirstUserRepository },
   });

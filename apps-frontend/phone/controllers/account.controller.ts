@@ -10,15 +10,13 @@ import {
 } from '@fishprovider/core-frontend';
 import { StoreFirstAccountRepository } from '@fishprovider/store-first';
 
-const defaultRepo = StoreFirstAccountRepository;
-
 export const getAccountController = async (filter: {
   accountId: string,
   getTradeAccount?: boolean,
 }) => {
   const { doc: account } = await getAccountService({
     filter,
-    repositories: { account: defaultRepo },
+    repositories: { account: StoreFirstAccountRepository },
   });
   return account;
 };
@@ -29,7 +27,7 @@ export const getAccountsController = async (filter: {
 }) => {
   const { docs: accounts } = await getAccountsService({
     filter,
-    repositories: { account: defaultRepo },
+    repositories: { account: StoreFirstAccountRepository },
   });
   return accounts;
 };
@@ -66,7 +64,7 @@ export const updateAccountController = async (
   const { doc: account } = await updateAccountService({
     filter,
     payload: rest,
-    repositories: { account: defaultRepo },
+    repositories: { account: StoreFirstAccountRepository },
   });
   return account;
 };
@@ -82,7 +80,7 @@ export const addAccountController = async (
 ) => {
   const { doc: account } = await addAccountService({
     payload,
-    repositories: { account: defaultRepo },
+    repositories: { account: StoreFirstAccountRepository },
   });
   return account;
 };
@@ -92,7 +90,7 @@ export const removeAccountController = async (filter: {
 }) => {
   const { doc: account } = await removeAccountService({
     filter,
-    repositories: { account: defaultRepo },
+    repositories: { account: StoreFirstAccountRepository },
   });
   return account;
 };
@@ -101,5 +99,5 @@ export const watchAccountController = <T>(
   selector: (state: Record<string, Account>) => T,
 ) => watchAccountService({
     selector,
-    repositories: { account: defaultRepo },
+    repositories: { account: StoreFirstAccountRepository },
   });

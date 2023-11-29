@@ -2,8 +2,6 @@ import { News } from '@fishprovider/core';
 import { getNewsService, watchNewsService } from '@fishprovider/core-frontend';
 import { StoreFirstNewsRepository } from '@fishprovider/store-first';
 
-const defaultRepo = StoreFirstNewsRepository;
-
 export const getNewsController = async (filter: {
   today?: boolean,
   week?: string,
@@ -11,7 +9,7 @@ export const getNewsController = async (filter: {
 }) => {
   const { docs: news } = await getNewsService({
     filter,
-    repositories: { news: defaultRepo },
+    repositories: { news: StoreFirstNewsRepository },
   });
   return news;
 };
@@ -20,5 +18,5 @@ export const watchNewsController = <T>(
   selector: (state: Record<string, News>) => T,
 ) => watchNewsService({
     selector,
-    repositories: { news: defaultRepo },
+    repositories: { news: StoreFirstNewsRepository },
   });
