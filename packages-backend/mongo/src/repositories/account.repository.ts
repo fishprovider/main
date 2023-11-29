@@ -71,7 +71,7 @@ const updateAccount: AccountRepository['updateAccount'] = async (filter, payload
     viewType, name, icon, strategyId, assetId, asset,
     leverage, balance, equity, margin, freeMargin, marginLevel,
     notes, privateNotes,
-    tradeSettings, protectSettings, settings, bannerStatus,
+    bannerStatus, tradeSettings, protectSettings, settings,
     providerData,
     addActivity, addMember, removeMemberEmail,
   } = payload;
@@ -94,10 +94,10 @@ const updateAccount: AccountRepository['updateAccount'] = async (filter, payload
     ...(marginLevel && { marginLevel }),
     ...(notes && { notes }),
     ...(privateNotes && { privateNotes }),
+    ...(bannerStatus && { bannerStatus }),
     ...(tradeSettings && { tradeSettings }),
     ...(protectSettings && { protectSettings }),
     ...(settings && { settings }),
-    ...(bannerStatus && { bannerStatus }),
     ...(providerData && { providerData }),
     updatedAt: new Date(),
   };
