@@ -60,8 +60,9 @@ const updateAccount: ApiHandler<Partial<Account>> = async (data, userSession) =>
         lastView: z.string().transform((_) => new Date(_)).optional(),
       }).strict().optional(),
       addMember: z.object({
-        email: z.string().optional(),
-        role: z.nativeEnum(AccountRole).optional(),
+        email: z.string(),
+        role: z.nativeEnum(AccountRole),
+        name: z.string(),
       }).strict().optional(),
       removeMemberEmail: z.string().optional(),
     }).strict(),

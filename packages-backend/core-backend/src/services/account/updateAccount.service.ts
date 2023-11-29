@@ -26,6 +26,7 @@ export const updateAccountService: UpdateAccountService = async ({
   const {
     viewType, name, icon, strategyId, notes, privateNotes, bannerStatus,
     tradeSettings, protectSettings, settings,
+    addMember, removeMemberEmail,
     ...rest
   } = payload;
 
@@ -54,7 +55,7 @@ export const updateAccountService: UpdateAccountService = async ({
   if (protectSettings && !isProtectorProvider) {
     throw new BaseError(AccountError.ACCOUNT_ACCESS_DENIED, accountId);
   }
-  if (settings && !isAdminProvider) {
+  if ((settings || addMember || removeMemberEmail) && !isAdminProvider) {
     throw new BaseError(AccountError.ACCOUNT_ACCESS_DENIED, accountId);
   }
   if (_.size(_.omit(rest, ['addActivity']))) {
