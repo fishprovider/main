@@ -70,7 +70,6 @@ const updateAccount: ApiHandler<Partial<Account>> = async (data, userSession) =>
     .parse(data);
 
   const { accountId, payload } = filter;
-  const { addActivity } = payload;
 
   const { doc } = await updateAccountService({
     filter: { accountId },
@@ -79,7 +78,7 @@ const updateAccount: ApiHandler<Partial<Account>> = async (data, userSession) =>
       account: CacheFirstAccountRepository,
     },
     options: {
-      returnAfter: !addActivity,
+      returnAfter: true,
     },
     context: { userSession },
   });
