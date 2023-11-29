@@ -48,11 +48,11 @@ export interface UserRepository {
     selector: (state: Record<string, User>) => T,
   ) => T;
 
-  watchUserInfo?: <T>(
-    selector: (state: UserInfo) => T,
-  ) => T;
-
   getUserInfo?: () => UserInfo;
 
   updateUserInfo?: (payload: Partial<UserInfo>) => void;
+
+  watchUserInfo?: <T>(
+    selector: (state: UserInfo) => T,
+  ) => T;
 }

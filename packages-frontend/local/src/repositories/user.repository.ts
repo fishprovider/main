@@ -1,7 +1,7 @@
 import { User } from '@fishprovider/core';
 import { UserRepository } from '@fishprovider/core-frontend';
 
-import { buildKeyUser, localGet } from '..';
+import { buildKeyUser, localGet, localSet } from '..';
 
 const getUser: UserRepository['getUser'] = async (filter) => {
   const key = buildKeyUser(filter);
@@ -9,6 +9,13 @@ const getUser: UserRepository['getUser'] = async (filter) => {
   return { doc: user };
 };
 
+const updateUser: UserRepository['updateUser'] = async (filter, payload) => {
+  const key = buildKeyUser(filter);
+  await localSet(key, payload.user);
+  return { doc: payload.user };
+};
+
 export const LocalUserRepository: UserRepository = {
   getUser,
+  updateUser,
 };
