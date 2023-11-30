@@ -21,6 +21,11 @@ function ActivityWatch() {
         userId,
         lastView: new Date(),
       },
+    }, {
+      projection: {
+        _id: 1,
+        activities: 1,
+      },
     }),
     queryKey: queryKeys.account(accountId, 'update'),
     refetchInterval: 1000 * 30, // 30s

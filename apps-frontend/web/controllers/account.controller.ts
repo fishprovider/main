@@ -5,7 +5,8 @@ import {
   AccountViewType, ProviderType,
 } from '@fishprovider/core';
 import {
-  addAccountService, getAccountService, getAccountsService,
+  addAccountService, BaseUpdateOptions,
+  getAccountService, getAccountsService,
   removeAccountService, updateAccountService, watchAccountService,
 } from '@fishprovider/core-frontend';
 import { StoreFirstAccountRepository } from '@fishprovider/store-first';
@@ -60,6 +61,7 @@ export const updateAccountController = async (
     removeMemberEmail?: string,
     account?: Partial<Account>,
   },
+  options?: BaseUpdateOptions<Account>,
 ) => {
   const { doc: account } = await updateAccountService({
     filter,
@@ -68,6 +70,7 @@ export const updateAccountController = async (
       account: StoreFirstAccountRepository,
       clientOnly: ClientOnlyAccountRepository,
     },
+    options,
   });
   return account;
 };
