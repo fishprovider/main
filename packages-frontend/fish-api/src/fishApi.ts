@@ -1,7 +1,8 @@
 import { log, promiseCreator } from '@fishprovider/core';
+import { BaseGetOptions } from '@fishprovider/core-frontend';
 import axios, { Axios, AxiosRequestConfig } from 'axios';
 
-export type ApiConfig = AxiosRequestConfig;
+export type ApiOptions<T> = BaseGetOptions<T> & AxiosRequestConfig;
 
 const clientPromise = promiseCreator<Axios>();
 
@@ -11,7 +12,7 @@ const errHandler = async <T>(
   handler: () => Promise<T>,
   url: string,
   payload: Record<string, any> = {},
-  options?: ApiConfig,
+  options?: ApiOptions<T>,
 ) => {
   try {
     return await handler();
@@ -32,7 +33,7 @@ const errHandler = async <T>(
 export const fishApiGet = async <T>(
   url: string,
   payload: Record<string, any> = {},
-  options?: ApiConfig,
+  options?: ApiOptions<T>,
 ) => errHandler<T>(async () => {
   const client = await clientPromise;
   const res = await client.get<T>(url, {
@@ -45,7 +46,7 @@ export const fishApiGet = async <T>(
 export const fishApiPost = async<T>(
   url: string,
   payload: Record<string, any> = {},
-  options?: ApiConfig,
+  options?: ApiOptions<T>,
 ) => errHandler<T>(async () => {
   const client = await clientPromise;
   const res = await client.post<T>(url, payload, options);
