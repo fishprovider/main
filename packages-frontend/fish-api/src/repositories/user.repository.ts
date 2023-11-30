@@ -3,8 +3,8 @@ import { UserRepository } from '@fishprovider/core-frontend';
 
 import { fishApiGet, fishApiPost } from '..';
 
-const getUser: UserRepository['getUser'] = async () => {
-  const user = await fishApiGet<Partial<User> | undefined>('/user/getUser');
+const getUser: UserRepository['getUser'] = async (_filter, options) => {
+  const user = await fishApiGet<Partial<User> | undefined>('/user/getUser', { options });
   return { doc: user };
 };
 
@@ -12,11 +12,11 @@ const updateUser: UserRepository['updateUser'] = async (_filter, payload, option
   const { refreshRoles, ...rest } = payload;
 
   if (refreshRoles) {
-    const user = await fishApiPost<Partial<User> | undefined>('/user/refreshUserRoles', {}, options);
+    const user = await fishApiPost<Partial<User> | undefined>('/user/refreshUserRoles', { options });
     return { doc: user };
   }
 
-  const user = await fishApiPost<Partial<User> | undefined>('/user/updateUser', rest, options);
+  const user = await fishApiPost<Partial<User> | undefined>('/user/updateUser', { ...rest, options });
   return { doc: user };
 };
 

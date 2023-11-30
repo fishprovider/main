@@ -57,13 +57,13 @@ const updateAccounts: AccountRepository['updateAccounts'] = async (filter, paylo
   return res ?? {};
 };
 
-const removeAccount: AccountRepository['removeAccount'] = async (filter) => {
+const removeAccount: AccountRepository['removeAccount'] = async (filter, options) => {
   const updateLocal = LocalFirstAccountRepository.removeAccount;
   const updateStore = StoreAccountRepository.removeAccount;
 
   const res = await updateStoreFirst<BaseGetResult<Account>>({
-    updateLocal: updateLocal && (() => updateLocal(filter)),
-    updateStore: updateStore && (() => updateStore(filter)),
+    updateLocal: updateLocal && (() => updateLocal(filter, options)),
+    updateStore: updateStore && (() => updateStore(filter, options)),
   });
 
   return res ?? {};

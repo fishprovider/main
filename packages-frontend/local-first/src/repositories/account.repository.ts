@@ -57,13 +57,13 @@ const updateAccounts: AccountRepository['updateAccounts'] = async (filter, paylo
   return res ?? {};
 };
 
-const removeAccount: AccountRepository['removeAccount'] = async (filter) => {
+const removeAccount: AccountRepository['removeAccount'] = async (filter, options) => {
   const updateApi = FishApiAccountRepository.removeAccount;
   const updateLocal = LocalAccountRepository.removeAccount;
 
   const res = await updateLocalFirst<BaseGetResult<Account>>({
-    updateApi: updateApi && (() => updateApi(filter)),
-    updateLocal: updateLocal && (() => updateLocal(filter)),
+    updateApi: updateApi && (() => updateApi(filter, options)),
+    updateLocal: updateLocal && (() => updateLocal(filter, options)),
   });
 
   return res ?? {};

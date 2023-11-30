@@ -45,13 +45,13 @@ const updateAccount: AccountRepository['updateAccount'] = async (filter, payload
   return res ?? {};
 };
 
-const removeAccount: AccountRepository['removeAccount'] = async (filter) => {
+const removeAccount: AccountRepository['removeAccount'] = async (filter, options) => {
   const updateDb = MongoAccountRepository.removeAccount;
   const updateCache = RedisAccountRepository.removeAccount;
 
   const res = await updateCacheFirst<BaseGetResult<Account>>({
-    updateDb: updateDb && (() => updateDb(filter)),
-    updateCache: updateCache && (() => updateCache(filter)),
+    updateDb: updateDb && (() => updateDb(filter, options)),
+    updateCache: updateCache && (() => updateCache(filter, options)),
   });
 
   return res ?? {};
