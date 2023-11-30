@@ -33,13 +33,13 @@ const getAccounts: AccountRepository['getAccounts'] = async (filter, options) =>
   return res ?? {};
 };
 
-const updateAccount: AccountRepository['updateAccount'] = async (filter, payload) => {
+const updateAccount: AccountRepository['updateAccount'] = async (filter, payload, options) => {
   const updateDb = MongoAccountRepository.updateAccount;
   const updateCache = RedisAccountRepository.updateAccount;
 
   const res = await updateCacheFirst<BaseGetResult<Account>>({
-    updateDb: updateDb && (() => updateDb(filter, payload)),
-    updateCache: updateCache && (({ doc } = {}) => updateCache(filter, { account: doc })),
+    updateDb: updateDb && (() => updateDb(filter, payload, options)),
+    updateCache: updateCache && (({ doc } = {}) => updateCache(filter, { account: doc }, options)),
   });
 
   return res ?? {};

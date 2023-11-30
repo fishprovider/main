@@ -3,35 +3,35 @@ import { AccountRepository } from '@fishprovider/core-frontend';
 
 import { fishApiGet, fishApiPost } from '..';
 
-const getAccount: AccountRepository['getAccount'] = async (filter) => {
+const getAccount: AccountRepository['getAccount'] = async (filter, options) => {
   const { getTradeAccount, ...rest } = filter;
 
   if (getTradeAccount) {
-    const account = await fishApiGet<Partial<Account> | undefined>('/account/getTradeAccount', rest);
+    const account = await fishApiGet<Partial<Account> | undefined>('/account/getTradeAccount', rest, options);
     return { doc: account };
   }
 
-  const account = await fishApiGet<Partial<Account> | undefined>('/account/getAccount', rest);
+  const account = await fishApiGet<Partial<Account> | undefined>('/account/getAccount', rest, options);
   return { doc: account };
 };
 
-const getAccounts: AccountRepository['getAccounts'] = async (filter) => {
+const getAccounts: AccountRepository['getAccounts'] = async (filter, options) => {
   const { getTradeAccounts, ...rest } = filter;
 
   if (getTradeAccounts) {
-    const accounts = await fishApiPost<Partial<Account>[] | undefined>('/account/getTradeAccounts', getTradeAccounts);
+    const accounts = await fishApiPost<Partial<Account>[] | undefined>('/account/getTradeAccounts', getTradeAccounts, options);
     return { docs: accounts };
   }
 
-  const accounts = await fishApiGet<Partial<Account>[] | undefined>('/account/getAccounts', rest);
+  const accounts = await fishApiGet<Partial<Account>[] | undefined>('/account/getAccounts', rest, options);
   return { docs: accounts };
 };
 
-const updateAccount: AccountRepository['updateAccount'] = async (filter, payload) => {
+const updateAccount: AccountRepository['updateAccount'] = async (filter, payload, options) => {
   // TODO: addMember
   // TODO: removeMemberEmail
 
-  const account = await fishApiPost<Partial<Account> | undefined>('/account/updateAccount', { ...filter, payload });
+  const account = await fishApiPost<Partial<Account> | undefined>('/account/updateAccount', { ...filter, payload }, options);
   return { doc: account };
 };
 

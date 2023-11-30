@@ -8,15 +8,15 @@ const getUser: UserRepository['getUser'] = async () => {
   return { doc: user };
 };
 
-const updateUser: UserRepository['updateUser'] = async (_filter, payload) => {
+const updateUser: UserRepository['updateUser'] = async (_filter, payload, options) => {
   const { refreshRoles, ...rest } = payload;
 
   if (refreshRoles) {
-    const user = await fishApiPost<Partial<User> | undefined>('/user/refreshUserRoles');
+    const user = await fishApiPost<Partial<User> | undefined>('/user/refreshUserRoles', {}, options);
     return { doc: user };
   }
 
-  const user = await fishApiPost<Partial<User> | undefined>('/user/updateUser', rest);
+  const user = await fishApiPost<Partial<User> | undefined>('/user/updateUser', rest, options);
   return { doc: user };
 };
 

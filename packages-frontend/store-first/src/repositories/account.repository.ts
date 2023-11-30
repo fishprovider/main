@@ -33,25 +33,25 @@ const getAccounts: AccountRepository['getAccounts'] = async (filter, options) =>
   return res ?? {};
 };
 
-const updateAccount: AccountRepository['updateAccount'] = async (filter, payload) => {
+const updateAccount: AccountRepository['updateAccount'] = async (filter, payload, options) => {
   const updateLocal = LocalFirstAccountRepository.updateAccount;
   const updateStore = StoreAccountRepository.updateAccount;
 
   const res = await updateStoreFirst<BaseGetResult<Account>>({
-    updateLocal: updateLocal && (() => updateLocal(filter, payload)),
-    updateStore: updateStore && (() => updateStore(filter, payload)),
+    updateLocal: updateLocal && (() => updateLocal(filter, payload, options)),
+    updateStore: updateStore && (() => updateStore(filter, payload, options)),
   });
 
   return res ?? {};
 };
 
-const updateAccounts: AccountRepository['updateAccounts'] = async (filter, payload) => {
+const updateAccounts: AccountRepository['updateAccounts'] = async (filter, payload, options) => {
   const updateLocal = LocalFirstAccountRepository.updateAccounts;
   const updateStore = StoreAccountRepository.updateAccounts;
 
   const res = await updateStoreFirst<BaseGetManyResult<Account>>({
-    updateLocal: updateLocal && (() => updateLocal(filter, payload)),
-    updateStore: updateStore && (() => updateStore(filter, payload)),
+    updateLocal: updateLocal && (() => updateLocal(filter, payload, options)),
+    updateStore: updateStore && (() => updateStore(filter, payload, options)),
   });
 
   return res ?? {};

@@ -19,13 +19,13 @@ const getUser: UserRepository['getUser'] = async (filter, options) => {
   return res ?? {};
 };
 
-const updateUser: UserRepository['updateUser'] = async (filter, payload) => {
+const updateUser: UserRepository['updateUser'] = async (filter, payload, options) => {
   const updateLocal = LocalFirstUserRepository.updateUser;
   const updateStore = StoreUserRepository.updateUser;
 
   const res = await updateStoreFirst<BaseGetResult<User>>({
-    updateLocal: updateLocal && (() => updateLocal(filter, payload)),
-    updateStore: updateStore && (() => updateStore(filter, payload)),
+    updateLocal: updateLocal && (() => updateLocal(filter, payload, options)),
+    updateStore: updateStore && (() => updateStore(filter, payload, options)),
   });
 
   return res ?? {};

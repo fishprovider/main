@@ -19,13 +19,13 @@ const getUser: UserRepository['getUser'] = async (filter, options) => {
   return res ?? {};
 };
 
-const updateUser: UserRepository['updateUser'] = async (filter, payload) => {
+const updateUser: UserRepository['updateUser'] = async (filter, payload, options) => {
   const updateLocal = LocalUserRepository.updateUser;
   const updateApi = FishApiUserRepository.updateUser;
 
   const res = await updateLocalFirst<BaseGetResult<User>>({
-    updateLocal: updateLocal && (() => updateLocal(filter, payload)),
-    updateApi: updateApi && (() => updateApi(filter, payload)),
+    updateLocal: updateLocal && (() => updateLocal(filter, payload, options)),
+    updateApi: updateApi && (() => updateApi(filter, payload, options)),
   });
 
   return res ?? {};
