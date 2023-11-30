@@ -38,7 +38,7 @@ const buildAccountFilter = (filter: {
 
   return {
     ...(accountId && { _id: accountId }),
-    ...(accountIds && { _id: { $in: accountIds } }),
+    ...(accountIds?.length && { _id: { $in: accountIds } }),
     ...(viewType && { viewType }),
     ...(email && { 'members.email': email }),
     ...(andFilter.length && { $and: andFilter }),
@@ -61,6 +61,7 @@ const getAccounts: AccountRepository['getAccounts'] = async (filter, options) =>
     buildAccountFilter(filter),
     options,
   ).toArray();
+  console.log('🚀 ~ file: account.repository.ts:53 ~ constgetAccount:AccountRepository[\'getAccount\']= ~ filter:', filter, buildAccountFilter(filter));
   return { docs: accounts };
 };
 
