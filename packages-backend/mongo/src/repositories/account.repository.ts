@@ -61,7 +61,6 @@ const getAccounts: AccountRepository['getAccounts'] = async (filter, options) =>
     buildAccountFilter(filter),
     options,
   ).toArray();
-  console.log('🚀 ~ file: account.repository.ts:53 ~ constgetAccount:AccountRepository[\'getAccount\']= ~ filter:', filter, buildAccountFilter(filter));
   return { docs: accounts };
 };
 

@@ -16,7 +16,7 @@ function UserClean() {
     queryFn: () => updateUserController({ email }, { refreshRoles: true }),
     queryKey: queryKeys.clean(),
     enabled: !!isServerLoggedIn,
-    refetchInterval: 1000 * 60 * 60, // 1h
+    refetchInterval: 1000 * 60 * 60 * 4, // 4h
   });
 
   return null;
