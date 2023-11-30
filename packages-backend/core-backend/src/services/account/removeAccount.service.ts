@@ -5,7 +5,7 @@ import {
 } from '../..';
 
 export const removeAccountService: RemoveAccountService = async ({
-  filter, repositories, context,
+  filter, repositories, options, context,
 }) => {
   //
   // pre-check
@@ -34,7 +34,7 @@ export const removeAccountService: RemoveAccountService = async ({
 
   await removeTradeAccountRepo({ accountId });
 
-  await removeAccountRepo(filter);
+  await removeAccountRepo(filter, options);
 
   await updateUsersRepo({}, { removeRoleAccountId: accountId });
 

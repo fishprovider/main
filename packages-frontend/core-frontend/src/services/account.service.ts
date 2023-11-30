@@ -6,45 +6,45 @@ import {
 } from '..';
 
 export const getAccountService: GetAccountService = async ({
-  filter, repositories,
+  filter, repositories, options,
 }) => {
   const getAccountRepo = checkRepository(repositories.account.getAccount);
-  return getAccountRepo(filter);
+  return getAccountRepo(filter, options);
 };
 
 export const getAccountsService: GetAccountsService = async ({
-  filter, repositories,
+  filter, repositories, options,
 }) => {
   const getAccountsRepo = checkRepository(repositories.account.getAccounts);
-  return getAccountsRepo(filter);
+  return getAccountsRepo(filter, options);
 };
 
 export const updateAccountService: UpdateAccountService = async ({
-  filter, payload, repositories,
+  filter, payload, repositories, options,
 }) => {
   const { account: accountUpdate, ...rest } = payload;
 
   if (accountUpdate) {
     const updateAccountRepo = checkRepository(repositories.clientOnly.updateAccount);
-    return updateAccountRepo(filter, payload);
+    return updateAccountRepo(filter, payload, options);
   }
 
   const updateAccountRepo = checkRepository(repositories.account.updateAccount);
-  return updateAccountRepo(filter, rest);
+  return updateAccountRepo(filter, rest, options);
 };
 
 export const addAccountService: AddAccountService = async ({
-  payload, repositories,
+  payload, repositories, options,
 }) => {
   const addAccountRepo = checkRepository(repositories.account.addAccount);
-  return addAccountRepo(payload);
+  return addAccountRepo(payload, options);
 };
 
 export const removeAccountService: RemoveAccountService = async ({
-  filter, repositories,
+  filter, repositories, options,
 }) => {
   const removeAccountRepo = checkRepository(repositories.account.removeAccount);
-  return removeAccountRepo(filter);
+  return removeAccountRepo(filter, options);
 };
 
 export const watchAccountService: WatchAccountService = ({

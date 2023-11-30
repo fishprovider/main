@@ -62,7 +62,7 @@ export interface AccountRepository {
     payload: {
       accounts?: Partial<Account>[],
     },
-    options?: BaseGetOptions<Account>,
+    options?: BaseUpdateOptions<Account>,
   ) => Promise<BaseGetManyResult<Account>>;
 
   addAccount?: (
@@ -73,12 +73,14 @@ export interface AccountRepository {
       tradeType: AccountTradeType,
       baseConfig: Partial<AccountConfig>,
     },
+    options?: BaseUpdateOptions<Account>,
   ) => Promise<BaseGetResult<Account>>;
 
   removeAccount?: (
     filter: {
       accountId: string,
     },
+    options?: BaseUpdateOptions<Account>,
   ) => Promise<BaseGetResult<Account>>;
 
   watchAccount?: <T>(
