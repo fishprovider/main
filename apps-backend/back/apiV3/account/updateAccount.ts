@@ -66,10 +66,13 @@ const updateAccount: ApiHandler<Partial<Account>> = async (data, userSession) =>
       }).strict().optional(),
       removeMemberEmail: z.string().optional(),
     }).strict(),
+    options: z.object({
+      projection: z.object({}).optional(),
+    }).strict().optional(),
   }).strict()
     .parse(data);
 
-  const { accountId, payload } = filter;
+  const { accountId, payload, options } = filter;
 
   const { doc } = await updateAccountService({
     filter: { accountId },
@@ -78,6 +81,7 @@ const updateAccount: ApiHandler<Partial<Account>> = async (data, userSession) =>
       account: CacheFirstAccountRepository,
     },
     options: {
+      projection: options?.projection,
       returnAfter: true,
     },
     context: { userSession },

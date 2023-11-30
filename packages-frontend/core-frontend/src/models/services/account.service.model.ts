@@ -4,9 +4,12 @@ import {
   AccountViewType, ProviderType,
 } from '@fishprovider/core';
 
-import { AccountRepository, BaseGetManyResult, BaseGetResult } from '..';
+import {
+  AccountRepository, BaseGetManyResult, BaseGetResult, BaseGetServiceParams,
+  BaseUpdateServiceParams,
+} from '..';
 
-export type GetAccountService = (params: {
+export type GetAccountService = (params: BaseGetServiceParams<Account> & {
   filter: {
     accountId: string,
     getTradeAccount?: boolean,
@@ -16,7 +19,7 @@ export type GetAccountService = (params: {
   },
 }) => Promise<BaseGetResult<Account>>;
 
-export type GetAccountsService = (params: {
+export type GetAccountsService = (params: BaseGetServiceParams<Account> & {
   filter: {
     viewType?: AccountViewType,
     email?: string,
@@ -34,7 +37,7 @@ export type GetAccountsService = (params: {
   },
 }) => Promise<BaseGetManyResult<Account>>;
 
-export type UpdateAccountService = (params: {
+export type UpdateAccountService = (params: BaseUpdateServiceParams<Account> & {
   filter: {
     accountId: string,
   },
@@ -60,7 +63,7 @@ export type UpdateAccountService = (params: {
   },
 }) => Promise<BaseGetResult<Account>>;
 
-export type AddAccountService = (params: {
+export type AddAccountService = (params: BaseUpdateServiceParams<Account> & {
   payload: {
     name: string,
     providerType: ProviderType,
@@ -73,7 +76,7 @@ export type AddAccountService = (params: {
   },
 }) => Promise<BaseGetResult<Account>>;
 
-export type RemoveAccountService = (params: {
+export type RemoveAccountService = (params: BaseUpdateServiceParams<Account> & {
   filter: {
     accountId: string,
   },

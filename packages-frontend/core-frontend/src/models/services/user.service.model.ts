@@ -3,10 +3,12 @@ import {
 } from '@fishprovider/core';
 
 import {
-  BaseGetResult, UserInfo, UserRepository,
+  BaseGetResult, BaseGetServiceParams,
+  BaseUpdateServiceParams,
+  UserInfo, UserRepository,
 } from '..';
 
-export type GetUserService = (params: {
+export type GetUserService = (params: BaseGetServiceParams<User> & {
   filter: {
     email?: string,
   },
@@ -15,7 +17,7 @@ export type GetUserService = (params: {
   },
 }) => Promise<BaseGetResult<User>>;
 
-export type UpdateUserService = (params: {
+export type UpdateUserService = (params:BaseUpdateServiceParams<User> & {
   filter: {
     email?: string,
   },
