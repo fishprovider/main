@@ -1,5 +1,5 @@
 import {
-  AccountConfig, AccountPlatform, BaseError, RepositoryError,
+  AccountConfig, BaseError, RepositoryError,
 } from '@fishprovider/core';
 import { AccountRepository } from '@fishprovider/core-backend';
 
@@ -17,20 +17,24 @@ const getAccount: AccountRepository['getAccount'] = async (payload) => {
   const { accountId, config: rawConfig } = payload;
   const config = checkConfig(rawConfig);
 
-  const doc = await getAccountInformation(
+  const tradeAccount = await getAccountInformation(
     new Connection(config),
     config.accountId,
   );
 
   return {
     doc: {
-      ...doc,
       _id: accountId,
-      platform: AccountPlatform.metatrader,
-      brokerType: doc.platform,
-      assetId: doc.currency,
-      asset: doc.currency,
-      providerData: doc,
+      assetId: tradeAccount.currency,
+      asset: tradeAccount.currency,
+      brokerType: tradeAccount.platform,
+      leverage: tradeAccount.leverage,
+      balance: tradeAccount.balance,
+      equity: tradeAccount.equity,
+      margin: tradeAccount.margin,
+      freeMargin: tradeAccount.freeMargin,
+      marginLevel: tradeAccount.marginLevel,
+      providerData: tradeAccount,
     },
   };
 };
