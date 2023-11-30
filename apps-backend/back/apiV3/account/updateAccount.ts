@@ -67,7 +67,7 @@ const updateAccount: ApiHandler<Partial<Account>> = async (data, userSession) =>
       removeMemberEmail: z.string().optional(),
     }).strict(),
     options: z.object({
-      projection: z.object({}).optional(),
+      projection: z.record(z.any()).optional(),
     }).strict().optional(),
   }).strict()
     .parse(data);
