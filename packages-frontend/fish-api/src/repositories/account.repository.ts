@@ -1,17 +1,17 @@
 import { Account } from '@fishprovider/core';
 import { AccountRepository } from '@fishprovider/core-frontend';
 
-import { fishApiGet, fishApiPost } from '..';
+import { fishApiPost } from '..';
 
 const getAccount: AccountRepository['getAccount'] = async (filter, options) => {
   const { getTradeAccount, ...rest } = filter;
 
   if (getTradeAccount) {
-    const account = await fishApiGet<Partial<Account> | undefined>('/account/getTradeAccount', { filter: rest, options });
+    const account = await fishApiPost<Partial<Account> | undefined>('/account/getTradeAccount', { filter: rest, options });
     return { doc: account };
   }
 
-  const account = await fishApiGet<Partial<Account> | undefined>('/account/getAccount', { filter: rest, options });
+  const account = await fishApiPost<Partial<Account> | undefined>('/account/getAccount', { filter: rest, options });
   return { doc: account };
 };
 
@@ -23,7 +23,7 @@ const getAccounts: AccountRepository['getAccounts'] = async (filter, options) =>
     return { docs: accounts };
   }
 
-  const accounts = await fishApiGet<Partial<Account>[] | undefined>('/account/getAccounts', { filter: rest, options });
+  const accounts = await fishApiPost<Partial<Account>[] | undefined>('/account/getAccounts', { filter: rest, options });
   return { docs: accounts };
 };
 

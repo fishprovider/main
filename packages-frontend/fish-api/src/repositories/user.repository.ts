@@ -1,10 +1,10 @@
 import { User } from '@fishprovider/core';
 import { UserRepository } from '@fishprovider/core-frontend';
 
-import { fishApiGet, fishApiPost } from '..';
+import { fishApiPost } from '..';
 
 const getUser: UserRepository['getUser'] = async (_filter, options) => {
-  const user = await fishApiGet<Partial<User> | undefined>('/user/getUser', { options });
+  const user = await fishApiPost<Partial<User> | undefined>('/user/getUser', { options });
   return { doc: user };
 };
 
