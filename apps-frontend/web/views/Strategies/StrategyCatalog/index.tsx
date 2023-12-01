@@ -26,10 +26,8 @@ function Catalog() {
 
   const {
     isServerLoggedIn,
-    email,
   } = watchUserInfoController((state) => ({
     isServerLoggedIn: state.isServerLoggedIn,
-    email: state.activeUser?.email,
   }));
 
   const [favorite, toggleFavorite] = useToggle();
@@ -41,7 +39,7 @@ function Catalog() {
     queryKey: queryKeys.slimAccounts(),
   });
   useQuery({
-    queryFn: () => getAccountsController({ email }),
+    queryFn: () => getAccountsController({ viewType: AccountViewType.private }),
     queryKey: queryKeys.userAccounts(),
     enabled: !!isServerLoggedIn,
   });

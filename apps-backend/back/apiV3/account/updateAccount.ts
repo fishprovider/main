@@ -8,8 +8,10 @@ import { z } from 'zod';
 import { ApiHandler } from '~types/ApiHandler.model';
 
 const updateAccount: ApiHandler<Partial<Account>> = async (data, userSession) => {
-  const filter = z.object({
-    accountId: z.string(),
+  const input = z.object({
+    filter: z.object({
+      accountId: z.string(),
+    }).strict(),
     payload: z.object({
       viewType: z.nativeEnum(AccountViewType).optional(),
       name: z.string().optional(),
@@ -72,10 +74,10 @@ const updateAccount: ApiHandler<Partial<Account>> = async (data, userSession) =>
   }).strict()
     .parse(data);
 
-  const { accountId, payload, options } = filter;
+  const { filter, payload, options } = input;
 
   const { doc } = await updateAccountService({
-    filter: { accountId },
+    filter,
     payload,
     repositories: {
       account: CacheFirstAccountRepository,

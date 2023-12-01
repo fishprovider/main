@@ -24,7 +24,6 @@ export const getAccountController = async (filter: {
 
 export const getAccountsController = async (filter: {
   viewType?: AccountViewType,
-  email?: string,
   getTradeAccounts?: {
     platform: AccountPlatform,
     baseConfig: Partial<AccountConfig>,

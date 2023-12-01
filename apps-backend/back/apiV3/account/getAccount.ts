@@ -6,15 +6,17 @@ import { z } from 'zod';
 import { ApiHandler } from '~types/ApiHandler.model';
 
 const getAccount: ApiHandler<Partial<Account>> = async (data, userSession) => {
-  const filter = z.object({
-    accountId: z.string(),
+  const input = z.object({
+    filter: z.object({
+      accountId: z.string(),
+    }).strict(),
   }).strict()
     .parse(data);
 
-  const { accountId } = filter;
+  const { filter } = input;
 
   const { doc } = await getAccountService({
-    filter: { accountId },
+    filter,
     repositories: {
       account: CacheFirstAccountRepository,
     },

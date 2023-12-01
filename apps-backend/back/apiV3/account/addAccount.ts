@@ -13,44 +13,38 @@ const env = {
 };
 
 const addAccount: ApiHandler<Partial<Account>> = async (data, userSession) => {
-  const payload = z.object({
-    name: z.string(),
-    providerType: z.nativeEnum(ProviderType),
-    platform: z.nativeEnum(AccountPlatform),
-    tradeType: z.nativeEnum(AccountTradeType),
-    baseConfig: z.object({
-      clientId: z.string().optional(),
-      clientSecret: z.string().optional(),
-      accountId: z.string().optional(),
-      accountNumber: z.string().optional(),
-      name: z.string().optional(),
-      user: z.string().optional(),
-      pass: z.string().optional(),
-      isLive: z.boolean().optional(),
-      // ct
-      host: z.string().optional(),
-      port: z.number().optional(),
-      accessToken: z.string().optional(),
-      refreshToken: z.string().optional(),
-      // mt
-      platform: z.string().optional(),
-      server: z.string().optional(),
+  const input = z.object({
+    payload: z.object({
+      name: z.string(),
+      providerType: z.nativeEnum(ProviderType),
+      platform: z.nativeEnum(AccountPlatform),
+      tradeType: z.nativeEnum(AccountTradeType),
+      baseConfig: z.object({
+        clientId: z.string().optional(),
+        clientSecret: z.string().optional(),
+        accountId: z.string().optional(),
+        accountNumber: z.string().optional(),
+        name: z.string().optional(),
+        user: z.string().optional(),
+        pass: z.string().optional(),
+        isLive: z.boolean().optional(),
+        // ct
+        host: z.string().optional(),
+        port: z.number().optional(),
+        accessToken: z.string().optional(),
+        refreshToken: z.string().optional(),
+        // mt
+        platform: z.string().optional(),
+        server: z.string().optional(),
+      }).strict(),
     }).strict(),
   }).strict()
     .parse(data);
 
-  const {
-    name, providerType, platform, tradeType, baseConfig,
-  } = payload;
+  const { payload } = input;
 
   const { doc: account = {} } = await addAccountService({
-    payload: {
-      name,
-      providerType,
-      platform,
-      tradeType,
-      baseConfig,
-    },
+    payload,
     repositories: {
       account: CacheFirstAccountRepository,
       trade: TradeAccountRepository,
@@ -58,6 +52,8 @@ const addAccount: ApiHandler<Partial<Account>> = async (data, userSession) => {
     },
     context: { userSession },
   });
+
+  const { platform, tradeType } = payload;
 
   switch (platform) {
     case AccountPlatform.ctrader: {

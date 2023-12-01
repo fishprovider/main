@@ -11,15 +11,17 @@ const env = {
 };
 
 const removeAccount: ApiHandler<Partial<Account>> = async (data, userSession) => {
-  const filter = z.object({
-    accountId: z.string(),
+  const input = z.object({
+    filter: z.object({
+      accountId: z.string(),
+    }).strict(),
   }).strict()
     .parse(data);
 
-  const { accountId } = filter;
+  const { filter } = input;
 
   const { doc: account = {} } = await removeAccountService({
-    filter: { accountId },
+    filter,
     repositories: {
       account: CacheFirstAccountRepository,
       trade: TradeAccountRepository,

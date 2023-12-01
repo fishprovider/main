@@ -7,26 +7,24 @@ import { z } from 'zod';
 import { ApiHandler } from '~types/ApiHandler.model';
 
 const getTradeAccounts: ApiHandler<Partial<Account>[]> = async (data, userSession) => {
-  const filter = z.object({
-    platform: z.nativeEnum(AccountPlatform),
-    baseConfig: z.object({
-      clientId: z.string(),
+  const input = z.object({
+    filter: z.object({
+      platform: z.nativeEnum(AccountPlatform),
+      baseConfig: z.object({
+        clientId: z.string(),
+      }).strict(),
+      tradeRequest: z.object({
+        redirectUrl: z.string(),
+        code: z.string(),
+      }).strict().optional(),
     }).strict(),
-    tradeRequest: z.object({
-      redirectUrl: z.string(),
-      code: z.string(),
-    }).strict().optional(),
   }).strict()
     .parse(data);
 
-  const { platform, baseConfig, tradeRequest } = filter;
+  const { filter } = input;
 
   const { docs } = await getTradeAccountsService({
-    filter: {
-      platform,
-      baseConfig,
-      tradeRequest,
-    },
+    filter,
     repositories: {
       account: CacheFirstAccountRepository,
       trade: TradeAccountRepository,

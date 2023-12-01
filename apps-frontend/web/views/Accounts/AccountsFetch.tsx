@@ -8,10 +8,8 @@ import { watchUserInfoController } from '~controllers/user.controller';
 function AccountsFetch() {
   const {
     isServerLoggedIn,
-    email,
   } = watchUserInfoController((state) => ({
     isServerLoggedIn: state.isServerLoggedIn,
-    email: state.activeUser?.email,
   }));
 
   useQuery({
@@ -19,7 +17,7 @@ function AccountsFetch() {
     queryKey: queryKeys.slimAccounts(),
   });
   useQuery({
-    queryFn: () => getAccountsController({ email }),
+    queryFn: () => getAccountsController({ viewType: AccountViewType.private }),
     queryKey: queryKeys.userAccounts(),
     enabled: !!isServerLoggedIn,
   });

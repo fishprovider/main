@@ -7,15 +7,17 @@ import { z } from 'zod';
 import { ApiHandler } from '~types/ApiHandler.model';
 
 const getTradeAccount: ApiHandler<Partial<Account>> = async (data, userSession) => {
-  const filter = z.object({
-    accountId: z.string(),
+  const input = z.object({
+    filter: z.object({
+      accountId: z.string(),
+    }).strict(),
   }).strict()
     .parse(data);
 
-  const { accountId } = filter;
+  const { filter } = input;
 
   const { doc } = await getTradeAccountService({
-    filter: { accountId },
+    filter,
     repositories: {
       account: CacheFirstAccountRepository,
       trade: TradeAccountRepository,

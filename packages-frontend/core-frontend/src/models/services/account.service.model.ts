@@ -22,7 +22,6 @@ export type GetAccountService = (params: BaseGetServiceParams<Account> & {
 export type GetAccountsService = (params: BaseGetServiceParams<Account> & {
   filter: {
     viewType?: AccountViewType,
-    email?: string,
     getTradeAccounts?: {
       platform: AccountPlatform,
       baseConfig: Partial<AccountConfig>,

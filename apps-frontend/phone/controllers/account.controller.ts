@@ -23,7 +23,6 @@ export const getAccountController = async (filter: {
 
 export const getAccountsController = async (filter: {
   viewType?: AccountViewType,
-  email?: string,
 }) => {
   const { docs: accounts } = await getAccountsService({
     filter,

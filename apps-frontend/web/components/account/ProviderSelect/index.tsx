@@ -14,12 +14,10 @@ function ProviderSelect() {
   const {
     isServerLoggedIn,
     providerId,
-    email,
     starProviders = {},
   } = watchUserInfoController((state) => ({
     isServerLoggedIn: state.isServerLoggedIn,
     providerId: state.activeAccount?._id,
-    email: state.activeUser?.email,
     starProviders: state.activeUser?.starAccounts,
   }));
   const accounts = watchAccountController((state) => _.orderBy(
@@ -39,7 +37,7 @@ function ProviderSelect() {
     queryKey: queryKeys.slimAccounts(),
   });
   useQuery({
-    queryFn: () => getAccountsController({ email }),
+    queryFn: () => getAccountsController({ viewType: AccountViewType.private }),
     queryKey: queryKeys.userAccounts(),
     enabled: !!isServerLoggedIn,
   });

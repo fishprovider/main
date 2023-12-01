@@ -20,7 +20,6 @@ export interface AccountRepository {
   getAccounts?: (
     filter: {
       viewType?: AccountViewType,
-      email?: string,
       getTradeAccounts?: {
         platform: AccountPlatform,
         baseConfig: Partial<AccountConfig>,

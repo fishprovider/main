@@ -1,3 +1,4 @@
+import { AccountViewType } from '@fishprovider/core';
 import { queryKeys } from '@fishprovider/cross/dist/constants/query';
 import { useQuery } from '@fishprovider/cross/dist/libs/query';
 import _ from 'lodash';
@@ -21,10 +22,8 @@ import TradeWatch from './TradeWatch';
 export default function Trade() {
   const {
     userId = '',
-    email,
   } = watchUserInfoController((state) => ({
     userId: state.activeUser?._id,
-    email: state.activeUser?.email,
   }));
 
   const options = watchAccountController((state) => _.orderBy(
@@ -44,7 +43,7 @@ export default function Trade() {
   })));
 
   useQuery({
-    queryFn: () => getAccountsController({ email }),
+    queryFn: () => getAccountsController({ viewType: AccountViewType.private }),
     queryKey: queryKeys.userAccounts(),
     refetchInterval: refreshMS,
   });
