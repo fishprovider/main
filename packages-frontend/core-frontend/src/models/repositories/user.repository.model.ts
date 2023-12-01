@@ -33,12 +33,12 @@ export interface UserRepository {
       email?: string,
     },
     payload: {
-      refreshRoles?: boolean,
       name?: string,
       starAccount?: {
         accountId: string
         enabled: boolean
-      }
+      },
+      refreshRoles?: boolean,
       user?: Partial<User>,
     },
     options?: BaseUpdateOptions<User>,

@@ -6,14 +6,18 @@ import { z } from 'zod';
 import { ApiHandler } from '~types/ApiHandler.model';
 
 const updateUser: ApiHandler<Partial<User>> = async (data, userSession) => {
-  const payload = z.object({
-    name: z.string().optional(),
-    starAccount: z.object({
-      accountId: z.string(),
-      enabled: z.boolean(),
-    }).strict().optional(),
+  const input = z.object({
+    payload: z.object({
+      name: z.string().optional(),
+      starAccount: z.object({
+        accountId: z.string(),
+        enabled: z.boolean(),
+      }).strict().optional(),
+    }),
   }).strict()
     .parse(data);
+
+  const { payload } = input;
 
   const { doc } = await updateUserService({
     filter: {

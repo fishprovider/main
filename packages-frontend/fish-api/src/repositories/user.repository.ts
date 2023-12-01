@@ -16,7 +16,7 @@ const updateUser: UserRepository['updateUser'] = async (_filter, payload, option
     return { doc: user };
   }
 
-  const user = await fishApiPost<Partial<User> | undefined>('/user/updateUser', { ...rest, options });
+  const user = await fishApiPost<Partial<User> | undefined>('/user/updateUser', { payload: rest, options });
   return { doc: user };
 };
 
