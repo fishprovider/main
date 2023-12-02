@@ -34,7 +34,7 @@ export const removeAccountService: RemoveAccountService = async ({
 
   await removeTradeAccountRepo({ accountId });
 
-  await removeAccountRepo(filter, options);
+  const { doc: removedAccount } = await removeAccountRepo(filter, options);
 
   await updateUsersRepo({}, { removeRoleAccountId: accountId });
 
@@ -48,6 +48,9 @@ export const removeAccountService: RemoveAccountService = async ({
   }
 
   return {
-    doc: sanitizeOutputAccount(accountRaw),
+    doc: {
+      ...sanitizeOutputAccount(removedAccount),
+      _id: accountId,
+    },
   };
 };
