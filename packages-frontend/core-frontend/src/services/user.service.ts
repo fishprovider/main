@@ -31,10 +31,10 @@ export const watchUserInfoService: WatchUserInfoService = ({
 //
 
 export const getUserService: GetUserService = async ({
-  filter, repositories,
+  filter, repositories, options,
 }) => {
   const getUserRepo = checkRepository(repositories.user.getUser);
-  const res = await getUserRepo(filter);
+  const res = await getUserRepo(filter, options);
 
   updateUserInfoService({
     payload: {
@@ -49,10 +49,10 @@ export const getUserService: GetUserService = async ({
 };
 
 export const updateUserService: UpdateUserService = async ({
-  filter, payload, repositories,
+  filter, payload, repositories, options,
 }) => {
   const updateUserRepo = checkRepository(repositories.user.updateUser);
-  const res = await updateUserRepo(filter, payload);
+  const res = await updateUserRepo(filter, payload, options);
 
   updateUserInfoService({
     payload: {

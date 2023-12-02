@@ -5,37 +5,45 @@ import {
   AccountViewType, ProviderType,
 } from '@fishprovider/core';
 import {
-  addAccountService, BaseUpdateOptions,
+  addAccountService, BaseGetOptions, BaseUpdateOptions,
   getAccountService, getAccountsService,
   removeAccountService, updateAccountService, watchAccountService,
 } from '@fishprovider/core-frontend';
 import { StoreFirstAccountRepository } from '@fishprovider/store-first';
 
-export const getAccountController = async (filter: {
-  accountId: string,
-  getTradeAccount?: boolean,
-}) => {
+export const getAccountController = async (
+  filter: {
+    accountId: string,
+    getTradeAccount?: boolean,
+  },
+  options?: BaseGetOptions<Account>,
+) => {
   const { doc: account } = await getAccountService({
     filter,
     repositories: { account: StoreFirstAccountRepository },
+    options,
   });
   return account;
 };
 
-export const getAccountsController = async (filter: {
-  viewType?: AccountViewType,
-  getTradeAccounts?: {
-    platform: AccountPlatform,
-    baseConfig: Partial<AccountConfig>,
-    tradeRequest?: {
-      redirectUrl: string,
-      code: string,
+export const getAccountsController = async (
+  filter: {
+    viewType?: AccountViewType,
+    getTradeAccounts?: {
+      platform: AccountPlatform,
+      baseConfig: Partial<AccountConfig>,
+      tradeRequest?: {
+        redirectUrl: string,
+        code: string,
+      },
     },
   },
-}) => {
+  options?: BaseGetOptions<Account>,
+) => {
   const { docs: accounts } = await getAccountsService({
     filter,
     repositories: { account: StoreFirstAccountRepository },
+    options,
   });
   return accounts;
 };
@@ -82,20 +90,26 @@ export const addAccountController = async (
     tradeType: AccountTradeType,
     baseConfig: Partial<AccountConfig>,
   },
+  options?: BaseUpdateOptions<Account>,
 ) => {
   const { doc: account } = await addAccountService({
     payload,
     repositories: { account: StoreFirstAccountRepository },
+    options,
   });
   return account;
 };
 
-export const removeAccountController = async (filter: {
-  accountId: string,
-}) => {
+export const removeAccountController = async (
+  filter: {
+    accountId: string,
+  },
+  options?: BaseUpdateOptions<Account>,
+) => {
   const { doc: account } = await removeAccountService({
     filter,
     repositories: { account: StoreFirstAccountRepository },
+    options,
   });
   return account;
 };

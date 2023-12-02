@@ -3,10 +3,10 @@ import { checkRepository } from '@fishprovider/core';
 import { GetNewsService, WatchNewsService } from '..';
 
 export const getNewsService: GetNewsService = async ({
-  filter, repositories,
+  filter, repositories, options,
 }) => {
   const getNewsRepo = checkRepository(repositories.news.getNews);
-  return getNewsRepo(filter);
+  return getNewsRepo(filter, options);
 };
 
 export const watchNewsService: WatchNewsService = ({
