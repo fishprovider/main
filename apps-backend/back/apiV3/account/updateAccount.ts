@@ -82,10 +82,7 @@ const updateAccount: ApiHandler<Partial<Account>> = async (data, userSession) =>
     repositories: {
       account: CacheFirstAccountRepository,
     },
-    options: {
-      projection: options?.projection,
-      returnAfter: true,
-    },
+    options,
     context: { userSession },
   });
 

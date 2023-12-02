@@ -76,7 +76,8 @@ const updateAccount: AccountRepository['updateAccount'] = async (filter, payload
     addActivity, addMember, removeMemberEmail,
   } = payload;
   const {
-    returnAfter, projection,
+    returnAfter = true,
+    projection,
   } = options || {};
 
   const updatedAccount: Partial<Account> = {

@@ -70,17 +70,18 @@ const updateUser: UserRepository['updateUser'] = async (filter, payload, options
     starAccount, roles, addRole, removeRole,
   } = payload;
   const {
-    returnAfter, projection,
+    returnAfter = true,
+    projection,
   } = options || {};
 
-  const updatedAccount: Partial<User> = {
+  const updatedUser: Partial<User> = {
     ...(roles && { roles }),
     updatedAt: new Date(),
   };
 
   const updateFilter: UpdateFilter<User> = {
     $set: {
-      ...updatedAccount,
+      ...updatedUser,
       ...(starAccount && {
         [`starAccounts.${starAccount.accountId}`]: starAccount.enabled,
       }),
@@ -128,7 +129,7 @@ const updateUser: UserRepository['updateUser'] = async (filter, payload, options
     return { doc: user ?? undefined };
   }
   await collection.updateOne(userFilter, updateFilter);
-  return {};
+  return { doc: updatedUser };
 };
 
 const updateUsers: UserRepository['updateUsers'] = async (filter, payload, options) => {
@@ -158,7 +159,8 @@ const updateUsers: UserRepository['updateUsers'] = async (filter, payload, optio
   await collection.updateMany(userFilter, updateFilter);
 
   const {
-    returnAfter, projection,
+    returnAfter = true,
+    projection,
   } = options || {};
 
   if (returnAfter) {
