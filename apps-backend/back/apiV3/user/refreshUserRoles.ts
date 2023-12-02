@@ -23,7 +23,13 @@ const refreshUserRoles: ApiHandler<Partial<User>> = async (data, userSession) =>
     context: { userSession },
   });
 
-  return { result: sanitizeOutputUser(user) };
+  return {
+    result: sanitizeOutputUser(user),
+    userSessionNew: {
+      ...userSession,
+      roles: user?.roles,
+    },
+  };
 };
 
 export default refreshUserRoles;

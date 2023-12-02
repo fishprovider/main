@@ -51,7 +51,7 @@ const removeAccount: ApiHandler<Partial<Account>> = async (data, userSession) =>
     default:
   }
 
-  return { doc: sanitizeOutputAccount(account) };
+  return { result: sanitizeOutputAccount(account) };
 };
 
 export default removeAccount;
