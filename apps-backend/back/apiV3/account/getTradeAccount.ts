@@ -4,6 +4,7 @@ import { getTradeAccountService } from '@fishprovider/core-backend';
 import { TradeAccountRepository } from '@fishprovider/trade';
 import { z } from 'zod';
 
+import { sanitizeOutputAccount } from '~helpers';
 import { ApiHandler } from '~types/ApiHandler.model';
 
 const getTradeAccount: ApiHandler<Partial<Account>> = async (data, userSession) => {
@@ -16,7 +17,7 @@ const getTradeAccount: ApiHandler<Partial<Account>> = async (data, userSession) 
 
   const { filter } = input;
 
-  const { doc } = await getTradeAccountService({
+  const { doc: tradeAccount } = await getTradeAccountService({
     filter,
     repositories: {
       account: CacheFirstAccountRepository,
@@ -25,7 +26,7 @@ const getTradeAccount: ApiHandler<Partial<Account>> = async (data, userSession) 
     context: { userSession },
   });
 
-  return { result: doc };
+  return { result: sanitizeOutputAccount(tradeAccount) };
 };
 
 export default getTradeAccount;

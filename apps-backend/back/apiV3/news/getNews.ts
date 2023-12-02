@@ -17,14 +17,14 @@ const getNews: ApiHandler<Partial<News>[]> = async (data, userSession) => {
 
   const { filter } = input;
 
-  const { docs } = await getNewsService({
+  const { docs: news } = await getNewsService({
     filter,
     repositories: {
       news: CacheFirstNewsRepository,
     },
     context: { userSession },
   });
-  return { result: docs };
+  return { result: news };
 };
 
 export default getNews;

@@ -4,6 +4,7 @@ import { refreshUserRolesService } from '@fishprovider/core-backend';
 import { MongoAccountRepository } from '@fishprovider/mongo';
 import { z } from 'zod';
 
+import { sanitizeOutputUser } from '~helpers';
 import { ApiHandler } from '~types/ApiHandler.model';
 
 const refreshUserRoles: ApiHandler<Partial<User>> = async (data, userSession) => {
@@ -11,7 +12,7 @@ const refreshUserRoles: ApiHandler<Partial<User>> = async (data, userSession) =>
   }).strict()
     .parse(data);
 
-  const { doc } = await refreshUserRolesService({
+  const { doc: user } = await refreshUserRolesService({
     filter: {
       email: userSession?.email,
     },
@@ -22,7 +23,7 @@ const refreshUserRoles: ApiHandler<Partial<User>> = async (data, userSession) =>
     context: { userSession },
   });
 
-  return { result: doc };
+  return { result: sanitizeOutputUser(user) };
 };
 
 export default refreshUserRoles;

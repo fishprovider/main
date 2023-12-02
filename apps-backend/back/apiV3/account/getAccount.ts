@@ -3,6 +3,7 @@ import { Account } from '@fishprovider/core';
 import { getAccountService } from '@fishprovider/core-backend';
 import { z } from 'zod';
 
+import { sanitizeOutputAccount } from '~helpers';
 import { ApiHandler } from '~types/ApiHandler.model';
 
 const getAccount: ApiHandler<Partial<Account>> = async (data, userSession) => {
@@ -15,7 +16,7 @@ const getAccount: ApiHandler<Partial<Account>> = async (data, userSession) => {
 
   const { filter } = input;
 
-  const { doc } = await getAccountService({
+  const { doc: account } = await getAccountService({
     filter,
     repositories: {
       account: CacheFirstAccountRepository,
@@ -26,7 +27,7 @@ const getAccount: ApiHandler<Partial<Account>> = async (data, userSession) => {
     context: { userSession },
   });
 
-  return { result: doc };
+  return { result: sanitizeOutputAccount(account) };
 };
 
 export default getAccount;

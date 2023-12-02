@@ -3,6 +3,7 @@ import { User } from '@fishprovider/core';
 import { updateUserService } from '@fishprovider/core-backend';
 import { z } from 'zod';
 
+import { sanitizeOutputUser } from '~helpers';
 import { ApiHandler } from '~types/ApiHandler.model';
 
 const updateUser: ApiHandler<Partial<User>> = async (data, userSession) => {
@@ -19,7 +20,7 @@ const updateUser: ApiHandler<Partial<User>> = async (data, userSession) => {
 
   const { payload } = input;
 
-  const { doc } = await updateUserService({
+  const { doc: user } = await updateUserService({
     filter: {
       email: userSession?.email,
     },
@@ -30,7 +31,7 @@ const updateUser: ApiHandler<Partial<User>> = async (data, userSession) => {
     context: { userSession },
   });
 
-  return { result: doc };
+  return { result: sanitizeOutputUser(user) };
 };
 
 export default updateUser;

@@ -3,6 +3,7 @@ import { Account, AccountViewType } from '@fishprovider/core';
 import { getAccountsService } from '@fishprovider/core-backend';
 import { z } from 'zod';
 
+import { sanitizeOutputAccount } from '~helpers';
 import { ApiHandler } from '~types/ApiHandler.model';
 
 const getAccounts: ApiHandler<Partial<Account>[]> = async (data, userSession) => {
@@ -15,7 +16,7 @@ const getAccounts: ApiHandler<Partial<Account>[]> = async (data, userSession) =>
 
   const { filter } = input;
 
-  const { docs } = await getAccountsService({
+  const { docs: accounts } = await getAccountsService({
     filter: {
       ...filter,
       ...(filter.viewType === AccountViewType.private && {
@@ -33,7 +34,7 @@ const getAccounts: ApiHandler<Partial<Account>[]> = async (data, userSession) =>
     },
     context: { userSession },
   });
-  return { result: docs };
+  return { result: accounts?.map(sanitizeOutputAccount) };
 };
 
 export default getAccounts;

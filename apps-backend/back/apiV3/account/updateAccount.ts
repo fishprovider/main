@@ -5,6 +5,7 @@ import {
 import { updateAccountService } from '@fishprovider/core-backend';
 import { z } from 'zod';
 
+import { sanitizeOutputAccount } from '~helpers';
 import { ApiHandler } from '~types/ApiHandler.model';
 
 const updateAccount: ApiHandler<Partial<Account>> = async (data, userSession) => {
@@ -76,7 +77,7 @@ const updateAccount: ApiHandler<Partial<Account>> = async (data, userSession) =>
 
   const { filter, payload, options } = input;
 
-  const { doc } = await updateAccountService({
+  const { doc: account } = await updateAccountService({
     filter,
     payload,
     repositories: {
@@ -86,7 +87,7 @@ const updateAccount: ApiHandler<Partial<Account>> = async (data, userSession) =>
     context: { userSession },
   });
 
-  return { result: doc };
+  return { result: sanitizeOutputAccount(account) };
 };
 
 export default updateAccount;

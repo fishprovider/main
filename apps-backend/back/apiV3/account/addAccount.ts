@@ -6,6 +6,7 @@ import { addAccountService } from '@fishprovider/core-backend';
 import { TradeAccountRepository } from '@fishprovider/trade';
 import { z } from 'zod';
 
+import { sanitizeOutputAccount } from '~helpers';
 import { ApiHandler } from '~types/ApiHandler.model';
 
 const env = {
@@ -72,7 +73,7 @@ const addAccount: ApiHandler<Partial<Account>> = async (data, userSession) => {
     default:
   }
 
-  return { result: account };
+  return { result: sanitizeOutputAccount(account) };
 };
 
 export default addAccount;
