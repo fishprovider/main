@@ -1,8 +1,8 @@
+import { CacheFirstAccountRepository, CacheFirstUserRepository } from '@fishprovider/cache-first';
 import {
   Account, AccountPlatform, AccountTradeType, ProviderType,
 } from '@fishprovider/core';
 import { addAccountService } from '@fishprovider/core-backend';
-import { MongoAccountRepository, MongoUserRepository } from '@fishprovider/mongo';
 import { TradeAccountRepository } from '@fishprovider/trade';
 import { z } from 'zod';
 
@@ -47,9 +47,9 @@ const addAccount: ApiHandler<Partial<Account>> = async (data, userSession) => {
   const { doc: account = {} } = await addAccountService({
     payload,
     repositories: {
-      account: MongoAccountRepository,
+      account: CacheFirstAccountRepository,
       trade: TradeAccountRepository,
-      user: MongoUserRepository,
+      user: CacheFirstUserRepository,
     },
     context: { userSession },
   });
