@@ -24,7 +24,8 @@ export const updateUserController = async (
     starAccount?: {
       accountId: string
       enabled: boolean
-    }
+    },
+    refreshRoles?: boolean
   },
 ) => {
   const { doc: user } = await updateUserService({
