@@ -1,6 +1,6 @@
-import { CacheFirstAccountRepository, CacheFirstUserRepository } from '@fishprovider/cache-first';
 import { Account, AccountPlatform } from '@fishprovider/core';
 import { removeAccountService } from '@fishprovider/core-backend';
+import { MongoAccountRepository, MongoUserRepository } from '@fishprovider/mongo';
 import { TradeAccountRepository } from '@fishprovider/trade';
 import { z } from 'zod';
 
@@ -24,9 +24,9 @@ const removeAccount: ApiHandler<Partial<Account>> = async (data, userSession) =>
   const { doc: account = {} } = await removeAccountService({
     filter,
     repositories: {
-      account: CacheFirstAccountRepository,
+      account: MongoAccountRepository,
       trade: TradeAccountRepository,
-      user: CacheFirstUserRepository,
+      user: MongoUserRepository,
     },
     context: { userSession },
   });

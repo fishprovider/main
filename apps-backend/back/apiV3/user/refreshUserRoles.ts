@@ -1,7 +1,6 @@
-import { CacheFirstUserRepository } from '@fishprovider/cache-first';
 import { User } from '@fishprovider/core';
 import { refreshUserRolesService } from '@fishprovider/core-backend';
-import { MongoAccountRepository } from '@fishprovider/mongo';
+import { MongoAccountRepository, MongoUserRepository } from '@fishprovider/mongo';
 import { z } from 'zod';
 
 import { sanitizeOutputUser } from '~helpers';
@@ -18,7 +17,7 @@ const refreshUserRoles: ApiHandler<Partial<User>> = async (data, userSession) =>
     },
     repositories: {
       account: MongoAccountRepository,
-      user: CacheFirstUserRepository,
+      user: MongoUserRepository,
     },
     context: { userSession },
   });

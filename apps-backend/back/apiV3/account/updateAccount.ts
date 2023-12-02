@@ -1,8 +1,8 @@
-import { CacheFirstAccountRepository } from '@fishprovider/cache-first';
 import {
   Account, AccountCopyVolumeMode, AccountRole, AccountViewType,
 } from '@fishprovider/core';
 import { updateAccountService } from '@fishprovider/core-backend';
+import { MongoAccountRepository } from '@fishprovider/mongo';
 import { z } from 'zod';
 
 import { sanitizeOutputAccount } from '~helpers';
@@ -81,7 +81,7 @@ const updateAccount: ApiHandler<Partial<Account>> = async (data, userSession) =>
     filter,
     payload,
     repositories: {
-      account: CacheFirstAccountRepository,
+      account: MongoAccountRepository,
     },
     options,
     context: { userSession },
