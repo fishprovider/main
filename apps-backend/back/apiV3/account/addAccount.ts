@@ -55,6 +55,7 @@ const addAccount: ApiHandler<Partial<Account>> = async (data, userSession) => {
 
   const { platform, tradeType } = payload;
 
+  // TODO: move to service
   switch (platform) {
     case AccountPlatform.ctrader: {
       Agenda.now(`${env.typePre}-${tradeType}-head-start-provider`, {

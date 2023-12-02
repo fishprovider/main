@@ -33,6 +33,7 @@ const removeAccount: ApiHandler<Partial<Account>> = async (data, userSession) =>
   const { accountId } = filter;
   const { platform, tradeType } = account;
 
+  // TODO: move to service
   switch (platform) {
     case AccountPlatform.ctrader: {
       Agenda.now(`${env.typePre}-${tradeType}-head-destroy-provider`, {
