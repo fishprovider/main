@@ -5,7 +5,6 @@ import _ from 'lodash';
 
 import {
   checkLogin, checkProjection, RefreshUserRolesService,
-  sanitizeOutputUser,
 } from '../..';
 
 export const refreshUserRolesService: RefreshUserRolesService = async ({
@@ -133,9 +132,9 @@ export const refreshUserRolesService: RefreshUserRolesService = async ({
 
   return {
     doc: {
-      ...sanitizeOutputUser(user),
-      _id: userId,
+      ...user,
       roles,
+      _id: userId,
     },
   };
 };

@@ -4,7 +4,6 @@ import {
 
 import {
   checkLogin, checkProjection, GetUserService,
-  sanitizeOutputUser,
 } from '../..';
 
 export const getUserService: GetUserService = async ({
@@ -26,7 +25,5 @@ export const getUserService: GetUserService = async ({
 
   checkProjection(options?.projection, user);
 
-  return {
-    doc: sanitizeOutputUser(user),
-  };
+  return { doc: user };
 };

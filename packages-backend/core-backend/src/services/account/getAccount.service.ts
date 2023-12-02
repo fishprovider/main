@@ -1,7 +1,7 @@
 import { checkRepository } from '@fishprovider/core';
 
 import {
-  checkAccountAccess, checkProjection, GetAccountService, sanitizeOutputAccount,
+  checkAccountAccess, checkProjection, GetAccountService,
 } from '../..';
 
 export const getAccountService: GetAccountService = async ({
@@ -15,12 +15,16 @@ export const getAccountService: GetAccountService = async ({
   //
   // main
   //
+  const { accountId } = filter;
   const { doc: account } = await getAccountRepo(filter, options);
 
   checkProjection(options?.projection, account);
   checkAccountAccess(account, context);
 
   return {
-    doc: sanitizeOutputAccount(account),
+    doc: {
+      ...account,
+      _id: accountId,
+    },
   };
 };

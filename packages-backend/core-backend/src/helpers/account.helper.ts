@@ -6,15 +6,6 @@ import {
   ServiceContext,
 } from '..';
 
-export const sanitizeOutputAccount = (account?: Partial<Account>) => ({
-  ...account,
-  config: undefined,
-});
-
-//
-// check functions
-//
-
 export const checkAccountAccess = (
   account?: Partial<Account>,
   context?: ServiceContext,

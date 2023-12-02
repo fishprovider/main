@@ -1,7 +1,7 @@
 import { checkRepository } from '@fishprovider/core';
 
 import {
-  checkAccountAccess, checkLogin, RemoveAccountService, sanitizeOutputAccount,
+  checkAccountAccess, checkLogin, RemoveAccountService,
 } from '../..';
 
 export const removeAccountService: RemoveAccountService = async ({
@@ -49,7 +49,7 @@ export const removeAccountService: RemoveAccountService = async ({
 
   return {
     doc: {
-      ...sanitizeOutputAccount(removedAccount),
+      ...removedAccount,
       _id: accountId,
     },
   };

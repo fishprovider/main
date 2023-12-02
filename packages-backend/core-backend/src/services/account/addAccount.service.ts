@@ -4,7 +4,7 @@ import {
 import _ from 'lodash';
 
 import {
-  AddAccountService, checkLogin, sanitizeOutputAccount,
+  AddAccountService, checkLogin,
 } from '../..';
 
 export const addAccountService: AddAccountService = async ({
@@ -119,6 +119,9 @@ export const addAccountService: AddAccountService = async ({
   });
 
   return {
-    doc: sanitizeOutputAccount(account),
+    doc: {
+      ...account,
+      _id: accountId,
+    },
   };
 };

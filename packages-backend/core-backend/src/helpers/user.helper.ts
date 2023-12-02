@@ -1,19 +1,10 @@
 import {
-  BaseError, User, UserError,
+  BaseError, UserError,
 } from '@fishprovider/core';
 
 import {
   UserSession,
 } from '..';
-
-export const sanitizeOutputUser = (user?: Partial<User>) => ({
-  ...user,
-  pushNotif: undefined,
-});
-
-//
-// check functions
-//
 
 export const checkLogin = (userSession?: UserSession) => {
   if (!userSession?._id) {

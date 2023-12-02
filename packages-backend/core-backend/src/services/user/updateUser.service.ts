@@ -1,7 +1,7 @@
 import { checkRepository } from '@fishprovider/core';
 
 import {
-  checkLogin, checkProjection, sanitizeOutputUser, UpdateUserService,
+  checkLogin, checkProjection, UpdateUserService,
 } from '../..';
 
 export const updateUserService: UpdateUserService = async ({
@@ -54,7 +54,7 @@ export const updateUserService: UpdateUserService = async ({
 
   return {
     doc: {
-      ...sanitizeOutputUser(user),
+      ...user,
       _id: userId,
     },
   };
