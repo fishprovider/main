@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@fishprovider/core-frontend": "*",
-    "zustand": "^4.4.3"
+    "zustand": "^4.4.7"
   },
   "devDependencies": {
     "socket.io-client": "^4.7.2"
