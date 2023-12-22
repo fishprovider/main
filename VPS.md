@@ -167,7 +167,7 @@ server {
         proxy_set_header X-Forwarded-Proto $scheme;
 
         # for buffer the responses from the proxied server
-        proxy_buffering   on;
+        proxy_buffering on;
     }
 }
 ```
