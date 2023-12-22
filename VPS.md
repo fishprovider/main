@@ -164,9 +164,9 @@ server {
         proxy_set_header Host $hos  t;
         proxy_set_header X-ReaIP $remote_addr;
         proxy_set_header Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_headeX-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-Proto $scheme;
 
-        # for buffer the re  sponses from the proxied server
+        # for buffer the responses from the proxied server
         proxy_buffering   on;
     }
 }
