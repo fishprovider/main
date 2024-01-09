@@ -119,7 +119,7 @@ function Catalog() {
       <Divider />
       <Stack align="center" id="green-series">
         <Title size="h2">
-          Green Series
+          Giving Horizons
         </Title>
         <ContentSection>
           <Title size="h4" ta="center">
