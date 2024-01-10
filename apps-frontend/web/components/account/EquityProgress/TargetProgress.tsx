@@ -59,9 +59,14 @@ function TargetProgress({ providerId, profit = 0, slim }: Props) {
         <Text size="sm">{`${_.round(progressAmt, 2)} (${_.round(progress, 2)}%)`}</Text>
       </Box>
       {slim ? null : (
-        <Box pos="absolute" top={40 - offset} right={0}>
-          <Text size="sm" color="green">{_.round(targetMonth, 2)}</Text>
-        </Box>
+        <>
+          <Box pos="absolute" top={40 - offset} left={0}>
+            <Text size="sm" color="green">{Math.round(balanceStartMonth)}</Text>
+          </Box>
+          <Box pos="absolute" top={40 - offset} right={0}>
+            <Text size="sm" color="green">{Math.round(targetMonth)}</Text>
+          </Box>
+        </>
       )}
     </Box>
   );
