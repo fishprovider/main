@@ -44,7 +44,7 @@ export default function ProviderCard({ providerId }: Props) {
   }));
 
   const totalProfit = summary?.roi || roi || 0;
-  const activeMonths = moment().diff(moment(createdAt), 'months') + 1;
+  const activeMonths = moment().diff(moment(createdAt), 'months');
   const avgProfit = totalProfit / activeMonths;
 
   const onInvest = () => {
@@ -79,7 +79,11 @@ export default function ProviderCard({ providerId }: Props) {
               <Text>
                 Active:
                 {' '}
-                <Text color="blue">{moment.duration(moment().diff(moment(createdAt))).humanize()}</Text>
+                <Text color="blue">
+                  {activeMonths}
+                  {' '}
+                  months
+                </Text>
               </Text>
               <Text>
                 Avg. Profit:

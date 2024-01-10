@@ -57,7 +57,7 @@ function ProviderCard({
   }));
 
   const totalProfit = summary?.roi || roi || 0;
-  const activeMonths = moment().diff(moment(createdAt), 'months') + 1;
+  const activeMonths = moment().diff(moment(createdAt), 'months');
   const avgProfit = totalProfit / activeMonths;
 
   const renderCardBig = () => (
@@ -92,7 +92,9 @@ function ProviderCard({
               Active:
               {' '}
               <Text fw={700} span c="blue">
-                {moment.duration(moment().diff(moment(createdAt))).humanize()}
+                {activeMonths}
+                {' '}
+                months
               </Text>
             </Text>
             <Text>
@@ -159,7 +161,9 @@ function ProviderCard({
                 Active:
                 {' '}
                 <Text fw={700} span c="blue">
-                  {moment.duration(moment().diff(moment(createdAt))).humanize()}
+                  {activeMonths}
+                  {' '}
+                  months
                 </Text>
               </Text>
               <Text size="sm">
