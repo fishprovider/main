@@ -64,7 +64,7 @@
     "@mantine/nprogress": "^6.0.21",
     "@mantine/spotlight": "^6.0.21",
     "@mui/icons-material": "5.14.13",
-    "@mui/material": "5.14.13",
+    "@mui/material": "5.15.4",
     "@next/bundle-analyzer": "^13.5.5",
     "@react-native-async-storage/async-storage": "1.18.2",
     "@react-native-firebase/app": "18.3.1",
