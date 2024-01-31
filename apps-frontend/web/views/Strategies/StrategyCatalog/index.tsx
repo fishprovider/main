@@ -135,6 +135,25 @@ function Catalog() {
           category="green-series"
         />
       </Stack>
+
+      <Divider />
+      <Stack align="center" id="vlcm">
+        <Title size="h2">
+          VLCM Group
+        </Title>
+        <ContentSection>
+          <Title size="h4" ta="center">
+            Our strategic partnership with VLCM Group, a leading trading team,
+            allows us to provide more investment strategies to investors
+          </Title>
+        </ContentSection>
+        <ProviderCards
+          favorite={favorite}
+          search={search}
+          variant={cardVariant}
+          category="vlcm"
+        />
+      </Stack>
     </Stack>
   );
 }
