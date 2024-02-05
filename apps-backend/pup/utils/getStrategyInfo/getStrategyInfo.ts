@@ -73,22 +73,20 @@ const getStrategyInfo = async (page: Page) => {
   const maxCount = 60;
   let count = 0;
   result.profitFactor = await getVal(page, 'Profit Factor');
-  result.allCopiers = await getVal(page, 'All Time Copiers');
+  result.allCopiers = await getVal(page, 'Investors over all time');
   while (count < maxCount && (result.profitFactor === 0 || result.allCopiers === 0)) {
     await page.waitForTimeout(10000);
     result.profitFactor = await getVal(page, 'Profit Factor');
-    result.allCopiers = await getVal(page, 'All Time Copiers');
+    result.allCopiers = await getVal(page, 'Investors over all time');
     count += 1;
   }
 
   clearInterval(interval);
 
-  result.roi = await getVal(page, 'All Time ROI', { parentLevel: 3, childrenPos: 2 });
+  result.roi = await getVal(page, 'ROI over all time', { parentLevel: 3, childrenPos: 2 });
   result.currency = await getVal(page, 'Currency', { parentLevel: 4, type: 'string' });
 
   result.profit = await getVal(page, 'Net Profit');
-  // result.profitFactor = await getVal(page, 'Profit Factor');
-  // result.profitFactor = await getVal(page, 'Profit Factor');
   result.profitPercent = await getVal(page, 'Percent Profitable');
   result.maxDrawdown = await getVal(page, 'Max Balance Drawdown');
   result.startBalance = await getVal(page, 'Starting Balance');
@@ -96,15 +94,13 @@ const getStrategyInfo = async (page: Page) => {
   result.equity = await getVal(page, 'Equity', { position: 2 });
   result.deposits = await getVal(page, 'Deposits');
   result.withdrawals = await getVal(page, 'Withdrawals');
-  result.margin = await getVal(page, 'Margin');
+  result.margin = await getVal(page, 'Margin Used');
   result.activeSince = await getVal(page, 'Active since', { type: 'string' });
 
-  result.activeCopier = await getVal(page, 'Currently Copying');
-  result.liveCopier = await getVal(page, 'Active Live Copiers');
-  result.demoCopier = await getVal(page, 'Active Demo Copiers');
-  // result.allCopiers = await getVal(page, 'All Time Copiers');
-  // result.allCopiers = await getVal(page, 'All Time Copiers');
-  result.copyFund = await getVal(page, 'Copying Funds ', { currency: result.currency });
+  // result.activeCopier = await getVal(page, 'Investors'); // TODO: Fix this
+  result.liveCopier = await getVal(page, 'Active live investors');
+  result.demoCopier = await getVal(page, 'Active demo investors');
+  result.copyFund = await getVal(page, 'Investor funds ', { currency: result.currency });
 
   result.copierStatUpdatedAt = new Date();
   result.roiStatUpdatedAt = new Date();
