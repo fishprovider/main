@@ -40,6 +40,7 @@ function EddProgress({ providerId, profit }: Props) {
   const equity = balance + profit;
   const edd = Math.min(0, equity - maxEquity); // edd <= 0
   const progress = (100 * edd) / dayMaxEdd;
+  const delta = (100 * edd) / maxEquity;
 
   return (
     <Box h={60} w={200} pos="relative">
@@ -52,7 +53,7 @@ function EddProgress({ providerId, profit }: Props) {
         <ProgressStyled value={progress} color="red" h={20} radius={0} animate={profit !== 0} flip />
       </Box>
       <Box pos="absolute" top={20} left={0} right={0} ta="center">
-        <Text size="sm">{`${_.round(edd, 2)} (${_.round(progress, 2)}%)`}</Text>
+        <Text size="sm">{`${_.round(edd, 2)} (${_.round(delta, 2)}%)`}</Text>
       </Box>
       <Box pos="absolute" top={40} left={0}>
         <Text size="sm" color="red">{`${_.round(minEquity, 2)} (${dayMaxEdd})`}</Text>

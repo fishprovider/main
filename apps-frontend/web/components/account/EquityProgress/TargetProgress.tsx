@@ -42,6 +42,7 @@ function TargetProgress({ providerId, profit = 0, slim }: Props) {
   const equity = balance + profit;
   const progressAmt = Math.max(0, equity - balanceStartMonth);
   const progress = (100 * progressAmt) / targetAmt;
+  const delta = (100 * progressAmt) / balanceStartMonth;
 
   const offset = slim ? 20 : 0;
 
@@ -56,7 +57,7 @@ function TargetProgress({ providerId, profit = 0, slim }: Props) {
         <ProgressStyled value={progress} color="green" h={20} radius={0} animate={profit !== 0} />
       </Box>
       <Box pos="absolute" top={20 - offset} left={0} right={0} ta="center">
-        <Text size="sm">{`${_.round(progressAmt, 2)} (${_.round(progress, 2)}%)`}</Text>
+        <Text size="sm">{`${_.round(progressAmt, 2)} (${_.round(delta, 2)}%)`}</Text>
       </Box>
       {slim ? null : (
         <>

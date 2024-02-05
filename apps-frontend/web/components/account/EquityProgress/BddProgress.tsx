@@ -51,9 +51,10 @@ function BddProgress({ providerId, profit }: Props) {
   const todayProfit = todayOrdersProfit + profit;
 
   const maxBalance = balanceStartDay;
-  const minBalance = balanceStartDay + dayMaxBdd;
+  const minBalance = balanceStartDay + dayMaxBdd; // dayMaxBdd <= 0
   const bdd = Math.min(0, todayProfit); // bdd <= 0
   const progress = (100 * bdd) / dayMaxBdd;
+  const delta = (100 * bdd) / dayMaxBdd;
 
   return (
     <Box h={60} w={200} pos="relative">
@@ -66,7 +67,7 @@ function BddProgress({ providerId, profit }: Props) {
         <ProgressStyled value={progress} color="red" h={20} radius={0} animate={profit !== 0} flip />
       </Box>
       <Box pos="absolute" top={20} left={0} right={0} ta="center">
-        <Text size="sm">{`${_.round(bdd, 2)} (${_.round(progress, 2)}%)`}</Text>
+        <Text size="sm">{`${_.round(bdd, 2)} (${_.round(delta, 2)}%)`}</Text>
       </Box>
       <Box pos="absolute" top={40} left={0}>
         <Text size="sm" color="red">{`${_.round(minBalance, 2)} (${dayMaxBdd})`}</Text>
