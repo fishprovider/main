@@ -27,7 +27,7 @@ const getForexNews = async (week: string, page: Page) => {
     let lastDate: string;
     let lastTime: string;
     return Array.from(tbody.children)
-      .filter((ele: any) => ele.classList.contains('calendar_row'))
+      .filter((ele: any) => ele.classList.contains('calendar__row'))
       .map((ele: any) => {
         const row = Array.from(ele.children) as any[];
         lastDate = row[0]?.innerText.trim().replace('\n', ' ') || lastDate;
@@ -66,7 +66,7 @@ const getMetalNews = async (week: string, page: Page) => {
     let lastDate: string;
     let lastTime: string;
     return Array.from(tbody.children)
-      .filter((ele: any) => ele.classList.contains('calendar_row'))
+      .filter((ele: any) => ele.classList.contains('calendar__row'))
       .map((ele: any) => {
         const row = Array.from(ele.children) as any[];
         lastDate = row[0]?.innerText.trim().replace('\n', ' ') || lastDate;
@@ -104,7 +104,7 @@ const getEnergyNews = async (week: string, page: Page) => {
     let lastDate: string;
     let lastTime: string;
     return Array.from(tbody.children)
-      .filter((ele: any) => ele.classList.contains('calendar_row'))
+      .filter((ele: any) => ele.classList.contains('calendar__row'))
       .map((ele: any) => {
         const row = Array.from(ele.children) as any[];
         lastDate = row[0]?.innerText.trim().replace('\n', ' ') || lastDate;
