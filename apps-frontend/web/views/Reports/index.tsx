@@ -27,7 +27,7 @@ function Reports({ recordMap, pageId }: NotionPageProps) {
           <div style={{ position: 'relative', width: '100%', height: iframeHeight }}>
             <Image
               alt="Latest Updates"
-              src="/trading-updates-2023-12.png"
+              src="/trading-updates-2024-02.png"
               height={iframeHeight}
               width="100%"
               fit="contain"
