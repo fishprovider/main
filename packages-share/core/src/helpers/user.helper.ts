@@ -10,15 +10,15 @@ export const getRoleProvider = (
   const isAdminWeb = isAdmin || roles.adminWeb;
   const isManagerWeb = isAdminWeb || roles.managerWeb;
 
-  const isAdminProvider = isAdminWeb
+  const isAdminAccount = isAdminWeb
     || (accountId && roles.adminAccounts?.[accountId]);
-  const isTraderProvider = isAdminProvider
+  const isTraderAccount = isAdminAccount
     || (accountId && roles.traderAccounts?.[accountId]);
-  const isProtectorProvider = isAdminProvider
+  const isProtectorAccount = isAdminAccount
     || (accountId && roles.protectorAccounts?.[accountId]);
-  const isViewerProvider = isManagerWeb
-    || isTraderProvider
-    || isProtectorProvider
+  const isViewerAccount = isManagerWeb
+    || isTraderAccount
+    || isProtectorAccount
     || (accountId && roles.viewerAccounts?.[accountId]);
 
   return {
@@ -26,9 +26,18 @@ export const getRoleProvider = (
     isAdminWeb,
     isManagerWeb,
 
-    isAdminProvider,
-    isTraderProvider,
-    isProtectorProvider,
-    isViewerProvider,
+    isAdminAccount,
+    isTraderAccount,
+    isProtectorAccount,
+    isViewerAccount,
+
+    /** @deprecated */
+    isAdminProvider: isAdminAccount,
+    /** @deprecated */
+    isTraderProvider: isTraderAccount,
+    /** @deprecated */
+    isProtectorProvider: isProtectorAccount,
+    /** @deprecated */
+    isViewerProvider: isViewerAccount,
   };
 };
