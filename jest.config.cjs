@@ -7,6 +7,7 @@ module.exports = {
   },
   modulePathIgnorePatterns: ['<rootDir>/dist'],
   forceExit: true,
+  passWithNoTests: true,
   transform: {
     '^.+\\.(ts|tsx|js|jsx)$': [
       'ts-jest',

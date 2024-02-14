@@ -7,7 +7,7 @@
   "scripts": {
     "lint": "eslint --cache --fix .",
     "type-check": "tsc -b",
-    "test": "jest --passWithNoTests",
+    "test": "jest",
     "clean": "rm -rf dist .eslintcache *.tsbuildinfo",
     "build": "tsc -b tsconfig.build.json",
     "ci-lint": "eslint --cache --fix",
