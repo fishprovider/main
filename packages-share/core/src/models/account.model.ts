@@ -187,7 +187,7 @@ export interface AccountStats extends Record<string, any> {
   profitMonths: Record<number, number[]>;
 }
 
-export interface Account {
+export interface AccountBase { // Infrequently change data
   _id: string;
   groupId?: string;
 
@@ -199,25 +199,6 @@ export interface Account {
   tradeType: AccountTradeType;
   viewType: AccountViewType;
   brokerType?: string; // standard, pro, ecn
-
-  asset?: string;
-  assetId?: string;
-
-  leverage?: number;
-  balance?: number;
-  equity?: number;
-  margin?: number;
-  freeMargin?: number;
-  marginLevel?: number;
-
-  balanceStartMonth?: number;
-  balanceStartMonthUpdatedAt?: Date;
-  balanceStartDay?: number;
-  balanceStartDayUpdatedAt?: Date;
-
-  maxEquity?: number;
-  maxEquityTime?: Date;
-  edd?: number;
 
   monthProfit?: number;
   riskScore?: number;
@@ -245,20 +226,13 @@ export interface Account {
 
   plan?: AccountPlan[];
   planUpdatedAt?: Date;
+
   locks?: AccountLock[];
   activeLevelTarget?: number,
 
   notes?: string;
   privateNotes?: string;
   bannerStatus?: AccountBannerStatus;
-
-  activities?: Record<string, AccountActivity>;
-  stats?: AccountStats;
-
-  providerData?: Record<string, any>; // trade data
-  summary?: Record<string, any>; // cron data
-  roi?: number;
-  capital?: number;
 
   isSystem?: boolean;
 
@@ -267,4 +241,39 @@ export interface Account {
 
   deleted?: boolean;
   deletedAt?: Date;
+}
+
+export interface AccountInfo {
+  asset?: string;
+  assetId?: string;
+
+  balance?: number;
+  equity?: number;
+  leverage?: number;
+  margin?: number;
+  freeMargin?: number;
+  marginLevel?: number;
+
+  providerData?: Record<string, any>;
+}
+
+export interface AccountMetrics {
+  balanceStartMonth?: number;
+  balanceStartMonthUpdatedAt?: Date;
+  balanceStartDay?: number;
+  balanceStartDayUpdatedAt?: Date;
+
+  maxEquity?: number;
+  maxEquityTime?: Date;
+  edd?: number;
+
+  summary?: Record<string, any>; // cron data
+  roi?: number;
+  capital?: number;
+
+  stats?: AccountStats;
+  activities?: Record<string, AccountActivity>;
+}
+
+export interface Account extends AccountBase, AccountInfo, AccountMetrics {
 }
