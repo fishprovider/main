@@ -3,18 +3,18 @@ import { AccountRepository, BaseGetManyResult, BaseGetResult } from '@fishprovid
 import { MongoAccountRepository } from '@fishprovider/mongo';
 import { RedisAccountRepository } from '@fishprovider/redis';
 
-import { getCacheFirst, updateCacheFirst } from '..';
+import { getAndSetCacheFirst, updateCacheFirst } from '..';
 
 const getAccount: AccountRepository['getAccount'] = async (filter, options) => {
   const getCache = RedisAccountRepository.getAccount;
   const setCache = RedisAccountRepository.updateAccount;
   const getDb = MongoAccountRepository.getAccount;
 
-  const res = await getCacheFirst<BaseGetResult<Account>>({
+  const res = await getAndSetCacheFirst<BaseGetResult<Account>>({
     getCache: getCache && (() => getCache(filter, options)),
     setCache: setCache && (({ doc } = {}) => setCache(filter, { account: doc }, options)),
     getDb: getDb && (() => getDb(filter, options)),
-  }, options);
+  });
 
   return res ?? {};
 };
@@ -24,11 +24,11 @@ const getAccounts: AccountRepository['getAccounts'] = async (filter, options) =>
   const setCache = RedisAccountRepository.updateAccounts;
   const getDb = MongoAccountRepository.getAccounts;
 
-  const res = await getCacheFirst<BaseGetManyResult<Account>>({
+  const res = await getAndSetCacheFirst<BaseGetManyResult<Account>>({
     getCache: getCache && (() => getCache(filter, options)),
     setCache: setCache && (({ docs } = {}) => setCache(filter, { accounts: docs }, options)),
     getDb: getDb && (() => getDb(filter, options)),
-  }, options);
+  });
 
   return res ?? {};
 };

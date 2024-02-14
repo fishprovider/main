@@ -1,11 +1,7 @@
 export type Projection<T> = Partial<Record<keyof T | string, 0 | 1>>;
 export type Sort = { [key: string]: 1 | -1 | 'asc' | 'desc' };
 
-export interface CacheFirstOptions {
-  initializeCache?: boolean,
-}
-
-export interface BaseGetOptions<T> extends CacheFirstOptions {
+export interface BaseGetOptions<T> {
   projection?: Projection<T>,
   sort?: Sort,
 }

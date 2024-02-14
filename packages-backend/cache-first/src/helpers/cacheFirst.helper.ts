@@ -1,5 +1,3 @@
-import { CacheFirstOptions } from '@fishprovider/core-backend';
-
 interface Base {
   doc?: any;
   docs?: any;
@@ -8,22 +6,29 @@ interface Base {
 export const getCacheFirst = async <T extends Base>(
   params: {
     getCache?: () => Promise<T>,
+  },
+) => {
+  const { getCache } = params;
+
+  const data: T | undefined = await getCache?.();
+  return data;
+};
+
+export const getAndSetCacheFirst = async <T extends Base>(
+  params: {
+    getCache?: () => Promise<T>,
     setCache?: (data?: T) => Promise<T>,
     getDb?: () => Promise<T>,
   },
-  options?: CacheFirstOptions,
 ) => {
   const { getCache, setCache, getDb } = params;
-  const { initializeCache } = options || {};
-
   let data: T | undefined = await getCache?.();
 
-  const isCacheEmpty = !data?.doc && !data?.docs;
-  if (initializeCache && isCacheEmpty) {
+  const isEmpty = !data?.doc && !data?.docs;
+  if (isEmpty) {
     data = await getDb?.();
     setCache?.(data); // non-blocking
   }
-
   return data;
 };
 
@@ -32,10 +37,8 @@ export const updateCacheFirst = async <T extends Base>(params: {
   updateCache?: (data?: T) => Promise<T>,
 }) => {
   const { updateDb, updateCache } = params;
-
   const data: T | undefined = await updateDb?.();
 
   updateCache?.(data); // non-blocking
-
   return data;
 };
