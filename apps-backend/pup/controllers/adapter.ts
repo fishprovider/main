@@ -1,7 +1,7 @@
 import { start as startSysInfo } from '@fishprovider/old-core/dist/libs/sysinfo';
 
-import getNextWeekNews from '~services/getNextWeekNews';
-import getStrategyInfos from '~services/getStrategyInfos';
+// import getNextWeekNews from '~services/getNextWeekNews';
+// import getStrategyInfos from '~services/getStrategyInfos';
 
 const status = async () => {
   Logger.warn('🎡 Status..');
@@ -23,8 +23,8 @@ const start = async () => {
   try {
     Logger.info('⭐ Starting...');
     startSysInfo();
-    await getStrategyInfos();
-    await getNextWeekNews();
+    // await getStrategyInfos();
+    // await getNextWeekNews();
     Logger.info('⭐ Started');
   } catch (err) {
     Logger.error(`🔥 Failed to start: ${err}`);
