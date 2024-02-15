@@ -9,6 +9,7 @@ import {
 } from '..';
 
 export interface AccountRepository {
+  /** @deprecated */
   getAccount?: (
     filter: {
       accountId?: string,
@@ -23,6 +24,31 @@ export interface AccountRepository {
     options?: BaseGetOptions<Account>,
   ) => Promise<BaseGetResult<Account>>;
 
+  getAccountBase?: (
+    filter: {
+      accountId?: string,
+      platform?: AccountPlatform,
+    },
+    options?: BaseGetOptions<Account>,
+  ) => Promise<BaseGetResult<Account>>;
+
+  getAccountProvider?: (
+    filter: {
+      config?: AccountConfig,
+    },
+    options?: BaseGetOptions<Account>,
+  ) => Promise<BaseGetResult<Account>>;
+
+  checkAccount?: (
+    filter: {
+      accountId: string,
+      name: string,
+      providerAccountId?: string,
+    },
+    options?: BaseGetOptions<Account>,
+  ) => Promise<BaseGetResult<Account>>;
+
+  /** @deprecated */
   getAccounts?: (
     filter: {
       viewType?: AccountViewType,
@@ -37,6 +63,25 @@ export interface AccountRepository {
     },
     options?: BaseGetOptions<Account>,
   ) => Promise<BaseGetManyResult<Account>>;
+
+  getAccountsBase?: (
+    filter: {
+      accountIds?: string[],
+      viewType?: AccountViewType,
+      email?: string,
+      platform?: AccountPlatform,
+    },
+    options?: BaseGetOptions<Account>,
+  ) => Promise<BaseGetResult<Account>>;
+
+  getAccountsProvider?: (
+    filter: {
+      config?: AccountConfig,
+      providerCode?: string,
+      providerRedirectUrl?: string,
+    },
+    options?: BaseGetOptions<Account>,
+  ) => Promise<BaseGetResult<Account>>;
 
   updateAccount?: (
     filter: {

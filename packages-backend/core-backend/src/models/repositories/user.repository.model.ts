@@ -1,6 +1,4 @@
-import {
-  AccountRole, User, UserRoles,
-} from '@fishprovider/core';
+import { AccountRole, User, UserRoles } from '@fishprovider/core';
 
 import {
   BaseGetManyResult, BaseGetOptions, BaseGetResult, BaseUpdateOptions, BaseUpdateResult,
