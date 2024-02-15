@@ -10,7 +10,7 @@ import Tooltip from '~ui/core/Tooltip';
 
 const commonKey = 'fishprovider';
 const discordKey = 'KpHQjdhKmC';
-const whatsAppChatKey = 'Lr2M5zX4GTZEyZSES798xs';
+const whatsAppChatKey = 'H2JDo9sPEKM0JpaIfqok3Q';
 const zaloKey = 'autuht309';
 
 interface CustomIconProps {
