@@ -14,6 +14,11 @@ export interface BaseGetResult<T> {
   doc?: Partial<T>;
 }
 
+export interface BaseCheckResult<T> extends BaseGetResult<T> {
+  found: boolean;
+  count?: number;
+}
+
 export interface BaseUpdateResult<T> extends BaseGetResult<T> {
   matchedCount?: number;
   modifiedCount?: number;

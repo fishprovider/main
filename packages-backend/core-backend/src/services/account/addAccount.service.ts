@@ -14,7 +14,7 @@ export const addAccountService: AddAccountService = async ({
   // pre-check
   //
   const userSession = checkLogin(context?.userSession);
-  const getAccountRepo = checkRepository(repositories.account.getAccount);
+  const checkAccountRepo = checkRepository(repositories.account.checkAccount);
   const addAccountRepo = checkRepository(repositories.account.addAccount);
   const getTradeClientRepo = checkRepository(repositories.account.getTradeClient);
   const updateTradeClientRepo = checkRepository(repositories.account.updateTradeClient);
@@ -41,14 +41,12 @@ export const addAccountService: AddAccountService = async ({
 
   const accountId = _.replace(name, /\s+/g, '_').toLowerCase();
 
-  const { doc: accountExisted } = await getAccountRepo({
-    checkExist: {
-      accountId,
-      name,
-      tradeAccountId: baseConfig.accountId,
-    },
+  const { found } = await checkAccountRepo({
+    accountId,
+    name,
+    providerAccountId: baseConfig.accountId,
   });
-  if (accountExisted) {
+  if (found) {
     throw new BaseError(AccountError.ACCOUNT_BAD_REQUEST, 'Account name already exists');
   }
 

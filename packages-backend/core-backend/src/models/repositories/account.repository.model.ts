@@ -5,6 +5,7 @@ import {
 } from '@fishprovider/core';
 
 import {
+  BaseCheckResult,
   BaseGetManyResult, BaseGetOptions, BaseGetResult, BaseUpdateOptions, BaseUpdateResult,
 } from '..';
 
@@ -45,8 +46,7 @@ export interface AccountRepository {
       name: string,
       providerAccountId?: string,
     },
-    options?: BaseGetOptions<Account>,
-  ) => Promise<BaseGetResult<Account>>;
+  ) => Promise<BaseCheckResult<Account>>;
 
   /** @deprecated */
   getAccounts?: (
@@ -64,7 +64,7 @@ export interface AccountRepository {
     options?: BaseGetOptions<Account>,
   ) => Promise<BaseGetManyResult<Account>>;
 
-  getAccountsBase?: (
+  getManyAccountBase?: (
     filter: {
       accountIds?: string[],
       viewType?: AccountViewType,
@@ -72,16 +72,16 @@ export interface AccountRepository {
       platform?: AccountPlatform,
     },
     options?: BaseGetOptions<Account>,
-  ) => Promise<BaseGetResult<Account>>;
+  ) => Promise<BaseGetManyResult<Account>>;
 
-  getAccountsProvider?: (
+  getManyAccountProvider?: (
     filter: {
       config?: AccountConfig,
       providerCode?: string,
       providerRedirectUrl?: string,
     },
     options?: BaseGetOptions<Account>,
-  ) => Promise<BaseGetResult<Account>>;
+  ) => Promise<BaseGetManyResult<Account>>;
 
   updateAccount?: (
     filter: {
