@@ -39,9 +39,10 @@ function InvestPlatforms({
     }
 
     if (![
-      ProviderType.exness,
-      ProviderType.roboforex,
-      ProviderType.alpari,
+      ProviderType.myfxbook,
+      // ProviderType.exness,
+      // ProviderType.roboforex,
+      // ProviderType.alpari,
     ].includes(providerType as ProviderType)) return '';
 
     const account = groupAccounts.find(
