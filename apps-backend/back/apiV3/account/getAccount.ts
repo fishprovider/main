@@ -18,11 +18,11 @@ const getAccount: ApiHandler<Partial<Account>> = async (data, userSession) => {
 
   const { doc: account } = await getAccountService({
     filter,
+    options: {
+      ttlSec: 60 * 60 * 24 * 7, // 1 week
+    },
     repositories: {
       account: CacheFirstAccountRepository,
-    },
-    options: {
-      initializeCache: true,
     },
     context: { userSession },
   });

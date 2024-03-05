@@ -4,6 +4,7 @@ export type Sort = { [key: string]: 1 | -1 | 'asc' | 'desc' };
 export interface BaseGetOptions<T> {
   projection?: Projection<T>,
   sort?: Sort,
+  ttlSec?: number,
 }
 
 export interface BaseUpdateOptions<T> extends BaseGetOptions<T> {
@@ -12,6 +13,7 @@ export interface BaseUpdateOptions<T> extends BaseGetOptions<T> {
 
 export interface BaseGetResult<T> {
   doc?: Partial<T>;
+  at?: Date;
 }
 
 export interface BaseCheckResult<T> extends BaseGetResult<T> {
@@ -26,4 +28,6 @@ export interface BaseUpdateResult<T> extends BaseGetResult<T> {
 
 export interface BaseGetManyResult<T> {
   docs?: Partial<T>[];
+  docsObj?: Record<string, Partial<T>>;
+  at?: Date;
 }

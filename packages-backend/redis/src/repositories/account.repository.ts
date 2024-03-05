@@ -1,5 +1,5 @@
 import { Account } from '@fishprovider/core';
-import { AccountRepository } from '@fishprovider/core-backend';
+import { AccountRepository, BaseGetManyResult, BaseGetResult } from '@fishprovider/core-backend';
 
 import {
   buildKeyAccount, buildKeyAccounts, convertUndefinedToNull, getRedis,
@@ -8,41 +8,59 @@ import {
 const getAccount: AccountRepository['getAccount'] = async (filter) => {
   const key = buildKeyAccount(filter);
   const { clientJson } = await getRedis();
-  const doc = await clientJson.get(key);
-  if (!doc) return {};
+  const result = await clientJson.get(key) as BaseGetResult<Account> | undefined;
+  if (!result) return {};
 
-  return { doc: doc as Partial<Account> };
+  return result;
 };
 
 const getAccounts: AccountRepository['getAccounts'] = async (filter) => {
   const key = buildKeyAccounts(filter);
   const { clientJson } = await getRedis();
-  const docs = await clientJson.get(key);
-  if (!docs) return {};
+  const result = await clientJson.get(key) as BaseGetManyResult<Account> | undefined;
+  if (!result) return {};
 
-  return { docs: docs as Partial<Account>[] };
+  return { ...result, docs: Object.values(result.docsObj || {}) };
 };
 
-const updateAccount: AccountRepository['updateAccount'] = async (filter, payload) => {
+const updateAccount: AccountRepository['updateAccount'] = async (filter, payload, options) => {
   const key = buildKeyAccount(filter);
-  const { client, clientJson } = await getRedis();
+  const { clientJson, client } = await getRedis();
   const { account } = payload;
   if (!account) return {};
 
-  await clientJson.merge(key, '.', convertUndefinedToNull(account));
-  await client.expire(key, 60 * 5); // 5 mins
-  return { doc: account };
+  await clientJson.merge(key, '$', {});
+  await clientJson.merge(key, '$.doc', convertUndefinedToNull(account)).catch(console.error);
+  const at = new Date();
+  await clientJson.set(key, '$.at', at);
+
+  const { ttlSec } = options || {};
+  if (ttlSec) {
+    await client.expire(key, ttlSec * 2);
+  }
+
+  return { doc: account, at };
 };
 
-const updateAccounts: AccountRepository['updateAccounts'] = async (filter, payload) => {
+const updateAccounts: AccountRepository['updateAccounts'] = async (filter, payload, options) => {
   const key = buildKeyAccounts(filter);
-  const { client, clientJson } = await getRedis();
+  const { clientJson, client } = await getRedis();
   const { accounts } = payload;
   if (!accounts) return {};
 
-  await clientJson.set(key, '.', convertUndefinedToNull(accounts));
-  await client.expire(key, 60 * 5); // 5 mins
-  return { docs: accounts };
+  await clientJson.merge(key, '$', {});
+  for (const account of accounts) {
+    await clientJson.merge(key, `$.docsObj.${account._id}`, convertUndefinedToNull(account));
+  }
+  const at = new Date();
+  await clientJson.set(key, '$.at', at);
+
+  const { ttlSec } = options || {};
+  if (ttlSec) {
+    await client.expire(key, ttlSec * 2);
+  }
+
+  return { docs: accounts, at };
 };
 
 const removeAccount: AccountRepository['removeAccount'] = async (filter) => {

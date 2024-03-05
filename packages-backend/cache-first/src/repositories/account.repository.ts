@@ -14,6 +14,7 @@ const getAccount: AccountRepository['getAccount'] = async (filter, options) => {
     getCache: getCache && (() => getCache(filter, options)),
     setCache: setCache && (({ doc } = {}) => setCache(filter, { account: doc }, options)),
     getDb: getDb && (() => getDb(filter, options)),
+    ttlSec: options?.ttlSec,
   });
 
   return res ?? {};
@@ -28,6 +29,7 @@ const getAccounts: AccountRepository['getAccounts'] = async (filter, options) =>
     getCache: getCache && (() => getCache(filter, options)),
     setCache: setCache && (({ docs } = {}) => setCache(filter, { accounts: docs }, options)),
     getDb: getDb && (() => getDb(filter, options)),
+    ttlSec: options?.ttlSec,
   });
 
   return res ?? {};

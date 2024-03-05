@@ -24,10 +24,10 @@ const getAccounts: ApiHandler<Partial<Account>[]> = async (data, userSession) =>
       }),
     },
     options: {
-      initializeCache: true,
       sort: {
         order: -1,
       },
+      ttlSec: 60 * 60 * 24 * 7, // 1 week
     },
     repositories: {
       account: CacheFirstAccountRepository,

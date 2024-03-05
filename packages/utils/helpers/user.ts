@@ -8,15 +8,15 @@ const getRoleProvider = (roles?: Roles, providerId?: string) => {
   const isManagerWeb = isAdminWeb || roles.managerWeb;
 
   const isAdminProvider = isAdminWeb
-    || (providerId && roles.adminProviders?.[providerId]);
+    || (providerId && roles.adminAccounts?.[providerId]);
   const isTraderProvider = isAdminProvider
-    || (providerId && roles.traderProviders?.[providerId]);
+    || (providerId && roles.traderAccounts?.[providerId]);
   const isProtectorProvider = isAdminProvider
-    || (providerId && roles.protectorProviders?.[providerId]);
+    || (providerId && roles.protectorAccounts?.[providerId]);
   const isViewerProvider = isManagerWeb
     || isTraderProvider
     || isProtectorProvider
-    || (providerId && roles.viewerProviders?.[providerId]);
+    || (providerId && roles.viewerAccounts?.[providerId]);
 
   return {
     isAdmin,

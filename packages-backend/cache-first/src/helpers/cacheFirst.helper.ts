@@ -1,6 +1,9 @@
+import moment from 'moment';
+
 interface Base {
   doc?: any;
   docs?: any;
+  at?: Date;
 }
 
 export const getCacheFirst = async <T extends Base>(
@@ -19,13 +22,17 @@ export const getAndSetCacheFirst = async <T extends Base>(
     getCache?: () => Promise<T>,
     setCache?: (data?: T) => Promise<T>,
     getDb?: () => Promise<T>,
+    ttlSec?: number,
   },
 ) => {
-  const { getCache, setCache, getDb } = params;
+  const {
+    getCache, setCache, getDb, ttlSec,
+  } = params;
   let data: T | undefined = await getCache?.();
 
   const isEmpty = !data?.doc && !data?.docs;
-  if (isEmpty) {
+  const isExpired = ttlSec && data?.at && moment().diff(moment(data.at), 'seconds') > ttlSec;
+  if (isEmpty || isExpired) {
     data = await getDb?.();
     setCache?.(data); // non-blocking
   }

@@ -11,10 +11,10 @@ const getUserDefault: () => User = () => ({
     adminWeb: false,
     managerWeb: false,
 
-    adminProviders: {},
-    traderProviders: {},
-    protectorProviders: {},
-    viewerProviders: {},
+    adminAccounts: {},
+    traderAccounts: {},
+    protectorAccounts: {},
+    viewerAccounts: {},
   },
 });
 
@@ -25,8 +25,8 @@ const getUser = ({
 } = {}) => {
   const user = getUserDefault();
 
-  if (adminProvider && user.roles?.adminProviders) {
-    user.roles.adminProviders[adminProvider] = true;
+  if (adminProvider && user.roles?.adminAccounts) {
+    user.roles.adminAccounts[adminProvider] = true;
   }
 
   return user;

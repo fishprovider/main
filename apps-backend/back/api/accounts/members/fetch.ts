@@ -12,30 +12,30 @@ const updateUser = async (providerId: string, member: Member) => {
     {
       $unset: {
         ...(role !== Roles.admin && {
-          [`roles.adminProviders.${providerId}`]: '',
+          [`roles.adminAccounts.${providerId}`]: '',
         }),
         ...(role !== Roles.trader && {
-          [`roles.traderProviders.${providerId}`]: '',
+          [`roles.traderAccounts.${providerId}`]: '',
         }),
         ...(role !== Roles.protector && {
-          [`roles.protectorProviders.${providerId}`]: '',
+          [`roles.protectorAccounts.${providerId}`]: '',
         }),
         ...(role !== Roles.viewer && {
-          [`roles.viewerProviders.${providerId}`]: '',
+          [`roles.viewerAccounts.${providerId}`]: '',
         }),
       },
       $set: {
         ...(role === Roles.admin && {
-          [`roles.adminProviders.${providerId}`]: true,
+          [`roles.adminAccounts.${providerId}`]: true,
         }),
         ...(role === Roles.trader && {
-          [`roles.traderProviders.${providerId}`]: true,
+          [`roles.traderAccounts.${providerId}`]: true,
         }),
         ...(role === Roles.protector && {
-          [`roles.protectorProviders.${providerId}`]: true,
+          [`roles.protectorAccounts.${providerId}`]: true,
         }),
         ...(role === Roles.viewer && {
-          [`roles.viewerProviders.${providerId}`]: true,
+          [`roles.viewerAccounts.${providerId}`]: true,
         }),
       },
     },
