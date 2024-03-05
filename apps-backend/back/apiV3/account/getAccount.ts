@@ -19,7 +19,8 @@ const getAccount: ApiHandler<Partial<Account>> = async (data, userSession) => {
   const { doc: account } = await getAccountService({
     filter,
     options: {
-      ttlSec: 60 * 60 * 24 * 7, // 1 week
+      expireSec: 60 * 60 * 24 * 7, // 1 week
+      reloadSec: 60 * 1, // 1 minute
     },
     repositories: {
       account: CacheFirstAccountRepository,

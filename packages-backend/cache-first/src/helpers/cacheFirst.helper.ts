@@ -22,20 +22,43 @@ export const getAndSetCacheFirst = async <T extends Base>(
     getCache?: () => Promise<T>,
     setCache?: (data?: T) => Promise<T>,
     getDb?: () => Promise<T>,
-    ttlSec?: number,
+    expireSec?: number,
+    reloadSec?: number,
   },
 ) => {
   const {
-    getCache, setCache, getDb, ttlSec,
+    getCache, setCache, getDb, expireSec, reloadSec,
   } = params;
   let data: T | undefined = await getCache?.();
 
-  const isEmpty = !data?.doc && !data?.docs;
-  const isExpired = ttlSec && data?.at && moment().diff(moment(data.at), 'seconds') > ttlSec;
-  if (isEmpty || isExpired) {
+  const checkSetCache = () => {
+    if (!data) return true;
+
+    const { doc, docs, at } = data;
+
+    const isEmpty = !doc && !docs;
+    if (isEmpty) return true;
+
+    if (!at) return false;
+
+    const now = moment();
+    const setAt = moment(at);
+    const diffSec = now.diff(setAt, 'seconds');
+
+    const isExpired = expireSec && diffSec > expireSec;
+    if (isExpired) return true;
+
+    const needReload = reloadSec && diffSec > reloadSec;
+    if (needReload) return true;
+
+    return false;
+  };
+
+  if (checkSetCache()) {
     data = await getDb?.();
     setCache?.(data); // non-blocking
   }
+
   return data;
 };
 

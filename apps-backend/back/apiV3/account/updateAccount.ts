@@ -85,7 +85,7 @@ const updateAccount: ApiHandler<Partial<Account>> = async (data, userSession) =>
     },
     options: {
       ...options,
-      ttlSec: 60 * 60 * 24 * 7, // 1 week
+      expireSec: 60 * 60 * 24 * 7, // 1 week
     },
     context: { userSession },
   });

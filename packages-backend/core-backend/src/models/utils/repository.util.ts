@@ -4,7 +4,8 @@ export type Sort = { [key: string]: 1 | -1 | 'asc' | 'desc' };
 export interface BaseGetOptions<T> {
   projection?: Projection<T>,
   sort?: Sort,
-  ttlSec?: number,
+  expireSec?: number,
+  reloadSec?: number,
 }
 
 export interface BaseUpdateOptions<T> extends BaseGetOptions<T> {

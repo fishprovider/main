@@ -27,7 +27,8 @@ const getAccounts: ApiHandler<Partial<Account>[]> = async (data, userSession) =>
       sort: {
         order: -1,
       },
-      ttlSec: 60 * 60 * 24 * 7, // 1 week
+      expireSec: 60 * 60 * 24 * 7, // 1 week
+      reloadSec: 60 * 1, // 1 minute
     },
     repositories: {
       account: CacheFirstAccountRepository,

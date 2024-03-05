@@ -34,9 +34,9 @@ const updateAccount: AccountRepository['updateAccount'] = async (filter, payload
   const at = new Date();
   await clientJson.set(key, '.at', at);
 
-  const { ttlSec } = options || {};
-  if (ttlSec) {
-    await client.expire(key, ttlSec * 2);
+  const { expireSec } = options || {};
+  if (expireSec) {
+    await client.expire(key, expireSec);
   }
 
   return { doc: account, at };
@@ -56,9 +56,9 @@ const updateAccounts: AccountRepository['updateAccounts'] = async (filter, paylo
   const at = new Date();
   await clientJson.set(key, '.at', at);
 
-  const { ttlSec } = options || {};
-  if (ttlSec) {
-    await client.expire(key, ttlSec * 2);
+  const { expireSec } = options || {};
+  if (expireSec) {
+    await client.expire(key, expireSec);
   }
 
   return { docs: accounts, at };
