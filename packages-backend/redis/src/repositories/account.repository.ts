@@ -29,10 +29,10 @@ const updateAccount: AccountRepository['updateAccount'] = async (filter, payload
   const { account } = payload;
   if (!account) return {};
 
-  await clientJson.merge(key, '$', {});
-  await clientJson.merge(key, '$.doc', convertUndefinedToNull(account)).catch(console.error);
+  await clientJson.merge(key, '.', {});
+  await clientJson.merge(key, '.doc', convertUndefinedToNull(account)).catch(console.error);
   const at = new Date();
-  await clientJson.set(key, '$.at', at);
+  await clientJson.set(key, '.at', at);
 
   const { ttlSec } = options || {};
   if (ttlSec) {
@@ -48,12 +48,13 @@ const updateAccounts: AccountRepository['updateAccounts'] = async (filter, paylo
   const { accounts } = payload;
   if (!accounts) return {};
 
-  await clientJson.merge(key, '$', {});
+  await clientJson.merge(key, '.', {});
   for (const account of accounts) {
-    await clientJson.merge(key, `$.docsObj.${account._id}`, convertUndefinedToNull(account));
+    await clientJson.merge(key, '.docsObj', {});
+    await clientJson.merge(key, `.docsObj.${account._id}`, convertUndefinedToNull(account));
   }
   const at = new Date();
-  await clientJson.set(key, '$.at', at);
+  await clientJson.set(key, '.at', at);
 
   const { ttlSec } = options || {};
   if (ttlSec) {
