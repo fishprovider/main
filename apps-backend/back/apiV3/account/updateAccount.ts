@@ -83,7 +83,10 @@ const updateAccount: ApiHandler<Partial<Account>> = async (data, userSession) =>
     repositories: {
       account: CacheFirstAccountRepository,
     },
-    options,
+    options: {
+      ...options,
+      ttlSec: 60 * 60 * 24 * 7, // 1 week
+    },
     context: { userSession },
   });
 
