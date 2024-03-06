@@ -45,6 +45,8 @@ const addAccountProvider: AccountRepository['addAccountProvider'] = async (paylo
   return {};
 };
 
+// TODO: implement removeAccount
+
 export const TradeAccountRepository: AccountRepository = {
   getAccountProvider,
   getAccountProviders,
