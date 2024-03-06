@@ -11,9 +11,8 @@ import Stepper from '~ui/core/Stepper';
 import Text from '~ui/core/Text';
 import Title from '~ui/core/Title';
 
-const defaultUrlExness = 'https://social-trading.exness.com/strategy/11804543';
-const defaultUrlRoboforex = 'https://www.copyfx.com/ratings/rating-all/show/264656?a=vtft';
-const defaultUrlAlpari = 'https://www.alpari.com/en/invest/pamm/548473';
+const defaultUrlExness = 'https://social-trading.exness.com/strategy/110134159';
+const defaultUrlRoboforex = 'https://www.copyfx.com/ratings/rating-all/show/000000?a=vtft'; // TODO: replace 000000
 
 interface Props {
   providerId: string,
@@ -39,10 +38,8 @@ function InvestPlatforms({
     }
 
     if (![
-      ProviderType.myfxbook,
-      // ProviderType.exness,
+      ProviderType.exness,
       // ProviderType.roboforex,
-      // ProviderType.alpari,
     ].includes(providerType as ProviderType)) return '';
 
     const account = groupAccounts.find(
@@ -52,7 +49,6 @@ function InvestPlatforms({
 
     if (!url && providerType === ProviderType.exness) return defaultUrlExness;
     if (!url && providerType === ProviderType.roboforex) return defaultUrlRoboforex;
-    if (!url && providerType === ProviderType.alpari) return defaultUrlAlpari;
 
     return url;
   };

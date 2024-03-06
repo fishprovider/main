@@ -18,7 +18,6 @@ const adminProviderIds: Record<string, string> = {
   [ProviderType.icmarkets]: 'earth',
   [ProviderType.exness]: 'earth2',
   roboforex: 'earth3',
-  alpari: 'earth4',
 };
 
 const runs = {};

@@ -3,7 +3,6 @@ enum ProviderType {
   icmarkets = 'icmarkets',
   exness = 'exness',
   roboforex = 'roboforex',
-  alpari = 'alpari',
 }
 
 enum AccountPlatform {
