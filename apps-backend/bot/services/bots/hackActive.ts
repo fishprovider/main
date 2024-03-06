@@ -144,7 +144,7 @@ const hackActiveExness = async (
 
     symbol: 'LTCUSD',
     direction: Direction.buy,
-    volume: 0.1,
+    volume: 0.01,
   };
 
   await newHackOrders(baseOrder, hackOrders, account.config);
