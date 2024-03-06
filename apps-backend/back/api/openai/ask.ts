@@ -26,7 +26,7 @@ async function ask({ input, tag, history }: AskParams): Promise<AskResult> {
   chatMessages.push({ role: 'user', content: input });
 
   const completion = await openai.chat.completions.create({
-    model: 'gpt-4-32k',
+    model: 'gpt-4-turbo-preview',
     messages: chatMessages,
   });
 
