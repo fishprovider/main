@@ -10,22 +10,7 @@ import {
 } from '..';
 
 export interface AccountRepository {
-  /** @deprecated */
   getAccount?: (
-    filter: {
-      accountId?: string,
-      checkExist?: {
-        accountId: string,
-        name: string,
-        tradeAccountId?: string,
-      },
-      platform?: AccountPlatform,
-      config?: AccountConfig,
-    },
-    options?: BaseGetOptions<Account>,
-  ) => Promise<BaseGetResult<Account>>;
-
-  getAccountBase?: (
     filter: {
       accountId?: string,
       platform?: AccountPlatform,
@@ -35,6 +20,8 @@ export interface AccountRepository {
 
   getAccountProvider?: (
     filter: {
+      accountId?: string,
+      platform?: AccountPlatform,
       config?: AccountConfig,
     },
     options?: BaseGetOptions<Account>,
@@ -48,14 +35,12 @@ export interface AccountRepository {
     },
   ) => Promise<BaseCheckResult<Account>>;
 
-  /** @deprecated */
   getAccounts?: (
     filter: {
       viewType?: AccountViewType,
       email?: string,
       accountIds?: string[],
       platform?: AccountPlatform,
-      config?: AccountConfig,
       tradeRequest?: {
         redirectUrl: string,
         code: string,
@@ -64,18 +49,9 @@ export interface AccountRepository {
     options?: BaseGetOptions<Account>,
   ) => Promise<BaseGetManyResult<Account>>;
 
-  getManyAccountBase?: (
+  getAccountProviders?: (
     filter: {
-      accountIds?: string[],
-      viewType?: AccountViewType,
-      email?: string,
       platform?: AccountPlatform,
-    },
-    options?: BaseGetOptions<Account>,
-  ) => Promise<BaseGetManyResult<Account>>;
-
-  getManyAccountProvider?: (
-    filter: {
       config?: AccountConfig,
       providerCode?: string,
       providerRedirectUrl?: string,
@@ -136,6 +112,15 @@ export interface AccountRepository {
       viewType: AccountViewType,
       tradeType: AccountTradeType,
       members: AccountMember[],
+    },
+    options?: BaseUpdateOptions<Account>,
+  ) => Promise<BaseGetResult<Account>>;
+
+  addAccountProvider?: (
+    payload: {
+      accountId: string,
+      platform: AccountPlatform,
+      config?: AccountConfig,
     },
     options?: BaseUpdateOptions<Account>,
   ) => Promise<BaseGetResult<Account>>;

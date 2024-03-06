@@ -11,7 +11,7 @@ export const getTradeAccountsService: GetTradeAccountsService = async ({
   // pre-check
   //
   const getTradeClientRepo = checkRepository(repositories.account.getTradeClient);
-  const getTradeAccountsRepo = checkRepository(repositories.trade.getAccounts);
+  const getAccountProvidersRepo = checkRepository(repositories.trade.getAccountProviders);
 
   //
   // main
@@ -32,7 +32,7 @@ export const getTradeAccountsService: GetTradeAccountsService = async ({
     throw new BaseError(AccountError.ACCOUNT_NOT_FOUND, 'Missing clientId or clientSecret');
   }
 
-  const { docs: accounts } = await getTradeAccountsRepo({
+  const { docs: accounts } = await getAccountProvidersRepo({
     platform,
     config: {
       ...baseConfig,
@@ -40,7 +40,8 @@ export const getTradeAccountsService: GetTradeAccountsService = async ({
       clientSecret,
       isLive,
     },
-    tradeRequest,
+    providerCode: tradeRequest?.code,
+    providerRedirectUrl: tradeRequest?.redirectUrl,
   });
 
   return {

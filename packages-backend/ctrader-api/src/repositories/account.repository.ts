@@ -28,7 +28,7 @@ const checkConfig = (config?: AccountConfig) => {
   };
 };
 
-const getAccount: AccountRepository['getAccount'] = async (filter) => {
+const getAccountProvider: AccountRepository['getAccountProvider'] = async (filter) => {
   const { accountId, config: rawConfig } = filter;
   const config = checkConfig(rawConfig);
 
@@ -48,12 +48,11 @@ const getAccount: AccountRepository['getAccount'] = async (filter) => {
   };
 };
 
-const getAccounts: AccountRepository['getAccounts'] = async (filter) => {
-  const { config: rawConfig, tradeRequest } = filter;
+const getAccountProviders: AccountRepository['getAccountProviders'] = async (filter) => {
+  const { config: rawConfig, providerCode: code, providerRedirectUrl: redirectUrl } = filter;
 
-  if (rawConfig && tradeRequest) {
+  if (rawConfig && code && redirectUrl) {
     const { clientId, clientSecret, isLive } = rawConfig;
-    const { redirectUrl, code } = tradeRequest;
     const url = `https://openapi.ctrader.com/apps/token?grant_type=authorization_code&code=${code}&redirect_uri=${redirectUrl}&client_id=${clientId}&client_secret=${clientSecret}`;
     log.info('Start getAccounts', url);
     const { data } = await axios.get(url);
@@ -92,6 +91,6 @@ const getAccounts: AccountRepository['getAccounts'] = async (filter) => {
 };
 
 export const CTraderAccountRepository: AccountRepository = {
-  getAccount,
-  getAccounts,
+  getAccountProvider,
+  getAccountProviders,
 };

@@ -13,7 +13,7 @@ const checkConfig = (config?: AccountConfig) => {
   return config;
 };
 
-const getAccount: AccountRepository['getAccount'] = async (payload) => {
+const getAccountProvider: AccountRepository['getAccountProvider'] = async (payload) => {
   const { accountId, config: rawConfig } = payload;
   const config = checkConfig(rawConfig);
 
@@ -39,7 +39,7 @@ const getAccount: AccountRepository['getAccount'] = async (payload) => {
   };
 };
 
-const addAccount: AccountRepository['addAccount'] = async (payload) => {
+const addAccountProvider: AccountRepository['addAccountProvider'] = async (payload) => {
   const { accountId, config: rawConfig } = payload;
   const config = checkConfig(rawConfig);
 
@@ -64,6 +64,6 @@ const addAccount: AccountRepository['addAccount'] = async (payload) => {
 };
 
 export const MetaApiAccountRepository: AccountRepository = {
-  getAccount,
-  addAccount,
+  getAccountProvider,
+  addAccountProvider,
 };

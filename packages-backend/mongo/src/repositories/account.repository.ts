@@ -55,15 +55,6 @@ const getAccount: AccountRepository['getAccount'] = async (filter, options) => {
   return { doc: account ?? undefined };
 };
 
-const getAccountBase: AccountRepository['getAccountBase'] = async (filter, options) => {
-  const { db } = await getMongo();
-  const account = await db.collection<Account>('accounts').findOne(
-    buildAccountFilter(filter),
-    options,
-  );
-  return { doc: account ?? undefined };
-};
-
 const checkAccount: AccountRepository['checkAccount'] = async (filter) => {
   const { db } = await getMongo();
   const { accountId, name, providerAccountId } = filter;
@@ -80,15 +71,6 @@ const checkAccount: AccountRepository['checkAccount'] = async (filter) => {
 };
 
 const getAccounts: AccountRepository['getAccounts'] = async (filter, options) => {
-  const { db } = await getMongo();
-  const accounts = await db.collection<Account>('accounts').find(
-    buildAccountFilter(filter),
-    options,
-  ).toArray();
-  return { docs: accounts };
-};
-
-const getManyAccountBase: AccountRepository['getManyAccountBase'] = async (filter, options) => {
   const { db } = await getMongo();
   const accounts = await db.collection<Account>('accounts').find(
     buildAccountFilter(filter),
@@ -246,10 +228,8 @@ const updateTradeClient: AccountRepository['updateTradeClient'] = async (filter)
 
 export const MongoAccountRepository: AccountRepository = {
   getAccount,
-  getAccountBase,
   checkAccount,
   getAccounts,
-  getManyAccountBase,
   updateAccount,
   addAccount,
   removeAccount,

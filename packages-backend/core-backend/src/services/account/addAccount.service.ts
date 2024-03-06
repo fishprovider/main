@@ -18,7 +18,7 @@ export const addAccountService: AddAccountService = async ({
   const addAccountRepo = checkRepository(repositories.account.addAccount);
   const getTradeClientRepo = checkRepository(repositories.account.getTradeClient);
   const updateTradeClientRepo = checkRepository(repositories.account.updateTradeClient);
-  const addTradeAccountRepo = checkRepository(repositories.trade.addAccount);
+  const addAccountProviderRepo = checkRepository(repositories.trade.addAccountProvider);
   const updateUserRepo = checkRepository(repositories.user.updateUser);
 
   //
@@ -69,15 +69,10 @@ export const addAccountService: AddAccountService = async ({
     name,
   };
 
-  const { doc: tradeAccount } = await addTradeAccountRepo({
-    accountId: '',
-    name,
-    config,
-    providerType,
+  const { doc: tradeAccount } = await addAccountProviderRepo({
+    accountId,
     platform,
-    tradeType,
-    viewType: AccountViewType.private,
-    members: [],
+    config,
   });
   if (tradeAccount?.config?.accountId) {
     config.accountId = tradeAccount.config.accountId;
