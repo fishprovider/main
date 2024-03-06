@@ -169,7 +169,8 @@ export const hackActive = async (
 
   if (account.providerType === ProviderType.icmarkets) {
     await hackActiveCTrader(account, liveOrders, hackOrders);
-  } else if (account.providerType === ProviderType.exness) {
-    await hackActiveExness(account, liveOrders, hackOrders);
   }
+  // if (account.providerType === ProviderType.exness) {
+  //   await hackActiveExness(account, liveOrders, hackOrders);
+  // }
 };
