@@ -182,7 +182,7 @@ const metatraderPlatforms = {
   //   name: 'ZuluTrade',
   //   icon: '/icons/zulutrade.png',
   //   href: 'https://www.zulutrade.com',
-  //   partnerUrl: 'https://www.zulutrade.com/?ref=2488273&utm_medium=affiliate&utm_source=2488273&utm_campaign=affiliate',
+  //   partnerUrl: 'https://www.zulutrade.com/?ref=2643228&utm_medium=affiliate&utm_source=2643228&utm_campaign=affiliate',
   //   rank: 269,
   // },
 };
