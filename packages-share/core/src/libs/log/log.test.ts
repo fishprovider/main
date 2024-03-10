@@ -2,13 +2,19 @@ import { jest } from '@jest/globals';
 
 import { log, LogHandler, registerCustomHandlers } from './log';
 
+const consoleErrorSpy = jest.spyOn(console, 'error');
+const consoleWarnSpy = jest.spyOn(console, 'warn');
+const consoleInfoSpy = jest.spyOn(console, 'info');
+const consoleDebugSpy = jest.spyOn(console, 'debug');
+const consoleLogSpy = jest.spyOn(console, 'log');
+
 describe('log', () => {
   beforeEach(() => {
-    jest.spyOn(console, 'error').mockImplementation(() => undefined);
-    jest.spyOn(console, 'warn').mockImplementation(() => undefined);
-    jest.spyOn(console, 'info').mockImplementation(() => undefined);
-    jest.spyOn(console, 'debug').mockImplementation(() => undefined);
-    jest.spyOn(console, 'log').mockImplementation(() => undefined);
+    consoleErrorSpy.mockImplementation(() => undefined);
+    consoleWarnSpy.mockImplementation(() => undefined);
+    consoleInfoSpy.mockImplementation(() => undefined);
+    consoleDebugSpy.mockImplementation(() => undefined);
+    consoleLogSpy.mockImplementation(() => undefined);
   });
 
   afterEach(() => {
