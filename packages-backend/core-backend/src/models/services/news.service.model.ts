@@ -1,13 +1,10 @@
-import {
-  News,
-} from '@fishprovider/core';
+import { News } from '@fishprovider/core';
 
 import {
-  BaseGetServiceParams, BaseUpdateServiceParams, NewsRepository,
-  RepositoryGetManyResult,
+  NewsRepository, RepositoryGetManyResult, ServiceGetParams, ServiceUpdateParams,
 } from '..';
 
-export type GetNewsService = (params: BaseGetServiceParams<News> & {
+export type GetNewsService = (params: ServiceGetParams<News> & {
   filter: {
     today?: boolean,
     week?: string,
@@ -18,7 +15,7 @@ export type GetNewsService = (params: BaseGetServiceParams<News> & {
   },
 }) => Promise<RepositoryGetManyResult<News>>;
 
-export type UpdateNewsService = (params: BaseUpdateServiceParams<News> & {
+export type UpdateNewsService = (params: ServiceUpdateParams<News> & {
   filter: {
     today?: boolean,
     week?: string,

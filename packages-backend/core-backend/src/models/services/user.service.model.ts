@@ -1,13 +1,11 @@
-import {
-  User, UserRoles,
-} from '@fishprovider/core';
+import { User, UserRoles } from '@fishprovider/core';
 
 import {
-  AccountRepository, BaseGetServiceParams, BaseUpdateServiceParams,
-  RepositoryGetManyResult, RepositoryGetResult, UserRepository,
+  AccountRepository, RepositoryGetManyResult, RepositoryGetResult, ServiceGetParams,
+  ServiceUpdateParams, UserRepository,
 } from '..';
 
-export type GetUserService = (params: BaseGetServiceParams<User> & {
+export type GetUserService = (params: ServiceGetParams<User> & {
   filter: {
     email?: string,
   },
@@ -16,7 +14,7 @@ export type GetUserService = (params: BaseGetServiceParams<User> & {
   },
 }) => Promise<RepositoryGetResult<User>>;
 
-export type GetUsersService = (params: BaseGetServiceParams<User> & {
+export type GetUsersService = (params: ServiceGetParams<User> & {
   filter: {
     pushNotifType?: string
     pushNotifTopic?: string
@@ -26,7 +24,7 @@ export type GetUsersService = (params: BaseGetServiceParams<User> & {
   },
 }) => Promise<RepositoryGetManyResult<User>>;
 
-export type UpdateUserService = (params: BaseUpdateServiceParams<User> & {
+export type UpdateUserService = (params: ServiceUpdateParams<User> & {
   filter: {
     email?: string,
   },
@@ -43,7 +41,7 @@ export type UpdateUserService = (params: BaseUpdateServiceParams<User> & {
   },
 }) => Promise<RepositoryGetResult<User>>;
 
-export type RefreshUserRolesService = (params: BaseUpdateServiceParams<User> & {
+export type RefreshUserRolesService = (params: ServiceUpdateParams<User> & {
   filter: {
     email?: string,
   },

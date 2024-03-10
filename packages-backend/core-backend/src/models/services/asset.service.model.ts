@@ -1,10 +1,8 @@
-import {
-  Asset, ProviderType,
-} from '@fishprovider/core';
+import { Asset, ProviderType } from '@fishprovider/core';
 
-import { AssetRepository, BaseGetServiceParams, RepositoryGetManyResult } from '..';
+import { AssetRepository, RepositoryGetManyResult, ServiceGetParams } from '..';
 
-export type GetAssetsService = (params: BaseGetServiceParams<Asset> & {
+export type GetAssetsService = (params: ServiceGetParams<Asset> & {
   filter: {
     providerType: ProviderType,
   },

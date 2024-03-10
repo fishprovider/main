@@ -5,12 +5,11 @@ import {
 } from '@fishprovider/core';
 
 import {
-  AccountRepository, BaseGetServiceParams,
-  BaseUpdateServiceParams,
-  RepositoryGetManyResult, RepositoryGetResult,
+  AccountRepository, RepositoryGetManyResult, RepositoryGetResult, ServiceGetParams,
+  ServiceUpdateParams,
 } from '..';
 
-export type GetAccountService = (params: BaseGetServiceParams<Account> & {
+export type GetAccountService = (params: ServiceGetParams<Account> & {
   filter: {
     accountId: string,
     getTradeAccount?: boolean,
@@ -20,7 +19,7 @@ export type GetAccountService = (params: BaseGetServiceParams<Account> & {
   },
 }) => Promise<RepositoryGetResult<Account>>;
 
-export type GetAccountsService = (params: BaseGetServiceParams<Account> & {
+export type GetAccountsService = (params: ServiceGetParams<Account> & {
   filter: {
     viewType?: AccountViewType,
     getTradeAccounts?: {
@@ -37,7 +36,7 @@ export type GetAccountsService = (params: BaseGetServiceParams<Account> & {
   },
 }) => Promise<RepositoryGetManyResult<Account>>;
 
-export type UpdateAccountService = (params: BaseUpdateServiceParams<Account> & {
+export type UpdateAccountService = (params: ServiceUpdateParams<Account> & {
   filter: {
     accountId: string,
   },
@@ -63,7 +62,7 @@ export type UpdateAccountService = (params: BaseUpdateServiceParams<Account> & {
   },
 }) => Promise<RepositoryGetResult<Account>>;
 
-export type AddAccountService = (params: BaseUpdateServiceParams<Account> & {
+export type AddAccountService = (params: ServiceUpdateParams<Account> & {
   payload: {
     name: string,
     providerType: ProviderType,
@@ -76,7 +75,7 @@ export type AddAccountService = (params: BaseUpdateServiceParams<Account> & {
   },
 }) => Promise<RepositoryGetResult<Account>>;
 
-export type RemoveAccountService = (params: BaseUpdateServiceParams<Account> & {
+export type RemoveAccountService = (params: ServiceUpdateParams<Account> & {
   filter: {
     accountId: string,
   },

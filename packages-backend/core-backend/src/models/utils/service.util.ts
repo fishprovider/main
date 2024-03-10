@@ -16,12 +16,12 @@ export interface ServiceContext {
   userSession?: UserSession;
 }
 
-export interface BaseGetServiceParams<T> {
+export interface ServiceGetParams<T> {
   context?: ServiceContext;
   options?: RepositoryGetOptions<T>,
 }
 
-export interface BaseUpdateServiceParams<T> {
+export interface ServiceUpdateParams<T> {
   context?: ServiceContext;
   options?: RepositoryUpdateOptions<T>,
 }
