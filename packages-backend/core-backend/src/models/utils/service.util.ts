@@ -9,7 +9,7 @@ export interface UserSession {
   picture?: string;
 
   roles?: UserRoles;
-  starProviders?: Record<string, boolean>;
+  starAccounts?: Record<string, boolean>;
 }
 
 export interface ServiceContext {

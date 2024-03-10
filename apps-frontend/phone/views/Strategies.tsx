@@ -21,7 +21,7 @@ export default function Strategies() {
     _.filter(state, (account) => {
       if (!account.strategyId) return false;
       if (account.groupId && account.groupId !== account._id) return false;
-      // if (favorite && !starProviders[account._id]) return false;
+      // if (favorite && !starAccounts[account._id]) return false;
       // if (search && !account.name.toLowerCase().includes(search.toLowerCase())) return false;
       return true;
     }),

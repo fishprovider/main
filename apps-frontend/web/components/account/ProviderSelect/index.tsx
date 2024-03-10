@@ -14,16 +14,16 @@ function ProviderSelect() {
   const {
     isServerLoggedIn,
     providerId,
-    starProviders = {},
+    starAccounts = {},
   } = watchUserInfoController((state) => ({
     isServerLoggedIn: state.isServerLoggedIn,
     providerId: state.activeAccount?._id,
-    starProviders: state.activeUser?.starAccounts,
+    starAccounts: state.activeUser?.starAccounts,
   }));
   const accounts = watchAccountController((state) => _.orderBy(
     _.filter(
       state,
-      (account) => account._id === providerId || !!starProviders[account._id],
+      (account) => account._id === providerId || !!starAccounts[account._id],
     ),
     [
       (account) => account.order || 0,

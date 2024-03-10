@@ -67,10 +67,10 @@ function TradeCards({
 }: Props) {
   const {
     userId = '',
-    starProviders = {},
+    starAccounts = {},
   } = watchUserInfoController((state) => ({
     userId: state.activeUser?._id,
-    starProviders: state.activeUser?.starAccounts,
+    starAccounts: state.activeUser?.starAccounts,
   }));
 
   const [page, setPage] = useState(1);
@@ -128,7 +128,7 @@ function TradeCards({
 
   const accounts = watchAccountController((state) => {
     const filteredAccounts = _.filter(state, (account) => {
-      if (favorite && !starProviders[account._id]) return false;
+      if (favorite && !starAccounts[account._id]) return false;
 
       if (search && !account.name.toLowerCase().includes(search.toLowerCase())) return false;
 

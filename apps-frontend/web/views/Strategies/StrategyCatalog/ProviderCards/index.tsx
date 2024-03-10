@@ -28,9 +28,9 @@ function ProviderCards({
   category,
 }: Props) {
   const {
-    starProviders = {},
+    starAccounts = {},
   } = watchUserInfoController((state) => ({
-    starProviders: state.activeUser?.starAccounts,
+    starAccounts: state.activeUser?.starAccounts,
   }));
 
   const [page, setPage] = useState(1);
@@ -40,7 +40,7 @@ function ProviderCards({
     _.filter(state, (account) => {
       if (!account.strategyId) return false;
       if (account.groupId && account.groupId !== account._id) return false;
-      if (favorite && !starProviders[account._id]) return false;
+      if (favorite && !starAccounts[account._id]) return false;
       if (search && !account.name.toLowerCase().includes(search.toLowerCase())) return false;
       if (category && !(account.category === category || account.categories?.includes(category)
       )) return false;

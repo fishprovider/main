@@ -20,7 +20,7 @@ interface User {
   createdAt?: Date;
 
   roles?: Roles
-  starProviders?: Record<string, boolean>;
+  starAccounts?: Record<string, boolean>;
 
   telegram?: {
     userId: string;

@@ -78,7 +78,7 @@ const loginHandler = async (req: Request, res: Response, next: NextFunction) => 
     const doc = await Mongo.collection<User>('users').findOne({ _id: uid }, {
       projection: {
         roles: 1,
-        starProviders: 1,
+        starAccounts: 1,
       },
     });
     userInfo = {
