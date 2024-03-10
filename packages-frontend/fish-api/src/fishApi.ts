@@ -1,8 +1,8 @@
 import { log, promiseCreator } from '@fishprovider/core';
-import { BaseGetOptions } from '@fishprovider/core-frontend';
+import { RepositoryGetOptions } from '@fishprovider/core-frontend';
 import axios, { Axios, AxiosRequestConfig } from 'axios';
 
-export type ApiOptions<T> = BaseGetOptions<T> & AxiosRequestConfig;
+export type ApiOptions<T> = RepositoryGetOptions<T> & AxiosRequestConfig;
 
 const clientPromise = promiseCreator<Axios>();
 

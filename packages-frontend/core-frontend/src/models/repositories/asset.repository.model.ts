@@ -1,14 +1,12 @@
 import { Asset, ProviderType } from '@fishprovider/core';
 
-import {
-  BaseGetManyResult, BaseGetOptions,
-} from '..';
+import { RepositoryGetManyResult, RepositoryGetOptions } from '..';
 
 export interface AssetRepository {
   getAssets?: (
     filter: {
       providerType: ProviderType,
     },
-    options?: BaseGetOptions<Asset>,
-  ) => Promise<BaseGetManyResult<Asset>>;
+    options?: RepositoryGetOptions<Asset>,
+  ) => Promise<RepositoryGetManyResult<Asset>>;
 }

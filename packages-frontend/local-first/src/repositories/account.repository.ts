@@ -1,5 +1,5 @@
 import { Account } from '@fishprovider/core';
-import { AccountRepository, BaseGetManyResult, BaseGetResult } from '@fishprovider/core-frontend';
+import { AccountRepository, RepositoryGetManyResult, RepositoryGetResult } from '@fishprovider/core-frontend';
 import { FishApiAccountRepository } from '@fishprovider/fish-api';
 import { LocalAccountRepository } from '@fishprovider/local';
 
@@ -10,7 +10,7 @@ const getAccount: AccountRepository['getAccount'] = async (filter, options) => {
   const setLocal = LocalAccountRepository.updateAccount;
   const getApi = FishApiAccountRepository.getAccount;
 
-  const res = await getLocalFirst<BaseGetResult<Account>>({
+  const res = await getLocalFirst<RepositoryGetResult<Account>>({
     getLocal: getLocal && (() => getLocal(filter, options)),
     setLocal: setLocal && (({ doc } = {}) => setLocal(filter, { account: doc }, options)),
     getApi: getApi && (() => getApi(filter, options)),
@@ -24,7 +24,7 @@ const getAccounts: AccountRepository['getAccounts'] = async (filter, options) =>
   const setLocal = LocalAccountRepository.updateAccounts;
   const getApi = FishApiAccountRepository.getAccounts;
 
-  const res = await getLocalFirst<BaseGetManyResult<Account>>({
+  const res = await getLocalFirst<RepositoryGetManyResult<Account>>({
     getLocal: getLocal && (() => getLocal(filter, options)),
     setLocal: setLocal && (({ docs } = {}) => setLocal(filter, { accounts: docs }, options)),
     getApi: getApi && (() => getApi(filter, options)),
@@ -37,7 +37,7 @@ const updateAccount: AccountRepository['updateAccount'] = async (filter, payload
   const updateApi = FishApiAccountRepository.updateAccount;
   const updateLocal = LocalAccountRepository.updateAccount;
 
-  const res = await updateLocalFirst<BaseGetResult<Account>>({
+  const res = await updateLocalFirst<RepositoryGetResult<Account>>({
     updateApi: updateApi && (() => updateApi(filter, payload, options)),
     updateLocal: updateLocal && (() => updateLocal(filter, payload, options)),
   });
@@ -49,7 +49,7 @@ const updateAccounts: AccountRepository['updateAccounts'] = async (filter, paylo
   const updateApi = FishApiAccountRepository.updateAccounts;
   const updateLocal = LocalAccountRepository.updateAccounts;
 
-  const res = await updateLocalFirst<BaseGetManyResult<Account>>({
+  const res = await updateLocalFirst<RepositoryGetManyResult<Account>>({
     updateLocal: updateLocal && (() => updateLocal(filter, payload, options)),
     updateApi: updateApi && (() => updateApi(filter, payload, options)),
   });
@@ -61,7 +61,7 @@ const removeAccount: AccountRepository['removeAccount'] = async (filter, options
   const updateApi = FishApiAccountRepository.removeAccount;
   const updateLocal = LocalAccountRepository.removeAccount;
 
-  const res = await updateLocalFirst<BaseGetResult<Account>>({
+  const res = await updateLocalFirst<RepositoryGetResult<Account>>({
     updateApi: updateApi && (() => updateApi(filter, options)),
     updateLocal: updateLocal && (() => updateLocal(filter, options)),
   });

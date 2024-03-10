@@ -1,5 +1,5 @@
 import { Account } from '@fishprovider/core';
-import { AccountRepository, BaseGetManyResult, BaseGetResult } from '@fishprovider/core-backend';
+import { AccountRepository, RepositoryGetManyResult, RepositoryGetResult } from '@fishprovider/core-backend';
 
 import {
   buildKeyAccount, buildKeyAccounts, convertUndefinedToNull, getRedis,
@@ -8,7 +8,7 @@ import {
 const getAccount: AccountRepository['getAccount'] = async (filter) => {
   const key = buildKeyAccount(filter);
   const { clientJson } = await getRedis();
-  const result = await clientJson.get(key) as BaseGetResult<Account> | undefined;
+  const result = await clientJson.get(key) as RepositoryGetResult<Account> | undefined;
   if (!result) return {};
 
   return result;
@@ -17,7 +17,7 @@ const getAccount: AccountRepository['getAccount'] = async (filter) => {
 const getAccounts: AccountRepository['getAccounts'] = async (filter) => {
   const key = buildKeyAccounts(filter);
   const { clientJson } = await getRedis();
-  const result = await clientJson.get(key) as BaseGetManyResult<Account> | undefined;
+  const result = await clientJson.get(key) as RepositoryGetManyResult<Account> | undefined;
   if (!result) return {};
 
   return { ...result, docs: Object.values(result.docsObj || {}) };

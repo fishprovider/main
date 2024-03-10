@@ -1,6 +1,6 @@
 import { UserRoles } from '@fishprovider/core';
 
-import { BaseGetOptions, BaseUpdateOptions } from '..';
+import { RepositoryGetOptions, RepositoryUpdateOptions } from '..';
 
 export interface UserSession {
   _id: string;
@@ -18,10 +18,10 @@ export interface ServiceContext {
 
 export interface BaseGetServiceParams<T> {
   context?: ServiceContext;
-  options?: BaseGetOptions<T>,
+  options?: RepositoryGetOptions<T>,
 }
 
 export interface BaseUpdateServiceParams<T> {
   context?: ServiceContext;
-  options?: BaseUpdateOptions<T>,
+  options?: RepositoryUpdateOptions<T>,
 }

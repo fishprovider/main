@@ -1,5 +1,5 @@
 import { News } from '@fishprovider/core';
-import { BaseGetManyResult, NewsRepository } from '@fishprovider/core-frontend';
+import { NewsRepository, RepositoryGetManyResult } from '@fishprovider/core-frontend';
 import { FishApiNewsRepository } from '@fishprovider/fish-api';
 import { LocalNewsRepository } from '@fishprovider/local';
 
@@ -10,7 +10,7 @@ const getNews: NewsRepository['getNews'] = async (filter, options) => {
   const setLocal = LocalNewsRepository.updateNews;
   const getApi = FishApiNewsRepository.getNews;
 
-  const res = await getLocalFirst<BaseGetManyResult<News>>({
+  const res = await getLocalFirst<RepositoryGetManyResult<News>>({
     getLocal: getLocal && (() => getLocal(filter, options)),
     setLocal: setLocal && (({ docs } = {}) => setLocal(filter, { news: docs }, options)),
     getApi: getApi && (() => getApi(filter, options)),

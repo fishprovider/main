@@ -1,5 +1,5 @@
 import { Account } from '@fishprovider/core';
-import { AccountRepository, BaseGetManyResult, BaseGetResult } from '@fishprovider/core-backend';
+import { AccountRepository, RepositoryGetManyResult, RepositoryGetResult } from '@fishprovider/core-backend';
 import { MongoAccountRepository } from '@fishprovider/mongo';
 import { RedisAccountRepository } from '@fishprovider/redis';
 
@@ -10,7 +10,7 @@ const getAccount: AccountRepository['getAccount'] = async (filter, options) => {
   const setCache = RedisAccountRepository.updateAccount;
   const getDb = MongoAccountRepository.getAccount;
 
-  const res = await getAndSetCacheFirst<BaseGetResult<Account>>({
+  const res = await getAndSetCacheFirst<RepositoryGetResult<Account>>({
     getCache: getCache && (() => getCache(filter, options)),
     setCache: setCache && (({ doc } = {}) => setCache(filter, { account: doc }, options)),
     getDb: getDb && (() => getDb(filter, options)),
@@ -25,7 +25,7 @@ const getAccounts: AccountRepository['getAccounts'] = async (filter, options) =>
   const setCache = RedisAccountRepository.updateAccounts;
   const getDb = MongoAccountRepository.getAccounts;
 
-  const res = await getAndSetCacheFirst<BaseGetManyResult<Account>>({
+  const res = await getAndSetCacheFirst<RepositoryGetManyResult<Account>>({
     getCache: getCache && (() => getCache(filter, options)),
     setCache: setCache && (({ docs } = {}) => setCache(filter, { accounts: docs }, options)),
     getDb: getDb && (() => getDb(filter, options)),
@@ -39,7 +39,7 @@ const updateAccount: AccountRepository['updateAccount'] = async (filter, payload
   const updateDb = MongoAccountRepository.updateAccount;
   const updateCache = RedisAccountRepository.updateAccount;
 
-  const res = await updateCacheFirst<BaseGetResult<Account>>({
+  const res = await updateCacheFirst<RepositoryGetResult<Account>>({
     updateDb: updateDb && (() => updateDb(filter, payload, options)),
     updateCache: updateCache && (({ doc } = {}) => updateCache(filter, { account: doc }, options)),
   });
@@ -51,7 +51,7 @@ const removeAccount: AccountRepository['removeAccount'] = async (filter, options
   const updateDb = MongoAccountRepository.removeAccount;
   const updateCache = RedisAccountRepository.removeAccount;
 
-  const res = await updateCacheFirst<BaseGetResult<Account>>({
+  const res = await updateCacheFirst<RepositoryGetResult<Account>>({
     updateDb: updateDb && (() => updateDb(filter, options)),
     updateCache: updateCache && (() => updateCache(filter, options)),
   });

@@ -5,9 +5,9 @@ import {
   AccountViewType, ProviderType,
 } from '@fishprovider/core';
 import {
-  addAccountService, BaseGetOptions, BaseUpdateOptions,
-  getAccountService, getAccountsService,
-  removeAccountService, updateAccountService, watchAccountService,
+  addAccountService, getAccountService, getAccountsService,
+  removeAccountService, RepositoryGetOptions, RepositoryUpdateOptions,
+  updateAccountService, watchAccountService,
 } from '@fishprovider/core-frontend';
 import { StoreFirstAccountRepository } from '@fishprovider/store-first';
 
@@ -16,7 +16,7 @@ export const getAccountController = async (
     accountId: string,
     getTradeAccount?: boolean,
   },
-  options?: BaseGetOptions<Account>,
+  options?: RepositoryGetOptions<Account>,
 ) => {
   const { doc: account } = await getAccountService({
     filter,
@@ -38,7 +38,7 @@ export const getAccountsController = async (
       },
     },
   },
-  options?: BaseGetOptions<Account>,
+  options?: RepositoryGetOptions<Account>,
 ) => {
   const { docs: accounts } = await getAccountsService({
     filter,
@@ -68,7 +68,7 @@ export const updateAccountController = async (
     removeMemberEmail?: string,
     account?: Partial<Account>,
   },
-  options?: BaseUpdateOptions<Account>,
+  options?: RepositoryUpdateOptions<Account>,
 ) => {
   const { doc: account } = await updateAccountService({
     filter,
@@ -90,7 +90,7 @@ export const addAccountController = async (
     tradeType: AccountTradeType,
     baseConfig: Partial<AccountConfig>,
   },
-  options?: BaseUpdateOptions<Account>,
+  options?: RepositoryUpdateOptions<Account>,
 ) => {
   const { doc: account } = await addAccountService({
     payload,
@@ -104,7 +104,7 @@ export const removeAccountController = async (
   filter: {
     accountId: string,
   },
-  options?: BaseUpdateOptions<Account>,
+  options?: RepositoryUpdateOptions<Account>,
 ) => {
   const { doc: account } = await removeAccountService({
     filter,

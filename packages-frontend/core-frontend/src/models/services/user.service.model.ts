@@ -3,8 +3,7 @@ import {
 } from '@fishprovider/core';
 
 import {
-  BaseGetResult, BaseGetServiceParams,
-  BaseUpdateServiceParams,
+  BaseGetServiceParams, BaseUpdateServiceParams, RepositoryGetResult,
   UserInfo, UserRepository,
 } from '..';
 
@@ -15,7 +14,7 @@ export type GetUserService = (params: BaseGetServiceParams<User> & {
   repositories: {
     user: UserRepository
   },
-}) => Promise<BaseGetResult<User>>;
+}) => Promise<RepositoryGetResult<User>>;
 
 export type UpdateUserService = (params:BaseUpdateServiceParams<User> & {
   filter: {
@@ -32,7 +31,7 @@ export type UpdateUserService = (params:BaseUpdateServiceParams<User> & {
   repositories: {
     user: UserRepository
   },
-}) => Promise<BaseGetResult<User>>;
+}) => Promise<RepositoryGetResult<User>>;
 
 export type WatchUserService = <T>(params: {
   selector: (state: Record<string, User>) => T,

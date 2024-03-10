@@ -1,9 +1,9 @@
-import { BaseGetOptions, BaseUpdateOptions } from '..';
+import { RepositoryGetOptions, RepositoryUpdateOptions } from '..';
 
 export interface BaseGetServiceParams<T> {
-  options?: BaseGetOptions<T>,
+  options?: RepositoryGetOptions<T>,
 }
 
 export interface BaseUpdateServiceParams<T> {
-  options?: BaseUpdateOptions<T>,
+  options?: RepositoryUpdateOptions<T>,
 }

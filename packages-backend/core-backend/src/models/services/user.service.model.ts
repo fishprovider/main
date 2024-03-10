@@ -3,8 +3,8 @@ import {
 } from '@fishprovider/core';
 
 import {
-  AccountRepository, BaseGetManyResult, BaseGetResult, BaseGetServiceParams,
-  BaseUpdateServiceParams, UserRepository,
+  AccountRepository, BaseGetServiceParams, BaseUpdateServiceParams,
+  RepositoryGetManyResult, RepositoryGetResult, UserRepository,
 } from '..';
 
 export type GetUserService = (params: BaseGetServiceParams<User> & {
@@ -14,7 +14,7 @@ export type GetUserService = (params: BaseGetServiceParams<User> & {
   repositories: {
     user: UserRepository
   },
-}) => Promise<BaseGetResult<User>>;
+}) => Promise<RepositoryGetResult<User>>;
 
 export type GetUsersService = (params: BaseGetServiceParams<User> & {
   filter: {
@@ -24,7 +24,7 @@ export type GetUsersService = (params: BaseGetServiceParams<User> & {
   repositories: {
     user: UserRepository
   },
-}) => Promise<BaseGetManyResult<User>>;
+}) => Promise<RepositoryGetManyResult<User>>;
 
 export type UpdateUserService = (params: BaseUpdateServiceParams<User> & {
   filter: {
@@ -41,7 +41,7 @@ export type UpdateUserService = (params: BaseUpdateServiceParams<User> & {
   repositories: {
     user: UserRepository
   },
-}) => Promise<BaseGetResult<User>>;
+}) => Promise<RepositoryGetResult<User>>;
 
 export type RefreshUserRolesService = (params: BaseUpdateServiceParams<User> & {
   filter: {
@@ -51,4 +51,4 @@ export type RefreshUserRolesService = (params: BaseUpdateServiceParams<User> & {
     account: AccountRepository
     user: UserRepository
   },
-}) => Promise<BaseGetResult<User>>;
+}) => Promise<RepositoryGetResult<User>>;

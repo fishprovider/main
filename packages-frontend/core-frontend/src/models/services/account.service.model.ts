@@ -5,8 +5,9 @@ import {
 } from '@fishprovider/core';
 
 import {
-  AccountRepository, BaseGetManyResult, BaseGetResult, BaseGetServiceParams,
+  AccountRepository, BaseGetServiceParams,
   BaseUpdateServiceParams,
+  RepositoryGetManyResult, RepositoryGetResult,
 } from '..';
 
 export type GetAccountService = (params: BaseGetServiceParams<Account> & {
@@ -17,7 +18,7 @@ export type GetAccountService = (params: BaseGetServiceParams<Account> & {
   repositories: {
     account: AccountRepository
   },
-}) => Promise<BaseGetResult<Account>>;
+}) => Promise<RepositoryGetResult<Account>>;
 
 export type GetAccountsService = (params: BaseGetServiceParams<Account> & {
   filter: {
@@ -34,7 +35,7 @@ export type GetAccountsService = (params: BaseGetServiceParams<Account> & {
   repositories: {
     account: AccountRepository,
   },
-}) => Promise<BaseGetManyResult<Account>>;
+}) => Promise<RepositoryGetManyResult<Account>>;
 
 export type UpdateAccountService = (params: BaseUpdateServiceParams<Account> & {
   filter: {
@@ -60,7 +61,7 @@ export type UpdateAccountService = (params: BaseUpdateServiceParams<Account> & {
     account: AccountRepository,
     clientOnly: AccountRepository,
   },
-}) => Promise<BaseGetResult<Account>>;
+}) => Promise<RepositoryGetResult<Account>>;
 
 export type AddAccountService = (params: BaseUpdateServiceParams<Account> & {
   payload: {
@@ -73,7 +74,7 @@ export type AddAccountService = (params: BaseUpdateServiceParams<Account> & {
   repositories: {
     account: AccountRepository,
   },
-}) => Promise<BaseGetResult<Account>>;
+}) => Promise<RepositoryGetResult<Account>>;
 
 export type RemoveAccountService = (params: BaseUpdateServiceParams<Account> & {
   filter: {
@@ -82,7 +83,7 @@ export type RemoveAccountService = (params: BaseUpdateServiceParams<Account> & {
   repositories: {
     account: AccountRepository,
   },
-}) => Promise<BaseGetResult<Account>>;
+}) => Promise<RepositoryGetResult<Account>>;
 
 export type WatchAccountService = <T>(params: {
   selector: (state: Record<string, Account>) => T,

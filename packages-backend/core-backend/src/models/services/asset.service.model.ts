@@ -2,9 +2,7 @@ import {
   Asset, ProviderType,
 } from '@fishprovider/core';
 
-import {
-  AssetRepository, BaseGetManyResult, BaseGetServiceParams,
-} from '..';
+import { AssetRepository, BaseGetServiceParams, RepositoryGetManyResult } from '..';
 
 export type GetAssetsService = (params: BaseGetServiceParams<Asset> & {
   filter: {
@@ -13,4 +11,4 @@ export type GetAssetsService = (params: BaseGetServiceParams<Asset> & {
   repositories: {
     asset: AssetRepository
   },
-}) => Promise<BaseGetManyResult<Asset>>;
+}) => Promise<RepositoryGetManyResult<Asset>>;

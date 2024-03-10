@@ -1,7 +1,8 @@
 import { AccountRole, User, UserRoles } from '@fishprovider/core';
 
 import {
-  BaseGetManyResult, BaseGetOptions, BaseGetResult, BaseUpdateOptions, BaseUpdateResult,
+  RepositoryGetManyResult, RepositoryGetOptions, RepositoryGetResult, RepositoryUpdateOptions,
+  RepositoryUpdateResult,
 } from '..';
 
 export interface UserRepository {
@@ -9,16 +10,16 @@ export interface UserRepository {
     filter: {
       email?: string,
     },
-    options?: BaseGetOptions<User>,
-  ) => Promise<BaseGetResult<User>>;
+    options?: RepositoryGetOptions<User>,
+  ) => Promise<RepositoryGetResult<User>>;
 
   getUsers?: (
     filter: {
       pushNotifType?: string
       pushNotifTopic?: string
     },
-    options?: BaseGetOptions<User>,
-  ) => Promise<BaseGetManyResult<User>>;
+    options?: RepositoryGetOptions<User>,
+  ) => Promise<RepositoryGetManyResult<User>>;
 
   updateUser?: (
     filter: {
@@ -40,8 +41,8 @@ export interface UserRepository {
         accountId: string,
       },
     },
-    options?: BaseUpdateOptions<User>,
-  ) => Promise<BaseUpdateResult<User>>;
+    options?: RepositoryUpdateOptions<User>,
+  ) => Promise<RepositoryUpdateResult<User>>;
 
   updateUsers?: (
     filter: {
@@ -50,6 +51,6 @@ export interface UserRepository {
     payload: {
       removeRoleAccountId?: string,
     },
-    options?: BaseUpdateOptions<User>,
-  ) => Promise<BaseGetManyResult<User>>;
+    options?: RepositoryUpdateOptions<User>,
+  ) => Promise<RepositoryGetManyResult<User>>;
 }

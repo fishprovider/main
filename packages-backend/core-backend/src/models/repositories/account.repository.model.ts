@@ -5,8 +5,8 @@ import {
 } from '@fishprovider/core';
 
 import {
-  BaseCheckResult,
-  BaseGetManyResult, BaseGetOptions, BaseGetResult, BaseUpdateOptions, BaseUpdateResult,
+  RepositoryCheckResult, RepositoryGetManyResult, RepositoryGetOptions,
+  RepositoryGetResult, RepositoryUpdateOptions, RepositoryUpdateResult,
 } from '..';
 
 export interface AccountRepository {
@@ -15,8 +15,8 @@ export interface AccountRepository {
       accountId?: string,
       platform?: AccountPlatform,
     },
-    options?: BaseGetOptions<Account>,
-  ) => Promise<BaseGetResult<Account>>;
+    options?: RepositoryGetOptions<Account>,
+  ) => Promise<RepositoryGetResult<Account>>;
 
   getAccountProvider?: (
     filter: {
@@ -24,8 +24,8 @@ export interface AccountRepository {
       platform?: AccountPlatform,
       config?: AccountConfig,
     },
-    options?: BaseGetOptions<Account>,
-  ) => Promise<BaseGetResult<Account>>;
+    options?: RepositoryGetOptions<Account>,
+  ) => Promise<RepositoryGetResult<Account>>;
 
   checkAccount?: (
     filter: {
@@ -33,7 +33,7 @@ export interface AccountRepository {
       name: string,
       providerAccountId?: string,
     },
-  ) => Promise<BaseCheckResult<Account>>;
+  ) => Promise<RepositoryCheckResult<Account>>;
 
   getAccounts?: (
     filter: {
@@ -46,8 +46,8 @@ export interface AccountRepository {
         code: string,
       },
     },
-    options?: BaseGetOptions<Account>,
-  ) => Promise<BaseGetManyResult<Account>>;
+    options?: RepositoryGetOptions<Account>,
+  ) => Promise<RepositoryGetManyResult<Account>>;
 
   getAccountProviders?: (
     filter: {
@@ -56,8 +56,8 @@ export interface AccountRepository {
       providerCode?: string,
       providerRedirectUrl?: string,
     },
-    options?: BaseGetOptions<Account>,
-  ) => Promise<BaseGetManyResult<Account>>;
+    options?: RepositoryGetOptions<Account>,
+  ) => Promise<RepositoryGetManyResult<Account>>;
 
   updateAccount?: (
     filter: {
@@ -88,8 +88,8 @@ export interface AccountRepository {
       removeMemberEmail?: string,
       account?: Partial<Account>,
     },
-    options?: BaseUpdateOptions<Account>,
-  ) => Promise<BaseUpdateResult<Account>>;
+    options?: RepositoryUpdateOptions<Account>,
+  ) => Promise<RepositoryUpdateResult<Account>>;
 
   updateAccounts?: (
     filter: {
@@ -99,8 +99,8 @@ export interface AccountRepository {
     payload: {
       accounts?: Partial<Account>[],
     },
-    options?: BaseUpdateOptions<Account>,
-  ) => Promise<BaseGetManyResult<Account>>;
+    options?: RepositoryUpdateOptions<Account>,
+  ) => Promise<RepositoryGetManyResult<Account>>;
 
   addAccount?: (
     payload: {
@@ -113,8 +113,8 @@ export interface AccountRepository {
       tradeType: AccountTradeType,
       members: AccountMember[],
     },
-    options?: BaseUpdateOptions<Account>,
-  ) => Promise<BaseGetResult<Account>>;
+    options?: RepositoryUpdateOptions<Account>,
+  ) => Promise<RepositoryGetResult<Account>>;
 
   addAccountProvider?: (
     payload: {
@@ -122,22 +122,22 @@ export interface AccountRepository {
       platform: AccountPlatform,
       config?: AccountConfig,
     },
-    options?: BaseUpdateOptions<Account>,
-  ) => Promise<BaseGetResult<Account>>;
+    options?: RepositoryUpdateOptions<Account>,
+  ) => Promise<RepositoryGetResult<Account>>;
 
   removeAccount?: (
     filter: {
       accountId?: string,
     },
-    options?: BaseUpdateOptions<Account>,
-  ) => Promise<BaseGetResult<Account>>;
+    options?: RepositoryUpdateOptions<Account>,
+  ) => Promise<RepositoryGetResult<Account>>;
 
   getTradeClient?: (
     filter: {
       platform: AccountPlatform,
       clientId?: string,
     },
-  ) => Promise<BaseGetResult<AccountConfig>>;
+  ) => Promise<RepositoryGetResult<AccountConfig>>;
 
   updateTradeClient?: (
     filter: {

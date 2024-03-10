@@ -3,7 +3,8 @@ import {
 } from '@fishprovider/core';
 
 import {
-  BaseGetManyResult, BaseGetServiceParams, BaseUpdateServiceParams, NewsRepository,
+  BaseGetServiceParams, BaseUpdateServiceParams, NewsRepository,
+  RepositoryGetManyResult,
 } from '..';
 
 export type GetNewsService = (params: BaseGetServiceParams<News> & {
@@ -15,7 +16,7 @@ export type GetNewsService = (params: BaseGetServiceParams<News> & {
   repositories: {
     news: NewsRepository
   },
-}) => Promise<BaseGetManyResult<News>>;
+}) => Promise<RepositoryGetManyResult<News>>;
 
 export type UpdateNewsService = (params: BaseUpdateServiceParams<News> & {
   filter: {
@@ -29,4 +30,4 @@ export type UpdateNewsService = (params: BaseUpdateServiceParams<News> & {
   repositories: {
     news: NewsRepository
   },
-}) => Promise<BaseGetManyResult<News>>;
+}) => Promise<RepositoryGetManyResult<News>>;

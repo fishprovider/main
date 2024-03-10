@@ -1,5 +1,5 @@
 import { News } from '@fishprovider/core';
-import { BaseGetOptions, getNewsService, watchNewsService } from '@fishprovider/core-frontend';
+import { getNewsService, RepositoryGetOptions, watchNewsService } from '@fishprovider/core-frontend';
 import { StoreFirstNewsRepository } from '@fishprovider/store-first';
 
 export const getNewsController = async (
@@ -8,7 +8,7 @@ export const getNewsController = async (
     week?: string,
     upcoming?: boolean,
   },
-  options?: BaseGetOptions<News>,
+  options?: RepositoryGetOptions<News>,
 ) => {
   const { docs: news } = await getNewsService({
     filter,

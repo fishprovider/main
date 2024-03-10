@@ -1,21 +1,21 @@
 export type Projection<T> = Partial<Record<keyof T | string, 0 | 1>>;
 export type Sort = { [key: string]: 1 | -1 | 'asc' | 'desc' };
 
-export interface BaseGetOptions<T> {
+export interface RepositoryGetOptions<T> {
   projection?: Projection<T>,
   sort?: Sort,
 }
 
-export interface BaseUpdateOptions<T> extends BaseGetOptions<T> {
+export interface RepositoryUpdateOptions<T> extends RepositoryGetOptions<T> {
 }
 
-export interface BaseGetResult<T> {
+export interface RepositoryGetResult<T> {
   doc?: Partial<T>;
 }
 
-export interface BaseUpdateResult<T> extends BaseGetResult<T> {
+export interface RepositoryUpdateResult<T> extends RepositoryGetResult<T> {
 }
 
-export interface BaseGetManyResult<T> {
+export interface RepositoryGetManyResult<T> {
   docs?: Partial<T>[];
 }

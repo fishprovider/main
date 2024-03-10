@@ -1,5 +1,5 @@
 import { User } from '@fishprovider/core';
-import { BaseGetResult, UserRepository } from '@fishprovider/core-frontend';
+import { RepositoryGetResult, UserRepository } from '@fishprovider/core-frontend';
 import { FishApiUserRepository } from '@fishprovider/fish-api';
 import { LocalUserRepository } from '@fishprovider/local';
 
@@ -10,7 +10,7 @@ const getUser: UserRepository['getUser'] = async (filter, options) => {
   const setLocal = LocalUserRepository.updateUser;
   const getApi = FishApiUserRepository.getUser;
 
-  const res = await getLocalFirst<BaseGetResult<User>>({
+  const res = await getLocalFirst<RepositoryGetResult<User>>({
     getLocal: getLocal && (() => getLocal(filter, options)),
     setLocal: setLocal && (({ doc } = {}) => setLocal(filter, { user: doc }, options)),
     getApi: getApi && (() => getApi(filter, options)),
@@ -23,7 +23,7 @@ const updateUser: UserRepository['updateUser'] = async (filter, payload, options
   const updateLocal = LocalUserRepository.updateUser;
   const updateApi = FishApiUserRepository.updateUser;
 
-  const res = await updateLocalFirst<BaseGetResult<User>>({
+  const res = await updateLocalFirst<RepositoryGetResult<User>>({
     updateLocal: updateLocal && (() => updateLocal(filter, payload, options)),
     updateApi: updateApi && (() => updateApi(filter, payload, options)),
   });

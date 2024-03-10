@@ -2,7 +2,8 @@ import { Account, User } from '@fishprovider/core';
 import { Socket } from 'socket.io-client';
 
 import {
-  BaseGetOptions, BaseGetResult, BaseUpdateOptions, BaseUpdateResult,
+  RepositoryGetOptions, RepositoryGetResult, RepositoryUpdateOptions,
+  RepositoryUpdateResult,
 } from '..';
 
 export interface UserInfo extends Record<string, any> {
@@ -25,8 +26,8 @@ export interface UserRepository {
     filter: {
       email?: string,
     },
-    options?: BaseGetOptions<User>,
-  ) => Promise<BaseGetResult<User>>;
+    options?: RepositoryGetOptions<User>,
+  ) => Promise<RepositoryGetResult<User>>;
 
   updateUser?: (
     filter: {
@@ -41,8 +42,8 @@ export interface UserRepository {
       refreshRoles?: boolean,
       user?: Partial<User>,
     },
-    options?: BaseUpdateOptions<User>,
-  ) => Promise<BaseUpdateResult<User>>;
+    options?: RepositoryUpdateOptions<User>,
+  ) => Promise<RepositoryUpdateResult<User>>;
 
   watchUser?: <T>(
     selector: (state: Record<string, User>) => T,

@@ -5,7 +5,8 @@ import {
 } from '@fishprovider/core';
 
 import {
-  BaseGetManyResult, BaseGetOptions, BaseGetResult, BaseUpdateOptions, BaseUpdateResult,
+  RepositoryGetManyResult, RepositoryGetOptions, RepositoryGetResult, RepositoryUpdateOptions,
+  RepositoryUpdateResult,
 } from '..';
 
 export interface AccountRepository {
@@ -14,8 +15,8 @@ export interface AccountRepository {
       accountId?: string,
       getTradeAccount?: boolean,
     },
-    options?: BaseGetOptions<Account>,
-  ) => Promise<BaseGetResult<Account>>;
+    options?: RepositoryGetOptions<Account>,
+  ) => Promise<RepositoryGetResult<Account>>;
 
   getAccounts?: (
     filter: {
@@ -29,8 +30,8 @@ export interface AccountRepository {
         },
       },
     },
-    options?: BaseGetOptions<Account>,
-  ) => Promise<BaseGetManyResult<Account>>;
+    options?: RepositoryGetOptions<Account>,
+  ) => Promise<RepositoryGetManyResult<Account>>;
 
   updateAccount?: (
     filter: {
@@ -50,8 +51,8 @@ export interface AccountRepository {
       addActivity?: AccountActivity,
       account?: Partial<Account>,
     },
-    options?: BaseUpdateOptions<Account>,
-  ) => Promise<BaseUpdateResult<Account>>;
+    options?: RepositoryUpdateOptions<Account>,
+  ) => Promise<RepositoryUpdateResult<Account>>;
 
   updateAccounts?: (
     filter: {
@@ -61,8 +62,8 @@ export interface AccountRepository {
     payload: {
       accounts?: Partial<Account>[],
     },
-    options?: BaseUpdateOptions<Account>,
-  ) => Promise<BaseGetManyResult<Account>>;
+    options?: RepositoryUpdateOptions<Account>,
+  ) => Promise<RepositoryGetManyResult<Account>>;
 
   addAccount?: (
     payload: {
@@ -72,15 +73,15 @@ export interface AccountRepository {
       tradeType: AccountTradeType,
       baseConfig: Partial<AccountConfig>,
     },
-    options?: BaseUpdateOptions<Account>,
-  ) => Promise<BaseGetResult<Account>>;
+    options?: RepositoryUpdateOptions<Account>,
+  ) => Promise<RepositoryGetResult<Account>>;
 
   removeAccount?: (
     filter: {
       accountId: string,
     },
-    options?: BaseUpdateOptions<Account>,
-  ) => Promise<BaseGetResult<Account>>;
+    options?: RepositoryUpdateOptions<Account>,
+  ) => Promise<RepositoryGetResult<Account>>;
 
   watchAccount?: <T>(
     selector: (state: Record<string, Account>) => T,

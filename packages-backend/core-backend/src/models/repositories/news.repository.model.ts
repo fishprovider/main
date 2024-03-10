@@ -1,6 +1,6 @@
 import { News } from '@fishprovider/core';
 
-import { BaseGetManyResult, BaseGetOptions, BaseUpdateOptions } from '..';
+import { RepositoryGetManyResult, RepositoryGetOptions, RepositoryUpdateOptions } from '..';
 
 export interface NewsRepository {
   getNews?: (
@@ -9,8 +9,8 @@ export interface NewsRepository {
       week?: string,
       upcoming?: boolean,
     },
-    options?: BaseGetOptions<News>,
-  ) => Promise<BaseGetManyResult<News>>;
+    options?: RepositoryGetOptions<News>,
+  ) => Promise<RepositoryGetManyResult<News>>;
 
   updateNews?: (
     filter: {
@@ -21,6 +21,6 @@ export interface NewsRepository {
     payload: {
       news?: Partial<News>[],
     },
-    options?: BaseUpdateOptions<News>,
-  ) => Promise<BaseGetManyResult<News>>;
+    options?: RepositoryUpdateOptions<News>,
+  ) => Promise<RepositoryGetManyResult<News>>;
 }
