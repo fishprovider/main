@@ -121,7 +121,8 @@ const updateAccount: AccountRepository['updateAccount'] = async (filter, payload
   const { db } = await getMongo();
   const collection = db.collection<Account>('accounts');
 
-  if (returnAfter) {
+  const isReturnAfter = returnAfter || addMember || removeMemberEmail;
+  if (isReturnAfter) {
     const account = await collection.findOneAndUpdate(
       accountFilter,
       updateFilter,
@@ -132,6 +133,7 @@ const updateAccount: AccountRepository['updateAccount'] = async (filter, payload
     );
     return { doc: account ?? undefined };
   }
+
   await collection.updateOne(accountFilter, updateFilter);
   return {
     doc: { _id: filter.accountId, ...updatedAccount },
