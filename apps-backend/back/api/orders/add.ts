@@ -20,8 +20,8 @@ const orderAdd = async ({ data, userInfo }: {
   const { order } = data;
   const { providerId } = order;
 
-  const { isTraderProvider } = getRoleProvider(userInfo.roles, providerId);
-  if (!isTraderProvider) {
+  const { isTraderAccount } = getRoleProvider(userInfo.roles, providerId);
+  if (!isTraderAccount) {
     return { error: ErrorType.accessDenied };
   }
 

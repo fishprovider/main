@@ -52,7 +52,7 @@ function ListTradePending({ orders }: Props) {
     )
   ));
 
-  const { isTraderProvider, isProtectorProvider } = getRoleProvider(roles, accountId);
+  const { isTraderAccount, isProtectorAccount } = getRoleProvider(roles, accountId);
 
   const { mutate: reload, isLoading: isLoadingReload } = useMutate({
     mutationFn: orderGetMany,
@@ -165,7 +165,7 @@ function ListTradePending({ orders }: Props) {
               />
             </Group>
           </Table.Header>
-          {(isTraderProvider || isProtectorProvider) && (
+          {(isTraderAccount || isProtectorAccount) && (
             <Table.Header>
               <Group spacing={0}>
                 Actions

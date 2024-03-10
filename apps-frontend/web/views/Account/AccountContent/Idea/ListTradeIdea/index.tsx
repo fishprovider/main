@@ -48,7 +48,7 @@ function ListTradeIdea() {
     )
   ));
 
-  const { isTraderProvider, isProtectorProvider } = getRoleProvider(roles, providerId);
+  const { isTraderAccount, isProtectorAccount } = getRoleProvider(roles, providerId);
 
   const { mutate: reload, isLoading: isLoadingReload } = useMutate({
     mutationFn: orderGetIdea,
@@ -98,7 +98,7 @@ function ListTradeIdea() {
             </Group>
           </Table.Header>
           <Table.Header>Profit</Table.Header>
-          {(isTraderProvider || isProtectorProvider) && (
+          {(isTraderAccount || isProtectorAccount) && (
             <Table.Header>
               <Group spacing={0}>
                 Actions

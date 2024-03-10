@@ -30,7 +30,7 @@ function ItemTradePending({ order, prices }: Props) {
     providerId: state.activeAccount?._id,
     roles: state.activeUser?.roles,
   }));
-  const { isTraderProvider, isProtectorProvider } = getRoleProvider(roles, providerId);
+  const { isTraderAccount, isProtectorAccount } = getRoleProvider(roles, providerId);
 
   const { mutate: close, isLoading } = useMutate({
     mutationFn: orderRemove,
@@ -53,7 +53,7 @@ function ItemTradePending({ order, prices }: Props) {
 
   const renderActions = () => (
     <Group spacing={0}>
-      {isTraderProvider && <OrderSettings order={order} />}
+      {isTraderAccount && <OrderSettings order={order} />}
       <Icon name="Delete" size="small" button onClick={onClose} loading={isLoading} tooltip="Close order" />
     </Group>
   );
@@ -63,7 +63,7 @@ function ItemTradePending({ order, prices }: Props) {
       <Table.Cell><OrderInfo order={order} /></Table.Cell>
       <Table.Cell><OrderActivities order={order} /></Table.Cell>
       <Table.Cell><Distance order={order} prices={prices} /></Table.Cell>
-      {(isTraderProvider || isProtectorProvider) && <Table.Cell>{renderActions()}</Table.Cell>}
+      {(isTraderAccount || isProtectorAccount) && <Table.Cell>{renderActions()}</Table.Cell>}
     </Table.Row>
   );
 }

@@ -19,8 +19,8 @@ const orderGetIdea = async ({ data, userInfo }: {
     return { error: ErrorType.badRequest };
   }
 
-  const { isViewerProvider } = getRoleProvider(userInfo.roles, providerId);
-  if (!isViewerProvider) {
+  const { isViewerAccount } = getRoleProvider(userInfo.roles, providerId);
+  if (!isViewerAccount) {
     return { error: ErrorType.accessDenied };
   }
 

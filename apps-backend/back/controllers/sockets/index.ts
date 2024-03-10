@@ -21,8 +21,8 @@ const authRoom = (room: string, userInfo?: Partial<User>) => {
     || room.startsWith('historyOrders-')
   ) {
     const providerId = room.split('-')[1];
-    const { isViewerProvider } = getRoleProvider(roles, providerId);
-    return !!isViewerProvider;
+    const { isViewerAccount } = getRoleProvider(roles, providerId);
+    return !!isViewerAccount;
   }
 
   return false;

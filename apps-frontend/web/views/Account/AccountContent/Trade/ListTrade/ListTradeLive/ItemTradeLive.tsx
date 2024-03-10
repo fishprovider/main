@@ -36,7 +36,7 @@ function ItemTradeLive({
     providerId: state.activeAccount?._id,
     roles: state.activeUser?.roles,
   }));
-  const { isTraderProvider, isProtectorProvider } = getRoleProvider(roles, providerId);
+  const { isTraderAccount, isProtectorAccount } = getRoleProvider(roles, providerId);
 
   const renderProfit = () => (
     <>
@@ -89,9 +89,9 @@ function ItemTradeLive({
 
     return (
       <Group spacing={0}>
-        {isTraderProvider && <OrderSettings order={order} />}
+        {isTraderAccount && <OrderSettings order={order} />}
         <CloseOrder order={order} />
-        {isTraderProvider && (
+        {isTraderAccount && (
           <Menu items={menuItems}>
             <span>
               <Icon name="MoreHoriz" button />
@@ -107,7 +107,7 @@ function ItemTradeLive({
       <Table.Cell><OrderInfo order={order} mergedView={mergedView} /></Table.Cell>
       {mergedView ? null : <Table.Cell><OrderActivities order={order} /></Table.Cell>}
       <Table.Cell>{renderProfit()}</Table.Cell>
-      {(isTraderProvider || isProtectorProvider) && <Table.Cell>{renderActions()}</Table.Cell>}
+      {(isTraderAccount || isProtectorAccount) && <Table.Cell>{renderActions()}</Table.Cell>}
     </Table.Row>
   );
 }

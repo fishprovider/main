@@ -27,12 +27,12 @@ function LockStatus({ lock, unlock }: Props) {
     lockByUserName,
   } = lock;
 
-  const { isAdminWeb, isTraderProvider, isProtectorProvider } = getRoleProvider(roles, providerId);
+  const { isAdminWeb, isTraderAccount, isProtectorAccount } = getRoleProvider(roles, providerId);
 
   return (
     <Stack spacing="xs">
       {(isAdminWeb || moment(lockUntil) < moment())
-        && (isTraderProvider || isProtectorProvider) && (
+        && (isTraderAccount || isProtectorAccount) && (
         <Box>
           <Button color="green" onClick={unlock}>
             Lock ended - Unlock now

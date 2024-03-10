@@ -25,12 +25,12 @@ import { toastError } from '~ui/toast';
 interface ParentCopySettingsProps {
   parentId: string;
   copySettings: AccountCopySettings;
-  isAdminProvider?: boolean;
+  isAdminAccount?: boolean;
   onClose?: () => void;
 }
 
 function ParentCopySettings({
-  parentId, copySettings, isAdminProvider, onClose,
+  parentId, copySettings, isAdminAccount, onClose,
 }: ParentCopySettingsProps) {
   const {
     accountId = '',
@@ -243,7 +243,7 @@ function ParentCopySettings({
       {renderEquitySL()}
       {renderCopyVolumeMode()}
       <div>
-        {isAdminProvider && <Button onClick={onSave}>{`[${parentName}] Save`}</Button>}
+        {isAdminAccount && <Button onClick={onSave}>{`[${parentName}] Save`}</Button>}
       </div>
     </Stack>
   );
@@ -357,7 +357,7 @@ function AdminSettings({ onClose }: Props) {
     (item) => settings.parents?.[item._id],
   ));
 
-  const { isAdminProvider, isManagerWeb } = getRoleProvider(roles, accountId);
+  const { isAdminAccount, isManagerWeb } = getRoleProvider(roles, accountId);
 
   const sortedParentIds = _.sortBy(_.keys(settings.parents));
 
@@ -415,7 +415,7 @@ function AdminSettings({ onClose }: Props) {
                   <ParentCopySettings
                     copySettings={copySettings}
                     parentId={parentId}
-                    isAdminProvider={!!isAdminProvider}
+                    isAdminAccount={!!isAdminAccount}
                     onClose={onClose}
                   />
                 )}
@@ -427,14 +427,14 @@ function AdminSettings({ onClose }: Props) {
           </Tabs.Panel>
         </Tabs>
       )}
-      {isAdminProvider && <Button onClick={onSave}>Save Admin Settings</Button>}
+      {isAdminAccount && <Button onClick={onSave}>Save Admin Settings</Button>}
     </>
   );
 
   return (
     <Stack
       style={{
-        ...(!isAdminProvider && {
+        ...(!isAdminAccount && {
           pointerEvents: 'none',
           opacity: 0.5,
         }),

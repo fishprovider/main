@@ -42,7 +42,7 @@ function ProtectSettings({ onClose }: Props) {
     protectSettings.equityLockHours || 2,
   );
 
-  const { isProtectorProvider } = getRoleProvider(roles, accountId);
+  const { isProtectorAccount } = getRoleProvider(roles, accountId);
 
   const onSave = async () => {
     if (enabledEquityLock) {
@@ -101,7 +101,7 @@ function ProtectSettings({ onClose }: Props) {
   return (
     <Stack
       style={{
-        ...(!isProtectorProvider && {
+        ...(!isProtectorAccount && {
           pointerEvents: 'none',
           opacity: 0.5,
         }),
@@ -109,7 +109,7 @@ function ProtectSettings({ onClose }: Props) {
     >
       <Title size="h6">Protector Zone</Title>
       {renderEL()}
-      {isProtectorProvider && <Button onClick={onSave}>Save Protector Settings</Button>}
+      {isProtectorAccount && <Button onClick={onSave}>Save Protector Settings</Button>}
     </Stack>
   );
 }

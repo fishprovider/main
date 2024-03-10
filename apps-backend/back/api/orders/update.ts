@@ -33,8 +33,8 @@ const orderUpdate = async ({ data, userInfo }: {
     return { error: ErrorType.badRequest };
   }
 
-  const { isTraderProvider } = getRoleProvider(userInfo.roles, providerId);
-  if (!isTraderProvider) {
+  const { isTraderAccount } = getRoleProvider(userInfo.roles, providerId);
+  if (!isTraderAccount) {
     return { error: ErrorType.accessDenied };
   }
 

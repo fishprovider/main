@@ -54,7 +54,7 @@ function ListTradeLive({ orders }: Props) {
     )
   ));
 
-  const { isTraderProvider, isProtectorProvider } = getRoleProvider(roles, accountId);
+  const { isTraderAccount, isProtectorAccount } = getRoleProvider(roles, accountId);
 
   const nonLockedOrders = orders.filter((order) => !order.lock);
 
@@ -236,7 +236,7 @@ function ListTradeLive({ orders }: Props) {
               />
             </Group>
           </Table.Header>
-          {(isTraderProvider || isProtectorProvider) && (
+          {(isTraderAccount || isProtectorAccount) && (
             <Table.Header>
               <Group spacing={0}>
                 Actions

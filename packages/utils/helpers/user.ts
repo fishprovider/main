@@ -7,15 +7,15 @@ const getRoleProvider = (roles?: Roles, providerId?: string) => {
   const isAdminWeb = isAdmin || roles.adminWeb;
   const isManagerWeb = isAdminWeb || roles.managerWeb;
 
-  const isAdminProvider = isAdminWeb
+  const isAdminAccount = isAdminWeb
     || (providerId && roles.adminAccounts?.[providerId]);
-  const isTraderProvider = isAdminProvider
+  const isTraderAccount = isAdminAccount
     || (providerId && roles.traderAccounts?.[providerId]);
-  const isProtectorProvider = isAdminProvider
+  const isProtectorAccount = isAdminAccount
     || (providerId && roles.protectorAccounts?.[providerId]);
-  const isViewerProvider = isManagerWeb
-    || isTraderProvider
-    || isProtectorProvider
+  const isViewerAccount = isManagerWeb
+    || isTraderAccount
+    || isProtectorAccount
     || (providerId && roles.viewerAccounts?.[providerId]);
 
   return {
@@ -23,10 +23,10 @@ const getRoleProvider = (roles?: Roles, providerId?: string) => {
     isAdminWeb,
     isManagerWeb,
 
-    isAdminProvider,
-    isTraderProvider,
-    isProtectorProvider,
-    isViewerProvider,
+    isAdminAccount,
+    isTraderAccount,
+    isProtectorAccount,
+    isViewerAccount,
   };
 };
 

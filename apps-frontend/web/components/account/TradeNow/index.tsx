@@ -12,9 +12,9 @@ interface Props {
 function TradeNow({ providerId }: Props) {
   const roles = watchUserInfoController((state) => state.activeUser?.roles);
 
-  const { isViewerProvider } = getRoleProvider(roles, providerId);
+  const { isViewerAccount } = getRoleProvider(roles, providerId);
 
-  if (!isViewerProvider) return null;
+  if (!isViewerAccount) return null;
 
   return (
     <Link href={toAccount(providerId)}>

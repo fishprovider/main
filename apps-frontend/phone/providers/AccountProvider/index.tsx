@@ -15,12 +15,12 @@ interface Props {
 function AccountProvider({ providerId, children }: Props) {
   const roles = watchUserInfoController((state) => state.activeUser?.roles);
 
-  const { isViewerProvider } = getRoleProvider(roles, providerId);
+  const { isViewerAccount } = getRoleProvider(roles, providerId);
 
   Logger.debug('[render] AccountProvider', providerId);
   return (
     <UserProvider>
-      {isViewerProvider && (
+      {isViewerAccount && (
         <StrategyProvider providerId={providerId}>
           <AccountWatch providerId={providerId} />
           <ActivityWatch />

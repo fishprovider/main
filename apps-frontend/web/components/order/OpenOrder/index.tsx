@@ -36,7 +36,7 @@ function OpenOrder() {
     });
   }, []);
 
-  const { isTraderProvider } = getRoleProvider(roles, providerId);
+  const { isTraderAccount } = getRoleProvider(roles, providerId);
 
   const onEdit = async () => {
     openModal({
@@ -49,7 +49,7 @@ function OpenOrder() {
     <>
       <SymbolsSelect />
       <Group>
-        {isTraderProvider && (
+        {isTraderAccount && (
           <Button onClick={onEdit} rightIcon={<Icon name="Add" />}>
             New Order
           </Button>

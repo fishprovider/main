@@ -17,8 +17,8 @@ const orderRemoveIdea = async ({ data, userInfo }: {
     return { error: ErrorType.badRequest };
   }
 
-  const { isTraderProvider, isProtectorProvider } = getRoleProvider(userInfo.roles, providerId);
-  if (!(isTraderProvider || isProtectorProvider)) {
+  const { isTraderAccount, isProtectorAccount } = getRoleProvider(userInfo.roles, providerId);
+  if (!(isTraderAccount || isProtectorAccount)) {
     return { error: ErrorType.accessDenied };
   }
 

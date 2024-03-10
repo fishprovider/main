@@ -24,7 +24,7 @@ function BotSettings() {
     providerId: state.activeAccount?._id,
     roles: state.activeUser?.roles,
   }));
-  const { isTraderProvider, isProtectorProvider } = getRoleProvider(roles, providerId);
+  const { isTraderAccount, isProtectorAccount } = getRoleProvider(roles, providerId);
 
   const onEdit = () => {
     openModal({
@@ -35,7 +35,7 @@ function BotSettings() {
 
   return (
     <Stack>
-      {(isTraderProvider || isProtectorProvider) && (
+      {(isTraderAccount || isProtectorAccount) && (
         <Group spacing="sm">
           <Title size="h4">🤖 Bot Settings</Title>
           <Icon name="Edit" button onClick={onEdit} tooltip="Edit Settings" />

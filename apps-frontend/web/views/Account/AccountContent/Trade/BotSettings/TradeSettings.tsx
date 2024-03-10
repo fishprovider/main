@@ -61,7 +61,7 @@ function TradeSettings({ onClose }: Props) {
     tradeSettings.closeTimeIfProfit || false,
   );
 
-  const { isTraderProvider } = getRoleProvider(roles, accountId);
+  const { isTraderAccount } = getRoleProvider(roles, accountId);
 
   const onSave = async () => {
     if (enabledCloseTime) {
@@ -192,7 +192,7 @@ function TradeSettings({ onClose }: Props) {
 
   return (
     <Stack style={{
-      ...(!isTraderProvider && {
+      ...(!isTraderAccount && {
         pointerEvents: 'none',
         opacity: 0.5,
       }),
@@ -202,7 +202,7 @@ function TradeSettings({ onClose }: Props) {
       {renderACP()}
       {renderACE()}
       {renderACT()}
-      {isTraderProvider && <Button onClick={onSave}>Save Trader Settings</Button>}
+      {isTraderAccount && <Button onClick={onSave}>Save Trader Settings</Button>}
     </Stack>
   );
 }

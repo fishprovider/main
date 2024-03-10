@@ -69,9 +69,9 @@ const lockMember = async ({ data, userInfo }: {
   }
 
   const {
-    isAdminWeb, isTraderProvider, isProtectorProvider,
+    isAdminWeb, isTraderAccount, isProtectorAccount,
   } = getRoleProvider(userInfo.roles, providerId);
-  if (!(isTraderProvider || isProtectorProvider)) {
+  if (!(isTraderAccount || isProtectorAccount)) {
     return { error: ErrorType.accessDenied };
   }
 
@@ -128,7 +128,7 @@ const lockMember = async ({ data, userInfo }: {
   if (unlock) {
     return { error: ErrorType.badRequest };
   }
-  if (!(isTraderProvider || isProtectorProvider)) {
+  if (!(isTraderAccount || isProtectorAccount)) {
     return { error: ErrorType.accessDenied };
   }
 

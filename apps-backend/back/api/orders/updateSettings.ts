@@ -31,9 +31,9 @@ const orderUpdateSettings = async ({ data, userInfo }: {
   }
 
   const {
-    isTraderProvider, isProtectorProvider, isViewerProvider,
+    isTraderAccount, isProtectorAccount, isViewerAccount,
   } = getRoleProvider(userInfo.roles, providerId);
-  if (!isViewerProvider) {
+  if (!isViewerAccount) {
     return { error: ErrorType.accessDenied };
   }
 
@@ -55,7 +55,7 @@ const orderUpdateSettings = async ({ data, userInfo }: {
         },
       }),
       $set: {
-        ...((isTraderProvider || isProtectorProvider) && {
+        ...((isTraderAccount || isProtectorAccount) && {
           ...(alarm !== undefined && { alarm }),
           ...(reborn !== undefined && { reborn }),
           ...(lock && { lock }),

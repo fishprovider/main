@@ -31,9 +31,9 @@ export const updateAccountService: UpdateAccountService = async ({
   } = payload;
 
   const {
-    isAdminProvider, isTraderProvider, isProtectorProvider, isViewerProvider,
+    isAdminAccount, isTraderAccount, isProtectorAccount, isViewerAccount,
   } = getRoleProvider(roles, accountId);
-  if (!isViewerProvider) {
+  if (!isViewerAccount) {
     throw new BaseError(AccountError.ACCOUNT_ACCESS_DENIED, accountId);
   }
 
@@ -46,16 +46,16 @@ export const updateAccountService: UpdateAccountService = async ({
   checkAccountAccess(account, context);
 
   if ((viewType || name || icon || strategyId || notes || privateNotes || bannerStatus)
-    && !(isTraderProvider || isProtectorProvider)) {
+    && !(isTraderAccount || isProtectorAccount)) {
     throw new BaseError(AccountError.ACCOUNT_ACCESS_DENIED, accountId);
   }
-  if (tradeSettings && !isTraderProvider) {
+  if (tradeSettings && !isTraderAccount) {
     throw new BaseError(AccountError.ACCOUNT_ACCESS_DENIED, accountId);
   }
-  if (protectSettings && !isProtectorProvider) {
+  if (protectSettings && !isProtectorAccount) {
     throw new BaseError(AccountError.ACCOUNT_ACCESS_DENIED, accountId);
   }
-  if ((settings || addMember || removeMemberEmail) && !isAdminProvider) {
+  if ((settings || addMember || removeMemberEmail) && !isAdminAccount) {
     throw new BaseError(AccountError.ACCOUNT_ACCESS_DENIED, accountId);
   }
   if (_.size(_.omit(rest, ['addActivity']))) {

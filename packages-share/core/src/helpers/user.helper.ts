@@ -30,14 +30,5 @@ export const getRoleProvider = (
     isTraderAccount,
     isProtectorAccount,
     isViewerAccount,
-
-    /** @deprecated */
-    isAdminProvider: isAdminAccount,
-    /** @deprecated */
-    isTraderProvider: isTraderAccount,
-    /** @deprecated */
-    isProtectorProvider: isProtectorAccount,
-    /** @deprecated */
-    isViewerProvider: isViewerAccount,
   };
 };

@@ -37,7 +37,7 @@ function AccountContent() {
     (item) => item.providerId === providerId && item.status === OrderStatus.idea,
   ).length);
 
-  const { isAdminProvider, isTraderProvider } = getRoleProvider(roles, providerId);
+  const { isAdminAccount, isTraderAccount } = getRoleProvider(roles, providerId);
 
   const tabs = [
     {
@@ -45,7 +45,7 @@ function AccountContent() {
       label: `Trade ${getCountText(tradeCount)}`,
       icon: <Icon name="AccountBalanceWallet" />,
     },
-    ...(isTraderProvider && hasCopy ? [{
+    ...(isTraderAccount && hasCopy ? [{
       value: 'idea',
       label: `Idea ${getCountText(ideaCount)}`,
       icon: <Icon name="Lightbulb" />,
@@ -55,7 +55,7 @@ function AccountContent() {
       label: 'History',
       icon: <Icon name="History" />,
     },
-    ...(isAdminProvider ? [{
+    ...(isAdminAccount ? [{
       value: 'admin',
       label: 'Admin',
       icon: <Icon name="AdminPanelSettings" />,
