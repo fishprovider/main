@@ -20,9 +20,9 @@ export type GetAccountService = (params: ServiceGetParams<Account> & {
 
 export type GetAccountsService = (params: ServiceGetParams<Account> & {
   filter: {
-    viewType?: AccountViewType,
-    email?: string,
     accountIds?: string[],
+    email?: string,
+    viewType?: AccountViewType,
   },
   repositories: {
     account: AccountRepository

@@ -13,7 +13,6 @@ export interface AccountRepository {
   getAccount?: (
     filter: {
       accountId?: string,
-      platform?: AccountPlatform,
     },
     options?: RepositoryGetOptions<Account>,
   ) => Promise<RepositoryGetResult<Account>>;
@@ -37,14 +36,9 @@ export interface AccountRepository {
 
   getAccounts?: (
     filter: {
-      viewType?: AccountViewType,
-      email?: string,
       accountIds?: string[],
-      platform?: AccountPlatform,
-      tradeRequest?: {
-        redirectUrl: string,
-        code: string,
-      },
+      email?: string,
+      viewType?: AccountViewType,
     },
     options?: RepositoryGetOptions<Account>,
   ) => Promise<RepositoryGetManyResult<Account>>;
@@ -93,8 +87,8 @@ export interface AccountRepository {
 
   updateAccounts?: (
     filter: {
-      viewType?: AccountViewType,
       email?: string,
+      viewType?: AccountViewType,
     },
     payload: {
       accounts?: Partial<Account>[],

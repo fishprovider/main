@@ -73,8 +73,8 @@ export const refreshUserRolesService: RefreshUserRolesService = async ({
   ]);
 
   const { docs: accounts } = await getAccountsRepo({
-    email,
     accountIds,
+    email,
   }, {
     projection: {
       _id: 1,

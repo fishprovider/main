@@ -11,37 +11,18 @@ import { getMongo } from '..';
 const buildAccountFilter = (filter: {
   accountId?: string,
   accountIds?: string[],
-  viewType?: AccountViewType,
   email?: string,
-  checkExist?: {
-    accountId: string,
-    name: string,
-    tradeAccountId?: string,
-  },
+  viewType?: AccountViewType,
 }): Filter<Account> => {
   const {
-    accountId, viewType, email, accountIds, checkExist,
+    accountId, accountIds, email, viewType,
   } = filter;
-
-  const andFilter: Filter<Account>['$and'] = [];
-
-  if (checkExist) {
-    const { accountId: checkAccountId, name, tradeAccountId } = checkExist;
-    andFilter.push({
-      $or: [
-        { _id: checkAccountId },
-        { name },
-        ...(tradeAccountId ? [{ 'config.accountId': tradeAccountId }] : []),
-      ],
-    });
-  }
 
   return {
     ...(accountId && { _id: accountId }),
     ...(accountIds?.length && { _id: { $in: accountIds } }),
-    ...(viewType && { viewType }),
     ...(email && { 'members.email': email }),
-    ...(andFilter.length && { $and: andFilter }),
+    ...(viewType && { viewType }),
     deleted: { $ne: true },
   };
 };
