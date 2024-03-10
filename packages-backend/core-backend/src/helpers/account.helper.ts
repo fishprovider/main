@@ -2,9 +2,7 @@ import {
   Account, AccountError, AccountViewType, BaseError, getRoleProvider,
 } from '@fishprovider/core';
 
-import {
-  ServiceContext,
-} from '..';
+import { ServiceContext } from '..';
 
 export const checkAccountAccess = (
   account?: Partial<Account>,

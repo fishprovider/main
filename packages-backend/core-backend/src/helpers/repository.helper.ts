@@ -2,7 +2,7 @@ import { BaseError, RepositoryError } from '@fishprovider/core';
 
 import { Projection } from '..';
 
-export const validateProjection = <T extends Record<string, any>>(
+const validateProjection = <T extends Record<string, any>>(
   projection?: Projection<T>,
   obj?: T,
 ) => {

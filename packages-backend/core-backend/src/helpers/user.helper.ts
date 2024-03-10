@@ -1,10 +1,6 @@
-import {
-  BaseError, UserError,
-} from '@fishprovider/core';
+import { BaseError, UserError } from '@fishprovider/core';
 
-import {
-  UserSession,
-} from '..';
+import { UserSession } from '..';
 
 export const checkLogin = (userSession?: UserSession) => {
   if (!userSession?._id) {
