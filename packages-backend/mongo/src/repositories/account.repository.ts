@@ -72,8 +72,8 @@ const updateAccount: AccountRepository['updateAccount'] = async (filter, payload
     addActivity, addMember, removeMemberEmail,
   } = payload;
   const {
-    returnAfter = true,
-    projection,
+    returnAfter: returnAfterRaw = true,
+    projection: projectionRaw,
   } = options || {};
 
   const updatedAccount: Partial<Account> = {
@@ -121,8 +121,18 @@ const updateAccount: AccountRepository['updateAccount'] = async (filter, payload
   const { db } = await getMongo();
   const collection = db.collection<Account>('accounts');
 
-  const isReturnAfter = returnAfter || addMember || removeMemberEmail;
-  if (isReturnAfter) {
+  const getReturnOptions = () => {
+    if (returnAfterRaw) return { returnAfter: true, projection: projectionRaw };
+    if (addMember || removeMemberEmail) {
+      return { returnAfter: true, projection: { ...projectionRaw, members: 1 } };
+    }
+    if (addActivity) {
+      return { returnAfter: true, projection: { ...projectionRaw, activities: 1 } };
+    }
+    return {};
+  };
+  const { returnAfter, projection } = getReturnOptions();
+  if (returnAfter) {
     const account = await collection.findOneAndUpdate(
       accountFilter,
       updateFilter,
