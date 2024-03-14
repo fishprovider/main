@@ -21,21 +21,29 @@ function MenuItems({ numMenuItems = 0, offset = 0 }: Props) {
   const fullItems = menuItems.slice(offset, numMenuItems + offset);
   const dropdownItems = menuItems.slice(numMenuItems + offset);
 
-  const renderFullItems = () => fullItems.map((item) => {
-    const isSelect = item.href === Routes.home
-      ? router.pathname === Routes.home
-      : router.pathname.startsWith(item.href);
-    return (
-      <Link key={item.key} href={item.href} variant="clean">
-        <Button
-          variant={isSelect ? 'light' : 'subtle'}
-          data-test-id={`navbar.${item.key}`}
-        >
-          {item.label}
-        </Button>
-      </Link>
-    );
-  });
+  const isSelect = (menuRoute: string) => {
+    if (menuRoute === Routes.home) {
+      return router.pathname === Routes.home;
+    }
+    if (menuRoute === Routes.blog && router.pathname === Routes.allBlog) {
+      return true;
+    }
+    if (menuRoute === Routes.news && router.pathname === Routes.allNews) {
+      return true;
+    }
+    return router.pathname.startsWith(menuRoute);
+  };
+
+  const renderFullItems = () => fullItems.map((item) => (
+    <Link key={item.key} href={item.href} variant="clean">
+      <Button
+        variant={isSelect(item.href) ? 'light' : 'subtle'}
+        data-test-id={`navbar.${item.key}`}
+      >
+        {item.label}
+      </Button>
+    </Link>
+  ));
 
   const renderDropdownItems = () => (dropdownItems.length ? (
     <Menu
