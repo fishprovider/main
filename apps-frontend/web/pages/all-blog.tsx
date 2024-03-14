@@ -7,7 +7,7 @@ import Button from '~ui/core/Button';
 import Group from '~ui/core/Group';
 import Stack from '~ui/core/Stack';
 
-export const getStaticProps = getDefaultStaticProps(notionPages.allNews.rootId);
+export const getStaticProps = getDefaultStaticProps(notionPages.allBlog.rootId);
 
 export default function Page({ recordMap, pageId }: NotionPageProps) {
   return (
@@ -15,12 +15,12 @@ export default function Page({ recordMap, pageId }: NotionPageProps) {
       <NotionPage
         recordMap={recordMap}
         pageId={pageId}
-        rootPageId={notionPages.allNews.rootId}
-        basePath="news"
+        rootPageId={notionPages.allBlog.rootId}
+        basePath="blog"
         withEstimateReadTime={false}
       />
       <Group position="center">
-        <Link href={Routes.allNews} variant="clean">
+        <Link href={Routes.allBlog} variant="clean">
           <Button size="md">See All ➜</Button>
         </Link>
       </Group>

@@ -5,7 +5,7 @@ export const notionPages = {
   blog: {
     rootId: 'df00ee4c71aa4ef9b6b3e2d17536b46d',
   },
-  allBlogs: {
+  allBlog: {
     rootId: 'b1e407e736224167b61fc1c5dcc314d2',
   },
   news: {

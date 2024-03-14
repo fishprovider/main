@@ -7,7 +7,9 @@ const Routes = {
   about: '/about',
   faq: '/faq',
   blog: '/blog',
+  allBlog: '/all-blog',
   news: '/news',
+  allNews: '/all-news',
 
   copyTrade: '/copy-trade',
 
