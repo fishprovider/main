@@ -15,6 +15,10 @@ const refreshUserRoles: ApiHandler<Partial<User>> = async (data, userSession) =>
     filter: {
       email: userSession?.email,
     },
+    options: {
+      expireSec: 60 * 60 * 24 * 7, // 1 week
+      reloadSec: 60 * 60, // 1 hour
+    },
     repositories: {
       account: CacheFirstAccountRepository,
       user: CacheFirstUserRepository,
