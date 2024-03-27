@@ -99,18 +99,18 @@ function ListTradeLive({ orders }: Props) {
     });
   };
 
-  const onCloseAll = async () => {
-    const errOrders = nonLockedOrders.map(validate).filter(({ error }) => error);
+  const onCloseAll = async (ordersToClose: Order[] = []) => {
+    const errOrders = ordersToClose.map(validate).filter(({ error }) => error);
     if (errOrders.length) {
       errOrders.forEach(({ error }) => error && toastError(error));
       return;
     }
 
     if (!(await openConfirmModal({
-      title: `Confirm to close all ${nonLockedOrders.length} orders (excluding locked orders)?`,
+      title: `Confirm to close all ${ordersToClose.length} orders (excluding locked orders)?`,
     }))) return;
 
-    closeAll(nonLockedOrders, {
+    closeAll(ordersToClose, {
       onSuccess: () => toastSuccess('Done'),
       onError: (err) => toastError(`${err}`),
     });
@@ -125,11 +125,12 @@ function ListTradeLive({ orders }: Props) {
       );
     }
 
+    const groupSymbolOrders = _.groupBy(orders, (item) => item.symbol);
+
     let viewOrders = orders;
 
     if (mergedView) {
-      const groupSymbolOrders = _.groupBy(orders, (item) => item.symbol);
-      const mergedOrders = _.flatMap(groupSymbolOrders, (symbolOrders, symbol) => {
+      viewOrders = _.flatMap(groupSymbolOrders, (symbolOrders, symbol) => {
         const digits = storePrices.getState()[`${providerType}-${symbol}`]?.digits;
         const directionOrders = _.groupBy(symbolOrders, (item) => item.direction);
         return _.map(directionOrders, (items) => {
@@ -151,8 +152,6 @@ function ListTradeLive({ orders }: Props) {
           };
         });
       });
-
-      viewOrders = mergedOrders;
     }
 
     viewOrders = viewOrders.map((item) => {
@@ -178,6 +177,7 @@ function ListTradeLive({ orders }: Props) {
         unmergeView={() => setMergedViewInput(
           (prev) => (prev === undefined ? !mergedView : !prev),
         )}
+        closeMergedOrders={() => onCloseAll(groupSymbolOrders[order.symbol])}
       />
     ));
   };
@@ -240,7 +240,7 @@ function ListTradeLive({ orders }: Props) {
             <Table.Header>
               <Group spacing={0}>
                 Actions
-                <Icon name="DeleteForever" size="small" button onClick={onCloseAll} loading={isLoadingCloseAll} tooltip="Close all" />
+                <Icon name="DeleteForever" size="small" button onClick={() => onCloseAll(nonLockedOrders)} loading={isLoadingCloseAll} tooltip="Close all" />
               </Group>
             </Table.Header>
           )}

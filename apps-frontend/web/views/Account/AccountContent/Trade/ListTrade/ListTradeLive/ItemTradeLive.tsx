@@ -24,10 +24,11 @@ interface Props {
   prices: Record<string, Price>;
   mergedView: boolean;
   unmergeView: () => void;
+  closeMergedOrders: () => void;
 }
 
 function ItemTradeLive({
-  order, prices, mergedView, unmergeView,
+  order, prices, mergedView, unmergeView, closeMergedOrders,
 }: Props) {
   const {
     providerId = '',
@@ -48,19 +49,22 @@ function ItemTradeLive({
   const renderActions = () => {
     if (mergedView) {
       return (
-        <Icon
-          name="Merge"
-          size="small"
-          button
-          color="teal"
-          buttonProps={{
-            style: {
-              transform: 'rotate(90deg)',
-            },
-          }}
-          tooltip="Aggregated Order"
-          onClick={unmergeView}
-        />
+        <Group spacing={0}>
+          <Icon
+            name="Merge"
+            size="small"
+            button
+            color="teal"
+            buttonProps={{
+              style: {
+                transform: 'rotate(90deg)',
+              },
+            }}
+            tooltip="Aggregated Order"
+            onClick={unmergeView}
+          />
+          <Icon name="Delete" size="small" button onClick={closeMergedOrders} tooltip="Close merged orders" />
+        </Group>
       );
     }
 
