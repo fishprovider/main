@@ -125,14 +125,13 @@ function ListTradeLive({ orders }: Props) {
       );
     }
 
-    const groupSymbolOrders = _.groupBy(orders, (item) => item.symbol);
-
     let viewOrders = orders;
 
     if (mergedView) {
+      const groupSymbolOrders = _.groupBy(orders, (item) => item.symbol);
       viewOrders = _.flatMap(groupSymbolOrders, (symbolOrders, symbol) => {
-        const digits = storePrices.getState()[`${providerType}-${symbol}`]?.digits;
         const directionOrders = _.groupBy(symbolOrders, (item) => item.direction);
+        const digits = storePrices.getState()[`${providerType}-${symbol}`]?.digits;
         return _.map(directionOrders, (items) => {
           let entry: number | undefined;
           let volume = 0;
@@ -177,7 +176,12 @@ function ListTradeLive({ orders }: Props) {
         unmergeView={() => setMergedViewInput(
           (prev) => (prev === undefined ? !mergedView : !prev),
         )}
-        closeMergedOrders={() => onCloseAll(groupSymbolOrders[order.symbol])}
+        closeMergedOrders={() => {
+          const mergedOrders = nonLockedOrders.filter(
+            (item) => item.symbol === order.symbol && item.direction === order.direction,
+          );
+          onCloseAll(mergedOrders);
+        }}
       />
     ));
   };
