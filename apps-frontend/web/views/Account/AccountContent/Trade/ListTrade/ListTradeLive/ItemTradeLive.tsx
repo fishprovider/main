@@ -25,10 +25,11 @@ interface Props {
   mergedView: boolean;
   unmergeView: () => void;
   closeMergedOrders: () => void;
+  isLoadingCloseMergedOrders: boolean;
 }
 
 function ItemTradeLive({
-  order, prices, mergedView, unmergeView, closeMergedOrders,
+  order, prices, mergedView, unmergeView, closeMergedOrders, isLoadingCloseMergedOrders,
 }: Props) {
   const {
     providerId = '',
@@ -63,7 +64,7 @@ function ItemTradeLive({
             tooltip="Aggregated Order"
             onClick={unmergeView}
           />
-          <Icon name="Delete" size="small" button onClick={closeMergedOrders} tooltip="Close merged orders" />
+          <Icon name="Delete" size="small" button onClick={closeMergedOrders} loading={isLoadingCloseMergedOrders} tooltip="Close merged orders" />
         </Group>
       );
     }
