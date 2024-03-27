@@ -173,9 +173,6 @@ function ListTradeLive({ orders }: Props) {
         order={order}
         prices={prices}
         mergedView={mergedView}
-        unmergeView={() => setMergedViewInput(
-          (prev) => (prev === undefined ? !mergedView : !prev),
-        )}
         closeMergedOrders={() => {
           const mergedOrders = nonLockedOrders.filter(
             (item) => item.symbol === order.symbol && item.direction === order.direction,
