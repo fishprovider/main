@@ -54,7 +54,7 @@ const runCopiers = async (onStart?: boolean) => {
 
   if (onStart) {
     Logger.info(`🎡 Running ${providerIds.length} providers`, providerIds, isPaused, isPausedWeekend());
-    Logger.warn(`🎡 Running ${providerIds.length} providers`, copyTasks);
+    Logger.info(`🎡 Running ${providerIds.length} providers`, copyTasks);
   }
   Logger.debug(`🎡 Running ${providerIds.length} providers`, providerIds, copyTasks, runs, lastRuns, isPaused, isPausedWeekend());
 

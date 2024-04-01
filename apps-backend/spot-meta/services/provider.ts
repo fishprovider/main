@@ -183,7 +183,7 @@ const start = async () => {
   if (spotTasks.price) {
     Logger.info(`Subscribing ${symbols.length} symbols`, symbols.map((symbol) => symbol).join(','));
     await startSubs(connection, symbols);
-    Logger.warn(`Subscribed ${symbols.length} symbols`);
+    Logger.info(`Subscribed ${symbols.length} symbols`);
     renewSymbols();
   }
   if (spotTasks.poll) {

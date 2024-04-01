@@ -53,7 +53,7 @@ const runBots = async (onStart?: boolean) => {
 
   if (onStart) {
     Logger.info(`🎡 Running ${providerIds.length} providers`, providerIds, isPaused, isPausedWeekend());
-    Logger.warn(`🎡 Running ${providerIds.length} providers`, botTasks);
+    Logger.info(`🎡 Running ${providerIds.length} providers`, botTasks);
   }
   Logger.debug(`🎡 Running ${providerIds.length} providers`, providerIds, botTasks, runs, lastRuns, isPaused, isPausedWeekend());
 
