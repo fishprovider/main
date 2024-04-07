@@ -65,9 +65,6 @@ if [[ -z $DEPLOY_ENV ]]; then
   exit 1
 fi
 
-# pull
-pm2 deploy pm2.config.cjs $DEPLOY_ENV
-
-# stop, and start
+# stop, start
 DOPPLER_TOKEN=$(doppler configure get token --plain) pm2 deploy pm2.config.cjs $DEPLOY_ENV \
 exec "source ./pm2-preload.sh; pm2 stop pm2.config.cjs --only $APP; pm2 startOrReload pm2.config.cjs --only $APP"
