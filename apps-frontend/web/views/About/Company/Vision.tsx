@@ -6,7 +6,7 @@ function Vision() {
   return (
     <Stack align="center">
       <Title size="h3">
-        Vision, Mission & Core Values
+        Vision, Mission & Values
       </Title>
       <Stack>
         <Text fz="lg">
@@ -18,8 +18,12 @@ function Vision() {
           : Investment products reach all countries in the world
         </Text>
         <Text fz="lg">
-          <Text span fw="bold">Core Values</Text>
-          : Ethics - Determination - Intelligence
+          <Text span fw="bold">Values</Text>
+          <Stack>
+            <Text>1. We think big do small</Text>
+            <Text>2. We build plans to success</Text>
+            <Text>3. We always control the hall</Text>
+          </Stack>
         </Text>
       </Stack>
     </Stack>
