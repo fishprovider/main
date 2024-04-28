@@ -1,9 +1,9 @@
+import { delay } from '@fishprovider/core';
 import { ExecutionType } from '@fishprovider/ctrader/dist/constants/openApi';
 import type { ConnectionType } from '@fishprovider/ctrader/dist/types/Connection.model';
 import type { CallbackPayload } from '@fishprovider/ctrader/dist/types/Event.model';
 import { start as startQueue } from '@fishprovider/old-core/dist/libs/queuePromise';
 import { getSymbols } from '@fishprovider/swap/dist/utils/price';
-import delay from '@fishprovider/utils/helpers/delay';
 
 import type { ClientAccount } from '~types/Client.model';
 import { reloadOrdersAndAccount } from '~utils/order';
