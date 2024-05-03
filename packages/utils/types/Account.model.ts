@@ -147,6 +147,8 @@ interface Account {
   balanceStartDay?: number;
   balanceStartDayUpdatedAt?: Date;
 
+  equity?: number;
+  profit?: number;
   margin?: number; // MetaTrader only
 
   maxEquity?: number;

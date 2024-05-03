@@ -17,6 +17,7 @@ import lockMaxEdd from './bots/lockMaxEdd';
 import lockTarget from './bots/lockTarget';
 import setBalanceStartDay from './bots/setBalanceStartDay';
 import setEdd from './bots/setEdd';
+import setEquityProfit from './bots/setEquityProfit';
 import setMaxEquity from './bots/setMaxEquity';
 
 const getTodayOrders = async (providerId: string) => {
@@ -58,6 +59,7 @@ const checkAccount = async (providerId: string) => {
 
     if (botTasks.account) {
       await setBalanceStartDay(account);
+      await setEquityProfit(account, profit);
       await setEdd(account, profit);
       await setMaxEquity(account, profit);
     }

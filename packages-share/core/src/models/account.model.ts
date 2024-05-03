@@ -248,6 +248,7 @@ export interface AccountInfo {
 
   balance?: number;
   equity?: number;
+  profit?: number;
   leverage?: number;
   margin?: number;
   freeMargin?: number;
