@@ -259,7 +259,7 @@ const startClient = async (client: Client) => {
       });
     await delay(1000 / +maxRequestPerSec);
   }
-  Logger.warn(`Started ${accounts.length} accounts ${clientId.substring(0, 4)}...`);
+  Logger.info(`Started ${accounts.length} accounts ${clientId.substring(0, 4)}...`);
 
   for (const account of accounts) {
     await reloadData(client, account)
@@ -268,7 +268,7 @@ const startClient = async (client: Client) => {
       });
     await delay(1000 / +maxRequestPerSec);
   }
-  Logger.warn(`Reloaded ${accounts.length} accounts ${clientId.substring(0, 4)}...`);
+  Logger.info(`Reloaded ${accounts.length} accounts ${clientId.substring(0, 4)}...`);
 };
 
 const start = async () => {
