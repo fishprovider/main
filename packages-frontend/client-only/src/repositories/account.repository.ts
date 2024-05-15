@@ -19,6 +19,6 @@ const updateAccount: AccountRepository['updateAccount'] = async (filter, payload
 
 export const ClientOnlyAccountRepository: AccountRepository = {
   ...StoreAccountRepository,
-  ...LocalAccountRepository,
+  // ...LocalAccountRepository,
   updateAccount,
 };

@@ -32,7 +32,7 @@ const updateUser: UserRepository['updateUser'] = async (filter, payload, options
 };
 
 export const LocalFirstUserRepository: UserRepository = {
-  ...LocalUserRepository,
+  // ...LocalUserRepository,
   ...FishApiUserRepository,
   getUser,
   updateUser,

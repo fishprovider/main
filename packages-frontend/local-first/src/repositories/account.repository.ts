@@ -70,7 +70,7 @@ const removeAccount: AccountRepository['removeAccount'] = async (filter, options
 };
 
 export const LocalFirstAccountRepository: AccountRepository = {
-  ...LocalAccountRepository,
+  // ...LocalAccountRepository,
   ...FishApiAccountRepository,
   getAccount,
   getAccounts,
