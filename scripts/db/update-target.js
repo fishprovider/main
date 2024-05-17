@@ -18,8 +18,8 @@ db.accounts.find({
 }).map((doc) => {
   const offset = 0.1;
   const monthProfit = +doc.monthProfit + offset;
-  const monthTargetLock = doc.balance + (doc.balance * monthProfit) / 100;
-  const copyVolumeRatioFixed = doc.balance / 1000;
+  const monthTargetLock = Math.round((doc.balance + (doc.balance * monthProfit) / 100) * 100) / 100;
+  const copyVolumeRatioFixed = Math.round((doc.balance / 1000) * 100) / 100;
 
   db.accounts.updateOne({
     _id: doc._id,
