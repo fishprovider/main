@@ -32,7 +32,7 @@ const newAccount = (
   clientSecret: connection.clientSecret,
   data: {
     type: 'cloud-g2',
-    region: 'new-york',
+    region: 'london',
     manualTrades: true,
     magic: 0,
 
