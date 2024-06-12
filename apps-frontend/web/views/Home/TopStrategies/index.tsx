@@ -82,7 +82,7 @@ function TopStrategies() {
       </Box>
       <Box h={380}>
         <Box ref={sliderScroll} sx={{ overflowX: 'auto' }}>
-          <Flex gap="md" py="xl">
+          <Flex gap="md" py="xl" justify="center">
             {topIds.map((providerId) => (
               <ProviderCardTop key={providerId} providerId={providerId} />
             ))}
