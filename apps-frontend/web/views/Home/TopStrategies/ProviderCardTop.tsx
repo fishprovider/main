@@ -35,24 +35,6 @@ const defaultTopProviders: Record<string, Partial<Account>> = {
     roi: 95.61,
     createdAt: new Date('2022-10-01T10:00:00.000+1000'),
   },
-  air: {
-    name: 'Air',
-    icon: '🌪️',
-    riskScore: 3,
-    winRate: 70,
-    monthProfit: 6,
-    roi: 134.05,
-    createdAt: new Date('2022-11-01T10:00:00.000+1000'),
-  },
-  fire: {
-    name: 'Fire',
-    icon: '🔥',
-    riskScore: 4,
-    winRate: 60,
-    monthProfit: 8,
-    roi: 159.27,
-    createdAt: new Date('2022-11-01T10:00:00.000+1000'),
-  },
 };
 
 interface Props {

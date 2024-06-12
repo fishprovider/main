@@ -20,24 +20,6 @@ export const TopAccounts = isLive ? [
     myFxBookUrl: 'https://www.myfxbook.com/members/FishProvider/water/10406062',
   },
   {
-    _id: 'air',
-    icon: '🌪️',
-    ctraderUrl: 'https://ct.spotware.com/copy/strategy/65937',
-    myFxBookUrl: 'https://www.myfxbook.com/members/FishProvider/air/10406063',
-  },
-  {
-    _id: 'fire',
-    icon: '🔥',
-    ctraderUrl: 'https://ct.spotware.com/copy/strategy/65938',
-    myFxBookUrl: 'https://www.myfxbook.com/members/FishProvider/fire/10406064',
-  },
-  {
-    _id: 'whale',
-    icon: '🐳',
-    ctraderUrl: 'https://ct.spotware.com/copy/strategy/67617',
-    myFxBookUrl: 'https://www.myfxbook.com/members/FishProvider/whale/10406065',
-  },
-  {
     _id: 'shark',
     icon: '🦈',
     ctraderUrl: 'https://ct.spotware.com/copy/strategy/70506',

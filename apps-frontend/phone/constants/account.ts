@@ -3,7 +3,7 @@ import {
   AccountRole, AccountTradeType, AccountViewType, ProviderType,
 } from '@fishprovider/core';
 
-const getTopProviderIds = () => ['earth', 'water', 'air', 'fire', 'whale'];
+const getTopProviderIds = () => ['earth', 'water'];
 
 const TopProviderIds = getTopProviderIds();
 

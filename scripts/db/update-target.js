@@ -5,9 +5,6 @@ db.accounts.find({
     $in: [
       'earth',
       'water',
-      'air',
-      'fire',
-      'whale',
       'shark',
       'greenhill',
       'blockchaindream',
