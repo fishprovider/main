@@ -19,12 +19,6 @@ export const TopAccounts = isLive ? [
     ctraderUrl: 'https://ct.spotware.com/copy/strategy/65917',
     myFxBookUrl: 'https://www.myfxbook.com/members/FishProvider/water/10406062',
   },
-  {
-    _id: 'shark',
-    icon: '🦈',
-    ctraderUrl: 'https://ct.spotware.com/copy/strategy/70506',
-    myFxBookUrl: 'https://www.myfxbook.com/members/FishProvider/shark/10406066',
-  },
 ] : [
   {
     _id: 'octopus',
