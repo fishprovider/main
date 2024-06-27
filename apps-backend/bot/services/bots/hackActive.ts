@@ -175,4 +175,6 @@ export const hackActive = async (
   if (enabled && account.providerType === ProviderType.exness) {
     await hackActiveExness(account, liveOrders, hackOrders);
   }
+
+  // TODO: hackActiveRoboforex
 };

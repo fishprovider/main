@@ -11,8 +11,8 @@ import Stepper from '~ui/core/Stepper';
 import Text from '~ui/core/Text';
 import Title from '~ui/core/Title';
 
-const defaultUrlExness = 'https://social-trading.exness.com/strategy/110134159';
-const defaultUrlRoboforex = 'https://www.copyfx.com/ratings/rating-all/show/000000?a=vtft'; // TODO: replace 000000
+const defaultUrlExness = 'https://social-trading.exness.com/strategy/110162102';
+const defaultUrlRoboforex = 'https://www.copyfx.com/ratings/rating-all/show/332377?a=vtft';
 
 interface Props {
   providerId: string,
@@ -39,7 +39,7 @@ function InvestPlatforms({
 
     if (![
       ProviderType.exness,
-      // ProviderType.roboforex,
+      ProviderType.roboforex,
     ].includes(providerType as ProviderType)) return '';
 
     const account = groupAccounts.find(

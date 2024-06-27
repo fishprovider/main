@@ -190,11 +190,13 @@ const metatraderPlatforms = {
 const ProviderTypeText: Record<string, string> = {
   [ProviderType.icmarkets]: ctraderPlatforms[ProviderType.icmarkets].name,
   [ProviderType.exness]: metatraderPlatforms[ProviderType.exness].name,
+  [ProviderType.roboforex]: metatraderPlatforms[ProviderType.roboforex].name,
 };
 
 const ProviderTypePrice: Record<string, string> = {
   [ProviderType.icmarkets]: '5 USFP/month',
   [ProviderType.exness]: '5 USFP/month',
+  [ProviderType.roboforex]: '5 USFP/month',
 };
 
 const AccountViewTypeText: Record<string, string> = {

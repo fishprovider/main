@@ -13,6 +13,7 @@ import AccountMetaTrader from './AccountMetaTrader';
 const supportProviderTypes = [
   ProviderType.icmarkets,
   ProviderType.exness,
+  ProviderType.roboforex,
 ];
 
 function AccountOpen() {
@@ -37,6 +38,7 @@ function AccountOpen() {
     switch (providerType) {
       case ProviderType.icmarkets: return <AccountCTrader />;
       case ProviderType.exness: return <AccountMetaTrader providerType={providerType} />;
+      case ProviderType.roboforex: return <AccountMetaTrader providerType={providerType} />;
       default: return <div>Coming soon... 🧱🚧🏗️👷👷‍♀️🧑‍🏭🛠️🔩⚒️🔨</div>;
     }
   };

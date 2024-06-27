@@ -12,12 +12,13 @@ import _ from 'lodash';
 const watchingProviderTypeSymbols: Record<string, string[]> = {
   [ProviderType.icmarkets]: forexMajorPairs,
   [ProviderType.exness]: [...forexMajorPairs, ...cryptoSymbols],
+  [ProviderType.roboforex]: [...forexMajorPairs, ...cryptoSymbols],
 };
 
 const adminProviderIds: Record<string, string> = {
   [ProviderType.icmarkets]: 'earth',
-  [ProviderType.exness]: 'earth2',
-  roboforex: 'earth3',
+  [ProviderType.exness]: 'exness',
+  [ProviderType.roboforex]: 'robo',
 };
 
 const runs = {};
@@ -45,6 +46,8 @@ const priceGetMany = async ({ data, userInfo }: {
     if (!watchingSymbols) return false;
 
     if (providerType === ProviderType.exness
+      && _.difference(symbols, watchingSymbols).length) return false;
+    if (providerType === ProviderType.roboforex
       && _.difference(symbols, watchingSymbols).length) return false;
 
     return true;
