@@ -8,6 +8,8 @@ db.accounts.find({
       'shark',
       'greenhill',
       'blockchaindream',
+      'exness',
+      'robo',
     ],
   },
 }).sort({
