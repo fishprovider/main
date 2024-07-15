@@ -98,25 +98,6 @@ function Catalog() {
       </Stack>
 
       <Divider />
-      <Stack align="center" id="ocean-series">
-        <Title size="h2">
-          Ocean Series
-        </Title>
-        <ContentSection>
-          <Title size="h4" ta="center">
-            These encapsulate a suite of innovative and adaptive strategies,
-            designed to seamlessly accommodate the diverse demands of all investors
-          </Title>
-        </ContentSection>
-        <ProviderCards
-          favorite={favorite}
-          search={search}
-          variant={cardVariant}
-          category="ocean-series"
-        />
-      </Stack>
-
-      <Divider />
       <Stack align="center" id="green-series">
         <Title size="h2">
           Giving Horizons
