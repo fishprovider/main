@@ -96,26 +96,6 @@ function Catalog() {
           category="nature-elements"
         />
       </Stack>
-
-      <Divider />
-      <Stack align="center" id="green-series">
-        <Title size="h2">
-          Giving Horizons
-        </Title>
-        <ContentSection>
-          <Title size="h4" ta="center">
-            These strategies focus on eco-friendly investments where profits
-            are used to support environmentally-friendly initiatives,
-            balancing good returns with sustainability for a greener future
-          </Title>
-        </ContentSection>
-        <ProviderCards
-          favorite={favorite}
-          search={search}
-          variant={cardVariant}
-          category="green-series"
-        />
-      </Stack>
     </Stack>
   );
 }
