@@ -27,7 +27,7 @@ function Reports({ recordMap, pageId }: NotionPageProps) {
           <div style={{ position: 'relative', width: '100%', height: iframeHeight }}>
             <Image
               alt="Latest Updates"
-              src="/trading-updates-2024-02.png"
+              src="/trading-updates-2024-06.png"
               height={iframeHeight}
               width="100%"
               fit="contain"
@@ -35,7 +35,7 @@ function Reports({ recordMap, pageId }: NotionPageProps) {
             />
             <iframe
               title="Latest Updates"
-              src="https://docs.google.com/spreadsheets/d/e/2PACX-1vT2MMZ7_4sKvladbKo9Ktzq1cU_Cz4VNqQjj5bAT05KPXNbvCLqusA6k6zTyrTw53lUtsr9JUTUl27b/pubhtml?gid=1616141404&amp;single=true&amp;widget=true&amp;headers=false"
+              src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ6W5sh-6T0R_RoAd5PrRzGQePMtkpOLKrn329uGkOZOP9SvM_OEl7Lkhb_kN6j4b2MBFiAG41pzJl4/pubhtml?gid=1616141404"
               height={iframeHeight}
               width="100%"
               style={{ position: 'absolute', width: '100%', height: iframeHeight }}
