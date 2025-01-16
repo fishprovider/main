@@ -234,7 +234,7 @@
     "type-fest": "^4.4.0",
     "typescript": "^5.2.2",
     "unplugin-auto-expose": "0.0.5",
-    "vite": "4.4.11",
+    "vite": "4.5.2",
     "ws": "^8.14.2",
     "zod": "^3.22.4",
     "zustand": "^4.4.3"
